@@ -28,21 +28,27 @@
 <body class="bg-black text-white min-h-screen">
 
 
-  <header class="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 shadow-lg flex items-center justify-between">
-    <div class="flex items-center space-x-3">
-      <img src="/assets/download.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
-      <span class="text-xl font-bold">School Admin</span>
-    </div>
-    <nav class="space-x-6">
-      <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium">School</a>
-      <a href="/pages/users/admin/teachers.html" class="hover:text-green-400 font-medium">Teachers</a>
-      <a href="/pages/users/addteacher.html" class="hover:text-green-400 font-medium">Add Teacher</a>
-       <a href="/pages/report.html" class="hover:text-green-400 font-medium">Report</a>
-      <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
-        Logout
-      </button>
-    </nav>
-  </header>
+<header class="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 shadow-lg flex items-center justify-between">
+  <div class="flex items-center space-x-3">
+    <img src="/assets/download.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
+    <span class="text-xl font-bold">School Admin</span>
+  </div>
+
+  <!-- Mobile Menu Button -->
+  <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">
+    &#9776;
+  </button>
+
+  <nav id="navMenu"
+     class="hidden fixed  top-0 right-0 h-full w-2/4 max-w-xs bg-black z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-start space-y-6 px-6 py-10 sm:static sm:flex sm:flex-row sm:items-center sm:space-y-0 sm:space-x-6 sm:translate-x-0 sm:w-auto sm:h-auto sm:bg-transparent sm:p-0">
+    <a href="/pages/users/admin/teachers.html" class="hover:text-green-400 font-medium">Teachers</a>
+    <a href="/pages/users/addteacher.html" class="hover:text-green-400 font-medium">Add Teacher</a>
+    <a href="/pages/report.html" class="hover:text-green-400 font-medium">Report</a>
+    <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
+      Logout
+    </button>
+  </nav>
+</header>
 
 
   <main class="pt-24 px-6 pb-10">
@@ -67,7 +73,7 @@
       </div>
     </div>
   </main>
-
+  <script src="/js/menu.js"></script>
   <script src="/js/signout.js"></script>
 </body>
 

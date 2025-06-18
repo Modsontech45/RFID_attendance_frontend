@@ -16,20 +16,24 @@
 </head>
 
 <body class="bg-gray-50">
-<header
-  class="fixed top-0 left-0 right-0 z-50 bg-black text-white shadow-md py-4 px-6 flex items-center justify-between border-b border-green-600">
-   <div class="flex items-center space-x-3">
-      <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
-      <span class="text-xl font-bold">Synctuario</span>
-    </div>
-  <nav class="space-x-6">
-    <a  href="/pages/users/teacher-profile.html" class="teacher-only  text-secondary hover:underline hidden ">
-  👤 Profile
-</a>
-    <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium teacher-access-denied">Office</a>
-    <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied">Home</a>
+<header class="fixed top-0 left-0 right-0 z-50 bg-black text-white shadow-md py-4 px-6 flex items-center justify-between border-b border-green-600">
+
+  <div class="flex items-center space-x-3">
+    <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
+    <span class="text-xl font-bold">Synctuario</span>
+  </div>
+
+  <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">
+    &#9776;
+  </button>
+
+
+  <nav id="navMenu"
+    class="hidden fixed  top-0 right-0 h-full w-2/4 max-w-xs bg-black z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-start space-y-6 px-6 py-10 sm:static sm:flex sm:flex-row sm:items-center sm:space-y-0 sm:space-x-6 sm:translate-x-0 sm:w-auto sm:h-auto sm:bg-transparent sm:p-0">
+    <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
+    <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium">Home</a>
     <a href="students.html" class="text-green-400 font-medium">Students</a>
-    <a href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
+    <a href="/pages/dashboard.html" class="hover:underline font-medium">Dashboard</a>
     <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
     <button
       class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
@@ -37,6 +41,8 @@
     </button>
   </nav>
 </header>
+
+
 
   <div class="max-w-6xl mx-auto p-6 pt-24" id="mainContent">
     <h2 class="text-3xl font-bold text-green-700 mb-6">All Registered Students</h2>
@@ -123,6 +129,8 @@
       </form>
     </div>
   </div>
+
+  <script src="/js/menu.js"></script>
 
 
  <script src="/js/students.js"></script>
