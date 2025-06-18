@@ -108,31 +108,46 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const adminLoginForm = document.getElementById("adminLoginForm");
-  if (adminLoginForm) {
-    adminLoginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+ if (adminLoginForm) {
+  adminLoginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      const data = Object.fromEntries(new FormData(e.target));
+    const loginBtn = adminLoginForm.querySelector("button[type='submit']");
+    const spinner = loginBtn.querySelector("svg");
+    const btnText = loginBtn.querySelector("span");
 
-      try {
-        const res = await postData(`${API_BASE}/admin/login`, data);
+    // Show loading spinner
+    spinner.classList.remove("hidden");
+    btnText.textContent = "Logging in...";
+    loginBtn.disabled = true;
 
-        if (res.token) {
-          setCookie("token", res.token, 7); // set token cookie
-          setCookie("role", "admin", 7); // set role cookie
+    const data = Object.fromEntries(new FormData(e.target));
 
-          console.log("Cookies after admin login:", document.cookie);
+    try {
+      const res = await postData(`${API_BASE}/admin/login`, data);
 
-          window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/adminlandingpage.html";
-        } else {
-          alert(res.message || "Login failed.");
-        }
-      } catch (error) {
-        console.error("Admin login error:", error);
-        alert("Server error. Please try again.");
+      if (res.token) {
+        setCookie("token", res.token, 7);
+        setCookie("role", "admin", 7);
+
+        console.log("Cookies after admin login:", document.cookie);
+
+        window.location.href =
+          "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/adminlandingpage.html";
+      } else {
+        alert(res.message || "Login failed.");
       }
-    });
-  }
+    } catch (error) {
+      console.error("Admin login error:", error);
+      alert("Server error. Please try again.");
+    } finally {
+      // Hide spinner and restore button
+      spinner.classList.add("hidden");
+      btnText.textContent = "Login";
+      loginBtn.disabled = false;
+    }
+  });
+}
 
   const adminSignupForm = document.getElementById("adminSignupForm");
   if (adminSignupForm) {
