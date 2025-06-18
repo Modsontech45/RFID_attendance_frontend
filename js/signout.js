@@ -18,12 +18,12 @@ function setCookie(name, value, days = 1) {
 }
 
 function deleteCookie(name) {
- 
+
   setCookie(name, "", -1);
 }
 
 function logout() {
   deleteCookie("token");
   deleteCookie("role");
-  window.location.href = "/index.html";
+  window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/index.html";
 }

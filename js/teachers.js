@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       card.className = `cursor-pointer p-4 rounded-lg border border-primary shadow hover:bg-secondary hover:text-white transition duration-200 flex items-center space-x-4`;
 
       card.addEventListener("click", () => {
-        window.location.href = `/pages/users/admin/teacher.html?id=${t.id}`;
+        window.location.href = `https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/teacher.html?id=${t.id}`;
       });
 
       const fullBio = t.bio || "No bio available";

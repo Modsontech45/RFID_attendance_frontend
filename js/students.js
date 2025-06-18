@@ -113,7 +113,7 @@ document.getElementById("close").addEventListener("click", closeModal);
 async function updateStudentUid(oldUid, newUid) {
   const role = getCookie("role");
   if (role !== "admin") {
-    window.location.href = "/pages/users/access-denied.html";
+    window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/access-denied.html";
     return;
   }
 

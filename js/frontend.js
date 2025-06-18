@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (adminBtn)
     adminBtn.onclick = () =>
-      (window.location.href = "/pages/users/admin/adminlogin.html");
+      (window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/adminlogin.html");
   if (teacherBtn)
     teacherBtn.onclick = () => teacherModal.classList.remove("hidden");
   if (closeTeacherModal)
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           setTimeout(() => {
             console.log("Redirecting to registerstudent.html...");
-            window.location.href = "/pages/students.html";
+            window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/pages/students.html";
           }, 1000);
         } else {
           Msg.textContent = res.message || "Login failed.";
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           console.log("Cookies after admin login:", document.cookie);
 
-          window.location.href = "/pages/users/admin/adminlandingpage.html";
+          window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/adminlandingpage.html";
         } else {
           alert(res.message || "Login failed.");
         }
@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutBtn.onclick = () => {
       deleteCookie("token");
       deleteCookie("role");
-      window.location.href = "/index.html";
+      window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/index.html";
     };
   }
 });
