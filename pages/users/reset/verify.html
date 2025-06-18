@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Email Verification</title>
+ <link href="/css/output.css" rel="stylesheet">
+</head>
+
+<body class="bg-black text-white flex items-center justify-center min-h-screen font-sans">
+  <div class="bg-black border-2 border-green-500 p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+    <h1 class="text-2xl font-bold text-green-700 mb-6">Email Verification</h1>
+    <div id="status" class="space-y-4">
+      <div class="mx-auto w-12 h-12 border-4 border-green-300 border-t-green-600 rounded-full animate-spin"></div>
+      <p class="text-green-400">Verifying your email...</p>
+    </div>
+  </div>
+
+  <script>
+    const statusDiv = document.getElementById('status');
+
+    async function verifyEmail() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+
+      if (!token) {
+        statusDiv.innerHTML = `<p class="text-red-500 font-semibold">❌ Invalid verification link.</p>`;
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/admin/verify/${token}`);
+        const data = await res.json();
+
+        if (res.ok) {
+          statusDiv.innerHTML = `
+            <p class="text-green-500 font-semibold">✅ ${data.message}</p>
+            <a href="/pages/users/admin/adminlogin.html" class="inline-block mt-4 px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">
+              Go to Login
+            </a>
+          `;
+        } else {
+          statusDiv.innerHTML = `<p class="text-red-500 font-semibold">❌ ${data.message || 'Invalid or expired token.'}</p>`;
+        }
+      } catch {
+        statusDiv.innerHTML = `<p class="text-red-500 font-semibold">❌ Server error. Please try again later.</p>`;
+      }
+    }
+
+    verifyEmail();
+  </script>
+</body>
+
+</html>

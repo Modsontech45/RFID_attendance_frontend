@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher Login</title>
+<link href="/css/output.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-black text-white flex items-center justify-center min-h-screen p-4">
+
+  <form id="teacherLoginForm" class="bg-green-800 rounded-lg p-8 max-w-md w-full shadow-lg space-y-6">
+    <h1 class="text-3xl font-bold mb-6 text-green-400 text-center">Teacher Login</h1>
+
+
+    <p id="Msg" class="text-red-500 text-center text-sm hidden"></p>
+
+    <input type="email" name="email" placeholder="Email" required
+      class="w-full p-3 rounded border border-green-600 bg-black text-white placeholder-green-300 focus:outline-none focus:ring-2 focus:ring-green-400" />
+
+    <button type="submit" id="loginBtn"
+      class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded transition flex items-center justify-center space-x-2">
+      <svg id="spinner" class="hidden animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor"
+          d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"></path>
+      </svg>
+      <span id="btnText">Login</span>
+    </button>
+
+    <p class="text-center text-green-400 text-sm">
+      <a href="/index.html" class="hover:underline">Back to Home</a>
+    </p>
+  </form>
+ <script defer src="/js/frontend.js"></script>
+</body>
+
+</html>

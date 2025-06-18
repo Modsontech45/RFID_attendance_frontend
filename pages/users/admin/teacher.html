@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Teacher Profile</title>
+<link href="/css/output.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#000000',
+            secondary: '#00A86B',
+            background: '#FFFFFF'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-background text-primary min-h-screen">
+
+
+  <header class="bg-primary text-white p-4 flex justify-between items-center fixed top-0 w-full z-50 shadow">
+    <div class="flex items-center space-x-3">
+      <img src="/assets/logo.jpg" alt="Logo" class="h-10 w-10 object-contain rounded-full bg-white" />
+      <h1 class="text-xl font-bold">Teacher Profile</h1>
+    </div>
+    <a href="/pages/users/admin/teachers.html" class="text-secondary font-semibold hover:underline">← Back to List</a>
+  </header>
+
+
+  <main class="pt-24 px-4">
+    <div class="max-w-3xl mx-auto p-6 bg-white border border-secondary rounded-xl shadow text-center">
+      <div id="profileContainer">
+        <p class="text-gray-600">Loading teacher details...</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const teacherId = getQueryParam('id');
+    const token = getCookie('token');
+
+    async function fetchTeacher() {
+      const container = document.getElementById('profileContainer');
+
+      if (!token) {
+        container.innerHTML = '<p class="text-red-500">You must be logged in.</p>';
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          container.innerHTML = `<p class="text-red-500">${data.message || 'Teacher not found.'}</p>`;
+          return;
+        }
+
+        const t = data.teacher;
+
+        container.innerHTML = `
+          <img src="${t.picture || 'https://via.placeholder.com/100'}" class="w-32 h-32 rounded-full mx-auto border-4 border-secondary object-cover" />
+          <h2 class="text-2xl font-bold mt-4 text-secondary">${t.full_name || 'Unnamed Teacher'}</h2>
+          <p class="text-sm text-gray-600 mb-2">${t.email}</p>
+          <p class="text-gray-700 italic">${t.bio || 'No bio available.'}</p>
+          <p class="text-xs mt-4 text-gray-400">Added on: ${new Date(t.created_at).toLocaleString()}</p>
+        `;
+      } catch (err) {
+        console.error(err);
+        document.getElementById('profileContainer').innerHTML = '<p class="text-red-500">Error fetching data.</p>';
+      }
+    }
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    fetchTeacher();
+  </script>
+</body>
+
+</html>

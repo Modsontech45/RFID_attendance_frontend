@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <title>Welcome</title>
+ <link href="./css/output.css" rel="stylesheet">
+
+  <style>
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-150px) scale(1.2);
+      }
+    }
+
+  .floating-comment {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: #22c55e;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    animation-name: floatUpFade;
+    animation-timing-function: ease-out;
+  }
+   @keyframes floatUpFade {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -150px);
+    }
+  }
+
+    #adPopup {
+      animation: adFadeInOut 10s infinite;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col overflow-hidden relative">
+
+
+  <header class="bg-gray-800 p-4 flex items-center justify-center shadow-md z-20">
+    <div class="text-2xl font-bold select-none">🏫 School Logo</div>
+  </header>
+
+
+  <main class="flex-grow flex flex-col items-center justify-center relative overflow-visible">
+
+
+    <div id="floatingCommentsContainer" class="absolute inset-0 pointer-events-none z-40 overflow-visible"></div>
+
+
+    <div class="text-center z-10 relative">
+      <h1 class="text-4xl font-bold mb-6">Are you an Admin or a Teacher?</h1>
+      <div class="space-x-6">
+        <button id="adminBtn" class="bg-blue-600 px-8 py-3 rounded hover:bg-blue-700 transition">Admin</button>
+        <button id="teacherBtn" class="bg-green-600 px-8 py-3 rounded hover:bg-green-700 transition">Teacher</button>
+      </div>
+    </div>
+
+
+
+
+    <div id="adPopup" class="fixed bottom-8 right-8 bg-green-400 bg-opacity-90 text-black p-4 rounded-lg shadow-lg max-w-xs text-center font-semibold cursor-pointer select-none z-30 hidden">
+      <a href="./pages/users/admin/adminlogin.html" class="block mb-2 hover:underline">LinkedIn</a>
+      <a href="adminsignup.html" class="block mb-2 hover:underline">Facebook</a>
+      <a href="teacherlogin.html" class="block hover:underline">TikTok</a>
+    </div>
+
+  </main>
+
+  <script>
+
+
+    const floatingCommentsContainer = document.getElementById('floatingCommentsContainer');
+    const adPopup = document.getElementById('adPopup');
+    const teacherModal = document.getElementById('teacherModal');
+    const teacherBtn = document.getElementById('teacherBtn');
+    const adminBtn = document.getElementById('adminBtn');
+    const closeTeacherModalBtn = document.getElementById('closeTeacherModal');
+
+    const comments = [
+      "Welcome to the Attendance System!",
+      "Admins, get started here.",
+      "Teachers, login securely!",
+      "New updates rolling out soon.",
+      "Remember to mark attendance daily.",
+      "Need help? Contact support.",
+      "Secure & easy to use.",
+      "Join us for smooth attendance!"
+    ];
+
+    function createFloatingComment() {
+      const commentText = comments[Math.floor(Math.random() * comments.length)];
+      const commentEl = document.createElement('div');
+      commentEl.className = 'floating-comment';
+      commentEl.textContent = commentText;
+
+      const containerWidth = floatingCommentsContainer.clientWidth;
+      const maxWidth = containerWidth - 150;
+      const left = Math.random() * maxWidth;
+      commentEl.style.left = `${left}px`;
+
+      const duration = 4000 + Math.random() * 3000;
+      commentEl.style.animationDuration = `${duration}ms`;
+      commentEl.style.animationDelay = '0s';
+
+      floatingCommentsContainer.appendChild(commentEl);
+
+      setTimeout(() => {
+        commentEl.remove();
+      }, duration);
+    }
+
+    setInterval(createFloatingComment, 1200);
+
+    setTimeout(() => {
+      adPopup.style.display = 'block';
+    }, 3000);
+
+    teacherBtn.addEventListener('click', () => {
+     window.location.href = '/pages/users/teacherlogin.html';
+    });
+
+    adminBtn.addEventListener('click', () => {
+      window.location.href = '/pages/users/admin/adminlogin.html';
+    });
+
+    closeTeacherModalBtn.addEventListener('click', () => {
+      teacherModal.classList.add('hidden');
+      teacherModal.classList.remove('flex');
+    });
+  </script>
+</body>
+</html>
