@@ -8,29 +8,65 @@
 <link href="/css/output.css" rel="stylesheet">
   <script src="/users/frontend.js"></script>
   <script src="/js/cookies.js"></script>
+  <style>
+    /* Mobile nav as sliding panel from right */
+#navMenu.mobile-active {
+  display: flex !important; /* override hidden */
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 70vw; /* slightly visible from side */
+  background-color: black;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1.5rem;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+/* Hidden off-canvas */
+#navMenu {
+  transition: transform 0.3s ease;
+}
+
+/* When not active, push nav off screen right */
+#navMenu:not(.mobile-active) {
+  transform: translateX(100%);
+}
+
+
+  </style>
 </head>
 
 <body class="bg-black text-white min-h-screen px-4">
 
+<header
+  class="w-full bg-black text-white shadow-md py-4 px-6 flex items-center justify-between border-b border-green-600">
+  <div class="flex items-center space-x-3">
+    <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
+    <span class="text-xl font-bold">Synctuario</span>
+  </div>
 
-  <header
-    class="w-full bg-black text-white shadow-md py-4 px-6 flex items-center justify-between border-b border-green-600">
-    <div class="flex items-center space-x-3">
-      <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
-      <span class="text-xl font-bold">Synctuario</span>
-    </div>
-    <nav class="space-x-6">
-      <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
-      <a href="/registerstudent.html" class="text-green-400 font-medium">Home</a>
-      <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
-      <a href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
-      <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
+  <!-- Menu Button for mobile -->
+  <button id="menuBtn" class="md:hidden text-white focus:outline-none">
+    &#9776; <!-- hamburger icon -->
+  </button>
+
+  <nav id="navMenu" class="hidden md:flex space-x-6 items-center">
+    <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
+    <a href="/registerstudent.html" class="text-green-400 font-medium">Home</a>
+    <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
+    <a href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
+    <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
     <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
-  Logout
-</button>
+      Logout
+    </button>
+  </nav>
+</header>
 
-    </nav>
-  </header>
 
   <div class="flex items-center justify-center mt-10">
     <div class="container max-w-lg w-full p-6 rounded-2xl bg-cover bg-center relative"
@@ -85,7 +121,7 @@
       </div>
     </div>
   </div>
-  
+<script src="/js/menu.js"></script>
 <script src="/js/registerstudent.js"></script>
 
 <script src="/js/signout.js"></script>
