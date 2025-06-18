@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Teachers List</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-<link href="/css/output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="/css/output.css" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
@@ -21,7 +21,6 @@
 </head>
 <body class="bg-background text-primary min-h-screen">
 
-
   <header class="bg-primary text-white p-4 shadow flex justify-between items-center fixed w-full top-0 z-50">
     <div class="flex items-center space-x-3">
       <img src="/assets/logo.png" alt="Logo" class="h-10 w-10 object-contain rounded-full bg-white" />
@@ -29,7 +28,6 @@
     </div>
     <a href="https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/adminlandingpage.html" class="text-secondary font-semibold hover:underline">Go Home</a>
   </header>
-
 
   <main class="pt-24 px-4">
     <div class="max-w-6xl mx-auto bg-white border border-secondary p-6 rounded-xl shadow">
@@ -40,22 +38,28 @@
     </div>
   </main>
 
-  <script src="/js/teachers.js"></script>
   <script src="/js/loader.js"></script>
+  <script src="/js/teachers.js"></script>
   <script>
-  async function pageInit() {
+   async function pageInit() {
+  const container = document.getElementById("teachersContainer");
+  if (!container) return;
 
-   if (!container){
-       showLoader();
+  showLoader();
 
-  }else{
-      hideLoader();
-      }
-
-
+  try {
+    await fetchTeachers();
+  } catch (error) {
+    container.innerHTML = '<p class="text-red-500">Failed to load teachers.</p>';
+  } finally {
+    hideLoader();
   }
+}
 
-  document.addEventListener("DOMContentLoaded", pageInit);
-</script>
+document.addEventListener("DOMContentLoaded", pageInit);
+
+
+    document.addEventListener("DOMContentLoaded", pageInit);
+  </script>
 </body>
 </html>

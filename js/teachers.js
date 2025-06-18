@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async () => {
+async function fetchTeachers() {
   const container = document.getElementById("teachersContainer");
   const token = getCookie("token");
 
@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       '<p class="text-red-500">You must be logged in as an admin.</p>';
     return;
   }
+
+  container.innerHTML = ''; // clear previous content
 
   try {
     const res = await fetch(
@@ -63,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error(err);
     container.innerHTML = '<p class="text-red-500">Something went wrong.</p>';
   }
-});
+}
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
