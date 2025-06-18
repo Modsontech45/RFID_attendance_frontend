@@ -12,20 +12,51 @@
       background-color: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(3px);
     }
+    #navMenu2.mobile-active {
+  display: flex !important;
+  position: fixed;
+  top: 4rem; /* below the fixed header (header height) */
+  right: 0;
+  height: calc(100vh - 4rem);
+  width: 70vw;
+  background-color: black;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1.5rem;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1100;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+#navMenu2 {
+  transition: transform 0.3s ease;
+}
+
+#navMenu2:not(.mobile-active) {
+  transform: translateX(100%);
+}
+
   </style>
 </head>
 
 <body class="bg-gray-50">
 <header
   class="fixed top-0 left-0 right-0 z-50 bg-black text-white shadow-md py-4 px-6 flex items-center justify-between border-b border-green-600">
-   <div class="flex items-center space-x-3">
-      <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
-      <span class="text-xl font-bold">Synctuario</span>
-    </div>
-  <nav class="space-x-6">
-    <a  href="/pages/users/teacher-profile.html" class="teacher-only  text-secondary hover:underline hidden ">
-  👤 Profile
-</a>
+  <div class="flex items-center space-x-3">
+    <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
+    <span class="text-xl font-bold">Synctuario</span>
+  </div>
+
+  <!-- Menu Button visible only on mobile -->
+  <button id="menuBtn2" class="md:hidden text-white focus:outline-none text-2xl">
+    &#9776;
+  </button>
+
+  <nav id="navMenu2" class="hidden md:flex space-x-6 items-center">
+    <a href="/pages/users/teacher-profile.html" class="teacher-only text-secondary hover:underline hidden">
+      👤 Profile
+    </a>
     <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium teacher-access-denied">Office</a>
     <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied">Home</a>
     <a href="students.html" class="text-green-400 font-medium">Students</a>
@@ -37,6 +68,7 @@
     </button>
   </nav>
 </header>
+
 
   <div class="max-w-6xl mx-auto p-6 pt-24" id="mainContent">
     <h2 class="text-3xl font-bold text-green-700 mb-6">All Registered Students</h2>
