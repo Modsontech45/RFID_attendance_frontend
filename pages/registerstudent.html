@@ -19,17 +19,37 @@
       <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
       <span class="text-xl font-bold">Synctuario</span>
     </div>
-    <nav class="space-x-6">
-      <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
-      <a href="/registerstudent.html" class="text-green-400 font-medium">Home</a>
-      <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
-      <a href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
-      <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
-    <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
-  Logout
+  <nav class="hidden md:flex space-x-6 items-center" id="navLinks">
+  <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
+  <a href="/registerstudent.html" class="text-green-400 font-medium">Home</a>
+  <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
+  <a href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
+  <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
+  <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
+    Logout
+  </button>
+</nav>
+
+<button id="menuBtn" class="md:hidden flex items-center px-3 py-2 border rounded text-white border-white hover:text-green-400 hover:border-green-400">
+  <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <title>Menu</title>
+    <path d="M0 3h20v2H0zM0 9h20v2H0zM0 15h20v2H0z" />
+  </svg>
 </button>
 
-    </nav>
+<div id="mobileMenu" class="hidden absolute top-full left-0 w-full bg-black text-white shadow-md md:hidden z-40">
+  <nav class="flex flex-col space-y-2 p-4">
+    <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
+    <a href="/registerstudent.html" class="text-green-400 font-medium">Home</a>
+    <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
+    <a href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
+    <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
+    <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none w-full">
+      Logout
+    </button>
+  </nav>
+</div>
+
   </header>
 
   <div class="flex items-center justify-center mt-10">
@@ -85,6 +105,7 @@
       </div>
     </div>
   </div>
+  <script src="/js/menu.js"></script>
 <script src="/js/registerstudent.js"></script>
 
 <script src="/js/signout.js"></script>

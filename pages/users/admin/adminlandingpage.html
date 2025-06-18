@@ -28,21 +28,38 @@
 <body class="bg-black text-white min-h-screen">
 
 
-  <header class="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 shadow-lg flex items-center justify-between">
-    <div class="flex items-center space-x-3">
-      <img src="/assets/download.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
-      <span class="text-xl font-bold">School Admin</span>
-    </div>
-    <nav class="space-x-6">
-      <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium">School</a>
-      <a href="/pages/users/admin/teachers.html" class="hover:text-green-400 font-medium">Teachers</a>
-      <a href="/pages/users/addteacher.html" class="hover:text-green-400 font-medium">Add Teacher</a>
-       <a href="/pages/report.html" class="hover:text-green-400 font-medium">Report</a>
-      <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
-        Logout
-      </button>
-    </nav>
-  </header>
+<header class="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 shadow-lg flex items-center justify-between">
+  <div class="flex items-center space-x-3">
+    <img src="/assets/download.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
+    <span class="text-xl font-bold">School Admin</span>
+  </div>
+
+  <!-- Hamburger button for mobile -->
+  <button id="menu-btn" class="block sm:hidden text-white focus:outline-none" aria-label="Toggle menu">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+  </button>
+
+  <!-- Desktop nav (hidden on mobile) -->
+  <nav id="desktop-menu" class="hidden sm:flex space-x-6 items-center">
+    <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium">School</a>
+    <a href="/pages/users/admin/teachers.html" class="hover:text-green-400 font-medium">Teachers</a>
+    <a href="/pages/users/addteacher.html" class="hover:text-green-400 font-medium">Add Teacher</a>
+    <a href="/pages/report.html" class="hover:text-green-400 font-medium">Report</a>
+    <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">Logout</button>
+  </nav>
+</header>
+<nav id="mobile-menu" class="sm:hidden hidden flex-col bg-black border border-green-600 rounded p-4 absolute top-16 right-4 w-48 space-y-2 z-50">
+  <a href="/pages/registerstudent.html" class="block hover:text-green-400 font-medium">School</a>
+  <a href="/pages/users/admin/teachers.html" class="block hover:text-green-400 font-medium">Teachers</a>
+  <a href="/pages/users/addteacher.html" class="block hover:text-green-400 font-medium">Add Teacher</a>
+  <a href="/pages/report.html" class="block hover:text-green-400 font-medium">Report</a>
+  <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded w-full">Logout</button>
+</nav>
+
 
 
   <main class="pt-24 px-6 pb-10">
@@ -67,7 +84,7 @@
       </div>
     </div>
   </main>
-
+  <script src="/js/menu.js"></script>
   <script src="/js/signout.js"></script>
 </body>
 
