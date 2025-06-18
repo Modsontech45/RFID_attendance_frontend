@@ -11,46 +11,26 @@
 </head>
 
 <body class="bg-white text-black min-h-screen  font-sans">
- <header class="fixed top-0 left-0 right-0 z-50 w-full bg-black text-white shadow-md py-4 px-6 flex items-center justify-between border-b border-green-600">
-
+  <header
+    class="fixed top-0 left-0 right-0 z-50 w-full bg-black text-white shadow-md py-4 px-6 flex items-center justify-between border-b border-green-600">
   <div class="flex items-center space-x-3">
-    <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
-    <span class="text-xl font-bold">Synctuario</span>
-  </div>
-
-  <!-- Hamburger button: show on mobile only -->
-  <button id="menu-btn" class="block sm:hidden text-white focus:outline-none" aria-label="Toggle menu">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <line x1="3" y1="12" x2="21" y2="12"/>
-      <line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </button>
-
-  <!-- Nav links: hidden on mobile, flex on sm+ -->
-  <nav id="menu" class="hidden sm:flex space-x-6 items-center">
-    <a href="/pages/users/teacher-profile.html" class="teacher-only text-secondary hover:underline hidden">👤 Profile</a>
-    <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium teacher-access-denied">Office</a>
-    <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied">Home</a>
-    <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
-    <a href="/pages/dashboard.html" class="text-green-400 font-medium">Dashboard</a>
-    <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
-    <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">Logout</button>
-  </nav>
-
-</header>
-
-<nav id="mobile-menu" class="sm:hidden hidden flex-col bg-black border border-green-600 rounded p-4 absolute top-16 right-4 w-48 space-y-2 z-50">
-  <a href="/pages/users/teacher-profile.html" class="teacher-only text-secondary hover:underline hidden block">👤 Profile</a>
-  <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium teacher-access-denied block">Office</a>
-  <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied block">Home</a>
-  <a href="/pages/students.html" class="hover:text-green-400 font-medium block">Students</a>
-  <a href="/pages/dashboard.html" class="text-green-400 font-medium block">Dashboard</a>
-  <a href="/pages/attendance.html" class="hover:text-green-400 font-medium block">Attendance</a>
-  <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none w-full">Logout</button>
-</nav>
-
-
+      <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
+      <span class="text-xl font-bold">Synctuario</span>
+    </div>
+    <nav class="space-x-6">
+       <a  href="/pages/users/teacher-profile.html" class="teacher-only  text-secondary hover:underline hidden ">
+  👤 Profile
+</a>
+      <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium teacher-access-denied">Office</a>
+      <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied">Home</a>
+      <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
+      <a href="/dashboard.html" class="text-green-400 font-medium">Dashboard</a>
+      <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
+      <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
+        Logout
+      </button>
+    </nav>
+  </header>
 
   <div class="max-w-7xl mx-auto pt-24">
     <div class="flex items-center justify-between mb-4">
@@ -80,7 +60,6 @@
     <canvas id="dashboardChart" height="100"></canvas>
   </div>
 
-    <script src="/js/menu.js"></script>
 <script src="/js/dashboard.js"></script>
 <script src="/js/signout.js"></script>
 <script src="/js/loader.js"></script>
