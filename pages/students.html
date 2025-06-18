@@ -157,33 +157,7 @@
   </div>
 
 <script >
-document.addEventListener('DOMContentLoaded', () => {
-  const menuBtn2 = document.getElementById('menuBtn2');
-  const navMenu2 = document.getElementById('navMenu2');
 
-  if (menuBtn2 && navMenu2) {
-    menuBtn2.addEventListener('click', () => {
-      navMenu2.classList.toggle('mobile-active');
-    });
-
-    navMenu2.querySelectorAll('a, button.logoutBtn').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu2.classList.remove('mobile-active');
-      });
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!navMenu2.contains(e.target) && e.target !== menuBtn2) {
-        navMenu2.classList.remove('mobile-active');
-      }
-    });
-  }
-});
-</script>
- <script src="/js/students.js"></script>
-  <script src="/js/signout.js"></script>
-  <script src="/js/loader.js"></script>
-<script>
   async function pageInit() {
     showLoader();             // Show blur & spinner
     await fetchStudents();    // Fetch all students
