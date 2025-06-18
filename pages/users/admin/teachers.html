@@ -44,11 +44,15 @@
   <script src="/js/loader.js"></script>
   <script>
   async function pageInit() {
-    showLoader();             // Show blur & spinner
-   if (res.ok){
-     hideLoader();
 
-   }
+   if (!container){
+       showLoader();
+
+  }else{
+      hideLoader();
+      }
+
+
   }
 
   document.addEventListener("DOMContentLoaded", pageInit);
