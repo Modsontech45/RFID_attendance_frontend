@@ -22,8 +22,9 @@ module.exports = {
        "/pages/users/admin/adminlandingpage.html",
         "/pages/users/admin/adminlogin.html",
          "/pages/users/admin/adminsignup.html",
-          "/pages/users/admin/teacher.html",
-           "/pages/users/admin/teachers.html"
+         "/pages/users/admin/teachers.html",
+          "/pages/users/admin/teacher.html"
+
   ],
   theme: {
     extend: {},
