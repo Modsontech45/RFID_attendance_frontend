@@ -45,8 +45,10 @@
   <script>
   async function pageInit() {
     showLoader();             // Show blur & spinner
-    await fetchStudents();    // Fetch all students
-    hideLoader();             // Hide blur & spinner
+   if (res.ok){
+     hideLoader();
+
+   }
   }
 
   document.addEventListener("DOMContentLoaded", pageInit);
