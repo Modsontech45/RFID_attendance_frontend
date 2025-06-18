@@ -124,8 +124,19 @@
     </div>
   </div>
 
+
  <script src="/js/students.js"></script>
   <script src="/js/signout.js"></script>
+  <script src="/js/loader.js"></script>
+<script>
+  async function pageInit() {
+    showLoader();             // Show blur & spinner
+    await fetchStudents();    // Fetch all students
+    hideLoader();             // Hide blur & spinner
+  }
+
+  document.addEventListener("DOMContentLoaded", pageInit);
+</script>
 </body>
 
 </html>
