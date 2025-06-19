@@ -1,0 +1,62 @@
+{
+  "home": {
+    "title": "Êtes-vous un administrateur ou un enseignant ?",
+    "admin": "Administrateur",
+    "teacher": "Enseignant",
+     "english": "Anglais",
+    "french" : "Français",
+  "floating_comments": [
+    "Bienvenue dans le système de présence !",
+    "Administrateurs, commencez ici.",
+    "Enseignants, connectez-vous en toute sécurité !",
+    "Nouvelles mises à jour bientôt.",
+    "N'oubliez pas de marquer la présence chaque jour.",
+    "Besoin d'aide ? Contactez le support.",
+    "Sécurisé et facile à utiliser.",
+    "Rejoignez-nous pour une présence fluide !"
+  ]
+
+
+
+  },
+  "adminhomepage":{
+  "dashboard": {
+    "title": "Tableau de bord administrateur",
+    "header": "Admin de l'école",
+    "menu": {
+      "school": "École",
+      "teachers": "Enseignants",
+      "add_teacher": "Ajouter un enseignant",
+      "report": "Rapport",
+      "logout": "Déconnexion"
+    },
+    "section_title": "Articles du tableau de bord",
+    "cards": {
+      "attendance": {
+        "title": "Suivi de présence",
+        "description": "Consultez et gérez la présence des élèves avec synchronisation en temps réel depuis les appareils IoT."
+      },
+      "teacher": {
+        "title": "Gestion des enseignants",
+        "description": "Ajoutez, mettez à jour et surveillez tous les enseignants inscrits avec contrôle d'accès et journaux d'activité."
+      },
+      "report": {
+        "title": "Rapports des élèves",
+        "description": "Générez des rapports de présence, de performance académique et de comportement."
+      }
+    }
+  }
+},
+
+  "login": {
+    "title": "Bon retour",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "submit": "Connexion"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "overview": "Aperçu",
+    "logout": "Déconnexion"
+  }
+}

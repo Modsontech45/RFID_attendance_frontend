@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Admin Dashboard</title>
+  <title   data-i18n="adminhomepage.dashboard.title">Admin Dashboard</title>
  <link href="/css/output.css" rel="stylesheet">
-  <script src="/js/cookies.js"></script>
+  <!-- <script src="/js/cookies.js"></script> -->
   <script>
     tailwind.config = {
       theme: {
@@ -31,7 +31,7 @@
  <header class=" sticky top-0  left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50 ">
   <div class="flex items-center space-x-3">
     <img src="/assets/download.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
-    <span class="text-xl font-bold">School Admin</span>
+    <span data-i18n="adminhomepage.dashboard.header" class="text-xl font-bold">School Admin</span>
   </div>
 
   <!-- Mobile Menu Button -->
@@ -76,6 +76,7 @@
       </div>
     </div>
   </main>
+  <script src="/js/language.js"></script>
   <script src="/js/menu.js"></script>
   <script src="/js/signout.js"></script>
 </body>

@@ -1,0 +1,62 @@
+{
+  "home": {
+    "title": "Are you an Admin or a Teacher?",
+    "admin": "Admin",
+    "teacher": "Teacher",
+    "english": "English",
+    "french" : "French",
+     "floating_comments": [
+    "Welcome to the Attendance System!",
+    "Admins, get started here.",
+    "Teachers, login securely!",
+    "New updates rolling out soon.",
+    "Remember to mark attendance daily.",
+    "Need help? Contact support.",
+    "Secure & easy to use.",
+    "Join us for smooth attendance!"
+  ]
+  },
+
+  "adminhomepage":{
+  "dashboard": {
+    "title": "Admin Dashboard",
+    "header": "School Admin",
+    "menu": {
+      "school": "School",
+      "teachers": "Teachers",
+      "add_teacher": "Add Teacher",
+      "report": "Report",
+      "logout": "Logout"
+    },
+    "section_title": "Dashboard Articles",
+    "cards": {
+      "attendance": {
+        "title": "Attendance Tracking",
+        "description": "View and manage student attendance with real-time syncing from IoT devices."
+      },
+      "teacher": {
+        "title": "Teacher Management",
+        "description": "Add, update, and monitor all registered teachers with access control and activity logs."
+      },
+      "report": {
+        "title": "Student Reports",
+        "description": "Generate reports for attendance, academic performance, and behavioral tracking."
+      }
+    }
+  }
+},
+
+
+
+  "login": {
+    "title": "Welcome Back",
+    "email": "Email Address",
+    "password": "Password",
+    "submit": "Login"
+  },
+  "dashboard": {
+    "title": "Admin Dashboard",
+    "overview": "Overview",
+    "logout": "Logout"
+  }
+}

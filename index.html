@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8" />
-  <title>Welcome</title>
+  <title >Welcome</title>
  <link href="./css/output.css" rel="stylesheet">
 
   <style>
@@ -60,15 +60,20 @@
 
   <main class="flex-grow flex flex-col items-center justify-center relative overflow-visible">
 
-  <div id="google_translate_element"></div>
+ 
     <div id="floatingCommentsContainer" class="absolute inset-0 pointer-events-none z-40 overflow-visible"></div>
 
 
     <div class="text-center z-10 relative">
-      <h1 class="text-4xl font-bold mb-6">Are you an Admin or a Teacher?</h1>
+      <h1 data-i18n="home.title" class="text-4xl font-bold mb-6">Are you an Admin or a Teacher?</h1>
       <div class="space-x-6">
-        <button id="adminBtn" class="bg-blue-600 px-8 py-3 rounded hover:bg-blue-700 transition">Admin</button>
-        <button id="teacherBtn" class="bg-green-600 px-8 py-3 rounded hover:bg-green-700 transition">Teacher</button>
+        <button data-i18n="home.admin" id="adminBtn" class="bg-blue-600 px-8 py-3 rounded hover:bg-blue-700 transition">Admin</button>
+        <button data-i18n="home.teacher" id="teacherBtn" class="bg-green-600 px-8 py-3 rounded hover:bg-green-700 transition">Teacher</button>
+   <select id="langSelect" class="text-green-700 border border-green-500 bg-transparent rounded px-2 py-1">
+  <option data-i18n="home.english" value="en">English</option>
+  <option data-i18n="home.french" value="fr">Français</option>
+</select>
+
       </div>
     </div>
 
@@ -83,68 +88,71 @@
 
 
   </main>
+  <script src="/js/language.js"></script>
 
   <script>
+const floatingCommentsContainer = document.getElementById('floatingCommentsContainer');
+const adPopup = document.getElementById('adPopup');
+const teacherModal = document.getElementById('teacherModal');
+const teacherBtn = document.getElementById('teacherBtn');
+const adminBtn = document.getElementById('adminBtn');
+const closeTeacherModalBtn = document.getElementById('closeTeacherModal');
 
 
-    const floatingCommentsContainer = document.getElementById('floatingCommentsContainer');
-    const adPopup = document.getElementById('adPopup');
-    const teacherModal = document.getElementById('teacherModal');
-    const teacherBtn = document.getElementById('teacherBtn');
-    const adminBtn = document.getElementById('adminBtn');
-    const closeTeacherModalBtn = document.getElementById('closeTeacherModal');
 
-    const comments = [
-      "Welcome to the Attendance System!",
-      "Admins, get started here.",
-      "Teachers, login securely!",
-      "New updates rolling out soon.",
-      "Remember to mark attendance daily.",
-      "Need help? Contact support.",
-      "Secure & easy to use.",
-      "Join us for smooth attendance!"
-    ];
+function createFloatingComment() {
+  const comments = window.floatingComments || [
+  "Welcome to the Attendance System!",
+  "Admins, get started here.",
+  "Teachers, login securely!",
+  "New updates rolling out soon.",
+  "Remember to mark attendance daily.",
+  "Need help? Contact support.",
+  "Secure & easy to use.",
+  "Join us for smooth attendance!"
+];
+  const text = comments[Math.floor(Math.random() * comments.length)];
+  const comment = document.createElement('div');
+  comment.className = 'floating-comment';
+  comment.textContent = text;
 
-    function createFloatingComment() {
-      const commentText = comments[Math.floor(Math.random() * comments.length)];
-      const commentEl = document.createElement('div');
-      commentEl.className = 'floating-comment';
-      commentEl.textContent = commentText;
+  const containerWidth = floatingCommentsContainer.clientWidth;
+  comment.style.left = `${Math.random() * (containerWidth - 150)}px`;
+  comment.style.animationDuration = `${4000 + Math.random() * 3000}ms`;
 
-      const containerWidth = floatingCommentsContainer.clientWidth;
-      const maxWidth = containerWidth - 150;
-      const left = Math.random() * maxWidth;
-      commentEl.style.left = `${left}px`;
+  floatingCommentsContainer.appendChild(comment);
 
-      const duration = 4000 + Math.random() * 3000;
-      commentEl.style.animationDuration = `${duration}ms`;
-      commentEl.style.animationDelay = '0s';
+  setTimeout(() => comment.remove(), 5000);
+}
 
-      floatingCommentsContainer.appendChild(commentEl);
+// Start floating comments animation
+setInterval(createFloatingComment, 1200);
 
-      setTimeout(() => {
-        commentEl.remove();
-      }, duration);
-    }
+// Show ad popup after a short delay
+setTimeout(() => {
+  adPopup.style.display = 'block';
+}, 3000);
 
-    setInterval(createFloatingComment, 1200);
+// Navigation button actions
+if (teacherBtn) {
+  teacherBtn.addEventListener('click', () => {
+    window.location.href = '/pages/users/teacherlogin.html';
+  });
+}
 
-    setTimeout(() => {
-      adPopup.style.display = 'block';
-    }, 3000);
+if (adminBtn) {
+  adminBtn.addEventListener('click', () => {
+    window.location.href = '/pages/users/admin/adminlogin.html';
+  });
+}
 
-    teacherBtn.addEventListener('click', () => {
-     window.location.href = '/pages/users/teacherlogin.html';
-    });
+if (closeTeacherModalBtn && teacherModal) {
+  closeTeacherModalBtn.addEventListener('click', () => {
+    teacherModal.classList.add('hidden');
+    teacherModal.classList.remove('flex');
+  });
+}
 
-    adminBtn.addEventListener('click', () => {
-      window.location.href = '/pages/users/admin/adminlogin.html';
-    });
-
-    closeTeacherModalBtn.addEventListener('click', () => {
-      teacherModal.classList.add('hidden');
-      teacherModal.classList.remove('flex');
-    });
   </script>
 </body>
 </html>

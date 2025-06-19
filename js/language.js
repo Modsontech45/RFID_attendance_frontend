@@ -1,27 +1,67 @@
-// googleTranslate.js
+const langSelect = document.getElementById('langSelect');
 
-// Read the user's selected language from the cookie
-function getSavedLanguage() {
-  const match = document.cookie.match(/(?:^|; )googtrans=\/[a-z]{2}\/([a-z]{2})/);
-  return match ? match[1] : null;
+function getNestedValue(obj, path) {
+  console.log(`Getting nested value for path: "${path}"`);
+  const parts = path.split('.');
+  return parts.reduce((acc, part) => {
+    console.log(`  - Checking part "${part}" on`, acc);
+    return acc && acc[part];
+  }, obj);
 }
 
-// Initialize the Google Translate widget
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement(
-    {
-      pageLanguage: 'en',
-      includedLanguages: 'en,fr,es,de,pt', // customize if needed
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    },
-    'google_translate_element'
-  );
+async function setLanguage(lang) {
+  console.log(`Setting language to: ${lang}`);
+
+  try {
+    const res = await fetch(`/locales/${lang}.json`);
+    const translations = await res.json();
+
+    console.log("Loaded translations:", translations);
+
+    const elements = document.querySelectorAll('[data-i18n]');
+    console.log(`Found ${elements.length} elements with data-i18n`);
+
+    elements.forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const text = getNestedValue(translations, key);
+      console.log(`Applying key "${key}" =>`, text);
+
+      if (text) {
+        el.textContent = text;
+      }
+    });
+
+  if (translations.home && translations.home.floating_comments) {
+  window.floatingComments = translations.home.floating_comments;
+} else {
+  window.floatingComments = null;
+  floatingCommentsContainer.innerHTML = '';
+
 }
 
-// Load the translate script dynamically
-(function () {
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-  document.head.appendChild(script);
-})();
+
+    localStorage.setItem('lang', lang);
+    console.log(`Language "${lang}" saved to localStorage.`);
+
+    langSelect.value = lang; // Update select UI to match current language
+    console.log(`Select element value set to: ${lang}`);
+  } catch (err) {
+    console.error('Error loading language:', err);
+  }
+}
+
+// Listen for language changes
+langSelect.addEventListener('change', (e) => {
+  const selectedLang = e.target.value;
+  console.log(`Language selected: ${selectedLang}`);
+  setLanguage(selectedLang);
+});
+
+// On page load, set language from localStorage or default to English
+document.addEventListener('DOMContentLoaded', () => {
+  const savedLang = localStorage.getItem('lang') || 'en';
+  console.log(`Saved language on load: ${savedLang}`);
+  setLanguage(savedLang);
+  langSelect.value = savedLang;
+  console.log(`Select element value on load set to: ${savedLang}`);
+});
