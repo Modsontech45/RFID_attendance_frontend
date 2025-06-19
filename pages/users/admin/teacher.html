@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Teacher Profile</title>
-<link href="/css/output.css" rel="stylesheet">
+  <link href="/css/output.css" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -22,29 +22,43 @@
 
 <body class="bg-background text-primary min-h-screen">
 
-
   <header class="bg-primary text-white p-4 flex justify-between items-center fixed top-0 w-full z-50 shadow">
     <div class="flex items-center space-x-3">
       <img src="/assets/logo.jpg" alt="Logo" class="h-10 w-10 object-contain rounded-full bg-white" />
       <h1 class="text-xl font-bold">Teacher Profile</h1>
     </div>
-    <a href="https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/teachers.html" class="text-secondary font-semibold hover:underline">← Back to List</a>
+    <a href="https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/teachers.html"
+      class="text-secondary font-semibold hover:underline">← Back to List</a>
   </header>
-
 
   <main class="pt-24 px-4">
     <div class="max-w-3xl mx-auto p-6 bg-white border border-secondary rounded-xl shadow text-center">
       <div id="profileContainer">
         <p class="text-gray-600">Loading teacher details...</p>
       </div>
+      <button id="deleteButton" type="button"
+        class="mt-6 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition flex justify-center items-center disabled:opacity-60">
+        <svg id="spinner" class="hidden animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg"
+          fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+        </svg>
+        <span id="btnText">Delete Teacher</span>
+      </button>
     </div>
   </main>
 
   <script>
-
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
+    }
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
     }
 
     const teacherId = getQueryParam('id');
@@ -83,15 +97,49 @@
         `;
       } catch (err) {
         console.error(err);
-        document.getElementById('profileContainer').innerHTML = '<p class="text-red-500">Error fetching data.</p>';
+        container.innerHTML = '<p class="text-red-500">Error fetching data.</p>';
       }
     }
 
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
+    async function deleteTeacher() {
+      const button = document.getElementById('deleteButton');
+      const spinner = document.getElementById('spinner');
+      const btnText = document.getElementById('btnText');
+
+      if (!token || !teacherId) return;
+
+      button.disabled = true;
+      spinner.classList.remove('hidden');
+      btnText.textContent = "Deleting...";
+
+      try {
+        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.message || "Failed to delete teacher.");
+          return;
+        }
+
+        alert("Teacher deleted successfully.");
+        window.location.href = "/pages/users/admin/teachers.html";
+      } catch (error) {
+        console.error(error);
+        alert("An error occurred while deleting the teacher.");
+      } finally {
+        button.disabled = false;
+        spinner.classList.add('hidden');
+        btnText.textContent = "Delete Teacher";
+      }
     }
+
+    document.getElementById("deleteButton").addEventListener("click", deleteTeacher);
 
     fetchTeacher();
   </script>
