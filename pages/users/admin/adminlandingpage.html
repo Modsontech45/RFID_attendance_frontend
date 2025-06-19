@@ -29,7 +29,10 @@
 
 <body class="bg-black text-white min-h-screen">
 
-
+ <select  id="langSelect" class=" hidden text-green-700 border border-green-500 bg-transparent rounded px-2 py-1">
+  <option data-i18n="home.english" value="en">English</option>
+  <option data-i18n="home.french" value="fr">Français</option>
+</select>
  <header class=" sticky top-0  left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50 ">
   <div class="flex items-center space-x-3">
     <img src="/assets/download.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
@@ -43,13 +46,13 @@
 
   <nav id="navMenu"
       class=" flex max-sm:hidden sm:items-center gap-4  transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40  max-sm:flex-col">
-       <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied">
+       <a data-i18n="adminhomepage.dashboard.menu.school" href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied">
         School
       </a>
-    <a href="/pages/users/admin/teachers.html" class="hover:text-green-400 font-medium">Teachers</a>
-    <a href="/pages/users/addteacher.html" class="hover:text-green-400 font-medium">Add Teacher</a>
-    <a href="/pages/report.html" class="hover:text-green-400 font-medium">Report</a>
-    <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
+    <a data-i18n="adminhomepage.dashboard.menu.teachers" href="/pages/users/admin/teachers.html" class="hover:text-green-400 font-medium">Teachers</a>
+    <a data-i18n="adminhomepage.dashboard.menu.add_teacher" href="/pages/users/addteacher.html" class="hover:text-green-400 font-medium">Add Teacher</a>
+    <a data-i18n="adminhomepage.dashboard.menu.report" href="/pages/report.html" class="hover:text-green-400 font-medium">Report</a>
+    <button data-i18n="adminhomepage.dashboard.menu.logout" class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
       Logout
     </button>
   </nav>
