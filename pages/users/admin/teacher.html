@@ -76,10 +76,10 @@
     async function fetchTeacher() {
       const container = document.getElementById('profileContainer');
 
-      // if (!token) {
-      //   container.innerHTML = '<p class="text-red-500">You must be logged in.</p>';
-      //   return;
-      // }
+      if (!token) {
+        container.innerHTML = '<p class="text-red-500">You must be logged in.</p>';
+        return;
+      }
 
       try {
         const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
