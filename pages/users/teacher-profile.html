@@ -159,6 +159,7 @@
   async function pageInit() {
     showLoader();             // Show blur & spinner
     await loadProfile();
+    await saveProfile();
     hideLoader();             // Hide blur & spinner
   }
 
