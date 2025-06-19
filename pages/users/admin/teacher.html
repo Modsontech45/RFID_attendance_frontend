@@ -49,17 +49,11 @@
           ← Go Back
         </a>
 
-        <!-- Delete Button -->
-        <button id="deleteButton" type="button"
-          class="px-4 py-2 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition flex items-center disabled:opacity-60">
-          <svg id="spinner" class="hidden animate-spin h-4 w-4 mr-2 text-white" xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-          </svg>
-          <span id="btnText">Delete</span>
-        </button>
+      <button id="deleteButton" type="button"
+  class="px-4 py-2 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition disabled:opacity-60">
+  Delete
+</button>
+
       </div>
     </div>
   </main>
@@ -117,43 +111,44 @@
       }
     }
 
-    async function deleteTeacher() {
-      const button = document.getElementById('deleteButton');
-      const spinner = document.getElementById('spinner');
-      const btnText = document.getElementById('btnText');
+   async function deleteTeacher() {
+  const confirmDelete = confirm("Are you sure you want to delete this teacher?");
+  if (!confirmDelete) return;
 
-      if (!token || !teacherId) return;
+  const button = document.getElementById('deleteButton');
+  const btnText = document.getElementById('btnText');
 
-      button.disabled = true;
-      spinner.classList.remove('hidden');
-      btnText.textContent = "Deleting...";
+  if (!token || !teacherId) return;
 
-      try {
-        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+  button.disabled = true;
+  btnText.textContent = "Deleting...";
 
-        const data = await res.json();
-
-        if (!res.ok) {
-          alert(data.message || "Failed to delete teacher.");
-          return;
-        }
-
-        alert("Teacher deleted successfully.");
-        window.location.href = "/pages/users/admin/teachers.html";
-      } catch (error) {
-        console.error(error);
-        alert("An error occurred while deleting the teacher.");
-      } finally {
-        button.disabled = false;
-        spinner.classList.add('hidden');
-        btnText.textContent = "Delete";
+  try {
+    const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
       }
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message || "Failed to delete teacher.");
+      return;
     }
+
+    alert("Teacher deleted successfully.");
+    window.location.href = "/pages/users/admin/teachers.html";
+  } catch (error) {
+    console.error(error);
+    alert("An error occurred while deleting the teacher.");
+  } finally {
+    button.disabled = false;
+    btnText.textContent = "Delete";
+  }
+}
+
 
     document.getElementById("deleteButton").addEventListener("click", deleteTeacher);
 
