@@ -63,7 +63,7 @@
         class="bg-secondary text-white px-4 py-2 rounded hover:bg-green-700">
         ✏️ Edit Profile
       </button>
-      <button id="saveBtn" onclick="saveProfile()"
+      <button  class="Savebutton" id="saveBtn" onclick="saveProfile()"
         class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hidden">
         💾 Save
       </button>
@@ -157,13 +157,29 @@ errorMesg.className = 'text-red-400'; // Use Tailwind class correctly
     }
 
     loadProfile();
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  pageInit();
+
+
+  const saveButton = document.querySelector(".Savebutton");
+  if (saveButton) {
+    saveButton.addEventListener("click", async () => {
+      showLoader();
+      await saveProfile();
+      hideLoader();
+    });
+  }
+});
+
   </script>
   <script src="/js/loader.js"></script>
 <script>
   async function pageInit() {
     showLoader();             // Show blur & spinner
     await loadProfile();
-    await saveProfile();
+
     hideLoader();             // Hide blur & spinner
   }
 
