@@ -32,7 +32,7 @@
   </header>
 
   <main class="max-w-3xl mx-auto bg-primary mt-10 p-6 rounded-xl border border-secondary shadow text-light">
-
+      <p id="errormessage"></p>
     <div class="flex items-center gap-4 mb-6">
       <img id="picture" src="" alt="Profile Picture"
         class="w-24 h-24 rounded-full object-cover border-2 border-secondary" />
@@ -122,6 +122,7 @@
     }
 
     async function saveProfile() {
+      const errorMesg = document.getElementById("errormessage");
       const token = getCookie('token');
       const full_name = document.getElementById('fullNameInput').value;
       const bio = document.getElementById('bioInput').value;
@@ -145,10 +146,13 @@
         document.getElementById('bioDisplay').textContent = bio;
 
         toggleEdit(false);
-        alert('Profile updated successfully');
+        errorMesg.innerText = 'Profile updated successfully';
+       errorMesg.className = 'text-green-400';
       } catch (err) {
         console.error(err);
-        alert('Something went wrong while saving.');
+        errorMesg.innerText = 'Something went wrong while saving.';
+errorMesg.className = 'text-red-400'; // Use Tailwind class correctly
+
       }
     }
 
