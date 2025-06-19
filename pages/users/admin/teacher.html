@@ -113,46 +113,57 @@
       }
     }
 
-    async function deleteTeacher() {
-      const confirmDelete = confirm("Are you sure you want to delete this teacher?");
-      if (!confirmDelete) return;
+   async function deleteTeacher() {
+  const confirmDelete = confirm("Are you sure you want to delete this teacher?");
+  if (!confirmDelete) return;
 
-      const button = document.getElementById("deleteButton");
-      const btnText = document.getElementById("btnText");
+  const button = document.getElementById("deleteButton");
+  const btnText = document.getElementById("btnText");
 
-      if (!token || !teacherId) {
-        alert("Missing authentication token or teacher ID.");
-        return;
+  if (!token || !teacherId) {
+    alert("Missing authentication token or teacher ID.");
+    return;
+  }
+
+  button.disabled = true;
+  btnText.textContent = "Deleting...";
+
+  try {
+    const response = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
       }
+    });
 
-      button.disabled = true;
-      btnText.textContent = "Deleting...";
-
+    if (!response.ok) {
+      // Try to get error message from JSON body
+      let errorMsg = "Failed to delete teacher.";
       try {
-        const response = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
-          method: "DELETE",
-          headers: {
-            "Authorization": `Bearer ${token}`
-          }
-        });
-
-        const result = await response.json();
-        console.log("Delete response:", result);
-
-        if (!response.ok) {
-          throw new Error(result.message || "Failed to delete teacher.");
-        }
-
-        alert("Teacher deleted successfully.");
-        window.location.href = "/pages/users/admin/teachers.html";
-      } catch (err) {
-        console.error("Delete error:", err);
-        alert(err.message || "An unexpected error occurred.");
-      } finally {
-        button.disabled = false;
-        btnText.textContent = "Delete";
+        const errorData = await response.json();
+        if (errorData.message) errorMsg = errorData.message;
+      } catch {
+        // Ignore JSON parse errors
       }
+      throw new Error(errorMsg);
     }
+
+    // Try parse success response if any
+    const result = await response.json().catch(() => ({}));
+    console.log("Delete response:", result);
+
+    alert("Teacher deleted successfully.");
+    window.location.href = "/pages/users/admin/teachers.html";
+
+  } catch (err) {
+    console.error("Delete error:", err);
+    alert(err.message || "An unexpected error occurred.");
+  } finally {
+    button.disabled = false;
+    btnText.textContent = "Delete";
+  }
+}
+
 
     document.addEventListener("DOMContentLoaded", () => {
       const deleteBtn = document.getElementById("deleteButton");
