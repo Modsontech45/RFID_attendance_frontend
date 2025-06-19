@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Teacher Profile</title>
-<link href="/css/output.css" rel="stylesheet">
+  <link href="/css/output.css" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -28,11 +28,12 @@
 <body class="bg-primary text-light min-h-screen">
   <header class="bg-primary border-b border-secondary text-white p-4 flex justify-between items-center">
     <h1 class="text-xl font-bold">Teacher Profile</h1>
-    <a href="https://rfid-attendance-synctuario-theta.vercel.app/pages/students.html" class="text-secondary hover:underline">🏠 Home</a>
+    <a href="https://rfid-attendance-synctuario-theta.vercel.app/pages/students.html"
+      class="text-secondary hover:underline">🏠 Home</a>
   </header>
 
   <main class="max-w-3xl mx-auto bg-primary mt-10 p-6 rounded-xl border border-secondary shadow text-light">
-      <p id="errormessage"></p>
+    <p id="errormessage"></p>
     <div class="flex items-center gap-4 mb-6">
       <img id="picture" src="" alt="Profile Picture"
         class="w-24 h-24 rounded-full object-cover border-2 border-secondary" />
@@ -63,7 +64,7 @@
         class="bg-secondary text-white px-4 py-2 rounded hover:bg-green-700">
         ✏️ Edit Profile
       </button>
-      <button  class="Savebutton" id="saveBtn" onclick="saveProfile()"
+      <button class="Savebutton" id="saveBtn" onclick="saveProfile()"
         class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hidden">
         💾 Save
       </button>
@@ -147,11 +148,23 @@
 
         toggleEdit(false);
         errorMesg.innerText = 'Profile updated successfully';
-       errorMesg.className = 'text-green-400';
+        errorMesg.className = 'text-green-400';
+
+        // Hide after 3 seconds
+        setTimeout(() => {
+          errorMesg.innerText = '';
+          errorMesg.className = '';
+        }, 3000); // 3000ms = 3 seconds
       } catch (err) {
         console.error(err);
         errorMesg.innerText = 'Something went wrong while saving.';
-errorMesg.className = 'text-red-400'; // Use Tailwind class correctly
+        errorMesg.className = 'text-red-400';
+
+        // Hide after 3 seconds
+        setTimeout(() => {
+          errorMesg.innerText = '';
+          errorMesg.className = '';
+        }, 3000);
 
       }
     }
@@ -159,32 +172,32 @@ errorMesg.className = 'text-red-400'; // Use Tailwind class correctly
     loadProfile();
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  pageInit();
+    document.addEventListener("DOMContentLoaded", () => {
+      pageInit();
 
 
-  const saveButton = document.querySelector(".Savebutton");
-  if (saveButton) {
-    saveButton.addEventListener("click", async () => {
-      showLoader();
-      await saveProfile();
-      hideLoader();
+      const saveButton = document.querySelector(".Savebutton");
+      if (saveButton) {
+        saveButton.addEventListener("click", async () => {
+          showLoader();
+          await saveProfile();
+          hideLoader();
+        });
+      }
     });
-  }
-});
 
   </script>
   <script src="/js/loader.js"></script>
-<script>
-  async function pageInit() {
-    showLoader();             // Show blur & spinner
-    await loadProfile();
+  <script>
+    async function pageInit() {
+      showLoader();             // Show blur & spinner
+      await loadProfile();
 
-    hideLoader();             // Hide blur & spinner
-  }
+      hideLoader();             // Hide blur & spinner
+    }
 
-  document.addEventListener("DOMContentLoaded", pageInit);
-</script>
+    document.addEventListener("DOMContentLoaded", pageInit);
+  </script>
 </body>
 
 </html>
