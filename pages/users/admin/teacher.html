@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Teacher Profile</title>
-  <link href="/css/output.css" rel="stylesheet">
+  <link href="/css/output.css" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
@@ -12,53 +12,59 @@
           colors: {
             primary: '#000000',
             secondary: '#00A86B',
-            background: '#FFFFFF'
-          }
-        }
-      }
-    }
+            background: '#FFFFFF',
+          },
+        },
+      },
+    };
   </script>
 </head>
 
 <body class="bg-background text-primary min-h-screen">
 
+  <!-- Header -->
   <header class="bg-primary text-white p-4 flex justify-between items-center fixed top-0 w-full z-50 shadow">
     <div class="flex items-center space-x-3">
       <img src="/assets/logo.jpg" alt="Logo" class="h-10 w-10 object-contain rounded-full bg-white" />
       <h1 class="text-xl font-bold">Teacher Profile</h1>
     </div>
-    <a href="https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/teachers.html"
-      class="text-secondary font-semibold hover:underline">← Back to List</a>
+    <a href="/pages/users/admin/teachers.html"
+      class="text-secondary font-semibold hover:underline text-sm">← Back to List</a>
   </header>
 
+  <!-- Main -->
   <main class="pt-24 px-4">
     <div class="max-w-3xl mx-auto p-6 bg-white border border-secondary rounded-xl shadow text-center">
+
+      <!-- Profile Info -->
       <div id="profileContainer">
         <p class="text-gray-600">Loading teacher details...</p>
       </div>
-     <div class="flex justify-between items-center mt-6 gap-4">
-  <!-- Go Back Button -->
-  <a href="/pages/users/admin/teachers.html"
-     class="px-4 py-2 text-sm bg-gray-200 text-black rounded hover:bg-gray-300 transition">
-    ← Go Back
-  </a>
 
-  <!-- Delete Button -->
-  <button id="deleteButton" type="button"
-    class="px-4 py-2 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition flex items-center disabled:opacity-60">
-    <svg id="spinner" class="hidden animate-spin h-4 w-4 mr-2 text-white" xmlns="http://www.w3.org/2000/svg"
-      fill="none" viewBox="0 0 24 24">
-      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-      <path class="opacity-75" fill="currentColor"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-    </svg>
-    <span id="btnText">Delete</span>
-  </button>
-</div>
+      <!-- Action Buttons -->
+      <div class="flex justify-between items-center mt-6 gap-4">
+        <!-- Go Back -->
+        <a href="/pages/users/admin/teachers.html"
+          class="px-4 py-2 text-sm bg-gray-200 text-black rounded hover:bg-gray-300 transition">
+          ← Go Back
+        </a>
 
+        <!-- Delete Button -->
+        <button id="deleteButton" type="button"
+          class="px-4 py-2 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition flex items-center disabled:opacity-60">
+          <svg id="spinner" class="hidden animate-spin h-4 w-4 mr-2 text-white" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+          <span id="btnText">Delete</span>
+        </button>
+      </div>
     </div>
   </main>
 
+  <!-- Script -->
   <script>
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -145,7 +151,7 @@
       } finally {
         button.disabled = false;
         spinner.classList.add('hidden');
-        btnText.textContent = "Delete Teacher";
+        btnText.textContent = "Delete";
       }
     }
 
