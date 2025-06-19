@@ -48,12 +48,19 @@
 
 
 
-  "login": {
-    "title": "Welcome Back",
-    "email": "Email Address",
-    "password": "Password",
-    "submit": "Login"
-  },
+  "login":{
+  "adminlogin": {
+    "title": "Admin Login",
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "login_button": "Login",
+    "no_account": "Don't have an account?",
+    "signup_link": "Sign up |",
+    "forgot_password": "Forgot password?",
+    "back": "Go back"
+  }
+}
+,
   "dashboard": {
     "title": "Admin Dashboard",
     "overview": "Overview",

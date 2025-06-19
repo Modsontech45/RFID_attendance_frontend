@@ -48,12 +48,19 @@
   }
 },
 
-  "login": {
-    "title": "Bon retour",
-    "email": "Adresse e-mail",
-    "password": "Mot de passe",
-    "submit": "Connexion"
-  },
+  "login":{
+  "adminlogin": {
+    "title": "Connexion Administrateur",
+    "email_placeholder": "Adresse e-mail",
+    "password_placeholder": "Mot de passe",
+    "login_button": "Connexion",
+    "no_account": "Vous n'avez pas de compte ?",
+    "signup_link": "S'inscrire |",
+    "forgot_password": "Mot de passe oublié ?",
+    "back": "Retour"
+  }
+}
+,
   "dashboard": {
     "title": "Tableau de bord",
     "overview": "Aperçu",
