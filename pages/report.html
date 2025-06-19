@@ -11,8 +11,7 @@
 <body class="bg-white text-black min-h-screen font-sans">
 
 
-  <header class="fixed top-0 left-0 right-0 z-50 bg-black text-white shadow-md py-4 px-6 flex items-center justify-between border-b border-green-600">
-
+  <header class=" sticky top-0  left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50 ">
   <div class="flex items-center space-x-3">
     <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
     <span class="text-xl font-bold">Synctuario</span>
@@ -23,8 +22,8 @@
   </button>
 
 
-  <nav id="navMenu"
-    class="hidden fixed  top-0 right-0 h-full w-2/4 max-w-xs bg-black z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-start space-y-6 px-6 py-10 sm:static sm:flex sm:flex-row sm:items-center sm:space-y-0 sm:space-x-6 sm:translate-x-0 sm:w-auto sm:h-auto sm:bg-transparent sm:p-0">
+<nav id="navMenu"
+      class=" flex max-sm:hidden sm:items-center gap-4  transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40  max-sm:flex-col">
     <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
     <a href="/registerstudent.html" class="hover:text-green-400 font-medium">Home</a>
     <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
