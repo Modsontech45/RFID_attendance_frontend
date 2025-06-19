@@ -218,8 +218,10 @@ document.addEventListener("DOMContentLoaded", () => {
           errorMessage.textContent = json.message || "Failed to add teacher.";
           errorMessage.classList.remove("hidden");
         } else {
-          alert(json.message);
+          errorMessage.className ='text-green-400'
+        errorMessage.textContent = json.message
           addTeacherForm.reset();
+          window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/teachers.html";
         }
       } catch (err) {
         console.error(err);
