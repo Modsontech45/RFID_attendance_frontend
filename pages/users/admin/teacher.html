@@ -48,11 +48,10 @@
           class="px-4 py-2 text-sm bg-gray-200 text-black rounded hover:bg-gray-300 transition">
           ← Go Back
         </a>
-
-      <button id="deleteButton" type="button"
-  class="px-4 py-2 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition ">
-  Delete
-</button>
+            <a   id="deleteButton" href="3"
+          class="px-4 py-2 text-sm bg-gray-200 text-black rounded hover:bg-gray-300 transition hover:text-red-400">
+         Delete
+        </a>
 
       </div>
     </div>
@@ -77,10 +76,10 @@
     async function fetchTeacher() {
       const container = document.getElementById('profileContainer');
 
-      if (!token) {
-        container.innerHTML = '<p class="text-red-500">You must be logged in.</p>';
-        return;
-      }
+      // if (!token) {
+      //   container.innerHTML = '<p class="text-red-500">You must be logged in.</p>';
+      //   return;
+      // }
 
       try {
         const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
