@@ -65,3 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
   langSelect.value = savedLang;
   console.log(`Select element value on load set to: ${savedLang}`);
 });
+
+
+if (!langSelect) {
+  const select = document.createElement('select');
+  select.id = 'langSelect';
+  select.innerHTML = `
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+  `;
+  document.body.appendChild(select);
+}
