@@ -57,7 +57,6 @@
     </div>
   </main>
 
-  <!-- Script -->
   <script>
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -110,46 +109,56 @@
       }
     }
 
-   async function deleteTeacher() {
+async function deleteTeacher() {
   const confirmDelete = confirm("Are you sure you want to delete this teacher?");
   if (!confirmDelete) return;
 
-  const button = document.getElementById('deleteButton');
-  const btnText = document.getElementById('btnText');
+  const button = document.getElementById("deleteButton");
+  const btnText = document.getElementById("btnText");
 
-  if (!token || !teacherId) return;
+  if (!token || !teacherId) {
+    alert("Missing authentication token or teacher ID.");
+    return;
+  }
 
+  // Set loading state
   button.disabled = true;
   btnText.textContent = "Deleting...";
 
   try {
-    const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
-      method: 'DELETE',
+    const response = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
+      method: "DELETE",
       headers: {
-        'Authorization': `Bearer ${token}`
+        "Authorization": `Bearer ${token}`
       }
     });
 
-    const data = await res.json();
+    const result = await response.json();
 
-    if (!res.ok) {
-      alert(data.message || "Failed to delete teacher.");
-      return;
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to delete teacher.");
     }
 
     alert("Teacher deleted successfully.");
     window.location.href = "/pages/users/admin/teachers.html";
-  } catch (error) {
-    console.error(error);
-    alert("An error occurred while deleting the teacher.");
+  } catch (err) {
+    console.error("Delete error:", err);
+    alert(err.message || "An unexpected error occurred.");
   } finally {
+    // Reset button state
     button.disabled = false;
     btnText.textContent = "Delete";
   }
 }
 
+// Attach event listener when DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+  const deleteBtn = document.getElementById("deleteButton");
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", deleteTeacher);
+  }
+});
 
-    document.getElementById("deleteButton").addEventListener("click", deleteTeacher);
 
     fetchTeacher();
   </script>
