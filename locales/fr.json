@@ -61,6 +61,18 @@
   }
 }
 ,
+"adminsignup": {
+    "title": "Inscription Administrateur",
+    "firstname_placeholder": "Prénom",
+    "lastname_placeholder": "Nom de famille",
+    "email_placeholder": "Adresse e-mail",
+    "password_placeholder": "Mot de passe",
+    "confirm_password_placeholder": "Confirmer le mot de passe",
+    "submit_button": "S'inscrire",
+    "already_have_account": "Vous avez déjà un compte ?",
+    "login_link": "Connexion"
+  },
+
   "dashboard": {
     "title": "Tableau de bord",
     "overview": "Aperçu",

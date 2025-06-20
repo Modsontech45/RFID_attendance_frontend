@@ -61,6 +61,19 @@
   }
 }
 ,
+
+"adminsignup": {
+    "title": "Admin Signup",
+    "firstname_placeholder": "First Name",
+    "lastname_placeholder": "Last Name",
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "confirm_password_placeholder": "Confirm Password",
+    "submit_button": "Sign Up",
+    "already_have_account": "Already have an account?",
+    "login_link": "Login"
+  },
+  
   "dashboard": {
     "title": "Admin Dashboard",
     "overview": "Overview",
