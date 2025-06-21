@@ -1,21 +1,53 @@
-
+// Cookie utility
 function getCookie(name) {
   const parts = `; ${document.cookie}`.split(`; ${name}=`);
   return parts.length === 2 ? parts.pop().split(";").shift() : null;
 }
 
-
-const role = getCookie("role");
-if (role === "teacher") {
-  document.querySelectorAll(".teacher-only").forEach(el => el.classList.remove("hidden"));
-  document.querySelectorAll(".teacher-access-denied").forEach(el => el.classList.add("hidden"));
-}
-
+// Global state
 let studentsData = [];
 
+// Language translation helpers
+function getNestedValue(obj, path) {
+  return path.split('.').reduce((acc, part) => acc?.[part], obj);
+}
 
+async function setLanguage(lang) {
+  try {
+    const res = await fetch(`/locales/${lang}.json`);
+    const translations = await res.json();
 
+    const elements = document.querySelectorAll('[data-i18n], [data-i18n-placeholder]');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const placeholderKey = el.getAttribute('data-i18n-placeholder');
 
+      if (key) {
+        const text = getNestedValue(translations, key);
+        if (text) el.textContent = text;
+      }
+
+      if (placeholderKey) {
+        const placeholderText = getNestedValue(translations, placeholderKey);
+        if (placeholderText) el.setAttribute('placeholder', placeholderText);
+      }
+    });
+
+    // Optional: handle floating comments
+    window.floatingComments = translations.home?.floating_comments || null;
+    if (!window.floatingComments && typeof floatingCommentsContainer !== 'undefined') {
+      floatingCommentsContainer.innerHTML = '';
+    }
+
+    localStorage.setItem('lang', lang);
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) langSelect.value = lang;
+  } catch (err) {
+    console.error('Error loading language:', err);
+  }
+}
+
+// Fetch and render students
 async function fetchStudents() {
   const errorMessage = document.getElementById("errormessage");
   try {
@@ -24,7 +56,6 @@ async function fetchStudents() {
 
     studentsData = await res.json();
     renderStudents(studentsData);
-
     if (errorMessage) {
       errorMessage.textContent = "";
       errorMessage.classList.add("hidden");
@@ -39,20 +70,18 @@ async function fetchStudents() {
   }
 }
 
-
 function renderStudents(students) {
   const tbody = document.getElementById("studentsBody");
   const formFilter = document.getElementById("formFilter").value.toLowerCase();
   const searchQuery = document.getElementById("searchInput").value.toLowerCase();
   tbody.innerHTML = "";
 
-  const filtered = students.filter(
-    (s) =>
-      (!formFilter || s.form?.toLowerCase() === formFilter) &&
-      (!searchQuery || s.name?.toLowerCase().includes(searchQuery))
+  const filtered = students.filter(s =>
+    (!formFilter || s.form?.toLowerCase() === formFilter) &&
+    (!searchQuery || s.name?.toLowerCase().includes(searchQuery))
   );
 
-  filtered.forEach((student) => {
+  filtered.forEach(student => {
     const row = document.createElement("tr");
     row.className = "hover:bg-gray-100 cursor-pointer";
     row.innerHTML = `
@@ -78,7 +107,7 @@ function renderStudents(students) {
   document.getElementById("femalePercent").textContent = total ? ((females / total) * 100).toFixed(1) : 0;
 }
 
-
+// Modal handling
 function openModal(uid) {
   document.getElementById("oldUid").value = uid;
   document.getElementById("newUid").value = "";
@@ -96,9 +125,6 @@ function closeModal() {
   document.getElementById("modalOverlay").classList.add("hidden");
 }
 
-document.getElementById("close").addEventListener("click", closeModal);
-
-
 async function updateStudentUid(oldUid, newUid) {
   if (getCookie("role") !== "admin") {
     window.location.href = "/pages/users/access-denied.html";
@@ -109,7 +135,6 @@ async function updateStudentUid(oldUid, newUid) {
   const updateBtn = document.getElementById("updateUidBtn");
   const spinner = document.getElementById("spinner");
 
-  // Reset message
   messageDiv.className = "mt-4 p-3 rounded-md text-center hidden";
   messageDiv.textContent = "";
   spinner.classList.remove("hidden");
@@ -144,107 +169,56 @@ async function updateStudentUid(oldUid, newUid) {
   }
 }
 
-// Event bindings
-document.getElementById("formFilter").addEventListener("change", () => renderStudents(studentsData));
-document.getElementById("searchInput").addEventListener("input", () => renderStudents(studentsData));
-
-document.getElementById("updateUidForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const oldUid = document.getElementById("oldUid").value.trim();
-  const newUid = document.getElementById("newUid").value.trim();
-
-  if (!oldUid || !newUid) {
-    alert("Please enter both current and new UIDs.");
-    return;
+// All DOM-related setup
+document.addEventListener("DOMContentLoaded", () => {
+  const role = getCookie("role");
+  if (role === "teacher") {
+    document.querySelectorAll(".teacher-only").forEach(el => el.classList.remove("hidden"));
+    document.querySelectorAll(".teacher-access-denied").forEach(el => el.classList.add("hidden"));
   }
 
-  const confirmed = confirm(`Change UID from "${oldUid}" to "${newUid}"?`);
-  if (confirmed) await updateStudentUid(oldUid, newUid);
-});
+  // Language setup
+  const langSelect = document.getElementById('langSelect');
+  const savedLang = localStorage.getItem('lang') || 'en';
+  setLanguage(savedLang);
 
-// Load students on page ready
-window.addEventListener("DOMContentLoaded", fetchStudents);
+  if (langSelect) {
+    langSelect.value = savedLang;
+    langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+  } else {
+    const fallback = document.createElement('select');
+    fallback.id = 'langSelect';
+    fallback.innerHTML = `
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+    `;
+    document.body.appendChild(fallback);
+    fallback.addEventListener('change', (e) => setLanguage(e.target.value));
+  }
 
+  // Modal close
+  document.getElementById("close").addEventListener("click", closeModal);
 
-const langSelect = document.getElementById('langSelect');
+  // Filter and search
+  document.getElementById("formFilter").addEventListener("change", () => renderStudents(studentsData));
+  document.getElementById("searchInput").addEventListener("input", () => renderStudents(studentsData));
 
-function getNestedValue(obj, path) {
-  console.log(`Getting nested value for path: "${path}"`);
-  const parts = path.split('.');
-  return parts.reduce((acc, part) => {
-    console.log(`  - Checking part "${part}" on`, acc);
-    return acc && acc[part];
-  }, obj);
-}
+  // Form submit
+  document.getElementById("updateUidForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const oldUid = document.getElementById("oldUid").value.trim();
+    const newUid = document.getElementById("newUid").value.trim();
 
-async function setLanguage(lang) {
-  console.log(`Setting language to: ${lang}`);
-
-  try {
-    const res = await fetch(`/locales/${lang}.json`);
-    const translations = await res.json();
-
-    console.log("Loaded translations:", translations);
-
-    const elements = document.querySelectorAll('[data-i18n], [data-i18n-placeholder]');
-    console.log(`Found ${elements.length} elements with i18n attributes`);
-
-    elements.forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      const placeholderKey = el.getAttribute('data-i18n-placeholder');
-
-      if (key) {
-        const text = getNestedValue(translations, key);
-        if (text) el.textContent = text;
-      }
-
-      if (placeholderKey) {
-        const placeholderText = getNestedValue(translations, placeholderKey);
-        if (placeholderText) el.setAttribute('placeholder', placeholderText);
-      }
-    });
-
-    // Handle floating comments if present
-    if (translations.home && translations.home.floating_comments) {
-      window.floatingComments = translations.home.floating_comments;
-    } else {
-      window.floatingComments = null;
-      if (typeof floatingCommentsContainer !== 'undefined') {
-        floatingCommentsContainer.innerHTML = '';
-      }
+    if (!oldUid || !newUid) {
+      alert("Please enter both current and new UIDs.");
+      return;
     }
 
-    localStorage.setItem('lang', lang);
-    langSelect.value = lang;
-    console.log(`Language "${lang}" saved to localStorage and applied.`);
-  } catch (err) {
-    console.error('Error loading language:', err);
-  }
-}
+    if (confirm(`Change UID from "${oldUid}" to "${newUid}"?`)) {
+      await updateStudentUid(oldUid, newUid);
+    }
+  });
 
-// Listen for language changes
-langSelect.addEventListener('change', (e) => {
-  const selectedLang = e.target.value;
-  console.log(`Language selected: ${selectedLang}`);
-  setLanguage(selectedLang);
+  // Initial fetch
+  fetchStudents();
 });
-
-// On page load, set language from localStorage or default to English
-document.addEventListener('DOMContentLoaded', () => {
-  const savedLang = localStorage.getItem('lang') || 'en';
-  console.log(`Saved language on load: ${savedLang}`);
-  setLanguage(savedLang);
-  langSelect.value = savedLang;
-  console.log(`Select element value on load set to: ${savedLang}`);
-});
-
-
-if (!langSelect) {
-  const select = document.createElement('select');
-  select.id = 'langSelect';
-  select.innerHTML = `
-    <option value="en">English</option>
-    <option value="fr">Français</option>
-  `;
-  document.body.appendChild(select);
-}
