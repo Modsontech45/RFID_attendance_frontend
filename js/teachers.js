@@ -1,3 +1,6 @@
+
+
+
 async function fetchTeachers() {
   const container = document.getElementById("teachersContainer");
   const token = getCookie("token");
