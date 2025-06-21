@@ -118,7 +118,31 @@
     },
     "error_message": "No students found."
   },
-
+"register": {
+    "title": "Synctuario RFID Student Attendance System",
+    "subtitle": "Waiting for scan...",
+    "form": {
+      "heading": "Register New Student",
+      "name": "Name",
+      "uid": "UID",
+      "email": "Email",
+      "telephone": "Telephone",
+      "gender": "Select Gender",
+      "gender_options": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      },
+      "form_label": "Select Form/Class",
+      "form_options": {
+        "form1": "Form 1",
+        "form2": "Form 2",
+        "form3": "Form 3",
+        "form4": "Form 4"
+      },
+      "submit": "Register"
+    }
+  },
 
 
 

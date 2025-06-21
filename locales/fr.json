@@ -118,6 +118,35 @@
     "error_message": "Aucun élève trouvé."
   },
 
+
+  "register": {
+    "title": "Système de présence des élèves Synctuario RFID",
+    "subtitle": "En attente de scan...",
+    "form": {
+      "heading": "Inscrire un nouvel élève",
+      "name": "Nom",
+      "uid": "UID",
+      "email": "Email",
+      "telephone": "Téléphone",
+      "gender": "Sélectionnez le genre",
+      "gender_options": {
+        "male": "Masculin",
+        "female": "Féminin",
+        "other": "Autre"
+      },
+      "form_label": "Sélectionnez la classe",
+      "form_options": {
+        "form1": "Classe 1",
+        "form2": "Classe 2",
+        "form3": "Classe 3",
+        "form4": "Classe 4"
+      },
+      "submit": "Enregistrer"
+    }
+  },
+
+
+
   "dashboard": {
     "title": "Tableau de bord",
     "overview": "Aperçu",
