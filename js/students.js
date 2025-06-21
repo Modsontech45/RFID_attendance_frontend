@@ -98,11 +98,16 @@ function renderStudents(students) {
 function openModal(uid) {
   document.getElementById("oldUid").value = uid;
   document.getElementById("newUid").value = "";
+
   const msg = document.getElementById("uidUpdateMessage");
-  msg.classList.add("hidden");
-  msg.textContent = "";
+  if (msg) {
+    msg.classList.add("hidden");
+    msg.textContent = "";
+  }
+
   document.getElementById("modalOverlay").classList.remove("hidden");
 }
+
 
 function closeModal() {
   document.getElementById("modalOverlay").classList.add("hidden");
