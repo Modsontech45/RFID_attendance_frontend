@@ -18,33 +18,37 @@ async function setLanguage(lang) {
 
     console.log("Loaded translations:", translations);
 
-    const elements = document.querySelectorAll('[data-i18n]');
-    console.log(`Found ${elements.length} elements with data-i18n`);
+    const elements = document.querySelectorAll('[data-i18n], [data-i18n-placeholder]');
+    console.log(`Found ${elements.length} elements with i18n attributes`);
 
     elements.forEach(el => {
       const key = el.getAttribute('data-i18n');
-      const text = getNestedValue(translations, key);
-      console.log(`Applying key "${key}" =>`, text);
+      const placeholderKey = el.getAttribute('data-i18n-placeholder');
 
-      if (text) {
-        el.textContent = text;
+      if (key) {
+        const text = getNestedValue(translations, key);
+        if (text) el.textContent = text;
+      }
+
+      if (placeholderKey) {
+        const placeholderText = getNestedValue(translations, placeholderKey);
+        if (placeholderText) el.setAttribute('placeholder', placeholderText);
       }
     });
 
-  if (translations.home && translations.home.floating_comments) {
-  window.floatingComments = translations.home.floating_comments;
-} else {
-  window.floatingComments = null;
-  floatingCommentsContainer.innerHTML = '';
-
-}
-
+    // Handle floating comments if present
+    if (translations.home && translations.home.floating_comments) {
+      window.floatingComments = translations.home.floating_comments;
+    } else {
+      window.floatingComments = null;
+      if (typeof floatingCommentsContainer !== 'undefined') {
+        floatingCommentsContainer.innerHTML = '';
+      }
+    }
 
     localStorage.setItem('lang', lang);
-    console.log(`Language "${lang}" saved to localStorage.`);
-
-    langSelect.value = lang; // Update select UI to match current language
-    console.log(`Select element value set to: ${lang}`);
+    langSelect.value = lang;
+    console.log(`Language "${lang}" saved to localStorage and applied.`);
   } catch (err) {
     console.error('Error loading language:', err);
   }

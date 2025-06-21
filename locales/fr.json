@@ -73,6 +73,51 @@
     "login_link": "Connexion"
   },
 
+  "student": {
+    "title": "Tous les étudiants enregistrés",
+    "filter_form_label": "Filtrer par classe/niveau :",
+    "filter_all_forms": "Toutes les classes",
+    "filter_form1": "Classe de 1ère",
+    "filter_form2": "Classe de 2nde",
+    "filter_form3": "Classe de 3e",
+    "filter_form4": "Classe de 4e",
+    "filter_science": "Scientifique",
+    "filter_arts": "Littéraire",
+    "filter_technical": "Technique",
+    "search_label": "Rechercher par nom :",
+    "search_placeholder": "Entrez le nom de l'élève",
+    "stats_total": "Nombre total d'élèves :",
+    "stats_male": "Garçons :",
+    "stats_female": "Filles :",
+    "stats_percent": "%",
+    "table": {
+      "name": "Nom",
+      "uid": "UID",
+      "email": "E-mail",
+      "telephone": "Téléphone",
+      "form": "Classe",
+      "gender": "Genre"
+    },
+    "modal": {
+      "title": "Mettre à jour l'UID de l'élève",
+      "current_uid_label": "UID actuel :",
+      "new_uid_label": "Nouvel UID :",
+      "update_button": "Mettre à jour l'UID",
+      "update_success": "UID mis à jour avec succès !",
+      "update_error": "Une erreur est survenue !"
+    },
+    "navbar": {
+      "logo": "Synctuario",
+      "office": "Bureau",
+      "home": "Accueil",
+      "students": "Élèves",
+      "dashboard": "Tableau de bord",
+      "attendance": "Présences",
+      "logout": "Déconnexion"
+    },
+    "error_message": "Aucun élève trouvé."
+  },
+
   "dashboard": {
     "title": "Tableau de bord",
     "overview": "Aperçu",

@@ -73,7 +73,55 @@
     "already_have_account": "Already have an account?",
     "login_link": "Login"
   },
-  
+
+"student": {
+    "title": "All Registered Students",
+    "filter_form_label": "Filter by Form/Class:",
+    "filter_all_forms": "All Forms",
+    "filter_form1": "Form 1",
+    "filter_form2": "Form 2",
+    "filter_form3": "Form 3",
+    "filter_form4": "Form 4",
+    "filter_science": "Science",
+    "filter_arts": "Arts",
+    "filter_technical": "Technical",
+    "search_label": "Search by Name:",
+    "search_placeholder": "Enter student name",
+    "stats_total": "Total Students:",
+    "stats_male": "Male:",
+    "stats_female": "Female:",
+    "stats_percent": "%",
+    "table": {
+      "name": "Name",
+      "uid": "UID",
+      "email": "Email",
+      "telephone": "Telephone",
+      "form": "Form/Class",
+      "gender": "Gender"
+    },
+    "modal": {
+      "title": "Update Student UID",
+      "current_uid_label": "Current UID:",
+      "new_uid_label": "New UID:",
+      "update_button": "Update UID",
+      "update_success": "UID updated successfully!",
+      "update_error": "Something went wrong!"
+    },
+    "navbar": {
+      "logo": "Synctuario",
+      "office": "Office",
+      "home": "Home",
+      "students": "Students",
+      "dashboard": "Dashboard",
+      "attendance": "Attendance",
+      "logout": "Logout"
+    },
+    "error_message": "No students found."
+  },
+
+
+
+
   "dashboard": {
     "title": "Admin Dashboard",
     "overview": "Overview",
