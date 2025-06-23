@@ -111,19 +111,19 @@
     <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full relative z-50">
       <button id="close" class="absolute right-3 top-3 cursor-pointer font-bold text-gray-700 hover:text-gray-900"
         aria-label="Close modal">×</button>
-      <h2  data-i18n="student.modal.title" class="text-2xl font-bold mb-4 ">Update Student UID</h2>
+      <h2   class="text-2xl font-bold mb-4 ">Update Student UID/Mettre à jour l'UID de l'élève</h2>
       <form id="updateUidForm" class="space-y-4">
         <div>
-          <label data-i18n="student.modal.current_uid_label" for="oldUid" class="block text-sm font-medium text-gray-700">Current UID:</label>
+          <label  for="oldUid" class="block text-sm font-medium text-gray-700">Current UID/UID actuel :</label>
           <input type="text" id="oldUid" name="oldUid" required readonly
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 sm:text-sm" />
         </div>
         <div>
-          <label  data-i18n="student.modal.new_uid_label" for="newUid" class="block text-sm font-medium text-gray-700">New UID:</label>
+          <label   for="newUid" class="block text-sm font-medium text-gray-700">New UID/Nouvel UID :</label>
           <input type="text" id="newUid" name="newUid" required
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm" />
         </div>
-        <button  data-i18n="student.modal.update_button" type="submit"
+        <button  type="submit"
           class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex justify-center items-center gap-2"
           id="updateUidBtn">
           <svg id="spinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -139,7 +139,7 @@
     </div>
   </div>
    <script src="/js/students.js"></script>
-  <!-- <script src="/js/language.js"></script> -->
+  <script src="/js/language.js"></script>
   <script src="/js/menu.js"></script>
 
 
