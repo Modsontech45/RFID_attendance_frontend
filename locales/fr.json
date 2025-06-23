@@ -147,9 +147,25 @@
 
 
 
-  "dashboard": {
-    "title": "Tableau de bord",
-    "overview": "Aperçu",
-    "logout": "Déconnexion"
+"dashboard": {
+    "title": "Tableau de Bord",
+    "brand": "Synctuario",
+    "nav": {
+      "profile": "👤 Profil",
+      "office": "Bureau",
+      "home": "Accueil",
+      "students": "Étudiants",
+      "dashboard": "Tableau de Bord",
+      "attendance": "Présences",
+      "logout": "Déconnexion"
+    },
+    "overviewTitle": "Aperçu du Tableau de Bord",
+    "dateFilter": "Filtrer par Date",
+    "stats": {
+      "total": "Nombre Total",
+      "present": "Présents",
+      "partial": "Partiels",
+      "absent": "Absents"
+    }
   }
 }

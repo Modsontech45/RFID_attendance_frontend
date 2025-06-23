@@ -146,9 +146,25 @@
 
 
 
-  "dashboard": {
-    "title": "Admin Dashboard",
-    "overview": "Overview",
-    "logout": "Logout"
+"dashboard": {
+    "title": "Dashboard",
+    "brand": "Synctuario",
+    "nav": {
+      "profile": "👤 Profile",
+      "office": "Office",
+      "home": "Home",
+      "students": "Students",
+      "dashboard": "Dashboard",
+      "attendance": "Attendance",
+      "logout": "Logout"
+    },
+    "overviewTitle": "Dashboard Overview",
+    "dateFilter": "Filter by Date",
+    "stats": {
+      "total": "Total Records",
+      "present": "Present",
+      "partial": "Partial",
+      "absent": "Absent"
+    }
   }
 }
