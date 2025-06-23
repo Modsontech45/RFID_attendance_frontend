@@ -167,5 +167,38 @@
       "partial": "Partiels",
       "absent": "Absents"
     }
+  },
+  "attendance": {
+    "title": "Liste des Présences",
+    "brand": "Synctuario",
+    "nav": {
+      "profile": "👤 Profil",
+      "office": "Bureau",
+      "home": "Accueil",
+      "students": "Étudiants",
+      "dashboard": "Tableau de Bord",
+      "attendance": "Présence",
+      "logout": "Déconnexion"
+    },
+    "heading": "Tous les Étudiants",
+    "download": "📥 Télécharger",
+    "download_pdf": "Télécharger en PDF",
+    "download_excel": "Télécharger en Excel",
+    "filter_form": "Filtrer par Classe/Niveau :",
+    "filter_date": "Filtrer par Date :",
+    "summary_title": "Résumé des Présences",
+    "total_students": "Total des Étudiants",
+    "present": "Présents",
+    "partial": "Partiels",
+    "absent": "Absents",
+    "table": {
+      "date": "Date",
+      "name": "Nom",
+      "uid": "UID",
+      "signin": "Entrée",
+      "signout": "Sortie",
+      "status": "Statut",
+      "form": "Classe"
+    }
   }
 }

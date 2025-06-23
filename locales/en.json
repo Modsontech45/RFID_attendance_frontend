@@ -166,5 +166,38 @@
       "partial": "Partial",
       "absent": "Absent"
     }
+  },
+   "attendance": {
+    "title": "Attendances List",
+    "brand": "Synctuario",
+    "nav": {
+      "profile": "👤 Profile",
+      "office": "Office",
+      "home": "Home",
+      "students": "Students",
+      "dashboard": "Dashboard",
+      "attendance": "Attendance",
+      "logout": "Logout"
+    },
+    "heading": "All Students",
+    "download": "📥 Download",
+    "download_pdf": "Download as PDF",
+    "download_excel": "Download as Excel",
+    "filter_form": "Filter by Form/Class:",
+    "filter_date": "Filter by Date:",
+    "summary_title": "Attendance Summary",
+    "total_students": "Total Students",
+    "present": "Present",
+    "partial": "Partial",
+    "absent": "Absent",
+    "table": {
+      "date": "Date",
+      "name": "Name",
+      "uid": "UID",
+      "signin": "SignIn",
+      "signout": "SignOut",
+      "status": "Status",
+      "form": "Form"
+    }
   }
 }
