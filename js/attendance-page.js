@@ -47,15 +47,15 @@ function renderStudents(data) {
   const tbody = document.getElementById("studentsBody");
   const form = document.getElementById("formFilter").value;
   const date = document.getElementById("dateFilter").value;
-  const statusText = document.getElementById("select-student");
+  // const statusText = document.getElementById("select-student");
   const formStatsSummary = document.getElementById("formStatsSummary");
 
   tbody.innerHTML = "";
   formStatsSummary.innerHTML = "";
-  statusText.innerHTML =
-    form && date
-      ? `Date and Form selected for <span class="text-blue-400">${form}</span> on <span class="text-gray-400">${date}</span>`
-      : "✅ Please Select Form and Date";
+  // statusText.innerHTML =
+  //   form && date
+  //     ? `Date and Form selected for <span class="text-blue-400">${form}</span> on <span class="text-gray-400">${date}</span>`
+  //     : "✅ Please Select Form and Date";
 
   // Filter data based on form and date
   const filtered = data.filter(
