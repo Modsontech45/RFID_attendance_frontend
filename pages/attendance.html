@@ -8,7 +8,7 @@
 
   <!-- Libraries -->
   <link href="/css/output.css" rel="stylesheet">
-
+<script src="/js/language.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -18,41 +18,48 @@
 </head>
 
 <body class="bg-white text-black min-h-screen font-sans">
-      <select  id="langSelect" class=" hidden text-green-700 border border-green-500 bg-transparent rounded px-2 py-1">
-  <option data-i18n="home.english" value="en">English</option>
-  <option data-i18n="home.french" value="fr">Français</option>
-</select>
+  <select id="langSelect" class=" hidden text-green-700 border border-green-500 bg-transparent rounded px-2 py-1">
+    <option data-i18n="home.english" value="en">English</option>
+    <option data-i18n="home.french" value="fr">Français</option>
+  </select>
 
 
- <header class=" sticky top-0  left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50 ">
+  <header
+    class=" sticky top-0  left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50 ">
     <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
     <span data-i18n="attendance.brand" class="text-xl font-bold">Synctuario</span>
-  </div>
+    </div>
 
 
-  <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">
-    &#9776;
-  </button>
-
-  <nav id="navMenu"
-      class=" flex max-sm:hidden sm:items-center gap-4  transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40  max-sm:flex-col">
-    <a data-i18n="attendance.nav.profile" href="/pages/users/teacher-profile.html" class="teacher-only text-secondary hover:underline hidden">
-      👤 Profile
-    </a>
-    <a data-i18n="attendance.nav.office" href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium teacher-access-denied">
-      Office
-    </a>
-    <a data-i18n="attendance.nav.home" href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied">
-      Home
-    </a>
-    <a data-i18n="attendance.nav.students" href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
-    <a data-i18n="attendance.nav.dashboard" href="/dashboard.html" class="hover:text-green-400 font-medium">Dashboard</a>
-    <a data-i18n="attendance.nav.attendance" href="/attendance.html" class="text-green-400 font-medium">Attendance</a>
-    <button data-i18n="attendance.nav.logout" class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
-      Logout
+    <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">
+      &#9776;
     </button>
-  </nav>
-</header>
+
+    <nav id="navMenu"
+      class=" flex max-sm:hidden sm:items-center gap-4  transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40  max-sm:flex-col">
+      <a data-i18n="attendance.nav.profile" href="/pages/users/teacher-profile.html"
+        class="teacher-only text-secondary hover:underline hidden">
+        👤 Profile
+      </a>
+      <a data-i18n="attendance.nav.office" href="/pages/users/admin/adminlandingpage.html"
+        class="hover:text-green-400 font-medium teacher-access-denied">
+        Office
+      </a>
+      <a data-i18n="attendance.nav.home" href="/pages/registerstudent.html"
+        class="hover:text-green-400 font-medium teacher-access-denied">
+        Home
+      </a>
+      <a data-i18n="attendance.nav.students" href="/pages/students.html"
+        class="hover:text-green-400 font-medium">Students</a>
+      <a data-i18n="attendance.nav.dashboard" href="/dashboard.html"
+        class="hover:text-green-400 font-medium">Dashboard</a>
+      <a data-i18n="attendance.nav.attendance" href="/attendance.html" class="text-green-400 font-medium">Attendance</a>
+      <button data-i18n="attendance.nav.logout"
+        class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
+        Logout
+      </button>
+    </nav>
+  </header>
 
   <!-- Main Content -->
   <main class="max-w-7xl mx-auto px-4 py-28">
@@ -61,8 +68,11 @@
     <div class="flex items-center justify-between mb-6">
       <h2 data-i18n="attendance.heading" class="text-3xl font-bold text-green-700">All Students</h2>
       <div class="relative">
-        <button data-i18n="attendance.download" id="downloadBtn" class="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition">📥 Download</button>
-        <div id="downloadOptions" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+        <button data-i18n="attendance.download" id="downloadBtn"
+          class="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition">📥
+          Download</button>
+        <div id="downloadOptions"
+          class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
           <button onclick="downloadAsPDF()" class="flex justify-between w-full px-4 py-2 hover:bg-gray-100">
             <span data-i18n="attendance.download_pdf" id="pdfText">Download as PDF</span>
             <svg id="pdfSpinner" class="w-4 h-4 ml-2 hidden animate-spin text-gray-600" viewBox="0 0 24 24">
@@ -84,34 +94,44 @@
 
     <div class="flex flex-wrap items-center gap-4 mb-6">
       <div>
-        <label data-i18n="attendance.filter_form"  for="formFilter" class="block text-sm font-semibold text-gray-700">Filter by Form/Class:</label>
-        <select id="formFilter" class="mt-1 block w-48 px-3 py-2 border border-green-500 rounded-md focus:ring-green-600 focus:border-green-600">
+        <label data-i18n="attendance.filter_form" for="formFilter"
+          class="block text-sm font-semibold text-gray-700">Filter by Form/Class:</label>
+        <select id="formFilter"
+          class="mt-1 block w-48 px-3 py-2 border border-green-500 rounded-md focus:ring-green-600 focus:border-green-600">
           <option data-i18n="student.filter_all_forms" value="">All Forms</option>
           <option data-i18n="student.filter_form1">Form 1</option>
           <option data-i18n="student.filter_form2">Form 2</option>
           <option data-i18n="student.filter_form3">Form 3</option>
           <option data-i18n="student.filter_form4">Form 4</option>
           <option data-i18n="student.filter_science">Science</option>
-          <option data-i18n="student.filter_arts" >Arts</option>
+          <option data-i18n="student.filter_arts">Arts</option>
           <option data-i18n="student.filter_technical">Technical</option>
         </select>
       </div>
 
       <div>
-        <label data-i18n="attendance.filter_date" for="dateFilter" class="block text-sm font-semibold text-gray-700">Filter by Date:</label>
-        <input type="date" id="dateFilter" class="mt-1 block w-48 px-3 py-2 border border-green-500 rounded-md focus:ring-green-600 focus:border-green-600" />
+        <label data-i18n="attendance.filter_date" for="dateFilter"
+          class="block text-sm font-semibold text-gray-700">Filter by Date:</label>
+        <input type="date" id="dateFilter"
+          class="mt-1 block w-48 px-3 py-2 border border-green-500 rounded-md focus:ring-green-600 focus:border-green-600" />
       </div>
     </div>
 
 
     <section class="mb-6">
-      <h3 data-i18n="attendance.summary_title" class="text-2xl font-bold mb-2">Attendance Summary <span class="text-green-600" id="select-student"></span></h3>
-      <div class="inline-block border-2 border-green-500 px-4 py-0.5 rounded mb-2">Total Students: <span id="totalStudents" class="font-semibold"></span></div>
+      <h3 data-i18n="attendance.summary_title" class="text-2xl font-bold mb-2">Attendance Summary <span
+          class="text-green-600" id="select-student"></span></h3>
+      <div class="inline-block border-2 border-green-500 px-4 py-0.5 rounded mb-2">Total Students: <span
+          id="totalStudents" class="font-semibold"></span></div>
       <hr class="mb-4" />
-      <div id="summaryStats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-lg text-gray-700 mb-4 py-6">
-        <div >Present: <span id="totalPresent" class="text-green-600 font-semibold border-2 border-green-500 px-4 py-0.5 rounded"></span> 👤</div>
-        <div >Partial: <span id="totalPartial" class="text-yellow-500 font-semibold border-2 border-yellow-500 px-4 py-0.5 rounded"></span> 🕘</div>
-        <div >Absent: <span id="totalAbsent" class="text-red-600 font-semibold border-2 border-red-500 px-4 py-0.5 rounded"></span> 🚫</div>
+      <div id="summaryStats"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-lg text-gray-700 mb-4 py-6">
+        <div>Present: <span id="totalPresent"
+            class="text-green-600 font-semibold border-2 border-green-500 px-4 py-0.5 rounded"></span> 👤</div>
+        <div>Partial: <span id="totalPartial"
+            class="text-yellow-500 font-semibold border-2 border-yellow-500 px-4 py-0.5 rounded"></span> 🕘</div>
+        <div>Absent: <span id="totalAbsent"
+            class="text-red-600 font-semibold border-2 border-red-500 px-4 py-0.5 rounded"></span> 🚫</div>
       </div>
       <div id="formStatsSummary" class="text-sm text-gray-800 space-y-2"></div>
       <hr />
@@ -141,19 +161,19 @@
   </main>
 
   <!-- Scripts -->
-   <script src="/js/menu.js"></script>
+  <script src="/js/menu.js"></script>
   <script src="/js/signout.js"></script>
   <script src="/js/attendance-page.js"></script>
   <script src="/js/loader.js"></script>
-<script>
-  async function pageInit() {
-    showLoader();
-    await fetchStudents();
-    hideLoader();
-  }
+  <script>
+    async function pageInit() {
+      showLoader();
+      await fetchStudents();
+      hideLoader();
+    }
 
-  document.addEventListener("DOMContentLoaded", pageInit);
-</script>
+    document.addEventListener("DOMContentLoaded", pageInit);
+  </script>
 
 </body>
 
