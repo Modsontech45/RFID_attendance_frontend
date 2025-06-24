@@ -42,7 +42,7 @@ function applyFilters() {
   const startDate = document.getElementById("startDateFilter").value;
   const endDate = document.getElementById("endDateFilter").value;
 
-  const filtered = allStudentData.filter((a) => {
+  const filtered = allStudentData.filter(a => {
     const matchForm = !form || a.form === form;
     const matchDate = !date || a.date?.slice(0, 10) === date;
     const matchName = !name || a.name?.toLowerCase().includes(name);
@@ -64,7 +64,7 @@ function renderStudents(data) {
   let present = 0, partial = 0, absent = 0;
   const formStats = {};
 
-  data.forEach((a) => {
+  data.forEach(a => {
     const f = a.form || "Unknown";
     formStats[f] = formStats[f] || { present: 0, partial: 0, absent: 0 };
 
@@ -95,7 +95,8 @@ function renderStudents(data) {
           ${status}
         </td>
         <td class="px-4 py-2">${f}</td>
-      </tr>`;
+      </tr>
+    `;
     tbody.insertAdjacentHTML("beforeend", row);
   });
 
@@ -105,7 +106,13 @@ function renderStudents(data) {
   document.getElementById("totalAbsent").textContent = absent;
 
   Object.entries(formStats).forEach(([f, stat]) => {
-    formStatsSummary.innerHTML += `<div><strong>${f}</strong> - Present: <span class="text-green-600">${stat.present}</span>, Partial: <span class="text-yellow-500">${stat.partial}</span>, Absent: <span class="text-red-600">${stat.absent}</span></div>`;
+    formStatsSummary.innerHTML += `
+      <div>
+        <strong>${f}</strong> - Present: <span class="text-green-600">${stat.present}</span>,
+        Partial: <span class="text-yellow-500">${stat.partial}</span>,
+        Absent: <span class="text-red-600">${stat.absent}</span>
+      </div>
+    `;
   });
 
   updateChart(present, partial, absent);
@@ -143,12 +150,11 @@ function updateChart(present, partial, absent) {
   });
 }
 
-// Auto refresh
+// Auto refresh functions
 function startStudentsAutoRefresh(delay = 10000) {
   clearInterval(studentsRefreshIntervalId);
   studentsRefreshIntervalId = setInterval(fetchStudents, delay);
 }
-
 function stopStudentsAutoRefresh() {
   clearInterval(studentsRefreshIntervalId);
 }
@@ -194,7 +200,7 @@ async function downloadAsPDF() {
   downloadOptions.classList.add("hidden");
 }
 
-// Download Excel
+// Download as Excel
 async function downloadExcel() {
   const excelText = document.getElementById("excelText");
   const excelSpinner = document.getElementById("excelSpinner");
@@ -226,7 +232,7 @@ async function downloadExcel() {
   downloadOptions.classList.add("hidden");
 }
 
-// Debounce function
+// Debounce helper to limit rapid calls
 function debounce(func, delay) {
   let timeout;
   return (...args) => {
@@ -235,21 +241,44 @@ function debounce(func, delay) {
   };
 }
 
-// Initialize page
+// Modal and advanced filter controls
+const advancedFilterBtn = document.getElementById("advancedFilterBtn");
+const advancedFilterModal = document.getElementById("advancedFilterModal");
+const closeAdvancedFilterModal = document.getElementById("closeAdvancedFilterModal");
+const applyAdvancedFilterBtn = document.getElementById("applyAdvancedFilterBtn");
+
+advancedFilterBtn.addEventListener("click", () => {
+  advancedFilterModal.classList.remove("hidden");
+});
+
+closeAdvancedFilterModal.addEventListener("click", () => {
+  advancedFilterModal.classList.add("hidden");
+});
+
+applyAdvancedFilterBtn.addEventListener("click", () => {
+  applyFilters();
+  advancedFilterModal.classList.add("hidden");
+});
+
+// Initialize page and event listeners
 function pageInit() {
   handleRoleVisibility();
   fetchStudents();
   startStudentsAutoRefresh();
 
+  // Filters on basic controls (formFilter, dateFilter, startDateFilter, endDateFilter)
   document.getElementById("formFilter").addEventListener("change", applyFilters);
   document.getElementById("dateFilter").addEventListener("change", applyFilters);
   document.getElementById("startDateFilter").addEventListener("change", applyFilters);
   document.getElementById("endDateFilter").addEventListener("change", applyFilters);
-  document.getElementById("applyFilterBtn").addEventListener("click", applyFilters);
+
+  // Debounced name filter for better UX
+  document.getElementById("nameFilter").addEventListener("input", debounce(applyFilters, 300));
+
+  // Download button toggle
   document.getElementById("downloadBtn").addEventListener("click", () => {
     downloadOptions.classList.toggle("hidden");
   });
-  document.getElementById("nameFilter").addEventListener("input", debounce(applyFilters, 300));
 }
-document.getElementById("applyFilterBtn").addEventListener("click", applyFilters);
+
 window.addEventListener("DOMContentLoaded", pageInit);
