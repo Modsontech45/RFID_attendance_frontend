@@ -10,15 +10,11 @@ function getCookie(name) {
 
 const role = getCookie("role");
 if (role === "teacher") {
-  document
-    .querySelectorAll(".teacher-only")
-    .forEach((el) => el.classList.remove("hidden"));
-  document
-    .querySelectorAll(".teacher-access-denied")
-    .forEach((el) => el.classList.add("hidden"));
+  document.querySelectorAll(".teacher-only").forEach(el => el.classList.remove("hidden"));
+  document.querySelectorAll(".teacher-access-denied").forEach(el => el.classList.add("hidden"));
 }
 
-function startStudentsAutoRefresh(delay = 1000) {
+function startStudentsAutoRefresh(delay = 10000) {
   clearInterval(studentsRefreshIntervalId);
   studentsRefreshIntervalId = setInterval(fetchStudents, delay);
 }
@@ -27,48 +23,62 @@ function stopStudentsAutoRefresh() {
   clearInterval(studentsRefreshIntervalId);
 }
 
+let allStudentData = [];
+
 async function fetchStudents() {
   try {
-    const res = await fetch(
-      "https://rfid-attendancesystem-backend-project.onrender.com/api/attendance"
-    );
+    const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/attendance");
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    const data = await res.json();
-    renderStudents(data);
+    allStudentData = await res.json();
+    applyFilters();
   } catch (err) {
-    document.getElementById(
-      "studentsBody"
-    ).innerHTML = `<tr><td colspan="7" class="text-center text-red-600">Failed to load data: ${err.message}</td></tr>`;
+    document.getElementById("studentsBody").innerHTML = `<tr><td colspan="7" class="text-center text-red-600">Failed to load data: ${err.message}</td></tr>`;
   }
 }
 
-// Render attendance table, summary, and chart
-function renderStudents(data) {
-  const tbody = document.getElementById("studentsBody");
+document.getElementById("formFilter").addEventListener("change", applyFilters);
+document.getElementById("dateFilter").addEventListener("change", applyFilters);
+document.getElementById("nameFilter").addEventListener("input", applyFilters);
+document.getElementById("startDateFilter").addEventListener("change", applyFilters);
+document.getElementById("endDateFilter").addEventListener("change", applyFilters);
+
+document.getElementById("downloadBtn").addEventListener("click", () => {
+  downloadOptions.classList.toggle("hidden");
+});
+
+document.querySelector("#downloadOptions button:nth-child(1)").addEventListener("click", downloadAsPDF);
+document.querySelector("#downloadOptions button:nth-child(2)").addEventListener("click", downloadExcel);
+
+function applyFilters() {
   const form = document.getElementById("formFilter").value;
   const date = document.getElementById("dateFilter").value;
-  // const statusText = document.getElementById("select-student");
+  const name = document.getElementById("nameFilter").value.toLowerCase();
+  const startDate = document.getElementById("startDateFilter").value;
+  const endDate = document.getElementById("endDateFilter").value;
+
+  const filtered = allStudentData.filter((a) => {
+    const matchForm = !form || a.form === form;
+    const matchDate = !date || a.date?.slice(0, 10) === date;
+    const matchName = !name || a.name?.toLowerCase().includes(name);
+    const matchStart = !startDate || new Date(a.date) >= new Date(startDate);
+    const matchEnd = !endDate || new Date(a.date) <= new Date(endDate);
+    return matchForm && matchDate && matchName && matchStart && matchEnd;
+  });
+
+  renderStudents(filtered);
+}
+
+function renderStudents(data) {
+  const tbody = document.getElementById("studentsBody");
   const formStatsSummary = document.getElementById("formStatsSummary");
 
   tbody.innerHTML = "";
   formStatsSummary.innerHTML = "";
-  // statusText.innerHTML =
-  //   form && date
-  //     ? `Date and Form selected for <span class="text-blue-400">${form}</span> on <span class="text-gray-400">${date}</span>`
-  //     : "✅ Please Select Form and Date";
 
-  // Filter data based on form and date
-  const filtered = data.filter(
-    (a) =>
-      (!form || a.form === form) && (!date || a.date?.slice(0, 10) === date)
-  );
-
-  let present = 0,
-    partial = 0,
-    absent = 0;
+  let present = 0, partial = 0, absent = 0;
   const formStats = {};
 
-  filtered.forEach((a) => {
+  data.forEach((a) => {
     const f = a.form || "Unknown";
     formStats[f] = formStats[f] || { present: 0, partial: 0, absent: 0 };
 
@@ -86,45 +96,18 @@ function renderStudents(data) {
 
     const row = `
       <tr class="hover:bg-gray-100 whitespace-nowrap">
-        <td class="px-4 py-2">${
-          a.date ? new Date(a.date).toLocaleDateString() : "N/A"
-        }</td>
+        <td class="px-4 py-2">${a.date ? new Date(a.date).toLocaleDateString() : "N/A"}</td>
         <td class="px-4 py-2">${a.name || "N/A"}</td>
         <td class="px-4 py-2">${a.uid || "N/A"}</td>
-        <td class="px-4 py-2 ${
-          a.sign_in_time ? "" : "text-red-600 font-semibold"
-        }">${
-      a.sign_in_time
-        ? new Date(a.sign_in_time).toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          })
-        : "Not signed in"
-    }</td>
-        <td class="px-4 py-2 ${
-          a.sign_out_time ? "" : "text-red-600 font-semibold"
-        }">${
-      a.sign_out_time
-        ? new Date(a.sign_out_time).toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          })
-        : "Not signed out"
-    }</td>
-        <td class="px-4 py-2 font-semibold ${
-          status === "present"
-            ? "text-green-600"
-            : status === "partial"
-            ? "text-yellow-500"
-            : "text-red-600"
-        }">${status}</td>
+        <td class="px-4 py-2 ${a.sign_in_time ? "" : "text-red-600 font-semibold"}">${a.sign_in_time ? new Date(a.sign_in_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "Not signed in"}</td>
+        <td class="px-4 py-2 ${a.sign_out_time ? "" : "text-red-600 font-semibold"}">${a.sign_out_time ? new Date(a.sign_out_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "Not signed out"}</td>
+        <td class="px-4 py-2 font-semibold ${status === "present" ? "text-green-600" : status === "partial" ? "text-yellow-500" : "text-red-600"}">${status}</td>
         <td class="px-4 py-2">${f}</td>
       </tr>`;
     tbody.insertAdjacentHTML("beforeend", row);
   });
 
-  document.getElementById("totalStudents").textContent =
-    present + partial + absent;
+  document.getElementById("totalStudents").textContent = present + partial + absent;
   document.getElementById("totalPresent").textContent = present;
   document.getElementById("totalPartial").textContent = partial;
   document.getElementById("totalAbsent").textContent = absent;
@@ -139,22 +122,17 @@ function renderStudents(data) {
     type: "pie",
     data: {
       labels: ["Present", "Partial", "Absent"],
-      datasets: [
-        {
-          data: [present, partial, absent],
-          backgroundColor: ["#16a34a", "#facc15", "#dc2626"],
-        },
-      ],
+      datasets: [{
+        data: [present, partial, absent],
+        backgroundColor: ["#16a34a", "#facc15", "#dc2626"],
+      }],
     },
     options: {
       animation: false,
       plugins: {
         datalabels: {
           formatter: (value, ctx) => {
-            const total = ctx.chart.data.datasets[0].data.reduce(
-              (a, b) => a + b,
-              0
-            );
+            const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
             return total ? `${((value / total) * 100).toFixed(1)}%` : "0%";
           },
           color: "#fff",
@@ -169,18 +147,14 @@ function renderStudents(data) {
 
 async function downloadAsPDF() {
   const { jsPDF } = window.jspdf;
-
   const pdfText = document.getElementById("pdfText");
   const pdfSpinner = document.getElementById("pdfSpinner");
-
   pdfText.textContent = "Generating...";
   pdfSpinner.classList.remove("hidden");
 
   try {
     const doc = new jsPDF("p", "pt", "a4");
-    const element = document.body;
-
-    const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+    const canvas = await html2canvas(document.body, { scale: 2, useCORS: true });
     const imgData = canvas.toDataURL("image/png");
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
@@ -190,7 +164,6 @@ async function downloadAsPDF() {
     if (imgHeight > pageHeight) {
       let position = 0;
       let heightLeft = imgHeight;
-
       while (heightLeft > 0) {
         doc.addImage(imgData, "PNG", 0, position, pageWidth, imgHeight);
         heightLeft -= pageHeight;
@@ -215,7 +188,6 @@ async function downloadAsPDF() {
 async function downloadExcel() {
   const excelText = document.getElementById("excelText");
   const excelSpinner = document.getElementById("excelSpinner");
-
   excelText.textContent = "Generating...";
   excelSpinner.classList.remove("hidden");
 
@@ -223,8 +195,7 @@ async function downloadExcel() {
     if (typeof XLSX === "undefined") {
       await new Promise((resolve, reject) => {
         const script = document.createElement("script");
-        script.src =
-          "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js";
+        script.src = "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js";
         script.onload = resolve;
         script.onerror = reject;
         document.head.appendChild(script);
@@ -234,14 +205,8 @@ async function downloadExcel() {
     const table = document.getElementById("studentTable");
     if (!table) throw new Error("Table with id 'studentTable' not found.");
 
-    // Convert table to workbook
     const workbook = XLSX.utils.table_to_book(table, { sheet: "Attendance" });
-
-    // Write workbook and trigger download
-    XLSX.writeFile(
-      workbook,
-      `attendance_${new Date().toISOString().slice(0, 10)}.xlsx`
-    );
+    XLSX.writeFile(workbook, `attendance_${new Date().toISOString().slice(0, 10)}.xlsx`);
   } catch (err) {
     console.error("Excel error:", err);
     alert("Failed to generate Excel: " + err.message);
@@ -252,19 +217,7 @@ async function downloadExcel() {
   downloadOptions.classList.add("hidden");
 }
 
-document.getElementById("formFilter").addEventListener("change", fetchStudents);
-document.getElementById("dateFilter").addEventListener("change", fetchStudents);
-document.getElementById("downloadBtn").addEventListener("click", () => {
-  downloadOptions.classList.toggle("hidden");
-});
-document
-  .querySelector("#downloadOptions button:nth-child(1)")
-  .addEventListener("click", downloadAsPDF);
-document
-  .querySelector("#downloadOptions button:nth-child(2)")
-  .addEventListener("click", downloadExcel);
-
 window.addEventListener("load", () => {
   fetchStudents();
-  startStudentsAutoRefresh(10000); // refresh every 10 seconds to reduce load
+  startStudentsAutoRefresh();
 });
