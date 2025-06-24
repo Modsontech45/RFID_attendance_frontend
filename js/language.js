@@ -41,9 +41,9 @@ async function setLanguage(lang) {
       window.floatingComments = translations.home.floating_comments;
     } else {
       window.floatingComments = null;
-    if (typeof floatingCommentsContainer !== 'undefined' && floatingCommentsContainer) {
-  floatingCommentsContainer.innerHTML = '';
-}
+      if (typeof floatingCommentsContainer !== 'undefined') {
+        floatingCommentsContainer.innerHTML = '';
+      }
     }
 
     localStorage.setItem('lang', lang);
