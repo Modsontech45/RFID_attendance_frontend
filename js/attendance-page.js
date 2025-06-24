@@ -1,30 +1,26 @@
 let chartInstance = null;
 let studentsRefreshIntervalId = null;
+let allStudentData = [];
+
 const downloadOptions = document.getElementById("downloadOptions");
 
+// Utility to get cookie value
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   return parts.length === 2 ? parts.pop().split(";").shift() : null;
 }
 
-const role = getCookie("role");
-if (role === "teacher") {
-  document.querySelectorAll(".teacher-only").forEach(el => el.classList.remove("hidden"));
-  document.querySelectorAll(".teacher-access-denied").forEach(el => el.classList.add("hidden"));
+// Role-based UI control
+function handleRoleVisibility() {
+  const role = getCookie("role");
+  if (role === "teacher") {
+    document.querySelectorAll(".teacher-only").forEach(el => el.classList.remove("hidden"));
+    document.querySelectorAll(".teacher-access-denied").forEach(el => el.classList.add("hidden"));
+  }
 }
 
-function startStudentsAutoRefresh(delay = 10000) {
-  clearInterval(studentsRefreshIntervalId);
-  studentsRefreshIntervalId = setInterval(fetchStudents, delay);
-}
-
-function stopStudentsAutoRefresh() {
-  clearInterval(studentsRefreshIntervalId);
-}
-
-let allStudentData = [];
-
+// Fetch students data from backend
 async function fetchStudents() {
   try {
     const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/attendance");
@@ -32,23 +28,13 @@ async function fetchStudents() {
     allStudentData = await res.json();
     applyFilters();
   } catch (err) {
-    document.getElementById("studentsBody").innerHTML = `<tr><td colspan="7" class="text-center text-red-600">Failed to load data: ${err.message}</td></tr>`;
+    document.getElementById("studentsBody").innerHTML = `
+      <tr><td colspan="7" class="text-center text-red-600">Failed to load data: ${err.message}</td></tr>
+    `;
   }
 }
 
-document.getElementById("formFilter").addEventListener("change", applyFilters);
-document.getElementById("dateFilter").addEventListener("change", applyFilters);
-document.getElementById("nameFilter").addEventListener("input", applyFilters);
-document.getElementById("startDateFilter").addEventListener("change", applyFilters);
-document.getElementById("endDateFilter").addEventListener("change", applyFilters);
-
-document.getElementById("downloadBtn").addEventListener("click", () => {
-  downloadOptions.classList.toggle("hidden");
-});
-
-document.querySelector("#downloadOptions button:nth-child(1)").addEventListener("click", downloadAsPDF);
-document.querySelector("#downloadOptions button:nth-child(2)").addEventListener("click", downloadExcel);
-
+// Apply filters to student data
 function applyFilters() {
   const form = document.getElementById("formFilter").value;
   const date = document.getElementById("dateFilter").value;
@@ -68,10 +54,10 @@ function applyFilters() {
   renderStudents(filtered);
 }
 
+// Render students in the table and update stats
 function renderStudents(data) {
   const tbody = document.getElementById("studentsBody");
   const formStatsSummary = document.getElementById("formStatsSummary");
-
   tbody.innerHTML = "";
   formStatsSummary.innerHTML = "";
 
@@ -99,9 +85,15 @@ function renderStudents(data) {
         <td class="px-4 py-2">${a.date ? new Date(a.date).toLocaleDateString() : "N/A"}</td>
         <td class="px-4 py-2">${a.name || "N/A"}</td>
         <td class="px-4 py-2">${a.uid || "N/A"}</td>
-        <td class="px-4 py-2 ${a.sign_in_time ? "" : "text-red-600 font-semibold"}">${a.sign_in_time ? new Date(a.sign_in_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "Not signed in"}</td>
-        <td class="px-4 py-2 ${a.sign_out_time ? "" : "text-red-600 font-semibold"}">${a.sign_out_time ? new Date(a.sign_out_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "Not signed out"}</td>
-        <td class="px-4 py-2 font-semibold ${status === "present" ? "text-green-600" : status === "partial" ? "text-yellow-500" : "text-red-600"}">${status}</td>
+        <td class="px-4 py-2 ${a.sign_in_time ? "" : "text-red-600 font-semibold"}">
+          ${a.sign_in_time ? new Date(a.sign_in_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "Not signed in"}
+        </td>
+        <td class="px-4 py-2 ${a.sign_out_time ? "" : "text-red-600 font-semibold"}">
+          ${a.sign_out_time ? new Date(a.sign_out_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "Not signed out"}
+        </td>
+        <td class="px-4 py-2 font-semibold ${status === "present" ? "text-green-600" : status === "partial" ? "text-yellow-500" : "text-red-600"}">
+          ${status}
+        </td>
         <td class="px-4 py-2">${f}</td>
       </tr>`;
     tbody.insertAdjacentHTML("beforeend", row);
@@ -116,8 +108,14 @@ function renderStudents(data) {
     formStatsSummary.innerHTML += `<div><strong>${f}</strong> - Present: <span class="text-green-600">${stat.present}</span>, Partial: <span class="text-yellow-500">${stat.partial}</span>, Absent: <span class="text-red-600">${stat.absent}</span></div>`;
   });
 
+  updateChart(present, partial, absent);
+}
+
+// Chart rendering
+function updateChart(present, partial, absent) {
   const ctx = document.getElementById("attendanceChart").getContext("2d");
   if (chartInstance) chartInstance.destroy();
+
   chartInstance = new Chart(ctx, {
     type: "pie",
     data: {
@@ -145,6 +143,17 @@ function renderStudents(data) {
   });
 }
 
+// Auto refresh
+function startStudentsAutoRefresh(delay = 10000) {
+  clearInterval(studentsRefreshIntervalId);
+  studentsRefreshIntervalId = setInterval(fetchStudents, delay);
+}
+
+function stopStudentsAutoRefresh() {
+  clearInterval(studentsRefreshIntervalId);
+}
+
+// Download as PDF
 async function downloadAsPDF() {
   const { jsPDF } = window.jspdf;
   const pdfText = document.getElementById("pdfText");
@@ -185,6 +194,7 @@ async function downloadAsPDF() {
   downloadOptions.classList.add("hidden");
 }
 
+// Download Excel
 async function downloadExcel() {
   const excelText = document.getElementById("excelText");
   const excelSpinner = document.getElementById("excelSpinner");
@@ -204,7 +214,6 @@ async function downloadExcel() {
 
     const table = document.getElementById("studentTable");
     if (!table) throw new Error("Table with id 'studentTable' not found.");
-
     const workbook = XLSX.utils.table_to_book(table, { sheet: "Attendance" });
     XLSX.writeFile(workbook, `attendance_${new Date().toISOString().slice(0, 10)}.xlsx`);
   } catch (err) {
@@ -217,7 +226,30 @@ async function downloadExcel() {
   downloadOptions.classList.add("hidden");
 }
 
-window.addEventListener("load", () => {
+// Debounce function
+function debounce(func, delay) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+// Initialize page
+function pageInit() {
+  handleRoleVisibility();
   fetchStudents();
   startStudentsAutoRefresh();
-});
+
+  document.getElementById("formFilter").addEventListener("change", applyFilters);
+  document.getElementById("dateFilter").addEventListener("change", applyFilters);
+  document.getElementById("startDateFilter").addEventListener("change", applyFilters);
+  document.getElementById("endDateFilter").addEventListener("change", applyFilters);
+  document.getElementById("applyFilterBtn").addEventListener("click", applyFilters);
+  document.getElementById("downloadBtn").addEventListener("click", () => {
+    downloadOptions.classList.toggle("hidden");
+  });
+  document.getElementById("nameFilter").addEventListener("input", debounce(applyFilters, 300));
+}
+
+window.addEventListener("DOMContentLoaded", pageInit);
