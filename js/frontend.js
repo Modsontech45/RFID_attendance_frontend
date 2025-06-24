@@ -1,6 +1,6 @@
 const API_BASE = "https://rfid-attendancesystem-backend-project.onrender.com/api";
 
-
+// Cookie utilities
 function setCookie(name, value, days = 7) {
   const expires = new Date(Date.now() + days * 86400 * 1000).toUTCString();
   document.cookie = `${name}=${value}; expires=${expires}; path=/`;
@@ -17,6 +17,7 @@ function deleteCookie(name) {
   setCookie(name, "", -1);
 }
 
+// POST helper with error handling
 async function postData(url = "", data = {}) {
   try {
     const res = await fetch(url, {
@@ -31,6 +32,7 @@ async function postData(url = "", data = {}) {
   }
 }
 
+// Toggle password visibility
 const passwordInput = document.getElementById("password");
 const toggle = document.getElementById("togglePassword");
 if (toggle && passwordInput) {
@@ -42,19 +44,21 @@ if (toggle && passwordInput) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Navigation buttons and modals
   const adminBtn = document.getElementById("adminBtn");
   const teacherBtn = document.getElementById("teacherBtn");
   const teacherModal = document.getElementById("teacherModal");
   const closeTeacherModal = document.getElementById("closeTeacherModal");
 
-  if (adminBtn)
+  if (adminBtn) {
     adminBtn.onclick = () =>
-      (window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/adminlogin.html");
-  if (teacherBtn)
-    teacherBtn.onclick = () => teacherModal.classList.remove("hidden");
-  if (closeTeacherModal)
-    closeTeacherModal.onclick = () => teacherModal.classList.add("hidden");
+      (window.location.href =
+        "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/adminlogin.html");
+  }
+  if (teacherBtn) teacherBtn.onclick = () => teacherModal.classList.remove("hidden");
+  if (closeTeacherModal) closeTeacherModal.onclick = () => teacherModal.classList.add("hidden");
 
+  // Teacher Login Form
   const teacherLoginForm = document.getElementById("teacherLoginForm");
   if (teacherLoginForm) {
     console.log("Teacher login form found and JS is working ✅");
@@ -66,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     teacherLoginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       Msg.classList.add("hidden");
       spinner.classList.remove("hidden");
       btnText.textContent = "Logging in...";
@@ -80,16 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Login response:", res);
 
         if (res.token) {
-          console.log("Setting token and role cookies...");
           setCookie("token", res.token, 7);
           setCookie("role", "teacher", 7);
 
-          console.log("Cookies after setting:");
-          console.log(document.cookie);
+          console.log("Cookies after setting:", document.cookie);
 
           setTimeout(() => {
-            console.log("Redirecting to registerstudent.html...");
-            window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/pages/students.html";
+            window.location.href =
+              "https://rfid-attendance-synctuario-theta.vercel.app/pages/students.html";
           }, 1000);
         } else {
           Msg.textContent = res.message || "Login failed.";
@@ -107,54 +108,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-const adminLoginForm = document.getElementById("adminLoginForm");
-if (adminLoginForm) {
-  adminLoginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  // Admin Login Form
+  const adminLoginForm = document.getElementById("adminLoginForm");
+  if (adminLoginForm) {
+    adminLoginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    const loginBtn = adminLoginForm.querySelector("button[type='submit']");
-    const spinner = loginBtn.querySelector("svg");
-    const btnText = loginBtn.querySelector("span");
+      const loginBtn = adminLoginForm.querySelector("button[type='submit']");
+      const spinner = loginBtn.querySelector("svg");
+      const btnText = loginBtn.querySelector("span");
 
-    // Show loading spinner
-    spinner.classList.remove("hidden");
-    btnText.textContent = "Logging in...";
-    loginBtn.disabled = true;
+      spinner.classList.remove("hidden");
+      btnText.textContent = "Logging in...";
+      loginBtn.disabled = true;
 
-    const data = Object.fromEntries(new FormData(e.target));
+      const data = Object.fromEntries(new FormData(e.target));
 
-    try {
-      const res = await postData(`${API_BASE}/admin/login`, data);
+      try {
+        const res = await postData(`${API_BASE}/admin/login`, data);
 
-      if (res.token) {
-        setCookie("token", res.token, 7);
-        setCookie("role", "admin", 7);
+        if (res.token) {
+          setCookie("token", res.token, 7);
+          setCookie("role", "admin", 7);
 
-        // Save API key in cookie if it exists in response
-        if (res.admin && res.admin.api_key) {
-          setCookie("api_key", res.admin.api_key, 7);
+          if (res.admin && res.admin.api_key) {
+            setCookie("api_key", res.admin.api_key, 7);
+          }
+
+          console.log("Cookies after admin login:", document.cookie);
+
+          window.location.href =
+            "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/adminlandingpage.html";
+        } else {
+          alert(res.message || "Login failed.");
         }
-
-        console.log("Cookies after admin login:", document.cookie);
-
-        window.location.href =
-          "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/adminlandingpage.html";
-      } else {
-        alert(res.message || "Login failed.");
+      } catch (error) {
+        console.error("Admin login error:", error);
+        alert("Server error. Please try again.");
+      } finally {
+        spinner.classList.add("hidden");
+        btnText.textContent = "Login";
+        loginBtn.disabled = false;
       }
-    } catch (error) {
-      console.error("Admin login error:", error);
-      alert("Server error. Please try again.");
-    } finally {
-      // Hide spinner and restore button
-      spinner.classList.add("hidden");
-      btnText.textContent = "Login";
-      loginBtn.disabled = false;
-    }
-  });
-}
+    });
+  }
 
-
+  // Admin Signup Form
   const adminSignupForm = document.getElementById("adminSignupForm");
   if (adminSignupForm) {
     const errorMsg = document.getElementById("errorMsg");
@@ -181,8 +180,7 @@ if (adminLoginForm) {
       signupSpinner.classList.add("hidden");
 
       if (res.redirect) {
-        errorMsg.textContent =
-          res.message || "Signup successful! Redirecting...";
+        errorMsg.textContent = res.message || "Signup successful! Redirecting...";
         errorMsg.classList.remove("hidden");
         setTimeout(() => (window.location.href = res.redirect), 1500);
       } else {
@@ -192,6 +190,7 @@ if (adminLoginForm) {
     });
   }
 
+  // Add Teacher Form
   const addTeacherForm = document.getElementById("addTeacherForm");
   if (addTeacherForm) {
     addTeacherForm.addEventListener("submit", async (e) => {
@@ -213,7 +212,7 @@ if (adminLoginForm) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Use token cookie here
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(data),
         });
@@ -224,10 +223,11 @@ if (adminLoginForm) {
           errorMessage.textContent = json.message || "Failed to add teacher.";
           errorMessage.classList.remove("hidden");
         } else {
-          errorMessage.className ='text-green-400'
-        errorMessage.textContent = json.message
+          errorMessage.className = "text-green-400";
+          errorMessage.textContent = json.message;
           addTeacherForm.reset();
-          window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/teachers.html";
+          window.location.href =
+            "https://rfid-attendance-synctuario-theta.vercel.app/pages/users/admin/teachers.html";
         }
       } catch (err) {
         console.error(err);
@@ -240,12 +240,14 @@ if (adminLoginForm) {
     });
   }
 
+  // Logout button
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
     logoutBtn.onclick = () => {
       deleteCookie("token");
       deleteCookie("role");
-      window.location.href = "https://rfid-attendance-synctuario-theta.vercel.app/index.html";
+      window.location.href =
+        "https://rfid-attendance-synctuario-theta.vercel.app/index.html";
     };
   }
 });
