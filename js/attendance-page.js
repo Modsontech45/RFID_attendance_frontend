@@ -251,5 +251,5 @@ function pageInit() {
   });
   document.getElementById("nameFilter").addEventListener("input", debounce(applyFilters, 300));
 }
-
+document.getElementById("applyFilterBtn").addEventListener("click", applyFilters);
 window.addEventListener("DOMContentLoaded", pageInit);
