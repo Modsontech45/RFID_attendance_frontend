@@ -61,6 +61,36 @@
 
   <main class="pt-24 px-6 pb-10">
     <h2 data-i18n="adminhomepage.dashboard.section_title" class="text-3xl font-bold text-green-400 mb-8 text-center">Dashboard Articles</h2>
+    <div class="my-6 p-4 bg-gray-900 rounded-lg text-white max-w-md mx-auto shadow-lg border border-green-600">
+  <h3 class="text-lg font-semibold mb-2">Your API Key</h3>
+  <div class="flex items-center space-x-2">
+    <input
+      id="apiKeyInput"
+      type="password"
+      readonly
+      class="flex-grow bg-gray-800 text-white px-3 py-2 rounded focus:outline-none"
+      value="****************************"
+      title="Your API Key (hidden)"
+    />
+    <button
+      id="toggleApiKeyBtn"
+      class="bg-green-600 hover:bg-green-700 px-3 py-2 rounded text-white text-sm"
+      title="Show/Hide API Key"
+    >
+      Show
+    </button>
+    <button
+      id="copyApiKeyBtn"
+      class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-white text-sm"
+      title="Copy API Key"
+    >
+      Copy
+    </button>
+  </div>
+  <p id="copyMsg" class="mt-2 text-green-400 text-sm hidden">API Key copied!</p>
+</div>
+
+
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
@@ -84,6 +114,57 @@
 
   <script src="/js/menu.js"></script>
   <script src="/js/signout.js"></script>
+  <script>
+  // Replace this with actual API key fetched/stored after login
+  // For example, you can save it in a cookie or pass it from backend rendering
+  const apiKey = getCookie('api_key') || 'YourAPIKeyHere';
+
+  const apiKeyInput = document.getElementById('apiKeyInput');
+  const toggleBtn = document.getElementById('toggleApiKeyBtn');
+  const copyBtn = document.getElementById('copyApiKeyBtn');
+  const copyMsg = document.getElementById('copyMsg');
+
+  // Initialize the input value masked with stars matching length
+  function maskApiKey(key) {
+    return '*'.repeat(key.length);
+  }
+
+  // Set masked initially
+  apiKeyInput.value = maskApiKey(apiKey);
+
+  // Toggle visibility of API key
+  toggleBtn.addEventListener('click', () => {
+    if (apiKeyInput.type === 'password') {
+      apiKeyInput.type = 'text';
+      apiKeyInput.value = apiKey;
+      toggleBtn.textContent = 'Hide';
+      apiKeyInput.title = 'Your API Key (visible)';
+    } else {
+      apiKeyInput.type = 'password';
+      apiKeyInput.value = maskApiKey(apiKey);
+      toggleBtn.textContent = 'Show';
+      apiKeyInput.title = 'Your API Key (hidden)';
+    }
+  });
+
+  // Copy to clipboard
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(apiKey).then(() => {
+      copyMsg.classList.remove('hidden');
+      setTimeout(() => copyMsg.classList.add('hidden'), 2000);
+    }).catch(() => {
+      alert('Failed to copy API Key');
+    });
+  });
+
+  // Utility to get cookie value by name
+  function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) return decodeURIComponent(match[2]);
+    return null;
+  }
+</script>
+
 </body>
 
 </html>

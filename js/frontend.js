@@ -107,8 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const adminLoginForm = document.getElementById("adminLoginForm");
- if (adminLoginForm) {
+const adminLoginForm = document.getElementById("adminLoginForm");
+if (adminLoginForm) {
   adminLoginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -130,6 +130,11 @@ document.addEventListener("DOMContentLoaded", () => {
         setCookie("token", res.token, 7);
         setCookie("role", "admin", 7);
 
+        // Save API key in cookie if it exists in response
+        if (res.admin && res.admin.api_key) {
+          setCookie("api_key", res.admin.api_key, 7);
+        }
+
         console.log("Cookies after admin login:", document.cookie);
 
         window.location.href =
@@ -148,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 }
+
 
   const adminSignupForm = document.getElementById("adminSignupForm");
   if (adminSignupForm) {
