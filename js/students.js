@@ -15,25 +15,22 @@ let studentsData = [];
 
 
 
-
 async function fetchStudents() {
   const errorMessage = document.getElementById("errormessage");
-  const apiKey = getCookie("api_key"); // ✅ get it from cookies
-  console.log(apiKey)
+  const apiKey = getCookie("api_key"); // make sure this function exists and works
 
   try {
     const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/students", {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": apiKey, // ✅ pass it as header
+        "x-api-key": apiKey, // send API key in header
       },
     });
 
-    if (!res.ok) {
-      throw new Error(`Server responded with status ${res.status}`);
-    }
+    if (!res.ok) throw new Error(`Server responded with status ${res.status}`);
 
-    studentsData = await res.json();
+    const studentsData = await res.json();
     renderStudents(studentsData);
 
     if (errorMessage) {
@@ -43,8 +40,7 @@ async function fetchStudents() {
   } catch (err) {
     console.error("Error fetching students:", err);
     if (errorMessage) {
-      errorMessage.textContent =
-        "Failed to fetch students. Server might be down or you have no access.";
+      errorMessage.textContent = "Failed to fetch students. Server might be down or you have no access.";
       errorMessage.classList.remove("hidden");
       errorMessage.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");
     }
