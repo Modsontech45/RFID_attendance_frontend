@@ -2,6 +2,13 @@ let pollingInterval = null;
 const statusEl = document.getElementById("status");
 const formEl = document.getElementById("registerForm");
 
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  if (match) return decodeURIComponent(match[2]);
+  return null;
+}
+
+
 function generateRandomID(length = 8) {
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -67,9 +74,10 @@ async function pollScanQueue() {
     statusEl.className = "text-center text-red-500 font-semibold mb-4";
   }
 }
-
 formEl.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  const api_key = getCookie("api_key");
 
   const data = {
     name: document.getElementById("name").value,
@@ -79,6 +87,7 @@ formEl.addEventListener("submit", async (e) => {
     telephone: document.getElementById("telephone").value,
     form: document.getElementById("form").value,
     gender: document.getElementById("gender").value,
+    api_key // ✅ add the API key to the payload
   };
 
   try {
