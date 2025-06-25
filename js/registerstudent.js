@@ -77,8 +77,6 @@ async function pollScanQueue() {
 formEl.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const api_key = getCookie("api_key");
-
   const data = {
     name: document.getElementById("name").value,
     student_id: generateRandomID(),
@@ -87,7 +85,6 @@ formEl.addEventListener("submit", async (e) => {
     telephone: document.getElementById("telephone").value,
     form: document.getElementById("form").value,
     gender: document.getElementById("gender").value,
-    api_key // ✅ add the API key to the payload
   };
 
   try {
@@ -119,6 +116,8 @@ formEl.addEventListener("submit", async (e) => {
     statusEl.className = "text-center text-red-500 font-semibold mb-4";
   }
 });
+
+
 
 window.onload = () => {
   pollingInterval = setInterval(pollScanQueue, 2000);
