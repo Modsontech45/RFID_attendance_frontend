@@ -1,15 +1,15 @@
-
 function getCookie(name) {
-  const parts = `; ${document.cookie}`.split(`; ${name}=`);
-  return parts.length === 2 ? parts.pop().split(";").shift() : null;
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  if (match) return decodeURIComponent(match[2]);
+  return null;
 }
-
 
 const role = getCookie("role");
 if (role === "teacher") {
   document.querySelectorAll(".teacher-only").forEach(el => el.classList.remove("hidden"));
   document.querySelectorAll(".teacher-access-denied").forEach(el => el.classList.add("hidden"));
 }
+
 
 let studentsData = [];
 
@@ -18,8 +18,26 @@ let studentsData = [];
 
 async function fetchStudents() {
   const errorMessage = document.getElementById("errormessage");
+  const apiKey = getCookie("api_key");
+
+  if (!apiKey) {
+    if (errorMessage) {
+      errorMessage.textContent = "Missing API key. Please log in again.";
+      errorMessage.classList.remove("hidden");
+      errorMessage.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");
+    }
+    return;
+  }
+
   try {
-    const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/students");
+    const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/students", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+      },
+    });
+
     if (!res.ok) throw new Error(`Server responded with status ${res.status}`);
 
     studentsData = await res.json();
@@ -32,12 +50,13 @@ async function fetchStudents() {
   } catch (err) {
     console.error("Error fetching students:", err);
     if (errorMessage) {
-      errorMessage.textContent = "Failed to fetch students. Server might be down.";
+      errorMessage.textContent = "Failed to fetch students. Server might be down or you have no access.";
       errorMessage.classList.remove("hidden");
       errorMessage.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");
     }
   }
 }
+
 
 
 function renderStudents(students) {

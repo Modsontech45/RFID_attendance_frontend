@@ -87,7 +87,7 @@ formEl.addEventListener("submit", async (e) => {
     telephone: document.getElementById("telephone").value,
     form: document.getElementById("form").value,
     gender: document.getElementById("gender").value,
-    api_key 
+    api_key
   };
 
   try {
