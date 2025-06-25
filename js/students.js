@@ -18,27 +18,20 @@ let studentsData = [];
 
 async function fetchStudents() {
   const errorMessage = document.getElementById("errormessage");
-  const apiKey = getCookie("api_key");
-
-  if (!apiKey) {
-    if (errorMessage) {
-      errorMessage.textContent = "Missing API key. Please log in again.";
-      errorMessage.classList.remove("hidden");
-      errorMessage.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");
-    }
-    return;
-  }
+  const apiKey = getCookie("api_key"); // ✅ get it from cookies
+  console.log(apiKey)
 
   try {
     const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/students", {
-      method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": apiKey,
+        "x-api-key": apiKey, // ✅ pass it as header
       },
     });
 
-    if (!res.ok) throw new Error(`Server responded with status ${res.status}`);
+    if (!res.ok) {
+      throw new Error(`Server responded with status ${res.status}`);
+    }
 
     studentsData = await res.json();
     renderStudents(studentsData);
@@ -50,12 +43,14 @@ async function fetchStudents() {
   } catch (err) {
     console.error("Error fetching students:", err);
     if (errorMessage) {
-      errorMessage.textContent = "Failed to fetch students. Server might be down or you have no access.";
+      errorMessage.textContent =
+        "Failed to fetch students. Server might be down or you have no access.";
       errorMessage.classList.remove("hidden");
       errorMessage.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");
     }
   }
 }
+
 
 
 
