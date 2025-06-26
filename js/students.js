@@ -51,10 +51,10 @@ async function fetchStudents() {
   console.error("⚠️ Error fetching students:", err);
   if (errorMessage) {
     // Try to show backend error message if available, fallback to generic
-    const backendMessage ="you have no student yet "
+    const backendMessage ="You have no student yet "
     errorMessage.textContent = backendMessage;
     errorMessage.classList.remove("hidden");
-    errorMessage.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");
+    errorMessage.classList.add("text-gray-600", "bg-red-100", "p-2", "rounded");
   }
 }
 
