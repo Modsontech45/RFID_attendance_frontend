@@ -84,10 +84,10 @@ async function loadDashboardData(dateFilter = null) {
   } catch (error) {
     console.error("Error loading dashboard data:", error);
 
-    document.getElementById("total").textContent = "Error";
-    document.getElementById("present").textContent = "Error";
-    document.getElementById("partial").textContent = "Error";
-    document.getElementById("absent").textContent = "Error";
+    document.getElementById("total").textContent = "Empty";
+    document.getElementById("present").textContent = "Empty";
+    document.getElementById("partial").textContent = "Empty";
+    document.getElementById("absent").textContent = "Empty";
   }
 }
 
