@@ -146,14 +146,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       signupSpinner.classList.add("hidden");
 
-      if (res.redirect) {
-        errorMsg.textContent = res.message || "Signup successful!";
-        errorMsg.classList.remove("hidden");
-        setTimeout(() => window.location.href = res.redirect, 1500);
-      } else {
-        errorMsg.textContent = res.message || "Signup failed.";
-        errorMsg.classList.remove("hidden");
-      }
+   if (res.redirect) {
+  errorMsg.textContent = res.message || "Signup successful!";
+  errorMsg.classList.remove("hidden");
+  errorMsg.classList.remove("text-red-600", "bg-red-100");       // Remove error styles if any
+  errorMsg.classList.add("text-green-600", "bg-green-100", "p-2", "rounded"); // Success styles
+  setTimeout(() => window.location.href = res.redirect, 1500);
+} else {
+  errorMsg.textContent = res.message || "Signup failed.";
+  errorMsg.classList.remove("hidden");
+  errorMsg.classList.remove("text-green-600", "bg-green-100");   // Remove success styles if any
+  errorMsg.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");    // Error styles
+}
+
     });
   }
 
