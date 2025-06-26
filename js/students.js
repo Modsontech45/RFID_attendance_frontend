@@ -51,7 +51,7 @@ async function fetchStudents() {
   console.error("⚠️ Error fetching students:", err);
   if (errorMessage) {
     // Try to show backend error message if available, fallback to generic
-    const backendMessage = err?.message || "Failed to fetch students. Server might be down or you have no access.";
+    const backendMessage ="you have no student yet "
     errorMessage.textContent = backendMessage;
     errorMessage.classList.remove("hidden");
     errorMessage.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");
