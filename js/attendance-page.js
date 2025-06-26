@@ -19,6 +19,7 @@ function handleRoleVisibility() {
   }
 }
 
+
 async function fetchStudents() {
   const apiKey = getCookie("api_key");  // Get API key from cookie
 

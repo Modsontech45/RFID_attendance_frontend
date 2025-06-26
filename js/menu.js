@@ -27,3 +27,5 @@ document.addEventListener("click", (e) => {
     setTimeout(() => navMenu.classList.add("max-sm:hidden"), 300);
   }
 });
+
+

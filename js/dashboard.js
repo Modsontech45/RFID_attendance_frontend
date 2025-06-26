@@ -21,9 +21,20 @@ let chartInstance = null;
 let refreshIntervalId = null; // Declare a variable to store the interval ID
 
 async function loadDashboardData(dateFilter = null) {
+      const apiKey = getCookie("api_key"); // get api key from cookie or wherever you store it
+    if (!apiKey) {
+      throw new Error("API key not found");
+    }
   try {
     const res = await fetch(
-      "https://rfid-attendancesystem-backend-project.onrender.com/api/attendance"
+      "https://rfid-attendancesystem-backend-project.onrender.com/api/attendance",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey,  // Send API key here for backend validation
+        },
+      }
     );
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
