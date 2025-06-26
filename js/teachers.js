@@ -1,11 +1,18 @@
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null;
+}
 
 
 async function fetchTeachers() {
   const container = document.getElementById("teachersContainer");
   const token = getCookie("token");
+  const apiKey = getCookie("api_key");
 
-  if (!token) {
+  if (!token || !apiKey) {
     container.innerHTML =
       '<p class="text-red-500">You must be logged in as an admin.</p>';
     return;
@@ -17,7 +24,10 @@ async function fetchTeachers() {
     const res = await fetch(
       "https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/all",
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "x-api-key": apiKey
+        },
       }
     );
 
@@ -50,13 +60,9 @@ async function fetchTeachers() {
           : fullBio;
 
       card.innerHTML = `
-        <img src="${t.picture || "https://via.placeholder.com/80"}" alt="${
-        t.full_name
-      }" class="w-16 h-16 rounded-full object-cover border-2 border-secondary" />
+        <img src="${t.picture || "https://via.placeholder.com/80"}" alt="${t.full_name}" class="w-16 h-16 rounded-full object-cover border-2 border-secondary" />
         <div>
-          <h2 class="text-lg font-semibold">${
-            t.full_name || "Unnamed Teacher"
-          }</h2>
+          <h2 class="text-lg font-semibold">${t.full_name || "Unnamed Teacher"}</h2>
           <p class="text-sm">${t.email}</p>
           <p class="text-xs italic">${shortBio}</p>
         </div>
@@ -70,8 +76,5 @@ async function fetchTeachers() {
   }
 }
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-}
+
+

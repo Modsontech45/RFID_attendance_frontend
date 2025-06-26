@@ -4,13 +4,12 @@ let allStudentData = [];
 
 const downloadOptions = document.getElementById("downloadOptions");
 
-// Utility to get cookie value
 function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  return parts.length === 2 ? parts.pop().split(";").shift() : null;
+  const cookieStr = `; ${document.cookie}`;
+  const parts = cookieStr.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null;
 }
-
 // Role-based UI control
 function handleRoleVisibility() {
   const role = getCookie("role");
@@ -20,11 +19,19 @@ function handleRoleVisibility() {
   }
 }
 
-// Fetch students data from backend
 async function fetchStudents() {
+  const apiKey = getCookie("api_key");  // Get API key from cookie
+
   try {
-    const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/attendance");
+    const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/attendance", {
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,  // <-- Send API key in header
+      },
+    });
+
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
     allStudentData = await res.json();
     applyFilters();
   } catch (err) {
@@ -33,6 +40,7 @@ async function fetchStudents() {
     `;
   }
 }
+
 
 // Apply filters to student data
 function applyFilters() {
