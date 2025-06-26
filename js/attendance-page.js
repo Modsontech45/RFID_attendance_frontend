@@ -36,9 +36,10 @@ async function fetchStudents() {
     allStudentData = await res.json();
     applyFilters();
   } catch (err) {
-    document.getElementById("studentsBody").innerHTML = `
-      <tr><td colspan="7" class="text-center text-red-600">Failed to load data, You have no attendance record</td></tr>
-    `;
+ document.getElementById("studentsBody").innerHTML = `
+  <tr><td colspan="7" class="text-center text-gray-600">Failed to load data, You have no attendance record</td></tr>
+`;
+
   }
 }
 

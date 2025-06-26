@@ -54,7 +54,8 @@ async function fetchStudents() {
     const backendMessage ="You have no student yet "
     errorMessage.textContent = backendMessage;
     errorMessage.classList.remove("hidden");
-    errorMessage.classList.add("text-gray-600", "bg-red-100", "p-2", "rounded");
+   errorMessage.classList.add("text-gray-600", "bg-gray-100", "p-2", "rounded");
+
   }
 }
 
