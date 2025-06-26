@@ -43,18 +43,21 @@ async function fetchStudents() {
 
     renderStudents(studentsData);
 
-    if (errorMessage) {
-      errorMessage.textContent = "";
-      errorMessage.classList.add("hidden");
-    }
-  } catch (err) {
-    console.error("⚠️ Error fetching students:", err);
-    if (errorMessage) {
-      errorMessage.textContent = "Failed to fetch students. Server might be down or you have no access.";
-      errorMessage.classList.remove("hidden");
-      errorMessage.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");
-    }
+   if (errorMessage) {
+  errorMessage.textContent = "";
+  errorMessage.classList.add("hidden");
+}
+} catch (err) {
+  console.error("⚠️ Error fetching students:", err);
+  if (errorMessage) {
+    // Try to show backend error message if available, fallback to generic
+    const backendMessage = err?.message || "Failed to fetch students. Server might be down or you have no access.";
+    errorMessage.textContent = backendMessage;
+    errorMessage.classList.remove("hidden");
+    errorMessage.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");
   }
+}
+
 }
 
 
