@@ -3,65 +3,94 @@
     "title": "Êtes-vous un administrateur ou un enseignant ?",
     "admin": "Administrateur",
     "teacher": "Enseignant",
-     "english": "Anglais",
-    "french" : "Français",
-  "floating_comments": [
-    "Bienvenue dans le système de présence !",
-    "Administrateurs, commencez ici.",
-    "Enseignants, connectez-vous en toute sécurité !",
-    "Nouvelles mises à jour bientôt.",
-    "N'oubliez pas de marquer la présence chaque jour.",
-    "Besoin d'aide ? Contactez le support.",
-    "Sécurisé et facile à utiliser.",
-    "Rejoignez-nous pour une présence fluide !"
-  ]
-
-
-
+    "english": "Anglais",
+    "french": "Français",
+    "floating_comments": [
+      "Bienvenue dans le système de présence !",
+      "Administrateurs, commencez ici.",
+      "Enseignants, connectez-vous en toute sécurité !",
+      "Nouvelles mises à jour bientôt disponibles.",
+      "N'oubliez pas de marquer la présence chaque jour.",
+      "Besoin d'aide ? Contactez le support.",
+      "Sûr et facile à utiliser.",
+      "Rejoignez-nous pour une gestion fluide de la présence !"
+    ],
+    "about": {
+      "title": "À propos du système de présence Modson",
+      "description": "Le système de présence Modson est une plateforme robuste et facile à utiliser conçue pour les écoles et les entreprises afin d'automatiser le suivi de la présence grâce à la technologie RFID. Il combine matériel et logiciel pour offrir une surveillance en temps réel fluide de la présence.",
+      "featuresTitle": "Fonctionnalités clés :",
+      "featuresList": [
+        "Enregistrez et suivez facilement la présence avec des cartes ou badges RFID scannés via des appareils ESP32.",
+        "Consultez les données de présence en direct avec des rapports détaillés accessibles aux administrateurs et enseignants.",
+        "Différents niveaux d'accès pour les administrateurs et enseignants garantissent la sécurité et les autorisations appropriées.",
+        "Prise en charge de l'anglais et du français pour répondre à des bases d'utilisateurs diversifiées.",
+        "Plans d'abonnement mensuels et annuels flexibles pour les écoles et entreprises de toutes tailles.",
+        "Essayez gratuitement pendant 15 jours à l'inscription.",
+        "Fonctionne pour les écoles comme pour les entreprises — entièrement adaptable.",
+        "Vos données sont enregistrées en toute sécurité et peuvent être utilisées ultérieurement.",
+        "Lorsqu'un administrateur s'inscrit, une clé API unique est générée pour la communication avec les appareils.",
+        "Les changements d'UID ne peuvent être effectués que par un administrateur ou un PDG, et le propriétaire de l'ID en sera informé.",
+        "Les enregistrements de présence peuvent être exportés au format Excel."
+      ],
+      "howItWorksTitle": "Comment ça marche :",
+      "howItWorksDescription": "Les élèves ou employés sont enregistrés avec des cartes RFID uniques. Lorsqu'une carte est scannée sur le lecteur ESP32, le système enregistre la présence avec des horodatages. Les administrateurs et enseignants peuvent surveiller la présence en direct, générer des rapports et gérer les utilisateurs via une interface web sécurisée.",
+      "whyChooseTitle": "Pourquoi choisir notre système ?",
+      "whyChooseList": [
+        "Réduit les erreurs manuelles de présence et le temps passé.",
+        "Améliore la précision et la responsabilité.",
+        "Fournit des analyses approfondies pour améliorer les performances.",
+        "S'adapte facilement à la croissance de votre organisation.",
+        "Soutenu par un support continu et des mises à jour.",
+        "Inclut un système d'API sécurisé pour la synchronisation des appareils de présence."
+      ],
+      "subscriptionTitle": "Plans d'abonnement :",
+      "subscriptionDescription": "Choisissez entre des abonnements mensuels et annuels adaptés à la taille et aux besoins de votre établissement. Profitez d'un support prioritaire, de mises à jour gratuites et d'une gestion de compte dédiée avec les plans annuels.",
+      "getStartedTitle": "Commencez dès aujourd'hui !",
+      "getStartedDescription": "Contactez-nous via le formulaire ci-dessus ou cliquez sur les boutons pour vous abonner et prendre le contrôle de votre gestion de présence.",
+      "contactButton": "Contactez-nous"
+    }
   },
-  "adminhomepage":{
-  "dashboard": {
-    "title": "Tableau de bord administrateur",
-    "header": "Admin de l'école",
-    "menu": {
-      "school": "École",
-      "teachers": "Enseignants",
-      "add_teacher": "Ajouter un enseignant",
-      "report": "Rapport",
-      "logout": "Déconnexion"
-    },
-    "section_title": "Articles du tableau de bord",
-    "cards": {
-      "attendance": {
-        "title": "Suivi de présence",
-        "description": "Consultez et gérez la présence des élèves avec synchronisation en temps réel depuis les appareils IoT."
+  "adminhomepage": {
+    "dashboard": {
+      "title": "Tableau de bord administrateur",
+      "header": "Admin de l'école",
+      "menu": {
+        "school": "École",
+        "teachers": "Enseignants",
+        "add_teacher": "Ajouter un enseignant",
+        "report": "Rapport",
+        "logout": "Déconnexion"
       },
-      "teacher": {
-        "title": "Gestion des enseignants",
-        "description": "Ajoutez, mettez à jour et surveillez tous les enseignants inscrits avec contrôle d'accès et journaux d'activité."
-      },
-      "report": {
-        "title": "Rapports des élèves",
-        "description": "Générez des rapports de présence, de performance académique et de comportement."
+      "section_title": "Articles du tableau de bord",
+      "cards": {
+        "attendance": {
+          "title": "Suivi de présence",
+          "description": "Consultez et gérez la présence des élèves avec synchronisation en temps réel depuis les appareils IoT."
+        },
+        "teacher": {
+          "title": "Gestion des enseignants",
+          "description": "Ajoutez, mettez à jour et surveillez tous les enseignants inscrits avec contrôle d'accès et journaux d'activité."
+        },
+        "report": {
+          "title": "Rapports des élèves",
+          "description": "Générez des rapports de présence, de performance académique et de comportement."
+        }
       }
     }
-  }
-},
-
-  "login":{
-  "adminlogin": {
-    "title": "Connexion Administrateur",
-    "email_placeholder": "Adresse e-mail",
-    "password_placeholder": "Mot de passe",
-    "login_button": "Connexion",
-    "no_account": "Vous n'avez pas de compte ?",
-    "signup_link": "S'inscrire |",
-    "forgot_password": "Mot de passe oublié ?",
-    "back": "Retour"
-  }
-}
-,
-"adminsignup": {
+  },
+  "login": {
+    "adminlogin": {
+      "title": "Connexion Administrateur",
+      "email_placeholder": "Adresse e-mail",
+      "password_placeholder": "Mot de passe",
+      "login_button": "Connexion",
+      "no_account": "Vous n'avez pas de compte ?",
+      "signup_link": "S'inscrire |",
+      "forgot_password": "Mot de passe oublié ?",
+      "back": "Retour"
+    }
+  },
+  "adminsignup": {
     "title": "Inscription Administrateur",
     "firstname_placeholder": "Prénom",
     "lastname_placeholder": "Nom de famille",
@@ -72,7 +101,6 @@
     "already_have_account": "Vous avez déjà un compte ?",
     "login_link": "Connexion"
   },
-
   "student": {
     "title": "Tous les étudiants enregistrés",
     "filter_form_label": "Filtrer par classe/niveau :",
@@ -117,8 +145,6 @@
     },
     "error_message": "Aucun élève trouvé."
   },
-
-
   "register": {
     "title": "Système de présence des élèves Synctuario RFID",
     "subtitle": "En attente de scan...",
@@ -144,10 +170,7 @@
       "submit": "Enregistrer"
     }
   },
-
-
-
-"dashboard": {
+  "dashboard": {
     "title": "Tableau de Bord",
     "brand": "Synctuario",
     "nav": {

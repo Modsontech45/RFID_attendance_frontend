@@ -4,65 +4,93 @@
     "admin": "Admin",
     "teacher": "Teacher",
     "english": "English",
-    "french" : "French",
-     "floating_comments": [
-    "Welcome to the Attendance System!",
-    "Admins, get started here.",
-    "Teachers, login securely!",
-    "New updates rolling out soon.",
-    "Remember to mark attendance daily.",
-    "Need help? Contact support.",
-    "Secure & easy to use.",
-    "Join us for smooth attendance!"
-  ]
+    "french": "French",
+    "floating_comments": [
+      "Welcome to the Attendance System!",
+      "Admins, get started here.",
+      "Teachers, login securely!",
+      "New updates rolling out soon.",
+      "Remember to mark attendance daily.",
+      "Need help? Contact support.",
+      "Secure & easy to use.",
+      "Join us for smooth attendance!"
+    ],
+    "about": {
+      "title": "About the Modson Attendance System",
+      "description": "The Modson Attendance System is a robust, easy-to-use platform designed for schools and companies to automate attendance tracking using RFID technology. It combines hardware and software to provide a seamless, real-time attendance monitoring experience.",
+      "featuresTitle": "Key Features:",
+      "featuresList": [
+        "Effortlessly register and track attendance with RFID cards or tags scanned via ESP32 devices.",
+        "View live attendance data with detailed reports and analytics accessible to admins and teachers.",
+        "Different access levels for admins and teachers ensure security and proper permissions.",
+        "Supports English and French to cater to diverse user bases.",
+        "Flexible monthly and yearly subscription plans for schools and companies of all sizes.",
+        "Get a 15-day free trial when you sign up.",
+        "Works for both schools and companies — fully adaptable.",
+        "Your data is securely saved and available for future use.",
+        "When an admin registers, a unique API key is generated for secure device communication.",
+        "Student or employee UID changes can only be made by an admin or CEO, and the ID owner will be notified.",
+        "Attendance records can be exported in Excel format."
+      ],
+      "howItWorksTitle": "How It Works:",
+      "howItWorksDescription": "Students or employees are registered with unique RFID cards. When a card is scanned on the ESP32 reader, the system logs the attendance with timestamps. Admins and teachers can monitor attendance live, generate reports, and manage users via a secure web interface.",
+      "whyChooseTitle": "Why Choose Our System?",
+      "whyChooseList": [
+        "Reduces manual attendance errors and time spent.",
+        "Improves accuracy and accountability.",
+        "Provides insightful analytics to improve school/company performance.",
+        "Scales easily with your organization's growth.",
+        "Backed by ongoing support and feature updates.",
+        "Includes a secure API system for syncing attendance devices."
+      ],
+      "subscriptionTitle": "Subscription Plans:",
+      "subscriptionDescription": "Choose between monthly and yearly subscriptions tailored to your institution's size and needs. Enjoy priority support, free updates, and dedicated account management with yearly plans.",
+      "getStartedTitle": "Get Started Today!",
+      "getStartedDescription": "Contact us using the form above or click the buttons to subscribe and take control of your attendance management.",
+      "contactButton": "Contact Us"
+    }
   },
-
-  "adminhomepage":{
-  "dashboard": {
-    "title": "Admin Dashboard",
-    "header": "School Admin",
-    "menu": {
-      "school": "School",
-      "teachers": "Teachers",
-      "add_teacher": "Add Teacher",
-      "report": "Report",
-      "logout": "Logout"
-    },
-    "section_title": "Dashboard Articles",
-    "cards": {
-      "attendance": {
-        "title": "Attendance Tracking",
-        "description": "View and manage student attendance with real-time syncing from IoT devices."
+  "adminhomepage": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "header": "School Admin",
+      "menu": {
+        "school": "School",
+        "teachers": "Teachers",
+        "add_teacher": "Add Teacher",
+        "report": "Report",
+        "logout": "Logout"
       },
-      "teacher": {
-        "title": "Teacher Management",
-        "description": "Add, update, and monitor all registered teachers with access control and activity logs."
-      },
-      "report": {
-        "title": "Student Reports",
-        "description": "Generate reports for attendance, academic performance, and behavioral tracking."
+      "section_title": "Dashboard Articles",
+      "cards": {
+        "attendance": {
+          "title": "Attendance Tracking",
+          "description": "View and manage student attendance with real-time syncing from IoT devices."
+        },
+        "teacher": {
+          "title": "Teacher Management",
+          "description": "Add, update, and monitor all registered teachers with access control and activity logs."
+        },
+        "report": {
+          "title": "Student Reports",
+          "description": "Generate reports for attendance, academic performance, and behavioral tracking."
+        }
       }
     }
-  }
-},
-
-
-
-  "login":{
-  "adminlogin": {
-    "title": "Admin Login",
-    "email_placeholder": "Email",
-    "password_placeholder": "Password",
-    "login_button": "Login",
-    "no_account": "Don't have an account?",
-    "signup_link": "Sign up |",
-    "forgot_password": "Forgot password?",
-    "back": "Go back"
-  }
-}
-,
-
-"adminsignup": {
+  },
+  "login": {
+    "adminlogin": {
+      "title": "Admin Login",
+      "email_placeholder": "Email",
+      "password_placeholder": "Password",
+      "login_button": "Login",
+      "no_account": "Don't have an account?",
+      "signup_link": "Sign up |",
+      "forgot_password": "Forgot password?",
+      "back": "Go back"
+    }
+  },
+  "adminsignup": {
     "title": "Admin Signup",
     "firstname_placeholder": "First Name",
     "lastname_placeholder": "Last Name",
@@ -73,8 +101,7 @@
     "already_have_account": "Already have an account?",
     "login_link": "Login"
   },
-
-"student": {
+  "student": {
     "title": "All Registered Students",
     "filter_form_label": "Filter by Form/Class:",
     "filter_all_forms": "All Forms",
@@ -118,7 +145,7 @@
     },
     "error_message": "No students found."
   },
-"register": {
+  "register": {
     "title": "Synctuario RFID Student Attendance System",
     "subtitle": "Waiting for scan...",
     "form": {
@@ -143,10 +170,7 @@
       "submit": "Register"
     }
   },
-
-
-
-"dashboard": {
+  "dashboard": {
     "title": "Dashboard",
     "brand": "Synctuario",
     "nav": {
@@ -167,7 +191,7 @@
       "absent": "Absent"
     }
   },
-   "attendance": {
+  "attendance": {
     "title": "Attendances List",
     "brand": "Synctuario",
     "nav": {
