@@ -170,6 +170,95 @@
       "submit": "Register"
     }
   },
+
+  
+
+"pricing": {
+    "title": "Modson Attendance System - Subscription Plans",
+    "nav": {
+      "logo": "Synctuario",
+      "home": "Home",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "contact": "Contact"
+    },
+    "subscriptions": {
+      "hero": {
+        "title": "Simplify Attendance Tracking with RFID",
+        "description": "Powerful, easy-to-use attendance management designed for schools and companies. Automate attendance, generate reports, and stay compliant — all in one platform.",
+        "cta": "See Pricing Plans"
+      },
+      "features": {
+        "rfid": {
+          "title": "RFID Integration",
+          "description": "Seamlessly integrate with RFID readers to automate attendance marking."
+        },
+        "dashboard": {
+          "title": "Real-Time Dashboard",
+          "description": "Monitor attendance live with detailed analytics and reports."
+        },
+        "access": {
+          "title": "Multi-User Access",
+          "description": "Admins and teachers have role-based access control and permissions."
+        }
+      },
+      "title": "Subscription Plans",
+      "monthly": {
+        "title": "Monthly Subscription",
+        "description": "Perfect for short-term needs or trials.",
+        "unit": "month",
+        "features": {
+          "1": "Unlimited users & devices",
+          "2": "Real-time attendance tracking",
+          "3": "Access to reports & analytics",
+          "4": "Email support"
+        },
+        "button": "Subscribe Monthly"
+      },
+      "yearly": {
+        "title": "Yearly Subscription",
+        "description": "Save 2 months with annual billing.",
+        "unit": "year",
+        "features": {
+          "1": "All monthly features",
+          "2": "Priority email & phone support",
+          "3": "Free updates & new features",
+          "4": "Dedicated account manager"
+        },
+        "button": "Subscribe Yearly"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "q1": {
+          "title": "Can I try the system before subscribing?",
+          "answer": "Yes! We offer a 14-day free trial for new customers."
+        },
+        "q2": {
+          "title": "What if I want to cancel my subscription?",
+          "answer": "You can cancel anytime. Your access will continue until the end of your billing period."
+        },
+        "q3": {
+          "title": "Do you offer support and updates?",
+          "answer": "Yes! Support is included in all plans, with priority support on the yearly plan."
+        }
+      },
+      "contact": {
+        "title": "Get in Touch",
+        "name": {
+          "label": "Name"
+        },
+        "email": {
+          "label": "Email"
+        },
+        "message": {
+          "label": "Message"
+        },
+        "submit": "Send Message"
+      }
+    }
+  },
+
   "dashboard": {
     "title": "Dashboard",
     "brand": "Synctuario",

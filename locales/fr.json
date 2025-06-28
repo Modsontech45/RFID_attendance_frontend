@@ -170,6 +170,95 @@
       "submit": "Enregistrer"
     }
   },
+
+ "pricing": {
+    "title": "Système de Présence Modson - Plans d'Abonnement",
+    "nav": {
+      "logo": "Synctuario",
+      "home": "Accueil",
+      "features": "Fonctionnalités",
+      "pricing": "Tarifs",
+      "faq": "FAQ",
+      "contact": "Contact"
+    },
+    "subscriptions": {
+      "hero": {
+        "title": "Simplifiez la gestion des présences avec RFID",
+        "description": "Gestion des présences puissante et facile à utiliser pour les écoles et les entreprises. Automatisez les présences, générez des rapports et restez conforme — tout sur une seule plateforme.",
+        "cta": "Voir les abonnements"
+      },
+      "features": {
+        "rfid": {
+          "title": "Intégration RFID",
+          "description": "Intégration transparente avec des lecteurs RFID pour automatiser la saisie des présences."
+        },
+        "dashboard": {
+          "title": "Tableau de Bord en Temps Réel",
+          "description": "Surveillez les présences en direct avec des rapports et des analyses détaillés."
+        },
+        "access": {
+          "title": "Accès Multi-Utilisateurs",
+          "description": "Les administrateurs et les enseignants ont des permissions basées sur les rôles."
+        }
+      },
+      "title": "Plans d'Abonnement",
+      "monthly": {
+        "title": "Abonnement Mensuel",
+        "description": "Parfait pour les besoins à court terme ou les essais.",
+        "unit": "mois",
+        "features": {
+          "1": "Utilisateurs et appareils illimités",
+          "2": "Suivi des présences en temps réel",
+          "3": "Accès aux rapports et analyses",
+          "4": "Support par e-mail"
+        },
+        "button": "S'abonner Mensuellement"
+      },
+      "yearly": {
+        "title": "Abonnement Annuel",
+        "description": "Économisez 2 mois avec la facturation annuelle.",
+        "unit": "an",
+        "features": {
+          "1": "Toutes les fonctionnalités mensuelles",
+          "2": "Support prioritaire par e-mail et téléphone",
+          "3": "Mises à jour gratuites et nouvelles fonctionnalités",
+          "4": "Gestionnaire de compte dédié"
+        },
+        "button": "S'abonner Annuellement"
+      },
+      "faq": {
+        "title": "Foire Aux Questions",
+        "q1": {
+          "title": "Puis-je essayer le système avant de m'abonner ?",
+          "answer": "Oui ! Nous offrons un essai gratuit de 14 jours pour les nouveaux clients."
+        },
+        "q2": {
+          "title": "Et si je souhaite annuler mon abonnement ?",
+          "answer": "Vous pouvez annuler à tout moment. L'accès continuera jusqu'à la fin de votre période de facturation."
+        },
+        "q3": {
+          "title": "Proposez-vous un support et des mises à jour ?",
+          "answer": "Oui ! Le support est inclus dans tous les forfaits, avec un support prioritaire dans le forfait annuel."
+        }
+      },
+      "contact": {
+        "title": "Nous Contacter",
+        "name": {
+          "label": "Nom"
+        },
+        "email": {
+          "label": "Email"
+        },
+        "message": {
+          "label": "Message"
+        },
+        "submit": "Envoyer le message"
+      }
+    }
+  },
+
+
+
   "dashboard": {
     "title": "Tableau de Bord",
     "brand": "Synctuario",
