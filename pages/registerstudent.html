@@ -5,105 +5,327 @@
   <meta charset="UTF-8" />
   <title>Student Registration & Attendance</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="/css/output.css" rel="stylesheet">
+  <link href="/css/output.css" rel="stylesheet" />
   <script src="/users/frontend.js"></script>
-<script src="/js/language.js" defer></script>
+  <script src="/js/language.js" defer></script>
   <script src="/js/cookies.js"></script>
 </head>
 
 <body class="bg-black text-white min-h-screen px-4">
-  <select  id="langSelect" class=" hidden text-green-700 border border-green-500 bg-transparent rounded px-2 py-1">
-  <option data-i18n="home.english" value="en">English</option>
-  <option data-i18n="home.french" value="fr">Français</option>
-</select>
+  <header
+    class="sticky top-0 left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50">
+    <div class="flex items-center space-x-3">
+      <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
+      <span class="text-xl font-bold">Synctuario</span>
+    </div>
 
+    <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">&#9776;</button>
 
- <header class=" sticky top-0  left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50 ">
+    <nav id="navMenu"
+      class="flex max-sm:hidden sm:items-center gap-4 transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40 max-sm:flex-col">
+      <a data-i18n="student.navbar.office" href="/pages/users/admin/adminlandingpage.html"
+        class="hover:text-green-400 font-medium">Office</a>
+      <a data-i18n="student.navbar.home" href="/pages/registerstudent.html" class="text-green-400 font-medium">Home</a>
+      <a data-i18n="student.navbar.students" href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
+      <a data-i18n="student.navbar.dashboard" href="/pages/dashboard.html" class="hover:underline font-medium">Dashboard</a>
+      <a data-i18n="student.navbar.attendance" href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
+      <button
+        data-i18n="student.navbar.logout"
+        class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
+        Logout
+      </button>
+    </nav>
+  </header>
 
-  <div class="flex items-center space-x-3">
-    <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
-    <span class="text-xl font-bold">Synctuario</span>
-  </div>
+  <main class="mt-10 max-w-4xl mx-auto space-y-12">
 
-  <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">
-    &#9776;
-  </button>
+    <!-- Registered Devices & Pending Scans Section -->
+    <section>
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-3xl font-bold text-green-400">Registered Devices</h2>
+        <button id="toggleAddDeviceBtn"
+          class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-semibold text-white">Add Device</button>
+      </div>
 
+      <!-- Hidden Device Registration Form (toggle visibility on button click) -->
+      <form id="registerDeviceForm"
+        class="hidden bg-gray-900 p-6 rounded-lg shadow border border-green-600 mb-8 max-w-md space-y-4">
+        <input type="text" id="device_uid" placeholder="Device UID (e.g. MAC address)" required
+          class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
+        <input type="text" id="device_name" placeholder="Device Name (e.g. Classroom A)" required
+          class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
+        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">
+          Register Device
+        </button>
+        <p id="deviceFormMessage" class="text-sm mt-2"></p>
+      </form>
 
-   <nav id="navMenu"
-      class=" flex max-sm:hidden sm:items-center gap-4  transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40  max-sm:flex-col">
-    <a data-i18n="student.navbar.office" href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
-    <a data-i18n="student.navbar.home" href="/pages/registerstudent.html" class="text-green-400 font-medium">Home</a>
-    <a data-i18n="student.navbar.students" href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
-    <a data-i18n="student.navbar.dashboard" href="/pages/dashboard.html" class="hover:underline font-medium">Dashboard</a>
-    <a data-i18n="student.navbar.attendance" href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
-    <button
-     data-i18n="student.navbar.logout" class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
-      Logout
-    </button>
-  </nav>
-</header>
+      <!-- Devices container -->
+      <div id="devicesContainer" class="space-y-8">
+        <!-- Device cards + pending scans get injected here -->
+      </div>
+    </section>
 
-  <div class="flex items-center justify-center mt-10">
-    <div id="google_translate_element"></div>
-    <div class="container max-w-lg w-full p-6 rounded-2xl bg-cover bg-center relative"
-      style="background-image: url('/download.jpeg'); background-repeat: no-repeat;">
-      <div class="bg-black bg-opacity-70 p-6 rounded-xl shadow-lg border border-green-700">
+  </main>
 
-        <h1 data-i18n="register.title" class="text-2xl font-bold text-center mb-2">
-          Synctuario RFID Student <span class="text-green-400">Attendance</span> System
-        </h1>
+  <script src="/js/menu.js"></script>
+  <!-- <script src="/js/registerstudent.js"></script> -->
+  <script src="/js/signout.js"></script>
 
-        <p data-i18n="register.subtitle" class="text-center text-sm mb-4">Waiting for scan...</p>
-        <div id="status" class="text-center text-base font-semibold mb-4 text-green-300"></div>
+  <script>
+    const api_key = getCookie('api_key');
 
-        <form id="registerForm" class="hidden space-y-4">
-          <h3 data-i18n="register.form.heading" class="text-lg font-bold mb-2">Register New Student</h3>
+    const toggleAddDeviceBtn = document.getElementById('toggleAddDeviceBtn');
+    const registerDeviceForm = document.getElementById('registerDeviceForm');
+    const deviceFormMessage = document.getElementById('deviceFormMessage');
+    const devicesContainer = document.getElementById('devicesContainer');
 
-          <input type="text" id="name" data-i18n-placeholder="register.form.name" required
-            class="w-full px-4 py-2 rounded bg-transparent border-b border-green-500 focus:outline-none focus:border-green-400 placeholder-white" />
+    // Toggle Device Registration Form visibility
+    toggleAddDeviceBtn.addEventListener('click', () => {
+      if (registerDeviceForm.classList.contains('hidden')) {
+        registerDeviceForm.classList.remove('hidden');
+        toggleAddDeviceBtn.textContent = 'Cancel';
+      } else {
+        registerDeviceForm.classList.add('hidden');
+        toggleAddDeviceBtn.textContent = 'Add Device';
+        deviceFormMessage.textContent = '';
+        registerDeviceForm.reset();
+      }
+    });
 
-          <input type="text" id="uid" readonly
-            class="w-full px-4 py-2 rounded bg-transparent border-b border-green-500 placeholder-white" />
+    // Handle Device Registration form submit
+    registerDeviceForm.addEventListener('submit', async e => {
+      e.preventDefault();
 
-          <input type="email" id="email"data-i18n-placeholder="register.form.email" required
-            class="w-full px-4 py-2 rounded bg-transparent border-b border-green-500 focus:outline-none focus:border-green-400 placeholder-white" />
+      const device_uid = document.getElementById('device_uid').value.trim();
+      const device_name = document.getElementById('device_name').value.trim();
 
-          <input type="tel" id="telephone" data-i18n-placeholder="register.form.telephone" required
-            class="w-full px-4 py-2 rounded bg-transparent border-b border-green-500 focus:outline-none focus:border-green-400 placeholder-white" />
+      if (!device_uid || !device_name) return;
 
-          <select id="gender" required
-            class="w-full px-4 py-2 rounded bg-black text-white border border-green-500 focus:outline-none focus:border-green-400">
-            <option data-i18n="register.form.gender"  value="">Select Gender</option>
-            <option data-i18n="register.form.gender_options.male" value="Male">Male</option>
-            <option data-i18n="register.form.gender_options.female" value="Female">Female</option>
-            <option data-i18n="register.form.gender_options.other" value="Other">Other</option>
+      deviceFormMessage.textContent = '';
+      deviceFormMessage.className = '';
+
+      try {
+        const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ device_uid, device_name, api_key })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          deviceFormMessage.textContent = data.error || 'Device registration failed.';
+          deviceFormMessage.className = 'text-red-400';
+          return;
+        }
+
+        deviceFormMessage.textContent = data.message || 'Device registered successfully.';
+        deviceFormMessage.className = 'text-green-400';
+
+        registerDeviceForm.reset();
+        registerDeviceForm.classList.add('hidden');
+        toggleAddDeviceBtn.textContent = 'Add Device';
+
+        fetchDevices(); // Refresh devices & scans
+      } catch (err) {
+        deviceFormMessage.textContent = 'Error registering device.';
+        deviceFormMessage.className = 'text-red-400';
+        console.error(err);
+      }
+    });
+
+    // Fetch registered devices & pending scans
+    async function fetchDevices() {
+      devicesContainer.innerHTML = `<p class="text-gray-400 text-center">Loading devices...</p>`;
+      try {
+        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices?api_key=${api_key}`);
+        if (!res.ok) throw new Error('Failed to fetch devices');
+        const devices = await res.json();
+
+        devicesContainer.innerHTML = '';
+        if (!devices.length) {
+          devicesContainer.innerHTML = `<p class="text-gray-400 text-center">No devices registered yet.</p>`;
+          return;
+        }
+
+        // Fetch all pending scans once
+        const scansRes = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/pending-scans?api_key=${api_key}`);
+        if (!scansRes.ok) throw new Error('Failed to fetch pending scans');
+        const scans = await scansRes.json();
+
+        devices.forEach(device => {
+          // Filter scans for this device
+          const deviceScans = scans.filter(s => s.device_uid === device.device_uid);
+
+          // Create device card
+          const card = document.createElement('div');
+          card.className = 'bg-gray-800 p-6 rounded-lg border border-green-600 shadow';
+
+          card.innerHTML = `
+            <h3 class="text-xl font-bold mb-2 text-green-400">${device.device_name}</h3>
+            <p class="mb-4 text-sm text-gray-400">Device UID: <code>${device.device_uid}</code></p>
+            <div class="pending-scans-container"></div>
+          `;
+
+          devicesContainer.appendChild(card);
+
+          const scansContainer = card.querySelector('.pending-scans-container');
+
+          if (deviceScans.length) {
+            // Show "Waiting for scan..." only if scans exist on this device
+            const waitingText = document.createElement('p');
+            waitingText.className = 'mb-3 text-yellow-400 font-semibold';
+            waitingText.textContent = 'Waiting for scan...';
+            scansContainer.appendChild(waitingText);
+
+            deviceScans.forEach(scan => {
+              const scanDiv = document.createElement('div');
+              scanDiv.className = 'bg-gray-700 p-3 rounded mb-3 flex justify-between items-center';
+
+              scanDiv.innerHTML = `
+                <div>
+                  <p><strong>UID:</strong> ${scan.uid}</p>
+                  <p><strong>Scanned At:</strong> ${new Date(scan.scanned_at).toLocaleString()}</p>
+                </div>
+                <button data-uid="${scan.uid}" data-deviceuid="${device.device_uid}"
+                  class="register-scan-btn bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white font-semibold">
+                  Register Student
+                </button>
+              `;
+
+              scansContainer.appendChild(scanDiv);
+            });
+
+            // Add event listeners to "Register Student" buttons
+            scansContainer.querySelectorAll('.register-scan-btn').forEach(button => {
+              button.addEventListener('click', () => {
+                openRegistrationModal(button.dataset.uid, button.dataset.deviceuid, scansContainer);
+              });
+            });
+
+          } else {
+            scansContainer.innerHTML = `<p class="text-gray-500 italic">No pending scans for this device.</p>`;
+          }
+        });
+
+      } catch (err) {
+        devicesContainer.innerHTML = `<p class="text-red-500 text-center">Failed to load devices or scans.</p>`;
+        console.error(err);
+      }
+    }
+
+    // Inline modal to register student for a scanned UID under a device card
+    function openRegistrationModal(uid, device_uid, container) {
+      // Hide main registration form (if open)
+      document.getElementById('registerForm').classList.add('hidden');
+
+      // Remove any existing modal
+      const existingModal = container.querySelector('.scan-registration-modal');
+      if (existingModal) existingModal.remove();
+
+      const modal = document.createElement('div');
+      modal.className = 'scan-registration-modal bg-black bg-opacity-90 p-5 rounded-lg border border-green-600 shadow-lg max-w-md mt-4';
+
+      modal.innerHTML = `
+        <h4 class="text-green-400 font-semibold mb-3">Register Student for UID: <code>${uid}</code></h4>
+        <form id="modalRegisterForm" class="space-y-3">
+          <input type="text" id="modal_name" placeholder="Full Name" required
+            class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
+          <input type="email" id="modal_email" placeholder="Email" required
+            class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
+          <input type="tel" id="modal_telephone" placeholder="Telephone" required
+            class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
+          <select id="modal_gender" required
+            class="w-full p-2 bg-black text-white rounded border border-green-500 focus:outline-none">
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
           </select>
-
-          <select id="form" required
-            class="w-full px-4 py-2 rounded bg-black text-white border border-green-500 focus:outline-none focus:border-green-400">
-            <option data-i18n="register.form.form_label" value="">Select Form/Class</option>
-            <option data-i18n="register.form.form_options.form1" value="Form 1">Form 1</option>
-            <option data-i18n="register.form.form_options.form2" value="Form 2">Form 2</option>
-            <option data-i18n="register.form.form_options.form3" value="Form 3">Form 3</option>
-            <option data-i18n="register.form.form_options.form4" value="Form 4">Form 4</option>
+          <select id="modal_form" required
+            class="w-full p-2 bg-black text-white rounded border border-green-500 focus:outline-none">
+            <option value="" disabled selected>Select Form/Class</option>
+            <option value="Form 1">Form 1</option>
+            <option value="Form 2">Form 2</option>
+            <option value="Form 3">Form 3</option>
+            <option value="Form 4">Form 4</option>
           </select>
-
-          <button  data-i18n="register.form.submit" type="submit"
-            class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded shadow">
-            Register
+          <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-semibold text-white">
+            Register Student
           </button>
         </form>
+        <button id="closeModalBtn" class="mt-2 text-red-500 hover:text-red-600 underline">Cancel</button>
+        <p id="modalMessage" class="mt-2 text-sm"></p>
+      `;
 
-      </div>
-    </div>
-  </div>
-  <script src="/js/menu.js"></script>
+      container.appendChild(modal);
 
-<script src="/js/registerstudent.js"></script>
+      // Close modal button
+      modal.querySelector('#closeModalBtn').addEventListener('click', () => {
+        modal.remove();
+        document.getElementById('registerForm').classList.remove('hidden');
+      });
 
-<script src="/js/signout.js"></script>
+      // Handle modal registration submit
+      modal.querySelector('#modalRegisterForm').addEventListener('submit', async e => {
+        e.preventDefault();
 
+        const studentData = {
+          name: modal.querySelector('#modal_name').value.trim(),
+          uid,
+          email: modal.querySelector('#modal_email').value.trim(),
+          telephone: modal.querySelector('#modal_telephone').value.trim(),
+          gender: modal.querySelector('#modal_gender').value,
+          form: modal.querySelector('#modal_form').value,
+          api_key
+        };
+
+        const modalMessage = modal.querySelector('#modalMessage');
+        modalMessage.textContent = '';
+        modalMessage.className = '';
+
+        try {
+          const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(studentData)
+          });
+
+          const result = await res.json();
+
+          if (!res.ok) {
+            modalMessage.textContent = result.message || 'Registration failed.';
+            modalMessage.className = 'text-yellow-400';
+            return;
+          }
+
+          modalMessage.textContent = 'Student registered successfully!';
+          modalMessage.className = 'text-green-400';
+
+          // Refresh devices and scans after registration
+          fetchDevices();
+
+          // Remove modal after short delay
+          setTimeout(() => modal.remove(), 2000);
+        } catch (err) {
+          modalMessage.textContent = 'Server error. Please try again.';
+          modalMessage.className = 'text-red-500';
+          console.error(err);
+        }
+      });
+    }
+
+    // Utility function to get cookie (same as in your external JS)
+    function getCookie(name) {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) return decodeURIComponent(match[2]);
+      return null;
+    }
+
+    // Initial fetch on page load
+    fetchDevices();
+
+  </script>
 </body>
 
 </html>
