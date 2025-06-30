@@ -138,18 +138,21 @@
           const lastSeen = lastSeenRaw ? new Date(lastSeenRaw) : null;
           const now = new Date();
 
-          let diffMinutes = null;
+          let diffSeconds = null;
           let timeAgo = "N/A";
           let isOnline = false;
 
           if (lastSeen instanceof Date && !isNaN(lastSeen)) {
-            diffMinutes = Math.floor((now - lastSeen) / 60000);
-            timeAgo = diffMinutes < 1
+            diffSeconds = Math.floor((now - lastSeen) / 1000); // difference in seconds
+            timeAgo = diffSeconds < 10
               ? "Just now"
-              : diffMinutes === 1
-                ? "1 minute ago"
-                : `${diffMinutes} minutes ago`;
-            isOnline = diffMinutes < 5;
+              : diffSeconds < 60
+                ? `${diffSeconds} seconds ago`
+                : diffSeconds < 120
+                  ? "1 minute ago"
+                  : `${Math.floor(diffSeconds / 60)} minutes ago`;
+
+            isOnline = diffSeconds < 10;  // online if last seen within 10 seconds
           } else {
             console.warn("⚠️ Invalid last_seen date:", lastSeenRaw);
           }
@@ -173,6 +176,7 @@
   </div>
   <div class="registration-form hidden mt-4"></div>
 `;
+
 
 
 
