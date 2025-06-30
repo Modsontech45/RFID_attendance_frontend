@@ -54,7 +54,6 @@
   <script src="/js/signout.js"></script>
 
   <script>
-   let fetchDevicesIntervalId = null;
 
     const api_key = getCookie("api_key");
     console.log("Loaded API Key:", api_key);
@@ -201,20 +200,6 @@
 
 
 
-function startFetchDevicesAutoRefresh(delay = 10000) {
-  if (fetchDevicesIntervalId) clearInterval(fetchDevicesIntervalId);
-  fetchDevicesIntervalId = setInterval(() => {
-    console.log("Auto-refreshing devices list...");
-    fetchDevices();
-  }, delay);
-}
-
-function stopFetchDevicesAutoRefresh() {
-  if (fetchDevicesIntervalId) {
-    clearInterval(fetchDevicesIntervalId);
-    fetchDevicesIntervalId = null;
-  }
-}
 
 
 
@@ -408,7 +393,6 @@ function stopFetchDevicesAutoRefresh() {
     }
 
     fetchDevices();
-    startFetchDevicesAutoRefresh();
     console.log("Initial fetchDevices() called");
 
 
