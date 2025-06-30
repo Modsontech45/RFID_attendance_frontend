@@ -54,7 +54,7 @@
   <script src="/js/signout.js"></script>
 
   <script>
-
+   let devicesData = [];
     const api_key = getCookie("api_key");
     console.log("Loaded API Key:", api_key);
 
@@ -127,7 +127,7 @@
           devicesContainer.innerHTML = '<p class="text-gray-400 text-center">No devices registered yet.</p>';
           return;
         }
-
+          devicesData = devices;
         devices.forEach(device => {
           console.log("Rendering device:", device.device_uid);
           const card = document.createElement("div");
@@ -158,15 +158,15 @@
             console.warn("⚠️ Invalid last_seen date:", lastSeenRaw);
           }
 
-          card.innerHTML = `
+        card.innerHTML = `
   <div class="flex justify-between items-start">
     <div>
       <h3 class="text-xl font-bold mb-1 text-green-400">${device.device_name}</h3>
       <p class="text-sm text-gray-400">UID: <code>${device.device_uid}</code></p>
-      <p class="text-sm ${isOnline ? 'text-green-400' : 'text-red-400'} font-semibold mt-1">
-        Status: ${isOnline ? '🟢 Online' : '🔴 Offline'}
+      <p class="text-sm font-semibold mt-1" id="status-${device.device_uid}">
+        Status: <span class="${isOnline ? 'text-green-400' : 'text-red-400'}">${isOnline ? '🟢 Online' : '🔴 Offline'}</span>
       </p>
-      <p class="text-sm text-gray-500">
+      <p class="text-sm text-gray-500" id="lastseen-${device.device_uid}">
         Last seen: ${timeAgo} (${lastSeen ? lastSeen.toLocaleString() : 'Unknown'})
       </p>
       <p class="scan-status text-yellow-400 font-semibold mt-1">Waiting for scan...</p>
@@ -199,8 +199,44 @@
 
 
 
+function updateDeviceStatus(device) {
+  const lastSeenRaw = device.last_seen;
+  const lastSeen = lastSeenRaw ? new Date(lastSeenRaw) : null;
+  const now = new Date();
 
+  if (!(lastSeen instanceof Date) || isNaN(lastSeen)) {
+    console.warn("Invalid last_seen for device:", device.device_uid);
+    return;
+  }
 
+  const diffMinutes = Math.floor((now - lastSeen) / 60000);
+  const timeAgo = diffMinutes < 1
+    ? "Just now"
+    : diffMinutes === 1
+      ? "1 minute ago"
+      : `${diffMinutes} minutes ago`;
+  const isOnline = diffMinutes < 3;
+
+  const statusEl = document.getElementById(`status-${device.device_uid}`);
+  const lastSeenEl = document.getElementById(`lastseen-${device.device_uid}`);
+
+  if (statusEl) {
+    statusEl.innerHTML = `Status: <span class="${isOnline ? 'text-green-400' : 'text-red-400'}">${isOnline ? '🟢 Online' : '🔴 Offline'}</span>`;
+  }
+
+  if (lastSeenEl) {
+    lastSeenEl.textContent = `Last seen: ${timeAgo} (${lastSeen.toLocaleString()})`;
+  }
+}
+
+function autoUpdateDeviceStatuses() {
+  devicesData.forEach(device => updateDeviceStatus(device));
+}
+
+// After first fetchDevices() call:
+fetchDevices().then(() => {
+  setInterval(autoUpdateDeviceStatuses, 10000); // every 10s
+});
 
 
     function pollDevice(device_uid, card) {
