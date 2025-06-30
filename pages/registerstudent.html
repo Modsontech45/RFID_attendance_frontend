@@ -123,74 +123,83 @@
       }
     }
 
-    function pollDevice(device_uid, card) {
-      const statusEl = card.querySelector(".scan-status");
-      const formContainer = card.querySelector(".registration-form");
-      let allowPolling = true;
+   function pollDevice(device_uid, card) {
+  const statusEl = card.querySelector(".scan-status");
+  const formContainer = card.querySelector(".registration-form");
+  let allowPolling = true;
+  let isFormVisible = false;
 
-      async function poll() {
-        if (!allowPolling) return;
+  async function poll() {
+    if (!allowPolling) return;
 
-        try {
-          const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`);
-          const response = await res.json();
-          const data = Array.isArray(response) ? response[0] : null;
+    try {
+      const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`);
+      const response = await res.json();
+      const data = Array.isArray(response) ? response[0] : null;
 
-          if (data && data.uid) {
-            statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
-            statusEl.className = "scan-status text-blue-400 font-semibold";
+      if (data && data.uid) {
+        statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
+        statusEl.className = "scan-status text-blue-400 font-semibold";
 
-            if (!data.exists) {
-              allowPolling = false;
-              formContainer.innerHTML = `
-                <form id="form-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3">
-                  <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
-                  <input type="text" name="name" placeholder="Name" class="input" required />
-                  <input type="email" name="email" placeholder="Email" class="input" required />
-                  <input type="tel" name="telephone" placeholder="Phone Number" class="input" required />
-                  <select name="form" class="input" required>
-                    <option value="" disabled selected>Select Form</option>
-                    <option value="Form 1">Form 1</option>
-                    <option value="Form 2">Form 2</option>
-                    <option value="Form 3">Form 3</option>
-                    <option value="Form 4">Form 4</option>
-                  </select>
-                  <select name="gender" class="input" required>
-                    <option value="" disabled selected>Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                  </select>
-                  <button type="submit" class="bg-green-600 hover:bg-green-700 py-2 rounded w-full text-white">Register</button>
-                  <p class="formMessage text-sm mt-2"></p>
-                </form>
-              `;
-              formContainer.classList.remove("hidden");
+        if (!data.exists && !isFormVisible) {
+          allowPolling = false;
+          isFormVisible = true;
 
-              const studentForm = formContainer.querySelector(`#form-${device_uid}`);
-              studentForm.addEventListener("submit", (e) =>
-                submitStudentForm(e, data.uid, studentForm, () => {
-                  allowPolling = true;
-                  formContainer.innerHTML = "";
-                  formContainer.classList.add("hidden");
-                })
-              );
-            }
-          } else {
-            statusEl.textContent = "No new scans.";
-            statusEl.className = "scan-status text-gray-400 font-semibold";
-          }
-        } catch (err) {
-          console.error(`Polling failed for device [${device_uid}]:`, err);
-          statusEl.textContent = "Polling error.";
-          statusEl.className = "scan-status text-red-400 font-semibold";
+          formContainer.innerHTML = `
+            <form id="form-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3">
+              <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
+              <input type="text" name="name" placeholder="Name" class="input" required />
+              <input type="email" name="email" placeholder="Email" class="input" required />
+              <input type="tel" name="telephone" placeholder="Phone Number" class="input" required />
+              <select name="form" class="input" required>
+                <option value="" disabled selected>Select Form</option>
+                <option value="Form 1">Form 1</option>
+                <option value="Form 2">Form 2</option>
+                <option value="Form 3">Form 3</option>
+                <option value="Form 4">Form 4</option>
+              </select>
+              <select name="gender" class="input" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <button type="submit" class="bg-green-600 hover:bg-green-700 py-2 rounded w-full text-white">Register</button>
+              <p class="formMessage text-sm mt-2"></p>
+            </form>
+          `;
+          formContainer.classList.remove("hidden");
+
+          const studentForm = formContainer.querySelector(`#form-${device_uid}`);
+          studentForm.addEventListener("submit", (e) =>
+            submitStudentForm(e, data.uid, studentForm, () => {
+              allowPolling = true;
+              isFormVisible = false;
+              formContainer.innerHTML = "";
+              formContainer.classList.add("hidden");
+            })
+          );
         }
-
-        setTimeout(poll, 3000);
+      } else {
+        if (!isFormVisible) {
+          statusEl.textContent = "No new scans.";
+          statusEl.className = "scan-status text-gray-400 font-semibold";
+          formContainer.innerHTML = "";
+          formContainer.classList.add("hidden");
+        }
       }
-
-      poll();
+    } catch (err) {
+      console.error(`Polling failed for device [${device_uid}]:`, err);
+      statusEl.textContent = "Polling error.";
+      statusEl.className = "scan-status text-red-400 font-semibold";
     }
+
+    setTimeout(poll, 3000);
+  }
+
+  poll();
+}
+
 
     async function submitStudentForm(event, uid, form, onSuccess) {
       event.preventDefault();
