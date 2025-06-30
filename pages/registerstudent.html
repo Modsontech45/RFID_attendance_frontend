@@ -47,8 +47,6 @@
     </section>
   </main>
 
-  <script src="/js/menu.js"></script>
-  <script src="/js/signout.js"></script>
   <script>
     const api_key = getCookie('api_key');
     const toggleAddDeviceBtn = document.getElementById('toggleAddDeviceBtn');
@@ -133,9 +131,8 @@
               const data = await res.json();
               if (!Array.isArray(data)) return;
 
-              const scan = data.find(s => s.uid);
+              const scan = data[0];
               if (!scan) return;
-
               statusEl.textContent = `UID: ${scan.uid} | ${scan.message}`;
 
               if (!scan.exists) {
