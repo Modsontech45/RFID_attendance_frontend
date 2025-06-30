@@ -192,14 +192,14 @@ function pollDevice(device_uid, card) {
       const data = await res.json();
       console.log(`Polling [${device_uid}] response:`, data);
 
-      if (Array.isArray(data) && data.length) {
-        const scan = data[0];
-        statusEl.textContent = `UID: ${scan.uid} | ${scan.message}`;
+      // 🔄 UPDATED THIS CHECK
+      if (data && data.uid) {
+        statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
         statusEl.className = "scan-status text-blue-400 font-semibold";
 
-        if (!scan.exists) {
+        if (!data.exists) {
           formContainer.innerHTML = `
-            <form id="studentRegisterForm" class="bg-gray-700 p-4 rounded space-y-3">
+            <form id="studentRegisterForm-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3">
               <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
               <input type="text" name="name" placeholder="Name" class="input" required />
               <input type="email" name="email" placeholder="Email" class="input" required />
@@ -218,14 +218,13 @@ function pollDevice(device_uid, card) {
                 <option value="Other">Other</option>
               </select>
               <button type="submit" class="bg-green-600 hover:bg-green-700 py-2 rounded w-full text-white">Register</button>
-              <p id="formMessage" class="mt-2 text-sm"></p>
+              <p class="formMessage text-sm mt-2"></p>
             </form>
           `;
           formContainer.classList.remove("hidden");
 
-          // Attach event listener AFTER form insertion
-          const form = formContainer.querySelector("#studentRegisterForm");
-          form.addEventListener("submit", (event) => submitStudentForm(event, scan.uid, form));
+          const studentForm = formContainer.querySelector(`#studentRegisterForm-${device_uid}`);
+          studentForm.addEventListener("submit", (e) => submitStudentForm(e, data.uid, studentForm));
         } else {
           formContainer.innerHTML = "";
           formContainer.classList.add("hidden");
@@ -236,23 +235,24 @@ function pollDevice(device_uid, card) {
           statusEl.className = "scan-status text-yellow-400 font-semibold";
         }, 6000);
       } else {
-        statusEl.textContent = "No scans found.";
-        statusEl.className = "scan-status text-yellow-400 font-semibold";
+        // If no valid scan object returned
+        statusEl.textContent = "No new scans.";
+        statusEl.className = "scan-status text-gray-400 font-semibold";
         formContainer.innerHTML = "";
         formContainer.classList.add("hidden");
       }
     } catch (err) {
       console.error(`Polling failed for device [${device_uid}]:`, err);
-      statusEl.textContent = "Error fetching scan queue.";
-      statusEl.className = "scan-status text-red-500 font-semibold";
-      formContainer.innerHTML = "";
-      formContainer.classList.add("hidden");
+      statusEl.textContent = "Polling error.";
+      statusEl.className = "scan-status text-red-400 font-semibold";
     }
+
     setTimeout(poll, 3000);
   }
 
   poll();
 }
+
 
 async function submitStudentForm(event, uid, form) {
   event.preventDefault();
