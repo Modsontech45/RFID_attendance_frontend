@@ -120,19 +120,35 @@
         devices.forEach(device => {
           const card = document.createElement("div");
           card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
+          const lastSeen = new Date(device.last_seen + 'Z'); // Normalize to UTC
+          const now = new Date();
+          const diffMinutes = Math.floor((now - lastSeen) / 60000);
+          const isOnline = diffMinutes < 5;
+
+          const timeAgo = diffMinutes < 1 ? 'Just now' :
+            diffMinutes === 1 ? '1 minute ago' :
+              `${diffMinutes} minutes ago`;
+
           card.innerHTML = `
   <div class="flex justify-between items-start">
     <div>
-      <h3 class="text-xl font-bold mb-2 text-green-400">${device.device_name}</h3>
-      <p class="mb-2 text-sm text-gray-400">Device UID: <code>${device.device_uid}</code></p>
-      <p class="scan-status text-yellow-400 font-semibold">Waiting for scan...</p>
+      <h3 class="text-xl font-bold mb-1 text-green-400">${device.device_name}</h3>
+      <p class="text-sm text-gray-400">UID: <code>${device.device_uid}</code></p>
+      <p class="text-sm ${isOnline ? 'text-green-400' : 'text-red-400'} font-semibold mt-1">
+        Status: ${isOnline ? '🟢 Online' : '🔴 Offline'}
+      </p>
+      <p class="text-sm text-gray-500">
+        Last seen: ${timeAgo} (${lastSeen.toLocaleString()})
+      </p>
+      <p class="scan-status text-yellow-400 font-semibold mt-1">Waiting for scan...</p>
     </div>
     <button class="delete-device-btn bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" data-uid="${device.device_uid}">
-      Remove
+      Delete
     </button>
   </div>
   <div class="registration-form hidden mt-4"></div>
 `;
+
 
           devicesContainer.appendChild(card);
           const deleteBtn = card.querySelector(".delete-device-btn");
@@ -285,30 +301,30 @@
 
 
     async function deleteDevice(device_uid, cardElement) {
-  if (!confirm(`Are you sure you want to delete device: ${device_uid}?`)) return;
+      if (!confirm(`Are you sure you want to delete device: ${device_uid}?`)) return;
 
-  try {
-    const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices/${device_uid}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ api_key }),
-    });
+      try {
+        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices/${device_uid}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ api_key }),
+        });
 
-    const data = await res.json();
-    console.log("Delete device response:", data);
+        const data = await res.json();
+        console.log("Delete device response:", data);
 
-    if (res.ok) {
-      cardElement.remove();
-    } else {
-      alert(data.error || "Failed to delete device.");
+        if (res.ok) {
+          cardElement.remove();
+        } else {
+          alert(data.error || "Failed to delete device.");
+        }
+      } catch (err) {
+        console.error("Error deleting device:", err);
+        alert("Something went wrong while deleting the device.");
+      }
     }
-  } catch (err) {
-    console.error("Error deleting device:", err);
-    alert("Something went wrong while deleting the device.");
-  }
-}
 
 
     function getCookie(name) {
