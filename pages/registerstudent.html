@@ -10,34 +10,19 @@
 </head>
 
 <body class="bg-black text-white min-h-screen px-4">
-  <header
-    class="sticky top-0 w-full bg-black text-white flex items-center justify-between p-5 shadow-md border-b border-green-600 z-50"
-  >
+  <header class="sticky top-0 w-full bg-black text-white flex items-center justify-between p-5 shadow-md border-b border-green-600 z-50">
     <div class="flex items-center space-x-3">
-      <img
-        src="/assets/logo.jpg"
-        alt="Logo"
-        class="w-10 h-10 rounded-full border-2 border-white"
-      />
+      <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
       <span class="text-xl font-bold">Synctuario</span>
     </div>
     <button id="menuBtn" class="sm:hidden text-3xl">&#9776;</button>
-    <nav
-      id="navMenu"
-      class="flex max-sm:hidden sm:items-center gap-4 max-sm:fixed top-0 right-0 max-sm:w-2/4 max-sm:bg-black max-sm:flex-col max-sm:z-40"
-    >
-      <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400"
-        >Office</a
-      >
+    <nav id="navMenu" class="flex max-sm:hidden sm:items-center gap-4 max-sm:fixed top-0 right-0 max-sm:w-2/4 max-sm:bg-black max-sm:flex-col max-sm:z-40">
+      <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400">Office</a>
       <a href="/pages/registerstudent.html" class="text-green-400">Home</a>
       <a href="/pages/students.html" class="hover:text-green-400">Students</a>
       <a href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
       <a href="/pages/attendance.html" class="hover:text-green-400">Attendance</a>
-      <button
-        class="logoutBtn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-      >
-        Logout
-      </button>
+      <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Logout</button>
     </nav>
   </header>
 
@@ -45,38 +30,13 @@
     <section>
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-3xl font-bold text-green-400">Registered Devices</h2>
-        <button
-          id="toggleAddDeviceBtn"
-          class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-white font-semibold"
-        >
-          Add Device
-        </button>
+        <button id="toggleAddDeviceBtn" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-white font-semibold">Add Device</button>
       </div>
 
-      <form
-        id="registerDeviceForm"
-        class="hidden bg-gray-900 p-6 rounded-lg border border-green-600 mb-8 max-w-md space-y-4"
-      >
-        <input
-          type="text"
-          id="device_uid"
-          placeholder="Device UID"
-          required
-          class="input"
-        />
-        <input
-          type="text"
-          id="device_name"
-          placeholder="Device Name"
-          required
-          class="input"
-        />
-        <button
-          type="submit"
-          class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold"
-        >
-          Register Device
-        </button>
+      <form id="registerDeviceForm" class="hidden bg-gray-900 p-6 rounded-lg border border-green-600 mb-8 max-w-md space-y-4">
+        <input type="text" id="device_uid" placeholder="Device UID" required class="input" />
+        <input type="text" id="device_name" placeholder="Device Name" required class="input" />
+        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">Register Device</button>
         <p id="deviceFormMessage" class="text-sm mt-2"></p>
       </form>
 
@@ -102,7 +62,6 @@
       toggleAddDeviceBtn.textContent = isVisible ? "Add Device" : "Cancel";
       deviceFormMessage.textContent = "";
       registerDeviceForm.reset();
-      console.log(isVisible ? "Hid device form" : "Showing device form");
     });
 
     registerDeviceForm.addEventListener("submit", async (e) => {
@@ -111,17 +70,12 @@
       const device_name = document.getElementById("device_name").value.trim();
       if (!device_uid || !device_name) return;
 
-      console.log("Registering device:", { device_uid, device_name, api_key });
-
       try {
-        const res = await fetch(
-          "https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ device_uid, device_name, api_key }),
-          }
-        );
+        const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ device_uid, device_name, api_key }),
+        });
 
         const data = await res.json();
         console.log("Device registration response:", data);
@@ -142,28 +96,21 @@
     });
 
     async function fetchDevices() {
-      devicesContainer.innerHTML =
-        '<p class="text-gray-400 text-center">Loading devices...</p>';
-      console.log("Fetching devices...");
-
+      devicesContainer.innerHTML = '<p class="text-gray-400 text-center">Loading devices...</p>';
       try {
-        const res = await fetch(
-          `https://rfid-attendancesystem-backend-project.onrender.com/api/devices?api_key=${api_key}`
-        );
+        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices?api_key=${api_key}`);
         const devices = await res.json();
         console.log("Fetched devices:", devices);
 
         devicesContainer.innerHTML = "";
-        if (!Array.isArray(devices) || !devices.length) {
-          devicesContainer.innerHTML =
-            '<p class="text-gray-400 text-center">No devices registered yet.</p>';
+        if (!Array.isArray(devices) || devices.length === 0) {
+          devicesContainer.innerHTML = '<p class="text-gray-400 text-center">No devices registered yet.</p>';
           return;
         }
 
-        devices.forEach((device) => {
+        devices.forEach(device => {
           const card = document.createElement("div");
-          card.className =
-            "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
+          card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
           card.innerHTML = `
             <h3 class="text-xl font-bold mb-2 text-green-400">${device.device_name}</h3>
             <p class="mb-2 text-sm text-gray-400">Device UID: <code>${device.device_uid}</code></p>
@@ -175,133 +122,116 @@
         });
       } catch (err) {
         console.error("Failed to fetch devices:", err);
-        devicesContainer.innerHTML =
-          '<p class="text-red-500 text-center">Failed to load devices.</p>';
+        devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices.</p>';
       }
     }
-function pollDevice(device_uid, card) {
-  const statusEl = card.querySelector(".scan-status");
-  const formContainer = card.querySelector(".registration-form");
 
-  async function poll() {
-    try {
-      const res = await fetch(
-        `https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`
-      );
-      if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-      const data = await res.json();
-      console.log(`Polling [${device_uid}] response:`, data);
+    function pollDevice(device_uid, card) {
+      const statusEl = card.querySelector(".scan-status");
+      const formContainer = card.querySelector(".registration-form");
 
-      // 🔄 UPDATED THIS CHECK
-      if (data && data.uid) {
-        statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
-        statusEl.className = "scan-status text-blue-400 font-semibold";
+      async function poll() {
+        try {
+          const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`);
+          const data = await res.json();
+          console.log(`Polling [${device_uid}] response:`, data);
 
-        if (!data.exists) {
-          formContainer.innerHTML = `
-            <form id="studentRegisterForm-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3">
-              <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
-              <input type="text" name="name" placeholder="Name" class="input" required />
-              <input type="email" name="email" placeholder="Email" class="input" required />
-              <input type="tel" name="telephone" placeholder="Phone Number" class="input" required />
-              <select name="form" class="input" required>
-                <option value="" disabled selected>Select Form</option>
-                <option value="Form 1">Form 1</option>
-                <option value="Form 2">Form 2</option>
-                <option value="Form 3">Form 3</option>
-                <option value="Form 4">Form 4</option>
-              </select>
-              <select name="gender" class="input" required>
-                <option value="" disabled selected>Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-              <button type="submit" class="bg-green-600 hover:bg-green-700 py-2 rounded w-full text-white">Register</button>
-              <p class="formMessage text-sm mt-2"></p>
-            </form>
-          `;
-          formContainer.classList.remove("hidden");
+          if (data && data.uid) {
+            statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
+            statusEl.className = "scan-status text-blue-400 font-semibold";
 
-          const studentForm = formContainer.querySelector(`#studentRegisterForm-${device_uid}`);
-          studentForm.addEventListener("submit", (e) => submitStudentForm(e, data.uid, studentForm));
-        } else {
-          formContainer.innerHTML = "";
-          formContainer.classList.add("hidden");
+            if (!data.exists) {
+              formContainer.innerHTML = `
+                <form id="form-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3">
+                  <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
+                  <input type="text" name="name" placeholder="Name" class="input" required />
+                  <input type="email" name="email" placeholder="Email" class="input" required />
+                  <input type="tel" name="telephone" placeholder="Phone Number" class="input" required />
+                  <select name="form" class="input" required>
+                    <option value="" disabled selected>Select Form</option>
+                    <option value="Form 1">Form 1</option>
+                    <option value="Form 2">Form 2</option>
+                    <option value="Form 3">Form 3</option>
+                    <option value="Form 4">Form 4</option>
+                  </select>
+                  <select name="gender" class="input" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <button type="submit" class="bg-green-600 hover:bg-green-700 py-2 rounded w-full text-white">Register</button>
+                  <p class="formMessage text-sm mt-2"></p>
+                </form>
+              `;
+              formContainer.classList.remove("hidden");
+
+              const studentForm = formContainer.querySelector(`#form-${device_uid}`);
+              studentForm.addEventListener("submit", (e) => submitStudentForm(e, data.uid, studentForm));
+            } else {
+              formContainer.innerHTML = "";
+              formContainer.classList.add("hidden");
+            }
+
+            setTimeout(() => {
+              statusEl.textContent = "Waiting for scan...";
+              statusEl.className = "scan-status text-yellow-400 font-semibold";
+            }, 6000);
+          }
+        } catch (err) {
+          console.error(`Polling failed for device [${device_uid}]:`, err);
+          statusEl.textContent = "Polling error.";
+          statusEl.className = "scan-status text-red-400 font-semibold";
         }
 
-        setTimeout(() => {
-          statusEl.textContent = "Waiting for scan...";
-          statusEl.className = "scan-status text-yellow-400 font-semibold";
-        }, 6000);
-      } else {
-        // If no valid scan object returned
-        statusEl.textContent = "No new scans.";
-        statusEl.className = "scan-status text-gray-400 font-semibold";
-        formContainer.innerHTML = "";
-        formContainer.classList.add("hidden");
+        setTimeout(poll, 3000);
       }
-    } catch (err) {
-      console.error(`Polling failed for device [${device_uid}]:`, err);
-      statusEl.textContent = "Polling error.";
-      statusEl.className = "scan-status text-red-400 font-semibold";
+
+      poll();
     }
 
-    setTimeout(poll, 3000);
-  }
+    async function submitStudentForm(event, uid, form) {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const formMessage = form.querySelector(".formMessage");
 
-  poll();
-}
+      const data = {
+        uid,
+        name: formData.get("name"),
+        email: formData.get("email"),
+        telephone: formData.get("telephone"),
+        form: formData.get("form"),
+        gender: formData.get("gender"),
+        student_id: Math.random().toString(36).substring(2, 10),
+        api_key,
+      };
 
+      console.log("Submitting student form:", data);
 
-async function submitStudentForm(event, uid, form) {
-  event.preventDefault();
-  const formData = new FormData(form);
-  const formMessage = form.querySelector("#formMessage");
+      try {
+        const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
 
-  const data = {
-    uid,
-    name: formData.get("name"),
-    email: formData.get("email"),
-    telephone: formData.get("telephone"),
-    form: formData.get("form"),
-    gender: formData.get("gender"),
-    student_id: Math.random().toString(36).substring(2, 10),
-    api_key,
-  };
+        const result = await res.json();
+        console.log("Student registration response:", result);
 
-  console.log("Submitting student form:", data);
-
-  try {
-    const res = await fetch(
-      "https://rfid-attendancesystem-backend-project.onrender.com/api/register",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        if (res.ok) {
+          formMessage.textContent = result.message || "Registration successful!";
+          formMessage.className = "formMessage text-green-400 mt-2";
+          setTimeout(() => form.remove(), 2000);
+        } else {
+          formMessage.textContent = result.error || "Registration failed.";
+          formMessage.className = "formMessage text-red-400 mt-2";
+        }
+      } catch (err) {
+        console.error("Student registration error:", err);
+        formMessage.textContent = "Registration error. Please try again.";
+        formMessage.className = "formMessage text-red-400 mt-2";
       }
-    );
-
-    const result = await res.json();
-    console.log("Student registration response:", result);
-
-    if (res.ok) {
-      formMessage.textContent = result.message || "Registration successful!";
-      formMessage.className = "text-green-400 mt-2";
-      // Optionally remove form after a delay
-      setTimeout(() => form.remove(), 2000);
-    } else {
-      formMessage.textContent = result.error || "Registration failed.";
-      formMessage.className = "text-red-400 mt-2";
     }
-  } catch (err) {
-    console.error("Student registration error:", err);
-    formMessage.textContent = "Registration error. Please try again.";
-    formMessage.className = "text-red-400 mt-2";
-  }
-}
-
-
 
     function getCookie(name) {
       const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
