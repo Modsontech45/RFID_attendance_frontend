@@ -7,13 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="/css/output.css" rel="stylesheet" />
   <script src="/users/frontend.js"></script>
-  <!-- <script src="/js/language.js" defer></script> -->
   <script src="/js/cookies.js"></script>
 </head>
 
 <body class="bg-black text-white min-h-screen px-4">
-  <header
-    class="sticky top-0 left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50">
+  <header class="sticky top-0 left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50">
     <div class="flex items-center space-x-3">
       <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
       <span class="text-xl font-bold">Synctuario</span>
@@ -21,180 +19,174 @@
 
     <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">&#9776;</button>
 
-    <nav id="navMenu"
-      class="flex max-sm:hidden sm:items-center gap-4 transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40 max-sm:flex-col">
-      <a data-i18n="student.navbar.office" href="/pages/users/admin/adminlandingpage.html"
-        class="hover:text-green-400 font-medium">Office</a>
-      <a data-i18n="student.navbar.home" href="/pages/registerstudent.html" class="text-green-400 font-medium">Home</a>
-      <a data-i18n="student.navbar.students" href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
-      <a data-i18n="student.navbar.dashboard" href="/pages/dashboard.html" class="hover:underline font-medium">Dashboard</a>
-      <a data-i18n="student.navbar.attendance" href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
-      <button
-        data-i18n="student.navbar.logout"
-        class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">
-        Logout
-      </button>
+    <nav id="navMenu" class="flex max-sm:hidden sm:items-center gap-4 transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40 max-sm:flex-col">
+      <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
+      <a href="/pages/registerstudent.html" class="text-green-400 font-medium">Home</a>
+      <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
+      <a href="/pages/dashboard.html" class="hover:underline font-medium">Dashboard</a>
+      <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
+      <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">Logout</button>
     </nav>
   </header>
 
   <main class="mt-10 max-w-4xl mx-auto space-y-12">
-
-    <!-- Registered Devices & Pending Scans Section -->
     <section>
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-3xl font-bold text-green-400">Registered Devices</h2>
-        <button id="toggleAddDeviceBtn"
-          class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-semibold text-white">Add Device</button>
+        <button id="toggleAddDeviceBtn" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-semibold text-white">Add Device</button>
       </div>
 
-      <!-- Hidden Device Registration Form (toggle visibility on button click) -->
-      <form id="registerDeviceForm"
-        class="hidden bg-gray-900 p-6 rounded-lg shadow border border-green-600 mb-8 max-w-md space-y-4">
-        <input type="text" id="device_uid" placeholder="Device UID (e.g. MAC address)" required
-          class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
-        <input type="text" id="device_name" placeholder="Device Name (e.g. Classroom A)" required
-          class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
-        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">
-          Register Device
-        </button>
+      <form id="registerDeviceForm" class="hidden bg-gray-900 p-6 rounded-lg shadow border border-green-600 mb-8 max-w-md space-y-4">
+        <input type="text" id="device_uid" placeholder="Device UID (e.g. MAC address)" required class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
+        <input type="text" id="device_name" placeholder="Device Name (e.g. Classroom A)" required class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
+        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">Register Device</button>
         <p id="deviceFormMessage" class="text-sm mt-2"></p>
       </form>
 
-      <!-- Devices container -->
-      <div id="devicesContainer" class="space-y-8">
-        <!-- Device cards + pending scans get injected here -->
-      </div>
+      <div id="devicesContainer" class="space-y-8"></div>
     </section>
-
   </main>
 
   <script src="/js/menu.js"></script>
-  <!-- <script src="/js/registerstudent.js"></script> -->
   <script src="/js/signout.js"></script>
-
   <script>
-   const api_key = getCookie('api_key');
-const toggleAddDeviceBtn = document.getElementById('toggleAddDeviceBtn');
-const registerDeviceForm = document.getElementById('registerDeviceForm');
-const deviceFormMessage = document.getElementById('deviceFormMessage');
-const devicesContainer = document.getElementById('devicesContainer');
+    const api_key = getCookie('api_key');
+    const toggleAddDeviceBtn = document.getElementById('toggleAddDeviceBtn');
+    const registerDeviceForm = document.getElementById('registerDeviceForm');
+    const deviceFormMessage = document.getElementById('deviceFormMessage');
+    const devicesContainer = document.getElementById('devicesContainer');
 
-// Toggle Device Form Visibility
-toggleAddDeviceBtn.addEventListener('click', () => {
-  const visible = !registerDeviceForm.classList.contains('hidden');
-  registerDeviceForm.classList.toggle('hidden', visible);
-  toggleAddDeviceBtn.textContent = visible ? 'Add Device' : 'Cancel';
-  deviceFormMessage.textContent = '';
-  registerDeviceForm.reset();
-});
-
-// Submit Device Registration
-registerDeviceForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const device_uid = document.getElementById('device_uid').value.trim();
-  const device_name = document.getElementById('device_name').value.trim();
-
-  if (!device_uid || !device_name) return;
-
-  try {
-    const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ device_uid, device_name, api_key })
+    toggleAddDeviceBtn.addEventListener('click', () => {
+      const isVisible = !registerDeviceForm.classList.contains('hidden');
+      registerDeviceForm.classList.toggle('hidden', isVisible);
+      toggleAddDeviceBtn.textContent = isVisible ? 'Add Device' : 'Cancel';
+      deviceFormMessage.textContent = '';
+      registerDeviceForm.reset();
     });
 
-    const data = await res.json();
+    registerDeviceForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const device_uid = document.getElementById('device_uid').value.trim();
+      const device_name = document.getElementById('device_name').value.trim();
+      if (!device_uid || !device_name) return;
 
-    deviceFormMessage.textContent = data.message || data.error || 'Unknown error';
-    deviceFormMessage.className = res.ok ? 'text-green-400' : 'text-red-400';
-
-    if (res.ok) {
-      registerDeviceForm.classList.add('hidden');
-      toggleAddDeviceBtn.textContent = 'Add Device';
-      fetchDevices();
-    }
-  } catch (err) {
-    deviceFormMessage.textContent = 'Error registering device.';
-    deviceFormMessage.className = 'text-red-400';
-  }
-});
-
-// Fetch Devices and Scans
-async function fetchDevices() {
-  devicesContainer.innerHTML = '<p class="text-gray-400 text-center">Loading devices...</p>';
-  try {
-    const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices?api_key=${api_key}`);
-    const devices = await res.json();
-
-    const scansRes = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/pending-scans?api_key=${api_key}`);
-    const scans = await scansRes.json();
-
-    devicesContainer.innerHTML = '';
-    if (!devices.length) {
-      devicesContainer.innerHTML = '<p class="text-gray-400 text-center">No devices registered yet.</p>';
-      return;
-    }
-
-    devices.forEach(device => {
-      const deviceScans = scans.filter(s => s.device_uid === device.device_uid);
-
-      const card = document.createElement('div');
-      card.className = 'bg-gray-800 p-6 rounded-lg border border-green-600 shadow';
-      card.innerHTML = `
-        <h3 class="text-xl font-bold mb-2 text-green-400">${device.device_name}</h3>
-        <p class="mb-4 text-sm text-gray-400">Device UID: <code>${device.device_uid}</code></p>
-        <div class="pending-scans-container"></div>
-      `;
-
-      const scansContainer = card.querySelector('.pending-scans-container');
-      if (deviceScans.length) {
-        const waitingText = document.createElement('p');
-        waitingText.className = 'mb-3 text-yellow-400 font-semibold';
-        waitingText.textContent = 'Waiting for scan...';
-        scansContainer.appendChild(waitingText);
-
-        deviceScans.forEach(scan => {
-          const scanDiv = document.createElement('div');
-          scanDiv.className = 'bg-gray-700 p-3 rounded mb-3 flex justify-between items-center';
-          scanDiv.innerHTML = `
-            <div>
-              <p><strong>UID:</strong> ${scan.uid}</p>
-              <p><strong>Scanned At:</strong> ${new Date(scan.scanned_at).toLocaleString()}</p>
-            </div>
-            <button data-uid="${scan.uid}" data-deviceuid="${device.device_uid}"
-              class="register-scan-btn bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white font-semibold">
-              Register Student
-            </button>
-          `;
-          scansContainer.appendChild(scanDiv);
+      try {
+        const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ device_uid, device_name, api_key })
         });
 
-        scansContainer.querySelectorAll('.register-scan-btn').forEach(button => {
-          button.addEventListener('click', () => {
-            openRegistrationModal(button.dataset.uid, button.dataset.deviceuid, scansContainer);
-          });
-        });
+        const data = await res.json();
+        deviceFormMessage.textContent = data.message || data.error || 'Unknown error';
+        deviceFormMessage.className = res.ok ? 'text-green-400' : 'text-red-400';
 
-      } else {
-        scansContainer.innerHTML = '<p class="text-gray-500 italic">No pending scans for this device.</p>';
+        if (res.ok) {
+          registerDeviceForm.classList.add('hidden');
+          toggleAddDeviceBtn.textContent = 'Add Device';
+          fetchDevices();
+        }
+      } catch (err) {
+        deviceFormMessage.textContent = 'Error registering device.';
+        deviceFormMessage.className = 'text-red-400';
       }
-
-      devicesContainer.appendChild(card);
     });
 
-  } catch (err) {
-    devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices or scans.</p>';
-    console.error(err);
-  }
-}
+    async function fetchDevices() {
+      devicesContainer.innerHTML = '<p class="text-gray-400 text-center">Loading devices...</p>';
+      try {
+        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices?api_key=${api_key}`);
+        const devices = await res.json();
 
-function getCookie(name) {
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? decodeURIComponent(match[2]) : null;
-}
+        devicesContainer.innerHTML = '';
+        if (!Array.isArray(devices) || !devices.length) {
+          devicesContainer.innerHTML = '<p class="text-gray-400 text-center">No devices registered yet.</p>';
+          return;
+        }
 
-fetchDevices();
+        devices.forEach(device => {
+          const card = document.createElement('div');
+          card.className = 'bg-gray-800 p-6 rounded-lg border border-green-600 shadow';
+          card.innerHTML = `
+            <h3 class="text-xl font-bold mb-2 text-green-400">${device.device_name}</h3>
+            <p class="mb-2 text-sm text-gray-400">Device UID: <code>${device.device_uid}</code></p>
+            <div class="status text-yellow-400 font-semibold mb-2">Waiting for scan...</div>
+            <form class="student-form hidden space-y-4">
+              <input type="text" name="name" placeholder="Name" required class="w-full px-4 py-2 rounded bg-gray-900 border border-green-500 placeholder-white" />
+              <input type="text" name="uid" readonly class="w-full px-4 py-2 rounded bg-gray-900 border border-green-500 placeholder-white" />
+              <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 rounded bg-gray-900 border border-green-500 placeholder-white" />
+              <input type="tel" name="telephone" placeholder="Phone Number" required class="w-full px-4 py-2 rounded bg-gray-900 border border-green-500 placeholder-white" />
+              <input type="text" name="form" placeholder="Form" required class="w-full px-4 py-2 rounded bg-gray-900 border border-green-500 placeholder-white" />
+              <input type="text" name="gender" placeholder="Gender" required class="w-full px-4 py-2 rounded bg-gray-900 border border-green-500 placeholder-white" />
+              <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded shadow">Register</button>
+            </form>
+          `;
 
+          const statusEl = card.querySelector('.status');
+          const formEl = card.querySelector('.student-form');
+
+          devicesContainer.appendChild(card);
+
+          async function poll() {
+            try {
+              const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device.device_uid}`);
+              const data = await res.json();
+              if (!Array.isArray(data)) return;
+
+              const scan = data.find(s => s.uid);
+              if (!scan) return;
+
+              statusEl.textContent = `UID: ${scan.uid} | ${scan.message}`;
+
+              if (!scan.exists) {
+                formEl.classList.remove('hidden');
+                formEl.uid.value = scan.uid;
+              } else {
+                formEl.classList.add('hidden');
+              }
+            } catch (err) {
+              console.error(`Polling error for ${device.device_uid}:`, err);
+            }
+            setTimeout(poll, 3000);
+          }
+
+          formEl.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(formEl);
+            const student = Object.fromEntries(formData.entries());
+            student.student_id = Math.random().toString(36).substring(2, 10);
+            student.api_key = api_key;
+
+            try {
+              const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(student)
+              });
+
+              const result = await res.json();
+              statusEl.textContent = result.message || 'Registered';
+              formEl.reset();
+              formEl.classList.add('hidden');
+            } catch (err) {
+              statusEl.textContent = 'Registration error';
+              console.error(err);
+            }
+          });
+
+          poll();
+        });
+      } catch (err) {
+        devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices or scans.</p>';
+      }
+    }
+
+    function getCookie(name) {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? decodeURIComponent(match[2]) : null;
+    }
+
+    fetchDevices();
   </script>
 </body>
 
