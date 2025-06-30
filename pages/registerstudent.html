@@ -132,49 +132,48 @@
           const card = document.createElement("div");
           card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
 
-          let lastSeenText = "Unknown";
+          const lastSeenRaw = device.last_seen;
+          console.log("🔁 Raw last_seen from backend:", lastSeenRaw);
+
+          const lastSeen = lastSeenRaw ? new Date(lastSeenRaw) : null;
+          const now = new Date();
+
+          let diffMinutes = null;
+          let timeAgo = "N/A";
           let isOnline = false;
 
-          if (device.last_seen) {
-            const lastSeen = new Date(device.last_seen + 'Z'); // Normalize to UTC
-            if (!isNaN(lastSeen)) {
-              const now = new Date();
-              const diffMinutes = Math.floor((now - lastSeen) / 60000);
-              isOnline = diffMinutes < 5;
-
-              const timeAgo = diffMinutes < 1
-                ? 'Just now'
-                : diffMinutes === 1
-                  ? '1 minute ago'
-                  : `${diffMinutes} minutes ago`;
-
-              lastSeenText = `${timeAgo} (${lastSeen.toLocaleString()})`;
-            } else {
-              console.warn("Invalid last_seen date for device:", device.device_uid, device.last_seen);
-            }
+          if (lastSeen instanceof Date && !isNaN(lastSeen)) {
+            diffMinutes = Math.floor((now - lastSeen) / 60000);
+            timeAgo = diffMinutes < 1
+              ? "Just now"
+              : diffMinutes === 1
+                ? "1 minute ago"
+                : `${diffMinutes} minutes ago`;
+            isOnline = diffMinutes < 5;
           } else {
-            console.warn("Missing last_seen for device:", device.device_uid);
+            console.warn("⚠️ Invalid last_seen date:", lastSeenRaw);
           }
 
           card.innerHTML = `
-<div class="flex justify-between items-start">
-  <div>
-    <h3 class="text-xl font-bold mb-1 text-green-400">${device.device_name}</h3>
-    <p class="text-sm text-gray-400">UID: <code>${device.device_uid}</code></p>
-    <p class="text-sm ${isOnline ? 'text-green-400' : 'text-red-400'} font-semibold mt-1">
-      Status: ${isOnline ? '🟢 Online' : '🔴 Offline'}
-    </p>
-    <p class="text-sm text-gray-500">
-      Last seen: ${lastSeenText}
-    </p>
-    <p class="scan-status text-yellow-400 font-semibold mt-1">Waiting for scan...</p>
+  <div class="flex justify-between items-start">
+    <div>
+      <h3 class="text-xl font-bold mb-1 text-green-400">${device.device_name}</h3>
+      <p class="text-sm text-gray-400">UID: <code>${device.device_uid}</code></p>
+      <p class="text-sm ${isOnline ? 'text-green-400' : 'text-red-400'} font-semibold mt-1">
+        Status: ${isOnline ? '🟢 Online' : '🔴 Offline'}
+      </p>
+      <p class="text-sm text-gray-500">
+        Last seen: ${timeAgo} (${lastSeen ? lastSeen.toLocaleString() : 'Unknown'})
+      </p>
+      <p class="scan-status text-yellow-400 font-semibold mt-1">Waiting for scan...</p>
+    </div>
+    <button class="delete-device-btn bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" data-uid="${device.device_uid}">
+      Delete
+    </button>
   </div>
-  <button class="delete-device-btn bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" data-uid="${device.device_uid}">
-    Delete
-  </button>
-</div>
-<div class="registration-form hidden mt-4"></div>
+  <div class="registration-form hidden mt-4"></div>
 `;
+
 
 
           devicesContainer.appendChild(card);
