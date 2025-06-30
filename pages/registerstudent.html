@@ -48,9 +48,7 @@
   <script src="/js/signout.js"></script>
 
   <script>
-
-
-    let pollingflag = true;
+    
     const api_key = getCookie("api_key");
     console.log("Loaded API Key:", api_key);
 
@@ -149,7 +147,6 @@ function pollDevice(device_uid, card) {
         statusEl.className = "scan-status text-blue-400 font-semibold";
 
         if (!data.exists) {
-          pollingflag = false;
           formContainer.innerHTML = `
             <form id="form-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3">
               <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
@@ -180,7 +177,6 @@ function pollDevice(device_uid, card) {
             submitStudentForm(e, data.uid, studentForm)
           );
         } else {
-           pollingflag = true;
           formContainer.innerHTML = "";
           formContainer.classList.add("hidden");
         }
@@ -204,13 +200,8 @@ function pollDevice(device_uid, card) {
 
     setTimeout(poll, 3000); // Keep polling
   }
-   if (pollingflag){
-     poll();
 
-   } else{
-    console.log("Let's register a student first");
-   }
-
+  poll();
 }
 
 
@@ -245,14 +236,12 @@ function pollDevice(device_uid, card) {
         if (res.ok) {
           formMessage.textContent = result.message || "Registration successful!";
           formMessage.className = "formMessage text-green-400 mt-2";
-           pollingflag = true;
           setTimeout(() => form.remove(), 2000);
         } else {
           formMessage.textContent = result.error || "Registration failed.";
           formMessage.className = "formMessage text-red-400 mt-2";
         }
       } catch (err) {
-         pollingflag = true;
         console.error("Student registration error:", err);
         formMessage.textContent = "Registration error. Please try again.";
         formMessage.className = "formMessage text-red-400 mt-2";
