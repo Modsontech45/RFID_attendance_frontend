@@ -48,6 +48,8 @@
   <script src="/js/signout.js"></script>
 
   <script>
+
+
     
     const api_key = getCookie("api_key");
     console.log("Loaded API Key:", api_key);
@@ -131,6 +133,8 @@ function pollDevice(device_uid, card) {
   const statusEl = card.querySelector(".scan-status");
   const formContainer = card.querySelector(".registration-form");
 
+  let intervalId = null;
+
   async function poll() {
     try {
       const res = await fetch(
@@ -143,6 +147,8 @@ function pollDevice(device_uid, card) {
       console.log(`✅ Polling [${device_uid}] response:`, response);
 
       if (data && data.uid) {
+        clearInterval(intervalId); // Pause polling for this device
+
         statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
         statusEl.className = "scan-status text-blue-400 font-semibold";
 
@@ -173,36 +179,48 @@ function pollDevice(device_uid, card) {
           formContainer.classList.remove("hidden");
 
           const studentForm = formContainer.querySelector(`#form-${device_uid}`);
-          studentForm.addEventListener("submit", (e) =>
-            submitStudentForm(e, data.uid, studentForm)
-          );
+          studentForm.addEventListener("submit", async (e) => {
+            await submitStudentForm(e, data.uid, studentForm);
+            formContainer.classList.add("hidden");
+
+            // Resume polling after registration
+            setTimeout(() => {
+              statusEl.textContent = "Waiting for scan...";
+              statusEl.className = "scan-status text-yellow-400 font-semibold";
+              intervalId = setInterval(poll, 2000);
+            }, 2000);
+          });
         } else {
+          // No registration needed
           formContainer.innerHTML = "";
           formContainer.classList.add("hidden");
+
+          setTimeout(() => {
+            statusEl.textContent = "Waiting for scan...";
+            statusEl.className = "scan-status text-yellow-400 font-semibold";
+            intervalId = setInterval(poll, 2000);
+          }, 2000);
         }
 
-        setTimeout(() => {
-          statusEl.textContent = "Waiting for scan...";
-          statusEl.className = "scan-status text-yellow-400 font-semibold";
-        }, 6000);
       } else {
-        // If no scan was returned
+        // No UID found
         statusEl.textContent = "No new scans.";
         statusEl.className = "scan-status text-gray-400 font-semibold";
         formContainer.innerHTML = "";
         formContainer.classList.add("hidden");
       }
+
     } catch (err) {
       console.error(`❌ Polling failed for device [${device_uid}]:`, err);
       statusEl.textContent = "Polling error.";
       statusEl.className = "scan-status text-red-400 font-semibold";
     }
-
-    setTimeout(poll, 3000); // Keep polling
   }
 
-  poll();
+  // Start polling
+  intervalId = setInterval(poll, 2000);
 }
+
 
 
     async function submitStudentForm(event, uid, form) {
