@@ -54,6 +54,7 @@
   <script src="/js/signout.js"></script>
 
   <script>
+    let fetchDevicesIntervalId = null;
     const api_key = getCookie("api_key");
     console.log("Loaded API Key:", api_key);
 
@@ -195,6 +196,23 @@
         devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices.</p>';
       }
     }
+
+
+
+
+function startFetchDevicesAutoRefresh(delay = 1000) {
+  // Clear any existing interval to avoid duplicates
+  clearInterval(fetchDevicesIntervalId);
+  // Immediately fetch devices once before starting the interval
+  fetchDevices();
+  // Set interval to repeatedly fetch devices every `delay` milliseconds
+  fetchDevicesIntervalId = setInterval(fetchDevices, delay);
+}
+
+function stopFetchDevicesAutoRefresh() {
+  clearInterval(fetchDevicesIntervalId);
+}
+
 
     function pollDevice(device_uid, card) {
       console.log(`Starting poll for device UID: ${device_uid}`);
