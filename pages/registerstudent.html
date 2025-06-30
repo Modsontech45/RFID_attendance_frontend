@@ -204,9 +204,7 @@
         devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices.</p>';
       }
     }
-
-    // Update only the status and last seen timestamps of devices in the DOM
-   function updateDeviceStatus(device) {
+function updateDeviceStatus(device) {
   const lastSeenRaw = device.last_seen;
   const lastSeen = lastSeenRaw ? new Date(lastSeenRaw) : null;
   const now = new Date();
@@ -225,14 +223,14 @@
         ? "1 minute ago"
         : `${Math.floor(diffSeconds / 60)} minutes ago`;
 
-  const isOnline = diffSeconds < 180; // 3 minutes threshold
+  const isOnline = diffSeconds < 10;
 
   const statusTextEl = document.getElementById(`status-text-${device.device_uid}`);
   const lastSeenEl = document.getElementById(`lastseen-${device.device_uid}`);
 
   if (statusTextEl) {
-    statusTextEl.textContent = isOnline ? "🟢 Online" : "🔴 Offline";
-    statusTextEl.className = isOnline ? "text-green-400" : "text-red-400";
+    statusTextEl.textContent = isOnline ? '🟢 Online' : '🔴 Offline';
+    statusTextEl.className = isOnline ? 'text-green-400' : 'text-red-400';
   }
 
   if (lastSeenEl) {
@@ -442,13 +440,13 @@
     // Initial fetch and set intervals for refresh and updates
     fetchDevices().then(() => {
       // Update status display every 10 seconds
-      setInterval(autoUpdateDeviceStatuses, 10000);
+      setInterval(autoUpdateDeviceStatuses, 2000);
 
       // Full device data refresh every 5 minutes
       setInterval(() => {
         console.log("Periodic full devices data refresh...");
         fetchDevices();
-      }, 300000);
+      }, 3000);
     });
 
     console.log("Initial fetchDevices() called");
