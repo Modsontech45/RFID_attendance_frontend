@@ -54,94 +54,109 @@
   <script src="/js/signout.js"></script>
 
   <script>
-const api_key = getCookie("api_key");
-console.log("Loaded API Key:", api_key);
+    const api_key = getCookie("api_key");
+    console.log("Loaded API Key:", api_key);
 
-const toggleAddDeviceBtn = document.getElementById("toggleAddDeviceBtn");
-const registerDeviceForm = document.getElementById("registerDeviceForm");
-const deviceFormMessage = document.getElementById("deviceFormMessage");
-const devicesContainer = document.getElementById("devicesContainer");
+    const toggleAddDeviceBtn = document.getElementById("toggleAddDeviceBtn");
+    const registerDeviceForm = document.getElementById("registerDeviceForm");
+    const deviceFormMessage = document.getElementById("deviceFormMessage");
+    const devicesContainer = document.getElementById("devicesContainer");
 
-toggleAddDeviceBtn.addEventListener("click", () => {
-  const isVisible = !registerDeviceForm.classList.contains("hidden");
-  console.log(`Toggle Add Device Form - currently visible: ${isVisible}`);
-  registerDeviceForm.classList.toggle("hidden", isVisible);
-  toggleAddDeviceBtn.textContent = isVisible ? "Add Device" : "Cancel";
-  deviceFormMessage.textContent = "";
-  registerDeviceForm.reset();
-});
-
-registerDeviceForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const device_uid = document.getElementById("device_uid").value.trim();
-  const device_name = document.getElementById("device_name").value.trim();
-  console.log("Register Device Form Submitted:", { device_uid, device_name });
-
-  if (!device_uid || !device_name) {
-    console.warn("Device UID or Name missing, aborting registration.");
-    return;
-  }
-
-  try {
-    const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ device_uid, device_name, api_key }),
+    toggleAddDeviceBtn.addEventListener("click", () => {
+      const isVisible = !registerDeviceForm.classList.contains("hidden");
+      console.log(`Toggle Add Device Form - currently visible: ${isVisible}`);
+      registerDeviceForm.classList.toggle("hidden", isVisible);
+      toggleAddDeviceBtn.textContent = isVisible ? "Add Device" : "Cancel";
+      deviceFormMessage.textContent = "";
+      registerDeviceForm.reset();
     });
-    console.log("Device registration HTTP status:", res.status);
 
-    const data = await res.json();
-    console.log("Device registration response data:", data);
+    registerDeviceForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const device_uid = document.getElementById("device_uid").value.trim();
+      const device_name = document.getElementById("device_name").value.trim();
+      console.log("Register Device Form Submitted:", { device_uid, device_name });
 
-    deviceFormMessage.textContent = data.message || data.error || "Unknown error";
-    deviceFormMessage.className = res.ok ? "text-green-400" : "text-red-400";
+      if (!device_uid || !device_name) {
+        console.warn("Device UID or Name missing, aborting registration.");
+        return;
+      }
 
-    if (res.ok) {
-      console.log("Device registered successfully, hiding form and refreshing device list.");
-      registerDeviceForm.classList.add("hidden");
-      toggleAddDeviceBtn.textContent = "Add Device";
-      fetchDevices();
-    }
-  } catch (err) {
-    console.error("Error registering device:", err);
-    deviceFormMessage.textContent = "Error registering device.";
-    deviceFormMessage.className = "text-red-400";
-  }
-});
+      try {
+        const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ device_uid, device_name, api_key }),
+        });
+        console.log("Device registration HTTP status:", res.status);
 
-async function fetchDevices() {
-  console.log("Fetching devices list...");
-  devicesContainer.innerHTML = '<p class="text-gray-400 text-center">Loading devices...</p>';
+        const data = await res.json();
+        console.log("Device registration response data:", data);
 
-  try {
-    const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices?api_key=${api_key}`);
-    console.log("Fetch devices HTTP status:", res.status);
+        deviceFormMessage.textContent = data.message || data.error || "Unknown error";
+        deviceFormMessage.className = res.ok ? "text-green-400" : "text-red-400";
 
-    const devices = await res.json();
-    console.log("Fetched devices data:", devices);
+        if (res.ok) {
+          console.log("Device registered successfully, hiding form and refreshing device list.");
+          registerDeviceForm.classList.add("hidden");
+          toggleAddDeviceBtn.textContent = "Add Device";
+          fetchDevices();
+        }
+      } catch (err) {
+        console.error("Error registering device:", err);
+        deviceFormMessage.textContent = "Error registering device.";
+        deviceFormMessage.className = "text-red-400";
+      }
+    });
 
-    devicesContainer.innerHTML = "";
-    if (!Array.isArray(devices) || devices.length === 0) {
-      console.log("No devices found.");
-      devicesContainer.innerHTML = '<p class="text-gray-400 text-center">No devices registered yet.</p>';
-      return;
-    }
+    async function fetchDevices() {
+      console.log("Fetching devices list...");
+      devicesContainer.innerHTML = '<p class="text-gray-400 text-center">Loading devices...</p>';
 
-    devices.forEach(device => {
-      console.log("Rendering device:", device.device_uid);
-      const card = document.createElement("div");
-      card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
+      try {
+        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices?api_key=${api_key}`);
+        console.log("Fetch devices HTTP status:", res.status);
 
-      const lastSeen = new Date(device.last_seen + 'Z'); // Normalize to UTC
-      const now = new Date();
-      const diffMinutes = Math.floor((now - lastSeen) / 60000);
-      const isOnline = diffMinutes < 5;
+        const devices = await res.json();
+        console.log("Fetched devices data:", devices);
 
-      const timeAgo = diffMinutes < 1 ? 'Just now' :
-        diffMinutes === 1 ? '1 minute ago' :
-          `${diffMinutes} minutes ago`;
+        devicesContainer.innerHTML = "";
+        if (!Array.isArray(devices) || devices.length === 0) {
+          console.log("No devices found.");
+          devicesContainer.innerHTML = '<p class="text-gray-400 text-center">No devices registered yet.</p>';
+          return;
+        }
 
-      card.innerHTML = `
+        devices.forEach(device => {
+          console.log("Rendering device:", device.device_uid);
+          const card = document.createElement("div");
+          card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
+
+          let lastSeenText = "Unknown";
+          let isOnline = false;
+
+          if (device.last_seen) {
+            const lastSeen = new Date(device.last_seen + 'Z'); // Normalize to UTC
+            if (!isNaN(lastSeen)) {
+              const now = new Date();
+              const diffMinutes = Math.floor((now - lastSeen) / 60000);
+              isOnline = diffMinutes < 5;
+
+              const timeAgo = diffMinutes < 1
+                ? 'Just now'
+                : diffMinutes === 1
+                  ? '1 minute ago'
+                  : `${diffMinutes} minutes ago`;
+
+              lastSeenText = `${timeAgo} (${lastSeen.toLocaleString()})`;
+            } else {
+              console.warn("Invalid last_seen date for device:", device.device_uid, device.last_seen);
+            }
+          } else {
+            console.warn("Missing last_seen for device:", device.device_uid);
+          }
+
+          card.innerHTML = `
 <div class="flex justify-between items-start">
   <div>
     <h3 class="text-xl font-bold mb-1 text-green-400">${device.device_name}</h3>
@@ -150,7 +165,7 @@ async function fetchDevices() {
       Status: ${isOnline ? '🟢 Online' : '🔴 Offline'}
     </p>
     <p class="text-sm text-gray-500">
-      Last seen: ${timeAgo} (${lastSeen.toLocaleString()})
+      Last seen: ${lastSeenText}
     </p>
     <p class="scan-status text-yellow-400 font-semibold mt-1">Waiting for scan...</p>
   </div>
@@ -161,52 +176,53 @@ async function fetchDevices() {
 <div class="registration-form hidden mt-4"></div>
 `;
 
-      devicesContainer.appendChild(card);
 
-      const deleteBtn = card.querySelector(".delete-device-btn");
-      deleteBtn.addEventListener("click", () => {
-        console.log(`Delete button clicked for device UID: ${device.device_uid}`);
-        deleteDevice(device.device_uid, card);
-      });
+          devicesContainer.appendChild(card);
 
-      pollDevice(device.device_uid, card);
-    });
-  } catch (err) {
-    console.error("Failed to fetch devices:", err);
-    devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices.</p>';
-  }
-}
+          const deleteBtn = card.querySelector(".delete-device-btn");
+          deleteBtn.addEventListener("click", () => {
+            console.log(`Delete button clicked for device UID: ${device.device_uid}`);
+            deleteDevice(device.device_uid, card);
+          });
 
-function pollDevice(device_uid, card) {
-  console.log(`Starting poll for device UID: ${device_uid}`);
+          pollDevice(device.device_uid, card);
+        });
+      } catch (err) {
+        console.error("Failed to fetch devices:", err);
+        devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices.</p>';
+      }
+    }
 
-  const statusEl = card.querySelector(".scan-status");
-  const formContainer = card.querySelector(".registration-form");
+    function pollDevice(device_uid, card) {
+      console.log(`Starting poll for device UID: ${device_uid}`);
 
-  let intervalId = null;
+      const statusEl = card.querySelector(".scan-status");
+      const formContainer = card.querySelector(".registration-form");
 
-  async function poll() {
-    try {
-      console.log(`Polling device UID: ${device_uid}`);
-      const res = await fetch(
-        `https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`
-      );
+      let intervalId = null;
 
-      console.log(`Polling HTTP status for device [${device_uid}]:`, res.status);
-      const response = await res.json();
-      const data = Array.isArray(response) ? response[0] : null;
+      async function poll() {
+        try {
+          console.log(`Polling device UID: ${device_uid}`);
+          const res = await fetch(
+            `https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`
+          );
 
-      console.log(`Polling response for device [${device_uid}]:`, response);
+          console.log(`Polling HTTP status for device [${device_uid}]:`, res.status);
+          const response = await res.json();
+          const data = Array.isArray(response) ? response[0] : null;
 
-      if (data && data.uid) {
-        clearInterval(intervalId); // Pause polling for this device
-        console.log(`Scan detected for device UID ${device_uid}:`, data);
+          console.log(`Polling response for device [${device_uid}]:`, response);
 
-        statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
-        statusEl.className = "scan-status text-blue-400 font-semibold";
+          if (data && data.uid) {
+            clearInterval(intervalId); // Pause polling for this device
+            console.log(`Scan detected for device UID ${device_uid}:`, data);
 
-        if (!data.exists) {
-          formContainer.innerHTML = `
+            statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
+            statusEl.className = "scan-status text-blue-400 font-semibold";
+
+            if (!data.exists) {
+              formContainer.innerHTML = `
 <form id="form-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3">
   <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
   <input type="text" name="name" placeholder="Name" class="input" required />
@@ -229,144 +245,144 @@ function pollDevice(device_uid, card) {
   <p class="formMessage text-sm mt-2"></p>
 </form>
 `;
-          formContainer.classList.remove("hidden");
+              formContainer.classList.remove("hidden");
 
-          const studentForm = formContainer.querySelector(`#form-${device_uid}`);
-          studentForm.addEventListener("submit", async (e) => {
-            console.log("Student registration form submitted");
-            await submitStudentForm(e, data.uid, studentForm);
+              const studentForm = formContainer.querySelector(`#form-${device_uid}`);
+              studentForm.addEventListener("submit", async (e) => {
+                console.log("Student registration form submitted");
+                await submitStudentForm(e, data.uid, studentForm);
+                formContainer.classList.add("hidden");
+
+                // Resume polling after registration
+                setTimeout(() => {
+                  statusEl.textContent = "Waiting for scan...";
+                  statusEl.className = "scan-status text-yellow-400 font-semibold";
+                  intervalId = setInterval(poll, 2000);
+                  console.log(`Resumed polling for device UID: ${device_uid}`);
+                }, 2000);
+              });
+            } else {
+              console.log("Scan exists, no registration needed.");
+
+              formContainer.innerHTML = "";
+              formContainer.classList.add("hidden");
+
+              setTimeout(() => {
+                statusEl.textContent = "Waiting for scan...";
+                statusEl.className = "scan-status text-yellow-400 font-semibold";
+                intervalId = setInterval(poll, 2000);
+                console.log(`Resumed polling for device UID: ${device_uid}`);
+              }, 2000);
+            }
+
+          } else {
+            console.log(`No new scan found for device UID: ${device_uid}`);
+            statusEl.textContent = "No new scans.";
+            statusEl.className = "scan-status text-gray-400 font-semibold";
+            formContainer.innerHTML = "";
             formContainer.classList.add("hidden");
+          }
 
-            // Resume polling after registration
-            setTimeout(() => {
-              statusEl.textContent = "Waiting for scan...";
-              statusEl.className = "scan-status text-yellow-400 font-semibold";
-              intervalId = setInterval(poll, 2000);
-              console.log(`Resumed polling for device UID: ${device_uid}`);
-            }, 2000);
-          });
-        } else {
-          console.log("Scan exists, no registration needed.");
-
-          formContainer.innerHTML = "";
-          formContainer.classList.add("hidden");
-
-          setTimeout(() => {
-            statusEl.textContent = "Waiting for scan...";
-            statusEl.className = "scan-status text-yellow-400 font-semibold";
-            intervalId = setInterval(poll, 2000);
-            console.log(`Resumed polling for device UID: ${device_uid}`);
-          }, 2000);
+        } catch (err) {
+          console.error(`Polling failed for device [${device_uid}]:`, err);
+          statusEl.textContent = "Polling error.";
+          statusEl.className = "scan-status text-red-400 font-semibold";
         }
-
-      } else {
-        console.log(`No new scan found for device UID: ${device_uid}`);
-        statusEl.textContent = "No new scans.";
-        statusEl.className = "scan-status text-gray-400 font-semibold";
-        formContainer.innerHTML = "";
-        formContainer.classList.add("hidden");
       }
 
-    } catch (err) {
-      console.error(`Polling failed for device [${device_uid}]:`, err);
-      statusEl.textContent = "Polling error.";
-      statusEl.className = "scan-status text-red-400 font-semibold";
+      // Start polling
+      intervalId = setInterval(poll, 2000);
     }
-  }
 
-  // Start polling
-  intervalId = setInterval(poll, 2000);
-}
+    async function submitStudentForm(event, uid, form) {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const formMessage = form.querySelector(".formMessage");
 
-async function submitStudentForm(event, uid, form) {
-  event.preventDefault();
-  const formData = new FormData(form);
-  const formMessage = form.querySelector(".formMessage");
+      const data = {
+        uid,
+        name: formData.get("name"),
+        email: formData.get("email"),
+        telephone: formData.get("telephone"),
+        form: formData.get("form"),
+        gender: formData.get("gender"),
+        student_id: Math.random().toString(36).substring(2, 10),
+        api_key,
+      };
 
-  const data = {
-    uid,
-    name: formData.get("name"),
-    email: formData.get("email"),
-    telephone: formData.get("telephone"),
-    form: formData.get("form"),
-    gender: formData.get("gender"),
-    student_id: Math.random().toString(36).substring(2, 10),
-    api_key,
-  };
+      console.log("Submitting student form data:", data);
 
-  console.log("Submitting student form data:", data);
+      try {
+        const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
 
-  try {
-    const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+        console.log("Student registration HTTP status:", res.status);
 
-    console.log("Student registration HTTP status:", res.status);
+        const result = await res.json();
+        console.log("Student registration response:", result);
 
-    const result = await res.json();
-    console.log("Student registration response:", result);
-
-    if (res.ok) {
-      formMessage.textContent = result.message || "Registration successful!";
-      formMessage.className = "formMessage text-green-400 mt-2";
-      setTimeout(() => form.remove(), 2000);
-    } else {
-      formMessage.textContent = result.error || "Registration failed.";
-      formMessage.className = "formMessage text-red-400 mt-2";
+        if (res.ok) {
+          formMessage.textContent = result.message || "Registration successful!";
+          formMessage.className = "formMessage text-green-400 mt-2";
+          setTimeout(() => form.remove(), 2000);
+        } else {
+          formMessage.textContent = result.error || "Registration failed.";
+          formMessage.className = "formMessage text-red-400 mt-2";
+        }
+      } catch (err) {
+        console.error("Student registration error:", err);
+        formMessage.textContent = "Registration error. Please try again.";
+        formMessage.className = "formMessage text-red-400 mt-2";
+      }
     }
-  } catch (err) {
-    console.error("Student registration error:", err);
-    formMessage.textContent = "Registration error. Please try again.";
-    formMessage.className = "formMessage text-red-400 mt-2";
-  }
-}
 
-async function deleteDevice(device_uid, cardElement) {
-  if (!confirm(`Are you sure you want to delete device: ${device_uid}?`)) {
-    console.log("Device deletion cancelled by user.");
-    return;
-  }
-  console.log(`Deleting device UID: ${device_uid}`);
+    async function deleteDevice(device_uid, cardElement) {
+      if (!confirm(`Are you sure you want to delete device: ${device_uid}?`)) {
+        console.log("Device deletion cancelled by user.");
+        return;
+      }
+      console.log(`Deleting device UID: ${device_uid}`);
 
-  try {
-    const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices/${device_uid}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ api_key }),
-    });
+      try {
+        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices/${device_uid}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ api_key }),
+        });
 
-    console.log("Delete device HTTP status:", res.status);
+        console.log("Delete device HTTP status:", res.status);
 
-    const data = await res.json();
-    console.log("Delete device response data:", data);
+        const data = await res.json();
+        console.log("Delete device response data:", data);
 
-    if (res.ok) {
-      console.log(`Device UID ${device_uid} deleted successfully.`);
-      cardElement.remove();
-    } else {
-      alert(data.error || "Failed to delete device.");
-      console.warn("Failed to delete device:", data.error);
+        if (res.ok) {
+          console.log(`Device UID ${device_uid} deleted successfully.`);
+          cardElement.remove();
+        } else {
+          alert(data.error || "Failed to delete device.");
+          console.warn("Failed to delete device:", data.error);
+        }
+      } catch (err) {
+        console.error("Error deleting device:", err);
+        alert("Something went wrong while deleting the device.");
+      }
     }
-  } catch (err) {
-    console.error("Error deleting device:", err);
-    alert("Something went wrong while deleting the device.");
-  }
-}
 
-function getCookie(name) {
-  console.log(`Getting cookie value for: ${name}`);
-  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-  const val = match ? decodeURIComponent(match[2]) : null;
-  console.log(`Cookie "${name}" value:`, val);
-  return val;
-}
+    function getCookie(name) {
+      console.log(`Getting cookie value for: ${name}`);
+      const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+      const val = match ? decodeURIComponent(match[2]) : null;
+      console.log(`Cookie "${name}" value:`, val);
+      return val;
+    }
 
-fetchDevices();
-console.log("Initial fetchDevices() called");
+    fetchDevices();
+    console.log("Initial fetchDevices() called");
 
 
   </script>
