@@ -55,7 +55,6 @@
 
   <script>
 
-    let devicesData = [];
     const api_key = getCookie("api_key");
     console.log("Loaded API Key:", api_key);
 
@@ -64,7 +63,6 @@
     const deviceFormMessage = document.getElementById("deviceFormMessage");
     const devicesContainer = document.getElementById("devicesContainer");
 
-    // Toggle Add Device Form visibility
     toggleAddDeviceBtn.addEventListener("click", () => {
       const isVisible = !registerDeviceForm.classList.contains("hidden");
       console.log(`Toggle Add Device Form - currently visible: ${isVisible}`);
@@ -74,7 +72,6 @@
       registerDeviceForm.reset();
     });
 
-    // Handle device registration form submission
     registerDeviceForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const device_uid = document.getElementById("device_uid").value.trim();
@@ -104,7 +101,7 @@
           console.log("Device registered successfully, hiding form and refreshing device list.");
           registerDeviceForm.classList.add("hidden");
           toggleAddDeviceBtn.textContent = "Add Device";
-          await fetchDevices();
+          fetchDevices();
         }
       } catch (err) {
         console.error("Error registering device:", err);
@@ -113,7 +110,6 @@
       }
     });
 
-    // Fetch and render device list
     async function fetchDevices() {
       console.log("Fetching devices list...");
       devicesContainer.innerHTML = '<p class="text-gray-400 text-center">Loading devices...</p>';
@@ -129,15 +125,11 @@
         if (!Array.isArray(devices) || devices.length === 0) {
           console.log("No devices found.");
           devicesContainer.innerHTML = '<p class="text-gray-400 text-center">No devices registered yet.</p>';
-          devicesData = [];
           return;
         }
 
-        devicesData = devices;
-
         devices.forEach(device => {
           console.log("Rendering device:", device.device_uid);
-
           const card = document.createElement("div");
           card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
 
@@ -152,7 +144,7 @@
           let isOnline = false;
 
           if (lastSeen instanceof Date && !isNaN(lastSeen)) {
-            diffSeconds = Math.floor((now - lastSeen) / 1000);
+            diffSeconds = Math.floor((now - lastSeen) / 1000); // difference in seconds
             timeAgo = diffSeconds < 10
               ? "Just now"
               : diffSeconds < 60
@@ -161,7 +153,7 @@
                   ? "1 minute ago"
                   : `${Math.floor(diffSeconds / 60)} minutes ago`;
 
-            isOnline = diffSeconds < 180;  // online if last seen within 3 minutes
+            isOnline = diffSeconds < 10;  // online if last seen within 10 seconds
           } else {
             console.warn("⚠️ Invalid last_seen date:", lastSeenRaw);
           }
@@ -171,13 +163,10 @@
     <div>
       <h3 class="text-xl font-bold mb-1 text-green-400">${device.device_name}</h3>
       <p class="text-sm text-gray-400">UID: <code>${device.device_uid}</code></p>
-    <p class="text-sm font-semibold mt-1" id="status-${device.device_uid}">
-  Status: <span id="status-text-${device.device_uid}" class="${isOnline ? 'text-green-400' : 'text-red-400'}">
-    ${isOnline ? '🟢 Online' : '🔴 Offline'}
-  </span>
-</p>
-
-      <p class="text-sm text-gray-500" id="lastseen-${device.device_uid}">
+      <p class="text-sm ${isOnline ? 'text-green-400' : 'text-red-400'} font-semibold mt-1">
+        Status: ${isOnline ? '🟢 Online' : '🔴 Offline'}
+      </p>
+      <p class="text-sm text-gray-500">
         Last seen: ${timeAgo} (${lastSeen ? lastSeen.toLocaleString() : 'Unknown'})
       </p>
       <p class="scan-status text-yellow-400 font-semibold mt-1">Waiting for scan...</p>
@@ -188,6 +177,9 @@
   </div>
   <div class="registration-form hidden mt-4"></div>
 `;
+
+
+
 
           devicesContainer.appendChild(card);
 
@@ -204,45 +196,13 @@
         devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices.</p>';
       }
     }
-function updateDeviceStatus(device) {
-  const lastSeenRaw = device.last_seen;
-  const lastSeen = lastSeenRaw ? new Date(lastSeenRaw) : null;
-  const now = new Date();
 
-  if (!(lastSeen instanceof Date) || isNaN(lastSeen)) {
-    console.warn("Invalid last_seen for device:", device.device_uid);
-    return;
-  }
 
-  const diffSeconds = Math.floor((now - lastSeen) / 1000);
-  const timeAgo = diffSeconds < 10
-    ? "Just now"
-    : diffSeconds < 60
-      ? `${diffSeconds} seconds ago`
-      : diffSeconds < 120
-        ? "1 minute ago"
-        : `${Math.floor(diffSeconds / 60)} minutes ago`;
 
-  const isOnline = diffSeconds < 10;
 
-  const statusTextEl = document.getElementById(`status-text-${device.device_uid}`);
-  const lastSeenEl = document.getElementById(`lastseen-${device.device_uid}`);
 
-  if (statusTextEl) {
-    statusTextEl.textContent = isOnline ? '🟢 Online' : '🔴 Offline';
-    statusTextEl.className = isOnline ? 'text-green-400' : 'text-red-400';
-  }
 
-  if (lastSeenEl) {
-    lastSeenEl.textContent = `Last seen: ${timeAgo} (${lastSeen.toLocaleString()})`;
-  }
-}
 
-    function autoUpdateDeviceStatuses() {
-      devicesData.forEach(device => updateDeviceStatus(device));
-    }
-
-    // Poll device for scans
     function pollDevice(device_uid, card) {
       console.log(`Starting poll for device UID: ${device_uid}`);
 
@@ -252,6 +212,7 @@ function updateDeviceStatus(device) {
       let intervalId = null;
 
       async function poll() {
+        
         try {
           console.log(`Polling device UID: ${device_uid}`);
           const res = await fetch(
@@ -266,7 +227,6 @@ function updateDeviceStatus(device) {
 
           if (data && data.uid) {
             clearInterval(intervalId); // Pause polling for this device
-            intervalId = null;
             console.log(`Scan detected for device UID ${device_uid}:`, data);
 
             statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
@@ -345,7 +305,6 @@ function updateDeviceStatus(device) {
       intervalId = setInterval(poll, 2000);
     }
 
-    // Submit new student registration
     async function submitStudentForm(event, uid, form) {
       event.preventDefault();
       const formData = new FormData(form);
@@ -391,7 +350,6 @@ function updateDeviceStatus(device) {
       }
     }
 
-    // Delete a device
     async function deleteDevice(device_uid, cardElement) {
       if (!confirm(`Are you sure you want to delete device: ${device_uid}?`)) {
         console.log("Device deletion cancelled by user.");
@@ -416,8 +374,6 @@ function updateDeviceStatus(device) {
         if (res.ok) {
           console.log(`Device UID ${device_uid} deleted successfully.`);
           cardElement.remove();
-          // Remove from devicesData to keep data in sync
-          devicesData = devicesData.filter(d => d.device_uid !== device_uid);
         } else {
           alert(data.error || "Failed to delete device.");
           console.warn("Failed to delete device:", data.error);
@@ -428,7 +384,6 @@ function updateDeviceStatus(device) {
       }
     }
 
-    // Get cookie value by name
     function getCookie(name) {
       console.log(`Getting cookie value for: ${name}`);
       const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -437,18 +392,7 @@ function updateDeviceStatus(device) {
       return val;
     }
 
-    // Initial fetch and set intervals for refresh and updates
-    fetchDevices().then(() => {
-      // Update status display every 10 seconds
-      setInterval(autoUpdateDeviceStatuses, 2000);
-
-      // Full device data refresh every 5 minutes
-      setInterval(() => {
-        console.log("Periodic full devices data refresh...");
-        fetchDevices();
-      }, 300000);
-    });
-
+    fetchDevices();
     console.log("Initial fetchDevices() called");
 
 
