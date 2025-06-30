@@ -138,10 +138,9 @@
             statusEl.className = 'scan-status text-blue-400 font-semibold';
 
             if (!scan.exists) {
-              formContainer.classList.remove('hidden');
               formContainer.innerHTML = `
-                <form class="student-form space-y-3">
-                  <input type="hidden" name="uid" value="${scan.uid}" />
+                <form onsubmit="submitStudentForm(event, '${scan.uid}')" class="bg-gray-700 p-4 rounded space-y-3">
+                  <h4 class="font-semibold text-lg text-green-300 mb-2">Register New Student</h4>
                   <input type="text" name="name" placeholder="Name" class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white" required />
                   <input type="email" name="email" placeholder="Email" class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white" required />
                   <input type="tel" name="telephone" placeholder="Phone Number" class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white" required />
@@ -150,12 +149,10 @@
                   <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">Register</button>
                 </form>
               `;
-
-              const studentForm = formContainer.querySelector('.student-form');
-              studentForm.addEventListener('submit', (e) => submitStudentForm(e, scan.uid, formContainer, statusEl));
+              formContainer.classList.remove('hidden');
             } else {
-              formContainer.classList.add('hidden');
               formContainer.innerHTML = '';
+              formContainer.classList.add('hidden');
             }
 
             setTimeout(() => {
@@ -172,9 +169,10 @@
       poll();
     }
 
-    async function submitStudentForm(e, uid, formContainer, statusEl) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
+    async function submitStudentForm(event, uid) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
       const data = {
         uid,
         name: formData.get('name'),
@@ -195,17 +193,13 @@
 
         const result = await res.json();
         if (res.ok) {
-          statusEl.textContent = result.message;
-          statusEl.className = 'text-green-400 font-semibold';
-          formContainer.classList.add('hidden');
-          formContainer.innerHTML = '';
+          alert(result.message);
+          form.remove();
         } else {
-          statusEl.textContent = result.error || 'Registration failed';
-          statusEl.className = 'text-yellow-400 font-semibold';
+          alert(result.error || 'Registration failed');
         }
       } catch (err) {
-        statusEl.textContent = 'Registration error';
-        statusEl.className = 'text-red-400 font-semibold';
+        alert('Registration error');
         console.error(err);
       }
     }
