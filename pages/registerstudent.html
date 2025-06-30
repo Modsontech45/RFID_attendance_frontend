@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Student Registration & Attendance</title>
@@ -10,13 +11,15 @@
 </head>
 
 <body class="bg-black text-white min-h-screen px-4">
-  <header class="sticky top-0 w-full bg-black text-white flex items-center justify-between p-5 shadow-md border-b border-green-600 z-50">
+  <header
+    class="sticky top-0 w-full bg-black text-white flex items-center justify-between p-5 shadow-md border-b border-green-600 z-50">
     <div class="flex items-center space-x-3">
       <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
       <span class="text-xl font-bold">Synctuario</span>
     </div>
     <button id="menuBtn" class="sm:hidden text-3xl">&#9776;</button>
-    <nav id="navMenu" class="flex max-sm:hidden sm:items-center gap-4 max-sm:fixed top-0 right-0 max-sm:w-2/4 max-sm:bg-black max-sm:flex-col max-sm:z-40">
+    <nav id="navMenu"
+      class="flex max-sm:hidden sm:items-center gap-4 max-sm:fixed top-0 right-0 max-sm:w-2/4 max-sm:bg-black max-sm:flex-col max-sm:z-40">
       <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400">Office</a>
       <a href="/pages/registerstudent.html" class="text-green-400">Home</a>
       <a href="/pages/students.html" class="hover:text-green-400">Students</a>
@@ -30,13 +33,16 @@
     <section>
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-3xl font-bold text-green-400">Registered Devices</h2>
-        <button id="toggleAddDeviceBtn" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-white font-semibold">Add Device</button>
+        <button id="toggleAddDeviceBtn"
+          class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-white font-semibold">Add Device</button>
       </div>
 
-      <form id="registerDeviceForm" class="hidden bg-gray-900 p-6 rounded-lg border border-green-600 mb-8 max-w-md space-y-4">
+      <form id="registerDeviceForm"
+        class="hidden bg-gray-900 p-6 rounded-lg border border-green-600 mb-8 max-w-md space-y-4">
         <input type="text" id="device_uid" placeholder="Device UID" required class="input" />
         <input type="text" id="device_name" placeholder="Device Name" required class="input" />
-        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">Register Device</button>
+        <button type="submit"
+          class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">Register Device</button>
         <p id="deviceFormMessage" class="text-sm mt-2"></p>
       </form>
 
@@ -50,7 +56,7 @@
   <script>
 
 
-    
+
     const api_key = getCookie("api_key");
     console.log("Loaded API Key:", api_key);
 
@@ -115,12 +121,23 @@
           const card = document.createElement("div");
           card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
           card.innerHTML = `
-            <h3 class="text-xl font-bold mb-2 text-green-400">${device.device_name}</h3>
-            <p class="mb-2 text-sm text-gray-400">Device UID: <code>${device.device_uid}</code></p>
-            <p class="scan-status text-yellow-400 font-semibold">Waiting for scan...</p>
-            <div class="registration-form hidden mt-4"></div>
-          `;
+  <div class="flex justify-between items-start">
+    <div>
+      <h3 class="text-xl font-bold mb-2 text-green-400">${device.device_name}</h3>
+      <p class="mb-2 text-sm text-gray-400">Device UID: <code>${device.device_uid}</code></p>
+      <p class="scan-status text-yellow-400 font-semibold">Waiting for scan...</p>
+    </div>
+    <button class="delete-device-btn bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" data-uid="${device.device_uid}">
+      Remove
+    </button>
+  </div>
+  <div class="registration-form hidden mt-4"></div>
+`;
+
           devicesContainer.appendChild(card);
+          const deleteBtn = card.querySelector(".delete-device-btn");
+          deleteBtn.addEventListener("click", () => deleteDevice(device.device_uid, card));
+
           pollDevice(device.device_uid, card);
         });
       } catch (err) {
@@ -129,31 +146,31 @@
       }
     }
 
-function pollDevice(device_uid, card) {
-  const statusEl = card.querySelector(".scan-status");
-  const formContainer = card.querySelector(".registration-form");
+    function pollDevice(device_uid, card) {
+      const statusEl = card.querySelector(".scan-status");
+      const formContainer = card.querySelector(".registration-form");
 
-  let intervalId = null;
+      let intervalId = null;
 
-  async function poll() {
-    try {
-      const res = await fetch(
-        `https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`
-      );
+      async function poll() {
+        try {
+          const res = await fetch(
+            `https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`
+          );
 
-      const response = await res.json();
-      const data = Array.isArray(response) ? response[0] : null;
+          const response = await res.json();
+          const data = Array.isArray(response) ? response[0] : null;
 
-      console.log(`✅ Polling [${device_uid}] response:`, response);
+          console.log(`✅ Polling [${device_uid}] response:`, response);
 
-      if (data && data.uid) {
-        clearInterval(intervalId); // Pause polling for this device
+          if (data && data.uid) {
+            clearInterval(intervalId); // Pause polling for this device
 
-        statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
-        statusEl.className = "scan-status text-blue-400 font-semibold";
+            statusEl.textContent = `UID: ${data.uid} | ${data.message || "Scan received"}`;
+            statusEl.className = "scan-status text-blue-400 font-semibold";
 
-        if (!data.exists) {
-          formContainer.innerHTML = `
+            if (!data.exists) {
+              formContainer.innerHTML = `
             <form id="form-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3">
               <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
               <input type="text" name="name" placeholder="Name" class="input" required />
@@ -176,50 +193,50 @@ function pollDevice(device_uid, card) {
               <p class="formMessage text-sm mt-2"></p>
             </form>
           `;
-          formContainer.classList.remove("hidden");
+              formContainer.classList.remove("hidden");
 
-          const studentForm = formContainer.querySelector(`#form-${device_uid}`);
-          studentForm.addEventListener("submit", async (e) => {
-            await submitStudentForm(e, data.uid, studentForm);
+              const studentForm = formContainer.querySelector(`#form-${device_uid}`);
+              studentForm.addEventListener("submit", async (e) => {
+                await submitStudentForm(e, data.uid, studentForm);
+                formContainer.classList.add("hidden");
+
+                // Resume polling after registration
+                setTimeout(() => {
+                  statusEl.textContent = "Waiting for scan...";
+                  statusEl.className = "scan-status text-yellow-400 font-semibold";
+                  intervalId = setInterval(poll, 2000);
+                }, 2000);
+              });
+            } else {
+              // No registration needed
+              formContainer.innerHTML = "";
+              formContainer.classList.add("hidden");
+
+              setTimeout(() => {
+                statusEl.textContent = "Waiting for scan...";
+                statusEl.className = "scan-status text-yellow-400 font-semibold";
+                intervalId = setInterval(poll, 2000);
+              }, 2000);
+            }
+
+          } else {
+            // No UID found
+            statusEl.textContent = "No new scans.";
+            statusEl.className = "scan-status text-gray-400 font-semibold";
+            formContainer.innerHTML = "";
             formContainer.classList.add("hidden");
+          }
 
-            // Resume polling after registration
-            setTimeout(() => {
-              statusEl.textContent = "Waiting for scan...";
-              statusEl.className = "scan-status text-yellow-400 font-semibold";
-              intervalId = setInterval(poll, 2000);
-            }, 2000);
-          });
-        } else {
-          // No registration needed
-          formContainer.innerHTML = "";
-          formContainer.classList.add("hidden");
-
-          setTimeout(() => {
-            statusEl.textContent = "Waiting for scan...";
-            statusEl.className = "scan-status text-yellow-400 font-semibold";
-            intervalId = setInterval(poll, 2000);
-          }, 2000);
+        } catch (err) {
+          console.error(`❌ Polling failed for device [${device_uid}]:`, err);
+          statusEl.textContent = "Polling error.";
+          statusEl.className = "scan-status text-red-400 font-semibold";
         }
-
-      } else {
-        // No UID found
-        statusEl.textContent = "No new scans.";
-        statusEl.className = "scan-status text-gray-400 font-semibold";
-        formContainer.innerHTML = "";
-        formContainer.classList.add("hidden");
       }
 
-    } catch (err) {
-      console.error(`❌ Polling failed for device [${device_uid}]:`, err);
-      statusEl.textContent = "Polling error.";
-      statusEl.className = "scan-status text-red-400 font-semibold";
+      // Start polling
+      intervalId = setInterval(poll, 2000);
     }
-  }
-
-  // Start polling
-  intervalId = setInterval(poll, 2000);
-}
 
 
 
@@ -286,4 +303,5 @@ function pollDevice(device_uid, card) {
     }
   </style>
 </body>
+
 </html>
