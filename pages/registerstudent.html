@@ -99,6 +99,9 @@
         const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices?api_key=${api_key}`);
         const devices = await res.json();
 
+        const scansRes = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/scan/pending-scans?api_key=${api_key}`);
+        const scans = await scansRes.json();
+
         devicesContainer.innerHTML = '';
         if (!Array.isArray(devices) || !devices.length) {
           devicesContainer.innerHTML = '<p class="text-gray-400 text-center">No devices registered yet.</p>';
@@ -106,48 +109,47 @@
         }
 
         devices.forEach(device => {
+          const deviceScans = scans.filter(s => s.device_uid === device.device_uid);
           const card = document.createElement('div');
           card.className = 'bg-gray-800 p-6 rounded-lg border border-green-600 shadow';
           card.innerHTML = `
             <h3 class="text-xl font-bold mb-2 text-green-400">${device.device_name}</h3>
-            <p class="mb-2 text-sm text-gray-400">Device UID: <code>${device.device_uid}</code></p>
-            <p class="scan-status text-yellow-400 font-semibold">Waiting for scan...</p>
+            <p class="mb-4 text-sm text-gray-400">Device UID: <code>${device.device_uid}</code></p>
+            <div class="pending-scans-container"></div>
           `;
-          devicesContainer.appendChild(card);
 
-          // Start polling for each device
-          pollDevice(device.device_uid, card);
+          const scansContainer = card.querySelector('.pending-scans-container');
+          if (deviceScans.length) {
+            const waitingText = document.createElement('p');
+            waitingText.className = 'mb-3 text-yellow-400 font-semibold';
+            waitingText.textContent = 'Waiting for scan...';
+            scansContainer.appendChild(waitingText);
+
+            deviceScans.forEach(scan => {
+              const scanDiv = document.createElement('div');
+              scanDiv.className = 'bg-gray-700 p-3 rounded mb-3 flex justify-between items-center';
+              scanDiv.innerHTML = `
+                <div>
+                  <p><strong>UID:</strong> ${scan.uid}</p>
+                  <p><strong>Scanned At:</strong> ${new Date(scan.scanned_at).toLocaleString()}</p>
+                </div>
+                <button data-uid="${scan.uid}" data-deviceuid="${device.device_uid}"
+                  class="register-scan-btn bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-white font-semibold">
+                  Register Student
+                </button>
+              `;
+              scansContainer.appendChild(scanDiv);
+            });
+          } else {
+            scansContainer.innerHTML = '<p class="text-gray-500 italic">No pending scans for this device.</p>';
+          }
+
+          devicesContainer.appendChild(card);
         });
       } catch (err) {
         devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices or scans.</p>';
         console.error(err);
       }
-    }
-
-    function pollDevice(device_uid, card) {
-      const statusEl = card.querySelector('.scan-status');
-
-      async function poll() {
-        try {
-          const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`);
-          const data = await res.json();
-
-          if (Array.isArray(data) && data.length) {
-            const scan = data[0];
-            statusEl.textContent = `UID: ${scan.uid} | ${scan.message}`;
-            statusEl.className = 'scan-status text-blue-400 font-semibold';
-            setTimeout(() => {
-              statusEl.textContent = 'Waiting for scan...';
-              statusEl.className = 'scan-status text-yellow-400 font-semibold';
-            }, 6000);
-          }
-        } catch (err) {
-          console.error(`Polling failed for device ${device_uid}:`, err);
-        }
-        setTimeout(poll, 3000);
-      }
-
-      poll();
     }
 
     function getCookie(name) {
