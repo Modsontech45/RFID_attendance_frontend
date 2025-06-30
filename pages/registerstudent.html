@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <title>Student Registration & Attendance</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="/css/output.css" rel="stylesheet" />
-  <script src="/users/frontend.js"></script>
-  <script src="/js/cookies.js"></script>
+  <script src="/users/frontend.js" defer></script>
+  <script src="/js/cookies.js" defer></script>
 </head>
 
 <body class="bg-black text-white min-h-screen px-4">
-  <header class="sticky top-0 left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50">
+  <header class="sticky top-0 w-full bg-black text-white flex items-center justify-between p-5 shadow-md border-b border-green-600 z-50">
     <div class="flex items-center space-x-3">
       <img src="/assets/logo.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
       <span class="text-xl font-bold">Synctuario</span>
     </div>
-
-    <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">&#9776;</button>
-
-    <nav id="navMenu" class="flex max-sm:hidden sm:items-center gap-4 transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40 max-sm:flex-col">
-      <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400 font-medium">Office</a>
-      <a href="/pages/registerstudent.html" class="text-green-400 font-medium">Home</a>
-      <a href="/pages/students.html" class="hover:text-green-400 font-medium">Students</a>
-      <a href="/pages/dashboard.html" class="hover:underline font-medium">Dashboard</a>
-      <a href="/pages/attendance.html" class="hover:text-green-400 font-medium">Attendance</a>
-      <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none">Logout</button>
+    <button id="menuBtn" class="sm:hidden text-3xl">&#9776;</button>
+    <nav id="navMenu" class="flex max-sm:hidden sm:items-center gap-4 max-sm:fixed top-0 right-0 max-sm:w-2/4 max-sm:bg-black max-sm:flex-col max-sm:z-40">
+      <a href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400">Office</a>
+      <a href="/pages/registerstudent.html" class="text-green-400">Home</a>
+      <a href="/pages/students.html" class="hover:text-green-400">Students</a>
+      <a href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
+      <a href="/pages/attendance.html" class="hover:text-green-400">Attendance</a>
+      <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Logout</button>
     </nav>
   </header>
 
@@ -33,12 +30,12 @@
     <section>
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-3xl font-bold text-green-400">Registered Devices</h2>
-        <button id="toggleAddDeviceBtn" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-semibold text-white">Add Device</button>
+        <button id="toggleAddDeviceBtn" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-white font-semibold">Add Device</button>
       </div>
 
-      <form id="registerDeviceForm" class="hidden bg-gray-900 p-6 rounded-lg shadow border border-green-600 mb-8 max-w-md space-y-4">
-        <input type="text" id="device_uid" placeholder="Device UID (e.g. MAC address)" required class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
-        <input type="text" id="device_name" placeholder="Device Name (e.g. Classroom A)" required class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white focus:outline-none" />
+      <form id="registerDeviceForm" class="hidden bg-gray-900 p-6 rounded-lg border border-green-600 mb-8 max-w-md space-y-4">
+        <input type="text" id="device_uid" placeholder="Device UID" required class="input" />
+        <input type="text" id="device_name" placeholder="Device Name" required class="input" />
         <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">Register Device</button>
         <p id="deviceFormMessage" class="text-sm mt-2"></p>
       </form>
@@ -52,6 +49,8 @@
 
   <script>
     const api_key = getCookie('api_key');
+    console.log('Loaded API Key:', api_key);
+
     const toggleAddDeviceBtn = document.getElementById('toggleAddDeviceBtn');
     const registerDeviceForm = document.getElementById('registerDeviceForm');
     const deviceFormMessage = document.getElementById('deviceFormMessage');
@@ -63,6 +62,7 @@
       toggleAddDeviceBtn.textContent = isVisible ? 'Add Device' : 'Cancel';
       deviceFormMessage.textContent = '';
       registerDeviceForm.reset();
+      console.log(isVisible ? 'Hid device form' : 'Showing device form');
     });
 
     registerDeviceForm.addEventListener('submit', async (e) => {
@@ -70,6 +70,8 @@
       const device_uid = document.getElementById('device_uid').value.trim();
       const device_name = document.getElementById('device_name').value.trim();
       if (!device_uid || !device_name) return;
+
+      console.log('Registering device:', { device_uid, device_name, api_key });
 
       try {
         const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register', {
@@ -79,6 +81,8 @@
         });
 
         const data = await res.json();
+        console.log('Device registration response:', data);
+
         deviceFormMessage.textContent = data.message || data.error || 'Unknown error';
         deviceFormMessage.className = res.ok ? 'text-green-400' : 'text-red-400';
 
@@ -88,6 +92,7 @@
           fetchDevices();
         }
       } catch (err) {
+        console.error('Error registering device:', err);
         deviceFormMessage.textContent = 'Error registering device.';
         deviceFormMessage.className = 'text-red-400';
       }
@@ -95,9 +100,12 @@
 
     async function fetchDevices() {
       devicesContainer.innerHTML = '<p class="text-gray-400 text-center">Loading devices...</p>';
+      console.log('Fetching devices...');
+
       try {
         const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/devices?api_key=${api_key}`);
         const devices = await res.json();
+        console.log('Fetched devices:', devices);
 
         devicesContainer.innerHTML = '';
         if (!Array.isArray(devices) || !devices.length) {
@@ -118,8 +126,8 @@
           pollDevice(device.device_uid, card);
         });
       } catch (err) {
-        devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices or scans.</p>';
-        console.error(err);
+        console.error('Failed to fetch devices:', err);
+        devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices.</p>';
       }
     }
 
@@ -131,6 +139,7 @@
         try {
           const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue?device_uid=${device_uid}`);
           const data = await res.json();
+          console.log(`Polling [${device_uid}] response:`, data);
 
           if (Array.isArray(data) && data.length) {
             const scan = data[0];
@@ -140,13 +149,13 @@
             if (!scan.exists) {
               formContainer.innerHTML = `
                 <form onsubmit="submitStudentForm(event, '${scan.uid}')" class="bg-gray-700 p-4 rounded space-y-3">
-                  <h4 class="font-semibold text-lg text-green-300 mb-2">Register New Student</h4>
-                  <input type="text" name="name" placeholder="Name" class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white" required />
-                  <input type="email" name="email" placeholder="Email" class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white" required />
-                  <input type="tel" name="telephone" placeholder="Phone Number" class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white" required />
-                  <input type="text" name="form" placeholder="Form" class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white" required />
-                  <input type="text" name="gender" placeholder="Gender" class="w-full p-2 bg-gray-800 rounded border border-green-500 text-white" required />
-                  <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">Register</button>
+                  <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
+                  <input type="text" name="name" placeholder="Name" class="input" required />
+                  <input type="email" name="email" placeholder="Email" class="input" required />
+                  <input type="tel" name="telephone" placeholder="Phone Number" class="input" required />
+                  <input type="text" name="form" placeholder="Form" class="input" required />
+                  <input type="text" name="gender" placeholder="Gender" class="input" required />
+                  <button type="submit" class="bg-green-600 hover:bg-green-700 py-2 rounded w-full text-white">Register</button>
                 </form>
               `;
               formContainer.classList.remove('hidden');
@@ -161,7 +170,7 @@
             }, 6000);
           }
         } catch (err) {
-          console.error(`Polling failed for device ${device_uid}:`, err);
+          console.error(`Polling failed for device [${device_uid}]:`, err);
         }
         setTimeout(poll, 3000);
       }
@@ -173,6 +182,7 @@
       event.preventDefault();
       const form = event.target;
       const formData = new FormData(form);
+
       const data = {
         uid,
         name: formData.get('name'),
@@ -184,6 +194,8 @@
         api_key
       };
 
+      console.log('Submitting student form:', data);
+
       try {
         const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/register', {
           method: 'POST',
@@ -192,6 +204,8 @@
         });
 
         const result = await res.json();
+        console.log('Student registration response:', result);
+
         if (res.ok) {
           alert(result.message);
           form.remove();
@@ -199,8 +213,8 @@
           alert(result.error || 'Registration failed');
         }
       } catch (err) {
+        console.error('Student registration error:', err);
         alert('Registration error');
-        console.error(err);
       }
     }
 
@@ -211,6 +225,17 @@
 
     fetchDevices();
   </script>
-</body>
 
+  <style>
+    .input {
+      width: 100%;
+      padding: 0.5rem;
+      background-color: #1f2937;
+      border: 1px solid #10b981;
+      border-radius: 0.375rem;
+      color: white;
+      outline: none;
+    }
+  </style>
+</body>
 </html>
