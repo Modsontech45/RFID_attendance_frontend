@@ -128,89 +128,86 @@
           return;
         }
 
-        devices.forEach(device => {
-          console.log("Rendering device:", device.device_uid);
-          const card = document.createElement("div");
-          card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
+// Suppose devicesContainer is already selected, e.g.
+const devicesContainer = document.getElementById('devicesContainer');
 
+// Add Tailwind grid classes for responsive grid layout:
+devicesContainer.className = "grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4";
 
-function formatTimeAgo(lastSeen) {
-  const now = new Date();
-  const diffMs = now - lastSeen;
-  const diffSec = Math.floor(diffMs / 1000);
-  const diffMin = Math.floor(diffSec / 60);
-  const diffHr = Math.floor(diffMin / 60);
-  const diffDay = Math.floor(diffHr / 24);
+devices.forEach(device => {
+  console.log("Rendering device:", device.device_uid);
+  const card = document.createElement("div");
+  card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
 
-  if (diffSec < 60) {
-    return "Just now";
-  } else if (diffMin < 60) {
-    return `${diffMin} minute${diffMin === 1 ? "" : "s"} ago`;
-  } else if (diffHr < 24) {
-    return `${diffHr} hour${diffHr === 1 ? "" : "s"} ago`;
-  } else if (diffDay === 1) {
-    return `Yesterday at ${lastSeen.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-  } else {
-    return lastSeen.toLocaleString();
-  }
-}
+  function formatTimeAgo(lastSeen) {
+    const now = new Date();
+    const diffMs = now - lastSeen;
+    const diffSec = Math.floor(diffMs / 1000);
+    const diffMin = Math.floor(diffSec / 60);
+    const diffHr = Math.floor(diffMin / 60);
+    const diffDay = Math.floor(diffHr / 24);
 
-// Inside your render loop
-const lastSeenRaw = device.last_seen;
-console.log("🔁 Raw last_seen from backend:", lastSeenRaw);
-
-const lastSeen = lastSeenRaw ? new Date(lastSeenRaw) : null;
-const now = new Date();
-
-let timeAgo = "N/A";
-let isOnline = false;
-
-if (lastSeen instanceof Date && !isNaN(lastSeen)) {
-  const diffSeconds = Math.floor((now - lastSeen) / 1000);
-  isOnline = diffSeconds < 10; // online if seen in the last 10 seconds
-  timeAgo = formatTimeAgo(lastSeen);
-} else {
-  console.warn("⚠️ Invalid last_seen date:", lastSeenRaw);
-}
-
-card.innerHTML = `
-  <div class="flex justify-between items-start">
-    <div>
-      <h3 class="text-xl font-bold mb-1 text-green-400">${device.device_name}</h3>
-      <p class="text-sm text-gray-400">UID: <code>${device.device_uid}</code></p>
-      <p class="text-sm ${isOnline ? 'text-green-400' : 'text-red-400'} font-semibold mt-1">
-        Status: ${isOnline ? '🟢 Online' : '🔴 Offline'}
-      </p>
-      <p class="text-sm text-gray-500">
-        Last seen: ${timeAgo} (${lastSeen ? lastSeen.toLocaleString() : 'Unknown'})
-      </p>
-      <p class="scan-status text-yellow-400 font-semibold mt-1">Waiting for scan...</p>
-    </div>
-    <button class="delete-device-btn bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" data-uid="${device.device_uid}">
-      Delete
-    </button>
-  </div>
-  <div class="registration-form hidden mt-4"></div>
-`;
-
-
-
-
-          devicesContainer.appendChild(card);
-
-          const deleteBtn = card.querySelector(".delete-device-btn");
-          deleteBtn.addEventListener("click", () => {
-            console.log(`Delete button clicked for device UID: ${device.device_uid}`);
-            deleteDevice(device.device_uid, card);
-          });
-
-          pollDevice(device.device_uid, card);
-        });
-      } catch (err) {
-        console.error("Failed to fetch devices:", err);
-        devicesContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load devices.</p>';
-      }
+    if (diffSec < 60) {
+      return "Just now";
+    } else if (diffMin < 60) {
+      return `${diffMin} minute${diffMin === 1 ? "" : "s"} ago`;
+    } else if (diffHr < 24) {
+      return `${diffHr} hour${diffHr === 1 ? "" : "s"} ago`;
+    } else if (diffDay === 1) {
+      return `Yesterday at ${lastSeen.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    } else {
+      return lastSeen.toLocaleString();
     }
+  }
+
+  const lastSeenRaw = device.last_seen;
+  console.log("🔁 Raw last_seen from backend:", lastSeenRaw);
+
+  const lastSeen = lastSeenRaw ? new Date(lastSeenRaw) : null;
+  const now = new Date();
+
+  let timeAgo = "N/A";
+  let isOnline = false;
+
+  if (lastSeen instanceof Date && !isNaN(lastSeen)) {
+    const diffSeconds = Math.floor((now - lastSeen) / 1000);
+    isOnline = diffSeconds < 10; // online if seen in the last 10 seconds
+    timeAgo = formatTimeAgo(lastSeen);
+  } else {
+    console.warn("⚠️ Invalid last_seen date:", lastSeenRaw);
+  }
+
+  card.innerHTML = `
+    <div class="flex justify-between items-start">
+      <div>
+        <h3 class="text-xl font-bold mb-1 text-green-400">${device.device_name}</h3>
+        <p class="text-sm text-gray-400">UID: <code>${device.device_uid}</code></p>
+        <p class="text-sm ${isOnline ? 'text-green-400' : 'text-red-400'} font-semibold mt-1">
+          Status: ${isOnline ? '🟢 Online' : '🔴 Offline'}
+        </p>
+        <p class="text-sm text-gray-500">
+          Last seen: ${timeAgo} (${lastSeen ? lastSeen.toLocaleString() : 'Unknown'})
+        </p>
+        <p class="scan-status text-yellow-400 font-semibold mt-1">Waiting for scan...</p>
+      </div>
+      <button class="delete-device-btn bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" data-uid="${device.device_uid}">
+        Delete
+      </button>
+    </div>
+    <div class="registration-form hidden mt-4"></div>
+  `;
+
+  devicesContainer.appendChild(card);
+
+  const deleteBtn = card.querySelector(".delete-device-btn");
+  deleteBtn.addEventListener("click", () => {
+    console.log(`Delete button clicked for device UID: ${device.device_uid}`);
+    deleteDevice(device.device_uid, card);
+  });
+
+  pollDevice(device.device_uid, card);
+});
+
 
 
 
