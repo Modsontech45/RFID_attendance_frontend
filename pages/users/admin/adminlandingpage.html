@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <title   data-i18n="adminhomepage.dashboard.title">Admin Dashboard</title>
-
- <link href="/css/output.css" rel="stylesheet">
-   <script src="/js/language.js" defer></script>
+  <title data-i18n="adminhomepage.dashboard.title">Admin Dashboard</title>
+  <link href="/css/output.css" rel="stylesheet" />
+  <script src="/js/language.js" defer></script>
   <script src="/js/cookies.js"></script>
   <script>
     tailwind.config = {
@@ -21,226 +19,184 @@
               '100%': { opacity: '1', transform: 'translateY(0)' },
             },
           },
-        }
-      }
-    }
+        },
+      },
+    };
   </script>
 </head>
 
 <body class="bg-black text-white min-h-screen">
+  <select id="langSelect" class="hidden text-green-700 border border-green-500 bg-transparent rounded px-2 py-1">
+    <option data-i18n="home.english" value="en">English</option>
+    <option data-i18n="home.french" value="fr">Français</option>
+  </select>
 
- <select  id="langSelect" class=" hidden text-green-700 border border-green-500 bg-transparent rounded px-2 py-1">
-  <option data-i18n="home.english" value="en">English</option>
-  <option data-i18n="home.french" value="fr">Français</option>
-</select>
- <header class=" sticky top-0  left-0 w-full bg-black flex text-white items-center justify-between gap-3 p-5 shadow-md border-b border-green-600 z-50 ">
-  <div class="flex items-center space-x-3">
-    <img src="/assets/download.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
-    <span data-i18n="adminhomepage.dashboard.header" class="text-xl font-bold">School Admin</span>
-  </div>
-
-  <!-- Mobile Menu Button -->
-  <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">
-    &#9776;
-  </button>
-
-  <nav id="navMenu"
-      class=" flex max-sm:hidden sm:items-center gap-4  transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40  max-sm:flex-col">
-       <a data-i18n="adminhomepage.dashboard.menu.school" href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied">
-        School
-      </a>
-    <a data-i18n="adminhomepage.dashboard.menu.teachers" href="/pages/users/admin/teachers.html" class="hover:text-green-400 font-medium">Teachers</a>
-    <a data-i18n="adminhomepage.dashboard.menu.add_teacher" href="/pages/users/addteacher.html" class="hover:text-green-400 font-medium">Add Teacher</a>
-    <a data-i18n="adminhomepage.dashboard.menu.report" href="/pages/report.html" class="hover:text-green-400 font-medium">Report</a>
-    <button data-i18n="adminhomepage.dashboard.menu.logout" class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
-      Logout
-    </button>
-  </nav>
-</header>
-
+  <header class="sticky top-0 left-0 w-full bg-black flex justify-between items-center gap-3 p-5 shadow-md border-b border-green-600 z-50">
+    <div class="flex items-center space-x-3">
+      <img src="/assets/download.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-white" />
+      <span data-i18n="adminhomepage.dashboard.header" class="text-xl font-bold">School Admin</span>
+    </div>
+    <button id="menuBtn" class="sm:hidden text-white text-3xl focus:outline-none">&#9776;</button>
+    <nav id="navMenu"
+         class="flex max-sm:hidden sm:items-center gap-4 transition-transform duration-300 max-sm:h-full max-sm:p-4 max-sm:w-2/4 max-sm:fixed top-0 right-0 max-sm:max-w-xs max-sm:bg-black max-sm:z-40 max-sm:flex-col">
+      <a href="/pages/registerstudent.html" class="hover:text-green-400 font-medium teacher-access-denied" data-i18n="adminhomepage.dashboard.menu.school">School</a>
+      <a href="/pages/users/admin/teachers.html" class="hover:text-green-400 font-medium" data-i18n="adminhomepage.dashboard.menu.teachers">Teachers</a>
+      <a href="/pages/users/addteacher.html" class="hover:text-green-400 font-medium" data-i18n="adminhomepage.dashboard.menu.add_teacher">Add Teacher</a>
+      <a href="/pages/report.html" class="hover:text-green-400 font-medium" data-i18n="adminhomepage.dashboard.menu.report">Report</a>
+      <button class="logoutBtn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded" data-i18n="adminhomepage.dashboard.menu.logout">Logout</button>
+    </nav>
+  </header>
 
   <main class="pt-24 px-6 pb-10">
-    <h2 data-i18n="adminhomepage.dashboard.section_title" class="text-3xl font-bold text-green-400 mb-8 text-center">Dashboard Articles</h2>
-<div class="my-6 mb-8 p-4 bg-gray-900 rounded-lg text-white max-w-md mx-auto shadow-lg border border-green-600">
-  <h3 class="text-lg font-semibold mb-2">Your API Key for the Device</h3>
-  <div class="flex items-center space-x-2">
-    <input
-      id="apiKeyInput"
-      type="password"
-      readonly
-      class="flex-grow bg-gray-800 text-white px-3 py-2 rounded focus:outline-none"
-      value="****************************"
-      title="Your API Key (hidden)"
-    />
-    <button
-      id="toggleApiKeyBtn"
-      class="bg-green-600 hover:bg-green-700 px-3 py-2 rounded text-white text-sm"
-      title="Show/Hide API Key"
-    >
-      Show
-    </button>
-    <button
-      id="copyApiKeyBtn"
-      class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-white text-sm"
-      title="Copy API Key"
-    >
-      Copy
-    </button>
-  </div>
-  <p id="copyMsg" class="mt-2 text-green-400 text-sm hidden">API Key copied!</p>
-</div>
+    <h2 class="text-3xl font-bold text-green-400 mb-8 text-center" data-i18n="adminhomepage.dashboard.section_title">Dashboard Articles</h2>
 
-
-
+    <div class="my-6 mb-8 p-4 bg-gray-900 rounded-lg text-white max-w-md mx-auto shadow-lg border border-green-600">
+      <h3 class="text-lg font-semibold mb-2">Your API Key for the Device</h3>
+      <div class="flex items-center space-x-2">
+        <input id="apiKeyInput" type="password" readonly class="flex-grow bg-gray-800 text-white px-3 py-2 rounded" value="****************************" />
+        <button id="toggleApiKeyBtn" class="bg-green-600 hover:bg-green-700 px-3 py-2 rounded text-white text-sm">Show</button>
+        <button id="copyApiKeyBtn" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-white text-sm">Copy</button>
+      </div>
+      <p id="copyMsg" class="mt-2 text-green-400 text-sm hidden">API Key copied!</p>
+    </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
       <div class="bg-white text-black p-6 rounded-xl shadow-lg border-2 border-green-600 animate-fadeInUp">
-        <h3 data-i18n="adminhomepage.dashboard.cards.attendance.title" class="text-xl font-bold text-green-700 mb-2">Attendance Tracking</h3>
-        <p data-i18n="adminhomepage.dashboard.cards.attendance.description" class="text-sm">View and manage student attendance with real-time syncing from IoT devices.</p>
+        <h3 class="text-xl font-bold text-green-700 mb-2" data-i18n="adminhomepage.dashboard.cards.attendance.title">Attendance Tracking</h3>
+        <p class="text-sm" data-i18n="adminhomepage.dashboard.cards.attendance.description">View and manage student attendance with real-time syncing from IoT devices.</p>
       </div>
 
-
       <div class="bg-white text-black p-6 rounded-xl shadow-lg border-2 border-green-600 animate-fadeInUp delay-100">
-        <h3 data-i18n="adminhomepage.dashboard.cards.teacher.title" class="text-xl font-bold text-green-700 mb-2">Teacher Management</h3>
-        <p data-i18n="adminhomepage.dashboard.cards.teacher.description" class="text-sm">Add, update, and monitor all registered teachers with access control and activity logs.</p>
+        <h3 class="text-xl font-bold text-green-700 mb-2" data-i18n="adminhomepage.dashboard.cards.teacher.title">Teacher Management</h3>
+        <p class="text-sm" data-i18n="adminhomepage.dashboard.cards.teacher.description">Add, update, and monitor all registered teachers with access control and activity logs.</p>
       </div>
 
       <div class="bg-white text-black p-6 rounded-xl shadow-lg border-2 border-green-600 animate-fadeInUp delay-200">
-        <h3 data-i18n="adminhomepage.dashboard.cards.report.title" class="text-xl font-bold text-green-700 mb-2">Student Reports</h3>
-        <p  data-i18n="adminhomepage.dashboard.cards.report.description" class="text-sm">Generate reports for attendance, academic performance, and behavioral tracking.</p>
+        <h3 class="text-xl font-bold text-green-700 mb-2" data-i18n="adminhomepage.dashboard.cards.report.title">Student Reports</h3>
+        <p class="text-sm" data-i18n="adminhomepage.dashboard.cards.report.description">Generate reports for attendance, academic performance, and behavioral tracking.</p>
       </div>
     </div>
 
     <div class="text-center my-10">
-  <button id="openCategoryModal" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded">
-    + Create Category
-  </button>
-</div>
+      <button id="openCategoryModal" class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded">
+        + Create Category
+      </button>
+    </div>
 
-<!-- Modal -->
-<div id="categoryModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
-  <div class="bg-gray-900 border border-green-600 text-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
-    <button id="closeCategoryModal" class="absolute top-2 right-2 text-white hover:text-red-400 text-xl">&times;</button>
-    <h3 class="text-xl font-semibold mb-4 text-green-400">New Category</h3>
-    <form id="categoryForm" class="space-y-4">
-      <input type="text" name="name" placeholder="Category Name" required class="w-full px-4 py-2 rounded bg-gray-800 border border-green-500 focus:outline-none" />
-      <button type="submit" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white">Create</button>
-      <p id="categoryMessage" class="text-sm mt-2 text-center"></p>
-    </form>
-  </div>
-</div>
-
+    <!-- Category Modal -->
+    <div id="categoryModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
+      <div class="bg-gray-900 border border-green-600 text-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+        <button id="closeCategoryModal" class="absolute top-2 right-2 text-white hover:text-red-400 text-xl">&times;</button>
+        <h3 class="text-xl font-semibold mb-4 text-green-400">New Category</h3>
+        <form id="categoryForm" class="space-y-4">
+          <input type="text" name="name" placeholder="Category Name" required class="w-full px-4 py-2 rounded bg-gray-800 border border-green-500 focus:outline-none" />
+          <button type="submit" id="createCategoryBtn" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white flex justify-center items-center gap-2">
+            <span>Create</span>
+            <span id="loadingSpinner" class="hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
+          </button>
+          <p id="categoryMessage" class="text-sm mt-3 text-center"></p>
+        </form>
+      </div>
+    </div>
   </main>
 
   <script src="/js/menu.js"></script>
   <script src="/js/signout.js"></script>
   <script>
-  // Replace this with actual API key fetched/stored after login
-  // For example, you can save it in a cookie or pass it from backend rendering
-  const apiKey = getCookie('api_key') || 'YourAPIKeyHere';
+    const apiKey = getCookie('api_key') || 'YourAPIKeyHere';
 
-  const apiKeyInput = document.getElementById('apiKeyInput');
-  const toggleBtn = document.getElementById('toggleApiKeyBtn');
-  const copyBtn = document.getElementById('copyApiKeyBtn');
-  const copyMsg = document.getElementById('copyMsg');
+    const apiKeyInput = document.getElementById('apiKeyInput');
+    const toggleBtn = document.getElementById('toggleApiKeyBtn');
+    const copyBtn = document.getElementById('copyApiKeyBtn');
+    const copyMsg = document.getElementById('copyMsg');
 
-  // Initialize the input value masked with stars matching length
-  function maskApiKey(key) {
-    return '*'.repeat(key.length);
-  }
-
-  // Set masked initially
-  apiKeyInput.value = maskApiKey(apiKey);
-
-  // Toggle visibility of API key
-  toggleBtn.addEventListener('click', () => {
-    if (apiKeyInput.type === 'password') {
-      apiKeyInput.type = 'text';
-      apiKeyInput.value = apiKey;
-      toggleBtn.textContent = 'Hide';
-      apiKeyInput.title = 'Your API Key (visible)';
-    } else {
-      apiKeyInput.type = 'password';
-      apiKeyInput.value = maskApiKey(apiKey);
-      toggleBtn.textContent = 'Show';
-      apiKeyInput.title = 'Your API Key (hidden)';
+    function maskApiKey(key) {
+      return '*'.repeat(key.length);
     }
-  });
 
-  // Copy to clipboard
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(apiKey).then(() => {
-      copyMsg.classList.remove('hidden');
-      setTimeout(() => copyMsg.classList.add('hidden'), 2000);
-    }).catch(() => {
-      alert('Failed to copy API Key');
-    });
-  });
+    apiKeyInput.value = maskApiKey(apiKey);
 
-// Elements
-const categoryModal = document.getElementById('categoryModal');
-const openCategoryModal = document.getElementById('openCategoryModal');
-const closeCategoryModal = document.getElementById('closeCategoryModal');
-const categoryForm = document.getElementById('categoryForm');
-const categoryMessage = document.getElementById('categoryMessage');
-
-// Open modal
-openCategoryModal.addEventListener('click', () => {
-  categoryModal.classList.remove('hidden');
-  categoryMessage.textContent = '';
-  categoryForm.reset();
-});
-
-// Close modal
-closeCategoryModal.addEventListener('click', () => {
-  categoryModal.classList.add('hidden');
-});
-
-// Handle form submission
-categoryForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const name = categoryForm.name.value.trim();
-
-  if (!name) return;
-
-  try {
-    const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/categories/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey
-      },
-      body: JSON.stringify({ name })
+    toggleBtn.addEventListener('click', () => {
+      if (apiKeyInput.type === 'password') {
+        apiKeyInput.type = 'text';
+        apiKeyInput.value = apiKey;
+        toggleBtn.textContent = 'Hide';
+      } else {
+        apiKeyInput.type = 'password';
+        apiKeyInput.value = maskApiKey(apiKey);
+        toggleBtn.textContent = 'Show';
+      }
     });
 
-    const result = await res.json();
-    if (res.ok) {
-      categoryMessage.textContent = result.message || 'Category created!';
-      categoryMessage.className = 'text-green-400 text-sm mt-2 text-center';
-      setTimeout(() => categoryModal.classList.add('hidden'), 1500);
-    } else {
-      categoryMessage.textContent = result.error || 'Failed to create category.';
-      categoryMessage.className = 'text-red-400 text-sm mt-2 text-center';
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(apiKey).then(() => {
+        copyMsg.classList.remove('hidden');
+        setTimeout(() => copyMsg.classList.add('hidden'), 2000);
+      });
+    });
+
+    const categoryModal = document.getElementById('categoryModal');
+    const openCategoryModal = document.getElementById('openCategoryModal');
+    const closeCategoryModal = document.getElementById('closeCategoryModal');
+    const categoryForm = document.getElementById('categoryForm');
+    const categoryMessage = document.getElementById('categoryMessage');
+
+    openCategoryModal.addEventListener('click', () => {
+      categoryModal.classList.remove('hidden');
+      categoryMessage.textContent = '';
+      categoryForm.reset();
+    });
+
+    closeCategoryModal.addEventListener('click', () => {
+      categoryModal.classList.add('hidden');
+    });
+
+    categoryForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = categoryForm.name.value.trim();
+      if (!name) return;
+
+      const createBtn = document.getElementById('createCategoryBtn');
+      const spinner = document.getElementById('loadingSpinner');
+
+      createBtn.disabled = true;
+      spinner.classList.remove('hidden');
+      categoryMessage.textContent = '';
+
+      try {
+        const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/categories/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey,
+          },
+          body: JSON.stringify({ name }),
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+          categoryMessage.textContent = result.message || 'Category created!';
+          categoryMessage.className = 'text-green-400 text-sm mt-3 text-center';
+          setTimeout(() => categoryModal.classList.add('hidden'), 1500);
+        } else {
+          categoryMessage.textContent = result.error || 'Failed to create category.';
+          categoryMessage.className = 'text-red-400 text-sm mt-3 text-center';
+        }
+      } catch (err) {
+        console.error('Error creating category:', err);
+        categoryMessage.textContent = 'Server error.';
+        categoryMessage.className = 'text-red-400 text-sm mt-3 text-center';
+      }
+
+      createBtn.disabled = false;
+      spinner.classList.add('hidden');
+    });
+
+    function getCookie(name) {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? decodeURIComponent(match[2]) : null;
     }
-  } catch (err) {
-    console.error('Error creating category:', err);
-    categoryMessage.textContent = 'Server error.';
-    categoryMessage.className = 'text-red-400 text-sm mt-2 text-center';
-  }
-});
-
-
-
-
-  // Utility to get cookie value by name
-  function getCookie(name) {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    if (match) return decodeURIComponent(match[2]);
-    return null;
-  }
-</script>
-
+  </script>
 </body>
-
 </html>
