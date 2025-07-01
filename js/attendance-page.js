@@ -270,9 +270,37 @@ applyAdvancedFilterBtn.addEventListener("click", () => {
   advancedFilterModal.classList.add("hidden");
 });
 
+
+  async function populateFormOptions() {
+    const formSelect = document.getElementById("formFilter");
+    const apiKey = getCookie("api_key");
+
+    try {
+      const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/categories", {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey
+        }
+      });
+
+      if (!res.ok) throw new Error("Failed to fetch categories");
+
+      const categories = await res.json();
+
+      categories.forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat.name;
+        option.textContent = cat.name;
+        formSelect.appendChild(option);
+      });
+    } catch (error) {
+      console.error("Error loading categories:", error);
+    }
+  }
 // Initialize page and event listeners
-function pageInit() {
+async function pageInit() {
   handleRoleVisibility();
+   await populateFormOptions();  // <- Add this
   fetchStudents();
   startStudentsAutoRefresh();
 
