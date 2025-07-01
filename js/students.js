@@ -10,16 +10,11 @@ if (role === "teacher") {
   document.querySelectorAll(".teacher-access-denied").forEach(el => el.classList.add("hidden"));
 }
 
-
-let studentsData = [];
-
-
+let studentsData = []; // global list for filtering
 
 async function fetchStudents() {
   const errorMessage = document.getElementById("errormessage");
-  const apiKey = getCookie("api_key"); // assumes getCookie() is defined
-
-  console.log("🔑 API Key from cookie:", apiKey);
+  const apiKey = getCookie("api_key");
 
   try {
     const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/students", {
@@ -30,39 +25,26 @@ async function fetchStudents() {
       },
     });
 
-    console.log("📦 Raw fetch response:", res);
+    if (!res.ok) throw new Error("Failed to fetch students");
 
-    if (!res.ok) {
-      const errorBody = await res.json().catch(() => ({}));
-      console.error("❌ Server responded with an error:", res.status, errorBody);
-      throw new Error(`Server responded with status ${res.status}`);
-    }
-
-    const studentsData = await res.json();
-    console.log("✅ Students data received:", studentsData);
+    const data = await res.json();
+    studentsData = data; // assign to global variable
 
     renderStudents(studentsData);
 
-   if (errorMessage) {
-  errorMessage.textContent = "";
-  errorMessage.classList.add("hidden");
-}
-} catch (err) {
-  console.error("⚠️ Error fetching students:", err);
-  if (errorMessage) {
-    // Try to show backend error message if available, fallback to generic
-    const backendMessage ="You have no student yet "
-    errorMessage.textContent = backendMessage;
-    errorMessage.classList.remove("hidden");
-   errorMessage.classList.add("text-gray-600", "bg-gray-100", "p-2", "rounded");
-
+    if (errorMessage) {
+      errorMessage.textContent = "";
+      errorMessage.classList.add("hidden");
+    }
+  } catch (err) {
+    console.error("⚠️ Error fetching students:", err);
+    if (errorMessage) {
+      errorMessage.textContent = "You have no student yet";
+      errorMessage.classList.remove("hidden");
+      errorMessage.classList.add("text-gray-600", "bg-gray-100", "p-2", "rounded");
+    }
   }
 }
-
-}
-
-
-
 
 function renderStudents(students) {
   const tbody = document.getElementById("studentsBody");
@@ -102,16 +84,13 @@ function renderStudents(students) {
   document.getElementById("femalePercent").textContent = total ? ((females / total) * 100).toFixed(1) : 0;
 }
 
-
 function openModal(uid) {
   document.getElementById("oldUid").value = uid;
   document.getElementById("newUid").value = "";
 
   const msg = document.getElementById("uidUpdateMessage");
-  if (msg) {
-    msg.className = "mt-4 p-3 rounded-md text-center hidden";
-    msg.textContent = "";
-  }
+  msg.className = "mt-4 p-3 rounded-md text-center hidden";
+  msg.textContent = "";
 
   document.getElementById("modalOverlay").classList.remove("hidden");
 }
@@ -122,33 +101,32 @@ function closeModal() {
 
 document.getElementById("close").addEventListener("click", closeModal);
 
+async function populateFormOptions() {
+  const formSelect = document.getElementById("formFilter");
+  const apiKey = getCookie("api_key");
 
-  async function populateFormOptions() {
-    const formSelect = document.getElementById("formFilter");
-    const apiKey = getCookie("api_key");
+  try {
+    const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/categories", {
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey
+      }
+    });
 
-    try {
-      const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/categories", {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": apiKey
-        }
-      });
+    if (!res.ok) throw new Error("Failed to fetch categories");
 
-      if (!res.ok) throw new Error("Failed to fetch categories");
+    const categories = await res.json();
 
-      const categories = await res.json();
-
-      categories.forEach(cat => {
-        const option = document.createElement("option");
-        option.value = cat.name;
-        option.textContent = cat.name;
-        formSelect.appendChild(option);
-      });
-    } catch (error) {
-      console.error("Error loading categories:", error);
-    }
+    categories.forEach(cat => {
+      const option = document.createElement("option");
+      option.value = cat.name;
+      option.textContent = cat.name;
+      formSelect.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error loading categories:", error);
   }
+}
 
 async function updateStudentUid(oldUid, newUid) {
   if (getCookie("role") !== "admin") {
@@ -160,7 +138,6 @@ async function updateStudentUid(oldUid, newUid) {
   const updateBtn = document.getElementById("updateUidBtn");
   const spinner = document.getElementById("spinner");
 
-  // Reset message
   messageDiv.className = "mt-4 p-3 rounded-md text-center hidden";
   messageDiv.textContent = "";
   spinner.classList.remove("hidden");
@@ -175,12 +152,13 @@ async function updateStudentUid(oldUid, newUid) {
         body: JSON.stringify({ newUid }),
       }
     );
+
     const data = await res.json();
 
     if (res.ok) {
       messageDiv.textContent = data.message || "UID updated successfully!";
       messageDiv.classList.add("bg-green-100", "text-green-800");
-      fetchStudents();
+      await fetchStudents();
     } else {
       messageDiv.textContent = data.error || "An unknown error occurred.";
       messageDiv.classList.add("bg-red-100", "text-red-800");
@@ -195,10 +173,11 @@ async function updateStudentUid(oldUid, newUid) {
   }
 }
 
-// Event bindings
+// Filter events
 document.getElementById("formFilter").addEventListener("change", () => renderStudents(studentsData));
 document.getElementById("searchInput").addEventListener("input", () => renderStudents(studentsData));
 
+// Form submission event
 document.getElementById("updateUidForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const oldUid = document.getElementById("oldUid").value.trim();
@@ -212,15 +191,11 @@ document.getElementById("updateUidForm").addEventListener("submit", async (e) =>
   const confirmed = confirm(`Change UID from "${oldUid}" to "${newUid}"?`);
   if (confirmed) await updateStudentUid(oldUid, newUid);
 });
-  async function pageInit() {
- 
-    await populateFormOptions();  // <- Add this
 
-  }
+// Page initialization
+async function pageInit() {
+  await populateFormOptions(); // Load filter options
+  await fetchStudents();       // Load student data and render
+}
 
-  document.addEventListener("DOMContentLoaded", pageInit);
-
-// Load students on page ready
-window.addEventListener("DOMContentLoaded", fetchStudents);
-
-
+document.addEventListener("DOMContentLoaded", pageInit);
