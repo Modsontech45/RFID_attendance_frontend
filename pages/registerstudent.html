@@ -133,7 +133,7 @@
           const card = document.createElement("div");
           card.className = "bg-gray-800 p-6 rounded-lg border border-green-600 shadow";
 
-        
+
 function formatTimeAgo(lastSeen) {
   const now = new Date();
   const diffMs = now - lastSeen;
@@ -249,7 +249,7 @@ card.innerHTML = `
 
             if (!data.exists) {
               formContainer.innerHTML = `
-<form id="form-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3">
+<form id="form-${device_uid}" class="bg-gray-700 p-4 rounded space-y-3 flex items-center justify-center gap-2">
   <h4 class="text-green-300 font-semibold text-lg mb-2">Register New Student</h4>
   <input type="text" name="name" placeholder="Name" class="input" required />
   <input type="email" name="email" placeholder="Email" class="input" required />
