@@ -7,10 +7,9 @@ const downloadOptions = document.getElementById("downloadOptions");
 function getCookie(name) {
   const cookieStr = `; ${document.cookie}`;
   const parts = cookieStr.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-  return null;
+  return parts.length === 2 ? parts.pop().split(";").shift() : null;
 }
-// Role-based UI control
+
 function handleRoleVisibility() {
   const role = getCookie("role");
   if (role === "teacher") {
@@ -19,15 +18,14 @@ function handleRoleVisibility() {
   }
 }
 
-
 async function fetchStudents() {
-  const apiKey = getCookie("api_key");  // Get API key from cookie
+  const apiKey = getCookie("api_key");
 
   try {
     const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/attendance", {
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": apiKey,  // <-- Send API key in header
+        "x-api-key": apiKey,
       },
     });
 
@@ -36,24 +34,26 @@ async function fetchStudents() {
     allStudentData = await res.json();
     applyFilters();
   } catch (err) {
- document.getElementById("studentsBody").innerHTML = `
-  <tr><td colspan="7" class="text-center text-gray-600">Failed to load data, You have no attendance record</td></tr>
-`;
-
+    const tbody = document.getElementById("studentsBody");
+    if (tbody) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7" class="text-center text-gray-600">Failed to load data. You have no attendance record.</td>
+        </tr>
+      `;
+    }
   }
 }
 
-
-// Apply filters to student data
 function applyFilters() {
-  const form = document.getElementById("formFilter").value;
-  const date = document.getElementById("dateFilter").value;
-  const name = document.getElementById("nameFilter").value.toLowerCase();
-  const startDate = document.getElementById("startDateFilter").value;
-  const endDate = document.getElementById("endDateFilter").value;
+  const form = document.getElementById("formFilter")?.value?.toLowerCase() || "";
+  const date = document.getElementById("dateFilter")?.value;
+  const name = document.getElementById("nameFilter")?.value.toLowerCase() || "";
+  const startDate = document.getElementById("startDateFilter")?.value;
+  const endDate = document.getElementById("endDateFilter")?.value;
 
   const filtered = allStudentData.filter(a => {
-    const matchForm = !form || a.form === form;
+    const matchForm = !form || a.form?.toLowerCase() === form;
     const matchDate = !date || a.date?.slice(0, 10) === date;
     const matchName = !name || a.name?.toLowerCase().includes(name);
     const matchStart = !startDate || new Date(a.date) >= new Date(startDate);
@@ -64,10 +64,11 @@ function applyFilters() {
   renderStudents(filtered);
 }
 
-// Render students in the table and update stats
 function renderStudents(data) {
   const tbody = document.getElementById("studentsBody");
   const formStatsSummary = document.getElementById("formStatsSummary");
+  if (!tbody || !formStatsSummary) return;
+
   tbody.innerHTML = "";
   formStatsSummary.innerHTML = "";
 
@@ -78,11 +79,10 @@ function renderStudents(data) {
     const f = a.form || "Unknown";
     formStats[f] = formStats[f] || { present: 0, partial: 0, absent: 0 };
 
-    const status = a.status;
-    if (status === "present") {
+    if (a.status === "present") {
       formStats[f].present++;
       present++;
-    } else if (status === "partial") {
+    } else if (a.status === "partial") {
       formStats[f].partial++;
       partial++;
     } else {
@@ -101,8 +101,8 @@ function renderStudents(data) {
         <td class="px-4 py-2 ${a.sign_out_time ? "" : "text-red-600 font-semibold"}">
           ${a.sign_out_time ? new Date(a.sign_out_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "Not signed out"}
         </td>
-        <td class="px-4 py-2 font-semibold ${status === "present" ? "text-green-600" : status === "partial" ? "text-yellow-500" : "text-red-600"}">
-          ${status}
+        <td class="px-4 py-2 font-semibold ${a.status === "present" ? "text-green-600" : a.status === "partial" ? "text-yellow-500" : "text-red-600"}">
+          ${a.status}
         </td>
         <td class="px-4 py-2">${f}</td>
       </tr>
@@ -115,7 +115,7 @@ function renderStudents(data) {
   document.getElementById("totalPartial").textContent = partial;
   document.getElementById("totalAbsent").textContent = absent;
 
-  Object.entries(formStats).forEach(([f, stat]) => {
+  for (const [f, stat] of Object.entries(formStats)) {
     formStatsSummary.innerHTML += `
       <div>
         <strong>${f}</strong> - Present: <span class="text-green-600">${stat.present}</span>,
@@ -123,14 +123,15 @@ function renderStudents(data) {
         Absent: <span class="text-red-600">${stat.absent}</span>
       </div>
     `;
-  });
+  }
 
   updateChart(present, partial, absent);
 }
 
-// Chart rendering
 function updateChart(present, partial, absent) {
-  const ctx = document.getElementById("attendanceChart").getContext("2d");
+  const ctx = document.getElementById("attendanceChart")?.getContext("2d");
+  if (!ctx) return;
+
   if (chartInstance) chartInstance.destroy();
 
   chartInstance = new Chart(ctx, {
@@ -160,20 +161,47 @@ function updateChart(present, partial, absent) {
   });
 }
 
-// Auto refresh functions
 function startStudentsAutoRefresh(delay = 10000) {
   clearInterval(studentsRefreshIntervalId);
   studentsRefreshIntervalId = setInterval(fetchStudents, delay);
 }
+
 function stopStudentsAutoRefresh() {
   clearInterval(studentsRefreshIntervalId);
 }
 
-// Download as PDF
+async function populateFormOptions() {
+  const formSelect = document.getElementById("formFilter");
+  const apiKey = getCookie("api_key");
+
+  try {
+    const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/categories", {
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey
+      }
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch categories");
+
+    const categories = await res.json();
+    categories.forEach(cat => {
+      const option = document.createElement("option");
+      option.value = cat.name;
+      option.textContent = cat.name;
+      formSelect?.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error loading categories:", error);
+  }
+}
+
+// PDF download
 async function downloadAsPDF() {
   const { jsPDF } = window.jspdf;
   const pdfText = document.getElementById("pdfText");
   const pdfSpinner = document.getElementById("pdfSpinner");
+
   pdfText.textContent = "Generating...";
   pdfSpinner.classList.remove("hidden");
 
@@ -186,8 +214,8 @@ async function downloadAsPDF() {
     const imgProps = doc.getImageProperties(imgData);
     const imgHeight = (imgProps.height * pageWidth) / imgProps.width;
 
+    let position = 0;
     if (imgHeight > pageHeight) {
-      let position = 0;
       let heightLeft = imgHeight;
       while (heightLeft > 0) {
         doc.addImage(imgData, "PNG", 0, position, pageWidth, imgHeight);
@@ -199,7 +227,7 @@ async function downloadAsPDF() {
       doc.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
     }
 
-    doc.save(`webpage_${new Date().toISOString().slice(0, 10)}.pdf`);
+    doc.save(`attendance_${new Date().toISOString().slice(0, 10)}.pdf`);
   } catch (err) {
     console.error("PDF error:", err);
     alert("Failed to generate PDF.");
@@ -207,13 +235,14 @@ async function downloadAsPDF() {
 
   pdfText.textContent = "Download as PDF";
   pdfSpinner.classList.add("hidden");
-  downloadOptions.classList.add("hidden");
+  downloadOptions?.classList.add("hidden");
 }
 
-// Download as Excel
+// Excel download
 async function downloadExcel() {
   const excelText = document.getElementById("excelText");
   const excelSpinner = document.getElementById("excelSpinner");
+
   excelText.textContent = "Generating...";
   excelSpinner.classList.remove("hidden");
 
@@ -239,10 +268,9 @@ async function downloadExcel() {
 
   excelText.textContent = "Download as Excel";
   excelSpinner.classList.add("hidden");
-  downloadOptions.classList.add("hidden");
+  downloadOptions?.classList.add("hidden");
 }
 
-// Debounce helper to limit rapid calls
 function debounce(func, delay) {
   let timeout;
   return (...args) => {
@@ -251,71 +279,34 @@ function debounce(func, delay) {
   };
 }
 
-// Modal and advanced filter controls
-const advancedFilterBtn = document.getElementById("advancedFilterBtn");
-const advancedFilterModal = document.getElementById("advancedFilterModal");
-const closeAdvancedFilterModal = document.getElementById("closeAdvancedFilterModal");
-const applyAdvancedFilterBtn = document.getElementById("applyAdvancedFilterBtn");
-
-advancedFilterBtn.addEventListener("click", () => {
-  advancedFilterModal.classList.remove("hidden");
-});
-
-closeAdvancedFilterModal.addEventListener("click", () => {
-  advancedFilterModal.classList.add("hidden");
-});
-
-applyAdvancedFilterBtn.addEventListener("click", () => {
-  applyFilters();
-  advancedFilterModal.classList.add("hidden");
-});
-
-
-  async function populateFormOptions() {
-    const formSelect = document.getElementById("formFilter");
-    const apiKey = getCookie("api_key");
-
-    try {
-      const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/categories", {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": apiKey
-        }
-      });
-
-      if (!res.ok) throw new Error("Failed to fetch categories");
-
-      const categories = await res.json();
-
-      categories.forEach(cat => {
-        const option = document.createElement("option");
-        option.value = cat.name;
-        option.textContent = cat.name;
-        formSelect.appendChild(option);
-      });
-    } catch (error) {
-      console.error("Error loading categories:", error);
-    }
-  }
-// Initialize page and event listeners
+// Page init
 async function pageInit() {
   handleRoleVisibility();
-   await populateFormOptions();  // <- Add this
-  fetchStudents();
+  await populateFormOptions();
+  await fetchStudents();
   startStudentsAutoRefresh();
 
-  // Filters on basic controls (formFilter, dateFilter, startDateFilter, endDateFilter)
-  document.getElementById("formFilter").addEventListener("change", applyFilters);
-  document.getElementById("dateFilter").addEventListener("change", applyFilters);
-  document.getElementById("startDateFilter").addEventListener("change", applyFilters);
-  document.getElementById("endDateFilter").addEventListener("change", applyFilters);
+  document.getElementById("formFilter")?.addEventListener("change", applyFilters);
+  document.getElementById("dateFilter")?.addEventListener("change", applyFilters);
+  document.getElementById("startDateFilter")?.addEventListener("change", applyFilters);
+  document.getElementById("endDateFilter")?.addEventListener("change", applyFilters);
+  document.getElementById("nameFilter")?.addEventListener("input", debounce(applyFilters, 300));
 
-  // Debounced name filter for better UX
-  document.getElementById("nameFilter").addEventListener("input", debounce(applyFilters, 300));
+  document.getElementById("downloadBtn")?.addEventListener("click", () => {
+    downloadOptions?.classList.toggle("hidden");
+  });
 
-  // Download button toggle
-  document.getElementById("downloadBtn").addEventListener("click", () => {
-    downloadOptions.classList.toggle("hidden");
+  document.getElementById("applyAdvancedFilterBtn")?.addEventListener("click", () => {
+    applyFilters();
+    document.getElementById("advancedFilterModal")?.classList.add("hidden");
+  });
+
+  document.getElementById("advancedFilterBtn")?.addEventListener("click", () => {
+    document.getElementById("advancedFilterModal")?.classList.remove("hidden");
+  });
+
+  document.getElementById("closeAdvancedFilterModal")?.addEventListener("click", () => {
+    document.getElementById("advancedFilterModal")?.classList.add("hidden");
   });
 }
 
