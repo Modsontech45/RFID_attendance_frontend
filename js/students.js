@@ -123,6 +123,33 @@ function closeModal() {
 document.getElementById("close").addEventListener("click", closeModal);
 
 
+  async function populateFormOptions() {
+    const formSelect = document.getElementById("formFilter");
+    const apiKey = getCookie("api_key");
+
+    try {
+      const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/categories", {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey
+        }
+      });
+
+      if (!res.ok) throw new Error("Failed to fetch categories");
+
+      const categories = await res.json();
+
+      categories.forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat.name;
+        option.textContent = cat.name;
+        formSelect.appendChild(option);
+      });
+    } catch (error) {
+      console.error("Error loading categories:", error);
+    }
+  }
+
 async function updateStudentUid(oldUid, newUid) {
   if (getCookie("role") !== "admin") {
     window.location.href = "/pages/users/access-denied.html";
@@ -185,6 +212,13 @@ document.getElementById("updateUidForm").addEventListener("submit", async (e) =>
   const confirmed = confirm(`Change UID from "${oldUid}" to "${newUid}"?`);
   if (confirmed) await updateStudentUid(oldUid, newUid);
 });
+  async function pageInit() {
+ 
+    await populateFormOptions();  // <- Add this
+
+  }
+
+  document.addEventListener("DOMContentLoaded", pageInit);
 
 // Load students on page ready
 window.addEventListener("DOMContentLoaded", fetchStudents);
