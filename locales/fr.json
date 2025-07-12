@@ -321,5 +321,10 @@
       "status": "Statut",
       "form": "Classe"
     }
+  },
+    "sub-admin":{
+    "return": "Retour",
+    "sub":"Notre équipe technique"
+
   }
 }

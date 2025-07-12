@@ -321,5 +321,10 @@
       "status": "Status",
       "form": "Form"
     }
+  },
+  "sub-admin":{
+    "return": "Go home",
+    "sub":"Your Staff"
+
   }
 }
