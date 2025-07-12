@@ -8,6 +8,9 @@ function getNestedValue(obj, path) {
     return acc && acc[part];
   }, obj);
 }
+function getSelectedLanguage() {
+  return localStorage.getItem('lang') || 'en';
+}
 
 async function setLanguage(lang) {
   console.log(`Setting language to: ${lang}`);

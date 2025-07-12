@@ -88,7 +88,9 @@ registerDeviceForm.addEventListener("submit", async (e) => {
   try {
     const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+          'Accept-Language': getSelectedLanguage(),
+      },
       body: JSON.stringify({ device_uid, device_name, api_key }),
     });
     console.log("Device registration HTTP status:", res.status);
