@@ -21,7 +21,7 @@
       "featuresTitle": "Key Features:",
       "featuresList": [
         "Effortlessly register and track attendance with RFID cards or tags scanned via ESP32 devices.",
-        "View live attendance data with detailed reports and analytics accessible to admins and teachers.",
+        "View live attendance data with detailed reports and analytics accessible to admins and staff.",
         "Different access levels for admins and teachers ensure security and proper permissions.",
         "Supports English and French to cater to diverse user bases.",
         "Flexible monthly and yearly subscription plans for schools and companies of all sizes.",

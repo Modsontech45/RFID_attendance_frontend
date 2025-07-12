@@ -16,12 +16,12 @@
       "Rejoignez-nous pour une gestion fluide de la présence !"
     ],
     "about": {
-      "title": "À propos du système de présence Modson",
+      "title": "À propos du système de présence Synctuario",
       "description": "Le système de présence Modson est une plateforme robuste et facile à utiliser conçue pour les écoles et les entreprises afin d'automatiser le suivi de la présence grâce à la technologie RFID. Il combine matériel et logiciel pour offrir une surveillance en temps réel fluide de la présence.",
       "featuresTitle": "Fonctionnalités clés :",
       "featuresList": [
         "Enregistrez et suivez facilement la présence avec des cartes ou badges RFID scannés via des appareils ESP32.",
-        "Consultez les données de présence en direct avec des rapports détaillés accessibles aux administrateurs et enseignants.",
+        "Consultez les données de présence en direct avec des rapports détaillés accessibles aux administrateurs et les membres personnel.",
         "Différents niveaux d'accès pour les administrateurs et enseignants garantissent la sécurité et les autorisations appropriées.",
         "Prise en charge de l'anglais et du français pour répondre à des bases d'utilisateurs diversifiées.",
         "Plans d'abonnement mensuels et annuels flexibles pour les écoles et entreprises de toutes tailles.",
