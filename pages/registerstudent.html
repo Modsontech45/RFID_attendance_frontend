@@ -60,6 +60,7 @@ console.log("Loaded API Key:", api_key);
 function getSelectedLanguage() {
   return localStorage.getItem('lang') || 'en';
 }
+const selectlang = getSelectedLanguage();
 const toggleAddDeviceBtn = document.getElementById("toggleAddDeviceBtn");
 const registerDeviceForm = document.getElementById("registerDeviceForm");
 const deviceFormMessage = document.getElementById("deviceFormMessage");
@@ -232,6 +233,7 @@ function pollDevice(device_uid, card) {
       );
 
       console.log(`Polling HTTP status for device [${device_uid}]:`, res.status);
+      console.log(`selected language ${device_uid}`)
       const response = await res.json();
       const data = Array.isArray(response) ? response[0] : null;
 
