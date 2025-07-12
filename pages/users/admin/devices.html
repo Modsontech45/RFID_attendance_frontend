@@ -28,7 +28,7 @@
     <div id="pendingScans" class="space-y-3"></div>
   </div>
 
-<script>
+  <script>
   // Get language from localStorage or default to 'en'
   function getSelectedLanguage() {
     return localStorage.getItem('lang') || 'en';
@@ -47,7 +47,7 @@
     const api_key = document.getElementById('api_key').value.trim();
 
     try {
-      const res = await fetch('/devices/register', {
+      const res = await fetch('https://rfid-attendancesystem-backend-project.onrender.com/api/devices/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +71,7 @@
     if (!api_key) return;
 
     try {
-      const res = await fetch(`/pending-scans?api_key=${api_key}`, {
+      const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/pending-scans?api_key=${api_key}`, {
         headers: {
           'Accept-Language': selectlang
         }
