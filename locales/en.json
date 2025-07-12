@@ -324,7 +324,10 @@
   },
   "sub-admin":{
     "return": "Go home",
-    "sub":"Your Staff"
+    "sub":"Your Staff",
+      "add": "Add a staff",
+     "addbut": "Add",
+    "email": "👉 Adresse e-mail d’un membre"
 
   }
 }

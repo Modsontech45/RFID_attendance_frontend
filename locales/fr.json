@@ -324,7 +324,11 @@
   },
     "sub-admin":{
     "return": "Retour",
-    "sub":"Notre équipe technique"
+    "sub":"Notre équipe technique",
+    "add": "Ajouter un membre",
+     "addbut": "Ajouter ",
+    "email": "👉 Adresse e-mail d’un membre"
+
 
   }
 }
