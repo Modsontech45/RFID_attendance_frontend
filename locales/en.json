@@ -62,9 +62,9 @@
       "create": "+ Create department",
       "view": "view department",
       "menu": {
-        "school": "School",
-        "teachers": "Teachers",
-        "add_teacher": "Add Teacher",
+        "school": "Home",
+        "teachers": "Staff",
+        "add_teacher": "Add Staff",
         "report": "Report",
         "logout": "Logout"
       },

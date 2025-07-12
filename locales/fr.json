@@ -62,9 +62,9 @@
       "create": "+ Créer un département",
       "view": "voir le département",
       "menu": {
-        "school": "École",
-        "teachers": "Enseignants",
-        "add_teacher": "Ajouter un enseignant",
+        "school": "Accueil",
+        "teachers": "L'équipe ",
+        "add_teacher": "Ajouter un membre",
         "report": "Rapport",
         "logout": "Déconnexion"
       },
