@@ -54,6 +54,10 @@
     "dashboard": {
       "title": "Admin Dashboard",
       "header": "School Admin",
+      "api": "Your API Key for the Device",
+      "show": "show",
+      "copy": "Copy",
+      "copied": "Api key copied !",
       "menu": {
         "school": "School",
         "teachers": "Teachers",
@@ -171,7 +175,7 @@
     }
   },
 
-  
+
 
 "pricing": {
     "title": "Modson Attendance System - Subscription Plans",

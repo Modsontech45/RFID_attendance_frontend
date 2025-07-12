@@ -54,6 +54,10 @@
     "dashboard": {
       "title": "Tableau de bord administrateur",
       "header": "Admin de l'école",
+      "api": "Votre clé API pour l’appareil",
+      "show": "Voir",
+      "copy": "Copier",
+      "copied": "Clé API copiée !",
       "menu": {
         "school": "École",
         "teachers": "Enseignants",
