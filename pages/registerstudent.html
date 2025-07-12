@@ -233,7 +233,7 @@ function pollDevice(device_uid, card) {
       );
 
       console.log(`Polling HTTP status for device [${device_uid}]:`, res.status);
-      console.log(`selected language ${device_uid}`)
+      console.log(`selected language ${selectlang}`)
       const response = await res.json();
       const data = Array.isArray(response) ? response[0] : null;
 
