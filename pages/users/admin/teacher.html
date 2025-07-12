@@ -53,126 +53,131 @@
     </div>
   </main>
 
-  <script>
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
+ <script>
+  // Get language from localStorage or default to 'en'
+  function getSelectedLanguage() {
+    return localStorage.getItem('lang') || 'en';
+  }
+  const selectlang = getSelectedLanguage();
+
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  const teacherId = getQueryParam('id');
+  const token = getCookie('token');
+
+  console.log("Page loaded");
+  console.log("Teacher ID:", teacherId);
+  console.log("Token:", token);
+  console.log("Selected language:", selectlang);
+
+  async function fetchTeacher() {
+    const container = document.getElementById('profileContainer');
+
+    if (!token) {
+      container.innerHTML = '<p class="text-red-500">You must be logged in.</p>';
+      return;
     }
 
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    }
+    try {
+      const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept-Language': selectlang
+        }
+      });
 
-    const teacherId = getQueryParam('id');
-    const token = getCookie('token');
+      const data = await res.json();
+      console.log("Fetched Teacher Data:", data);
 
-    console.log("Page loaded");
-    console.log("Teacher ID:", teacherId);
-    console.log("Token:", token);
-
-    async function fetchTeacher() {
-      const container = document.getElementById('profileContainer');
-
-      if (!token) {
-        container.innerHTML = '<p class="text-red-500">You must be logged in.</p>';
+      if (!res.ok) {
+        container.innerHTML = `<p class="text-red-500">${data.message || 'Teacher not found.'}</p>`;
         return;
       }
 
-      try {
-        const res = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+      const t = data.teacher;
 
-        const data = await res.json();
-        console.log("Fetched Teacher Data:", data);
+      container.innerHTML = `
+        <img src="${t.picture || 'https://via.placeholder.com/100'}"
+             class="w-32 h-32 rounded-full mx-auto border-4 border-secondary object-cover" />
+        <h2 class="text-2xl font-bold mt-4 text-secondary">${t.full_name || 'Unnamed Teacher'}</h2>
+        <p class="text-sm text-gray-600 mb-2">${t.email}</p>
+        <p class="text-gray-700 italic">${t.bio || 'No bio available.'}</p>
+        <p class="text-xs mt-4 text-gray-400">Added on: ${new Date(t.created_at).toLocaleString()}</p>
+      `;
+    } catch (err) {
+      console.error("Error fetching teacher:", err);
+      container.innerHTML = '<p class="text-red-500">Error fetching data.</p>';
+    }
+  }
 
-        if (!res.ok) {
-          container.innerHTML = `<p class="text-red-500">${data.message || 'Teacher not found.'}</p>`;
-          return;
+  async function deleteTeacher() {
+    const confirmDelete = confirm("Are you sure you want to delete this teacher?");
+    if (!confirmDelete) return;
+
+    const button = document.getElementById("deleteButton");
+    const btnText = document.getElementById("btnText");
+
+    if (!token || !teacherId) {
+      alert("Missing authentication token or teacher ID.");
+      return;
+    }
+
+    button.disabled = true;
+    btnText.textContent = "Deleting...";
+
+    try {
+      const response = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept-Language": selectlang
         }
+      });
 
-        const t = data.teacher;
-
-        container.innerHTML = `
-          <img src="${t.picture || 'https://via.placeholder.com/100'}"
-               class="w-32 h-32 rounded-full mx-auto border-4 border-secondary object-cover" />
-          <h2 class="text-2xl font-bold mt-4 text-secondary">${t.full_name || 'Unnamed Teacher'}</h2>
-          <p class="text-sm text-gray-600 mb-2">${t.email}</p>
-          <p class="text-gray-700 italic">${t.bio || 'No bio available.'}</p>
-          <p class="text-xs mt-4 text-gray-400">Added on: ${new Date(t.created_at).toLocaleString()}</p>
-        `;
-      } catch (err) {
-        console.error("Error fetching teacher:", err);
-        container.innerHTML = '<p class="text-red-500">Error fetching data.</p>';
+      if (!response.ok) {
+        let errorMsg = "Failed to delete teacher.";
+        try {
+          const errorData = await response.json();
+          if (errorData.message) errorMsg = errorData.message;
+        } catch {}
+        throw new Error(errorMsg);
       }
+
+      const result = await response.json().catch(() => ({}));
+      console.log("Delete response:", result);
+
+      alert("Teacher deleted successfully.");
+      window.location.href = "/pages/users/admin/teachers.html";
+
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert(err.message || "An unexpected error occurred.");
+    } finally {
+      button.disabled = false;
+      btnText.textContent = "Delete";
     }
-
-   async function deleteTeacher() {
-  const confirmDelete = confirm("Are you sure you want to delete this teacher?");
-  if (!confirmDelete) return;
-
-  const button = document.getElementById("deleteButton");
-  const btnText = document.getElementById("btnText");
-
-  if (!token || !teacherId) {
-    alert("Missing authentication token or teacher ID.");
-    return;
   }
 
-  button.disabled = true;
-  btnText.textContent = "Deleting...";
-
-  try {
-    const response = await fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/teachers/${teacherId}`, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${token}`
-      }
-    });
-
-    if (!response.ok) {
-      // Try to get error message from JSON body
-      let errorMsg = "Failed to delete teacher.";
-      try {
-        const errorData = await response.json();
-        if (errorData.message) errorMsg = errorData.message;
-      } catch {
-        // Ignore JSON parse errors
-      }
-      throw new Error(errorMsg);
+  document.addEventListener("DOMContentLoaded", () => {
+    const deleteBtn = document.getElementById("deleteButton");
+    if (deleteBtn) {
+      deleteBtn.addEventListener("click", deleteTeacher);
     }
 
-    // Try parse success response if any
-    const result = await response.json().catch(() => ({}));
-    console.log("Delete response:", result);
-
-    alert("Teacher deleted successfully.");
-    window.location.href = "/pages/users/admin/teachers.html";
-
-  } catch (err) {
-    console.error("Delete error:", err);
-    alert(err.message || "An unexpected error occurred.");
-  } finally {
-    button.disabled = false;
-    btnText.textContent = "Delete";
-  }
-}
+    fetchTeacher();
+  });
+</script>
 
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const deleteBtn = document.getElementById("deleteButton");
-      if (deleteBtn) {
-        deleteBtn.addEventListener("click", deleteTeacher);
-      }
-
-      fetchTeacher();
-    });
-  </script>
-  
 </body>
 
 </html>

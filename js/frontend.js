@@ -16,11 +16,20 @@ function deleteCookie(name) {
   setCookie(name, "", -1);
 }
 
-async function postData(url = "", data = {}) {
+function getSelectedLanguage() {
+  return localStorage.getItem('lang') || 'en';
+}
+const selectlang = getSelectedLanguage();
+
+async function postData(url = "", data = {}, headers = {}) {
   try {
     const res = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Accept-Language": selectlang,
+        ...headers
+      },
       body: JSON.stringify(data),
     });
     return await res.json();
@@ -146,19 +155,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       signupSpinner.classList.add("hidden");
 
-   if (res.redirect) {
-  errorMsg.textContent = res.message || "Signup successful!";
-  errorMsg.classList.remove("hidden");
-  errorMsg.classList.remove("text-red-600", "bg-red-100");       // Remove error styles if any
-  errorMsg.classList.add("text-green-600", "bg-green-100", "p-2", "rounded"); // Success styles
-  setTimeout(() => window.location.href = res.redirect, 1500);
-} else {
-  errorMsg.textContent = res.message || "Signup failed.";
-  errorMsg.classList.remove("hidden");
-  errorMsg.classList.remove("text-green-600", "bg-green-100");   // Remove success styles if any
-  errorMsg.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");    // Error styles
-}
-
+      if (res.redirect) {
+        errorMsg.textContent = res.message || "Signup successful!";
+        errorMsg.classList.remove("hidden");
+        errorMsg.classList.remove("text-red-600", "bg-red-100");       // Remove error styles if any
+        errorMsg.classList.add("text-green-600", "bg-green-100", "p-2", "rounded"); // Success styles
+        setTimeout(() => window.location.href = res.redirect, 1500);
+      } else {
+        errorMsg.textContent = res.message || "Signup failed.";
+        errorMsg.classList.remove("hidden");
+        errorMsg.classList.remove("text-green-600", "bg-green-100");   // Remove success styles if any
+        errorMsg.classList.add("text-red-600", "bg-red-100", "p-2", "rounded");    // Error styles
+      }
     });
   }
 
@@ -184,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Accept-Language": selectlang,
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(data),

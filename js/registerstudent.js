@@ -8,6 +8,10 @@ function getCookie(name) {
   return null;
 }
 
+function getSelectedLanguage() {
+  return localStorage.getItem("lang") || "en";
+}
+const selectlang = getSelectedLanguage();
 
 function generateRandomID(length = 8) {
   const chars =
@@ -21,7 +25,12 @@ function generateRandomID(length = 8) {
 async function pollScanQueue() {
   try {
     const res = await fetch(
-      "https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue"
+      "https://rfid-attendancesystem-backend-project.onrender.com/api/scan/queue",
+      {
+        headers: {
+          "Accept-Language": selectlang,
+        },
+      }
     );
     let data = await res.json();
     console.log("Polled scan data:", data);
@@ -43,7 +52,7 @@ async function pollScanQueue() {
             clearInterval(pollingInterval); // Stop polling
 
             setTimeout(() => {
-              pollingInterval = setInterval(pollScanQueue, 2000); // Restart polling after 5 seconds
+              pollingInterval = setInterval(pollScanQueue, 2000); // Restart polling after 2 seconds
             }, 2000);
             className = "text-green-400 font-semibold mb-2 block text-center";
           } else {
@@ -74,10 +83,11 @@ async function pollScanQueue() {
     statusEl.className = "text-center text-red-500 font-semibold mb-4";
   }
 }
+
 formEl.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-   const api_key = getCookie("api_key");
+  const api_key = getCookie("api_key");
 
   const data = {
     name: document.getElementById("name").value,
@@ -87,7 +97,7 @@ formEl.addEventListener("submit", async (e) => {
     telephone: document.getElementById("telephone").value,
     form: document.getElementById("form").value,
     gender: document.getElementById("gender").value,
-    api_key
+    api_key,
   };
 
   try {
@@ -95,7 +105,10 @@ formEl.addEventListener("submit", async (e) => {
       "https://rfid-attendancesystem-backend-project.onrender.com/api/register",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept-Language": selectlang,
+        },
         body: JSON.stringify(data),
       }
     );
@@ -119,8 +132,6 @@ formEl.addEventListener("submit", async (e) => {
     statusEl.className = "text-center text-red-500 font-semibold mb-4";
   }
 });
-
-
 
 window.onload = () => {
   pollingInterval = setInterval(pollScanQueue, 2000);

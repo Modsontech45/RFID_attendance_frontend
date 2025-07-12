@@ -28,68 +28,82 @@
     <div id="pendingScans" class="space-y-3"></div>
   </div>
 
-  <script>
-    const form = document.getElementById('registerDeviceForm');
-    const messageDiv = document.getElementById('message');
-    const scansContainer = document.getElementById('pendingScans');
+<script>
+  // Get language from localStorage or default to 'en'
+  function getSelectedLanguage() {
+    return localStorage.getItem('lang') || 'en';
+  }
+  const selectlang = getSelectedLanguage();
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  const form = document.getElementById('registerDeviceForm');
+  const messageDiv = document.getElementById('message');
+  const scansContainer = document.getElementById('pendingScans');
 
-      const device_uid = document.getElementById('device_uid').value.trim();
-      const device_name = document.getElementById('device_name').value.trim();
-      const api_key = document.getElementById('api_key').value.trim();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-      try {
-        const res = await fetch('/devices/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ device_uid, device_name, api_key })
-        });
+    const device_uid = document.getElementById('device_uid').value.trim();
+    const device_name = document.getElementById('device_name').value.trim();
+    const api_key = document.getElementById('api_key').value.trim();
 
-        const data = await res.json();
-        messageDiv.innerText = data.message || 'Device registered.';
-        messageDiv.className = 'text-green-400';
+    try {
+      const res = await fetch('/devices/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept-Language': selectlang
+        },
+        body: JSON.stringify({ device_uid, device_name, api_key })
+      });
 
-        fetchPendingScans(api_key); // refresh pending scans list
-      } catch (err) {
-        messageDiv.innerText = 'Error registering device.';
-        messageDiv.className = 'text-red-400';
-      }
-    });
+      const data = await res.json();
+      messageDiv.innerText = data.message || 'Device registered.';
+      messageDiv.className = 'text-green-400';
 
-    async function fetchPendingScans(api_key) {
-      if (!api_key) return;
-
-      try {
-        const res = await fetch(`/pending-scans?api_key=${api_key}`);
-        const scans = await res.json();
-
-        scansContainer.innerHTML = '';
-
-        if (scans.length === 0) {
-          scansContainer.innerHTML = '<p class="text-gray-400">No pending scans yet.</p>';
-          return;
-        }
-
-        scans.forEach(scan => {
-          const card = document.createElement('div');
-          card.className = 'bg-gray-800 p-3 rounded shadow text-sm';
-
-          card.innerHTML = `
-            <p><strong>UID:</strong> ${scan.uid}</p>
-            <p><strong>Device:</strong> ${scan.device_uid}</p>
-            <p><strong>Status:</strong> ${scan.status}</p>
-            <p><strong>Scanned At:</strong> ${new Date(scan.scanned_at).toLocaleString()}</p>
-          `;
-
-          scansContainer.appendChild(card);
-        });
-
-      } catch (err) {
-        scansContainer.innerHTML = '<p class="text-red-400">Failed to load pending scans.</p>';
-      }
+      fetchPendingScans(api_key); // refresh pending scans list
+    } catch (err) {
+      messageDiv.innerText = 'Error registering device.';
+      messageDiv.className = 'text-red-400';
     }
-  </script>
+  });
+
+  async function fetchPendingScans(api_key) {
+    if (!api_key) return;
+
+    try {
+      const res = await fetch(`/pending-scans?api_key=${api_key}`, {
+        headers: {
+          'Accept-Language': selectlang
+        }
+      });
+      const scans = await res.json();
+
+      scansContainer.innerHTML = '';
+
+      if (scans.length === 0) {
+        scansContainer.innerHTML = '<p class="text-gray-400">No pending scans yet.</p>';
+        return;
+      }
+
+      scans.forEach(scan => {
+        const card = document.createElement('div');
+        card.className = 'bg-gray-800 p-3 rounded shadow text-sm';
+
+        card.innerHTML = `
+          <p><strong>UID:</strong> ${scan.uid}</p>
+          <p><strong>Device:</strong> ${scan.device_uid}</p>
+          <p><strong>Status:</strong> ${scan.status}</p>
+          <p><strong>Scanned At:</strong> ${new Date(scan.scanned_at).toLocaleString()}</p>
+        `;
+
+        scansContainer.appendChild(card);
+      });
+
+    } catch (err) {
+      scansContainer.innerHTML = '<p class="text-red-400">Failed to load pending scans.</p>';
+    }
+  }
+</script>
+
 </body>
 </html>

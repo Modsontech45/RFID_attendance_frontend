@@ -210,7 +210,7 @@ const selectlang = getSelectedLanguage();
         const result = await res.json();
 
         if (res.ok) {
-          categoryMessage.textContent = result.message || 'Category created!';
+          categoryMessage.textContent = result.message;
           categoryMessage.className = 'text-green-400 text-sm mt-3 text-center';
           setTimeout(() => categoryModal.classList.add('hidden'), 1500);
         } else {

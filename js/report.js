@@ -7,9 +7,17 @@ async function generateReport() {
     return;
   }
 
+  // Get language from localStorage or default to "en"
+  const lang = localStorage.getItem("lang") || "en";
+
   try {
     const res = await fetch(
-      "https://rfid-attendancesystem-backend-project.onrender.com/api/attendance"
+      "https://rfid-attendancesystem-backend-project.onrender.com/api/attendance",
+      {
+        headers: {
+          "Accept-Language": lang,
+        },
+      }
     );
     if (!res.ok) throw new Error("Network response was not ok");
 

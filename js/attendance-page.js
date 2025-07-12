@@ -10,6 +10,11 @@ function getCookie(name) {
   return parts.length === 2 ? parts.pop().split(";").shift() : null;
 }
 
+function getSelectedLanguage() {
+  return localStorage.getItem('lang') || 'en';
+}
+const selectlang = getSelectedLanguage();
+
 function handleRoleVisibility() {
   const role = getCookie("role");
   if (role === "teacher") {
@@ -26,6 +31,7 @@ async function fetchStudents() {
       headers: {
         "Content-Type": "application/json",
         "x-api-key": apiKey,
+        "Accept-Language": selectlang
       },
     });
 
@@ -178,7 +184,8 @@ async function populateFormOptions() {
     const res = await fetch("https://rfid-attendancesystem-backend-project.onrender.com/api/categories", {
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": apiKey
+        "x-api-key": apiKey,
+        "Accept-Language": selectlang
       }
     });
 
