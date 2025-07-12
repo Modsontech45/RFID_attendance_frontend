@@ -57,6 +57,9 @@
 const api_key = getCookie("api_key");
 console.log("Loaded API Key:", api_key);
 
+function getSelectedLanguage() {
+  return localStorage.getItem('lang') || 'en';
+}
 const toggleAddDeviceBtn = document.getElementById("toggleAddDeviceBtn");
 const registerDeviceForm = document.getElementById("registerDeviceForm");
 const deviceFormMessage = document.getElementById("deviceFormMessage");
