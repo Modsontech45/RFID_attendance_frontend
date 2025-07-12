@@ -327,7 +327,8 @@
     "sub":"Your Staff",
       "add": "Add a staff",
      "addbut": "Add",
-    "email": "👉 Adresse e-mail d’un membre"
+    "email": "👉 Adresse e-mail d’un membre",
+     "memberlogin": "Saff login"
 
   }
 }
