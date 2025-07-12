@@ -58,6 +58,9 @@
       "show": "Voir",
       "copy": "Copier",
       "copied": "Clé API copiée !",
+      "rule":"Utilisez le bouton ci-dessous pour créer une nouvelle catégorie pour vos formulaires ou départements. Les catégories aident à regrouper les utilisateurs pour une meilleure organisation et un meilleur suivi.",
+      "create": "+ Créer un département",
+      "view": "voir le département",
       "menu": {
         "school": "École",
         "teachers": "Enseignants",

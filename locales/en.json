@@ -58,6 +58,9 @@
       "show": "show",
       "copy": "Copy",
       "copied": "Api key copied !",
+      "rule": "Use the button below to create a new category for your forms or departments. Categories help group users for better organization and reporting.",
+      "create": "+ Create department",
+      "view": "view department",
       "menu": {
         "school": "School",
         "teachers": "Teachers",
