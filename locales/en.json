@@ -148,7 +148,9 @@
       "students": "Students",
       "dashboard": "Dashboard",
       "attendance": "Attendance",
-      "logout": "Logout"
+      "logout": "Logout",
+      "device": "Registered Device",
+      "add" : "Add Device"
     },
     "error_message": "No students found."
   },

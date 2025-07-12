@@ -25,28 +25,28 @@
     <button id="menuBtn" class="sm:hidden text-3xl">&#9776;</button>
     <nav id="navMenu"
       class="flex max-sm:hidden sm:items-center gap-4 max-sm:fixed top-0 right-0 max-sm:w-2/4 max-sm:bg-black max-sm:flex-col max-sm:z-40">
-      <a  data-i18n="students.nabar.office" href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400">Office</a>
-      <a  data-i18n="students.nabar.home" href="/pages/registerstudent.html" class="text-green-400">Home</a>
-      <a  data-i18n="students.nabar.students" href="/pages/students.html" class="hover:text-green-400">Students</a>
-      <a   data-i18n="students.nabar.dashboard" href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
-      <a  data-i18n="students.nabar.attendance" href="/pages/attendance.html" class="hover:text-green-400">Attendance</a>
-      <button  data-i18n="students.nabar.logout" class="logoutBtn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Logout</button>
+      <a  data-i18n="student.nabar.office" href="/pages/users/admin/adminlandingpage.html" class="hover:text-green-400">Office</a>
+      <a  data-i18n="student.nabar.home" href="/pages/registerstudent.html" class="text-green-400">Home</a>
+      <a  data-i18n="student.nabar.students" href="/pages/students.html" class="hover:text-green-400">Students</a>
+      <a   data-i18n="student.nabar.dashboard" href="/pages/dashboard.html" class="hover:underline">Dashboard</a>
+      <a  data-i18n="student.nabar.attendance" href="/pages/attendance.html" class="hover:text-green-400">Attendance</a>
+      <button  data-i18n="student.nabar.logout" class="logoutBtn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Logout</button>
     </nav>
   </header>
 
   <main class="mt-10 max-w-4xl mx-auto space-y-12">
     <section>
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-3xl font-bold text-green-400">Registered Devices</h2>
-        <button id="toggleAddDeviceBtn"
+        <h2  data-i18n="student.nabar.device" class="text-3xl font-bold text-green-400">Registered Devices</h2>
+        <button id="toggleAddDeviceBtn"  data-i18n="student.nabar.add"
           class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-white font-semibold">Add Device</button>
       </div>
 
       <form id="registerDeviceForm"
         class="hidden bg-gray-900 p-6 rounded-lg border border-green-600 mb-8 max-w-md space-y-4">
-        <input type="text" id="device_uid" placeholder="Device UID" required class="input" />
-        <input type="text" id="device_name" placeholder="Device Name" required class="input" />
-        <button type="submit"
+        <input type="text" id="device_uid" placeholder="Device UID/ UID" required class="input" />
+        <input type="text" id="device_name" placeholder="Device Name/Nom de L'appareil" required class="input" />
+        <button type="submit"  data-i18n="student.nabar.add"
           class="w-full bg-green-600 hover:bg-green-700 py-2 rounded text-white font-semibold">Register Device</button>
         <p id="deviceFormMessage" class="text-sm mt-2"></p>
       </form>

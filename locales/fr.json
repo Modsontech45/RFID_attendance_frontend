@@ -148,7 +148,9 @@
       "students": "Élèves",
       "dashboard": "Tableau de bord",
       "attendance": "Présences",
-      "logout": "Déconnexion"
+      "logout": "Déconnexion",
+      "device": "Appareil enregistré",
+      "add": "Ajouter un appareil"
     },
     "error_message": "Aucun élève trouvé."
   },
