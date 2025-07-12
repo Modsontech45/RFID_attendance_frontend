@@ -62,7 +62,7 @@ async function fetchTeachers() {
       card.innerHTML = `
         <img src="${t.picture || "https://via.placeholder.com/80"}" alt="${t.full_name}" class="w-16 h-16 rounded-full object-cover border-2 border-secondary" />
         <div>
-          <h2 class="text-lg font-semibold">${t.full_name || "Unnamed Teacher"}</h2>
+          <h2 class="text-lg font-semibold">${t.full_name || "Unnamed Staff"}</h2>
           <p class="text-sm">${t.email}</p>
           <p class="text-xs italic">${shortBio}</p>
         </div>
