@@ -134,7 +134,10 @@
   <script src="/js/signout.js"></script>
   <script>
     const apiKey = getCookie('api_key') || 'YourAPIKeyHere';
-
+function getSelectedLanguage() {
+  return localStorage.getItem('lang') || 'en';
+}
+const selectlang = getSelectedLanguage();
     const apiKeyInput = document.getElementById('apiKeyInput');
     const toggleBtn = document.getElementById('toggleApiKeyBtn');
     const copyBtn = document.getElementById('copyApiKeyBtn');
@@ -199,6 +202,7 @@
           headers: {
             'Content-Type': 'application/json',
             'x-api-key': apiKey,
+             'Accept-Language': selectlang,
           },
           body: JSON.stringify({ name }),
         });
