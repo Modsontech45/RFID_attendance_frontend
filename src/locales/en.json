@@ -1,0 +1,447 @@
+{
+  "app": {
+    "title": "Welcome",
+    "description": "This is a demo application."
+  },
+  "login": {
+    "admin": {
+      "title": "Admin Login",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "loginButton": "Login",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Sign up",
+      "forgotPassword": "Forgot password?",
+      "back": "Go back"
+    },
+    "adminsignup": {
+      "title": "Admin Signup",
+      "firstname_placeholder": "First Name",
+      "lastname_placeholder": "Last Name",
+      "email_placeholder": "Email",
+      "password_placeholder": "Password",
+      "confirm_password_placeholder": "Confirm Password",
+      "submit_button": "Sign Up",
+      "already_have_account": "Already have an account?",
+      "login_link": "Login"
+    },
+    "teacherlogin": {
+      "title": "Staff Login",
+      "subtitle": "Enter your email address to access your account",
+      "email_placeholder": "Email / e-mail",
+      "login_button": "Login",
+      "info_text": "Only registered staff members can access this portal. Contact your administrator if you need assistance.",
+      "back": "Back to Home"
+    }
+  },
+  "signup": {
+    "admin": {
+      "title": "Admin Sign Up",
+      "schoolPlaceholder": "School Name",
+      "usernamePlaceholder": "Username",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "confirmPasswordPlaceholder": "Confirm Password",
+      "submitButton": "Sign Up",
+      "creatingAccount": "Creating Account...",
+      "alreadyHaveAccount": "Already have an account?",
+      "loginLink": "Login",
+      "back": "Back to Login"
+    },
+    "error": {
+      "general": "Signup failed. Please try again.",
+      "accountExists": "An account with this email already exists.",
+      "network": "Network error. Please check your connection and try again."
+    }
+  },
+  "validation": {
+    "schoolNameRequired": "School name is required",
+    "usernameRequired": "Username is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Email is invalid",
+    "passwordRequired": "Password is required",
+    "passwordLength": "Password must be at least 6 characters",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsDontMatch": "Passwords do not match"
+  },
+  "button": {
+    "login": "Log In"
+  },
+  "home": {
+    "welcome_comments": [
+      "✨ Welcome to Synctuario!",
+      "🔐 Secure RFID Technology",
+      "📊 Real-time Analytics",
+      "🚀 Easy Setup & Use",
+      "💼 Perfect for Schools & Companies",
+      "🎯 99.9% Accuracy Rate",
+      "⚡ Lightning Fast Scanning",
+      "🌟 Trusted by 500+ Organizations"
+    ],
+    "header": {
+      "docs": "Docs",
+      "language": {
+        "english": "English",
+        "french": "French"
+      },
+      "title": "Synctuario"
+    },
+    "hero": {
+      "subtitle": "Next-Generation School Attendance System",
+      "title_part1": "Smart School",
+      "title_part2": "Attendance Made Simple",
+      "description": "Revolutionary RFID-powered attendance tracking for schools. Experience seamless, real-time monitoring with enterprise-grade security."
+    },
+    "buttons": {
+      "admin_portal": "Admin Portal",
+      "teacher_portal": "Teacher Portal",
+      "documentation": "Documentation"
+    },
+    "stats": {
+      "schools": "Schools",
+      "daily_scans": "Daily Scans",
+      "accuracy": "Accuracy",
+      "uptime": "Uptime",
+      "schools_value": "500+",
+      "daily_scans_value": "50K+",
+      "accuracy_value": "99.9%",
+      "uptime_value": "99.99%"
+    },
+    "features": {
+      "title": "Why Choose Synctuario for Your School?",
+      "description": "Cutting-edge technology meets intuitive design for the ultimate school attendance management experience.",
+      "items": [
+        {
+          "title": "Lightning Fast",
+          "description": "RFID scanning in milliseconds with ESP32 integration"
+        },
+        {
+          "title": "Enterprise Security",
+          "description": "Bank-level encryption with unique API keys for each school"
+        },
+        {
+          "title": "Real-time Analytics",
+          "description": "Live dashboards with detailed reports and insights"
+        },
+        {
+          "title": "Multi-language",
+          "description": "Full support for English and French interfaces"
+        },
+        {
+          "title": "Mobile Ready",
+          "description": "Access from any device with responsive design"
+        },
+        {
+          "title": "Export Data",
+          "description": "Download attendance records in Excel format"
+        }
+      ]
+    },
+    "how_it_works": {
+      "title": "How It Works",
+      "description": "Simple setup, powerful results in just three steps.",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Register Students",
+          "description": "Add students with unique RFID cards"
+        },
+        {
+          "step": "02",
+          "title": "Scan & Track",
+          "description": "ESP32 readers capture attendance with timestamps"
+        },
+        {
+          "step": "03",
+          "title": "Monitor & Report",
+          "description": "View live data and generate detailed analytics"
+        }
+      ]
+    },
+    "use_cases": {
+      "title": "Perfect for Schools",
+      "elementary": {
+        "title": "Elementary & High Schools",
+        "items": [
+          "Student attendance tracking",
+          "Teacher access management",
+          "Parent notification system",
+          "Class-wise reporting"
+        ]
+      },
+      "university": {
+        "title": "Universities & Colleges",
+        "items": [
+          "Large-scale student tracking",
+          "Multi-campus support",
+          "Advanced analytics",
+          "Integration with LMS"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Ready to Transform Your School?",
+      "description": "Join hundreds of schools already using Synctuario for seamless attendance management.",
+      "pricing_button": "View Pricing",
+      "contact_button": "Contact Us",
+      "benefits": [
+        "15-day free trial",
+        "No setup fees",
+        "Cancel anytime"
+      ]
+    },
+    "contact": {
+      "title": "Contact Us",
+      "subtitle": "Send us a message and we'll get back to you",
+      "name_placeholder": "Your Name",
+      "email_placeholder": "Your Email",
+      "message_placeholder": "Your Message",
+      "send_button": "Send Message",
+      "sending": "Sending...",
+      "success_message": "Message sent successfully!",
+      "error_message": "Failed to send message. Please try again later."
+    },
+    "popup": {
+      "connect_with_us": "Connect With Us",
+      "close": "Close"
+    }
+  },
+  "documentation": {
+    "title": "Documentation",
+    "subtitle": "Everything you need to know about setting up, configuring, and using the Synctuario RFID attendance system.",
+    "gettingStarted": {
+      "title": "Getting Started",
+      "welcome": "Welcome to Synctuario",
+      "description": "Synctuario is a comprehensive RFID-based attendance management system designed for schools and organizations. This documentation will guide you through setup, configuration, and usage.",
+      "forSchools": "For Schools",
+      "schoolsDesc": "Track student attendance with RFID cards and real-time monitoring.",
+      "forOrganizations": "For Organizations",
+      "organizationsDesc": "Monitor employee attendance and access control systems."
+    },
+    "hardwareSetup": {
+      "title": "Hardware Setup",
+      "esp32Setup": "ESP32 RFID Reader Setup",
+      "requiredComponents": "Required Components:",
+      "wiringDiagram": "Wiring Diagram:",
+      "importantNotes": "Important Notes:"
+    },
+    "arduinoCode": {
+      "title": "Arduino Code",
+      "completeCode": "Complete Arduino Code:",
+      "configurationSteps": "Configuration Steps:"
+    },
+    "apiReference": {
+      "title": "API Reference",
+      "endpoints": "API Endpoints"
+    },
+    "userManagement": {
+      "title": "User Management",
+      "managingUsers": "Managing Users",
+      "adminUsers": "Admin Users",
+      "teacherUsers": "Teacher Users",
+      "registrationProcess": "Student Registration Process:"
+    },
+    "security": {
+      "title": "Security & API Keys",
+      "bestPractices": "Security Best Practices",
+      "apiKeyManagement": "API Key Management",
+      "securityGuidelines": "Security Guidelines:",
+      "dataProtection": "Data Protection"
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "commonIssues": "Common Issues & Solutions",
+      "deviceOffline": {
+        "problem": "Device shows as offline",
+        "cause": "WiFi connection issues or device not sending heartbeat",
+        "solution": "Check WiFi credentials, ensure device is powered, verify API key is correct"
+      },
+      "rfidNotDetected": {
+        "problem": "RFID cards not being detected",
+        "cause": "Wiring issues or RFID module malfunction",
+        "solution": "Verify wiring connections, check power supply, test with known working RFID card"
+      },
+      "apiEndpoints": {
+        "registerDevice": {
+          "description": "Register a new RFID device",
+          "example": {
+            "device_uid": "ESP32_001",
+            "device_name": "Main Entrance",
+            "api_key": "your_api_key"
+          }
+        },
+        "getDevices": {
+          "description": "Get all registered devices",
+          "example": "GET /api/devices?api_key=your_api_key"
+        },
+        "submitScan": {
+          "description": "Submit RFID scan data",
+          "example": {
+            "uid": "A1B2C3D4",
+            "device_uid": "ESP32_001",
+            "api_key": "your_api_key"
+          }
+        }
+      }
+    },
+    "quickLinks": {
+      "title": "Quick Links",
+      "adminPortal": "Admin Portal",
+      "adminDescription": "Access the admin dashboard",
+      "teacherPortal": "Teacher Portal",
+      "teacherDescription": "Access the teacher dashboard",
+      "getStarted": "Get Started",
+      "pricingDescription": "View pricing and plans"
+    }
+  },
+  "pricing": {
+    "title": "Choose the plan that fits your school",
+    "subtitle": "Affordable pricing plans designed to scale with your institution.",
+    "starter": {
+      "title": "Starter",
+      "subtitle": "Perfect for small schools or pilots",
+      "price": "$29",
+      "period": "month",
+      "features": [
+        "Basic student management",
+        "Limited attendance tracking",
+        "Basic analytics dashboard",
+        "Email support"
+      ]
+    },
+    "professional": {
+      "title": "Professional",
+      "subtitle": "Great for growing institutions",
+      "price": "$79",
+      "period": "month",
+      "mostPopular": "Most Popular",
+      "features": [
+        "Advanced student management",
+        "Real-time attendance tracking",
+        "Detailed analytics and reporting",
+        "Priority email support"
+      ]
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "subtitle": "Best for large or multi-campus setups",
+      "price": "Custom",
+      "period": "month",
+      "features": [
+        "All professional features",
+        "Dedicated account manager",
+        "Custom integrations",
+        "24/7 support"
+      ]
+    },
+    "getStarted": "Get Started",
+    "contactSales": "Contact Sales",
+    "allPlansInclude": "All Plans Include",
+    "allPlansSubtitle": "Every plan includes essential features to run your school efficiently.",
+    "features": {
+      "studentManagement": {
+        "title": "Student Management",
+        "description": "Manage student profiles, classes, and performance from one dashboard."
+      },
+      "realTimeTracking": {
+        "title": "Real-Time Tracking",
+        "description": "Instant updates on attendance and student activity."
+      },
+      "advancedReports": {
+        "title": "Advanced Reports",
+        "description": "Gain insights with automated reports and performance summaries."
+      },
+      "fastSetup": {
+        "title": "Fast Setup",
+        "description": "Get your school up and running in no time with our onboarding help."
+      }
+    },
+    "contact": {
+      "title": "Get In Touch",
+      "subtitle": "Reach out to learn more, schedule a demo, or request a custom quote.",
+      "email": "Email Us",
+      "phone": "Call Us",
+      "office": "Our Office",
+      "whyChoose": "Why Choose Synctuario?",
+      "reasons": [
+        "Award-Winning Support",
+        "Global Accessibility",
+        "Enterprise-Grade Security"
+      ],
+      "getStartedToday": "Get Started Today",
+      "form": {
+        "yourName": "Your Name",
+        "schoolEmail": "School Email",
+        "schoolName": "School Name",
+        "selectPlan": "Select a Plan (Optional)",
+        "message": "Your Message",
+        "sendMessage": "Send Message"
+      }
+    }
+  },
+  "dashboard": {
+    "apiKeyPlaceholder": "YourAPIKeyHere",
+    "defaultSchoolName": "Synctuario Academy",
+    "defaultUsername": "admin_user",
+    "loading": "Loading Dashboard",
+    "welcomeTitle": "Welcome Back",
+    "welcomeSubtitle": "Manage your institution with powerful tools and real-time insights",
+    "stats": {
+      "students": "Total Students",
+      "teachers": "Active Teachers",
+      "attendance": "Today's Attendance",
+      "records": "Attendance Records"
+    },
+    "apiSection": {
+      "title": "API Key",
+      "show": "Show",
+      "hide": "Hide",
+      "copy": "Copy",
+      "copied": "Copied to clipboard!"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "subtitle": "Perform common tasks quickly",
+      "create": "Create Category",
+      "view": "View Categories",
+      "timeSettings": "Time Settings"
+    },
+    "features": {
+      "title": "Dashboard Features",
+      "attendance": {
+        "title": "Attendance Tracking",
+        "description": "Monitor and manage student attendance records"
+      },
+      "teacher": {
+        "title": "Teacher Management",
+        "description": "Add and manage teaching staff"
+      },
+      "report": {
+        "title": "Reports & Analytics",
+        "description": "Generate detailed reports and insights"
+      },
+      "learnMore": "Learn more"
+    },
+    "nav": {
+      "school": "School",
+      "staff": "Staff",
+      "reports": "Reports",
+      "addStaff": "Add Staff",
+      "docs": "Documentation"
+    },
+    "logout": "Logout",
+    "modal": {
+      "title": "New Category",
+      "subtitle": "Create a new department category",
+      "categoryName": "Category Name",
+      "categoryPlaceholder": "Enter category name...",
+      "creating": "Creating...",
+      "createButton": "Create Category"
+    },
+    "category": {
+      "success": "Category created successfully!",
+      "error": "Failed to create category.",
+      "serverError": "Server error. Please try again."
+    }
+  }
+}

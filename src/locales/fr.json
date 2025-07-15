@@ -1,0 +1,452 @@
+{
+  "app": {
+    "title": "Bienvenue",
+    "description": "Ceci est une application de démonstration."
+  },
+  "button": {
+    "login": "Se connecter"
+  },
+  "validation": {
+    "schoolNameRequired": "Le nom de l'école est requis",
+    "usernameRequired": "Le nom d'utilisateur est requis",
+    "emailRequired": "L'email est requis",
+    "emailInvalid": "L'email est invalide",
+    "passwordRequired": "Le mot de passe est requis",
+    "passwordLength": "Le mot de passe doit contenir au moins 6 caractères",
+    "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+    "passwordsDontMatch": "Les mots de passe ne correspondent pas"
+  },
+  "signup": {
+    "admin": {
+      "title": "Inscription Admin",
+      "schoolPlaceholder": "Nom de l'école",
+      "usernamePlaceholder": "Nom d'utilisateur",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Mot de passe",
+      "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+      "submitButton": "S'inscrire",
+      "creatingAccount": "Création du compte...",
+      "alreadyHaveAccount": "Vous avez déjà un compte?",
+      "loginLink": "Connexion",
+      "back": "Retour à la connexion"
+    },
+    "error": {
+      "general": "Échec de l'inscription. Veuillez réessayer.",
+      "accountExists": "Un compte avec cet email existe déjà.",
+      "network": "Erreur réseau. Veuillez vérifier votre connexion et réessayer."
+    }
+  },
+  "login": {
+    "admin": {
+      "title": "Connexion Administrateur",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Mot de passe",
+      "loginButton": "Se connecter",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signupLink": "S'inscrire",
+      "forgotPassword": "Mot de passe oublié ?",
+      "back": "Retour"
+    },
+    "adminsignup": {
+      "title": "Inscription Administrateur",
+      "firstname_placeholder": "Prénom",
+      "lastname_placeholder": "Nom de famille",
+      "email_placeholder": "Adresse e-mail",
+      "password_placeholder": "Mot de passe",
+      "confirm_password_placeholder": "Confirmer le mot de passe",
+      "submit_button": "S'inscrire",
+      "already_have_account": "Vous avez déjà un compte ?",
+      "login_link": "Se connecter",
+      "back": "Retour"
+    },
+    "teacherlogin": {
+      "title": "Connexion Personnel",
+      "subtitle": "Entrez votre adresse e-mail pour accéder à votre compte",
+      "email_placeholder": "Email / e-mail",
+      "login_button": "Se connecter",
+      "info_text": "Seuls les membres du personnel enregistrés peuvent accéder à ce portail. Contactez votre administrateur si vous avez besoin d'aide.",
+      "back": "Retour à l'accueil"
+    }
+  },
+  "home": {
+    "welcome_comments": [
+      "✨ Bienvenue à Synctuario!",
+      "🔐 Technologie RFID Sécurisée",
+      "📊 Analytique en Temps Réel",
+      "🚀 Installation Facile & Utilisation",
+      "💼 Parfait pour les écoles & entreprises",
+      "🎯 Taux de précision de 99,9%",
+      "⚡ Scannage ultra-rapide",
+      "🌟 Confié par plus de 500 organisations"
+    ],
+    "header": {
+      "docs": "Docs",
+      "language": {
+        "english": "Anglais",
+        "french": "Français"
+      },
+      "title": "Synctuario"
+    },
+    "hero": {
+      "subtitle": "Système de présence scolaire de nouvelle génération",
+      "title_part1": "École Intelligente",
+      "title_part2": "Présence Simplifiée",
+      "description": "Suivi de présence révolutionnaire alimenté par RFID pour les écoles. Expérience fluide et surveillance en temps réel avec une sécurité de niveau entreprise."
+    },
+    "buttons": {
+      "admin_portal": "Portail Admin",
+      "teacher_portal": "Portail Enseignant",
+      "documentation": "Documentation"
+    },
+    "stats": {
+      "schools": "Écoles",
+      "daily_scans": "Passages Quotidiens",
+      "accuracy": "Précision",
+      "uptime": "Disponibilité",
+      "schools_value": "500+",
+      "daily_scans_value": "50K+",
+      "accuracy_value": "99,9%",
+      "uptime_value": "99,99%"
+    },
+    "features": {
+      "title": "Pourquoi choisir Synctuario pour votre école ?",
+      "description": "La technologie de pointe rencontre un design intuitif pour l'expérience ultime de gestion de présence scolaire.",
+      "items": [
+        {
+          "title": "Ultra-rapide",
+          "description": "Scan RFID en millisecondes avec intégration ESP32"
+        },
+        {
+          "title": "Sécurité d'entreprise",
+          "description": "Chiffrement de niveau bancaire avec clés API uniques pour chaque école"
+        },
+        {
+          "title": "Analytique en temps réel",
+          "description": "Tableaux de bord en direct avec rapports détaillés"
+        },
+        {
+          "title": "Multi-langue",
+          "description": "Support complet pour les interfaces en anglais et français"
+        },
+        {
+          "title": "Mobile prêt",
+          "description": "Accès depuis n'importe quel appareil avec design responsive"
+        },
+        {
+          "title": "Exporter les données",
+          "description": "Téléchargez les relevés de présence au format Excel"
+        }
+      ]
+    },
+    "how_it_works": {
+      "title": "Comment ça marche",
+      "description": "Installation simple, résultats puissants en seulement trois étapes.",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Inscrire les élèves",
+          "description": "Ajouter des élèves avec des cartes RFID uniques"
+        },
+        {
+          "step": "02",
+          "title": "Scanner & Suivre",
+          "description": "Les lecteurs ESP32 capturent la présence avec horodatage"
+        },
+        {
+          "step": "03",
+          "title": "Surveiller & Rapporter",
+          "description": "Voir les données en direct et générer des analyses détaillées"
+        }
+      ]
+    },
+    "use_cases": {
+      "title": "Parfait pour les écoles",
+      "elementary": {
+        "title": "Écoles primaires & secondaires",
+        "items": [
+          "Suivi de présence des élèves",
+          "Gestion des accès enseignants",
+          "Système de notification aux parents",
+          "Rapports par classe"
+        ]
+      },
+      "university": {
+        "title": "Universités & collèges",
+        "items": [
+          "Suivi à grande échelle des étudiants",
+          "Support multi-campus",
+          "Analytique avancée",
+          "Intégration avec les LMS"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Prêt à transformer votre école ?",
+      "description": "Rejoignez des centaines d'écoles qui utilisent déjà Synctuario pour une gestion de présence sans faille.",
+      "pricing_button": "Voir les tarifs",
+      "contact_button": "Contactez-nous",
+      "benefits": [
+        "Essai gratuit de 15 jours",
+        "Pas de frais d'installation",
+        "Annulez à tout moment"
+      ]
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "subtitle": "Envoyez-nous un message et nous vous répondrons",
+      "name_placeholder": "Votre nom",
+      "email_placeholder": "Votre e-mail",
+      "message_placeholder": "Votre message",
+      "send_button": "Envoyer le message",
+      "sending": "Envoi...",
+      "success_message": "Message envoyé avec succès !",
+      "error_message": "Échec de l'envoi du message. Veuillez réessayer plus tard."
+    },
+    "popup": {
+      "connect_with_us": "Connectez-vous avec nous",
+      "close": "Fermer"
+    }
+  },
+  "documentation": {
+    "title": "Documentation",
+    "subtitle": "Tout ce que vous devez savoir sur la configuration et l'utilisation du système de présence RFID Synctuario.",
+    "gettingStarted": {
+      "title": "Commencer",
+      "welcome": "Bienvenue sur Synctuario",
+      "description": "Synctuario est un système complet de gestion de présence basé sur RFID conçu pour les écoles et les organisations. Cette documentation vous guidera à travers la configuration et l'utilisation.",
+      "forSchools": "Pour les écoles",
+      "schoolsDesc": "Suivez la présence des étudiants avec des cartes RFID et une surveillance en temps réel.",
+      "forOrganizations": "Pour les organisations",
+      "organizationsDesc": "Surveillez la présence des employés et les systèmes de contrôle d'accès."
+    },
+    "hardwareSetup": {
+      "title": "Configuration matérielle",
+      "esp32Setup": "Configuration du lecteur RFID ESP32",
+      "requiredComponents": "Composants requis:",
+      "wiringDiagram": "Schéma de câblage:",
+      "importantNotes": "Notes importantes:"
+    },
+    "arduinoCode": {
+      "title": "Code Arduino",
+      "completeCode": "Code Arduino complet:",
+      "configurationSteps": "Étapes de configuration:"
+    },
+    "apiReference": {
+      "title": "Référence API",
+      "endpoints": "Points de terminaison API"
+    },
+    "userManagement": {
+      "title": "Gestion des utilisateurs",
+      "managingUsers": "Gestion des utilisateurs",
+      "adminUsers": "Utilisateurs administrateurs",
+      "teacherUsers": "Utilisateurs enseignants",
+      "registrationProcess": "Processus d'inscription des étudiants:"
+    },
+    "security": {
+      "title": "Sécurité et clés API",
+      "bestPractices": "Meilleures pratiques de sécurité",
+      "apiKeyManagement": "Gestion des clés API",
+      "securityGuidelines": "Directives de sécurité:",
+      "dataProtection": "Protection des données"
+    },
+    "troubleshooting": {
+      "title": "Dépannage",
+      "commonIssues": "Problèmes courants et solutions",
+      "deviceOffline": {
+        "problem": "L'appareil apparaît hors ligne",
+        "cause": "Problèmes de connexion WiFi ou appareil n'envoie pas de signal",
+        "solution": "Vérifiez les identifiants WiFi, assurez-vous que l'appareil est alimenté, vérifiez la clé API"
+      },
+      "rfidNotDetected": {
+        "problem": "Cartes RFID non détectées",
+        "cause": "Problèmes de câblage ou dysfonctionnement du module RFID",
+        "solution": "Vérifiez les connexions, contrôlez l'alimentation, testez avec une carte RFID fonctionnelle"
+      }
+    },
+    "apiEndpoints": {
+      "registerDevice": {
+        "description": "Enregistrer un nouvel appareil RFID",
+        "example": {
+          "device_uid": "ESP32_001",
+          "device_name": "Entrée principale",
+          "api_key": "votre_clé_api"
+        }
+      },
+      "getDevices": {
+        "description": "Obtenir tous les appareils enregistrés",
+        "example": "GET /api/devices?api_key=votre_clé_api"
+      },
+      "submitScan": {
+        "description": "Soumettre les données de scan RFID",
+        "example": {
+          "uid": "A1B2C3D4",
+          "device_uid": "ESP32_001",
+          "api_key": "votre_clé_api"
+        }
+      }
+    }
+  },
+  "pricing": {
+    "title": "Tarification scolaire",
+    "subtitle": "Choisissez le plan parfait pour votre école. Tous les plans incluent notre système de présence RFID complet avec surveillance en temps réel et rapports complets.",
+    "starter": {
+      "title": "Débutant",
+      "subtitle": "Parfait pour les petites écoles",
+      "price": "29$",
+      "period": "par mois",
+      "features": [
+        "Jusqu'à 100 étudiants",
+        "5 enseignants",
+        "2 appareils RFID",
+        "Rapports de base",
+        "Support par e-mail",
+        "Accès à l'application mobile"
+      ]
+    },
+    "professional": {
+      "title": "Professionnel",
+      "subtitle": "Idéal pour les écoles moyennes",
+      "price": "79$",
+      "period": "par mois",
+      "mostPopular": "Le plus populaire",
+      "features": [
+        "Jusqu'à 500 étudiants",
+        "20 enseignants",
+        "10 appareils RFID",
+        "Rapports avancés",
+        "Support prioritaire",
+        "Notifications aux parents",
+        "Export de données",
+        "Image de marque personnalisée"
+      ]
+    },
+    "enterprise": {
+      "title": "Entreprise",
+      "subtitle": "Pour les grandes écoles",
+      "price": "199$",
+      "period": "par mois",
+      "features": [
+        "Étudiants illimités",
+        "Enseignants illimités",
+        "Appareils illimités",
+        "Rapports personnalisés",
+        "Support téléphonique 24/7",
+        "Accès API",
+        "Solution en marque blanche",
+        "Gestionnaire dédié"
+      ]
+    },
+    "getStarted": "Commencer",
+    "contactSales": "Contacter les ventes",
+    "allPlansInclude": "Tous les plans incluent",
+    "allPlansSubtitle": "Chaque plan Synctuario comprend ces fonctionnalités essentielles pour la gestion scolaire moderne",
+    "features": {
+      "studentManagement": {
+        "title": "Gestion des étudiants",
+        "description": "Base de données complète des étudiants avec attribution de cartes RFID"
+      },
+      "realTimeTracking": {
+        "title": "Suivi en temps réel",
+        "description": "Surveillance de présence en direct avec notifications instantanées"
+      },
+      "advancedReports": {
+        "title": "Rapports avancés",
+        "description": "Analyses détaillées et rapports de présence exportables"
+      },
+      "fastSetup": {
+        "title": "Configuration rapide",
+        "description": "Installation rapide et configuration facile des appareils"
+      }
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "subtitle": "Prêt à transformer le système de présence de votre école? Contactez notre équipe.",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "office": "Bureau",
+      "whyChoose": "Pourquoi choisir Synctuario?",
+      "reasons": [
+        "Approuvé par 500+ écoles dans le monde",
+        "Garantie de disponibilité de 99,9%",
+        "Sécurité de niveau entreprise"
+      ],
+      "getStartedToday": "Commencez aujourd'hui",
+      "form": {
+        "yourName": "Votre nom",
+        "schoolEmail": "E-mail de l'école",
+        "schoolName": "Nom de l'école",
+        "selectPlan": "Sélectionner un plan",
+        "message": "Parlez-nous des besoins de votre école...",
+        "sendMessage": "Envoyer le message",
+        "sending": "Envoi...",
+        "contactSales": "Contacter les ventes",
+        "selectedPlan": "Plan sélectionné:"
+      }
+    }
+  },
+  "dashboard": {
+    "apiKeyPlaceholder": "VotreCléAPIici",
+    "defaultSchoolName": "Synctuario Académie",
+    "defaultUsername": "utilisateur_admin",
+    "loading": "Chargement du tableau de bord",
+    "welcomeTitle": "Bon retour",
+    "welcomeSubtitle": "Gérez votre établissement avec des outils puissants et des informations en temps réel",
+    "stats": {
+      "students": "Nombre total d'élèves",
+      "teachers": "Enseignants actifs",
+      "attendance": "Présences aujourd'hui",
+      "records": "Historique des présences"
+    },
+    "apiSection": {
+      "title": "Clé API",
+      "show": "Afficher",
+      "hide": "Masquer",
+      "copy": "Copier",
+      "copied": "Copié dans le presse-papiers !"
+    },
+    "quickActions": {
+      "title": "Actions rapides",
+      "subtitle": "Effectuez rapidement des tâches courantes",
+      "create": "Créer une catégorie",
+      "view": "Voir les catégories",
+      "timeSettings": "Paramètres horaires"
+    },
+    "features": {
+      "title": "Fonctionnalités du tableau de bord",
+      "attendance": {
+        "title": "Suivi de la présence",
+        "description": "Surveillez et gérez les présences des élèves"
+      },
+      "teacher": {
+        "title": "Gestion des enseignants",
+        "description": "Ajoutez et gérez le personnel enseignant"
+      },
+      "report": {
+        "title": "Rapports et analyses",
+        "description": "Générez des rapports détaillés et des statistiques"
+      },
+      "learnMore": "En savoir plus"
+    },
+    "nav": {
+      "school": "École",
+      "staff": "Personnel",
+      "reports": "Rapports",
+      "addStaff": "Ajouter un membre",
+      "docs": "Documentation"
+    },
+    "logout": "Déconnexion",
+    "modal": {
+      "title": "Nouvelle catégorie",
+      "subtitle": "Créer une nouvelle catégorie de département",
+      "categoryName": "Nom de la catégorie",
+      "categoryPlaceholder": "Saisissez le nom de la catégorie...",
+      "creating": "Création...",
+      "createButton": "Créer la catégorie"
+    },
+    "category": {
+      "success": "Catégorie créée avec succès !",
+      "error": "Échec de la création de la catégorie.",
+      "serverError": "Erreur serveur. Veuillez réessayer."
+    }
+  }
+}
