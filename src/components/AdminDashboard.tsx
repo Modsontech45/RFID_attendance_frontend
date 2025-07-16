@@ -367,7 +367,9 @@ const AdminDashboard: React.FC = () => {
               </div>
 
               <div className="flex items-center space-x-4">
-             
+                <button className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
+                  <Search className="h-5 w-5 text-gray-400 transition-colors hover:text-white" />
+                </button>
 
                 <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
                   <Bell className="h-5 w-5 text-gray-400 transition-colors hover:text-white" />
@@ -378,7 +380,7 @@ const AdminDashboard: React.FC = () => {
                   <Settings className="h-5 w-5 text-gray-400 transition-all duration-300 hover:rotate-90 hover:text-white" />
                 </button>
 
-                {/* <LanguageSwitcher /> */}
+                <LanguageSwitcher />
 
                 <button
                   onClick={handleLogout}
@@ -440,7 +442,7 @@ const AdminDashboard: React.FC = () => {
               </button>
 
               <div className="border-t border-white/10 pt-4">
-                {/* <LanguageSwitcher /> */}
+                <LanguageSwitcher />
 
                 <button
                   onClick={handleLogout}
@@ -488,6 +490,7 @@ const AdminDashboard: React.FC = () => {
               value: isLoadingStats ? "..." : dashboardStats.totalStudents.toString(),
               change: "+12%",
               color: "from-blue-500 to-cyan-500",
+              link: "/admin/students"
             },
             {
               icon: GraduationCap,
@@ -495,6 +498,7 @@ const AdminDashboard: React.FC = () => {
               value: isLoadingStats ? "..." : dashboardStats.totalTeachers.toString(),
               change: "+5%",
               color: "from-green-500 to-emerald-500",
+              link: "/admin/teachers"
             },
             {
               icon: ClipboardList,
@@ -502,6 +506,8 @@ const AdminDashboard: React.FC = () => {
               value: isLoadingStats ? "..." : `${dashboardStats.attendanceRate}%`,
               change: "+2.1%",
               color: "from-purple-500 to-pink-500",
+               link: "/admin/attendance"
+
             },
             {
               icon: TrendingUp,
@@ -509,6 +515,7 @@ const AdminDashboard: React.FC = () => {
               value: isLoadingStats ? "..." : dashboardStats.totalAttendanceToday.toString(),
               change: "+1.2%",
               color: "from-orange-500 to-red-500",
+                link: "/teacher/reports"
             },
           ].map((stat, index) => (
             <div
