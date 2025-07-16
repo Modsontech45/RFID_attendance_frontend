@@ -13,7 +13,7 @@ const LanguageSwitcher = () => {
   return (
     <div className="flex flex-col gap-1">
       <label htmlFor="language-select" className="text-sm text-white">
-        <FormattedMessage id="home.languageLabel" defaultMessage="Select Language" />
+        {/* <FormattedMessage id="home.languageLabel" defaultMessage="Select Language" /> */}
       </label>
       <select
         id="language-select"

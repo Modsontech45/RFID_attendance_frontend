@@ -707,7 +707,7 @@ const DocumentationPage: React.FC = () => {
             <button onClick={() => navigate("/pricing")} className="text-gray-300 hover:text-white">
               <FormattedMessage id="nav.pricing" defaultMessage="Pricing" />
             </button>
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
           </div>
         </div>
       </header>

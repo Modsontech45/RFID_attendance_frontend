@@ -427,7 +427,7 @@ const StudentsList: React.FC = () => {
               </button>
 
               <div className="pt-4 border-t border-white/10">
-                <select
+                {/* <select
                   value={currentLanguage}
                   onChange={handleLanguageChange}
                   className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
@@ -442,7 +442,7 @@ const StudentsList: React.FC = () => {
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Logout</span>
-                </button>
+                </button> */}
               </div>
             </nav>
           </div>

@@ -530,20 +530,17 @@ const SchoolManagement: React.FC = () => {
                   <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                 </button>
 
-                {/* Settings */}
-                <button className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
-                </button>
+           
 
                 {/* Language Selector */}
-                <select
+                {/* <select
                   value={currentLanguage}
                   onChange={handleLanguageChange}
                   className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-white/20 transition-all duration-300"
                 >
                   <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
                   <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-                </select>
+                </select> */}
 
                 <button
                   onClick={handleLogout}
@@ -566,7 +563,7 @@ const SchoolManagement: React.FC = () => {
 
           {/* Mobile Navigation */}
           <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-            isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+            isMobileMenuOpen ? 'max-h-99 opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}>
             <nav className="pb-4 border-t border-white/10 pt-4 space-y-2">
               <button
@@ -604,14 +601,7 @@ const SchoolManagement: React.FC = () => {
               </button>
 
               <div className="pt-4 border-t border-white/10">
-                <select
-                  value={currentLanguage}
-                  onChange={handleLanguageChange}
-                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-                >
-                  <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
-                  <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-                </select>
+            
 
                 <button
                   onClick={handleLogout}
