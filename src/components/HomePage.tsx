@@ -662,48 +662,64 @@ const HomePage: React.FC = () => {
 
       {/* Social Links Popup */}
       {showAdPopup && (
-        <div className="animate-fade-in fixed bottom-8 right-8 z-40 max-w-xs rounded-xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md">
-          <div className="space-y-4 text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500">
-              <Star className="h-6 w-6 text-white" />
-            </div>
-            <h3 className="font-semibold text-white">
-              <FormattedMessage id="home.popup.connect_with_us" defaultMessage="Connect With Us" />
-            </h3>
-            <div className="flex justify-center space-x-4">
-              <a
-                href="https://www.linkedin.com/in/modson-tande-4842871b2"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 transition-colors hover:bg-blue-700"
-              >
-                <Linkedin className="h-5 w-5 text-white" />
-              </a>
-              <a
-                href="https://www.facebook.com/61563245937633/videos/401360552995380"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500 transition-colors hover:bg-blue-600"
-              >
-                <Facebook className="h-5 w-5 text-white" />
-              </a>
-              <a
-                href="https://github.com/Modsontech45"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-700 transition-colors hover:bg-gray-600"
-              >
-                <Github className="h-5 w-5 text-white" />
-              </a>
-            </div>
-            <button
-              onClick={() => setShowAdPopup(false)}
-              className="text-xs text-gray-400 transition-colors hover:text-white"
-            >
-              <FormattedMessage id="home.popup.close" defaultMessage="Close" />
-            </button>
-          </div>
-        </div>
+      <div className="animate-fade-in fixed bottom-8 right-8 z-40 max-w-xs rounded-xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md">
+  <div className="space-y-4 text-center">
+  
+    <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full overflow-hidden">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV85rp_Srka8ObqhnOnAcPmKnUWOUxdlCZLA&s" // Replace with your image URL
+        alt="Modson Tande"
+        className="object-cover h-full w-full"
+      />
+    </div>
+    
+    {/* Greeting Message */}
+    <h3 className="font-semibold text-white">
+      Hello, I'm <span className="text-cyan-400">Modson Tande</span>
+    </h3>
+    
+    {/* Connect with Us Section */}
+    <h3 className="font-semibold text-white">
+      <FormattedMessage id="home.popup.connect_with_us" defaultMessage="Connect With me" />
+    </h3>
+    
+    <div className="flex justify-center space-x-4">
+      <a
+        href="https://www.linkedin.com/in/modson-tande-4842871b2"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 transition-colors hover:bg-blue-700"
+      >
+        <Linkedin className="h-5 w-5 text-white" />
+      </a>
+      <a
+        href="https://www.facebook.com/61563245937633/videos/401360552995380"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500 transition-colors hover:bg-blue-600"
+      >
+        <Facebook className="h-5 w-5 text-white" />
+      </a>
+      <a
+        href="https://github.com/Modsontech45"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-700 transition-colors hover:bg-gray-600"
+      >
+        <Github className="h-5 w-5 text-white" />
+      </a>
+    </div>
+    
+    {/* Close Button */}
+    <button
+      onClick={() => setShowAdPopup(false)}
+      className="text-xs text-gray-400 transition-colors hover:text-white"
+    >
+      <FormattedMessage id="home.popup.close" defaultMessage="Close" />
+    </button>
+  </div>
+</div>
+
       )}
 
       {/* Contact Modal */}
