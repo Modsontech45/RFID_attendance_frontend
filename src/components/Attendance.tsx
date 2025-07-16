@@ -699,7 +699,17 @@ const Attendance: React.FC = () => {
                   <span>Advanced Filter</span>
                 </button>
 
-           
+                {/* <button
+                  onClick={() => {
+                    setError('');
+                    setIsLoading(true);
+                    fetchAttendanceRecords().finally(() => setIsLoading(false));
+                  }}
+                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  <span>Refresh</span>
+                </button> */}
               </div>
             </div>
           </div>
