@@ -518,30 +518,31 @@ const AdminDashboard: React.FC = () => {
                 link: "/teacher/reports"
             },
           ].map((stat, index) => (
-            <div
-              key={index}
-              className="group transform rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/10 hover:shadow-2xl"
-            >
-              <div
-                className={`h-12 w-12 bg-gradient-to-r ${stat.color} mb-4 flex items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110`}
-              >
-                {isLoadingStats ? (
-                  <Loader2 className="h-6 w-6 animate-spin text-white" />
-                ) : (
-                  <stat.icon className="h-6 w-6 text-white" />
-                )}
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl font-bold text-white">{stat.value}</div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
-                <div className="flex items-center space-x-1 text-xs text-green-400">
-                  <TrendingUp className="h-3 w-3" />
-                  <span>{stat.change}</span>
-                </div>
-              </div>
+        <div
+          key={index}
+          onClick={() => navigate(stat.link)} // Add the onClick handler for navigation
+          className="group transform rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/10 hover:shadow-2xl cursor-pointer" // Added cursor-pointer for better UX
+        >
+          <div
+            className={`h-12 w-12 bg-gradient-to-r ${stat.color} mb-4 flex items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110`}
+          >
+            {isLoadingStats ? (
+              <Loader2 className="h-6 w-6 animate-spin text-white" />
+            ) : (
+              <stat.icon className="h-6 w-6 text-white" />
+            )}
+          </div>
+          <div className="space-y-2">
+            <div className="text-2xl font-bold text-white">{stat.value}</div>
+            <div className="text-sm text-gray-400">{stat.label}</div>
+            <div className="flex items-center space-x-1 text-xs text-green-400">
+              <TrendingUp className="h-3 w-3" />
+              <span>{stat.change}</span>
             </div>
-          ))}
-        </section>
+          </div>
+        </div>
+      ))}
+    </section>
 
         {/* API Key Section */}
         <section className="animate-slide-up" style={{ animationDelay: "400ms" }}>
