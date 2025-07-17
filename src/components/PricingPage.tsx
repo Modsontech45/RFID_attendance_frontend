@@ -179,7 +179,7 @@ const PricingPage: React.FC = () => {
                 />
               </p>
               <div className="mb-2 text-4xl font-bold text-blue-400">
-                <FormattedMessage id="pricing.starter.price" defaultMessage="$29" />
+                <FormattedMessage id="pricing.starter.price" defaultMessage="$30" />
               </div>
               <div className="text-gray-400">
                 <FormattedMessage id="pricing.starter.period" defaultMessage="month" />
@@ -245,7 +245,7 @@ const PricingPage: React.FC = () => {
                 />
               </p>
               <div className="mb-2 text-4xl font-bold text-blue-400">
-                <FormattedMessage id="pricing.professional.price" defaultMessage="$79" />
+                <FormattedMessage id="pricing.professional.price" defaultMessage="$60" />
               </div>
               <div className="text-gray-400">
                 <FormattedMessage id="pricing.professional.period" defaultMessage="month" />

@@ -30,111 +30,255 @@ import { FormattedMessage, useIntl } from "react-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const arduinoCode = `#include <WiFi.h>
-#include <HTTPClient.h>
 #include <SPI.h>
 #include <MFRC522.h>
+#include <NTPClient.h>
+#include <WiFiUdp.h>
+#include <HTTPClient.h>
+#include <time.h>
+#include <Wire.h> 
 #include <ArduinoJson.h>
+#include <LiquidCrystal_I2C.h>
 
-// WiFi credentials
-const char* ssid = "YOUR_WIFI_SSID";
-const char* password = "YOUR_WIFI_PASSWORD";
+const char* deviceUID = "ESP32-CLASS-b"; // Set uniquely per device
+const char* apiKey = "jkvklkllkdvnlxnklvklnxklcnzclxlc;ldxkcljdncdsnocdncdslncosdjoasvdsfvfvfv";
+const char* ssid = "xxxxxxxxxxxxxx";
+const char* password = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
-// API configuration
-const char* apiKey = "YOUR_API_KEY";
-const char* deviceUID = "YOUR_DEVICE_UID";
-const char* serverURL = "https://rfid-attendancesystem-backend-project.onrender.com";
+#define LED_SUCCESS 25
+#define LED_FAIL    27
+#define BUZZER_PIN  26
+#define SS_PIN      5
+#define RST_PIN     15
 
-// RFID pins
-#define SS_PIN 21
-#define RST_PIN 22
-
+// RFID and LCD Setup
 MFRC522 mfrc522(SS_PIN, RST_PIN);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", 0, 60000);
+const char* serverURL = "https://rfid-attendancesystem-backend-project.onrender.com/api/scan";
+
+// Timer variables for notifyOnlineStatus
+unsigned long previousOnlineMillis = 0;
+const unsigned long onlineInterval = 10000; // 
+
+void connectToWiFi() {
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi");
+  lcd.setCursor(0, 0);
+  lcd.print("Connecting WiFi");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+    lcd.print(".");
+  }
+  Serial.println("\nWiFi connected.");
+  lcd.clear();
+  lcd.print("WiFi connected");
+  notifyOnlineStatus(); // Notify once immediately on connect
+}
+
+String readCardUID() {
+  if (!mfrc522.PICC_IsNewCardPresent() || !mfrc522.PICC_ReadCardSerial()) {
+    return "";
+  }
+
+  String uid = "";
+  for (byte i = 0; i < mfrc522.uid.size; i++) {
+    uid += (mfrc522.uid.uidByte[i] < 0x10 ? "0" : "") + String(mfrc522.uid.uidByte[i], HEX);
+  }
+  uid.toUpperCase();
+  return uid;
+}
+
+void displaySending(String uid) {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("UID:");
+  lcd.setCursor(5, 0);
+  lcd.print(uid.substring(0, 11));
+  lcd.setCursor(0, 1);
+  lcd.print("Sending...");
+}
+
+void showResult(const char* message, const char* flag) {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(message);
+  lcd.setCursor(0, 1);
+  lcd.print(flag);
+}
+
+void signalStatus(int sign) {
+  digitalWrite(LED_SUCCESS, LOW);
+  digitalWrite(LED_FAIL, LOW);
+  digitalWrite(BUZZER_PIN, LOW);
+
+  switch (sign) {
+    case 0: // Failed
+      digitalWrite(LED_FAIL, HIGH);
+      digitalWrite(BUZZER_PIN, HIGH);
+      delay(100);
+      break;
+    case 1: // Success
+      digitalWrite(LED_SUCCESS, HIGH);
+      digitalWrite(BUZZER_PIN, HIGH);
+      delay(100);
+      break;
+    case 2: // Duplicate
+      for (int i = 0; i < 2; i++) {
+        digitalWrite(LED_SUCCESS, HIGH);
+        digitalWrite(LED_FAIL, HIGH);
+        digitalWrite(BUZZER_PIN, HIGH);
+        delay(100);
+        digitalWrite(LED_SUCCESS, LOW);
+        digitalWrite(LED_FAIL, LOW);
+        digitalWrite(BUZZER_PIN, LOW);
+        delay(100);
+      }
+      break;
+    case 3: // Late
+      digitalWrite(LED_SUCCESS, HIGH);
+      digitalWrite(BUZZER_PIN, HIGH);
+      delay(200);
+      break;
+  }
+
+  digitalWrite(LED_SUCCESS, LOW);
+  digitalWrite(LED_FAIL, LOW);
+  digitalWrite(BUZZER_PIN, LOW);
+}
+
+void sendToServer(String uid) {
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("WiFi not connected!");
+    lcd.setCursor(0, 1);
+    lcd.print("WiFi Error");
+    return;
+  }
+
+  HTTPClient http;
+  http.begin(serverURL);
+  http.addHeader("Content-Type", "application/json");
+
+  String json = "{\"uid\":\"" + uid + "\", \"device_uid\":\"" + String(deviceUID) + "\", \"api_key\":\"" + String(apiKey) + "\"}";
+
+  int httpCode = http.POST(json);
+
+  if (httpCode > 0) {
+    String response = http.getString();
+    Serial.println("Server response: " + response);
+
+    StaticJsonDocument<256> doc;
+    if (deserializeJson(doc, response) == DeserializationError::Ok) {
+      handleResponse(doc);
+    } else {
+      Serial.println("JSON parse error");
+      lcd.clear();
+      lcd.print("Parse Error");
+    }
+  } else {
+    Serial.print("POST failed. Code: ");
+    Serial.println(httpCode);
+    lcd.setCursor(0, 1);
+    lcd.print("POST Failed");
+  }
+
+  http.end();
+}
+
+void notifyOnlineStatus() {
+  if (WiFi.status() != WL_CONNECTED) return;
+
+  HTTPClient http;
+  http.begin("https://rfid-attendancesystem-backend-project.onrender.com/api/devices/online");
+  http.addHeader("Content-Type", "application/json");
+
+  String payload = "{\"device_uid\":\"" + String(deviceUID) + "\",\"api_key\":\"" + String(apiKey) + "\"}";
+  int httpCode = http.POST(payload);
+
+  if (httpCode > 0) {
+    String response = http.getString();
+    Serial.println("Online status response: " + response);
+  } else {
+    Serial.println("Failed to notify online status");
+  }
+
+  http.end();
+}
+
+void handleResponse(JsonDocument &doc) {
+  const char* message = doc["message"];
+  const char* flag = doc["flag"];
+  int sign = doc["sign"];
+
+  signalStatus(sign);
+  showResult(message, flag);
+  delay(2000);
+}
+
+// === Setup ===
 
 void setup() {
   Serial.begin(115200);
+  delay(1000);
+
+  lcd.init();
+  lcd.backlight();
+  lcd.print("System Booting...");
+
+  pinMode(LED_SUCCESS, OUTPUT);
+  pinMode(LED_FAIL, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+
+  connectToWiFi();
+
   SPI.begin();
   mfrc522.PCD_Init();
 
-  // Connect to WiFi
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi...");
+  byte version = mfrc522.PCD_ReadRegister(mfrc522.VersionReg);
+  if (version == 0x00 || version == 0xFF) {
+    lcd.setCursor(0, 1);
+    lcd.print("RFID Error");
+    Serial.println("ERROR: RFID not detected.");
+  } else {
+    lcd.clear();
+    lcd.print("RFID Ready");
   }
-  Serial.println("WiFi connected!");
 
-  // Update device status
-  updateDeviceStatus();
+  delay(2000);
+  lcd.clear();
+  lcd.print("Scan Your Card");
 }
+
+// === Loop ===
 
 void loop() {
-  // Update device status every 30 seconds
-  static unsigned long lastUpdate = 0;
-  if (millis() - lastUpdate > 30000) {
-    updateDeviceStatus();
-    lastUpdate = millis();
+  // Send online status every minute
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousOnlineMillis >= onlineInterval) {
+    previousOnlineMillis = currentMillis;
+    notifyOnlineStatus();
   }
 
-  // Check for RFID cards
-  if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) {
-    String uid = "";
-    for (byte i = 0; i < mfrc522.uid.size; i++) {
-      uid += String(mfrc522.uid.uidByte[i], HEX);
-    }
-    uid.toUpperCase();
-
-    Serial.println("Card detected: " + uid);
-    sendScanData(uid);
-
-    mfrc522.PICC_HaltA();
-    delay(2000); // Prevent multiple reads
+  String uid = readCardUID();
+  if (uid == "") {
+    delay(200);
+    return;
   }
 
-  delay(100);
-}
+  Serial.println("============================");
+  Serial.println("Card UID: " + uid);
 
-void updateDeviceStatus() {
-  if (WiFi.status() == WL_CONNECTED) {
-    HTTPClient http;
-    http.begin(String(serverURL) + "/api/devices/heartbeat");
-    http.addHeader("Content-Type", "application/json");
+  displaySending(uid);
+  sendToServer(uid);
 
-    DynamicJsonDocument doc(1024);
-    doc["device_uid"] = deviceUID;
-    doc["api_key"] = apiKey;
+  Serial.println("============================");
+  delay(3000);
 
-    String jsonString;
-    serializeJson(doc, jsonString);
-
-    int httpResponseCode = http.POST(jsonString);
-    if (httpResponseCode > 0) {
-      Serial.println("Device status updated");
-    }
-    http.end();
-  }
-}
-
-void sendScanData(String uid) {
-  if (WiFi.status() == WL_CONNECTED) {
-    HTTPClient http;
-    http.begin(String(serverURL) + "/api/scan");
-    http.addHeader("Content-Type", "application/json");
-
-    DynamicJsonDocument doc(1024);
-    doc["uid"] = uid;
-    doc["device_uid"] = deviceUID;
-    doc["api_key"] = apiKey;
-
-    String jsonString;
-    serializeJson(doc, jsonString);
-
-    int httpResponseCode = http.POST(jsonString);
-    if (httpResponseCode > 0) {
-      String response = http.getString();
-      Serial.println("Scan sent: " + response);
-    }
-    http.end();
-  }
+  lcd.clear();
+  lcd.print("Scan Your Card");
 }`;
 
 const apiEndpoints = [
