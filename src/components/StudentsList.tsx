@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
+// import { useTranslation } from '../hooks/useTranslation';
 import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
 import {
   Shield,
@@ -27,6 +27,8 @@ import {
   Download,
   RefreshCw
 } from 'lucide-react';
+import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 
 interface Student {
   id: number;
@@ -47,7 +49,9 @@ interface Category {
 
 const StudentsList: React.FC = () => {
   const navigate = useNavigate();
-  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
+  // const { t, locale,, changeLanguage, loading } = useTranslation();
+  const { formatMessage } = useIntl();
+  const { locale, } = useLocalIntl();
   const [students, setStudents] = useState<Student[]>([]);
   const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -96,7 +100,7 @@ const StudentsList: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': apiKey,
-          'Accept-Language': currentLanguage
+          'Accept-Language': locale,
         }
       });
 
@@ -122,7 +126,7 @@ const StudentsList: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': apiKey || '',
-          'Accept-Language': currentLanguage
+          'Accept-Language': locale,
         }
       });
 
@@ -152,7 +156,7 @@ const StudentsList: React.FC = () => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Accept-Language': currentLanguage
+          'Accept-Language': locale,
         },
         body: JSON.stringify({
           newUid: newUid.trim()
@@ -252,7 +256,7 @@ const StudentsList: React.FC = () => {
   }, [navigate, token]);
 
   // Show loading state while translations are loading
-  if (loading || !isLoaded) {
+  if (isLoading || !isLoaded) {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -311,7 +315,7 @@ const StudentsList: React.FC = () => {
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    Office
+                   {formatMessage({ id: "students.navigation.office" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -321,14 +325,14 @@ const StudentsList: React.FC = () => {
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    Home
+                    {formatMessage({ id: "students.navigation.home" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
 
                 <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
                   <span className="text-green-400 transition-colors">
-                    Students
+                  {formatMessage({ id: "students.navigation.students" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-emerald-400"></div>
                 </button>
@@ -341,7 +345,7 @@ const StudentsList: React.FC = () => {
                       onClick={() => navigate('/admin/attendance')}
                       className="text-gray-300 group-hover:text-white transition-colors"
                     >
-                      Attendance
+                     {formatMessage({ id: "students.navigation.attendance" })}
                     </button>
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
@@ -361,21 +365,21 @@ const StudentsList: React.FC = () => {
                 </button>
 
                 {/* Language Selector */}
-                <select
-                  value={currentLanguage}
+                {/* <select
+                  value={locale,}
                   onChange={handleLanguageChange}
                   className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-white/20 transition-all duration-300"
                 >
                   <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
                   <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-                </select>
+                </select> */}
 
                 <button
                   onClick={handleLogout}
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <span>{formatMessage({ id: "students.navigation.logout" })}</span>
                 </button>
               </div>
             </nav>
@@ -398,23 +402,23 @@ const StudentsList: React.FC = () => {
                 onClick={() => navigate('/admin/dashboard')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                Office
+               {formatMessage({ id: "students.navigation.office" })}
               </button>
               <button
                 onClick={() => navigate('/admin/school')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                Home
+               {formatMessage({ id: "students.navigation.home" })}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-green-400">
-                Students
+                {formatMessage({ id: "students.navigation.students" })}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white">
                 <button
                   onClick={() => navigate('/admin/dashboard')}
                   className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
                 >
-                  Dashboard
+                  {formatMessage({ id: "students.navigation.dashboard" })}
                 </button>
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white">
@@ -422,13 +426,13 @@ const StudentsList: React.FC = () => {
                   onClick={() => navigate('/admin/attendance')}
                   className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
                 >
-                  Attendance
+                 {formatMessage({ id: "students.navigation.attendance" })}
                 </button>
               </button>
 
               <div className="pt-4 border-t border-white/10">
                 {/* <select
-                  value={currentLanguage}
+                  value={locale,}
                   onChange={handleLanguageChange}
                   className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
                 >
@@ -457,11 +461,11 @@ const StudentsList: React.FC = () => {
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-                All Registered Members
+                 {formatMessage({ id: "students.header.title" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Manage and monitor your member database with comprehensive tools
+              {formatMessage({ id: "students.header.subtitle" })}
             </p>
           </div>
         </section>
@@ -469,10 +473,10 @@ const StudentsList: React.FC = () => {
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Users, label: "Total Students", value: totalStudents.toString(), color: "from-green-500 to-emerald-500" },
-            { icon: UserCheck, label: "Male Students", value: `${maleCount} (${malePercent}%)`, color: "from-blue-500 to-cyan-500" },
-            { icon: Activity, label: "Female Students", value: `${femaleCount} (${femalePercent}%)`, color: "from-purple-500 to-pink-500" },
-            { icon: BarChart3, label: "Forms/Classes", value: categories.length.toString(), color: "from-orange-500 to-red-500" }
+            { icon: Users, label:  formatMessage({ id: "students.stats.totalStudents" }), value: totalStudents.toString(), color: "from-green-500 to-emerald-500" },
+            { icon: UserCheck, label: formatMessage({ id: "students.stats.maleStudents" }), value: `${maleCount} (${malePercent}%)`, color: "from-blue-500 to-cyan-500" },
+            { icon: Activity, label: formatMessage({ id: "students.stats.femaleStudents" }), value: `${femaleCount} (${femalePercent}%)`, color: "from-purple-500 to-pink-500" },
+            { icon: BarChart3, label: formatMessage({ id: "students.stats.formsClasses" }), value: categories.length.toString(), color: "from-orange-500 to-red-500" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
               <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -493,13 +497,12 @@ const StudentsList: React.FC = () => {
               {/* Search and Filter */}
               <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-green-300">Filter by Form/Class:</label>
                   <select
                     value={formFilter}
                     onChange={(e) => setFormFilter(e.target.value)}
                     className="bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 w-48"
                   >
-                    <option value="">All Forms</option>
+                    <option value="">{formatMessage({ id: "students.filters.allForms" })}</option>
                     {categories.map(category => (
                       <option key={category.id} value={category.name}>{category.name}</option>
                     ))}
@@ -507,12 +510,12 @@ const StudentsList: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-green-300">Search by Name:</label>
+
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
-                      placeholder="Search students..."
+                      placeholder={formatMessage({ id: "students.filters.searchByName" })}
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 w-64"
@@ -525,7 +528,7 @@ const StudentsList: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <button className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2">
                   <Download className="w-4 h-4" />
-                  <span>Export</span>
+                  <span>{formatMessage({ id: "students.filters.export" })}</span>
                 </button>
 
                 <button
@@ -537,7 +540,7 @@ const StudentsList: React.FC = () => {
                   className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  <span>Refresh</span>
+                  <span>{formatMessage({ id: "students.filters.refresh" })}</span>
                 </button>
               </div>
             </div>
@@ -551,7 +554,7 @@ const StudentsList: React.FC = () => {
             <div className="flex items-center justify-center py-20">
               <div className="text-center space-y-4">
                 <Loader2 className="w-12 h-12 animate-spin text-green-600 mx-auto" />
-                <span className="text-gray-300 text-lg">Loading students...</span>
+                <span className="text-gray-300 text-lg">{formatMessage({ id: "students.loading" })}</span>
               </div>
             </div>
           )}
@@ -572,7 +575,7 @@ const StudentsList: React.FC = () => {
                 className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 mx-auto"
               >
                 <RefreshCw className="w-4 h-4" />
-                <span>Try Again</span>
+                <span>{formatMessage({ id: "students.errors.tryAgain" })}</span>
               </button>
             </div>
           )}
@@ -587,37 +590,37 @@ const StudentsList: React.FC = () => {
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <User className="w-4 h-4" />
-                          <span>Name</span>
+                          <span>{formatMessage({ id: "students.table.headers.name" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Hash className="w-4 h-4" />
-                          <span>UID</span>
+                          <span>{formatMessage({ id: "students.table.headers.uid" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Mail className="w-4 h-4" />
-                          <span>Email</span>
+                          <span>{formatMessage({ id: "students.table.headers.email" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Phone className="w-4 h-4" />
-                          <span>Telephone</span>
+                          <span>{formatMessage({ id: "students.table.headers.telephone" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <GraduationCap className="w-4 h-4" />
-                          <span>Form/Class</span>
+                          <span>{formatMessage({ id: "students.table.headers.form" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Users className="w-4 h-4" />
-                          <span>Gender</span>
+                          <span>{formatMessage({ id: "students.table.headers.gender" })}</span>
                         </div>
                       </th>
                     </tr>
@@ -664,8 +667,8 @@ const StudentsList: React.FC = () => {
                     <div className="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
                       <Users className="w-12 h-12 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">No Members Found</h3>
-                    <p className="text-gray-400">Try adjusting your search or filter criteria</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "students.errors.noStudents" })}</h3>
+                    <p className="text-gray-400">{formatMessage({ id: "students.errors.adjustFilters" })}</p>
                   </div>
                 )}
               </div>
@@ -689,13 +692,13 @@ const StudentsList: React.FC = () => {
               <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Edit className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Update Student UID</h3>
-              <p className="text-gray-400 mt-2">Change the RFID card UID for {selectedStudent.name}</p>
+              <h3 className="text-2xl font-bold text-white">{formatMessage({ id: "students.modal.updateUID" })}</h3>
+              <p className="text-gray-400 mt-2">{formatMessage({ id: "students.modal.updateDescription", values: { name: selectedStudent.name } })}</p>
             </div>
 
             <form onSubmit={handleUpdateUid} className="space-y-6">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">Current UID:</label>
+                <label className="text-sm font-medium text-gray-300">{formatMessage({ id: "students.modal.currentUID" })}</label>
                 <input
                   type="text"
                   value={selectedStudent.uid}
@@ -705,12 +708,12 @@ const StudentsList: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">New UID:</label>
+                <label className="text-sm font-medium text-gray-300">{formatMessage({ id: "students.modal.newUID" })}</label>
                 <input
                   type="text"
                   value={newUid}
                   onChange={(e) => setNewUid(e.target.value)}
-                  placeholder="Enter new UID..."
+                  placeholder={formatMessage({ id: "students.modal.newUIDPlaceholder" })}
                   required
                   className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300"
                 />
@@ -724,12 +727,12 @@ const StudentsList: React.FC = () => {
                 {isUpdating ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Updating...</span>
+                    <span>{formatMessage({ id: "students.modal.updating" })}</span>
                   </>
                 ) : (
                   <>
                     <Edit className="w-5 h-5" />
-                    <span>Update UID</span>
+                    <span>{formatMessage({ id: "students.modal.updateUID" })}</span>
                   </>
                 )}
               </button>

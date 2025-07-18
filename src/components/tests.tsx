@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '../hooks/useTranslation';
 import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
 import {
   Shield,
@@ -22,7 +23,7 @@ import {
 } from 'lucide-react';
 import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
-// import LanguageSwitcher from "./LanguageSwitcher";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface Device {
   device_uid: string;
@@ -53,8 +54,9 @@ interface RegistrationFormData {
 const SchoolManagement: React.FC = () => {
   const navigate = useNavigate();
 const { formatMessage } = useIntl();
-  const { locale } = useLocalIntl();
-
+  
+const { locale } = useLocalIntl();
+  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
   const [devices, setDevices] = useState<Device[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -67,7 +69,7 @@ const { formatMessage } = useIntl();
   const [pollIntervals, setPollIntervals] = useState<Map<string, NodeJS.Timeout>>(new Map());
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
- 
+
   const token = getAuthData('token');
   const apiKey = getApiKey();
   const adminData = getAdminData();
@@ -119,7 +121,7 @@ const { formatMessage } = useIntl();
       const response = await fetch(`${API_BASE}/categories`, {
         headers: {
           'x-api-key': apiKey || '',
-          'Accept-Language': locale,
+          'Accept-Language': currentLanguage,
         }
       });
       if (response.ok) {
@@ -240,7 +242,7 @@ const { formatMessage } = useIntl();
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept-Language': locale,
+          'Accept-Language': currentLanguage,
         },
         body: JSON.stringify({
           device_uid: deviceUid,
@@ -273,7 +275,7 @@ const { formatMessage } = useIntl();
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'Accept-Language': locale,
+          'Accept-Language': currentLanguage,
         },
         body: JSON.stringify({ api_key: apiKey })
       });
@@ -367,7 +369,7 @@ const { formatMessage } = useIntl();
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept-Language': locale,
+          'Accept-Language': currentLanguage,
         },
         body: JSON.stringify({
           uid: scanData.uid,
@@ -415,7 +417,7 @@ const { formatMessage } = useIntl();
   };
 
   // Show loading state while translations are loading
-  if (isLoading|| !isLoaded) {
+  if (loading || !isLoaded) {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -474,14 +476,14 @@ const { formatMessage } = useIntl();
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {formatMessage({ id: "schoolManagement.dashboard" })}
+                    Dashboard
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
 
                 <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
                   <span className="text-blue-400 transition-colors">
-                    {formatMessage({ id: "schoolManagement.schoolManagement" })}
+                    School Management
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
                 </button>
@@ -491,7 +493,7 @@ const { formatMessage } = useIntl();
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                   {formatMessage({ id: "schoolManagement.students" })}
+                    Students
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -501,7 +503,7 @@ const { formatMessage } = useIntl();
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                     {formatMessage({ id: "schoolManagement.attendance" })}
+                    Attendance
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -511,7 +513,7 @@ const { formatMessage } = useIntl();
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {formatMessage({ id: "schoolManagement.reports" })}
+                    Reports
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -538,7 +540,7 @@ const { formatMessage } = useIntl();
 
                 {/* Language Selector */}
                 {/* <select
-                  value={locale}
+                  value={currentLanguage}
                   onChange={handleLanguageChange}
                   className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-white/20 transition-all duration-300"
                 >
@@ -574,28 +576,28 @@ const { formatMessage } = useIntl();
                 onClick={() => navigate('/admin/dashboard')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                {formatMessage({ id: "schoolManagement.dashboard" })}
+                Dashboard
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400">
-                {formatMessage({ id: "schoolManagement.title" })}
+                School Management
               </button>
               <button
                 onClick={() => navigate('/admin/students')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                {formatMessage({ id: "schoolManagement.students" })}
+                Students
               </button>
               <button
                 onClick={() => navigate('/admin/attendance')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                {formatMessage({ id: "schoolManagement.attendance" })}
+                Attendance
               </button>
               <button
                 onClick={() => navigate('/admin/reports')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                {formatMessage({ id: "schoolManagement.reports" })}
+                Reports
               </button>
               <button
                 onClick={() => navigate('/docs')}
@@ -628,11 +630,11 @@ const { formatMessage } = useIntl();
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-              {formatMessage({ id: "schoolManagement.title" })}
+                {t('schoolManagement.title')}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              {formatMessage({ id: "schoolManagement.subtitle" })}
+              {t('schoolManagement.subtitle')}
             </p>
           </div>
         </section>
@@ -642,8 +644,8 @@ const { formatMessage } = useIntl();
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
               <div className="space-y-2">
-                <h2 className="text-2xl font-bold text-white"> {formatMessage({ id: "schoolManagement.registeredDevices" })}</h2>
-                <p className="text-gray-300"> {formatMessage({ id: "schoolManagement.monitorDevices" })}</p>
+                <h2 className="text-2xl font-bold text-white">{t('schoolManagement.registeredDevices')}</h2>
+                <p className="text-gray-300">{t('schoolManagement.monitorDevices')}</p>
               </div>
 
               <button
@@ -651,7 +653,7 @@ const { formatMessage } = useIntl();
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
               >
                 <Plus className="w-5 h-5" />
-                <span>{showAddForm ? formatMessage({ id: "schoolManagement.cancel" }) : formatMessage({ id: "schoolManagement.addDevice" })}</span>
+                <span>{showAddForm ? t('schoolManagement.cancel') : t('schoolManagement.addDevice')}</span>
               </button>
             </div>
           </div>
@@ -663,23 +665,23 @@ const { formatMessage } = useIntl();
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg max-w-md mx-auto">
               <form onSubmit={registerDevice} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">{formatMessage({ id: "schoolManagement.deviceUid" })}</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">{t('schoolManagement.deviceUid')}</label>
                   <input
                     type="text"
                     value={deviceUid}
                     onChange={(e) => setDeviceUid(e.target.value)}
-                    placeholder={formatMessage({ id: "schoolManagement.enterDeviceUid" })}
+                    placeholder={t('schoolManagement.enterDeviceUid')}
                     required
                     className="w-full px-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">{formatMessage({ id: "schoolManagement.deviceName" })}</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">{t('schoolManagement.deviceName')}</label>
                   <input
                     type="text"
                     value={deviceName}
                     onChange={(e) => setDeviceName(e.target.value)}
-                    placeholder={formatMessage({ id: "schoolManagement.enterDeviceName" })}
+                    placeholder={t('schoolManagement.enterDeviceName')}
                     required
                     className="w-full px-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   />
@@ -688,7 +690,7 @@ const { formatMessage } = useIntl();
                   type="submit"
                   className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 py-3 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
-                 {formatMessage({ id: "schoolManagement.registerDevice" })}
+                  {t('schoolManagement.registerDevice')}
                 </button>
                 {formMessage && (
                   <p className={`text-sm mt-2 ${formMessage.includes('success') ? 'text-green-400' : 'text-red-400'}`}>
@@ -707,7 +709,7 @@ const { formatMessage } = useIntl();
             <div className="flex items-center justify-center py-20">
               <div className="text-center space-y-4">
                 <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto" />
-                <span className="text-gray-300 text-lg">{formatMessage({ id: "schoolManagement.loadingDevices" })}</span>
+                <span className="text-gray-300 text-lg">{t('schoolManagement.loadingDevices')}</span>
               </div>
             </div>
           )}
@@ -720,8 +722,8 @@ const { formatMessage } = useIntl();
                   <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
                     <Users className="w-12 h-12 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "schoolManagement.noDevicesRegistered" })}</h3>
-                  <p className="text-gray-400">{formatMessage({ id: "schoolManagement.addFirstDevice" })}</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">{t('schoolManagement.noDevicesRegistered')}</h3>
+                  <p className="text-gray-400">{t('schoolManagement.addFirstDevice')}</p>
                 </div>
               ) : (
                 <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -751,14 +753,14 @@ const { formatMessage } = useIntl();
                                 <WifiOff className="w-4 h-4 text-red-400" />
                               )}
                               <span className={`text-sm font-semibold ${isOnline ? 'text-green-400' : 'text-red-400'}`}>
-                                {isOnline ? formatMessage({ id: "schoolManagement.online" }) : formatMessage({ id: "schoolManagement.offline" })}
+                                {isOnline ? t('schoolManagement.online') : t('schoolManagement.offline')}
                               </span>
                             </div>
 
                             <div className="flex items-center gap-2 mb-3">
                               <Clock className="w-4 h-4 text-gray-400" />
                               <span className={`text-sm ${isOnline ? 'text-green-300' : 'text-red-300'}`}>
-                                {formatMessage({ id: "schoolManagement.lastSeen" })} {timeAgo}
+                                {t('schoolManagement.lastSeen')} {timeAgo}
                               </span>
                             </div>
 
@@ -773,7 +775,7 @@ const { formatMessage } = useIntl();
                           <button
                             onClick={() => deleteDevice(device.device_uid)}
                             className="bg-red-600 hover:bg-red-700 p-2 rounded-lg transition-colors duration-200"
-                            title={formatMessage({ id: "schoolManagement.deleteDevice" })}
+                            title={t('schoolManagement.deleteDevice')}
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -781,7 +783,7 @@ const { formatMessage } = useIntl();
 
                         {showForm && (
                           <div className="mt-4 p-4 bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-lg border border-blue-500/30">
-                            <h4 className="text-lg font-semibold text-blue-300 mb-4">{formatMessage({ id: "schoolManagement.registerNewStudent" })}</h4>
+                            <h4 className="text-lg font-semibold text-blue-300 mb-4">{t('schoolManagement.registerNewStudent')}</h4>
                             <StudentRegistrationForm
                               device_uid={device.device_uid}
                               categories={categories}
@@ -818,7 +820,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
   });
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState('');
-  const { formatMessage } = useIntl();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -856,7 +858,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
         name="name"
         value={formData.name}
         onChange={handleChange}
-        placeholder={formatMessage({ id: "schoolManagement.studentName" })}
+        placeholder={t('schoolManagement.studentName')}
         required
         className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
       />
@@ -866,7 +868,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
         name="email"
         value={formData.email}
         onChange={handleChange}
-        placeholder={formatMessage({ id: "schoolManagement.emailAddress" })}
+        placeholder={t('schoolManagement.emailAddress')}
         required
         className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
       />
@@ -876,7 +878,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
         name="telephone"
         value={formData.telephone}
         onChange={handleChange}
-        placeholder={formatMessage({ id: "schoolManagement.phoneNumber" })}
+        placeholder={t('schoolManagement.phoneNumber')}
         required
         className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
       />
@@ -888,7 +890,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
         required
         className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
       >
-        <option value="">{formatMessage({ id: "schoolManagement.selectClass" })}</option>
+        <option value="">{t('schoolManagement.selectClass')}</option>
         {categories.map(category => (
           <option key={category.id} value={category.name}>
             {category.name}
@@ -903,10 +905,10 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
         required
         className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
       >
-        <option value="">{formatMessage({ id: "schoolManagement.selectGender" })}</option>
-        <option value="Male">{formatMessage({ id: "schoolManagement.male" })}</option>
-        <option value="Female">{formatMessage({ id: "schoolManagement.female" })}</option>
-        <option value="Other">{formatMessage({ id: "schoolManagement.other" })}</option>
+        <option value="">{t('schoolManagement.selectGender')}</option>
+        <option value="Male">{t('schoolManagement.male')}</option>
+        <option value="Female">{t('schoolManagement.female')}</option>
+        <option value="Other">{t('schoolManagement.other')}</option>
       </select>
 
       <button
@@ -914,7 +916,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
         disabled={submitting}
         className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 py-2 rounded-lg font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
       >
-        {submitting ? formatMessage({ id: "schoolManagement.registering" }) : formatMessage({ id: "schoolManagement.registerStudent" })}
+        {submitting ? t('schoolManagement.registering') : t('schoolManagement.registerStudent')}
       </button>
 
       {message && (

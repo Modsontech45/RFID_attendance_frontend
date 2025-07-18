@@ -443,5 +443,226 @@
       "error": "Failed to create category.",
       "serverError": "Server error. Please try again."
     }
+  },
+    "schoolManagement": {
+    "title": "School Device Management",
+    "subtitle": "Monitor and manage your school's RFID devices with real-time scanning capabilities",
+    "registeredDevices": "Registered Devices",
+    "monitorDevices": "Monitor your school's RFID scanning devices",
+    "addDevice": "Add Device",
+    "cancel": "Cancel",
+    "deviceUid": "Device UID",
+    "deviceName": "Device Name",
+    "enterDeviceUid": "Enter device UID",
+    "enterDeviceName": "Enter device name",
+    "registerDevice": "Register Device",
+    "noDevicesRegistered": "No Devices Registered",
+    "addFirstDevice": "Add your first device to get started",
+    "online": "Online",
+    "offline": "Offline",
+    "waitingForScan": "Waiting for scan...",
+    "scanDetected": "Scan detected",
+    "newStudentDetected": "New student detected - UID:",
+    "registerNewStudent": "Register New Student",
+    "studentName": "Student Name",
+    "emailAddress": "Email Address",
+    "phoneNumber": "Phone Number",
+    "selectClass": "Select Class/Form",
+    "selectGender": "Select Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "registerStudent": "Register Student",
+    "registering": "Registering...",
+    "deleteDevice": "Delete Device",
+    "confirmDelete": "Are you sure you want to delete this device?",
+    "loadingDevices": "Loading devices...",
+    "justNow": "Just now",
+    "minuteAgo": "minute ago",
+    "minutesAgo": "minutes ago",
+    "hourAgo": "hour ago",
+    "hoursAgo": "hours ago",
+    "yesterday": "Yesterday at",
+    "never": "Never",
+    "lastSeen": "Last seen:",
+    "dashboard": "Dashboard",
+    "students": "Students",
+    "attendance": "Attendance",
+    "reports": "Reports",
+    "registerStudentButton": "Register Student",
+    "schoolManagement": "School Management",
+    "logout": "Logout"
+  },
+  "students":{
+  "loading": {
+    "students": "Loading Students",
+    "loadingStudents": "Loading students..."
+  },
+  "navigation": {
+    "office": "Office",
+    "home": "Home",
+    "students": "Students",
+    "attendance": "Attendance",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "header": {
+    "title": "All Registered Members",
+    "subtitle": "Manage and monitor your member database with comprehensive tools"
+  },
+  "stats": {
+    "totalStudents": "Total Students",
+    "maleStudents": "Male Students",
+    "femaleStudents": "Female Students",
+    "formsClasses": "Forms/Classes"
+  },
+  "filters": {
+    "filterByForm": "Filter by Form/Class:",
+    "allForms": "All Forms",
+    "searchByName": "Search by Name:",
+    "searchPlaceholder": "Search students...",
+    "export": "Export",
+    "refresh": "Refresh"
+  },
+  "table": {
+    "headers": {
+      "name": "Name",
+      "uid": "UID",
+      "email": "Email",
+      "telephone": "Telephone",
+      "form": "Form/Class",
+      "gender": "Gender"
+    }
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female"
+  },
+  "errors": {
+    "noStudentsFound": "No Members Found",
+    "adjustFilters": "Try adjusting your search or filter criteria",
+    "tryAgain": "Try Again"
+  },
+  "modal": {
+    "updateUID": "Update Student UID",
+    "updateDescription": "Change the RFID card UID for",
+    "currentUID": "Current UID:",
+    "newUID": "New UID:",
+    "newUIDPlaceholder": "Enter new UID...",
+    "updating": "Updating...",
+    "updateButton": "Update UID"
+  },
+  "buttons": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "update": "Update",
+    "delete": "Delete",
+    "confirm": "Confirm"
+  },
+  "messages": {
+    "success": "Operation completed successfully",
+    "error": "An error occurred",
+    "updated": "Updated successfully",
+    "deleted": "Deleted successfully"
+  },
+  "common": {
+    "loading": "Loading...",
+    "noData": "No data available",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All",
+    "none": "None",
+    "yes": "Yes",
+    "no": "No"
   }
+},
+  "attendance": {
+  "loading": {
+    "students": "Loading Students",
+    "loadingStudents": "Loading students..."
+  },
+  "navigation": {
+    "office": "Office",
+    "home": "Home",
+    "students": "Students",
+    "attendance": "Attendance",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "language": {
+    "english": "English",
+    "french": "French"
+  },
+  "header": {
+    "title": "All Registered Members",
+    "subtitle": "Manage and monitor your member database with comprehensive tools"
+  },
+  "stats": {
+    "totalStudents": "Total Students",
+    "maleStudents": "Male Students",
+    "femaleStudents": "Female Students",
+    "formsClasses": "Forms/Classes"
+  },
+  "filters": {
+    "filterByForm": "Filter by Form/Class:",
+    "allForms": "All Forms",
+    "searchByName": "Search by Name:",
+    "searchPlaceholder": "Search students...",
+    "export": "Export",
+    "refresh": "Refresh"
+  },
+  "table": {
+    "headers": {
+      "name": "Name",
+      "uid": "UID",
+      "email": "Email",
+      "telephone": "Telephone",
+      "form": "Form/Class",
+      "gender": "Gender"
+    }
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female"
+  },
+  "errors": {
+    "noStudentsFound": "No Members Found",
+    "adjustFilters": "Try adjusting your search or filter criteria",
+    "tryAgain": "Try Again"
+  },
+  "modal": {
+    "updateUID": "Update Student UID",
+    "updateDescription": "Change the RFID card UID for",
+    "currentUID": "Current UID:",
+    "newUID": "New UID:",
+    "newUIDPlaceholder": "Enter new UID...",
+    "updating": "Updating...",
+    "updateButton": "Update UID"
+  },
+  "buttons": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "update": "Update",
+    "delete": "Delete",
+    "confirm": "Confirm"
+  },
+  "messages": {
+    "success": "Operation completed successfully",
+    "error": "An error occurred",
+    "updated": "Updated successfully",
+    "deleted": "Deleted successfully"
+  },
+  "common": {
+    "loading": "Loading...",
+    "noData": "No data available",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All",
+    "none": "None",
+    "yes": "Yes",
+    "no": "No"
+  }
+}
 }

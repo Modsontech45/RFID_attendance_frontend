@@ -448,5 +448,226 @@
       "error": "Échec de la création de la catégorie.",
       "serverError": "Erreur serveur. Veuillez réessayer."
     }
+  },
+    "schoolManagement": {
+    "title": "Gestion des appareils scolaires",
+    "subtitle": "Surveillez et gérez les appareils RFID de votre école avec des capacités de numérisation en temps réel",
+    "registeredDevices": "Appareils enregistrés",
+    "monitorDevices": "Surveillez les appareils de numérisation RFID de votre école",
+    "addDevice": "Ajouter un appareil",
+    "cancel": "Annuler",
+    "deviceUid": "UID de l'appareil",
+    "deviceName": "Nom de l'appareil",
+    "enterDeviceUid": "Entrez l'UID de l'appareil",
+    "enterDeviceName": "Entrez le nom de l'appareil",
+    "registerDevice": "Enregistrer l'appareil",
+    "noDevicesRegistered": "Aucun appareil enregistré",
+    "addFirstDevice": "Ajoutez votre premier appareil pour commencer",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "waitingForScan": "En attente de numérisation...",
+    "scanDetected": "Numérisation détectée",
+    "newStudentDetected": "Nouvel étudiant détecté - UID:",
+    "registerNewStudent": "Enregistrer un nouvel étudiant",
+    "studentName": "Nom de l'étudiant",
+    "emailAddress": "Adresse e-mail",
+    "phoneNumber": "Numéro de téléphone",
+    "selectClass": "Sélectionner la classe/forme",
+    "selectGender": "Sélectionner le sexe",
+    "male": "Masculin",
+    "female": "Féminin",
+    "other": "Autre",
+    "registerStudent": "Enregistrer l'étudiant",
+    "registering": "Enregistrement...",
+    "deleteDevice": "Supprimer l'appareil",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet appareil?",
+    "loadingDevices": "Chargement des appareils...",
+    "justNow": "À l'instant",
+    "minuteAgo": "minute",
+    "minutesAgo": "minutes",
+    "hourAgo": "heure",
+    "hoursAgo": "heures",
+    "yesterday": "Hier à",
+    "never": "Jamais",
+    "lastSeen": "Vu pour la dernière fois:",
+    "dashboard": "Tableau de bord",
+    "students": "Étudiants",
+    "reports": "Rapports",
+   
+    "schoolManagement": "Gestion de l'école",
+    "attendance": "Présence",
+    "logout": "Déconnexion"
+  },
+    "students":{
+  "loading": {
+    "students": "Chargement des Étudiants",
+    "loadingStudents": "Chargement des étudiants..."
+  },
+  "navigation": {
+    "office": "Bureau",
+    "home": "Accueil",
+    "students": "Étudiants",
+    "attendance": "Présence",
+    "dashboard": "Tableau de Bord",
+    "logout": "Déconnexion"
+  },
+  "header": {
+    "title": "Tous les Membres Inscrits",
+    "subtitle": "Gérez et surveillez votre base de données de membres avec des outils complets"
+  },
+  "stats": {
+    "totalStudents": "Total Étudiants",
+    "maleStudents": "Étudiants Masculins",
+    "femaleStudents": "Étudiants Féminins",
+    "formsClasses": "Formulaires/Classes"
+  },
+  "filters": {
+    "filterByForm": "Filtrer par Formulaire/Classe :",
+    "allForms": "Tous les Formulaires",
+    "searchByName": "Rechercher par Nom :",
+    "searchPlaceholder": "Rechercher des étudiants...",
+    "export": "Exporter",
+    "refresh": "Actualiser"
+  },
+  "table": {
+    "headers": {
+      "name": "Nom",
+      "uid": "UID",
+      "email": "Email",
+      "telephone": "Téléphone",
+      "form": "Formulaire/Classe",
+      "gender": "Genre"
+    }
+  },
+  "gender": {
+    "male": "Masculin",
+    "female": "Féminin"
+  },
+  "errors": {
+    "noStudentsFound": "Aucun Membre Trouvé",
+    "adjustFilters": "Essayez d'ajuster vos critères de recherche ou de filtre",
+    "tryAgain": "Réessayer"
+  },
+  "modal": {
+    "updateUID": "Mettre à jour l'UID de l'Étudiant",
+    "updateDescription": "Changer l'UID de la carte RFID pour",
+    "currentUID": "UID Actuel :",
+    "newUID": "Nouvel UID :",
+    "newUIDPlaceholder": "Entrez le nouvel UID...",
+    "updating": "Mise à jour...",
+    "updateButton": "Mettre à jour l'UID"
+  },
+  "buttons": {
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "update": "Mettre à jour",
+    "delete": "Supprimer",
+    "confirm": "Confirmer"
+  },
+  "messages": {
+    "success": "Opération terminée avec succès",
+    "error": "Une erreur s'est produite",
+    "updated": "Mis à jour avec succès",
+    "deleted": "Supprimé avec succès"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "noData": "Aucune donnée disponible",
+    "search": "Recherche",
+    "filter": "Filtrer",
+    "all": "Tous",
+    "none": "Aucun",
+    "yes": "Oui",
+    "no": "Non"
   }
+},
+"attendance": {
+  "loading": {
+    "students": "Chargement des Étudiants",
+    "loadingStudents": "Chargement des étudiants..."
+  },
+  "navigation": {
+    "office": "Bureau",
+    "home": "Accueil",
+    "students": "Étudiants",
+    "attendance": "Présence",
+    "dashboard": "Tableau de Bord",
+    "logout": "Déconnexion"
+  },
+  "language": {
+    "english": "Anglais",
+    "french": "Français"
+  },
+  "header": {
+    "title": "Tous les Membres Inscrits",
+    "subtitle": "Gérez et surveillez votre base de données de membres avec des outils complets"
+  },
+  "stats": {
+    "totalStudents": "Total Étudiants",
+    "maleStudents": "Étudiants Masculins",
+    "femaleStudents": "Étudiants Féminins",
+    "formsClasses": "Formulaires/Classes"
+  },
+  "filters": {
+    "filterByForm": "Filtrer par Formulaire/Classe :",
+    "allForms": "Tous les Formulaires",
+    "searchByName": "Rechercher par Nom :",
+    "searchPlaceholder": "Rechercher des étudiants...",
+    "export": "Exporter",
+    "refresh": "Actualiser"
+  },
+  "table": {
+    "headers": {
+      "name": "Nom",
+      "uid": "UID",
+      "email": "Email",
+      "telephone": "Téléphone",
+      "form": "Formulaire/Classe",
+      "gender": "Genre"
+    }
+  },
+  "gender": {
+    "male": "Masculin",
+    "female": "Féminin"
+  },
+  "errors": {
+    "noStudentsFound": "Aucun Membre Trouvé",
+    "adjustFilters": "Essayez d'ajuster vos critères de recherche ou de filtre",
+    "tryAgain": "Réessayer"
+  },
+  "modal": {
+    "updateUID": "Mettre à jour l'UID de l'Étudiant",
+    "updateDescription": "Changer l'UID de la carte RFID pour",
+    "currentUID": "UID Actuel :",
+    "newUID": "Nouvel UID :",
+    "newUIDPlaceholder": "Entrez le nouvel UID...",
+    "updating": "Mise à jour...",
+    "updateButton": "Mettre à jour l'UID"
+  },
+  "buttons": {
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "update": "Mettre à jour",
+    "delete": "Supprimer",
+    "confirm": "Confirmer"
+  },
+  "messages": {
+    "success": "Opération terminée avec succès",
+    "error": "Une erreur s'est produite",
+    "updated": "Mis à jour avec succès",
+    "deleted": "Supprimé avec succès"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "noData": "Aucune donnée disponible",
+    "search": "Recherche",
+    "filter": "Filtrer",
+    "all": "Tous",
+    "none": "Aucun",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}
 }
