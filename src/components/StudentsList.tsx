@@ -265,7 +265,7 @@ const StudentsList: React.FC = () => {
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-              Loading Students
+                         {formatMessage({ id: "students.loading.students" })}
             </div>
             <div className="flex justify-center space-x-1">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>

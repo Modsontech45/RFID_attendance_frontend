@@ -20,7 +20,7 @@ import {
   Loader2,
   Building
 } from 'lucide-react';
-import { FormattedMessage, useIntl } from "react-intl";
+import {  useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 // import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -316,13 +316,13 @@ const { formatMessage } = useIntl();
     const diffDay = Math.floor(diffHr / 24);
 
     if (diffSec < 60) {
-      return 'Just now';
+      return `${formatMessage({ id: "schoolManagement.justNow" })}`;
     } else if (diffMin < 60) {
-      return `${diffMin} minute${diffMin === 1 ? '' : 's'} ago`;
+      return `${diffMin} minute${diffMin === 1 ? '' : 's'}   ${formatMessage({ id: "schoolManagement.ago" })}`;
     } else if (diffHr < 24) {
-      return `${diffHr} hour${diffHr === 1 ? '' : 's'} ago`;
+      return `${diffHr}  ${formatMessage({ id: "schoolManagement.hoursAgo" })}${diffHr === 1 ? '' : 's'}   ${formatMessage({ id: "schoolManagement.ago" })}`;
     } else if (diffDay === 1) {
-      return `Yesterday at ${lastSeenDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+      return ` ${formatMessage({ id: "schoolManagement.yesterday" })} ${lastSeenDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     } else {
       return lastSeenDate.toLocaleString();
     }
@@ -335,13 +335,13 @@ const { formatMessage } = useIntl();
     if (scanData) {
       if (showForm) {
         return {
-          text: `New student detected - UID: ${scanData.uid}`,
+          text: ` ${formatMessage({ id: "schoolManagement.newStudentDetected" })}: ${scanData.uid}`,
           className: 'text-orange-400 font-semibold',
           icon: <AlertCircle className="w-4 h-4" />
         };
       } else {
         return {
-          text: `Scan detected - UID: ${scanData.uid} | ${scanData.message}`,
+          text: `${formatMessage({ id: "schoolManagement.scanDetected" })}: ${scanData.uid} | ${scanData.message}`,
           className: 'text-blue-400 font-semibold',
           icon: <CheckCircle className="w-4 h-4" />
         };
@@ -349,7 +349,7 @@ const { formatMessage } = useIntl();
     }
 
     return {
-      text: 'Waiting for scan...',
+      text: `${formatMessage({ id: "schoolManagement.waitingForScan" })}`,
       className: 'text-yellow-400 font-semibold flex items-center gap-2',
       icon: <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
     };
@@ -424,7 +424,7 @@ const { formatMessage } = useIntl();
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Loading School Management
+             {formatMessage({ id: "students.loading.students" })}
             </div>
             <div className="flex justify-center space-x-1">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>

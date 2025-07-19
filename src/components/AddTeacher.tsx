@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
-import { getAuthData, getApiKey, postData, API_BASE, getAdminData } from '../utils/auth';
-import { 
-  Shield, 
-  ArrowLeft, 
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import {
+  getAuthData,
+  getApiKey,
+  postData,
+  API_BASE,
+  getAdminData,
+} from "../utils/auth";
+import {
+  Shield,
+  ArrowLeft,
   Loader2,
   Mail,
   UserPlus,
@@ -14,78 +20,89 @@ import {
   Bell,
   Users,
   Plus,
-  Send
-} from 'lucide-react';
+  Send,
+} from "lucide-react";
+import { useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 
 const AddTeacher: React.FC = () => {
   const navigate = useNavigate();
-  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
-  const [email, setEmail] = useState('');
+  const { formatMessage } = useIntl();
+  const { locale } = useLocalIntl();
+  const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState<'success' | 'error' | ''>('');
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error" | "">("");
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const token = getAuthData('token');
+  const token = getAuthData("token");
   const apiKey = getApiKey();
   const adminData = getAdminData();
-  
-  // Extract admin info with fallbacks
-  const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
-  const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeLanguage(e.target.value);
-  };
+  // Extract admin info with fallbacks
+  const schoolName =
+    adminData?.schoolname ||
+    adminData?.email?.split("@")[1]?.split(".")[0] ||
+    "Synctuario Academy";
+  const username =
+    adminData?.username || adminData?.email?.split("@")[0] || "admin_user";
 
   const handleGoBack = () => {
-    navigate('/admin/dashboard');
+    navigate("/admin/dashboard");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email.trim()) {
-      setMessage('Email is required');
-      setMessageType('error');
+      setMessage("Email is required");
+      setMessageType("error");
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      setMessage('Please enter a valid email address');
-      setMessageType('error');
+      setMessage("Please enter a valid email address");
+      setMessageType("error");
       return;
     }
 
     setIsLoading(true);
-    setMessage('');
+    setMessage("");
 
     try {
-      const result = await postData(`${API_BASE}/teachers/add`, {
-        email: email.trim()
-      }, {
-        'Authorization': `Bearer ${token}`,
-        'x-api-key': apiKey,
-        'Accept-Language': currentLanguage
-      });
+      const result = await postData(
+        `${API_BASE}/teachers/add`,
+        {
+          email: email.trim(),
+        },
+        {
+          Authorization: `Bearer ${token}`,
+          "x-api-key": apiKey,
+          "Accept-Language": locale || "en",
+        }
+      );
 
       if (result.message && !result.error) {
-        setMessage(result.message || 'Teacher added successfully!');
-        setMessageType('success');
-        setEmail('');
-        
+        setMessage(result.message || "Teacher added successfully!");
+        setMessageType("success");
+        setEmail("");
+
         // Redirect to teachers list after success
         setTimeout(() => {
-          navigate('/admin/teachers');
+          navigate("/admin/teachers");
         }, 2000);
       } else {
-        setMessage(result.error || result.message || 'Failed to add teacher.');
-        setMessageType('error');
+        setMessage(result.error || result.message || "Failed to add teacher.");
+        setMessageType("error");
       }
     } catch (error) {
-      console.error('Error adding teacher:', error);
-      setMessage(error instanceof Error ? error.message : 'Server error. Please try again.');
-      setMessageType('error');
+      console.error("Error adding teacher:", error);
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Server error. Please try again."
+      );
+      setMessageType("error");
     } finally {
       setIsLoading(false);
     }
@@ -93,10 +110,10 @@ const AddTeacher: React.FC = () => {
 
   // Check authentication on component mount
   useEffect(() => {
-    const role = getAuthData('role');
-    
-    if (!token || role !== 'admin') {
-      navigate('/admin/login');
+    const role = getAuthData("role");
+
+    if (!token || role !== "admin") {
+      navigate("/admin/login");
       return;
     }
 
@@ -105,7 +122,7 @@ const AddTeacher: React.FC = () => {
   }, [navigate, token]);
 
   // Show loading state while translations are loading
-  if (loading || !isLoaded) {
+  if (isLoading || !isLoaded) {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -117,9 +134,18 @@ const AddTeacher: React.FC = () => {
               Loading Add Teacher
             </div>
             <div className="flex justify-center space-x-1">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              <div
+                className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
+                style={{ animationDelay: "0ms" }}
+              ></div>
+              <div
+                className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
+                style={{ animationDelay: "150ms" }}
+              ></div>
+              <div
+                className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
+                style={{ animationDelay: "300ms" }}
+              ></div>
             </div>
           </div>
         </div>
@@ -132,8 +158,14 @@ const AddTeacher: React.FC = () => {
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+        <div
+          className="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "4s" }}
+        ></div>
       </div>
 
       {/* Header */}
@@ -169,22 +201,12 @@ const AddTeacher: React.FC = () => {
                 <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
               </button>
 
-              {/* Language Selector */}
-              <select 
-                value={currentLanguage}
-                onChange={handleLanguageChange}
-                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-white/20 transition-all duration-300"
-              >
-                <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
-                <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-              </select>
-              
               <button
                 onClick={handleGoBack}
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span>Dashboard</span>
+                <span>{formatMessage({ id: "addTeacher.dashboard" })}</span>
               </button>
             </div>
           </div>
@@ -202,21 +224,24 @@ const AddTeacher: React.FC = () => {
                 <UserPlus className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Add New Staff Member
+                {formatMessage({ id: "addTeacher.title" })}
               </h1>
               <p className="text-green-200 text-sm">
-                Enter the email address of the staff member you want to add
+                {formatMessage({ id: "addTeacher.subtitle" }) ||
+                  "Enter the email address of the staff member you want to add"}
               </p>
             </div>
 
             {/* Message */}
             {message && (
-              <div className={`border rounded-lg p-4 text-sm flex items-center space-x-3 animate-fade-in ${
-                messageType === 'success' 
-                  ? 'bg-green-500/20 border-green-500/50 text-green-300' 
-                  : 'bg-red-500/20 border-red-500/50 text-red-300'
-              }`}>
-                {messageType === 'success' ? (
+              <div
+                className={`border rounded-lg p-4 text-sm flex items-center space-x-3 animate-fade-in ${
+                  messageType === "success"
+                    ? "bg-green-500/20 border-green-500/50 text-green-300"
+                    : "bg-red-500/20 border-red-500/50 text-red-300"
+                }`}
+              >
+                {messageType === "success" ? (
                   <CheckCircle className="w-5 h-5 flex-shrink-0" />
                 ) : (
                   <AlertCircle className="w-5 h-5 flex-shrink-0" />
@@ -230,20 +255,26 @@ const AddTeacher: React.FC = () => {
               {/* Email Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-green-300">
-                  Staff Email Address
+                  {formatMessage({ id: "addTeacher.emailLabel" }) ||
+                    "Teacher Email Address"}
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder={t('addTeacher.emailPlaceholder') || 'staff@example.com'}
+                    placeholder={
+                      formatMessage({ id: "addTeacher.emailPlaceholder" }) ||
+                      "teacher@example.com"
+                    }
                     required
                     className="w-full pl-12 pr-4 py-4 border border-green-400/50 rounded-xl bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
                   />
-                  <span>The staff member will receive an email invitation to join</span>
                 </div>
+                <p className="text-xs text-green-300 mt-1">
+                  {formatMessage({ id: "addTeacher.infoText" }) ||
+                    "The teacher will receive an email invitation to join"}
+                </p>
               </div>
 
               {/* Submit Button */}
@@ -255,12 +286,18 @@ const AddTeacher: React.FC = () => {
                 {isLoading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Adding Staff...</span>
+                    <span>
+                      {formatMessage({ id: "addTeacher.adding" }) ||
+                        "Adding..."}
+                    </span>
                   </>
                 ) : (
                   <>
                     <Send className="w-5 h-5" />
-                    <span>Add Staff Member</span>
+                    <span>
+                      {formatMessage({ id: "addTeacher.submitButton" }) ||
+                        "Add Teacher"}
+                    </span>
                   </>
                 )}
               </button>
@@ -270,7 +307,10 @@ const AddTeacher: React.FC = () => {
             <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 text-center">
               <div className="flex items-center justify-center space-x-2 text-green-300 text-sm">
                 <Users className="w-4 h-4" />
-                <span>{t('addTeacher.infoText') || 'The staff member will receive an email invitation to join'}</span>
+                <span>
+                  {formatMessage({ id: "addTeacher.infoText" }) ||
+                    "The staff member will receive an email invitation to join"}
+                </span>
               </div>
             </div>
 
@@ -281,7 +321,7 @@ const AddTeacher: React.FC = () => {
                 className="text-green-400 hover:text-green-300 transition-colors duration-300 flex items-center space-x-2 mx-auto group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
-                <span>Go Back to Dashboard</span>
+                <span> {formatMessage({ id: "addTeacher.goBack" })}</span>
               </button>
             </div>
           </div>

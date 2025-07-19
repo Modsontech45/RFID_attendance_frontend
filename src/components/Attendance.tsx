@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
 import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
 import { 
   Shield, 
@@ -31,7 +30,8 @@ import {
   Eye,
   PieChart
 } from 'lucide-react';
-
+import {  useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 interface AttendanceRecord {
   id: number;
   date: string;
@@ -65,7 +65,9 @@ interface FormStats {
 
 const Attendance: React.FC = () => {
   const navigate = useNavigate();
-  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
+const { formatMessage } = useIntl();
+  const { locale } = useLocalIntl();
+ 
   const [attendanceRecords, setAttendanceRecords] = useState<AttendanceRecord[]>([]);
   const [filteredRecords, setFilteredRecords] = useState<AttendanceRecord[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -98,9 +100,9 @@ const Attendance: React.FC = () => {
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeLanguage(e.target.value);
-  };
+  // const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   changeLanguage(e.target.value);
+  // };
 
   const handleLogout = () => {
     if (refreshInterval) {
@@ -125,7 +127,7 @@ const Attendance: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': apiKey,
-          'Accept-Language': currentLanguage
+          'Accept-Language': locale,
         }
       });
 
@@ -151,7 +153,7 @@ const Attendance: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': apiKey,
-          'Accept-Language': currentLanguage
+          'Accept-Language': locale,
         }
       });
       
@@ -403,7 +405,7 @@ const Attendance: React.FC = () => {
   }, [navigate, token]);
 
   // Show loading state while translations are loading
-  if (loading || !isLoaded) {
+  if (isLoading || !isLoaded) {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -412,7 +414,7 @@ const Attendance: React.FC = () => {
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Loading Attendance
+             {formatMessage({ id: "attendance.loading.attendance" })}
             </div>
             <div className="flex justify-center space-x-1">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
@@ -465,7 +467,7 @@ const Attendance: React.FC = () => {
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    Office
+                   {formatMessage({ id: "attendance.office" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -475,7 +477,7 @@ const Attendance: React.FC = () => {
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    Home
+                   {formatMessage({ id: "attendance.home" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -485,14 +487,14 @@ const Attendance: React.FC = () => {
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    Students
+                  {formatMessage({ id: "attendance.students" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
                 
                 <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
                   <span className="text-blue-400 transition-colors">
-                    Attendance
+                    {formatMessage({ id: "attendance.attendance" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
                 </button>
@@ -500,32 +502,24 @@ const Attendance: React.FC = () => {
 
               <div className="flex items-center space-x-4">
                 {/* Notifications */}
-                <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+                <button title='Notifications' className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                   <Bell className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
                   <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                 </button>
 
                 {/* Settings */}
-                <button className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+                <button  title={formatMessage({ id: "attendance.settings" })} className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                   <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
                 </button>
 
-                {/* Language Selector */}
-                <select 
-                  value={currentLanguage}
-                  onChange={handleLanguageChange}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-white/20 transition-all duration-300"
-                >
-                  <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
-                  <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-                </select>
+
 
                 <button
                   onClick={handleLogout}
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <span>  {formatMessage({ id: "attendance.logout" })}</span>
                 </button>
               </div>
             </nav>
@@ -548,40 +542,33 @@ const Attendance: React.FC = () => {
                 onClick={() => navigate('/admin/dashboard')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                Office
+            {formatMessage({ id: "attendance.office" })}
               </button>
               <button 
                 onClick={() => navigate('/admin/school')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                Home
+                  {formatMessage({ id: "attendance.home" })}
               </button>
               <button 
                 onClick={() => navigate('/admin/students')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                Students
+                  {formatMessage({ id: "attendance.students" })}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400">
-                Attendance
+                {formatMessage({ id: "attendance.attendance" })}
               </button>
               
               <div className="pt-4 border-t border-white/10">
-                <select 
-                  value={currentLanguage}
-                  onChange={handleLanguageChange}
-                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-                >
-                  <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
-                  <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-                </select>
+          
 
                 <button
                   onClick={handleLogout}
                   className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <span>{formatMessage({ id: "attendance.logout" })}</span>
                 </button>
               </div>
             </nav>
@@ -597,11 +584,11 @@ const Attendance: React.FC = () => {
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-                Attendance Analytics
+                {formatMessage({ id: "attendance.title" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Monitor and analyze member attendance with real-time insights and comprehensive reporting
+              {formatMessage({ id: "attendance.subtitle" })}
             </p>
           </div>
         </section>
@@ -609,10 +596,10 @@ const Attendance: React.FC = () => {
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Users, label: "Total Records", value: stats.totalStudents.toString(), change: "+12%", color: "from-blue-500 to-cyan-500" },
-            { icon: CheckCircle, label: "Present", value: stats.totalPresent.toString(), change: "+5%", color: "from-green-500 to-emerald-500" },
-            { icon: Clock, label: "Partial", value: stats.totalPartial.toString(), change: "+2%", color: "from-yellow-500 to-orange-500" },
-            { icon: XCircle, label: "Absent", value: stats.totalAbsent.toString(), change: "-3%", color: "from-red-500 to-pink-500" }
+            { icon: Users, label:  formatMessage({ id: "attendance.stats.totalStudents" }), value: stats.totalStudents.toString(), change: "+12%", color: "from-blue-500 to-cyan-500" },
+            { icon: CheckCircle, label: formatMessage({ id: "attendance.stats.presentToday" }), value: stats.totalPresent.toString(), change: "+5%", color: "from-green-500 to-emerald-500" },
+            { icon: Clock, label: formatMessage({ id: "attendance.stats.partial" }), value: stats.totalPartial.toString(), change: "+2%", color: "from-yellow-500 to-orange-500" },
+            { icon: XCircle, label: formatMessage({ id: "attendance.stats.absentToday" }), value: stats.totalAbsent.toString(), change: "-3%", color: "from-red-500 to-pink-500" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
               <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -637,13 +624,13 @@ const Attendance: React.FC = () => {
               {/* Search and Filter */}
               <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-blue-300">Filter by Form/Class:</label>
+                
                   <select
                     value={filters.form}
                     onChange={(e) => handleFilterChange('form', e.target.value)}
                     className="bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 w-48"
                   >
-                    <option value="">All Forms</option>
+                    <option value=""> {formatMessage({ id: "attendance.allforms" })}</option>
                     {categories.map(category => (
                       <option key={category.id} value={category.name}>{category.name}</option>
                     ))}
@@ -651,7 +638,7 @@ const Attendance: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-blue-300">Filter by Date:</label>
+              
                   <input
                     type="date"
                     value={filters.date}
@@ -663,13 +650,30 @@ const Attendance: React.FC = () => {
 
               {/* Actions */}
               <div className="flex items-center space-x-4">
+                   <button
+                  onClick={() => {
+                    setError('');
+                    setIsLoading(true);
+                    fetchAttendanceRecords().finally(() => setIsLoading(false));
+                  }}
+                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  {/* <span>Refresh</span> */}
+                </button>
                 <div className="relative">
+
+                  
+
+
+
+
                   <button
                     onClick={() => setShowDownloadOptions(!showDownloadOptions)}
                     className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2"
                   >
                     <Download className="w-4 h-4" />
-                    <span>Download</span>
+                    {/* <span>{formatMessage({ id: "attendance.download" })}</span> */}
                   </button>
                   {showDownloadOptions && (
                     <div className="absolute right-0 mt-2 w-48 bg-black/80 backdrop-blur-md border border-white/20 rounded-xl shadow-2xl z-50 overflow-hidden">
@@ -677,14 +681,14 @@ const Attendance: React.FC = () => {
                         onClick={downloadAsPDF}
                         className="flex justify-between w-full px-4 py-3 hover:bg-white/10 text-white transition-colors"
                       >
-                        <span>Download as PDF</span>
+                        <span>{formatMessage({ id: "attendance.downloadAspdf" })}</span>
                         <FileText className="w-4 h-4" />
                       </button>
                       <button
                         onClick={downloadAsExcel}
                         className="flex justify-between w-full px-4 py-3 hover:bg-white/10 text-white transition-colors"
                       >
-                        <span>Download as Excel</span>
+                        <span>{formatMessage({ id: "attendance.downloadAsExcel" })}</span>
                         <BarChart3 className="w-4 h-4" />
                       </button>
                     </div>
@@ -696,20 +700,10 @@ const Attendance: React.FC = () => {
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <Filter className="w-4 h-4" />
-                  <span>Advanced Filter</span>
+                  <span>{formatMessage({ id: "attendance.advancedFilters" })}</span>
                 </button>
 
-                {/* <button
-                  onClick={() => {
-                    setError('');
-                    setIsLoading(true);
-                    fetchAttendanceRecords().finally(() => setIsLoading(false));
-                  }}
-                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                  <span>Refresh</span>
-                </button> */}
+             
               </div>
             </div>
           </div>
@@ -722,7 +716,7 @@ const Attendance: React.FC = () => {
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
                 <BarChart3 className="w-5 h-5 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-white">Attendance Summary</h2>
+              <h2 className="text-2xl font-bold text-white">{formatMessage({ id: "attendance.summary" })}</h2>
             </div>
             
             <div className="grid md:grid-cols-2 gap-8">
@@ -735,7 +729,7 @@ const Attendance: React.FC = () => {
 
               {/* Form Statistics */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-blue-300 mb-4">Statistics by Form/Class</h3>
+                <h3 className="text-lg font-semibold text-blue-300 mb-4">{formatMessage({ id: "attendance.statistics" })}</h3>
                 <div className="space-y-3">
                   {Object.entries(formStats).map(([form, stat]) => (
                     <div key={form} className="bg-black/30 rounded-xl p-4 border border-white/10">
@@ -743,15 +737,15 @@ const Attendance: React.FC = () => {
                       <div className="grid grid-cols-3 gap-4 text-sm">
                         <div className="text-center">
                           <div className="text-green-400 font-bold text-lg">{stat.present}</div>
-                          <div className="text-gray-400">Present</div>
+                          <div className="text-gray-400">{formatMessage({ id: "attendance.statsPresent" })}</div>
                         </div>
                         <div className="text-center">
                           <div className="text-yellow-400 font-bold text-lg">{stat.partial}</div>
-                          <div className="text-gray-400">Partial</div>
+                          <div className="text-gray-400">{formatMessage({ id: "attendance.statsPartial" })}</div>
                         </div>
                         <div className="text-center">
                           <div className="text-red-400 font-bold text-lg">{stat.absent}</div>
-                          <div className="text-gray-400">Absent</div>
+                          <div className="text-gray-400">{formatMessage({ id: "attendance.statsAbsent" })}</div>
                         </div>
                       </div>
                     </div>
@@ -769,7 +763,7 @@ const Attendance: React.FC = () => {
             <div className="flex items-center justify-center py-20">
               <div className="text-center space-y-4">
                 <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto" />
-                <span className="text-gray-300 text-lg">Loading attendance records...</span>
+                <span className="text-gray-300 text-lg">{formatMessage({ id: "attendance.loading.loadingAttendance" })}</span>
               </div>
             </div>
           )}
@@ -780,7 +774,7 @@ const Attendance: React.FC = () => {
               <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <AlertCircle className="w-8 h-8 text-red-400" />
               </div>
-              <h3 className="text-xl font-semibold text-red-400 mb-2">Error Loading Attendance</h3>
+              <h3 className="text-xl font-semibold text-red-400 mb-2">{formatMessage({ id: "attendance.loading.error" })}</h3>
               <p className="text-red-300 mb-6">{error}</p>
               <button
                 onClick={() => {
@@ -791,7 +785,7 @@ const Attendance: React.FC = () => {
                 className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 mx-auto"
               >
                 <RefreshCw className="w-4 h-4" />
-                <span>Try Again</span>
+                <span>{formatMessage({ id: "attendance.loading.tryAgain" })}</span>
               </button>
             </div>
           )}
@@ -806,43 +800,43 @@ const Attendance: React.FC = () => {
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Calendar className="w-4 h-4" />
-                          <span>Date</span>
+                          <span>{formatMessage({ id: "attendance.table.date" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <User className="w-4 h-4" />
-                          <span>Name</span>
+                          <span>{formatMessage({ id: "attendance.table.name" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Hash className="w-4 h-4" />
-                          <span>UID</span>
+                          <span>{formatMessage({ id: "attendance.table.uid" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Clock className="w-4 h-4" />
-                          <span>Sign In</span>
+                          <span>{formatMessage({ id: "attendance.table.signInTime" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Clock className="w-4 h-4" />
-                          <span>Sign Out</span>
+                          <span>{formatMessage({ id: "attendance.table.signOutTime" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Activity className="w-4 h-4" />
-                          <span>Status</span>
+                          <span>{formatMessage({ id: "attendance.table.status" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <GraduationCap className="w-4 h-4" />
-                          <span>Form</span>
+                          <span>{formatMessage({ id: "attendance.table.form" })}</span>
                         </div>
                       </th>
                     </tr>
@@ -888,8 +882,8 @@ const Attendance: React.FC = () => {
                     <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
                       <BarChart3 className="w-12 h-12 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">No Attendance Records Found</h3>
-                    <p className="text-gray-400">Try adjusting your search or filter criteria</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "attendance.loading.noRecords" })}</h3>
+                    <p className="text-gray-400">{formatMessage({ id: "attendance.loading.tryAdjusting" })}</p>
                   </div>
                 )}
               </div>
@@ -913,24 +907,24 @@ const Attendance: React.FC = () => {
               <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Filter className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Advanced Filters</h3>
-              <p className="text-gray-400 mt-2">Refine your attendance search</p>
+              <h3 className="text-2xl font-bold text-white">{formatMessage({ id: "attendance.advancedFilters" })}</h3>
+              <p className="text-gray-400 mt-2">{formatMessage({ id: "attendance.description" })}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">Filter by Name:</label>
+                <label className="text-sm font-medium text-gray-300">{formatMessage({ id: "attendance.searchByName" })}</label>
                 <input
                   type="text"
                   value={filters.name}
                   onChange={(e) => handleFilterChange('name', e.target.value)}
-                  placeholder="Enter student name"
+                  placeholder={formatMessage({ id: "attendance.searchPlaceholder" })}
                   className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/20 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300"
                 />
               </div>
               
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">Start Date:</label>
+                <label className="text-sm font-medium text-gray-300">{formatMessage({ id: "attendance.startDate" })}:</label>
                 <input
                   type="date"
                   value={filters.startDate}
@@ -940,7 +934,7 @@ const Attendance: React.FC = () => {
               </div>
               
               <div className="space-y-2 md:col-span-2">
-                <label className="text-sm font-medium text-gray-300">End Date:</label>
+                <label className="text-sm font-medium text-gray-300">{formatMessage({ id: "attendance.endDate" })}:</label>
                 <input
                   type="date"
                   value={filters.endDate}
@@ -955,7 +949,7 @@ const Attendance: React.FC = () => {
                 onClick={() => setShowAdvancedFilter(false)}
                 className="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-3 rounded-xl font-semibold transition-all duration-300"
               >
-                Cancel
+               {formatMessage({ id: "attendance.cancel" })}
               </button>
               
               <button
@@ -965,7 +959,7 @@ const Attendance: React.FC = () => {
                 }}
                 className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
-                Apply Filters
+               {formatMessage({ id: "attendance.applyFilters" })}
               </button>
             </div>
           </div>

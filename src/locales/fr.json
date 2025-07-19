@@ -449,7 +449,7 @@
       "serverError": "Erreur serveur. Veuillez réessayer."
     }
   },
-    "schoolManagement": {
+  "schoolManagement": {
     "title": "Gestion des appareils scolaires",
     "subtitle": "Surveillez et gérez les appareils RFID de votre école avec des capacités de numérisation en temps réel",
     "registeredDevices": "Appareils enregistrés",
@@ -486,188 +486,191 @@
     "minuteAgo": "minute",
     "minutesAgo": "minutes",
     "hourAgo": "heure",
-    "hoursAgo": "heures",
+    "hoursAgo": "heure",
     "yesterday": "Hier à",
+    "ago": "auparavant",
     "never": "Jamais",
     "lastSeen": "Vu pour la dernière fois:",
     "dashboard": "Tableau de bord",
     "students": "Étudiants",
     "reports": "Rapports",
-   
+
     "schoolManagement": "Gestion de l'école",
     "attendance": "Présence",
     "logout": "Déconnexion"
   },
-    "students":{
-  "loading": {
-    "students": "Chargement des Étudiants",
-    "loadingStudents": "Chargement des étudiants..."
+  "students": {
+    "loading": {
+      "students": "Chargement des Étudiants",
+      "loadingStudents": "Chargement des étudiants..."
+    },
+    "navigation": {
+      "office": "Bureau",
+      "home": "Accueil",
+      "students": "Étudiants",
+      "attendance": "Présence",
+      "dashboard": "Tableau de Bord",
+      "logout": "Déconnexion"
+    },
+    "header": {
+      "title": "Tous les Membres Inscrits",
+      "subtitle": "Gérez et surveillez votre base de données de membres avec des outils complets"
+    },
+    "stats": {
+      "totalStudents": "Total Étudiants",
+      "maleStudents": "Étudiants Masculins",
+      "femaleStudents": "Étudiants Féminins",
+      "formsClasses": "Formulaires/Classes"
+    },
+    "filters": {
+      "filterByForm": "Filtrer par Formulaire/Classe :",
+      "allForms": "Tous les Formulaires",
+      "searchByName": "Rechercher par Nom :",
+      "searchPlaceholder": "Rechercher des étudiants...",
+      "export": "Exporter",
+      "refresh": "Actualiser"
+    },
+    "table": {
+      "headers": {
+        "name": "Nom",
+        "uid": "UID",
+        "email": "Email",
+        "telephone": "Téléphone",
+        "form": "Formulaire/Classe",
+        "gender": "Genre"
+      }
+    },
+    "gender": {
+      "male": "Masculin",
+      "female": "Féminin"
+    },
+    "errors": {
+      "noStudentsFound": "Aucun Membre Trouvé",
+      "adjustFilters": "Essayez d'ajuster vos critères de recherche ou de filtre",
+      "tryAgain": "Réessayer"
+    },
+    "modal": {
+      "updateUID": "Mettre à jour l'UID de l'Étudiant",
+      "updateDescription": "Changer l'UID de la carte RFID pour",
+      "currentUID": "UID Actuel :",
+      "newUID": "Nouvel UID :",
+      "newUIDPlaceholder": "Entrez le nouvel UID...",
+      "updating": "Mise à jour...",
+      "updateButton": "Mettre à jour l'UID"
+    },
+    "buttons": {
+      "close": "Fermer",
+      "cancel": "Annuler",
+      "save": "Sauvegarder",
+      "update": "Mettre à jour",
+      "delete": "Supprimer",
+      "confirm": "Confirmer"
+    },
+    "messages": {
+      "success": "Opération terminée avec succès",
+      "error": "Une erreur s'est produite",
+      "updated": "Mis à jour avec succès",
+      "deleted": "Supprimé avec succès"
+    },
+    "common": {
+      "loading": "Chargement...",
+      "noData": "Aucune donnée disponible",
+      "search": "Recherche",
+      "filter": "Filtrer",
+      "all": "Tous",
+      "none": "Aucun",
+      "yes": "Oui",
+      "no": "Non"
+    }
   },
-  "navigation": {
+  "attendance": {
     "office": "Bureau",
     "home": "Accueil",
     "students": "Étudiants",
     "attendance": "Présence",
-    "dashboard": "Tableau de Bord",
-    "logout": "Déconnexion"
-  },
-  "header": {
-    "title": "Tous les Membres Inscrits",
-    "subtitle": "Gérez et surveillez votre base de données de membres avec des outils complets"
-  },
-  "stats": {
-    "totalStudents": "Total Étudiants",
-    "maleStudents": "Étudiants Masculins",
-    "femaleStudents": "Étudiants Féminins",
-    "formsClasses": "Formulaires/Classes"
-  },
-  "filters": {
-    "filterByForm": "Filtrer par Formulaire/Classe :",
-    "allForms": "Tous les Formulaires",
+    "logout": "Déconnexion",
+    "settings": "Paramètres",
+    "loading": {
+      "attendance": "Chargement de la Présence",
+      "loadingAttendance": "Chargement des enregistrements...",
+      "error": "Une erreur s'est produite lors du chargement des données de présence. Veuillez réessayer. 🙏😢",
+      "noRecords": "Aucun enregistrement de présence trouvé pour aujourd'hui. 🙏😢",
+      "tryAgain": "Essayez de rafraîchir la page ou de vérifier votre connexion Internet.🙏😢",
+      "tryAdjusting": "Essayez d'ajuster vos critères de recherche ou de filtre pour afficher les enregistrements.🙏😢"
+    },
+    "title": "Analyse de la Présence",
+    "subtitle": "Surveillez et analysez la présence des membres avec des informations en temps réel et des rapports complets",
+    "stats": {
+      "totalStudents": "Total Étudiants",
+      "presentToday": "Présents Aujourd'hui",
+      "absentToday": "Absents Aujourd'hui",
+      "attendanceRate": "Taux de Présence",
+      "partial": "Partiel"
+    },
+    "allforms": "Tous les Formulaires",
+    "download": "Télécharger",
+    "downloadAspdf": "Télécharger en PDF",
+    "downloadAsExcel": "Télécharger en Excel",
+    "advancedFilters": "Filtres Avancés",
+    "description": "Affinez votre recherche de présence avec des filtres avancés",
     "searchByName": "Rechercher par Nom :",
-    "searchPlaceholder": "Rechercher des étudiants...",
-    "export": "Exporter",
-    "refresh": "Actualiser"
-  },
-  "table": {
-    "headers": {
+    "searchPlaceholder": "Rechercher des membres...",
+    "startDate": "Date de Début",
+    "endDate": "Date de Fin",
+    "cancel": "Annuler",
+    "applyFilters": "Appliquer les Filtres",
+    "summary": "Résumé de la Présence",
+    "statistics": "Statistiques par Formulaire/Classe",
+    "statsPresent": "Présents",
+    "statsAbsent": "Absents",
+    "statsPartial": "Partiels",
+    "table": {
+      "date": "Date",
       "name": "Nom",
       "uid": "UID",
-      "email": "Email",
-      "telephone": "Téléphone",
-      "form": "Formulaire/Classe",
-      "gender": "Genre"
+      "signInTime": "Heure de Connexion",
+      "signOutTime": "Heure de Déconnexion",
+      "status": "Statut",
+      "form": "Formulaire/Classe"
     }
   },
-  "gender": {
-    "male": "Masculin",
-    "female": "Féminin"
-  },
-  "errors": {
-    "noStudentsFound": "Aucun Membre Trouvé",
-    "adjustFilters": "Essayez d'ajuster vos critères de recherche ou de filtre",
-    "tryAgain": "Réessayer"
-  },
-  "modal": {
-    "updateUID": "Mettre à jour l'UID de l'Étudiant",
-    "updateDescription": "Changer l'UID de la carte RFID pour",
-    "currentUID": "UID Actuel :",
-    "newUID": "Nouvel UID :",
-    "newUIDPlaceholder": "Entrez le nouvel UID...",
-    "updating": "Mise à jour...",
-    "updateButton": "Mettre à jour l'UID"
-  },
-  "buttons": {
-    "close": "Fermer",
-    "cancel": "Annuler",
-    "save": "Sauvegarder",
-    "update": "Mettre à jour",
-    "delete": "Supprimer",
-    "confirm": "Confirmer"
-  },
-  "messages": {
-    "success": "Opération terminée avec succès",
-    "error": "Une erreur s'est produite",
-    "updated": "Mis à jour avec succès",
-    "deleted": "Supprimé avec succès"
-  },
-  "common": {
-    "loading": "Chargement...",
-    "noData": "Aucune donnée disponible",
-    "search": "Recherche",
+  "teachersList": {
+    "yourStaff": "Votre Personnel Enseignant",
+    "errorLoading": "Une erreur s'est produite lors du chargement des enseignants 🙏😢",
+    "subtitle": "Gérez et surveillez votre personnel enseignant avec des outils complets",
+    "loading": "Chargement des enseignants...",
+    "noTeachers": "Aucun enseignant trouvé",
+    "addYourFirstTeacher": "Ajoutez votre premier enseignant pour commencer",
+    "addTeachers": "Ajoutez des enseignants pour les voir ici",
+    "tryAgain": "Réessayer",
+    "goHome": "Retour à l'accueil",
+    "stats": {
+      "totalTeachers": "Total Enseignants",
+      "activeTeachers": "Enseignants Actifs",
+      "TopPerforming": "Meilleurs Performants",
+      "avgExperience": "Expérience Moyenne"
+    },
+    "searchTeachers": "Rechercher des enseignants...",
     "filter": "Filtrer",
-    "all": "Tous",
-    "none": "Aucun",
-    "yes": "Oui",
-    "no": "Non"
-  }
-},
-"attendance": {
-  "loading": {
-    "students": "Chargement des Étudiants",
-    "loadingStudents": "Chargement des étudiants..."
-  },
-  "navigation": {
-    "office": "Bureau",
-    "home": "Accueil",
-    "students": "Étudiants",
-    "attendance": "Présence",
-    "dashboard": "Tableau de Bord",
-    "logout": "Déconnexion"
-  },
-  "language": {
-    "english": "Anglais",
-    "french": "Français"
-  },
-  "header": {
-    "title": "Tous les Membres Inscrits",
-    "subtitle": "Gérez et surveillez votre base de données de membres avec des outils complets"
-  },
-  "stats": {
-    "totalStudents": "Total Étudiants",
-    "maleStudents": "Étudiants Masculins",
-    "femaleStudents": "Étudiants Féminins",
-    "formsClasses": "Formulaires/Classes"
-  },
-  "filters": {
-    "filterByForm": "Filtrer par Formulaire/Classe :",
-    "allForms": "Tous les Formulaires",
-    "searchByName": "Rechercher par Nom :",
-    "searchPlaceholder": "Rechercher des étudiants...",
     "export": "Exporter",
-    "refresh": "Actualiser"
+    "addTeacher": "Ajouter un Enseignant",
+    "unnamedTeacher":"Personnel Non Nommé",
+    "joined": "Rejoint le ",
+    "view":"Voir",
+    "nobio":"Pas de bio disponible"
+
+    
   },
-  "table": {
-    "headers": {
-      "name": "Nom",
-      "uid": "UID",
-      "email": "Email",
-      "telephone": "Téléphone",
-      "form": "Formulaire/Classe",
-      "gender": "Genre"
-    }
-  },
-  "gender": {
-    "male": "Masculin",
-    "female": "Féminin"
-  },
-  "errors": {
-    "noStudentsFound": "Aucun Membre Trouvé",
-    "adjustFilters": "Essayez d'ajuster vos critères de recherche ou de filtre",
-    "tryAgain": "Réessayer"
-  },
-  "modal": {
-    "updateUID": "Mettre à jour l'UID de l'Étudiant",
-    "updateDescription": "Changer l'UID de la carte RFID pour",
-    "currentUID": "UID Actuel :",
-    "newUID": "Nouvel UID :",
-    "newUIDPlaceholder": "Entrez le nouvel UID...",
-    "updating": "Mise à jour...",
-    "updateButton": "Mettre à jour l'UID"
-  },
-  "buttons": {
-    "close": "Fermer",
-    "cancel": "Annuler",
-    "save": "Sauvegarder",
-    "update": "Mettre à jour",
-    "delete": "Supprimer",
-    "confirm": "Confirmer"
-  },
-  "messages": {
-    "success": "Opération terminée avec succès",
-    "error": "Une erreur s'est produite",
-    "updated": "Mis à jour avec succès",
-    "deleted": "Supprimé avec succès"
-  },
-  "common": {
-    "loading": "Chargement...",
-    "noData": "Aucune donnée disponible",
-    "search": "Recherche",
-    "filter": "Filtrer",
-    "all": "Tous",
-    "none": "Aucun",
-    "yes": "Oui",
-    "no": "Non"
-  }
+  "addTeacher": {
+  "title": "Ajouter un nouvel enseignant",
+  "subtitle": "Entrez l'adresse e-mail de l'enseignant que vous souhaitez ajouter",
+  "emailLabel": "Adresse e-mail de l'enseignant",
+  "emailPlaceholder": "enseignant@exemple.com",
+  "submitButton": "Ajouter un enseignant",
+  "adding": "Ajout de l'enseignant...",
+  "infoText": "L'enseignant recevra une invitation par e-mail pour rejoindre",
+  "goBack": "Retour au tableau de bord",
+  "dashboard": "Retour"
 }
+
 }

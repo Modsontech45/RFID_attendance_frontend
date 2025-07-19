@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
+
 import { getAuthData, getApiKey, getAdminData, API_BASE } from '../utils/auth';
 import {
   Shield,
@@ -26,6 +26,8 @@ import {
   Download,
   RefreshCw
 } from 'lucide-react';
+import {  useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 
 interface Teacher {
   id: number;
@@ -40,7 +42,9 @@ interface Teacher {
 
 const TeachersList: React.FC = () => {
   const navigate = useNavigate();
-  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
+const { formatMessage } = useIntl();
+const { locale } = useLocalIntl();
+ 
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>('');
@@ -56,9 +60,9 @@ const TeachersList: React.FC = () => {
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeLanguage(e.target.value);
-  };
+  // const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   changeLanguage(e.target.value);
+  // };
 
   const handleGoHome = () => {
     navigate('/admin/dashboard');
@@ -136,7 +140,7 @@ const TeachersList: React.FC = () => {
     teacher.department?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  if (loading || !isLoaded) {
+  if (isLoading|| !isLoaded) {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -205,22 +209,22 @@ const TeachersList: React.FC = () => {
                 <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
               </button>
 
-              {/* Language Selector */}
-              <select
+          
+              {/* <select
                 value={currentLanguage}
                 onChange={handleLanguageChange}
                 className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-white/20 transition-all duration-300"
               >
                 <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
                 <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-              </select>
+              </select> */}
 
               <button
                 onClick={handleGoHome}
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span>Dashboard</span>
+                <span>{formatMessage({ id: "teachersList.goHome" })}</span>
               </button>
             </div>
           </div>
@@ -235,11 +239,11 @@ const TeachersList: React.FC = () => {
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-                {t('teachersList.yourStaff')}
+              {formatMessage({ id: "teachersList.yourStaff" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Manage and monitor your staff with comprehensive tools
+              {formatMessage({ id: "teachersList.subtitle" })}
             </p>
           </div>
         </section>
@@ -247,10 +251,10 @@ const TeachersList: React.FC = () => {
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Users, label: "Total Staff", value: teachers.length.toString(), change: "+3%", color: "from-green-500 to-emerald-500" },
-            { icon: UserCheck, label: "Active Staff", value: Math.floor(teachers.length * 0.85).toString(), change: "+5%", color: "from-blue-500 to-cyan-500" },
-            { icon: Award, label: "Top Performers", value: Math.floor(teachers.length * 0.2).toString(), change: "+12%", color: "from-purple-500 to-pink-500" },
-            { icon: Clock, label: "Avg. Experience", value: "4.2y", change: "+0.3y", color: "from-orange-500 to-red-500" }
+            { icon: Users, label:  formatMessage({ id: "teachersList.stats.totalTeachers" }), value: teachers.length.toString(), change: "+3%", color: "from-green-500 to-emerald-500" },
+            { icon: UserCheck, label: formatMessage({ id: "teachersList.stats.activeTeachers" }), value: Math.floor(teachers.length * 0.85).toString(), change: "+5%", color: "from-blue-500 to-cyan-500" },
+            { icon: Award, label: formatMessage({ id: "teachersList.stats.TopPerforming" }), value: Math.floor(teachers.length * 0.2).toString(), change: "+12%", color: "from-purple-500 to-pink-500" },
+            { icon: Clock, label: formatMessage({ id: "teachersList.stats.avgExperience" }), value: "4.2y", change: "+0.3y", color: "from-orange-500 to-red-500" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
               <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -278,7 +282,7 @@ const TeachersList: React.FC = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search teachers..."
+                    placeholder={formatMessage({ id: "teachersList.searchTeachers" })}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 w-64"
@@ -286,7 +290,7 @@ const TeachersList: React.FC = () => {
                 </div>
                 <button className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2">
                   <Filter className="w-4 h-4" />
-                  <span>Filter</span>
+                  <span>{formatMessage({ id: "teachersList.filter" })}</span>
                 </button>
               </div>
 
@@ -317,7 +321,7 @@ const TeachersList: React.FC = () => {
 
                 <button className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2">
                   <Download className="w-4 h-4" />
-                  <span>Export</span>
+                  <span>{formatMessage({ id: "teachersList.export" })}</span>
                 </button>
 
                 <button
@@ -325,7 +329,7 @@ const TeachersList: React.FC = () => {
                   className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>Add Teacher</span>
+                  <span>{formatMessage({ id: "teachersList.addTeacher" })}</span>
                 </button>
               </div>
             </div>
@@ -350,7 +354,7 @@ const TeachersList: React.FC = () => {
               <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-red-400" />
               </div>
-              <h3 className="text-xl font-semibold text-red-400 mb-2">Error Loading Teachers</h3>
+              <h3 className="text-xl font-semibold text-red-400 mb-2">{formatMessage({ id: "teachersList.errorLoading" })}</h3>
               <p className="text-red-300 mb-6">{error}</p>
               <button
                 onClick={() => {
@@ -374,14 +378,14 @@ const TeachersList: React.FC = () => {
                   <div className="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
                     <Users className="w-12 h-12 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">No Staff Members Found</h3>
-                  <p className="text-gray-400 mb-8">Add staff members to see them here</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "teachersList.noTeachers" })}</h3>
+                  <p className="text-gray-400 mb-8">{formatMessage({ id: "teachersList.addTeacher" })}</p>
                   <button
                     onClick={handleAddTeacher}
                     className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-3 mx-auto"
                   >
                     <Plus className="w-5 h-5" />
-                    <span>Add Your First Staff Member</span>
+                    <span>{formatMessage({ id: "teachersList.addYourFirstTeacher" })}</span>
                   </button>
                 </div>
               ) : (
@@ -403,7 +407,7 @@ const TeachersList: React.FC = () => {
                       <div className={`relative ${viewMode === 'list' ? 'flex-shrink-0' : 'mx-auto mb-4'}`}>
                         <img
                           src={teacher.picture || "https://via.placeholder.com/120"}
-                          alt={teacher.full_name || "Unnamed Staff"}
+                          alt={teacher.full_name || `${formatMessage({ id: "teachersList.unnamedTeacher" })}`}
                           className={`${
                             viewMode === 'list' ? 'w-16 h-16' : 'w-20 h-20'
                           } rounded-full object-cover border-3 border-green-500/50 group-hover:border-green-400 transition-all duration-300 shadow-lg`}
@@ -416,7 +420,7 @@ const TeachersList: React.FC = () => {
                       {/* Teacher Info */}
                       <div className={`flex-1 ${viewMode === 'list' ? 'text-left' : ''}`}>
                         <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors duration-300 mb-2">
-                          {teacher.full_name || "Unnamed Staff"}
+                          {teacher.full_name || `${formatMessage({ id: "teachersList.unnamedTeacher" })}`}
                         </h3>
 
                         <div className="space-y-2 mb-4">
@@ -435,13 +439,13 @@ const TeachersList: React.FC = () => {
                           {teacher.created_at && (
                             <div className="flex items-center space-x-2 text-gray-400 justify-center">
                               <Calendar className="w-4 h-4" />
-                              <span className="text-xs">Joined {formatDate(teacher.created_at)}</span>
+                              <span className="text-xs">{formatMessage({ id: "teachersList.joined" })}{formatDate(teacher.created_at)}</span>
                             </div>
                           )}
                         </div>
 
                         <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-                          {truncateBio(teacher.bio || '')}
+                          {truncateBio(teacher.bio || `${formatMessage({ id: "teachersList.nobio" })}`)}
                         </p>
 
                         {/* Action Buttons */}
@@ -454,29 +458,11 @@ const TeachersList: React.FC = () => {
                             className="bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 text-sm"
                           >
                             <Eye className="w-4 h-4" />
-                            <span>View</span>
+                            <span>{formatMessage({ id: "teachersList.view" })}</span>
                           </button>
 
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              console.log(`Edit teacher ${teacher.id}`);
-                            }}
-                            className="bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 text-sm"
-                          >
-                            <Edit className="w-4 h-4" />
-                            <span>Edit</span>
-                          </button>
-
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              console.log(`More options for teacher ${teacher.id}`);
-                            }}
-                            className="bg-gray-600/20 hover:bg-gray-600 text-gray-400 hover:text-white p-2 rounded-lg transition-all duration-300"
-                          >
-                            <MoreVertical className="w-4 h-4" />
-                          </button>
+                        
+                       
                         </div>
                       </div>
                     </div>
