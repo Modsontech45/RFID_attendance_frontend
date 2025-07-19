@@ -290,7 +290,7 @@ const { locale } = useLocalIntl();
                 </div>
                 <button className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2">
                   <Filter className="w-4 h-4" />
-                  <span>{formatMessage({ id: "teachersList.filter" })}</span>
+                 
                 </button>
               </div>
 
@@ -321,7 +321,7 @@ const { locale } = useLocalIntl();
 
                 <button className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2">
                   <Download className="w-4 h-4" />
-                  <span>{formatMessage({ id: "teachersList.export" })}</span>
+                
                 </button>
 
                 <button
