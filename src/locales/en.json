@@ -208,6 +208,9 @@
   },
   "documentation": {
     "title": "Documentation",
+    "home": "Home",
+    "pricing": "Pricing",
+    "badge": "Complete Documentation",
     "subtitle": "Everything you need to know about setting up, configuring, and using the Synctuario RFID attendance system.",
     "gettingStarted": {
       "title": "Getting Started",
@@ -300,7 +303,7 @@
     "starter": {
       "title": "Starter",
       "subtitle": "Perfect for small schools or pilots",
-      "price": "$29",
+      "price": "$35",
       "period": "month",
       "features": [
         "Basic student management",
@@ -312,7 +315,7 @@
     "professional": {
       "title": "Professional",
       "subtitle": "Great for growing institutions",
-      "price": "$79",
+      "price": "$65",
       "period": "month",
       "mostPopular": "Most Popular",
       "features": [
@@ -325,7 +328,7 @@
     "enterprise": {
       "title": "Enterprise",
       "subtitle": "Best for large or multi-campus setups",
-      "price": "Custom",
+      "price": "$170",
       "period": "month",
       "features": [
         "All professional features",
@@ -671,6 +674,16 @@
     "infoText": "The staff member will receive an email invitation to join",
     "goBack": "Go Back to Dashboard",
     "dashboard": "Dashboard"
-  }
+  },
+    "teacherlogin": {
+      "title": "Teacher Login",
+      "subtitle": "Enter your email address to access your account",
+      "email_placeholder": "Email / e-mail",
+      "login_button": "Login",
+      "info_text": "Only registered staff members can access this portal. Contact your administrator if you need assistance.",
+      "back": "Back to Home",
+       "loading": "Loading..."
+    }
+
 
 }

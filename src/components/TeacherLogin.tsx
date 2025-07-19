@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
+// import { useTranslation } from '../hooks/useTranslation';
 import { postData, API_BASE, setAuthData } from '../utils/auth';
 import { 
   Shield, 
@@ -9,10 +9,12 @@ import {
   Mail,
   Users
 } from 'lucide-react';
-
+import {  useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 const TeacherLogin: React.FC = () => {
   const navigate = useNavigate();
-  const { t, loading } = useTranslation();
+ const { formatMessage } = useIntl();
+   const { locale } = useLocalIntl();
   const [formData, setFormData] = useState({
     email: ''
   });
@@ -59,7 +61,7 @@ const TeacherLogin: React.FC = () => {
     
     try {
       const result = await postData(`${API_BASE}/teachers/login`, formData, {
-        'Accept-Language': localStorage.getItem('lang') || 'en'
+        'Accept-Language': locale || 'en'
       });
       
       if (result.token) {
@@ -90,14 +92,14 @@ const TeacherLogin: React.FC = () => {
   };
 
   // Show loading state while translations are loading
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="bg-black text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mx-auto mb-4">
             <Users className="w-6 h-6 text-white animate-pulse" />
           </div>
-          <div className="text-xl text-white">{t('loading') || 'Loading...'}</div>
+          <div className="text-xl text-white">{  formatMessage({ id: "teacherlogin.loading" }) || 'Loading...'}</div>
         </div>
       </div>
     );
@@ -133,10 +135,10 @@ const TeacherLogin: React.FC = () => {
                 <Users className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-                Teacher Login
+              { formatMessage({ id: "teacherlogin.title" })}
               </h1>
               <p className="text-white text-sm">
-                Enter your email address to access your account
+                 { formatMessage({ id: "teacherlogin.subtitle" })}
               </p>
             </div>
 
@@ -156,7 +158,7 @@ const TeacherLogin: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="Email"
+                  placeholder=  { formatMessage({ id: "teacherlogin.email_placeholder" })}
                   required
                   className={`w-full pl-12 pr-4 py-3 border rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 transition-all ${
                     errors.email 
@@ -179,17 +181,17 @@ const TeacherLogin: React.FC = () => {
               {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>Logging in...</span>
+                  <span>{ formatMessage({ id: "teacherlogin.loading" })}</span>
                 </>
               ) : (
-                <span>Login</span>
+                <span>{ formatMessage({ id: "teacherlogin.login_button" })}</span>
               )}
             </button>
 
             {/* Info Text */}
             <div className="bg-green-900 border border-green-600 rounded-lg p-4 text-center">
               <p className="text-white text-sm">
-                Only registered teachers can access this portal. Contact your administrator if you need assistance.
+                { formatMessage({ id: "teacherlogin.info_text" })}
               </p>
             </div>
 
@@ -200,7 +202,7 @@ const TeacherLogin: React.FC = () => {
               className="w-full flex items-center justify-center space-x-2 text-gray-400 hover:text-white transition-colors py-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to Home</span>
+              <span>{ formatMessage({ id: "teacherlogin.back" })}</span>
             </button>
           </form>
         </div>

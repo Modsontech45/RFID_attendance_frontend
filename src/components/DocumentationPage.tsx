@@ -846,10 +846,10 @@ const DocumentationPage: React.FC = () => {
           </div>
           <div className="flex items-center space-x-4">
             <button onClick={() => navigate("/")} className="text-gray-300 hover:text-white">
-              <FormattedMessage id="nav.home" defaultMessage="Home" />
+              <FormattedMessage id="documentation.home" defaultMessage="Home" />
             </button>
             <button onClick={() => navigate("/pricing")} className="text-gray-300 hover:text-white">
-              <FormattedMessage id="nav.pricing" defaultMessage="Pricing" />
+              <FormattedMessage id="documentation.pricing" defaultMessage="Pricing" />
             </button>
             {/* <LanguageSwitcher /> */}
           </div>
@@ -864,17 +864,17 @@ const DocumentationPage: React.FC = () => {
             <Book className="h-4 w-4" />
             <span className="text-sm font-medium">
               <FormattedMessage
-                id="documentation.hero.badge"
+                id="documentation.badge"
                 defaultMessage="Complete Documentation"
               />
             </span>
           </div>
           <h1 className="text-5xl font-bold">
-            <FormattedMessage id="documentation.hero.title" defaultMessage="Documentation" />
+            <FormattedMessage id="documentation.title" defaultMessage="Documentation" />
           </h1>
           <p className="mx-auto max-w-3xl text-xl text-gray-300">
             <FormattedMessage
-              id="documentation.hero.subtitle"
+              id="documentation.subtitle"
               defaultMessage="Everything you need to know about setting up, configuring, and using the Synctuario RFID attendance system."
             />
           </p>
@@ -926,7 +926,7 @@ const DocumentationPage: React.FC = () => {
               <h3 className="mb-2 font-semibold text-white">
                 <FormattedMessage
                   id="documentation.quickLinks.adminPortal"
-                  defaultMessage="Admin Portal"
+                  defaultMessage=""
                 />
               </h3>
               <p className="text-sm text-gray-300">

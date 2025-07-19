@@ -21,7 +21,7 @@ import {
   AlertCircle,
   Loader2,
 } from "lucide-react";
-import LanguageSwitcher from "./LanguageSwitcher";
+// import LanguageSwitcher from "./LanguageSwitcher";
 
 const PricingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -127,7 +127,10 @@ const PricingPage: React.FC = () => {
                 href="/"
                 className="text-gray-300 transition-colors hover:text-white"
               >
-                Home
+                <FormattedMessage
+                  id="documentation.home"
+                  defaultMessage="Choose the plan that fits your school"
+                />
               </a>
               <a
                 // onClick={() => href("#contact")}
@@ -136,7 +139,7 @@ const PricingPage: React.FC = () => {
               >
                 Contact
               </a>
-              <LanguageSwitcher />
+              {/* <LanguageSwitcher /> */}
             </div>
           </div>
         </div>
@@ -467,7 +470,7 @@ const PricingPage: React.FC = () => {
                     <h3 className="text-lg font-semibold text-white">
                       <FormattedMessage id="pricing.contact.phone" defaultMessage="Call Us" />
                     </h3>
-                    <p className="text-gray-300">+1 (555) 123-4567</p>
+                    <p className="text-gray-300">+22893946043</p>
                   </div>
                 </div>
 
@@ -480,9 +483,9 @@ const PricingPage: React.FC = () => {
                       <FormattedMessage id="pricing.contact.office" defaultMessage="Our Office" />
                     </h3>
                     <p className="text-gray-300">
-                      123 Education Street
+                     HEDZRANAWE LOME TOGO
                       <br />
-                      Tech City, TC 12345
+                      AFRIPUL GROUP
                     </p>
                   </div>
                 </div>
@@ -591,7 +594,7 @@ const PricingPage: React.FC = () => {
                   </option>
                   <option value="Starter">
                     {formatMessage({ id: "pricing.starter.title", defaultMessage: "Starter" })} -{" "}
-                    {formatMessage({ id: "pricing.starter.price", defaultMessage: "$29" })}/
+                    {formatMessage({ id: "pricing.starter.price", defaultMessage: "$35" })}/
                     {formatMessage({ id: "pricing.starter.period", defaultMessage: "month" })}
                   </option>
                   <option value="Professional">
@@ -599,7 +602,7 @@ const PricingPage: React.FC = () => {
                       id: "pricing.professional.title",
                       defaultMessage: "Professional",
                     })}{" "}
-                    - {formatMessage({ id: "pricing.professional.price", defaultMessage: "$79" })}/
+                    - {formatMessage({ id: "pricing.professional.price", defaultMessage: "$65" })}/
                     {formatMessage({ id: "pricing.professional.period", defaultMessage: "month" })}
                   </option>
                   <option value="Enterprise">
@@ -607,7 +610,7 @@ const PricingPage: React.FC = () => {
                       id: "pricing.enterprise.title",
                       defaultMessage: "Enterprise",
                     })}{" "}
-                    - {formatMessage({ id: "pricing.enterprise.price", defaultMessage: "Custom" })}/
+                    - {formatMessage({ id: "pricing.enterprise.price", defaultMessage: "$170" })}/
                     {formatMessage({ id: "pricing.enterprise.period", defaultMessage: "month" })}
                   </option>
                 </select>

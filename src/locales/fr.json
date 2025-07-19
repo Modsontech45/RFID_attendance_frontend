@@ -209,6 +209,9 @@
   },
   "documentation": {
     "title": "Documentation",
+    "home": "Accueil",
+    "pricing": "Tarification",
+    "badge": "Documentation Complète",
     "subtitle": "Tout ce que vous devez savoir sur la configuration et l'utilisation du système de présence RFID Synctuario.",
     "gettingStarted": {
       "title": "Commencer",
@@ -284,7 +287,16 @@
           "api_key": "votre_clé_api"
         }
       }
-    }
+    },
+    "quickLinks": {
+  "title": "Liens Rapides",
+  "adminPortal": "Portail Administrateur",
+  "adminDescription": "Accéder au tableau de bord administrateur",
+  "teacherPortal": "Portail Enseignant",
+  "teacherDescription": "Accéder au tableau de bord enseignant",
+  "getStarted": "Commencer",
+  "pricingDescription": "Voir les tarifs et les plans"
+}
   },
   "pricing": {
     "title": "Tarification scolaire",
@@ -292,7 +304,7 @@
     "starter": {
       "title": "Débutant",
       "subtitle": "Parfait pour les petites écoles",
-      "price": "29$",
+      "price": "$35",
       "period": "par mois",
       "features": [
         "Jusqu'à 100 étudiants",
@@ -306,7 +318,7 @@
     "professional": {
       "title": "Professionnel",
       "subtitle": "Idéal pour les écoles moyennes",
-      "price": "79$",
+      "price": "$65",
       "period": "par mois",
       "mostPopular": "Le plus populaire",
       "features": [
@@ -323,7 +335,7 @@
     "enterprise": {
       "title": "Entreprise",
       "subtitle": "Pour les grandes écoles",
-      "price": "199$",
+      "price": "$170",
       "period": "par mois",
       "features": [
         "Étudiants illimités",
@@ -671,6 +683,16 @@
   "infoText": "L'enseignant recevra une invitation par e-mail pour rejoindre",
   "goBack": "Retour au tableau de bord",
   "dashboard": "Retour"
-}
+},
+ "teacherlogin": {
+      "title": "Connexion Des enseignants",
+      "subtitle": "Entrez votre adresse e-mail pour accéder à votre compte",
+      "email_placeholder": "Email / e-mail",
+      "login_button": "Se connecter",
+      "info_text": "Seuls les membres du personnel enregistrés peuvent accéder à ce portail. Contactez votre administrateur si vous avez besoin d'aide.",
+      "back": "Retour à l'accueil",
+      "loading": "En cours..."
+
+    }
 
 }
