@@ -536,15 +536,7 @@ const { formatMessage } = useIntl();
 
            
 
-                {/* Language Selector */}
-                {/* <select
-                  value={locale}
-                  onChange={handleLanguageChange}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-white/20 transition-all duration-300"
-                >
-                  <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
-                  <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-                </select> */}
+           
 
                 <button
                   onClick={handleLogout}

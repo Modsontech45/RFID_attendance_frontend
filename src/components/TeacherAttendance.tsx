@@ -26,6 +26,8 @@ import {
   RefreshCw,
   TrendingUp,
   Activity,
+  Menu,
+  X,
   Eye,
   PieChart
 } from 'lucide-react';
@@ -63,6 +65,7 @@ const TeacherAttendance: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [showDownloadOptions, setShowDownloadOptions] = useState(false);
   const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
+   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Filter states
   const [filters, setFilters] = useState({
@@ -91,6 +94,9 @@ const TeacherAttendance: React.FC = () => {
 
   const handleLogout = () => {
     logout();
+  };
+    const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const fetchAttendanceRecords = async () => {
@@ -374,8 +380,8 @@ const TeacherAttendance: React.FC = () => {
               </div>
             </div>
 
-            {/* Navigation */}
-            <nav className="flex items-center space-x-6">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8">
               <button 
                 onClick={() => navigate('/teacher/students')}
                 className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
@@ -437,7 +443,64 @@ const TeacherAttendance: React.FC = () => {
                 </button>
               </div>
             </nav>
+
+           {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+
+
           </div>
+             <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
+            isMobileMenuOpen ? 'max-h-99 opacity-100 mt-4' : 'max-h-0 opacity-0'
+          }`}>
+            <nav className="pb-4 border-t border-white/10 pt-4 space-y-2">
+              <button 
+                onClick={() => navigate('/teacher/students')}
+                className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400"
+              >
+                <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
+                  <Users className="w-4 h-4" />
+                  <span>Students</span>
+                </span>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+              </button>
+
+                <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400">
+                <span className="text-blue-400 transition-colors flex items-center space-x-2">
+                  <BarChart3 className="w-4 h-4" />
+                  <span>Attendance</span>
+                </span>
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
+              </button>
+
+              <button 
+                onClick={() => navigate('/teacher/profile')}
+                className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400"
+              >
+                <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
+                  <User className="w-4 h-4" />
+                  <span>Profile</span>
+                </span>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+              </button>
+
+             
+
+                <button
+                  onClick={handleLogout}
+                  className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Logout</span>
+                </button>
+
+            </nav>
+            </div>
+            
         </div>
       </header>
 
