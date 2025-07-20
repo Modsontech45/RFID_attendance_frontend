@@ -600,7 +600,7 @@
   "title": "Attendance analysis",
   "subtitle": "Monitor and analyze member attendance with real-time insights and comprehensive reporting",
   "stats": {
-    "totalAttendance": "Total Attendance",
+    "totalStudents": "Total Attendance",
     "presentToday": "Present Today",
     "absentToday": "Absent Today",
     "attendanceRate": "Attendance Rate",
