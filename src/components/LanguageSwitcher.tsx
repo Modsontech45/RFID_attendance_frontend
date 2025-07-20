@@ -23,7 +23,7 @@ const LanguageSwitcher = () => {
       >
         {availableLocales.map((lang) => (
           <option key={lang.code} value={lang.code} className="text-gray-900">
-            {lang.name}
+            {lang.name} {lang.flag}
           </option>
         ))}
       </select>

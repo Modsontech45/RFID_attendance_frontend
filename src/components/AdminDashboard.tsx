@@ -292,7 +292,7 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
-      {/* Header */}
+      {/* Header */} 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-black/20 shadow-2xl backdrop-blur-xl transition-all duration-300">
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">

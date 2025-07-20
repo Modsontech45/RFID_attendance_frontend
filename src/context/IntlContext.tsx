@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { IntlProvider } from "react-intl";
-
+import 'flag-icon-css/css/flag-icons.min.css'; // Import flag icons CSS
 // Import locale messages
 import enMessages from "../locales/en.json";
 import frMessages from "../locales/fr.json";
@@ -69,10 +69,11 @@ export const IntlContextProvider: React.FC<IntlContextProviderProps> = ({
     return savedLocale && messages[savedLocale] ? savedLocale : "en";
   });
 
-  const availableLocales = [
-    { code: "en" as Locale, name: "English", flag: "🇺🇸" },
-    { code: "fr" as Locale, name: "Français", flag: "🇫🇷" },
-  ];
+const availableLocales = [
+  { code: "en" as Locale, name: "English", flag: "🇬🇧" },
+  { code: "fr" as Locale, name: "Français", flag: "🇫🇷" },
+];
+
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
