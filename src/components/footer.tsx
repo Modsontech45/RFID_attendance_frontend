@@ -13,7 +13,7 @@ const Footer = () => {
           <p className="text-sm mt-2">Empowering users with technology.</p>
         </div>
 
-        {/* Quick Links */}
+        {/* Quick Links
         <div>
           <h3 className="text-lg font-semibold text-white mb-2">Quick Links</h3>
           <ul className="space-y-1">
@@ -22,7 +22,7 @@ const Footer = () => {
             <li><Link to="/services" className="hover:text-white">Services</Link></li>
             <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Copyright */}
         <div className="md:text-right">
