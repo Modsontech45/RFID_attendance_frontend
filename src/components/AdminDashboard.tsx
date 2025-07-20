@@ -409,7 +409,7 @@ const AdminDashboard: React.FC = () => {
               isMobileMenuOpen ? "mt-4 max-h-96 opacity-100" : "max-h-0 opacity-0"
             }`}
           >
-            <nav className="space-y-2 border-t border-white/10 pb-4 pt-4">
+            <nav className=" border-t border-white/10 pb-4 pt-4">
               <button
                 onClick={() => navigate("/admin/school")}
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
@@ -441,14 +441,14 @@ const AdminDashboard: React.FC = () => {
                 <FormattedMessage id="dashboard.nav.docs" defaultMessage="Documentation" />
               </button>
 
-              <div className="border-t border-white/10 pt-4">
+              <div className=" border-t border-white/10 pt-4">
                 <LanguageSwitcher />
 
                 <button
                   onClick={handleLogout}
-                  className="flex w-full items-center justify-center space-x-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 px-4 py-3 font-semibold text-white transition-all duration-300 hover:from-red-600 hover:to-red-700"
+                  className="my-2 flex w-full items-center justify-center space-x-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 px-4 py-3 font-semibold text-white transition-all duration-300 hover:from-red-600 hover:to-red-700"
                 >
-                  <LogOut className="h-4 w-4" />
+                  <LogOut className=" h-6 w-4" />
                   <span>
                     <FormattedMessage id="dashboard.logout" defaultMessage="Logout" />
                   </span>
