@@ -22,40 +22,42 @@ import DocumentationPage from "./components/DocumentationPage";
 import ReportsPage from "./components/ReportsPage";
 import AdminTeacherProfileView from "./components/AdminTeacherProfileView";
 import TimeSettings from "./components/Timesetting";
+import Layout from "./components/Layout";
+
 
 export const publicRoutes = [
-  { path: "/", element: <HomePage /> },
-  { path: "/pricing", element: <PricingPage /> },
-  { path: "/docs", element: <DocumentationPage /> },
+  { path: "/", element: <Layout><HomePage /></Layout>  },
+  { path: "/pricing", element: <Layout><PricingPage /></Layout> },
+  { path: "/docs", element: <Layout><DocumentationPage /></Layout> },
 ];
 
 export const adminRoutes = [
-  { path: "/admin/login", element: <AdminLogin /> },
-  { path: "/admin/signup", element: <AdminSignup /> },
-  { path: "/admin/dashboard", element: <AdminDashboard /> },
-  { path: "/admin/forgot-password", element: <ForgotPassword /> },
-  { path: "/admin/reset-password", element: <ResetPassword /> },
-  { path: "/admin/reset-success", element: <ResetSuccess /> },
-  { path: "/admin/verify", element: <EmailVerification /> },
-  { path: "/admin/email-sent", element: <EmailSent /> },
-  { path: "/admin/teachers", element: <TeachersList /> },
-  { path: "/admin/teachers/add", element: <AddTeacher /> },
-  { path: "/admin/teachers/:id", element: <TeacherProfile /> },
-  { path: "/admin/school", element: <SchoolManagement /> },
-  { path: "/admin/students", element: <StudentsList /> },
-  { path: "/admin/attendance", element: <Attendance /> },
-  { path: "/admin/categories", element: <CategoriesManagement /> },
-  { path: "/admin/reports", element: <ReportsPage /> },
-  { path: "/admin/teacher/:teacherId", element: <AdminTeacherProfileView /> },
-  { path: "/admin/time-settings", element: <TimeSettings /> },
+  { path: "/admin/login", element: <Layout><AdminLogin /></Layout> },
+  { path: "/admin/signup", element: <Layout><AdminSignup /></Layout> },
+  { path: "/admin/dashboard", element:<Layout><AdminDashboard /></Layout> },
+  { path: "/admin/forgot-password", element: <Layout><ForgotPassword /></Layout> },
+  { path: "/admin/reset-password", element: <Layout><ResetPassword /></Layout> },
+  { path: "/admin/reset-success", element: <Layout><ResetSuccess /></Layout> },
+  { path: "/admin/verify", element: <Layout><EmailVerification /></Layout> },
+  { path: "/admin/email-sent", element: <Layout><EmailSent /></Layout> },
+  { path: "/admin/teachers", element: <Layout><TeachersList /></Layout> },
+  { path: "/admin/teachers/add", element: <Layout><AddTeacher /></Layout> },
+  { path: "/admin/teachers/:id", element: <Layout><TeacherProfile /></Layout> },
+  { path: "/admin/school", element: <Layout><SchoolManagement /></Layout> },
+  { path: "/admin/students", element: <Layout><StudentsList /></Layout> },
+  { path: "/admin/attendance", element: <Layout><Attendance /></Layout> },
+  { path: "/admin/categories", element: <Layout><CategoriesManagement /></Layout> },
+  { path: "/admin/reports", element: <Layout><ReportsPage /></Layout> },
+  { path: "/admin/teacher/:teacherId", element: <Layout><AdminTeacherProfileView /></Layout> },
+  { path: "/admin/time-settings", element: <Layout><TimeSettings /></Layout> },
 ];
 
 export const teacherRoutes = [
-  { path: "/teacher/login", element: <TeacherLogin /> },
-  { path: "/teacher/students", element: <TeacherStudents /> },
-  { path: "/teacher/attendance", element: <TeacherAttendance /> },
-  { path: "/teacher/profile", element: <TeacherProfile /> },
-  { path: "/teacher/reports", element: <ReportsPage /> },
+  { path: "/teacher/login", element: <Layout><TeacherLogin /></Layout> },
+  { path: "/teacher/students", element: <Layout><TeacherStudents /></Layout> },
+  { path: "/teacher/attendance", element: <Layout><TeacherAttendance /></Layout> },
+  { path: "/teacher/profile", element: <Layout><TeacherProfile /></Layout> },
+  { path: "/teacher/reports", element: <Layout><ReportsPage /></Layout> },
 ];
 
 // Combine all routes if needed

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { IntlContextProvider } from "./context/IntlContext";
 import { allRoutes } from "./routes";
 
+
 function App() {
   return (
     <IntlContextProvider>
