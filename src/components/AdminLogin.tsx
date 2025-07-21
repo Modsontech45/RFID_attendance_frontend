@@ -87,7 +87,7 @@ const AdminLogin: React.FC = () => {
         return;
       }
 
-      console.log("Login failed, no token in response");
+      console.log("Login failed, no token found in response");
       setErrors({
         general: result.message || formatMessage({ id: "login.error.general" }),
       });
