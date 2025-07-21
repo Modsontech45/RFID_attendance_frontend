@@ -92,40 +92,55 @@ const subscription = adminData?.subscription_status || (
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const fetchStudents = async () => {
-    if (!token || !apiKey) {
-      setError('You must be logged in as an admin.');
+ const fetchStudents = async () => {
+  if (!token || !apiKey) {
+    setError('You must be logged in as an admin.');
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/students`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'Accept-Language': locale,
+      }
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      if (result.subscriptionExpired) {
+        alert(result.message || "Subscription expired");
+        window.location.href = result.redirectTo || "/pricing";
+        return;
+      } else {
+        setError(result.message || 'Failed to fetch students');
+        setStudents([]);
+        setFilteredStudents([]);
+        return;
+      }
+    }
+
+    if (result.subscription_status !== 'active' && result.subscription_status !== 'trial') {
+      alert('Your subscription has expired. Please renew to access student data.');
+      window.location.href = "/pricing";
       return;
     }
 
-    try {
-      const response = await fetch(`${API_BASE}/students`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'Accept-Language': locale,
-        }
-      });
+    setStudents(result.students || []);
+    setFilteredStudents(result.students || []);
+    setError('');
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch students');
-      }
-      if (subscription !== "active" && subscription !== "trial") {
-         setError('Your subscription has expired. Please renew to access student data.');
-      } else {
-        const data = await response.json();
-        setStudents(data);
-        setFilteredStudents(data);
-        setError('');
-      } 
-    } catch (error) {
-      console.error('Error fetching students:', error);
-      setError('You have no student yet');
-      setStudents([]);
-      setFilteredStudents([]);
-    }
-  };
+  } catch (error) {
+    console.error('Error fetching students:', error);
+    setError('Network error. Please try again later.');
+    setStudents([]);
+    setFilteredStudents([]);
+  }
+};
+
 
   const fetchCategories = async () => {
     try {
