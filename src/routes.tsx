@@ -55,7 +55,7 @@ export const adminRoutes = [
   { path: "/admin/time-settings", element: <Layout><TimeSettings /></Layout> },
   {path: "/admin/paymentsucces", element: <PaymentSuccess/>},
   {path: "/admin/paymentfailed", element: <PaymentFailed/>},  
-  {path: "/admin/verify-payment/:reference", element: <Layout><VerifyPayment /></Layout>},
+  {path: "/admin/verify-payment", element: <Layout><VerifyPayment /></Layout>},
 ];
 
 export const teacherRoutes = [
