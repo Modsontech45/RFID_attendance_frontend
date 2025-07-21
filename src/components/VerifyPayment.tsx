@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-const VerifyPayment = () => {
+const VerifyPayment: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const [status, setStatus] = useState("Verifying...");
-  const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState<string>("Verifying...");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const reference = searchParams.get("reference");
@@ -15,18 +15,17 @@ const VerifyPayment = () => {
       return;
     }
 
-    // Call your backend to verify
     fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/paystack/verify/${reference}`)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: { status: string; message?: string }) => {
         if (data.status === "success") {
           setStatus("✅ Payment verified successfully.");
         } else {
-          setStatus(`❌ Verification failed: ${data.message}`);
+          setStatus(`❌ Verification failed: ${data.message || "Unknown error"}`);
         }
         setLoading(false);
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.error("Verification error", err);
         setStatus("❌ An error occurred during verification.");
         setLoading(false);
