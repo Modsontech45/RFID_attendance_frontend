@@ -19,35 +19,45 @@ const VerifyPayment: React.FC = () => {
 
     fetch(verifyUrl, {
       method: "GET",
-      redirect: "manual", // Prevent automatic redirect following
+      redirect: "manual", // Do not follow redirects automatically
     })
       .then(async (res) => {
-        if (res.type === "opaqueredirect" || (res.status >= 300 && res.status < 400)) {
-          // Redirect detected, parse Location header
+        console.log("Response status:", res.status);
+        if (res.status >= 300 && res.status < 400) {
+          // Redirect response detected
           const location = res.headers.get("Location");
-          if (location?.includes("paymentsuccess")) {
+          console.log("Redirect Location:", location);
+
+          if (location?.toLowerCase().includes("paymentsuccess")) {
             setStatus("✅ Payment verified successfully.");
-          } else if (location?.includes("paymentfailed")) {
+          } else if (location?.toLowerCase().includes("paymentfailed")) {
             setStatus("❌ Payment verification failed.");
           } else {
-            setStatus("⚠️ Payment verification completed with unknown status.");
+            setStatus(`⚠️ Payment verification completed with unknown status. Redirected to: ${location}`);
           }
           setLoading(false);
         } else {
-          // Not a redirect, try parse JSON response
-          const data = await res.json();
-          if (data.status === "success") {
-            setStatus("✅ Payment verified successfully.");
-          } else if (data.status === "failed" || data.status === "error") {
-            setStatus(`❌ Verification failed: ${data.message || "Unknown error"}`);
-          } else {
-            setStatus("⚠️ Verification completed. Please check your payment status.");
+          // Not a redirect, parse JSON response
+          try {
+            const data = await res.json();
+            console.log("JSON response data:", data);
+
+            if (data.status === "success") {
+              setStatus("✅ Payment verified successfully.");
+            } else if (data.status === "failed" || data.status === "error") {
+              setStatus(`❌ Verification failed: ${data.message || "Unknown error"}`);
+            } else {
+              setStatus("⚠️ Verification completed. Please check your payment status.");
+            }
+          } catch (jsonError) {
+            console.error("Error parsing JSON:", jsonError);
+            setStatus("❌ Received unexpected response format.");
           }
           setLoading(false);
         }
       })
       .catch((err: any) => {
-        console.error("Verification error", err);
+        console.error("Verification error:", err);
         setStatus("❌ An error occurred during verification.");
         setLoading(false);
       });
