@@ -116,35 +116,47 @@ const { formatMessage } = useIntl();
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const fetchAttendanceRecords = async () => {
-    if (!apiKey) {
-      setError('You must be logged in as an admin.');
-      return;
-    }
+ const fetchAttendanceRecords = async () => {
+  if (!apiKey) {
+    setError('You must be logged in as an admin.');
+    return;
+  }
 
-    try {
-      const response = await fetch(`${API_BASE}/attendance`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'Accept-Language': locale,
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+  try {
+    const response = await fetch(`${API_BASE}/attendance`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'Accept-Language': locale,
       }
-      
-      const data = await response.json();
-      setAttendanceRecords(Array.isArray(data) ? data : []);
-      setError('');
-    } catch (error) {
-      console.error('Error fetching attendance records:', error);
-      setError('Failed to load data. You have no attendance record.');
-      setAttendanceRecords([]);
+    });
+
+    // Handle expired subscription manually
+    if (response.status === 403) {
+      const result = await response.json();
+      if (result.subscriptionExpired && result.redirectTo) {
+        alert(result.message || "Subscription expired");
+        window.location.href = result.redirectTo;
+        return;
+      } else {
+        throw new Error(result.message || "Access denied");
+      }
     }
-  };
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    setAttendanceRecords(Array.isArray(data) ? data : []);
+    setError('');
+  } catch (error) {
+    console.error('Error fetching attendance records:', error);
+    setError('Failed to load data. You have no attendance record.');
+    setAttendanceRecords([]);
+  }
+};
 
   const fetchCategories = async () => {
     if (!apiKey) return;
