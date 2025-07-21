@@ -9,7 +9,7 @@ const VerifyPayment: React.FC = () => {
   useEffect(() => {
     const reference = searchParams.get("reference");
     if (!reference) {
-      setStatus("❌ No payment reference found.");
+      setStatus("No payment reference found.");
       setLoading(false);
       return;
     }
@@ -19,16 +19,23 @@ const VerifyPayment: React.FC = () => {
         const res = await fetch(
           `https://rfid-attendancesystem-backend-project.onrender.com/api/paystack/verify/${reference}`
         );
+
+        // If backend redirects instead of JSON, handle that as well
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`Server responded with status ${res.status}: ${text}`);
+        }
+
         const data = await res.json();
 
         if (data.status === "success") {
           setStatus("✅ Payment verified successfully.");
         } else {
-          setStatus(`❌ Verification failed: ${data.message || "Unknown error"}`);
+          setStatus(`Verification failed: ${data.message || "Unknown error"}`);
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error("Verification error:", error);
-        setStatus("❌ An error occurred during verification.");
+        setStatus("An error occurred during verification.");
       } finally {
         setLoading(false);
       }
