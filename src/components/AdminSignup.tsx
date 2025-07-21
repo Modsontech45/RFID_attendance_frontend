@@ -147,7 +147,7 @@ const AdminSignup: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Main Con */}
       <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 py-8">
         <div className="w-full max-w-md">
           {/* Signup Form */}

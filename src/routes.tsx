@@ -25,7 +25,7 @@ import TimeSettings from "./components/Timesetting";
 import Layout from "./components/Layout";
 import PaymentSuccess from "./components/paymentsuccess";
 import PaymentFailed from "./components/paymentfailed";
-import VerifyPayment from "./components/verifypayment";
+import VerifyPayment from "./components/VerifyPayment"
 
 
 export const publicRoutes = [
