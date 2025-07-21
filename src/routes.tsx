@@ -23,8 +23,7 @@ import ReportsPage from "./components/ReportsPage";
 import AdminTeacherProfileView from "./components/AdminTeacherProfileView";
 import TimeSettings from "./components/Timesetting";
 import Layout from "./components/Layout";
-import PaymentSuccess from "./components/Paymentsuccess";
-import PaymentFailed from "./components/Paymentfailed";
+
 import VerifyPayment from "./components/VerifyPayment"
 
 
@@ -53,8 +52,7 @@ export const adminRoutes = [
   { path: "/admin/reports", element: <Layout><ReportsPage /></Layout> },
   { path: "/admin/teacher/:teacherId", element: <Layout><AdminTeacherProfileView /></Layout> },
   { path: "/admin/time-settings", element: <Layout><TimeSettings /></Layout> },
-  {path: "/admin/paymentsuccess", element: <PaymentSuccess/>},
-  {path: "/admin/paymentfailed", element: <PaymentFailed/>},  
+
  { path: "/admin/verify-payment/:reference", element: <Layout><VerifyPayment /></Layout> },
 
 ];
