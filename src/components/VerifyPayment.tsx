@@ -64,17 +64,17 @@ const VerifyPayment: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-700 via-green-800 to-black text-center p-4">
-      <div className="bg-black bg-opacity-40 backdrop-blur-sm border border-green-600 border-opacity-30 shadow-2xl rounded-xl p-8 max-w-md w-full">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-700 via-blue-800 to-black text-center p-4">
+      <div className="bg-black bg-opacity-40 backdrop-blur-sm border border-blue-600 border-opacity-30 shadow-2xl rounded-xl p-8 max-w-md w-full">
         <h1 className="text-xl font-bold mb-4 text-white">Payment Verification</h1>
         {loading ? (
-          <p className="text-green-300 animate-pulse text-lg">Please wait...</p>
+          <p className="text-blue-300 animate-pulse text-lg">Please wait...</p>
         ) : (
           <div>
             <p className="text-white text-lg mb-6">{status}</p>
             <button 
               onClick={() => window.location.href = '/'}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
             >
               Go Home
             </button>
