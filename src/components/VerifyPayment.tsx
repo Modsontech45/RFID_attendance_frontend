@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 
 const VerifyPayment: React.FC = () => {
-  const [searchParams] = useSearchParams();
   const [status, setStatus] = useState<string>("Verifying...");
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const reference = searchParams.get("reference");
+    // Simulate getting reference from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const reference = urlParams.get("reference");
 
     if (!reference) {
       setStatus("❌ No payment reference found.");
@@ -61,16 +61,24 @@ const VerifyPayment: React.FC = () => {
         setStatus("❌ An error occurred during verification.");
         setLoading(false);
       });
-  }, [searchParams]);
+  }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 text-center p-4">
-      <div className="bg-white shadow-md rounded-xl p-8 max-w-md w-full">
-        <h1 className="text-xl font-bold mb-4">Payment Verification</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-700 via-green-800 to-black text-center p-4">
+      <div className="bg-black bg-opacity-40 backdrop-blur-sm border border-green-600 border-opacity-30 shadow-2xl rounded-xl p-8 max-w-md w-full">
+        <h1 className="text-xl font-bold mb-4 text-white">Payment Verification</h1>
         {loading ? (
-          <p className="text-blue-600 animate-pulse">Please wait...</p>
+          <p className="text-green-300 animate-pulse text-lg">Please wait...</p>
         ) : (
-          <p className="text-gray-700">{status}</p>
+          <div>
+            <p className="text-white text-lg mb-6">{status}</p>
+            <button 
+              onClick={() => window.location.href = '/'}
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+            >
+              Go Home
+            </button>
+          </div>
         )}
       </div>
     </div>
