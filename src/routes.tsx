@@ -23,8 +23,8 @@ import ReportsPage from "./components/ReportsPage";
 import AdminTeacherProfileView from "./components/AdminTeacherProfileView";
 import TimeSettings from "./components/Timesetting";
 import Layout from "./components/Layout";
-import PaymentSuccess from "./components/paymentsuccess";
-import PaymentFailed from "./components/paymentfailed";
+import PaymentSuccess from "./components/Paymentsuccess";
+import PaymentFailed from "./components/Paymentfailed";
 import VerifyPayment from "./components/VerifyPayment"
 
 
