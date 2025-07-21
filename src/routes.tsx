@@ -31,6 +31,7 @@ export const publicRoutes = [
   { path: "/", element: <Layout><HomePage /></Layout>  },
   { path: "/pricing", element: <Layout><PricingPage /></Layout> },
   { path: "/docs", element: <Layout><DocumentationPage /></Layout> },
+   { path: "/admin/verify-payment", element: <Layout><VerifyPayment /></Layout> },
 ];
 
 export const adminRoutes = [
@@ -53,7 +54,7 @@ export const adminRoutes = [
   { path: "/admin/teacher/:teacherId", element: <Layout><AdminTeacherProfileView /></Layout> },
   { path: "/admin/time-settings", element: <Layout><TimeSettings /></Layout> },
 
- { path: "/admin/verify-payment", element: <Layout><VerifyPayment /></Layout> },
+
 
 ];
 
