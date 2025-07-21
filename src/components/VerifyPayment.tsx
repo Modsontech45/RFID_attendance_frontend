@@ -10,7 +10,7 @@ const VerifyPayment: React.FC = () => {
     const reference = searchParams.get("reference");
 
     if (!reference) {
-      setStatus("❌ No payment reference found.");
+      setStatus(" No payment reference found.");
       setLoading(false);
       return;
     }
@@ -21,13 +21,13 @@ const VerifyPayment: React.FC = () => {
         if (data.status === "success") {
           setStatus("✅ Payment verified successfully.");
         } else {
-          setStatus(`❌ Verification failed: ${data.message || "Unknown error"}`);
+          setStatus(`Verification failed: ${data.message || "Unknown error"}`);
         }
         setLoading(false);
       })
       .catch((err: any) => {
         console.error("Verification error", err);
-        setStatus("❌ An error occurred during verification.");
+        setStatus("An error occurred during verification.");
         setLoading(false);
       });
   }, [searchParams]);
