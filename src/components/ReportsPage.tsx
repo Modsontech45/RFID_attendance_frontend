@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
 import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
+import SubscriptionCard from './SubscriptionModal';
 import { 
   Shield, 
   BarChart3,
@@ -103,7 +104,7 @@ const ReportsPage: React.FC = () => {
   // Extract admin info with fallbacks
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
-
+const subscription = adminData?.subscription_status;
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     changeLanguage(e.target.value);
   };
@@ -708,7 +709,7 @@ const ReportsPage: React.FC = () => {
             </div>
           </div>
         </section>
-
+   {subscription !== "active" && subscription !== "trial" && <SubscriptionCard />}
         {/* Stats Overview */}
         {reportData && (
           <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '400ms' }}>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
+import SubscriptionCard from './SubscriptionModal';
 import { 
   Shield, 
   Users, 
@@ -99,7 +100,7 @@ const { formatMessage } = useIntl();
   // Extract admin info with fallbacks
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
-
+  const subscription = adminData?.subscription_status 
   // const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
   //   changeLanguage(e.target.value);
   // };
@@ -134,7 +135,7 @@ const { formatMessage } = useIntl();
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+      
       const data = await response.json();
       setAttendanceRecords(Array.isArray(data) ? data : []);
       setError('');
@@ -616,7 +617,7 @@ const { formatMessage } = useIntl();
             </div>
           ))}
         </section>
-
+   {subscription !== "active" && subscription !== "trial" && <SubscriptionCard />}
         {/* Controls */}
         <section className="animate-slide-up" style={{ animationDelay: '400ms' }}>
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg">

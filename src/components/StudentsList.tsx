@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SubscriptionCard from './SubscriptionModal';
 // import { useTranslation } from '../hooks/useTranslation';
 import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
 import {
@@ -76,9 +77,12 @@ const StudentsList: React.FC = () => {
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeLanguage(e.target.value);
-  };
+  // const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   changeLanguage(e.target.value);
+  // };
+const subscription = adminData?.subscription_status || (
+    <button>subscribe</button>
+  );
 
   const handleLogout = () => {
     logout();
@@ -107,11 +111,14 @@ const StudentsList: React.FC = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch students');
       }
-
-      const data = await response.json();
-      setStudents(data);
-      setFilteredStudents(data);
-      setError('');
+      if (subscription !== "active" && subscription !== "trial") {
+         setError('Your subscription has expired. Please renew to access student data.');
+      } else {
+        const data = await response.json();
+        setStudents(data);
+        setFilteredStudents(data);
+        setError('');
+      } 
     } catch (error) {
       console.error('Error fetching students:', error);
       setError('You have no student yet');
@@ -489,6 +496,7 @@ const StudentsList: React.FC = () => {
             </div>
           ))}
         </section>
+       {subscription !== "active" && subscription !== "trial" && <SubscriptionCard />}
 
         {/* Filters and Search */}
         <section className="animate-slide-up" style={{ animationDelay: '400ms' }}>

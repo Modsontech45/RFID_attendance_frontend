@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 // import { useTranslation } from '../hooks/useTranslation';
-import { postData, API_BASE, setAuthData } from '../utils/auth';
+import { postData, API_BASE, setAuthData, getAdminData } from '../utils/auth';
+
 import { 
   Shield, 
   ArrowLeft, 
@@ -11,6 +12,8 @@ import {
 } from 'lucide-react';
 import {  useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
+
+ const adminData = getAdminData();
 const TeacherLogin: React.FC = () => {
   const navigate = useNavigate();
  const { formatMessage } = useIntl();
@@ -36,7 +39,7 @@ const TeacherLogin: React.FC = () => {
     }
   };
 
-
+const subscription = adminData?.subscription_status
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
 
@@ -58,7 +61,11 @@ const TeacherLogin: React.FC = () => {
     }
 
     setIsLoading(true);
-    
+    if (subscription !== "active" && subscription !== "trial") {
+      setErrors({ general: 'Your subscription has expired. Please contact your administrator to renew access to student data.' });
+      setIsLoading(false);
+      return;
+    } else
     try {
       const result = await postData(`${API_BASE}/teachers/login`, formData, {
         'Accept-Language': locale || 'en'
