@@ -53,7 +53,7 @@ export const adminRoutes = [
   { path: "/admin/teacher/:teacherId", element: <Layout><AdminTeacherProfileView /></Layout> },
   { path: "/admin/time-settings", element: <Layout><TimeSettings /></Layout> },
 
- { path: "/admin/verify-payment/:reference", element: <Layout><VerifyPayment /></Layout> },
+ { path: "/admin/verify-payment", element: <Layout><VerifyPayment /></Layout> },
 
 ];
 
