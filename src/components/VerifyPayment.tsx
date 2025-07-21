@@ -15,22 +15,36 @@ const VerifyPayment: React.FC = () => {
       return;
     }
 
-    fetch(`https://rfid-attendancesystem-backend-project.onrender.com/api/paystack/verify?reference=${reference}`)
-      .then((res) => res.json())
-      .then((data: { status?: string; message?: string }) => {
-        // Note: Your backend currently redirects on success/failure,
-        // so if you want JSON response, backend must be adjusted.
-        // For now, handle JSON response if backend sends it.
+    const verifyUrl = `https://rfid-attendancesystem-backend-project.onrender.com/api/paystack/verify/${reference}`;
 
-        if (data.status === "success") {
-          setStatus("✅ Payment verified successfully.");
-        } else if (data.status === "failed" || data.status === "error") {
-          setStatus(`❌ Verification failed: ${data.message || "Unknown error"}`);
+    fetch(verifyUrl, {
+      method: "GET",
+      redirect: "manual", // Prevent automatic redirect following
+    })
+      .then(async (res) => {
+        if (res.type === "opaqueredirect" || (res.status >= 300 && res.status < 400)) {
+          // Redirect detected, parse Location header
+          const location = res.headers.get("Location");
+          if (location?.includes("paymentsuccess")) {
+            setStatus("✅ Payment verified successfully.");
+          } else if (location?.includes("paymentfailed")) {
+            setStatus("❌ Payment verification failed.");
+          } else {
+            setStatus("⚠️ Payment verification completed with unknown status.");
+          }
+          setLoading(false);
         } else {
-          // Backend might redirect, so data may not contain status
-          setStatus("⚠️ Verification completed. Please check your payment status.");
+          // Not a redirect, try parse JSON response
+          const data = await res.json();
+          if (data.status === "success") {
+            setStatus("✅ Payment verified successfully.");
+          } else if (data.status === "failed" || data.status === "error") {
+            setStatus(`❌ Verification failed: ${data.message || "Unknown error"}`);
+          } else {
+            setStatus("⚠️ Verification completed. Please check your payment status.");
+          }
+          setLoading(false);
         }
-        setLoading(false);
       })
       .catch((err: any) => {
         console.error("Verification error", err);
