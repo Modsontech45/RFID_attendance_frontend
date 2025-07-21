@@ -135,6 +135,7 @@ const { formatMessage } = useIntl();
     // Handle expired subscription manually
     if (response.status === 403) {
       const result = await response.json();
+      console.log('Subscription expired response:', result);
       if (result.subscriptionExpired && result.redirectTo) {
         alert(result.message || "Subscription expired");
         window.location.href = result.redirectTo;
