@@ -299,6 +299,7 @@
 }
   },
   "pricing": {
+      "back": "Retour",
     "title": "Tarification scolaire",
     "subtitle": "Choisissez le plan parfait pour votre école. Tous les plans incluent notre système de présence RFID complet avec surveillance en temps réel et rapports complets.",
     "starter": {
@@ -306,6 +307,11 @@
       "subtitle": "Parfait pour les petites écoles",
       "price": "$35",
       "period": "par mois",
+      "subscribed": "✅ Abonné",
+      "freetrialExpired": "L'essai gratuit a expiré",
+      "freetrialAvailable": "Essai gratuit disponible",
+      "startfreetrial": "Commencer l'essai gratuit",
+      "downgrade": "Reculer",
       "features": [
         "Jusqu'à 100 étudiants",
         "5 enseignants",

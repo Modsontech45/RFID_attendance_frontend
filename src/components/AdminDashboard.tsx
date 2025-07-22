@@ -427,9 +427,9 @@ const AdminDashboard: React.FC = () => {
 
                 <span
                   onClick={
-                    subscription !== "active"
-                      ? () => handleSubscriptionClick()
-                      : undefined
+                   
+                      () => handleSubscriptionClick()
+                     
                   }
                   className={`px-3 py-1 rounded-full text-white font-medium text-sm cursor-pointer ${
                     subscription === "active"

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
+import {  getAdminData } from '../utils/auth';
 import axios from "axios";
 import {
   Shield,
@@ -106,7 +107,8 @@ const PricingPage: React.FC = () => {
   const { formatMessage } = useIntl();
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
-
+    const adminData = getAdminData();
+    const plans = adminData?.subscription_plan
   const handlePlanSelect = (planName: string) => {
     setSelectedPlan(planName);
     setShowPaymentForm(true);
@@ -137,12 +139,12 @@ const PricingPage: React.FC = () => {
 
             <div className="flex items-center space-x-4">
               <a
-                // onClick={() => navigate("/")}
-                href="/"
+                onClick={() => navigate(-1)}
+             
                 className="text-gray-300 transition-colors hover:text-white"
               >
                 <FormattedMessage
-                  id="documentation.home"
+                  id="pricing.back"
                   defaultMessage="Choose the plan that fits your school"
                 />
               </a>
@@ -195,13 +197,14 @@ const PricingPage: React.FC = () => {
 
       {/* Original pricing cards design */}
       <section className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+       
         {/* Starter Plan */}
         <div className="transform rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/10">
           <div className="mb-8 text-center">
             <h3 className="mb-2 text-2xl font-bold text-white">
               <FormattedMessage
                 id="pricing.starter.title"
-                defaultMessage="Starter"
+                defaultMessage="Basic Plan"
               />
             </h3>
             <p className="mb-6 text-gray-400">
@@ -222,6 +225,19 @@ const PricingPage: React.FC = () => {
                 defaultMessage="month"
               />
             </div>
+         <span className="mt-4 inline-block cursor-pointer rounded-full bg-gradient-to-r from-blue-900 via-green-2 to-blue-600 px-6 py-3 text-white font-extrabold shadow-xl ring-4 ring-green-700 transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-1 hover:shadow-2xl animate-pulse">
+          
+
+                   <FormattedMessage
+                id={`${
+                  plans === 'enterprise' ||   plans === 'professional' || plans === 'starter'
+                    ? 'pricing.starter.freetrialExpired'
+                    : null
+                }`}
+                defaultMessage="pricing.starter.startfreetrial"
+              />
+          </span>
+
           </div>
 
           <ul className="mb-8 space-y-4">
@@ -250,13 +266,19 @@ const PricingPage: React.FC = () => {
             ))}
           </ul>
 
+         
+
           <button
             onClick={() => handlePlanSelect("Starter")}
             className="w-full transform rounded-xl bg-blue-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700"
           >
             <FormattedMessage
-              id="pricing.getStarted"
-              defaultMessage="Get Started"
+              id={`${
+                  plans === 'enterprise' ||   plans === 'professional'
+                    ? 'pricing.starter.downgrade'
+                    : null
+                }`}
+                defaultMessage="pricing.starter.startfreetrial"
             />
           </button>
         </div>

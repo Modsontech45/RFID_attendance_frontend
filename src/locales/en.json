@@ -298,13 +298,21 @@
     }
   },
   "pricing": {
+    "back": "Back ",
     "title": "Choose the plan that fits your school",
     "subtitle": "Affordable pricing plans designed to scale with your institution.",
     "starter": {
-      "title": "Starter",
+      "title": "Basic",
       "subtitle": "Perfect for small schools or pilots",
       "price": "$35",
       "period": "month",
+      "subscribed": "Subscribed",
+      "freetrialExpired": "Free Trial Expired",
+     
+      "freetrialAvailable": "Free Trial Available",
+      "startfreetrial": "Start Free Trial",
+      "downgrade": "Downgrade",
+
       "features": [
         "Basic student management",
         "Limited attendance tracking",
