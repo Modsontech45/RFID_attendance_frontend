@@ -73,7 +73,7 @@ const VerifyPayment: React.FC = () => {
           <div>
             <p className="text-white text-lg mb-6">{status}</p>
             <button 
-              onClick={() => window.location.href = '/'}
+              onClick={() => window.location.href = '/pricing'}
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
             >
               Go Home

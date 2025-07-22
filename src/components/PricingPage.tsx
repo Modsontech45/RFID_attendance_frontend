@@ -201,7 +201,7 @@ const PricingPage: React.FC = () => {
           {/* Starter Plan */}
          <div
   className={`transform rounded-2xl border border-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 ${
-    plans === "starter" ? "" : "bg-white/5 hover:bg-white/10"
+    plans === "starter" ?  "ring-2 ring-blue-500" : ""
   }`}
 
 >
@@ -312,13 +312,14 @@ const PricingPage: React.FC = () => {
           </div>
 
           {/* Professional Plan */}
-          <div className="relative transform rounded-2xl border-2 border-blue-500/50 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30">
+          <div className={`relative transform rounded-2xl border-2 border-blue-500/50 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+            ${plans === "professional" ? "ring-2 ring-blue-500" : ""}`}>
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 transform">
               <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
                 <Star className="h-4 w-4" />
                 <span>
                   <FormattedMessage
-                    id="pricing.professional.mostPopular"
+                    id={plans === "professional" ? "pricing.starter.subscribed" : "pricing.professional.popular"}
                     defaultMessage="Most Popular"
                   />
                 </span>
@@ -383,7 +384,7 @@ const PricingPage: React.FC = () => {
               className="w-full transform rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-cyan-700"
             >
               <FormattedMessage
-                id="pricing.getStarted"
+                id={plans === "professional" ? "pricing.starter.subscribed" : plans === "starter" ? "pricing.starter.upgrade" : plans === "enterprise" ? "pricing.starter.downgrade" : "pricing.starter.getStarted"}
                 defaultMessage="Get Started"
               />
             </button>
