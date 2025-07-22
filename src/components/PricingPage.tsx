@@ -232,7 +232,7 @@ const PricingPage: React.FC = () => {
                 id={`${
                   plans === 'enterprise' ||   plans === 'professional' || plans === 'starter'
                     ? 'pricing.starter.freetrialExpired'
-                    : null
+                    :'pricing.starter.startfreetrial'
                 }`}
                 defaultMessage="pricing.starter.startfreetrial"
               />
