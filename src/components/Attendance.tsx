@@ -100,7 +100,7 @@ const { formatMessage } = useIntl();
   // Extract admin info with fallbacks
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
-  const subscription = adminData?.subscription_status 
+  const subscription = adminData?.subscription_status || 'inactive'; 
   // const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
   //   changeLanguage(e.target.value);
   // };
@@ -444,6 +444,13 @@ const { formatMessage } = useIntl();
   const stats = calculateStats();
   const formStats = calculateFormStats();
 
+
+  if (subscription !== 'active' && subscription !== 'trial') {
+   alert(`Your subscription has expired. Please renew to access attendance data.${subscription}`);
+    window.location.href = "/pricing";
+   return;
+  }
+
   return (
     <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen">
       {/* Animated Background Elements */}
@@ -516,12 +523,11 @@ const { formatMessage } = useIntl();
 
               <div className="flex items-center space-x-4">
                 {/* Notifications */}
-                <button title='Notifications' className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+                {/* <button title='Notifications' className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                   <Bell className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
                   <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                 </button>
 
-                {/* Settings */}
                 <button  title={formatMessage({ id: "attendance.settings" })} className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                   <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
                 </button>
@@ -534,7 +540,7 @@ const { formatMessage } = useIntl();
                 >
                   <LogOut className="w-4 h-4" />
                   <span>  {formatMessage({ id: "attendance.logout" })}</span>
-                </button>
+                </button> */}
               </div>
             </nav>
 
@@ -630,7 +636,7 @@ const { formatMessage } = useIntl();
             </div>
           ))}
         </section>
-   {subscription !== "active" && subscription !== "trial" && <SubscriptionCard />}
+   {/* {subscription !== "active" && subscription !== "trial" && <SubscriptionCard />} */}
         {/* Controls */}
         <section className="animate-slide-up" style={{ animationDelay: '400ms' }}>
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg">

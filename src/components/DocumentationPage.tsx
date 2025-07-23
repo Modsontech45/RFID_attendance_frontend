@@ -845,7 +845,7 @@ const DocumentationPage: React.FC = () => {
             </span>
           </div>
           <div className="flex items-center space-x-4">
-            <button onClick={() => navigate("/")} className="text-gray-300 hover:text-white">
+            <button onClick={() => navigate(-1)} className="text-gray-300 hover:text-white">
               <FormattedMessage id="documentation.home" defaultMessage="Home" />
             </button>
             <button onClick={() => navigate("/pricing")} className="text-gray-300 hover:text-white">

@@ -552,22 +552,21 @@ const { formatMessage } = useIntl();
 
               <div className="flex items-center space-x-4">
                 {/* Notifications */}
-                <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+                {/* <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                   <Bell className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
                   <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                </button>
+                </button> */}
+
 
            
-
-           
-
+{/* 
                 <button
                   onClick={handleLogout}
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Logout</span>
-                </button>
+                </button> */}
               </div>
             </nav>
 
@@ -622,13 +621,13 @@ const { formatMessage } = useIntl();
               <div className="pt-4 border-t border-white/10">
             
 
-                <button
+                {/* <button
                   onClick={handleLogout}
                   className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Logout</span>
-                </button>
+                </button> */}
               </div>
             </nav>
           </div>

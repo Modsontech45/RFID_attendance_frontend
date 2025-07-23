@@ -432,10 +432,10 @@ const AdminDashboard: React.FC = () => {
               <div className="flex items-center space-x-4">
              
 
-                <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
+                {/* <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
                   <Bell className="h-5 w-5 text-gray-400 transition-colors hover:text-white" />
                   <div className="absolute right-1 top-1 h-2 w-2 animate-pulse rounded-full bg-red-500" />
-                </button>
+                </button> */}
 
                 <button  onClick={() => navigate("/admin/settings")}
                  className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
@@ -516,10 +516,10 @@ const AdminDashboard: React.FC = () => {
 
               <div className=" border-t border-white/10 pt-4">
 
-                 <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
+                 {/* <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
                   <Bell className="h-5 w-5 text-gray-400 transition-colors hover:text-white" />
                   <div className="absolute right-1 top-1 h-2 w-2 animate-pulse rounded-full bg-red-500" />
-                </button>
+                </button> */}
         
 
                  <button  onClick={() => navigate("/admin/settings")}

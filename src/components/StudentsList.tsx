@@ -80,9 +80,8 @@ const StudentsList: React.FC = () => {
   // const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
   //   changeLanguage(e.target.value);
   // };
-const subscription = adminData?.subscription_status || (
-    <button>subscribe</button>
-  );
+let subscription =   adminData?.subscription_status || 'inactive';
+
 
   const handleLogout = () => {
     logout();
@@ -111,7 +110,7 @@ const subscription = adminData?.subscription_status || (
     const result = await response.json();
 
     if (!response.ok) {
-      if (result.subscriptionExpired) {
+      if (subscription !== 'active' && subscription !== 'trial') {
         alert(result.message || "Subscription expired");
         window.location.href = result.redirectTo || "/pricing";
         return;
@@ -123,8 +122,8 @@ const subscription = adminData?.subscription_status || (
       }
     }
 
-    if (result.subscription_status !== 'active' && result.subscription_status !== 'trial') {
-      alert('Your subscription has expired. Please renew to access student data.');
+    if (subscription !== 'active' && subscription !== 'trial') {
+      alert(`Your subscription has expired. Please renew to access student data.${subscription}`);
       window.location.href = "/pricing";
       return;
     }
@@ -376,15 +375,15 @@ const subscription = adminData?.subscription_status || (
 
               <div className="flex items-center space-x-4">
                 {/* Notifications */}
-                <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+                {/* <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                   <Bell className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
                   <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                 </button>
 
-                {/* Settings */}
+               
                 <button className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                   <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
-                </button>
+                </button> */}
 
                 {/* Language Selector */}
                 {/* <select
@@ -396,13 +395,13 @@ const subscription = adminData?.subscription_status || (
                   <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
                 </select> */}
 
-                <button
+                {/* <button
                   onClick={handleLogout}
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>{formatMessage({ id: "students.navigation.logout" })}</span>
-                </button>
+                </button> */}
               </div>
             </nav>
 

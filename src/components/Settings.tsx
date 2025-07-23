@@ -251,7 +251,7 @@ const SettingsComponent: React.FC = () => {
                           defaultMessage="Days Left"
                         />} value={`${daysLeft}`} />
               <SummaryRow label={<FormattedMessage
-                          id="AdminProfile.school"
+                          id="AdminProfile.schoolName"
                           defaultMessage="School"
                         />} value={SchoolName} />
             </div>
