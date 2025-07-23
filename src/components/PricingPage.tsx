@@ -142,11 +142,11 @@ const PricingPage: React.FC = () => {
             <div className="flex items-center space-x-4">
               <a
                 onClick={() => navigate(-1)}
-                className="text-gray-300 transition-colors hover:text-white"
+                className="text-gray-300 transition-colors cursor-pointer hover:text-white"
               >
                 <FormattedMessage
                   id="pricing.back"
-                  defaultMessage="Choose the plan that fits your school"
+                  defaultMessage="Back"
                 />
               </a>
               <a

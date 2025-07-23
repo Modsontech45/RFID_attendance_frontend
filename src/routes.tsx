@@ -24,7 +24,7 @@ import AdminTeacherProfileView from "./components/AdminTeacherProfileView";
 import TimeSettings from "./components/Timesetting";
 import Layout from "./components/Layout";
 import VerifyPayment from "./components/VerifyPayment";
-
+import SettingsComponent from "./components/Settings";
 
 
 
@@ -55,6 +55,7 @@ export const adminRoutes = [
   { path: "/admin/teacher/:teacherId", element: <Layout><AdminTeacherProfileView /></Layout> },
   { path: "/admin/time-settings", element: <Layout><TimeSettings /></Layout> },
   { path: "/admin/verify-payment", element: <Layout><VerifyPayment /></Layout> },
+  { path: "/admin/settings", element: <Layout><SettingsComponent /></Layout> }
 
 
 

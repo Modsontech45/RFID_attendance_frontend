@@ -12,6 +12,7 @@ import {
   FileText,
   LogOut,
   Menu,
+  User,
   X,
   Eye,
   EyeOff,
@@ -429,33 +430,19 @@ const AdminDashboard: React.FC = () => {
               </div>
 
               <div className="flex items-center space-x-4">
-                <button className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
-                  <Search className="h-5 w-5 text-gray-400 transition-colors hover:text-white" />
-                </button>
+             
 
                 <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
                   <Bell className="h-5 w-5 text-gray-400 transition-colors hover:text-white" />
                   <div className="absolute right-1 top-1 h-2 w-2 animate-pulse rounded-full bg-red-500" />
                 </button>
 
-                <button className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
-                  <Settings className="h-5 w-5 text-gray-400 transition-all duration-300 hover:rotate-90 hover:text-white" />
+                <button  onClick={() => navigate("/admin/settings")}
+                 className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
+                  <User className="h-5 w-5 text-gray-400 transition-all duration-300 hover:rotate-90 hover:text-white" />
                 </button>
 
-              
-
-                <button
-                  onClick={handleLogout}
-                  className="flex transform items-center space-x-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 px-4 py-2 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-red-600 hover:to-red-700 hover:shadow-xl"
-                >
-                  <LogOut className="h-4 w-4" />
-                  <span>
-                    <FormattedMessage
-                      id="dashboard.logout"
-                      defaultMessage="Logout"
-                    />
-                  </span>
-                </button>
+            
               </div>
             </nav>
 
@@ -528,19 +515,16 @@ const AdminDashboard: React.FC = () => {
               </button>
 
               <div className=" border-t border-white/10 pt-4">
+
+                 <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
+                  <Bell className="h-5 w-5 text-gray-400 transition-colors hover:text-white" />
+                  <div className="absolute right-1 top-1 h-2 w-2 animate-pulse rounded-full bg-red-500" />
+                </button>
         
 
-                <button
-                  onClick={handleLogout}
-                  className="my-2 flex w-full items-center justify-center space-x-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 px-4 py-3 font-semibold text-white transition-all duration-300 hover:from-red-600 hover:to-red-700"
-                >
-                  <LogOut className=" h-6 w-4" />
-                  <span>
-                    <FormattedMessage
-                      id="dashboard.logout"
-                      defaultMessage="Logout"
-                    />
-                  </span>
+                 <button  onClick={() => navigate("/admin/settings")}
+                 className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
+                  <User className="h-5 w-5 text-gray-400 transition-all duration-300 hover:rotate-90 hover:text-white" />
                 </button>
               </div>
             </nav>
