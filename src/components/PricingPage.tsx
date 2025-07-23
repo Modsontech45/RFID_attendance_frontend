@@ -23,13 +23,16 @@ import {
   Loader2,
 } from "lucide-react";
 
-const PaymentForm: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [plan, setPlan] = useState("starter");
+type PaymentFormProps = {
+  email: string;
+  plan: string;
+};
+
+const PaymentForm: React.FC<PaymentFormProps> = ({ email, plan }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handlePayment = async (e: React.FormEvent) => {
+   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
@@ -45,7 +48,7 @@ const PaymentForm: React.FC = () => {
         "https://rfid-attendancesystem-backend-project.onrender.com/api/paystack/initialize",
         {
           email,
-          plan,
+          plan: plan.toLowerCase(),
         }
       );
 
@@ -61,37 +64,34 @@ const PaymentForm: React.FC = () => {
       setLoading(false);
     }
   };
-
   return (
-    <div className="max-w-md mx-auto p-6 bg-black rounded-lg shadow-md">
+    <div className="max-w-md mx-auto p-6 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 rounded-lg shadow-md">
       <h2 className="text-xl font-bold mb-4">Subscribe to a Plan</h2>
       <form onSubmit={handlePayment}>
         <div className="mb-4">
-          <label className="block font-medium ">Email:</label>
+        
           <input
             type="email"
-            className="w-full border px-3 py-2 rounded bg-black text-white"
+            className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            disabled
           />
         </div>
         <div className="mb-4">
-          <label className="block font-medium">Choose Plan:</label>
+       
           <select
-            className="w-full border px-3 py-2 rounded bg-black text-white"
+            className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white"
             value={plan}
-            onChange={(e) => setPlan(e.target.value)}
+            disabled
           >
-            <option value="starter">Starter</option>
-            <option value="professional">Professional</option>
-            <option value="enterprise">Enterprise</option>
+            <option >{plan}</option>
+         
           </select>
         </div>
         {error && <p className="text-red-600 mb-4">{error}</p>}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          className="w-full bg-green-900 text-white py-2 rounded hover:bg-blue-700"
           disabled={loading}
         >
           {loading ? "Processing..." : "Proceed to Payment"}
@@ -106,14 +106,17 @@ const PricingPage: React.FC = () => {
   const { formatMessage } = useIntl();
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
+   const [email, setEmail] = useState("");
   const adminData = getAdminData();
   const plans = adminData?.subscription_plan;
   const planstatus = adminData?.subscription_status;
   const endfree = adminData?.trial_end_date;
-  const startfree = adminData?.trial_start_date;
-  const handlePlanSelect = (planName: string) => {
+ const Email = adminData?.email;
+
+   const handlePlanSelect = (planName: string) => {
     setSelectedPlan(planName);
-    setShowPaymentForm(true);
+    setEmail(Email); // Set immediately from admin data
+    setShowPaymentForm(true); // Show the form
   };
 
   return (
@@ -182,29 +185,26 @@ const PricingPage: React.FC = () => {
         </section>
 
         {/* Payment Form Modal/Section */}
-        {showPaymentForm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="relative bg-green-900 rounded-lg p-6 max-w-md w-full mx-4">
-              <button
-                onClick={() => setShowPaymentForm(false)}
-                className="absolute top-2 right-2 text-white hover:text-gray-700"
-              >
-                ✕
-              </button>
-              <PaymentForm />
-            </div>
-          </div>
-        )}
+       {showPaymentForm && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50  ">
+    <div className="relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30">
+      <button
+        onClick={() => setShowPaymentForm(false)}
+        className="absolute top-2 right-2 text-white hover:text-gray-700"
+      >
+        ✕
+      </button>
+      <PaymentForm email={email} plan={selectedPlan} />
+    </div>
+  </div>
+)}
+
 
         {/* Original pricing cards design */}
         <section className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
           {/* Starter Plan */}
-         <div
-  className={`transform rounded-2xl border border-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 ${
-    plans === "starter" ?  "ring-2 ring-blue-500" : ""
-  }`}
-
->
+          <div className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+            ${plans === "starter" ? "ring-2 ring-blue-500" : ""}`}>
 
   {plans === "starter" && (
   <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
@@ -285,7 +285,7 @@ const PricingPage: React.FC = () => {
             </ul>
 
             <button
-              onClick={() => handlePlanSelect("Starter")}
+              onClick={() => handlePlanSelect("starter")}
               disabled={
                 plans === "starter" && planstatus === "active"
               
@@ -312,7 +312,7 @@ const PricingPage: React.FC = () => {
           </div>
 
           {/* Professional Plan */}
-          <div className={`relative transform rounded-2xl border-2 border-blue-500/50 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+          <div className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
             ${plans === "professional" ? "ring-2 ring-blue-500" : ""}`}>
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 transform">
               <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
@@ -380,8 +380,18 @@ const PricingPage: React.FC = () => {
             </ul>
 
             <button
-              onClick={() => handlePlanSelect("Professional")}
-              className="w-full transform rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-cyan-700"
+              onClick={() => handlePlanSelect("professional")}
+                disabled={
+                plans === "professional" && planstatus === "active"
+              
+              }
+                 className={`w-full transform rounded-xl py-3 font-semibold transition-all duration-300
+    ${
+      plans === "professional" && planstatus === "active"
+        ? "bg-gray-400 text-white cursor-not-allowed"
+        : "bg-blue-600 text-white hover:scale-105 hover:bg-blue-700"
+    }
+  `}
             >
               <FormattedMessage
                 id={plans === "professional" ? "pricing.starter.subscribed" : plans === "starter" ? "pricing.starter.upgrade" : plans === "enterprise" ? "pricing.starter.downgrade" : "pricing.starter.getStarted"}
@@ -391,7 +401,19 @@ const PricingPage: React.FC = () => {
           </div>
 
           {/* Enterprise Plan */}
-          <div className="transform rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/10">
+                  <div className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+            ${plans === "enterprise" ? "ring-2 ring-blue-500" : ""}`}>
+            {plans === "enterprise" && (
+  <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
+  <CheckCircle className="h-4 w-4" />
+    <span>
+      <FormattedMessage
+        id="pricing.starter.subscribed"
+        defaultMessage="Most Popular"
+      />
+    </span>
+  </span>
+)}
             <div className="mb-8 text-center">
               <h3 className="mb-2 text-2xl font-bold text-white">
                 <FormattedMessage
@@ -446,11 +468,21 @@ const PricingPage: React.FC = () => {
             </ul>
 
             <button
-              onClick={() => handlePlanSelect("Enterprise")}
-              className="w-full transform rounded-xl bg-purple-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-purple-700"
+              onClick={() => handlePlanSelect("enterprise")}
+                  disabled={
+                plans === "enterprise" && planstatus === "active"
+              
+              }
+              className={`w-full transform rounded-xl py-3 font-semibold transition-all duration-300
+    ${
+      plans === "enterprise" && planstatus === "active"
+        ? "bg-gray-400 text-white cursor-not-allowed"
+        : "bg-blue-600 text-white hover:scale-105 hover:bg-blue-700"
+    }
+  `}
             >
               <FormattedMessage
-                id="pricing.contactSales"
+                id={`${plans === "enterprise" ? "pricing.starter.subscribed" : plans === "professional" ? "pricing.starter.upgrade" : plans === "starter" ? "pricing.starter.upgrade" : "pricing.starter.getStarted"}`}
                 defaultMessage="Contact Sales"
               />
             </button>
