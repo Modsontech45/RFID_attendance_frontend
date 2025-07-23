@@ -32,7 +32,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ email, plan }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-   const handlePayment = async (e: React.FormEvent) => {
+  const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
@@ -69,7 +69,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ email, plan }) => {
       <h2 className="text-xl font-bold mb-4">Subscribe to a Plan</h2>
       <form onSubmit={handlePayment}>
         <div className="mb-4">
-        
           <input
             type="email"
             className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white"
@@ -78,14 +77,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ email, plan }) => {
           />
         </div>
         <div className="mb-4">
-       
           <select
             className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white"
             value={plan}
             disabled
           >
-            <option >{plan}</option>
-         
+            <option>{plan}</option>
           </select>
         </div>
         {error && <p className="text-red-600 mb-4">{error}</p>}
@@ -106,14 +103,14 @@ const PricingPage: React.FC = () => {
   const { formatMessage } = useIntl();
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
-   const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const adminData = getAdminData();
   const plans = adminData?.subscription_plan;
   const planstatus = adminData?.subscription_status;
   const endfree = adminData?.trial_end_date;
- const Email = adminData?.email;
+  const Email = adminData?.email;
 
-   const handlePlanSelect = (planName: string) => {
+  const handlePlanSelect = (planName: string) => {
     setSelectedPlan(planName);
     setEmail(Email); // Set immediately from admin data
     setShowPaymentForm(true); // Show the form
@@ -185,39 +182,38 @@ const PricingPage: React.FC = () => {
         </section>
 
         {/* Payment Form Modal/Section */}
-       {showPaymentForm && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50  ">
-    <div className="relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30">
-      <button
-        onClick={() => setShowPaymentForm(false)}
-        className="absolute top-2 right-2 text-white hover:text-gray-700"
-      >
-        ✕
-      </button>
-      <PaymentForm email={email} plan={selectedPlan} />
-    </div>
-  </div>
-)}
-
+        {showPaymentForm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50  ">
+            <div className="relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30">
+              <button
+                onClick={() => setShowPaymentForm(false)}
+                className="absolute top-2 right-2 text-white hover:text-gray-700"
+              >
+                ✕
+              </button>
+              <PaymentForm email={email} plan={selectedPlan} />
+            </div>
+          </div>
+        )}
 
         {/* Original pricing cards design */}
         <section className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
           {/* Starter Plan */}
-          <div className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
-            ${plans === "starter" ? "ring-2 ring-blue-500" : ""}`}>
-
-  {plans === "starter" && (
-  <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
-  <CheckCircle className="h-4 w-4" />
-    <span>
-      <FormattedMessage
-        id="pricing.starter.subscribed"
-        defaultMessage="Most Popular"
-      />
-    </span>
-  </span>
-)}
-
+          <div
+            className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+            ${plans === "starter" ? "ring-2 ring-blue-500" : ""}`}
+          >
+            {plans === "starter" && planstatus === "active" && (
+              <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
+                <CheckCircle className="h-4 w-4" />
+                <span>
+                  <FormattedMessage
+                    id="pricing.starter.subscribed"
+                    defaultMessage="Most Popular"
+                  />
+                </span>
+              </span>
+            )}
 
             <div className="mb-8 text-center">
               <h3 className="mb-2 text-2xl font-bold text-white">
@@ -243,14 +239,17 @@ const PricingPage: React.FC = () => {
                   id="pricing.starter.period"
                   defaultMessage="month"
                 />
-              </div>
+              </div> 
               <span className="mt-4 inline-block cursor-pointer rounded-full bg-gradient-to-r from-blue-900 via-green-2 to-blue-600 px-6 py-3 text-white font-extrabold shadow-xl ring-4 ring-green-700 transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-1 hover:shadow-2xl animate-pulse">
                 <FormattedMessage
                   id={`${
                     plans === "enterprise" ||
                     plans === "professional" ||
-                    (plans === "starter" && planstatus === "active")|| endfree > new Date().toISOString()
+                    (plans === "starter" && planstatus === "active") ||
+                    endfree > new Date().toISOString()
                       ? "pricing.starter.freetrialExpired"
+                      : planstatus === "trial"
+                      ? "pricing.starter.freeplan"
                       : "pricing.starter.startfreetrial"
                   }`}
                   defaultMessage="pricing.starter.startfreetrial"
@@ -286,10 +285,7 @@ const PricingPage: React.FC = () => {
 
             <button
               onClick={() => handlePlanSelect("starter")}
-              disabled={
-                plans === "starter" && planstatus === "active"
-              
-              }
+              disabled={plans === "starter" && planstatus === "active"}
               className={`w-full transform rounded-xl py-3 font-semibold transition-all duration-300
     ${
       plans === "starter" && planstatus === "active"
@@ -302,9 +298,9 @@ const PricingPage: React.FC = () => {
                 id={`${
                   plans === "enterprise" || plans === "professional"
                     ? "pricing.starter.downgrade"
-                    : plans === "starter"
+                    : plans === "starter" && planstatus === "active"
                       ? "pricing.starter.subscribed"
-                      : "pricing.starter.startfreetrial"
+                      : "pricing.starter.getStarted"
                 }`}
                 defaultMessage="pricing.starter.downgrade"
               />
@@ -312,14 +308,20 @@ const PricingPage: React.FC = () => {
           </div>
 
           {/* Professional Plan */}
-          <div className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
-            ${plans === "professional" ? "ring-2 ring-blue-500" : ""}`}>
+          <div
+            className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+            ${plans === "professional" ? "ring-2 ring-blue-500" : ""}`}
+          >
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 transform">
               <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
                 <Star className="h-4 w-4" />
                 <span>
                   <FormattedMessage
-                    id={plans === "professional" ? "pricing.starter.subscribed" : "pricing.professional.popular"}
+                    id={
+                      plans === "professional"
+                        ? "pricing.starter.subscribed"
+                        : "pricing.professional.popular"
+                    }
                     defaultMessage="Most Popular"
                   />
                 </span>
@@ -381,11 +383,8 @@ const PricingPage: React.FC = () => {
 
             <button
               onClick={() => handlePlanSelect("professional")}
-                disabled={
-                plans === "professional" && planstatus === "active"
-              
-              }
-                 className={`w-full transform rounded-xl py-3 font-semibold transition-all duration-300
+              disabled={plans === "professional" && planstatus === "active"}
+              className={`w-full transform rounded-xl py-3 font-semibold transition-all duration-300
     ${
       plans === "professional" && planstatus === "active"
         ? "bg-gray-400 text-white cursor-not-allowed"
@@ -394,26 +393,36 @@ const PricingPage: React.FC = () => {
   `}
             >
               <FormattedMessage
-                id={plans === "professional" ? "pricing.starter.subscribed" : plans === "starter" ? "pricing.starter.upgrade" : plans === "enterprise" ? "pricing.starter.downgrade" : "pricing.starter.getStarted"}
+                id={
+                  plans === "professional"
+                    ? "pricing.starter.subscribed"
+                    : plans === "starter"
+                      ? "pricing.starter.upgrade"
+                      : plans === "enterprise"
+                        ? "pricing.starter.downgrade"
+                        : "pricing.starter.getStarted"
+                }
                 defaultMessage="Get Started"
               />
             </button>
           </div>
 
           {/* Enterprise Plan */}
-                  <div className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
-            ${plans === "enterprise" ? "ring-2 ring-blue-500" : ""}`}>
+          <div
+            className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+            ${plans === "enterprise" ? "ring-2 ring-blue-500" : ""}`}
+          >
             {plans === "enterprise" && (
-  <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
-  <CheckCircle className="h-4 w-4" />
-    <span>
-      <FormattedMessage
-        id="pricing.starter.subscribed"
-        defaultMessage="Most Popular"
-      />
-    </span>
-  </span>
-)}
+              <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
+                <CheckCircle className="h-4 w-4" />
+                <span>
+                  <FormattedMessage
+                    id="pricing.starter.subscribed"
+                    defaultMessage="Most Popular"
+                  />
+                </span>
+              </span>
+            )}
             <div className="mb-8 text-center">
               <h3 className="mb-2 text-2xl font-bold text-white">
                 <FormattedMessage
@@ -469,10 +478,7 @@ const PricingPage: React.FC = () => {
 
             <button
               onClick={() => handlePlanSelect("enterprise")}
-                  disabled={
-                plans === "enterprise" && planstatus === "active"
-              
-              }
+              disabled={plans === "enterprise" && planstatus === "active"}
               className={`w-full transform rounded-xl py-3 font-semibold transition-all duration-300
     ${
       plans === "enterprise" && planstatus === "active"
