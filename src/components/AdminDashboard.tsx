@@ -341,6 +341,23 @@ const AdminDashboard: React.FC = () => {
                 <div className="text-xs text-gray-400">@{username}</div>
               </div>
             </div>
+
+              <span
+                  onClick={
+                   
+                      () => handleSubscriptionClick()
+                     
+                  }
+                  className={`px-3 py-1 rounded-full text-white font-medium text-sm cursor-pointer ${
+                    subscription === "active"
+                      ? "bg-green-500 cursor-default"
+                      : "bg-red-500 hover:opacity-80"
+                  }`}
+                >
+                  <FormattedMessage
+                    id={`${subscription === "active" ? "pricing.starter.subscribed" : subscription === "trial" ? "pricing.starter.freeplan" : "pricing.starter.subscribeNow"}`}
+                  />
+                </span>
       
             {/* Desktop Navigation */}
             <nav className="hidden items-center space-x-8 lg:flex">
@@ -425,20 +442,7 @@ const AdminDashboard: React.FC = () => {
                   <Settings className="h-5 w-5 text-gray-400 transition-all duration-300 hover:rotate-90 hover:text-white" />
                 </button>
 
-                <span
-                  onClick={
-                   
-                      () => handleSubscriptionClick()
-                     
-                  }
-                  className={`px-3 py-1 rounded-full text-white font-medium text-sm cursor-pointer ${
-                    subscription === "active"
-                      ? "bg-green-500 cursor-default"
-                      : "bg-red-500 hover:opacity-80"
-                  }`}
-                >
-                  {subscription}
-                </span>
+              
 
                 <button
                   onClick={handleLogout}
