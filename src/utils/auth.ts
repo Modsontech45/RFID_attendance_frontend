@@ -63,6 +63,8 @@ export const logout = (): void => {
   deleteAuthData("token");
   deleteAuthData("role");
   deleteAuthData("api_key");
+  deleteAuthData("admin_data");
+  deleteCookie("token");
   window.location.href = "/";
 };
 

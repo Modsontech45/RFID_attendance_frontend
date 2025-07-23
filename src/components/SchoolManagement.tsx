@@ -92,6 +92,10 @@ const { formatMessage } = useIntl();
   const handleGoHome = () => {
     navigate('/admin/dashboard');
   };
+  function handleSubscriptionClick() {
+  console.log("Subscription is not active — show modal or redirect");
+  navigate("/pricing");
+}
 
   useEffect(() => {
     const role = getAuthData('role');
@@ -464,6 +468,26 @@ const { formatMessage } = useIntl();
                 <div className="text-xs text-gray-400">@{username}</div>
               </div>
             </div>
+
+
+                  <span
+                  onClick={
+                   
+                      () => handleSubscriptionClick()
+                     
+                  }
+                  className={`px-3 py-1 rounded-full text-white font-medium text-sm cursor-pointer ${
+                    subscription === "active"
+                      ? "bg-green-800 cursor-default"
+                      : "bg-red-800 hover:opacity-80"
+                  }`}
+                >
+                  {subscription === "active"
+                    ? formatMessage({ id: "pricing.starter.subscribed" })
+                    : subscription === "trial"
+                    ? formatMessage({ id: "pricing.starter.freeplan" })
+                    : formatMessage({ id: "pricing.starter.subscribeNow" })}
+                </span>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">

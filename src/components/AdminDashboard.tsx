@@ -350,8 +350,8 @@ const AdminDashboard: React.FC = () => {
                   }
                   className={`px-3 py-1 rounded-full text-white font-medium text-sm cursor-pointer ${
                     subscription === "active"
-                      ? "bg-green-500 cursor-default"
-                      : "bg-red-500 hover:opacity-80"
+                      ? "bg-green-800 cursor-default"
+                      : "bg-red-800 hover:opacity-80"
                   }`}
                 >
                   <FormattedMessage
@@ -528,20 +528,7 @@ const AdminDashboard: React.FC = () => {
               </button>
 
               <div className=" border-t border-white/10 pt-4">
-              <span
-                  onClick={
-                    subscription !== "active"
-                      ? () => handleSubscriptionClick()
-                      : undefined
-                  }
-                  className={`px-3 py-1 rounded-full text-white font-medium text-sm cursor-pointer ${
-                    subscription === "active"
-                      ? "bg-green-500 cursor-default"
-                      : "bg-red-500 hover:opacity-80"
-                  }`}
-                >
-                  {subscription}
-                </span>
+        
 
                 <button
                   onClick={handleLogout}
