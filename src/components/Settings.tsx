@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAuthData, logout, getApiKey, getAdminData } from "../utils/auth";
+import { getAdminData, logout } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
 import {
   CreditCard,
@@ -7,7 +7,6 @@ import {
   Building,
   GraduationCap,
   Settings,
- 
   LogOut,
   CheckCircle,
   Clock,
@@ -16,64 +15,42 @@ import {
   Activity,
   Loader2,
 } from "lucide-react";
-import { Navigate } from "react-router-dom";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 
-interface SubscriptionData {
-  plan: string;
-  status: string;
-  type: string;
-  joinDate: string;
-  startDate: string;
-  endDate: string;
-  daysLeft: number;
-}
+const SettingsComponent: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+    const { formatMessage } = useIntl();
+   
 
-interface AdminData {
-  schoolname?: string;
-  username?: string;
-  email?: string;
-  subscription_status?: string;
-}
-const adminData = getAdminData();
-  const SchoolName = adminData?.schoolname 
+  const adminData = getAdminData();
+  const SchoolName = adminData?.schoolname;
   const Username = adminData?.username || adminData?.email?.split("@")[0] || "admin";
   const plan = adminData?.subscription_plan || "trial";
   const PlanType = adminData?.subscription_type || "Monthly";
   const subscriptionStatus = adminData?.subscription_status || "active";
   const PlanStartDate = adminData?.subscription_start_date || "2024-01-01";
   const PlanEndDate = adminData?.subscription_end_date || "2025-01-01";
-  const daysLeft =  Math.ceil((new Date(PlanEndDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+  const daysLeft =   Math.ceil((new Date(PlanEndDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
   const Email = adminData?.email || "admin@centralhigh.edu";
-   const datejoin = adminData?.created_at || "2024-01-15";
-const SettingsComponent: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
-
-
-
-
- 
+  const datejoin = adminData?.created_at || "2024-01-15";
+  let MoneyPaid = 0
+  const daypercentage = Math.max((daysLeft / 31) * 100, 5)
+  if (plan === "starter") {
+    MoneyPaid = 35;
+  } else if (plan === "professional") {
+    MoneyPaid = 65;
+  } else if (plan === "enterprise") {
+    MoneyPaid = 170;
+  }
+  let Cardbalance  = MoneyPaid * (daypercentage / 100).toFixed(2);
 
   useEffect(() => {
-    // Simulate loading subscription data
     const loadSubscriptionData = async () => {
-      try {
-        setIsLoading(true);
-        // In real implementation, fetch from API
-        // const token = getAuthData("token");
-        // const response = await postData(`${API_BASE}/subscription`, {}, token);
-        // setSubscriptionData(response.data);
-        
-        // Simulate API call delay
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
-      } catch (error) {
-        console.error("Error loading subscription data:", error);
-        setIsLoading(false);
-      }
+      setIsLoading(true);
+      setTimeout(() => setIsLoading(false), 800);
     };
-
     loadSubscriptionData();
   }, []);
 
@@ -82,238 +59,201 @@ const SettingsComponent: React.FC = () => {
     navigate("/admin/login");
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+  const formatDate = (dateString: string) =>
+    new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
-  };
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
-      case 'active':
-        return 'text-green-600 bg-green-100';
-      case 'expired':
-        return 'text-red-600 bg-red-100';
-      case 'pending':
-        return 'text-yellow-600 bg-yellow-100';
+      case "active":
+        return "text-green-400 bg-green-900/30";
+      case "expired":
+        return "text-red-400 bg-red-900/30";
+      case "pending":
+        return "text-yellow-400 bg-yellow-900/30";
       default:
-        return 'text-gray-600 bg-gray-100';
+        return "text-gray-300 bg-gray-700";
     }
   };
 
   const getDaysLeftColor = (days: number) => {
-    if (days > 30) return 'text-green-600';
-    if (days > 7) return 'text-yellow-600';
-    return 'text-red-600';
+    if (days > 30) return "text-green-400";
+    if (days > 7) return "text-yellow-400";
+    return "text-red-400";
   };
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0e141b] flex items-center justify-center text-white">
         <div className="flex items-center space-x-2">
-          <Loader2 className="h-6 w-6 animate-spin text-blue-600" />
-          <span className="text-gray-600">Loading settings...</span>
+          <Loader2 className="h-6 w-6 animate-spin text-blue-400" />
+          <span className="text-gray-300"> <FormattedMessage
+                          id="AdminProfile.loading"
+                          defaultMessage="Loading Profile"
+                        /></span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#0e141b] text-white">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div>
-               <div className="flex items-center space-x-3">
-              <User className="h-8 w-8 text-blue-600" />
-              <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
+      <div className="bg-[#1e2a38] border-b border-[#263445] shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+          <div>
+            <div className="flex items-center space-x-3">
+              <User className="h-8 w-8 text-blue-400" />
+              <h1 className="text-2xl font-bold"><FormattedMessage
+                          id="AdminProfile.title"
+                          defaultMessage="Admin Profile"
+                        /></h1>
             </div>
-             <button onClick={() => navigate("/admin/dashboard")}
-              className="mt-2 text-blue-600 hover:text-blue-800 transition-colors">
-           <span
-  className="relative ring-1  transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 mt-8 p-1 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30"
->
-  Back to Dashboard
-</span>
-
-
-             </button>
-
-            </div>
-           
-            <button 
-              onClick={handleLogout}
-              className="flex items-center space-x-2 text-red-600 hover:text-red-800 transition-colors">
-              <LogOut className="h-5 w-5" />
-              <span>Logout</span>
+            <button
+              onClick={() => navigate("/admin/dashboard")}
+              className="mt-2 inline-block text-blue-400 hover:text-blue-200 transition"
+            >
+              <span className="ring-1 rounded-md border border-blue-400/50 bg-blue-900/20 px-3 py-1 text-sm backdrop-blur">
+             <FormattedMessage
+                          id="AdminProfile.back"
+                          defaultMessage="Back to Dashboards"
+                        />
+              </span>
             </button>
           </div>
+          <button
+            onClick={handleLogout}
+            className="flex items-center space-x-2 text-red-400 hover:text-red-300"
+          >
+            <LogOut className="h-5 w-5" />
+            <span>
+                <FormattedMessage
+                          id="AdminProfile.logout"
+                          defaultMessage="Logout"
+                        />
+            </span>
+          </button>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Subscription Information Card */}
+          {/* Subscription Info */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm border p-6">
+            <div className="bg-[#1e2a38] rounded-lg p-6 border border-[#263445] shadow">
               <div className="flex items-center space-x-3 mb-6">
-                <CreditCard className="h-6 w-6 text-blue-600" />
-                <h2 className="text-xl font-semibold text-gray-900">
-                  Subscription Information
+                <CreditCard className="h-6 w-6 text-blue-400" />
+                <h2 className="text-xl font-semibold">
+                   <FormattedMessage
+                          id="AdminProfile.subscriptionInfo"
+                          defaultMessage="Subscription Information"
+                        />
                 </h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Subscription Plan */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-500">
-                    Subscription Plan
-                  </label>
-                  <div className="flex items-center space-x-2">
-                    <Zap className="h-5 w-5 text-blue-600" />
-                    <span className="text-lg font-semibold text-gray-900">{plan}</span>
-                  </div>
-                </div>
-
-                {/* Status */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-500">
-                    Status
-                  </label>
-                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(subscriptionStatus)}`}>
-                    <CheckCircle className="h-4 w-4 mr-1" />
-                    {subscriptionStatus}
-                  </span>
-                </div>
-
-                {/* Type */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-500">
-                    Subscription Type
-                  </label>
-                  <div className="flex items-center space-x-2">
-                    <Calendar className="h-5 w-5 text-gray-600" />
-                    <span className="text-gray-900">{PlanType}</span>
-                  </div>
-                </div>
-
-                {/* Days Left */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-500">
-                    Days Left
-                  </label>
-                  <div className="flex items-center space-x-2">
-                    <Clock className="h-5 w-5 text-gray-600" />
-                    <span className={`text-lg font-semibold ${getDaysLeftColor(daysLeft)}`}>
-                      {daysLeft} days
-                    </span>
-                  </div>
-                </div>
-
-                {/* Join Date */}
-                <div className="space-y-2">
-                 <p>Join our platform on</p>
-                  <span className="text-gray-900">{formatDate(datejoin)}</span>
-                </div>
-
-                {/* Start Date */}
-                <div className="space-y-2">
-                  <p>Subscription Start Date</p>
-                  <span className="text-gray-900">{formatDate(PlanStartDate)}</span>
-                </div>
-
-                {/* End Date */}
-                <div className="space-y-2">
-                  <p>Subscription End Date</p>
-                  <span className="text-gray-900">{formatDate(PlanEndDate )}</span>
-                </div>
+                <Info label={<FormattedMessage
+                          id="AdminProfile.subscriptionPlan"
+                          defaultMessage="Subscription Plan"
+                        />} icon={<Zap className="h-5 w-5 text-blue-400" />} value={plan} />
+                <StatusBadge label="Status" status={subscriptionStatus} />
+                <Info label={<FormattedMessage
+                          id="AdminProfile.subscriptionPlan"
+                          defaultMessage="Subscription Plan"
+                        />} icon={<Calendar className="h-5 w-5 text-gray-400" />} value={PlanType} />
+                <Info label={<FormattedMessage
+                          id="AdminProfile.daysLeft"
+                          defaultMessage="Days Left"
+                        />} icon={<Clock className="h-5 w-5 text-gray-400" />} value={`${daysLeft} days`} className={getDaysLeftColor(daysLeft)} />
+                <Info label={<FormattedMessage
+                          id="AdminProfile.joinedOn"
+                          defaultMessage="Joined On"
+                        />} value={formatDate(datejoin)} />
+                <Info label={<FormattedMessage
+                          id="AdminProfile.startDate"
+                          defaultMessage="Start Date"
+                        />} value={formatDate(PlanStartDate)} />
+                <Info label={<FormattedMessage
+                          id="AdminProfile.endDate"
+                          defaultMessage="End Date"
+                        />} value={formatDate(PlanEndDate)} />
               </div>
 
-              {/* Progress Bar for Days Left */}
+              {/* Progress Bar */}
               <div className="mt-6">
-                <div className="flex justify-between text-sm text-gray-600 mb-2">
-                  <span>Subscription Progress</span>
-                  <span>{daysLeft} days remaining</span>
+                <div className="flex justify-between text-sm text-gray-400 mb-2">
+                  <span><FormattedMessage
+                          id="AdminProfile.Subscriptionprogress"
+                          defaultMessage="  Subscription Progress"
+                        /></span>
+                  <span>{daysLeft} <FormattedMessage
+                          id="AdminProfile.daysremaining"
+                          defaultMessage="Days remaining"
+                        /></span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
+                <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      daysLeft > 20 ? 'bg-green-500' :
-                      daysLeft > 15 ? 'bg-yellow-500' : 'bg-red-500'
+                      daysLeft > 20 ? "bg-green-500" : daysLeft > 10 ? "bg-yellow-500" : "bg-red-500"
                     }`}
-                    style={{ width: `${Math.max((daysLeft / 30) * 100, 5)}%` }}
+                    style={{ width: `${Math.max((daysLeft / 31) * 100, 5)}%` }}
                   ></div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Account Information Sidebar */}
+          {/* Sidebar */}
           <div className="space-y-6">
-            
-            {/* School Information */}
-            <div className="bg-white rounded-lg shadow-sm border p-6">
+            {/* School Info */}
+            <div className="bg-[#1e2a38] rounded-lg p-6 border border-[#263445] shadow">
               <div className="flex items-center space-x-3 mb-4">
-                <Building className="h-6 w-6 text-blue-600" />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  School Information
-                </h3>
+                <Building className="h-6 w-6 text-blue-400" />
+                <h3 className="text-lg font-semibold"><FormattedMessage
+                          id="AdminProfile.schoolInformation"
+                          defaultMessage="School Information"
+                        /></h3>
               </div>
-              
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium text-gray-500">
-                    School Name
-                  </label>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <GraduationCap className="h-4 w-4 text-gray-600" />
-                    <span className="text-gray-900 font-medium">{SchoolName}</span>
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="text-sm font-medium text-gray-500">
-                    Admin Username
-                  </label>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <User className="h-4 w-4 text-gray-600" />
-                    <span className="text-gray-900 font-medium">{Username}</span>
-                  </div>
-                </div>
-              </div>
+              <Info label={<FormattedMessage
+                          id="AdminProfile.schoolName"
+                          defaultMessage="School Name"
+                        />} icon={<GraduationCap className="h-4 w-4 text-gray-400" />} value={SchoolName} />
+              <Info label={<FormattedMessage
+                          id="AdminProfile.username"
+                          defaultMessage="Admin Username"
+                        />} icon={<User className="h-4 w-4 text-gray-400" />} value={Username} />
             </div>
 
-       
-
-            {/* Quick Stats */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-sm p-6 text-white">
+            {/* Card Summary */}
+            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#6d28d9] rounded-lg p-6 shadow text-white">
               <div className="flex items-center space-x-3 mb-3">
                 <Activity className="h-6 w-6" />
-                <h3 className="text-lg font-semibold">Your Card</h3>
+                <h3 className="text-lg font-semibold">
+                  <span> <FormattedMessage
+                          id="AdminProfile.cardbalance"
+                          defaultMessage="Card Balance"
+                        />{` $${Cardbalance}`}</span>
+                </h3>
               </div>
-              
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-blue-100">Plan:</span>
-                  <span className="font-medium">{plan}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-blue-100">Status:</span>
-                  <span className="font-medium">{subscriptionStatus}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-blue-100">Days Left:</span>
-                  <span className="font-medium">{ daysLeft}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-blue-100">School:</span>
-                  <span className="font-medium truncate">{SchoolName}</span>
-                </div>
-              </div>
+              <SummaryRow label={<FormattedMessage
+                          id="AdminProfile.subscriptionPlan"
+                          defaultMessage="Subscription Plan"
+                        />} value={plan} />
+              <SummaryRow label={<FormattedMessage
+                          id="AdminProfile.status"
+                          defaultMessage="Status"
+                        />} value={subscriptionStatus} />
+              <SummaryRow label={<FormattedMessage
+                          id="AdminProfile.daysLeft"
+                          defaultMessage="Days Left"
+                        />} value={`${daysLeft}`} />
+              <SummaryRow label={<FormattedMessage
+                          id="AdminProfile.school"
+                          defaultMessage="School"
+                        />} value={SchoolName} />
             </div>
           </div>
         </div>
@@ -321,5 +261,55 @@ const SettingsComponent: React.FC = () => {
     </div>
   );
 };
+
+const Info = ({
+  label,
+  icon,
+  value,
+  className = "",
+}: {
+  label: string;
+  icon?: React.ReactNode;
+  value: string | undefined;
+  className?: string;
+}) => (
+  <div className="space-y-2">
+    <label className="text-sm text-gray-400">{label}</label>
+    <div className="flex items-center space-x-2">
+      {icon}
+      <span className={`font-medium ${className}`}>{value}</span>
+    </div>
+  </div>
+);
+
+const StatusBadge = ({ label, status }: { label: string; status: string }) => (
+  <div className="space-y-2">
+    <label className="text-sm text-gray-400">{label}</label>
+    <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(status)}`}>
+      <CheckCircle className="h-4 w-4 mr-1" />
+      {status}
+    </span>
+  </div>
+);
+
+const getStatusColor = (status: string) => {
+  switch (status.toLowerCase()) {
+    case "active":
+      return "text-green-400 bg-green-900/30";
+    case "expired":
+      return "text-red-400 bg-red-900/30";
+    case "pending":
+      return "text-yellow-400 bg-yellow-900/30";
+    default:
+      return "text-gray-300 bg-gray-700";
+  }
+};
+
+const SummaryRow = ({ label, value }: { label: string; value: string | undefined }) => (
+  <div className="flex justify-between text-sm">
+    <span className="text-blue-100">{label}:</span>
+    <span className="font-medium">{value}</span>
+  </div>
+);
 
 export default SettingsComponent;

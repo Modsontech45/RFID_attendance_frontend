@@ -694,6 +694,32 @@
       "info_text": "Only registered staff members can access this portal. Contact your administrator if you need assistance.",
       "back": "Back to Home",
        "loading": "Loading..."
+    },
+    "AdminProfile":{
+      "loading": "Loading Profile...",
+      "error": "An error occurred while loading your profile 🙏😢",
+      "title": "Admin Profile",
+      "back": " Back to Dashboards",
+      "logout": "Logout",
+      "subInfo": "Subscription Information",
+      "subscriptionPlan": "Subscription Plan",
+      "subscriptionType": "Subscription Type",
+      "schoolName": "School Name",
+      "createdAt": "Account Created At",
+      "daysLeft": "Days Left in Subscription",
+      "joinedOn": "Joined on",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "Subscriptionprogress": "Subscription Progress",
+      "daysremaining": "Days remaining",
+      "status": "Status",
+      "schoolInformation": "School Information",
+      "username": "Admin Username",
+      "cardbalance": "Card Balance",
+
+
+
+
     }
 
 

@@ -703,6 +703,29 @@
       "back": "Retour à l'accueil",
       "loading": "En cours..."
 
-    }
+    },
+    "AdminProfile": {
+  "loading": "Chargement du profil...",
+  "error": "Une erreur s'est produite lors du chargement de votre profil 🙏😢",
+  "title": "Profil Administrateur",
+  "back": "Retour au tableau de bord",
+  "logout": "Déconnexion",
+  "subInfo": "Informations sur l'abonnement",
+  "subscriptionPlan": "Formule d'abonnement",
+  "subscriptionType": "Type d'abonnement",
+  "schoolName": "Nom de l'établissement",
+  "createdAt": "Compte créé le",
+  "daysLeft": "Jours restants dans l'abonnement",
+  "joinedOn": "Inscrit le",
+  "startDate": "Date de début",
+  "endDate": "Date de fin",
+  "Subscriptionprogress": "Progression de l'abonnement",
+  "daysremaining": "Jours restants",
+  "status": "Statut",
+  "schoolInformation": "Informations sur l'établissement",
+  "username": "Nom d'utilisateur administrateur",
+  "cardbalance": "Solde de la carte"
+}
+
 
 }
