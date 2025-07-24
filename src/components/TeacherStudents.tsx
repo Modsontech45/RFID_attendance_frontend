@@ -261,27 +261,7 @@ const TeacherStudents: React.FC = () => {
               </button>
 
               <div className="flex items-center space-x-4">
-                {/* Notifications */}
-                <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <Bell className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-                  <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                </button>
-
-                {/* Settings */}
-                <button className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
-                </button>
-
-                {/* Language Selector */}
-                <select 
-                  value={currentLanguage}
-                  onChange={handleLanguageChange}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-white/20 transition-all duration-300"
-                >
-                  <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
-                  <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-                </select>
-
+             
                 <button
                   onClick={handleLogout}
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
