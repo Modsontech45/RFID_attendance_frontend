@@ -299,6 +299,7 @@
   },
   "pricing": {
     "back": "Back ",
+    "school": "School",
     "title": "Choose the plan that fits your school",
     "subtitle": "Affordable pricing plans designed to scale with your institution.",
     "starter": {
@@ -315,6 +316,7 @@
       "downgrade": "Downgrade",
       "freeplan": "Free Plan",
       "subscribeNow": "Subscribe Now",
+      
 
       "features": [
         "Basic student management",

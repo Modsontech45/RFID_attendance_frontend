@@ -27,17 +27,17 @@ const SettingsComponent: React.FC = () => {
   const adminData = getAdminData();
   const SchoolName = adminData?.schoolname;
   const Username = adminData?.username || adminData?.email?.split("@")[0] || "admin";
-  const plan = adminData?.subscription_plan || "trial";
+  const plan = adminData?.subscription_plan || "unknown";
   const PlanType = adminData?.subscription_type || "Monthly";
   const subscriptionStatus = adminData?.subscription_status || "active";
-  const PlanStartDate = adminData?.subscription_start_date || "2024-01-01";
-  const PlanEndDate = adminData?.subscription_end_date || "2025-01-01";
+  const PlanStartDate = adminData?.subscription_start_date ||  subscriptionStatus === "trial" ? adminData?.trial_start_date : 0;
+  const PlanEndDate = adminData?.subscription_end_date ||  subscriptionStatus === "trial" ? adminData?.trial_end_date : 0;
   const daysLeft =   Math.ceil((new Date(PlanEndDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
   const Email = adminData?.email || "admin@centralhigh.edu";
   const datejoin = adminData?.created_at || "2024-01-15";
   let MoneyPaid = 0
   const daypercentage = Math.max((daysLeft / 31) * 100, 5)
-  if (plan === "starter") {
+  if (plan === "starter" && subscriptionStatus !== "trial") {
     MoneyPaid = 35;
   } else if (plan === "professional") {
     MoneyPaid = 65;
