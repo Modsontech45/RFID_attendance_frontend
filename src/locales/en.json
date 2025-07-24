@@ -314,7 +314,7 @@
       "freetrialAvailable": "Free Trial Available",
       "startfreetrial": "Start Free Trial",
       "downgrade": "Downgrade",
-      "freeplan": "Free Plan",
+      "freeplan": "Free Plan Activated",
       "subscribeNow": "Subscribe Now",
       
 
@@ -503,7 +503,7 @@
     "yesterday": "Yesterday at",
     "never": "Never",
     "lastSeen": "Last seen:",
-    "dashboard": "Dashboard",
+    "dashboard": "Admin Dashboard",
     "students": "Students",
     "attendance": "Attendance",
     "reports": "Reports",
@@ -521,6 +521,7 @@
     "home": "Home",
     "students": "Students",
     "attendance": "Attendance",
+    "profile": "Profile",
     "dashboard": "Dashboard",
     "logout": "Logout"
   },
@@ -723,7 +724,31 @@
 
 
 
-    }
+    },
+
+    "reports":{
+  "reports.title": "Analytics & Reports",
+  "reports.subtitle": "Comprehensive insights and detailed reports for your attendance management system",
+  "filters.startDate": "Start Date: ",
+  "filters.endDate": "End Date: ",
+  "filters.form": "Form/Class: ",
+  "filters.allForms": "All Forms",
+  "filters.apply": "Apply Filters",
+  "filters.refresh": "Refresh",
+  "stats.totalStudents": "Total Students",
+  "stats.totalTeachers": "Total Teachers",
+  "stats.attendanceRate": "Attendance Rate",
+  "stats.totalRecords": "Total Records",
+  "charts.attendanceRate": "Attendance Rate",
+  "charts.formStatistics": "Form Statistics",
+  "charts.monthlyTrends": "Monthly Trends",
+  "download.title": "Download Reports",
+  "download.subtitle": "Generate and download comprehensive reports in your preferred format",
+  "download.pdf": "Download PDF Report",
+  "download.excel": "Download Excel Report",
+  "download.generating": "Generating your report... This may take a few moments."
+}
+
 
 
 }

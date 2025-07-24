@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
+// import { useTranslation } from '../hooks/useTranslation';
 import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
 import SubscriptionCard from './SubscriptionModal';
 import { 
@@ -20,6 +20,7 @@ import {
   AlertCircle,
   FileText,
   PieChart,
+  User,
   Settings,
   Bell,
   LogOut,
@@ -29,7 +30,8 @@ import {
   Eye,
   Search
 } from 'lucide-react';
-
+import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 interface AttendanceRecord {
   id: number;
   date: string;
@@ -76,7 +78,8 @@ interface ReportData {
 
 const ReportsPage: React.FC = () => {
   const navigate = useNavigate();
-  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
+  const { formatMessage } = useIntl();
+  const { locale, } = useLocalIntl();
   const [reportData, setReportData] = useState<ReportData | null>(null);
   const [attendanceRecords, setAttendanceRecords] = useState<AttendanceRecord[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
@@ -105,9 +108,7 @@ const ReportsPage: React.FC = () => {
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
 const subscription = adminData?.subscription_status;
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeLanguage(e.target.value);
-  };
+
 
   const handleLogout = () => {
     logout();
@@ -125,14 +126,14 @@ const subscription = adminData?.subscription_status;
           headers: {
             'Content-Type': 'application/json',
             'x-api-key': apiKey || '',
-            'Accept-Language': currentLanguage
+            'Accept-Language': locale || 'en'
           }
         }),
         fetch(`${API_BASE}/students`, {
           headers: {
             'Content-Type': 'application/json',
             'x-api-key': apiKey || '',
-            'Accept-Language': currentLanguage
+            'Accept-Language': locale || 'en'
           }
         }),
         fetch(`${API_BASE}/teachers/all`, {
@@ -145,7 +146,7 @@ const subscription = adminData?.subscription_status;
           headers: {
             'Content-Type': 'application/json',
             'x-api-key': apiKey || '',
-            'Accept-Language': currentLanguage
+            'Accept-Language': locale || 'en'
           }
         })
       ]);
@@ -449,7 +450,7 @@ const subscription = adminData?.subscription_status;
     }
   }, [reportData]);
 
-  if (loading || isLoading) {
+  if (isLoading) {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -508,7 +509,7 @@ const subscription = adminData?.subscription_status;
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    Dashboard
+                      {formatMessage({ id: "schoolManagement.dashboard" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -518,57 +519,59 @@ const subscription = adminData?.subscription_status;
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    Students
+                    {formatMessage({ id: "schoolManagement.schoolManagement" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
+                    <button 
+                  onClick={() => navigate('/admin/students')}
+                  className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+                >
+                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                  {formatMessage({ id: "attendance.students" })}
+                  </span>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                </button>
+                
                 
                 <button 
                   onClick={() => navigate('/admin/attendance')}
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    Attendance
+                     {formatMessage({ id: "attendance.attendance" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
+
+                
                 
                 <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
                   <span className="text-blue-400 transition-colors">
-                    Reports
+                      {formatMessage({ id: "schoolManagement.reports" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
                 </button>
               </div>
 
               <div className="flex items-center space-x-4">
-                {/* Notifications */}
-                <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <Bell className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-                  <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                </button>
+                
 
                 {/* Settings */}
-                <button className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
+                <button onClick={() => navigate('/admin/settings')}
+                className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+                  <User className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
                 </button>
 
-                {/* Language Selector */}
-                <select 
-                  value={currentLanguage}
-                  onChange={handleLanguageChange}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-white/20 transition-all duration-300"
-                >
-                  <option value="en" className="text-gray-900">🇺🇸 English</option>
-                  <option value="fr" className="text-gray-900">🇫🇷 Français</option>
-                </select>
+          
 
                 <button
                   onClick={handleLogout}
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <span>  {formatMessage({ id: "AdminProfile.logout" })}
+                  </span>
                 </button>
               </div>
             </nav>
@@ -586,45 +589,48 @@ const subscription = adminData?.subscription_status;
           <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
             isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}>
-            <nav className="pb-4 border-t border-white/10 pt-4 space-y-2">
+            <nav className="pb-4 border-t border-white/10 pt-4 space-y-1">
               <button 
                 onClick={() => navigate('/admin/dashboard')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                Dashboard
+                 {formatMessage({ id: "schoolManagement.dashboard" })}
               </button>
               <button 
                 onClick={() => navigate('/admin/students')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
-              >
-                Students
+              >  {formatMessage({ id: "schoolManagement.schoolManagement" })}
+              </button>
+                 <button 
+                onClick={() => navigate('/admin/students')}
+                className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
+              >  {formatMessage({ id: "schoolManagement.schoolManagement" })}
               </button>
               <button 
                 onClick={() => navigate('/admin/attendance')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                Attendance
+             {formatMessage({ id: "attendance.attendance" })}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400">
-                Reports
+                 {formatMessage({ id: "schoolManagement.reports" })}
               </button>
+                 <button onClick={() => navigate('/admin/settings')}
+                className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+                  <User className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
+                </button>
               
-              <div className="pt-4 border-t border-white/10">
-                <select 
-                  value={currentLanguage}
-                  onChange={handleLanguageChange}
-                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-                >
-                  <option value="en" className="text-gray-900">🇺🇸 English</option>
-                  <option value="fr" className="text-gray-900">🇫🇷 Français</option>
-                </select>
+              <div className="pt-2 pb-4 border-t border-white/10">
+         
 
                 <button
                   onClick={handleLogout}
                   className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <span> {formatMessage({ id: "AdminProfile.logout" })}
+
+                  </span>
                 </button>
               </div>
             </nav>
@@ -640,11 +646,11 @@ const subscription = adminData?.subscription_status;
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-                Analytics & Reports
+              {formatMessage({ id: "reports.reports.title" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Comprehensive insights and detailed reports for your attendance management system
+              {formatMessage({ id: "reports.reports.subtitle" })}
             </p>
           </div>
         </section>
@@ -655,7 +661,7 @@ const subscription = adminData?.subscription_status;
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
               <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-blue-300">Start Date:</label>
+                  <label className="text-sm font-medium text-blue-300"> {formatMessage({ id: "reports.filters.startDate" })}</label>
                   <input
                     type="date"
                     value={selectedDateRange.startDate}
@@ -665,7 +671,7 @@ const subscription = adminData?.subscription_status;
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-blue-300">End Date:</label>
+                  <label className="text-sm font-medium text-blue-300"> {formatMessage({ id: "reports.filters.endDate" })}</label>
                   <input
                     type="date"
                     value={selectedDateRange.endDate}
@@ -675,13 +681,13 @@ const subscription = adminData?.subscription_status;
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-blue-300">Form/Class:</label>
+                  <label className="text-sm font-medium text-blue-300"> {formatMessage({ id: "reports.filters.form" })}</label>
                   <select
                     value={selectedForm}
                     onChange={(e) => setSelectedForm(e.target.value)}
                     className="bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 w-48"
                   >
-                    <option value="">All Forms</option>
+                    <option value=""> {formatMessage({ id: "reports.filters.allForms" })}</option>
                     {categories.map(category => (
                       <option key={category.id} value={category.name}>{category.name}</option>
                     ))}
@@ -695,7 +701,7 @@ const subscription = adminData?.subscription_status;
                   className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <Filter className="w-4 h-4" />
-                  <span>Apply Filters</span>
+                  <span> {formatMessage({ id: "reports.filters.apply" })}</span>
                 </button>
 
                 <button
@@ -703,7 +709,7 @@ const subscription = adminData?.subscription_status;
                   className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  <span>Refresh</span>
+                  <span> {formatMessage({ id: "reports.filters.refresh" })}</span>
                 </button>
               </div>
             </div>
@@ -716,28 +722,28 @@ const subscription = adminData?.subscription_status;
             {[
               { 
                 icon: Users, 
-                label: "Total Students", 
+                label: ` ${formatMessage({ id: "reports.stats.totalStudents" })}`, 
                 value: reportData.totalStudents.toString(), 
                 change: "+12%", 
                 color: "from-blue-500 to-cyan-500" 
               },
               { 
                 icon: Users, 
-                label: "Total Teachers", 
+                label: ` ${formatMessage({ id: "reports.stats.totalTeachers" })}`, 
                 value: reportData.totalTeachers.toString(), 
                 change: "+5%", 
                 color: "from-green-500 to-emerald-500" 
               },
               { 
                 icon: Activity, 
-                label: "Attendance Rate", 
+                label: ` ${formatMessage({ id: "reports.stats.attendanceRate" })}`, 
                 value: `${reportData.attendanceRate.toFixed(1)}%`, 
                 change: "+2.1%", 
                 color: "from-purple-500 to-pink-500" 
               },
               { 
                 icon: BarChart3, 
-                label: "Total Records", 
+                label: ` ${formatMessage({ id: "reports.stats.totalRecords" })}`, 
                 value: reportData.totalAttendanceRecords.toString(), 
                 change: "+15%", 
                 color: "from-orange-500 to-red-500" 
@@ -767,7 +773,7 @@ const subscription = adminData?.subscription_status;
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center space-x-2">
                 <PieChart className="w-5 h-5 text-blue-400" />
-                <span>Attendance Rate</span>
+                <span>{formatMessage({ id: "reports.charts.attendanceRate" })}</span>
               </h3>
               <div className="h-64 relative">
                 <canvas ref={attendanceChartRef} className="max-w-full max-h-full"></canvas>
@@ -778,7 +784,7 @@ const subscription = adminData?.subscription_status;
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center space-x-2">
                 <BarChart3 className="w-5 h-5 text-green-400" />
-                <span>Form Statistics</span>
+                <span>{formatMessage({ id: "reports.charts.formStatistics" })}</span>
               </h3>
               <div className="h-64 relative">
                 <canvas ref={formChartRef} className="max-w-full max-h-full"></canvas>
@@ -789,7 +795,7 @@ const subscription = adminData?.subscription_status;
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg md:col-span-2 lg:col-span-1">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center space-x-2">
                 <TrendingUp className="w-5 h-5 text-purple-400" />
-                <span>Monthly Trends</span>
+                <span>{formatMessage({ id: "reports.charts.monthlyTrends" })}</span>
               </h3>
               <div className="h-64 relative">
                 <canvas ref={trendChartRef} className="max-w-full max-h-full"></canvas>
@@ -803,8 +809,8 @@ const subscription = adminData?.subscription_status;
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-lg">
             <div className="text-center space-y-6">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold text-white">Download Reports</h2>
-                <p className="text-gray-300">Generate and download comprehensive reports in your preferred format</p>
+                <h2 className="text-3xl font-bold text-white">{formatMessage({ id: "reports.download.title" })}</h2>
+                <p className="text-gray-300">{formatMessage({ id: "reports.download.subtitle" })}</p>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -818,7 +824,7 @@ const subscription = adminData?.subscription_status;
                   ) : (
                     <FileText className="w-5 h-5" />
                   )}
-                  <span>Download PDF Report</span>
+                  <span>{formatMessage({ id: "reports.download.pdf" })}</span>
                 </button>
                 
                 <button
@@ -831,7 +837,7 @@ const subscription = adminData?.subscription_status;
                   ) : (
                     <Download className="w-5 h-5" />
                   )}
-                  <span>Download Excel Report</span>
+                  <span>{formatMessage({ id: "reports.download.excel" })}</span>
                 </button>
               </div>
 

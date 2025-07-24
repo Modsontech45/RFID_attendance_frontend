@@ -442,7 +442,7 @@ const AdminDashboard: React.FC = () => {
                   <User className="h-5 w-5 text-gray-400 transition-all duration-300 hover:rotate-90 hover:text-white" />
                 </button>
 
-            
+            <LanguageSwitcher />
               </div>
             </nav>
 
@@ -526,6 +526,7 @@ const AdminDashboard: React.FC = () => {
                  className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
                   <User className="h-5 w-5 text-gray-400 transition-all duration-300 hover:rotate-90 hover:text-white" />
                 </button>
+                <LanguageSwitcher />
               </div>
             </nav>
           </div>

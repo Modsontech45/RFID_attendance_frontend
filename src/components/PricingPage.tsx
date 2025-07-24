@@ -38,7 +38,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ email, plan }) => {
     setError("");
 
     if (!email || !plan) {
-      setError("Please enter a valid email and select a plan.");
+      setError("Please sign up first");
+      window.location.href = "/admin/signup";
       setLoading(false);
       return;
     }
@@ -106,7 +107,7 @@ const PricingPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const adminData = getAdminData();
   const plans = adminData?.subscription_plan;
-  const planstatus = adminData?.subscription_status;
+  const planstatus =  adminData?.subscription_status;
   const endfree = adminData?.trial_end_date;
   const Email = adminData?.email;
 
@@ -251,11 +252,7 @@ const PricingPage: React.FC = () => {
               </div> 
               <span className="mt-4 inline-block cursor-pointer rounded-full bg-gradient-to-r from-blue-900 via-green-2 to-blue-600 px-6 py-3 text-white font-extrabold shadow-xl ring-4 ring-green-700 transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-1 hover:shadow-2xl animate-pulse">
                 <FormattedMessage
-                  id={`${
-                    plans === "enterprise" ||
-                    plans === "professional" ||
-                    (plans === "starter" && planstatus === "active") ||
-                    endfree > new Date().toISOString()
+                  id={`${ ( plans === "starter"|| plans === "professional" || plans === "enterprise")  && planstatus === "active" || planstatus === "expired"
                       ? "pricing.starter.freetrialExpired"
                       : planstatus === "trial"
                       ? "pricing.starter.freeplan"

@@ -336,7 +336,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                   {formatMessage({ id: "students.navigation.office" })}
+                   {formatMessage({ id: "schoolManagement.dashboard" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -346,7 +346,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {formatMessage({ id: "students.navigation.home" })}
+                    {formatMessage({ id: "schoolManagement.schoolManagement" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -371,6 +371,16 @@ let subscription =   adminData?.subscription_status || 'inactive';
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
+                   <button
+                  onClick={() => navigate('/admin/reports')}
+                  className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+                >
+                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                    {formatMessage({ id: "schoolManagement.reports" })}
+                  </span>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                </button>
+
               </div>
 
               <div className="flex items-center space-x-4">
@@ -423,13 +433,13 @@ let subscription =   adminData?.subscription_status || 'inactive';
                 onClick={() => navigate('/admin/dashboard')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-               {formatMessage({ id: "students.navigation.office" })}
+               {formatMessage({ id: "schoolManagement.dashboard" })}
               </button>
               <button
                 onClick={() => navigate('/admin/school')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-               {formatMessage({ id: "students.navigation.home" })}
+               {formatMessage({ id: "schoolManagement.schoolManagement" })}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-green-400">
                 {formatMessage({ id: "students.navigation.students" })}
@@ -450,6 +460,16 @@ let subscription =   adminData?.subscription_status || 'inactive';
                  {formatMessage({ id: "students.navigation.attendance" })}
                 </button>
               </button>
+                 <button
+                  onClick={() => navigate('/admin/reports')}
+                  className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+                >
+                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                    {formatMessage({ id: "schoolManagement.reports" })}
+                  </span>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                </button>
+
 
               <div className="pt-4 border-t border-white/10">
                 {/* <select

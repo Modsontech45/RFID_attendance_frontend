@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
+
 import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
 import { 
   Shield, 
@@ -10,8 +10,10 @@ import {
   Bell,
   Search,
   Filter,
+  Menu,
   User,
   Mail,
+  X,
   Phone,
   GraduationCap,
   Hash,
@@ -25,6 +27,8 @@ import {
   Eye,
   FileText
 } from 'lucide-react';
+import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 
 interface Student {
   id: number;
@@ -45,7 +49,8 @@ interface Category {
 
 const TeacherStudents: React.FC = () => {
   const navigate = useNavigate();
-  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
+ const { formatMessage } = useIntl();
+  const { locale, } = useLocalIntl();
   const [students, setStudents] = useState<Student[]>([]);
   const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -53,6 +58,7 @@ const TeacherStudents: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState('');
   const [formFilter, setFormFilter] = useState('');
+ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const token = getAuthData('token');
   const apiKey = getApiKey();
@@ -69,6 +75,9 @@ const TeacherStudents: React.FC = () => {
   const handleLogout = () => {
     logout();
   };
+    const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   const fetchStudents = async () => {
     if (!apiKey) {
@@ -82,7 +91,7 @@ const TeacherStudents: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': apiKey,
-          'Accept-Language': currentLanguage
+          'Accept-Language': locale
         }
       });
 
@@ -106,7 +115,7 @@ const TeacherStudents: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': apiKey || '',
-          'Accept-Language': currentLanguage
+          'Accept-Language': locale
         }
       });
       
@@ -164,7 +173,7 @@ const TeacherStudents: React.FC = () => {
   }, [navigate, token]);
 
   // Show loading state while translations are loading
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -187,7 +196,7 @@ const TeacherStudents: React.FC = () => {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300">
+       <header className="sticky top-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Title */}
@@ -206,12 +215,14 @@ const TeacherStudents: React.FC = () => {
               </div>
             </div>
 
-            {/* Navigation */}
-            <nav className="flex items-center space-x-6">
-              <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8">
+       <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
                 <span className="text-green-400 transition-colors flex items-center space-x-2">
                   <Users className="w-4 h-4" />
-                  <span>Students</span>
+                  <span>       {formatMessage({ id: "students.navigation.students" })}
+
+                  </span>
                 </span>
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-emerald-400"></div>
               </button>
@@ -222,21 +233,14 @@ const TeacherStudents: React.FC = () => {
               >
                 <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
                   <BarChart3 className="w-4 h-4" />
-                  <span>Attendance</span>
+                  <span>
+                        {formatMessage({ id: "students.navigation.attendance" })}
+                  </span>
                 </span>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
               </button>
 
-              <button 
-                onClick={() => navigate('/teacher/reports')}
-                className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
-              >
-                <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
-                  <FileText className="w-4 h-4" />
-                  <span>Reports</span>
-                </span>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
-              </button>
+         
 
               <button 
                 onClick={() => navigate('/docs')}
@@ -255,7 +259,7 @@ const TeacherStudents: React.FC = () => {
               >
                 <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
                   <User className="w-4 h-4" />
-                  <span>Profile</span>
+                  <span>{formatMessage({ id: "students.navigation.profile" })}</span>
                 </span>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
               </button>
@@ -267,7 +271,81 @@ const TeacherStudents: React.FC = () => {
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <span>{formatMessage({ id: "students.navigation.logout" })}</span>
+                </button>
+              </div>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
+            isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+          }`}>
+            <nav className="pb-4 border-t border-white/10 pt-4 space-y-2">
+              <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
+                <span className="text-green-400 transition-colors flex items-center space-x-2">
+                  <Users className="w-4 h-4" />
+                  {formatMessage({ id: "students.navigation.students" })}
+                </span>
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-emerald-400"></div>
+              </button>
+              
+              <button 
+                onClick={() => navigate('/teacher/attendance')}
+                className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
+              >
+                <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
+                  <BarChart3 className="w-4 h-4" />
+                  <span>     {formatMessage({ id: "students.navigation.attendance" })}
+
+                  </span>
+                </span>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
+              </button>
+
+
+              <button 
+                onClick={() => navigate('/docs')}
+               className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
+              >
+                <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
+                  <FileText className="w-4 h-4" />
+                  <span>Docs</span>
+                </span>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
+              </button>
+
+              <button 
+                onClick={() => navigate('/teacher/profile')}
+                className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+              >
+                <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
+                  <User className="w-4 h-4" />
+                  <span>
+                     {formatMessage({ id: "students.navigation.profile" })}
+                  </span>
+                </span>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
+              </button>
+
+              <div className="flex items-center space-x-4">
+             
+                <button
+                  onClick={handleLogout}
+                  className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>
+                    {formatMessage({ id: "students.navigation.logout" })}
+                  </span>
                 </button>
               </div>
             </nav>
@@ -283,11 +361,11 @@ const TeacherStudents: React.FC = () => {
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-                Student Directory
+              {formatMessage({ id: "students.header.title" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              View and monitor all registered students in your institution
+            {formatMessage({ id: "students.header.subtitle" })}
             </p>
           </div>
         </section>
@@ -295,10 +373,10 @@ const TeacherStudents: React.FC = () => {
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Users, label: "Total Students", value: totalStudents.toString(), change: "+12%", color: "from-green-500 to-emerald-500" },
-            { icon: UserCheck, label: "Male Students", value: `${maleCount} (${malePercent}%)`, change: "+5%", color: "from-blue-500 to-cyan-500" },
-            { icon: Activity, label: "Female Students", value: `${femaleCount} (${femalePercent}%)`, change: "+2%", color: "from-purple-500 to-pink-500" },
-            { icon: BarChart3, label: "Forms/Classes", value: categories.length.toString(), change: "+1%", color: "from-orange-500 to-red-500" }
+            { icon: Users, label: formatMessage({ id: "students.stats.totalStudents" }), value: totalStudents.toString(), change: "+12%", color: "from-green-500 to-emerald-500" },
+            { icon: UserCheck, label: formatMessage({ id: "students.stats.maleStudents" }), value: `${maleCount} (${malePercent}%)`, change: "+5%", color: "from-blue-500 to-cyan-500" },
+            { icon: Activity, label: formatMessage({ id: "students.stats.femaleStudents" }), value: `${femaleCount} (${femalePercent}%)`, change: "+2%", color: "from-purple-500 to-pink-500" },
+            { icon: BarChart3, label: formatMessage({ id: "students.stats.formsClasses" }), value: categories.length.toString(), change: "+1%", color: "from-orange-500 to-red-500" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
               <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -323,13 +401,13 @@ const TeacherStudents: React.FC = () => {
               {/* Search and Filter */}
               <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-green-300">Filter by Form/Class:</label>
+                
                   <select
                     value={formFilter}
                     onChange={(e) => setFormFilter(e.target.value)}
                     className="bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 w-48"
                   >
-                    <option value="">All Forms</option>
+                    <option value="">{formatMessage({ id: "students.filters.allForms" })}</option>
                     {categories.map(category => (
                       <option key={category.id} value={category.name}>{category.name}</option>
                     ))}
@@ -337,12 +415,12 @@ const TeacherStudents: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-green-300">Search by Name:</label>
+               
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
-                      placeholder="Search students..."
+                      placeholder={formatMessage({ id: "students.filters.searchByName" })}
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 w-64"
@@ -355,7 +433,7 @@ const TeacherStudents: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <button className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2">
                   <Download className="w-4 h-4" />
-                  <span>Export</span>
+                  <span>{formatMessage({ id: "students.filters.export" })}</span>
                 </button>
 
                 <button
@@ -367,7 +445,7 @@ const TeacherStudents: React.FC = () => {
                   className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  <span>Refresh</span>
+                  <span>{formatMessage({ id: "students.filters.refresh" })}</span>
                 </button>
               </div>
             </div>
@@ -381,7 +459,7 @@ const TeacherStudents: React.FC = () => {
             <div className="flex items-center justify-center py-20">
               <div className="text-center space-y-4">
                 <Loader2 className="w-12 h-12 animate-spin text-green-600 mx-auto" />
-                <span className="text-gray-300 text-lg">Loading students...</span>
+                <span className="text-gray-300 text-lg">{formatMessage({ id: "students.loading" })}</span>
               </div>
             </div>
           )}
@@ -402,7 +480,7 @@ const TeacherStudents: React.FC = () => {
                 className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 mx-auto"
               >
                 <RefreshCw className="w-4 h-4" />
-                <span>Try Again</span>
+                <span>{formatMessage({ id: "students.errors.tryAgain" })}</span>
               </button>
             </div>
           )}
@@ -417,37 +495,37 @@ const TeacherStudents: React.FC = () => {
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <User className="w-4 h-4" />
-                          <span>Name</span>
+                          <span>{formatMessage({ id: "students.table.headers.name" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Hash className="w-4 h-4" />
-                          <span>UID</span>
+                          <span>{formatMessage({ id: "students.table.headers.uid" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Mail className="w-4 h-4" />
-                          <span>Email</span>
+                          <span>{formatMessage({ id: "students.table.headers.email" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Phone className="w-4 h-4" />
-                          <span>Telephone</span>
+                          <span>{formatMessage({ id: "students.table.headers.telephone" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <GraduationCap className="w-4 h-4" />
-                          <span>Form/Class</span>
+                          <span>{formatMessage({ id: "students.table.headers.form" })}</span>
                         </div>
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">
                           <Users className="w-4 h-4" />
-                          <span>Gender</span>
+                          <span>{formatMessage({ id: "students.table.headers.gender" })}</span>
                         </div>
                       </th>
                     </tr>
@@ -493,8 +571,8 @@ const TeacherStudents: React.FC = () => {
                     <div className="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
                       <Users className="w-12 h-12 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">No Members Found</h3>
-                    <p className="text-gray-400">Try adjusting your search or filter criteria</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "students.errors.noMembersFound" })}</h3>
+                    <p className="text-gray-400">{formatMessage({ id: "students.errors.adjustFilters" })}</p>
                   </div>
                 )}
               </div>

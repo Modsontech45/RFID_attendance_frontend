@@ -315,8 +315,10 @@
       "freetrialAvailable": "Essai gratuit disponible",
       "startfreetrial": "Commencer l'essai gratuit",
       "downgrade": "Reculer",
+      "freeplan": "Plan gratuit activé",
       "getStarted": "Commencer",
       "upgrade": "Améliorer",
+      "subscribeNow": "S'abonner Maintenant",
       "features": [
         "Jusqu'à 100 étudiants",
         "5 enseignants",
@@ -533,6 +535,7 @@
       "students": "Étudiants",
       "attendance": "Présence",
       "dashboard": "Tableau de Bord",
+      "profile": "Profil",
       "logout": "Déconnexion"
     },
     "header": {
@@ -728,7 +731,30 @@
   "cardbalance": "Solde de la carte: ",
   "days": "Jours"
   
+},
+"reports":{
+  "reports.title": "Analytique et Rapports",
+  "reports.subtitle": "Informations complètes et rapports détaillés pour votre système de gestion de présence",
+  "filters.startDate": "Date de début: ",
+  "filters.endDate": "Date de fin: ",
+  "filters.form": "Classe/Formulaire",
+  "filters.allForms": "Toutes les classes",
+  "filters.apply": "Appliquer les filtres",
+  "filters.refresh": "Rafraîchir",
+  "stats.totalStudents": "Nombre total d'élèves",
+  "stats.totalTeachers": "Nombre total d'enseignants",
+  "stats.attendanceRate": "Taux de présence",
+  "stats.totalRecords": "Nombre total d'enregistrements",
+  "charts.attendanceRate": "Taux de présence",
+  "charts.formStatistics": "Statistiques par classe",
+  "charts.monthlyTrends": "Tendances mensuelles",
+  "download.title": "Télécharger les rapports",
+  "download.subtitle": "Générez et téléchargez des rapports complets dans le format de votre choix",
+  "download.pdf": "Télécharger le rapport PDF",
+  "download.excel": "Télécharger le rapport Excel",
+  "download.generating": "Génération de votre rapport... Cela peut prendre quelques instants."
 }
+
 
 
 }

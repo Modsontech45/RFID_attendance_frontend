@@ -488,7 +488,7 @@ const { formatMessage } = useIntl();
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                   {formatMessage({ id: "attendance.office" })}
+                  {formatMessage({ id: "schoolManagement.dashboard" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -498,7 +498,7 @@ const { formatMessage } = useIntl();
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                   {formatMessage({ id: "attendance.home" })}
+                  {formatMessage({ id: "schoolManagement.schoolManagement" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -518,6 +518,15 @@ const { formatMessage } = useIntl();
                     {formatMessage({ id: "attendance.attendance" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
+                </button>
+                        <button
+                  onClick={() => navigate('/admin/reports')}
+                  className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+                >
+                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                    {formatMessage({ id: "schoolManagement.reports" })}
+                  </span>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
               </div>
 
@@ -562,13 +571,13 @@ const { formatMessage } = useIntl();
                 onClick={() => navigate('/admin/dashboard')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-            {formatMessage({ id: "attendance.office" })}
+            {formatMessage({ id: "schoolManagement.dashboard" })}
               </button>
               <button 
                 onClick={() => navigate('/admin/school')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                  {formatMessage({ id: "attendance.home" })}
+                  {formatMessage({ id: "schoolManagement.schoolManagement" })}
               </button>
               <button 
                 onClick={() => navigate('/admin/students')}
@@ -579,6 +588,15 @@ const { formatMessage } = useIntl();
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400">
                 {formatMessage({ id: "attendance.attendance" })}
               </button>
+                     <button
+                  onClick={() => navigate('/admin/reports')}
+                  className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+                >
+                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                    {formatMessage({ id: "schoolManagement.reports" })}
+                  </span>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                </button>
               
               <div className="pt-4 border-t border-white/10">
           
