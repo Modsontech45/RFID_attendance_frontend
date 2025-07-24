@@ -72,7 +72,7 @@ const SettingsComponent: React.FC = () => {
         return "text-green-400 bg-green-900/30";
       case "expired":
         return "text-red-400 bg-red-900/30";
-      case "pending":
+      case "trial ":
         return "text-yellow-400 bg-yellow-900/30";
       default:
         return "text-gray-300 bg-gray-700";
@@ -80,8 +80,8 @@ const SettingsComponent: React.FC = () => {
   };
 
   const getDaysLeftColor = (days: number) => {
-    if (days > 30) return "text-green-400";
-    if (days > 7) return "text-yellow-400";
+    if (days > 25) return "text-green-400";
+    if (days > 15) return "text-yellow-400";
     return "text-red-400";
   };
 
@@ -167,7 +167,7 @@ const SettingsComponent: React.FC = () => {
                 <Info label={<FormattedMessage
                           id="AdminProfile.daysLeft"
                           defaultMessage="Days Left"
-                        />} icon={<Clock className="h-5 w-5 text-gray-400" />} value={`${daysLeft} days`} className={getDaysLeftColor(daysLeft)} />
+                        />} icon={<Clock className="h-5 w-5 text-gray-400" />} value={`${daysLeft} ${formatMessage({ id: "AdminProfile.days" })}`} className={getDaysLeftColor(daysLeft)} />
                 <Info label={<FormattedMessage
                           id="AdminProfile.joinedOn"
                           defaultMessage="Joined On"

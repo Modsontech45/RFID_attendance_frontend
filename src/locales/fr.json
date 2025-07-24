@@ -724,7 +724,9 @@
   "status": "Statut",
   "schoolInformation": "Informations sur l'établissement",
   "username": "Nom d'utilisateur administrateur",
-  "cardbalance": "Solde de la carte"
+  "cardbalance": "Solde de la carte: ",
+  "days": "Jours"
+  
 }
 
 
