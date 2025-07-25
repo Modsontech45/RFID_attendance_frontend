@@ -398,12 +398,15 @@ const { formatMessage } = useIntl();
       return;
     }
 
-    const initializeData = async () => {
-      await Promise.all([fetchAttendanceRecords(), fetchCategories()]);
-      setIsLoading(false);
-      setTimeout(() => setIsLoaded(true), 300);
-      startAutoRefresh();
-    };
+const initializeData = async () => {
+  await Promise.all([fetchAttendanceRecords(), fetchCategories()]);
+  const today = new Date().toISOString().split('T')[0];
+  setFilters(prev => ({ ...prev, date: today })); // 🟢 set today's date filter
+  setIsLoading(false);
+  setTimeout(() => setIsLoaded(true), 300);
+  startAutoRefresh();
+};
+
 
     initializeData();
 

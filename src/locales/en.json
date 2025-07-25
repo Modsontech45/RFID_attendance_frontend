@@ -747,7 +747,35 @@
   "download.pdf": "Download PDF Report",
   "download.excel": "Download Excel Report",
   "download.generating": "Generating your report... This may take a few moments."
-}
+},
+ "profile": {
+    "backtoschool": "Back",
+    "loading": "Loading profile...",
+    "edit": "Edit Profile",
+    "picture": "Profile Picture URL",
+    "fullname": "Full Name",
+    "bio": "Bio",
+    "joined": "Joined on",
+    "editform": {
+      "placeholder": {
+        "picture": "Enter image URL",
+        "name": "Enter your full name",
+        "bio": "Tell us about yourself..."
+      }
+    },
+    "noPicture": "No picture URL set",
+    "unnamed": "Unnamed",
+    "noBio": "No bio available",
+    "save": "Save Profile",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "logout": "Logout",
+    "success": "Profile updated successfully",
+    "error": "An error occurred",
+    "section": {
+      "title": "Profile Information"
+    }
+  }
 
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAuthData, API_BASE } from '../utils/auth';
-import { Mail, Calendar, CheckCircle, ArrowLeft } from 'lucide-react';
+import { Mail, Calendar, CheckCircle, ArrowLeft, Trash2, AlertTriangle } from 'lucide-react';
 
 interface TeacherData {
   full_name: string;
@@ -16,6 +16,8 @@ const AdminTeacherProfileView: React.FC = () => {
   const navigate = useNavigate();
   const [teacherData, setTeacherData] = useState<TeacherData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const token = getAuthData('token');
   const role = getAuthData('role');
 
@@ -42,6 +44,36 @@ const AdminTeacherProfileView: React.FC = () => {
 
     fetchTeacher();
   }, [teacherId, token, role, navigate]);
+
+  const handleDeleteTeacher = async () => {
+    if (!teacherId) return;
+    
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`${API_BASE}/teachers/${teacherId}`, {
+        method: 'DELETE',
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (!res.ok) {
+        throw new Error('Failed to delete teacher');
+      }
+      
+      // Navigate back to dashboard after successful deletion
+      navigate('/admin/teachers', { 
+        state: { message: 'Teacher deleted successfully' }
+      });
+    } catch (err) {
+      console.error('Error deleting teacher:', err);
+      alert('Failed to delete teacher. Please try again.');
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  };
 
   const formatDate = (dateString: string) =>
     dateString ? new Date(dateString).toLocaleDateString() : 'Unknown';
@@ -87,6 +119,44 @@ const AdminTeacherProfileView: React.FC = () => {
         </button>
       </div>
 
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-slate-800 border border-red-500/30 rounded-xl p-6 max-w-md w-full shadow-2xl">
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto">
+                <AlertTriangle className="w-8 h-8 text-red-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white">Delete Teacher</h3>
+              <p className="text-gray-300">
+                Are you sure you want to delete <span className="font-semibold text-white">{teacherData.full_name}</span>? 
+                This action cannot be undone.
+              </p>
+              <div className="flex space-x-3 pt-4">
+                <button
+                  onClick={() => setShowDeleteConfirm(false)}
+                  disabled={isDeleting}
+                  className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDeleteTeacher}
+                  disabled={isDeleting}
+                  className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition disabled:opacity-50 flex items-center justify-center"
+                >
+                  {isDeleting ? (
+                    <div className="w-4 h-4 border-2 border-white border-dashed rounded-full animate-spin"></div>
+                  ) : (
+                    'Delete'
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-3xl mx-auto bg-white/10 border border-white/10 rounded-2xl p-8 shadow-2xl backdrop-blur-sm">
         <div className="text-center space-y-6">
           <img
@@ -113,6 +183,17 @@ const AdminTeacherProfileView: React.FC = () => {
 
           <div className="mt-6 bg-black/30 p-4 rounded-lg whitespace-pre-line border border-white/20 text-gray-300 leading-relaxed text-sm sm:text-base">
             {teacherData.bio || 'No bio available.'}
+          </div>
+
+          {/* Delete Button */}
+          <div className="pt-6 border-t border-white/10">
+            <button
+              onClick={() => setShowDeleteConfirm(true)}
+              className="inline-flex items-center space-x-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all shadow-lg hover:shadow-red-500/25"
+            >
+              <Trash2 className="w-4 h-4" />
+              <span>Delete Teacher</span>
+            </button>
           </div>
         </div>
       </div>

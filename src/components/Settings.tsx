@@ -29,9 +29,25 @@ const SettingsComponent: React.FC = () => {
   const Username = adminData?.username || adminData?.email?.split("@")[0] || "admin";
   const plan = adminData?.subscription_plan || "unknown";
   const PlanType = adminData?.subscription_type || "Monthly";
-  const subscriptionStatus = adminData?.subscription_status || "active";
-  const PlanStartDate = adminData?.subscription_start_date ||  subscriptionStatus === "trial" ? adminData?.trial_start_date : 0;
-  const PlanEndDate = adminData?.subscription_end_date ||  subscriptionStatus === "trial" ? adminData?.trial_end_date : 0;
+  const subscriptionStatus = adminData?.subscription_status || "trial";
+
+
+
+  let PlanStartDate = "" //adminData?.subscription_start_date // ||  subscriptionStatus === "trial" ? adminData?.trial_start_date :adminData?.subscription_start_date;
+  let PlanEndDate = ""// adminData?.subscription_end_date // || subscriptionStatus === "trial" ? adminData?.trial_end_date :adminData?.subscription_end_date;
+
+  if (subscriptionStatus === "trial"){
+    PlanStartDate = adminData?.trial_start_date
+    PlanEndDate = adminData?.trial_end_date 
+
+  } else if (subscriptionStatus === "active"){
+
+    PlanEndDate = adminData?.subscription_end_date
+    PlanStartDate = adminData?.subscription_start_date
+  }
+
+
+
   const daysLeft =   Math.ceil((new Date(PlanEndDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
   const Email = adminData?.email || "admin@centralhigh.edu";
   const datejoin = adminData?.created_at || "2024-01-15";

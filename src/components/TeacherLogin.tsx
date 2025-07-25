@@ -50,42 +50,53 @@ const TeacherLogin: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!validateForm()) {
+    return;
+  }
+
+  setIsLoading(true);
+
+  try {
+    const result = await postData(`${API_BASE}/teachers/login`, formData, {
+      'Accept-Language': locale || 'en'
+    });
+
+    if (result.token) {
+      // ✅ Save authentication data
+      setAuthData('token', result.token);
+      setAuthData('role', 'teacher');
+
+      if (result.teacher?.api_key) {
+        setAuthData('api_key', result.teacher.api_key);
+      }
+
+      if (result.admin) {
+        // ✅ Log and save admin data
+        console.log('✅ Admin data:', result.admin);
+        setAuthData('admin_data', JSON.stringify(result.admin));
+      } else {
+        console.warn('⚠️ No admin data returned');
+      }
+
+      // ✅ Redirect
+      console.log('Teacher login successful, redirecting to dashboard...');
+      navigate('/teacher/students');
+
+    } else {
+      setErrors({ general: result.message || 'Login failed. Please try again.' });
     }
 
-    setIsLoading(true);
-    
-    try {
-      const result = await postData(`${API_BASE}/teachers/login`, formData, {
-        'Accept-Language': locale || 'en'
-      });
-      
-      if (result.token) {
-        // Set authentication data in localStorage
-        setAuthData('token', result.token);
-        setAuthData('role', 'teacher');
-        if (result.teacher?.api_key) {
-          setAuthData('api_key', result.teacher.api_key);
-        }
-        
-        // Navigate to teacher students page
-        console.log('Teacher login successful, redirecting to dashboard...');
-        navigate('/teacher/students');
-      } else {
-        setErrors({ general: result.message || 'Login failed. Please try again.' });
-      }
-      
-    } catch (error) {
-      console.error('Login error:', error);
-      setErrors({ general: `${error.message || 'An unexpected error occurred.'}` });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  } catch (error: any) {
+    console.error('Login error:', error);
+    setErrors({ general: `${error.message || 'An unexpected error occurred.'}` });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   const handleGoBack = () => {
     navigate('/');

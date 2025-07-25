@@ -322,11 +322,14 @@ const TeacherAttendance: React.FC = () => {
       navigate('/teacher/login');
       return;
     }
+const initializeData = async () => {
+  await Promise.all([fetchAttendanceRecords(), fetchCategories()]);
+  const today = new Date().toISOString().split('T')[0];
+  setFilters(prev => ({ ...prev, date: today })); // 🟢 set today's date filter
+  setIsLoading(false);
 
-    const initializeData = async () => {
-      await Promise.all([fetchAttendanceRecords(), fetchCategories()]);
-      setIsLoading(false);
-    };
+};
+
 
     initializeData();
 

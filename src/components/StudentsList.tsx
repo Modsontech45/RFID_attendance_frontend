@@ -91,54 +91,35 @@ let subscription =   adminData?.subscription_status || 'inactive';
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
- const fetchStudents = async () => {
-  if (!token || !apiKey) {
-    setError('You must be logged in as an admin.');
-    return;
-  }
-
-  try {
-    const response = await fetch(`${API_BASE}/students`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'Accept-Language': locale,
-      }
-    });
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      if (subscription !== 'active' && subscription !== 'trial') {
-        alert(result.message || "Subscription expired");
-        window.location.href = result.redirectTo || "/pricing";
-        return;
-      } else {
-        setError(result.message || 'Failed to fetch students');
-        setStudents([]);
-        setFilteredStudents([]);
-        return;
-      }
-    }
-
-    if (subscription !== 'active' && subscription !== 'trial') {
-      alert(`Your subscription has expired. Please renew to access student data.${subscription}`);
-      window.location.href = "/pricing";
+  const fetchStudents = async () => {
+    if (!apiKey) {
+      setError('You must be logged in.');
       return;
     }
 
-    setStudents(result.students || []);
-    setFilteredStudents(result.students || []);
-    setError('');
+    try {
+      const response = await fetch(`${API_BASE}/students`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'Accept-Language': locale
+        }
+      });
 
-  } catch (error) {
-    console.error('Error fetching students:', error);
-    setError('Network error. Please try again later.');
-    setStudents([]);
-    setFilteredStudents([]);
-  }
-};
+      if (!response.ok) {
+        throw new Error('Failed to fetch students');
+      }
+
+      const data = await response.json();
+      setStudents(Array.isArray(data) ? data : []);
+      setError('');
+    } catch (error) {
+      console.error('Error fetching students:', error);
+      setError('You have no student yet');
+      setStudents([]);
+    }
+  };
 
 
   const fetchCategories = async () => {
@@ -591,7 +572,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
 
         {/* Students Table */}
         <section className="animate-slide-up" style={{ animationDelay: '600ms' }}>
-          {/* Loading State */}
+       
           {isLoading && (
             <div className="flex items-center justify-center py-20">
               <div className="text-center space-y-4">
@@ -709,7 +690,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                     <div className="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
                       <Users className="w-12 h-12 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "students.errors.noStudents" })}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "students.errors.noStudentsFound" })}</h3>
                     <p className="text-gray-400">{formatMessage({ id: "students.errors.adjustFilters" })}</p>
                   </div>
                 )}

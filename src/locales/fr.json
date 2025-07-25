@@ -753,8 +753,35 @@
   "download.pdf": "Télécharger le rapport PDF",
   "download.excel": "Télécharger le rapport Excel",
   "download.generating": "Génération de votre rapport... Cela peut prendre quelques instants."
-}
-
+},
+ "profile": {
+    "backtoschool": "Retour",
+    "loading": "Chargement du profil...",
+    "edit": "Modifier le profil",
+    "picture": "URL de la photo de profil",
+    "fullname": "Nom complet",
+    "bio": "Biographie",
+    "joined": "Inscrit le",
+    "editform": {
+      "placeholder": {
+        "picture": "Entrez l'URL de l'image",
+        "name": "Entrez votre nom complet",
+        "bio": "Parlez-nous de vous..."
+      }
+    },
+    "noPicture": "Aucune URL de photo définie",
+    "unnamed": "Sans nom",
+    "noBio": "Aucune biographie disponible",
+    "save": "Enregistrer le profil",
+    "saving": "Enregistrement...",
+    "cancel": "Annuler",
+    "logout": "Se déconnecter",
+    "success": "Profil mis à jour avec succès",
+    "error": "Une erreur s'est produite",
+    "section": {
+      "title": "Informations du profil"
+    }
+  }
 
 
 }

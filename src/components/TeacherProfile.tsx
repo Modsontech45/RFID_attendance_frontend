@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
+
 import {
   getAuthData,
   logout,
@@ -26,6 +26,9 @@ import {
   Bell,
   BarChart3
 } from 'lucide-react';
+import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
+
 
 interface TeacherData {
   full_name: string;
@@ -37,7 +40,8 @@ interface TeacherData {
 
 const TeacherProfile: React.FC = () => {
   const navigate = useNavigate();
-  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
+ const { formatMessage } = useIntl();
+  const { locale, } = useLocalIntl();
 
   const [teacherData, setTeacherData] = useState<TeacherData>({
     full_name: '',
@@ -84,7 +88,7 @@ const TeacherProfile: React.FC = () => {
       const response = await fetch(`${API_BASE}/teachers/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Accept-Language': currentLanguage
+          'Accept-Language': locale
         }
       });
 
@@ -127,7 +131,7 @@ const TeacherProfile: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
-          'Accept-Language': currentLanguage
+          'Accept-Language': locale
         },
         body: JSON.stringify(editForm)
       });
@@ -165,9 +169,9 @@ const TeacherProfile: React.FC = () => {
     }
 
     loadProfile();
-  }, [navigate, token, currentLanguage]);
+  }, [navigate, token, locale]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center text-white">
         <div className="text-center">
@@ -217,21 +221,12 @@ const TeacherProfile: React.FC = () => {
               >
                 <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
                   <Home className="w-4 h-4" />
-                  <span>Members</span>
+              
                 </span>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
               </button>
 
-              <button
-                onClick={() => navigate('/teacher/attendance')}
-                className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
-              >
-                <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
-                  <BarChart3 className="w-4 h-4" />
-                  <span>Attendance</span>
-                </span>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
-              </button>
+            
 
               <div className="flex items-center space-x-4">
                 {/* Notifications */}
@@ -240,28 +235,8 @@ const TeacherProfile: React.FC = () => {
                   <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                 </button>
 
-                {/* Settings */}
-                <button className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
-                </button>
-
-                {/* Language Selector */}
-                <select
-                  value={currentLanguage}
-                  onChange={handleLanguageChange}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-white/20 transition-all duration-300"
-                >
-                  <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
-                  <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-                </select>
-
-                <button
-                  onClick={handleLogout}
-                  className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
-                </button>
+            
+            
               </div>
             </nav>
           </div>
@@ -283,175 +258,193 @@ const TeacherProfile: React.FC = () => {
 
         {/* Profile Content */}
         {!isLoading && (
-          <div className="space-y-8 animate-fade-in">
+           <div className="space-y-8 animate-fade-in">
 
-            {/* Profile Header */}
-            <section className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-2xl">
-              <div className="text-center space-y-6">
-                {/* Profile Picture */}
-                <div className="relative inline-block">
-                  <img
-                    src={teacherData.picture || "https://via.placeholder.com/150"}
-                    alt="Profile Picture"
-                    className="w-32 h-32 rounded-full object-cover border-4 border-green-500/50 shadow-2xl mx-auto"
-                  />
-                  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-3 border-white flex items-center justify-center shadow-lg">
-                    <CheckCircle className="w-4 h-4 text-white" />
-                  </div>
-                </div>
-
-                {/* Basic Info */}
-                <div className="space-y-3">
-                  <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                    {teacherData.full_name || "Unnamed Teacher"}
-                  </h1>
-
-                  <div className="flex items-center justify-center space-x-2 text-gray-300">
-                    <Mail className="w-5 h-5 text-green-400" />
-                    <span className="text-lg">{teacherData.email}</span>
-                  </div>
-
-                  <div className="flex items-center justify-center space-x-2 text-gray-400">
-                    <Calendar className="w-4 h-4" />
-                    <span className="text-sm">Joined {formatDate(teacherData.created_at)}</span>
-                  </div>
+          {/* Profile Header */}
+          <section className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-2xl">
+            <div className="text-center space-y-6">
+              {/* Profile Picture */}
+              <div className="relative inline-block">
+                <img
+                  src={teacherData.picture || "https://via.placeholder.com/150"}
+                  alt="Profile Picture"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-green-500/50 shadow-2xl mx-auto"
+                />
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-3 border-white flex items-center justify-center shadow-lg">
+                  <CheckCircle className="w-4 h-4 text-white" />
                 </div>
               </div>
-            </section>
 
-            {/* Message */}
-            {message && (
-              <div className={`border rounded-xl p-4 text-center flex items-center justify-center space-x-3 animate-fade-in ${
-                messageType === 'success'
-                  ? 'bg-green-500/20 border-green-500/50 text-green-300'
-                  : 'bg-red-500/20 border-red-500/50 text-red-300'
-              }`}>
-                {messageType === 'success' ? (
-                  <CheckCircle className="w-5 h-5" />
+              {/* Basic Info */}
+              <div className="space-y-3">
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                  {teacherData.full_name || formatMessage({ id: "profile.unnamed" })}
+                </h1>
+
+                <div className="flex items-center justify-center space-x-2 text-gray-300">
+                  <Mail className="w-5 h-5 text-green-400" />
+                  <span className="text-lg">{teacherData.email}</span>
+                </div>
+
+                <div className="flex items-center justify-center space-x-2 text-gray-400">
+                  <Calendar className="w-4 h-4" />
+                  <span className="text-sm">
+                    <FormattedMessage id="profile.joined" /> {formatDate(teacherData.created_at)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Message */}
+          {message && (
+            <div className={`border rounded-xl p-4 text-center flex items-center justify-center space-x-3 animate-fade-in ${
+              messageType === 'success'
+                ? 'bg-green-500/20 border-green-500/50 text-green-300'
+                : 'bg-red-500/20 border-red-500/50 text-red-300'
+            }`}>
+              {messageType === 'success' ? (
+                <CheckCircle className="w-5 h-5" />
+              ) : (
+                <AlertCircle className="w-5 h-5" />
+              )}
+              <span>
+                {formatMessage({ id: messageType === 'success' ? "profile.success" : "profile.error" })}
+              </span>
+            </div>
+          )}
+
+          {/* Profile Details */}
+          <section className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-lg">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                  <User className="w-5 h-5 text-white" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">
+                  <FormattedMessage id="profile.section.title" />
+                </h2>
+              </div>
+
+              {!isEditing && (
+                <button
+                  onClick={() => toggleEdit(true)}
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                >
+                  <Edit className="w-4 h-4" />
+                  <span>
+                    <FormattedMessage id="profile.edit" />
+                  </span>
+                </button>
+              )}
+            </div>
+
+            <div className="space-y-6">
+              {/* Profile Picture URL */}
+              <div className="space-y-2">
+                <label className="block font-semibold text-sm text-green-300">
+                  <FormattedMessage id="profile.picture" />
+                </label>
+                {isEditing ? (
+                  <div className="relative">
+                    <Camera className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
+                    <input
+                      type="text"
+                      value={editForm.picture}
+                      onChange={(e) => handleInputChange('picture', e.target.value)}
+                      placeholder={formatMessage({ id: "profile.editform.placeholder.picture" })}
+                      className="w-full pl-12 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                    />
+                  </div>
                 ) : (
-                  <AlertCircle className="w-5 h-5" />
+                  <p className="text-gray-300 bg-black/30 rounded-xl p-3 border border-white/10">
+                    {teacherData.picture || formatMessage({ id: "profile.noPicture" })}
+                  </p>
                 )}
-                <span>{message}</span>
               </div>
-            )}
 
-            {/* Profile Details */}
-            <section className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-lg">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
-                    <User className="w-5 h-5 text-white" />
+              {/* Full Name */}
+              <div className="space-y-2">
+                <label className="block font-semibold text-sm text-green-300">
+                  <FormattedMessage id="profile.fullname" />
+                </label>
+                {isEditing ? (
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
+                    <input
+                      type="text"
+                      value={editForm.full_name}
+                      onChange={(e) => handleInputChange('full_name', e.target.value)}
+                      placeholder={formatMessage({ id: "profile.editform.placeholder.name" })}
+                      className="w-full pl-12 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
+                    />
                   </div>
-                  <h2 className="text-2xl font-bold text-white">Profile Information</h2>
-                </div>
+                ) : (
+                  <p className="text-gray-300 bg-black/30 rounded-xl p-3 border border-white/10">
+                    {teacherData.full_name || formatMessage({ id: "profile.unnamed" })}
+                  </p>
+                )}
+              </div>
 
-                {!isEditing && (
+              {/* Bio */}
+              <div className="space-y-2">
+                <label className="block font-semibold text-sm text-green-300">
+                  <FormattedMessage id="profile.bio" />
+                </label>
+                {isEditing ? (
+                  <div className="relative">
+                    <FileText className="absolute left-3 top-3 w-5 h-5 text-green-400" />
+                    <textarea
+                      value={editForm.bio}
+                      onChange={(e) => handleInputChange('bio', e.target.value)}
+                      placeholder={formatMessage({ id: "profile.editform.placeholder.bio" })}
+                      rows={4}
+                      className="w-full pl-12 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 resize-none"
+                    />
+                  </div>
+                ) : (
+                  <p className="text-gray-300 bg-black/30 rounded-xl p-3 border border-white/10 whitespace-pre-line">
+                    {teacherData.bio || formatMessage({ id: "profile.noBio" })}
+                  </p>
+                )}
+              </div>
+
+              {/* Edit Actions */}
+              {isEditing && (
+                <div className="flex justify-end space-x-4 pt-4">
                   <button
-                    onClick={() => toggleEdit(true)}
-                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                    onClick={() => toggleEdit(false)}
+                    className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300"
                   >
-                    <Edit className="w-4 h-4" />
-                    <span>Edit Profile</span>
+                    <FormattedMessage id="profile.cancel" />
                   </button>
-                )}
-              </div>
 
-              <div className="space-y-6">
-                {/* Profile Picture URL */}
-                <div className="space-y-2">
-                  <label className="block font-semibold text-sm text-green-300">Profile Picture URL</label>
-                  {isEditing ? (
-                    <div className="relative">
-                      <Camera className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
-                      <input
-                        type="text"
-                        value={editForm.picture}
-                        onChange={(e) => handleInputChange('picture', e.target.value)}
-                        placeholder="Enter image URL"
-                        className="w-full pl-12 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
-                      />
-                    </div>
-                  ) : (
-                    <p className="text-gray-300 bg-black/30 rounded-xl p-3 border border-white/10">
-                      {teacherData.picture || 'No picture URL set'}
-                    </p>
-                  )}
+                  <button
+                    onClick={saveProfile}
+                    disabled={isSaving}
+                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center space-x-2 shadow-lg"
+                  >
+                    {isSaving ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>
+                          <FormattedMessage id="profile.saving" />
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-4 h-4" />
+                        <span>
+                          <FormattedMessage id="profile.save" />
+                        </span>
+                      </>
+                    )}
+                  </button>
                 </div>
-
-                {/* Full Name */}
-                <div className="space-y-2">
-                  <label className="block font-semibold text-sm text-green-300">Full Name</label>
-                  {isEditing ? (
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
-                      <input
-                        type="text"
-                        value={editForm.full_name}
-                        onChange={(e) => handleInputChange('full_name', e.target.value)}
-                        placeholder="Enter your full name"
-                        className="w-full pl-12 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
-                      />
-                    </div>
-                  ) : (
-                    <p className="text-gray-300 bg-black/30 rounded-xl p-3 border border-white/10">
-                      {teacherData.full_name || 'Unnamed'}
-                    </p>
-                  )}
-                </div>
-
-                {/* Bio */}
-                <div className="space-y-2">
-                  <label className="block font-semibold text-sm text-green-300">Bio</label>
-                  {isEditing ? (
-                    <div className="relative">
-                      <FileText className="absolute left-3 top-3 w-5 h-5 text-green-400" />
-                      <textarea
-                        value={editForm.bio}
-                        onChange={(e) => handleInputChange('bio', e.target.value)}
-                        placeholder="Tell us about yourself..."
-                        rows={4}
-                        className="w-full pl-12 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 resize-none"
-                      />
-                    </div>
-                  ) : (
-                    <p className="text-gray-300 bg-black/30 rounded-xl p-3 border border-white/10 whitespace-pre-line">
-                      {teacherData.bio || 'No bio available'}
-                    </p>
-                  )}
-                </div>
-
-                {/* Edit Actions */}
-                {isEditing && (
-                  <div className="flex justify-end space-x-4 pt-4">
-                    <button
-                      onClick={() => toggleEdit(false)}
-                      className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300"
-                    >
-                      Cancel
-                    </button>
-
-                    <button
-                      onClick={saveProfile}
-                      disabled={isSaving}
-                      className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center space-x-2 shadow-lg"
-                    >
-                      {isSaving ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          <span>Saving...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Save className="w-4 h-4" />
-                          <span>Save Profile</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                )}
-              </div>
-            </section>
-          </div>
+              )}
+            </div>
+          </section>
+        </div>
         )}
       </main>
     </div>
