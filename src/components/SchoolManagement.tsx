@@ -197,49 +197,43 @@ const { formatMessage } = useIntl();
     }
   };
 
-const pollDeviceForScans = async (device_uid: string) => {
-  try {
-    const response = await fetch(`${API_BASE}/scan/queue?device_uid=${device_uid}`);
-    if (response.ok) {
-      const data = await response.json();
-      const scanData = Array.isArray(data) ? data[0] : null;
+  const pollDeviceForScans = async (device_uid: string) => {
+    try {
+      const response = await fetch(`${API_BASE}/scan/queue?device_uid=${device_uid}`);
+      if (response.ok) {
+        const data = await response.json();
+        const scanData = Array.isArray(data) ? data[0] : null;
+        console.log(scanData)
 
-      if (scanData && (scanData.uid || scanData.student_uid)) {
-        console.log(`Scan detected for device ${device_uid}:`, scanData);
+        if (scanData && scanData.uid) {
+          console.log(`Scan detected for device ${device_uid}:`, scanData);
 
-        // Optional: Show mismatch warning in console or alert
-        if (scanData.flag || scanData.message) {
-          console.warn(`⚠️ Warning for device ${device_uid}:`, scanData.flag || scanData.message);
-          // Optionally show in UI: alert(scanData.flag || scanData.message);
-        }
+          // Update scan data
+          setDeviceScans(prev => new Map(prev.set(device_uid, scanData)));
 
-        // Update scan data
-        setDeviceScans(prev => new Map(prev.set(device_uid, scanData)));
+          // Stop polling temporarily
+          stopPollingDevice(device_uid);
 
-        // Stop polling temporarily
-        stopPollingDevice(device_uid);
-
-        if (!scanData.exists) {
-          // Show registration form for new student
-          setShowRegistrationForms(prev => new Set(prev.add(device_uid)));
-        } else {
-          // Existing student - resume polling after delay
-          setTimeout(() => {
-            setDeviceScans(prev => {
-              const newMap = new Map(prev);
-              newMap.delete(device_uid);
-              return newMap;
-            });
-            startPollingDevice(device_uid);
-          }, 3000);
+          if (!scanData.exists) {
+            // Show registration form for new student
+            setShowRegistrationForms(prev => new Set(prev.add(device_uid)));
+          } else {
+            // Existing student - resume polling after delay
+            setTimeout(() => {
+              setDeviceScans(prev => {
+                const newMap = new Map(prev);
+                newMap.delete(device_uid);
+                return newMap;
+              });
+              startPollingDevice(device_uid);
+            }, 3000);
+          }
         }
       }
+    } catch (error) {
+      console.error(`Error polling device ${device_uid}:`, error);
     }
-  } catch (error) {
-    console.error(`Error polling device ${device_uid}:`, error);
-  }
-};
-
+  };
 
   const registerDevice = async (e: React.FormEvent) => {
     e.preventDefault();
