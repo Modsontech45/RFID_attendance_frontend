@@ -48,7 +48,7 @@ const SettingsComponent: React.FC = () => {
 
 
 
-  const daysLeft =   Math.ceil((new Date(PlanEndDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+  const daysLeft =  Math.ceil((new Date(PlanEndDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
   const Email = adminData?.email || "admin@centralhigh.edu";
   const datejoin = adminData?.created_at || "2024-01-15";
   let MoneyPaid = 0
