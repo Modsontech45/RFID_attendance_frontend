@@ -203,7 +203,7 @@ const { formatMessage } = useIntl();
       if (response.ok) {
         const data = await response.json();
         const scanData = Array.isArray(data) ? data[0] : null;
-        console.log(scanData)
+     
 
         if (scanData && scanData.uid) {
           console.log(`Scan detected for device ${device_uid}:`, scanData);

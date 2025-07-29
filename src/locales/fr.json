@@ -781,7 +781,19 @@
     "section": {
       "title": "Informations du profil"
     }
-  }
+  },
+  "settime": {
+  "header": "Paramètres d'heure d'entrée / de sortie",
+  "start": "Début de l'entrée :",
+  "startEnd": "Fin de l'entrée :",
+  "endstart": "Début de la sortie :",
+  "end:": "Fin de la sortie :",
+  "modifier": "Modifier",
+  "save": "Ok",
+  "cancel": "Annuler",
+  "home":"Accueil"
+}
+
 
 
 }

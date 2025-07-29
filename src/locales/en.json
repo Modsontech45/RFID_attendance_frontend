@@ -775,7 +775,18 @@
     "section": {
       "title": "Profile Information"
     }
-  }
+  },
+"settime": {
+  "header": "Sign In / Sign Out Time Settings",
+  "start": "Sign In Start Time:",
+  "startEnd": "Sign In End Time:",
+  "endstart": "Sign Out Start Time:",
+  "end:": "Sign Out End Time:",
+  "modifier": "Edit",
+  "save": "OK",
+  "cancel": "Cancel",
+  "home": "Home"
+}
 
 
 

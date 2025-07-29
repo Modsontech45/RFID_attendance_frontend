@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getApiKey } from "../utils/auth";
 import { API_BASE } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 
 interface TimeSettingsData {
   sign_in_start: string;
@@ -11,6 +13,7 @@ interface TimeSettingsData {
 }
 
 const TimeSettings: React.FC = () => {
+  const { formatMessage } = useIntl();
   const apiKey = getApiKey();
   const navigate = useNavigate();
   const [settings, setSettings] = useState<TimeSettingsData | null>(null);
@@ -22,7 +25,10 @@ const TimeSettings: React.FC = () => {
   });
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   useEffect(() => {
     async function fetchTimeSettings() {
@@ -34,7 +40,10 @@ const TimeSettings: React.FC = () => {
         setSettings(data);
         setForm(data);
       } catch (err: any) {
-        setMessage({ type: "error", text: err.message || "Failed to load time settings." });
+        setMessage({
+          type: "error",
+          text: err.message || "Failed to load time settings.",
+        });
       } finally {
         setLoading(false);
       }
@@ -63,16 +72,24 @@ const TimeSettings: React.FC = () => {
 
       setSettings(form);
       setEditing(false);
-      setMessage({ type: "success", text: result.message || "Time settings updated successfully!" });
+      setMessage({
+        type: "success",
+        text: result.message || "Time settings updated successfully!",
+      });
     } catch (err: any) {
-      setMessage({ type: "error", text: err.message || "Failed to update settings." });
+      setMessage({
+        type: "error",
+        text: err.message || "Failed to update settings.",
+      });
     }
   };
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
-        <span className="text-green-400 text-lg font-semibold tracking-wide">Loading time settings...</span>
+        <span className="text-green-400 text-lg font-semibold tracking-wide">
+          Loading time settings...
+        </span>
       </div>
     );
   }
@@ -81,7 +98,11 @@ const TimeSettings: React.FC = () => {
     <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 py-12">
       <div className="max-w-2xl w-full px-10 py-12 bg-gradient-to-r from-black via-gray-900 to-green-900 rounded-xl shadow-2xl text-white font-sans">
         <h2 className="text-3xl font-extrabold mb-8 text-center tracking-wider drop-shadow-md">
-          Sign In / Sign Out Time Settings
+          <FormattedMessage
+            id="settime.header"
+            defaultMessage="Sign In / Sign Out Time Settings"
+          />
+      
         </h2>
 
         {message && (
@@ -100,16 +121,40 @@ const TimeSettings: React.FC = () => {
         {!editing ? (
           <div className="space-y-6 text-lg leading-relaxed text-green-300">
             <p>
-              <strong className="text-green-400">Sign In Start:</strong> {settings?.sign_in_start}
+              <strong className="text-green-400">
+                    <FormattedMessage
+            id="settime.start"
+            defaultMessage="Sign In Start:"
+          />
+                </strong>{" "}
+              {settings?.sign_in_start}
             </p>
             <p>
-              <strong className="text-green-400">Sign In End:</strong> {settings?.sign_in_end}
+              <strong className="text-green-400">
+                             <FormattedMessage
+            id="settime.startEnd"
+            defaultMessage="Sign In End:"
+          />
+                </strong>{" "}
+              {settings?.sign_in_end}
             </p>
             <p>
-              <strong className="text-green-400">Sign Out Start:</strong> {settings?.sign_out_start}
+              <strong className="text-green-400">
+                                       <FormattedMessage
+            id="settime.endstart"
+            defaultMessage="Sign Out Start:"
+          />
+               </strong>{" "}
+              {settings?.sign_out_start}
             </p>
             <p>
-              <strong className="text-green-400">Sign Out End:</strong> {settings?.sign_out_end}
+              <strong className="text-green-400">
+                                               <FormattedMessage
+            id="settime.end"
+            defaultMessage="Sign Out End:"
+          />
+                </strong>{" "}
+              {settings?.sign_out_end}
             </p>
             <div className="mt-10 text-center">
               <button
@@ -117,13 +162,22 @@ const TimeSettings: React.FC = () => {
                 onClick={() => setEditing(true)}
                 className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-black font-bold px-10 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
               >
-                Edit Time Settings
+                                                        <FormattedMessage
+            id="settime.modifier"
+            defaultMessage="Edit Time Settings"
+          />
+              
               </button>
             </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
-            {["sign_in_start", "sign_in_end", "sign_out_start", "sign_out_end"].map((field) => (
+            {[
+              "sign_in_start",
+              "sign_in_end",
+              "sign_out_start",
+              "sign_out_end",
+            ].map((field) => (
               <div key={field}>
                 <label
                   htmlFor={field}
@@ -147,7 +201,10 @@ const TimeSettings: React.FC = () => {
                 type="submit"
                 className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-black font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
               >
-                Save
+                     <FormattedMessage
+            id="settime.save"
+            defaultMessage="Save"
+          />
               </button>
               <button
                 type="button"
@@ -157,7 +214,10 @@ const TimeSettings: React.FC = () => {
                 }}
                 className="bg-gray-800 hover:bg-gray-700 text-green-400 font-semibold px-8 py-3 rounded-xl shadow-inner transition"
               >
-                Cancel
+                       <FormattedMessage
+            id="settime.cancel"
+            defaultMessage="Cancel"
+          />
               </button>
             </div>
           </form>
@@ -169,10 +229,12 @@ const TimeSettings: React.FC = () => {
         className="mt-10 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-black font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
         type="button"
       >
-        Go Home
+               <FormattedMessage
+            id="settime.home"
+            defaultMessage="Go Home"
+          />
+    
       </button>
-
-  
     </div>
   );
 };
