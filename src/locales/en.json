@@ -786,7 +786,46 @@
   "save": "OK",
   "cancel": "Cancel",
   "home": "Home"
-}
+},
+ "forgotPassword": {
+    "title": "Reset Your Password",
+    "subtitle": "Enter your email address and we'll send you a link to reset your password",
+    "email_placeholder": "Your Email",
+    "send_button": "Send Reset Link",
+    "remember_password": "Remember your password?",
+    "back_to_login": "Back to Login"
+  },
+    "resetPassword": {
+    "title": "Set New Password",
+    "subtitle": "Enter your new password below",
+    "new_password_placeholder": "New Password",
+    "confirm_password_placeholder": "Confirm Password",
+    "reset_button": "Reset Password",
+    "resetting": "resetting .....",
+    "back": "Back to request password reset"
+  },
+    "resetSuccess": {
+    "title": "Password Reset Successful!",
+    "message": "Your password has been updated. You can now log in with your new password.",
+    "loginButton": "Login",
+    "additionalInfo": "Keep your new password secure and don't share it with anyone."
+  },
+    "emailSent": {
+    "title": "Check your inbox",
+    "message1": "We've sent a verification link to your email.",
+    "message2": "Please confirm to continue.",
+    "backToSignup": "Back to Signup",
+    "additionalInfo": "Didn't receive the email? Check your spam folder or try signing up again."
+  },
+    "emailVerification": {
+    "title": "Email Verification",
+    "verifying": "Verifying your email...",
+    "goToLogin": "Go to Login",
+    "invalidLink": "Invalid link or token expired",
+    "backToLogin": "Back to Login",
+    "successInfo": "Your account is now active and ready to use.",
+    "errorInfo": "Please check your email for a new verification link or contact support."
+  }
 
 
 

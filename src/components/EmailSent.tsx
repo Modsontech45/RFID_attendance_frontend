@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
+import { useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { 
   Shield, 
   Mail,
@@ -10,18 +11,15 @@ import {
 
 const EmailSent: React.FC = () => {
   const navigate = useNavigate();
-  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
-
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeLanguage(e.target.value);
-  };
+  const { formatMessage: t } = useIntl();
+  const { locale } = useLocalIntl();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleBackToSignup = () => {
     navigate('/admin/signup');
   };
 
-  // Show loading state while translations are loading
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -55,18 +53,6 @@ const EmailSent: React.FC = () => {
                 Synctuario
               </span>
             </div>
-            
-            <div className="flex items-center space-x-4">
-              <select 
-                value={currentLanguage}
-                onChange={handleLanguageChange}
-                disabled={loading}
-                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-              >
-                <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
-                <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-              </select>
-            </div>
           </div>
         </div>
       </header>
@@ -82,17 +68,17 @@ const EmailSent: React.FC = () => {
                 <Mail className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                📧 {t('emailSent.title')}
+                📧 {t({ id: 'emailSent.title' })}
               </h1>
             </div>
 
             {/* Message */}
             <div className="space-y-4">
               <p className="text-green-300 text-lg">
-                {t('emailSent.message1')}
+                {t({ id: 'emailSent.message1' })}
               </p>
               <p className="text-green-300 text-lg">
-                {t('emailSent.message2')}
+                {t({ id: 'emailSent.message2' })}
               </p>
             </div>
 
@@ -107,13 +93,13 @@ const EmailSent: React.FC = () => {
               className="w-full flex items-center justify-center space-x-2 text-green-400 hover:text-green-300 transition-colors py-3 border border-green-500/50 rounded-lg hover:bg-green-500/10"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>{t('emailSent.backToSignup')}</span>
+              <span>{t({ id: 'emailSent.backToSignup' })}</span>
             </button>
 
             {/* Additional Info */}
             <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-center">
               <p className="text-green-300 text-sm">
-                {t('emailSent.additionalInfo')}
+                {t({ id: 'emailSent.additionalInfo' })}
               </p>
             </div>
           </div>

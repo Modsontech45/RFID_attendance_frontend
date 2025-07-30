@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useTranslation } from '../hooks/useTranslation';
+
 import { postData, API_BASE } from '../utils/auth';
 import { 
   Shield, 
@@ -13,11 +13,15 @@ import {
   AlertCircle,
   XCircle
 } from 'lucide-react';
+import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl as useLocalIntl } from "../context/IntlContext";
 
 const ResetPassword: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
+  const { formatMessage } = useIntl();
+  const { locale } = useLocalIntl();
+
   const [formData, setFormData] = useState({
     newPassword: '',
     confirmPassword: ''
@@ -129,7 +133,7 @@ const ResetPassword: React.FC = () => {
   };
 
   // Show loading state while translations are loading
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -191,15 +195,7 @@ const ResetPassword: React.FC = () => {
             </div>
             
             <div className="flex items-center space-x-4">
-              <select 
-                value={currentLanguage}
-                onChange={handleLanguageChange}
-                disabled={loading}
-                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-              >
-                <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
-                <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-              </select>
+       
             </div>
           </div>
         </div>
@@ -216,10 +212,18 @@ const ResetPassword: React.FC = () => {
                 <Lock className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-                {t('resetPassword.title')}
+                  <FormattedMessage
+                                      id="resetPassword.title"
+                                      defaultMessage="Set New Password"
+                                    />
+          
               </h1>
               <p className="text-green-200 text-sm">
-                {t('resetPassword.subtitle')}
+                   <FormattedMessage
+                                      id="resetPassword.subtitle"
+                                      defaultMessage="Enter your new password below"
+                                    />
+    
               </p>
             </div>
 
@@ -242,7 +246,11 @@ const ResetPassword: React.FC = () => {
                     name="newPassword"
                     value={formData.newPassword}
                     onChange={handleInputChange}
-                    placeholder={t('resetPassword.new_password_placeholder') || 'New Password'}
+                     placeholder={formatMessage({
+                      id: "resetPassword.new_password_placeholder",
+                     
+                    })}
+                    // placeholder={t('resetPassword.new_password_placeholder') || 'New Password'}
                     required
                     className="w-full pl-12 pr-12 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
@@ -265,7 +273,11 @@ const ResetPassword: React.FC = () => {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    placeholder={t('resetPassword.confirm_password_placeholder') || 'Confirm Password'}
+                      placeholder={formatMessage({
+                      id: "resetPassword.confirm_password_placeholder",
+                     
+                    })}
+                    // placeholder={t('resetPassword.confirm_password_placeholder') || 'Confirm Password'}
                     required
                     className="w-full pl-12 pr-12 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
@@ -288,10 +300,20 @@ const ResetPassword: React.FC = () => {
                 {isLoading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Resetting...</span>
+                    <span>  <FormattedMessage
+                                      id="resetPassword.resetting"
+                                     
+                                    /></span>
                   </>
                 ) : (
-                  <span>{t('resetPassword.reset_button')}</span>
+                  <span>
+                     <FormattedMessage
+                                      id="resetPassword.reset_button"
+                                     
+                                    />
+    
+                    {/* {t('resetPassword.reset_button')} */}
+                  </span>
                 )}
               </button>
             </form>
@@ -303,7 +325,10 @@ const ResetPassword: React.FC = () => {
               className="w-full flex items-center justify-center space-x-2 text-white/70 hover:text-white transition-colors py-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to Reset Request</span>
+              <span>     <FormattedMessage
+                                      id="resetPassword.back"
+                                     
+                                    /></span>
             </button>
           </div>
         </div>

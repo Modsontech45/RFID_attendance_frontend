@@ -792,7 +792,46 @@
   "save": "Ok",
   "cancel": "Annuler",
   "home":"Accueil"
-}
+},
+  "forgotPassword": {
+    "title": "Réinitialiser votre mot de passe",
+    "subtitle": "Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe",
+    "email_placeholder": "Votre e-mail",
+    "send_button": "Envoyer le lien de réinitialisation",
+    "remember_password": "Vous vous souvenez de votre mot de passe ?",
+    "back_to_login": "Retour à la connexion"
+  },
+    "resetPassword": {
+    "title": "Définir un nouveau mot de passe",
+    "subtitle": "Entrez votre nouveau mot de passe ci-dessous",
+    "new_password_placeholder": "Nouveau mot de passe",
+    "confirm_password_placeholder": "Confirmer le mot de passe",
+    "reset_button": "Réinitialiser le mot de passe",
+    "resetting": "réinitialisation en cours...",
+  "back": "Retour à la demande de réinitialisation du mot de passe"
+  },
+   "resetSuccess": {
+    "title": "Réinitialisation du mot de passe réussie !",
+    "message": "Votre mot de passe a été mis à jour. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+    "loginButton": "Se connecter",
+    "additionalInfo": "Gardez votre nouveau mot de passe en sécurité et ne le partagez avec personne."
+  },
+   "emailSent": {
+    "title": "Vérifiez votre boîte de réception",
+    "message1": "Nous avons envoyé un lien de vérification à votre email.",
+    "message2": "Veuillez confirmer pour continuer.",
+    "backToSignup": "Retour à l'inscription",
+    "additionalInfo": "Vous n'avez pas reçu l'email ? Vérifiez votre dossier spam ou essayez de vous inscrire à nouveau."
+  },
+   "emailVerification": {
+    "title": "Vérification d'email",
+    "verifying": "Vérification de votre email...",
+    "goToLogin": "Aller à la connexion",
+    "backToLogin": "Retour à la connexion",
+    "invalidLink": "Lien invalide ou jeton expiré",
+    "successInfo": "Votre compte est maintenant actif et prêt à être utilisé.",
+    "errorInfo": "Veuillez vérifier votre email pour un nouveau lien de vérification ou contactez le support."
+  }
 
 
 
