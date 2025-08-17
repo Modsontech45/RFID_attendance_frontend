@@ -557,7 +557,7 @@ const AdminDashboard: React.FC = () => {
               label: `Total ${terminology.studentPlural}`,
               value: isLoadingStats
                 ? "..."
-                : dashboardStats.totalStudents.toString(),
+               : (dashboardStats?.totalStudents || 0).toString(),
               change: "+12%",
               color: "from-blue-500 to-cyan-500",
               link: "/admin/students",
@@ -567,7 +567,7 @@ const AdminDashboard: React.FC = () => {
               label: `Active ${terminology.teacherPlural}`,
               value: isLoadingStats
                 ? "..."
-                : dashboardStats.totalTeachers.toString(),
+               : (dashboardStats?.totalTeachers || 0).toString(),
               change: "+5%",
               color: "from-green-500 to-emerald-500",
               link: "/admin/teachers",
@@ -577,7 +577,7 @@ const AdminDashboard: React.FC = () => {
               label: formatMessage({ id: "dashboard.stats.attendance" }),
               value: isLoadingStats
                 ? "..."
-                : `${dashboardStats.attendanceRate}%`,
+               : `${dashboardStats?.attendanceRate || 0}%`,
               change: "+2.1%",
               color: "from-purple-500 to-pink-500",
               link: "/admin/attendance",
@@ -587,7 +587,7 @@ const AdminDashboard: React.FC = () => {
               label: formatMessage({ id: "dashboard.stats.records" }),
               value: isLoadingStats
                 ? "..."
-                : dashboardStats.totalAttendanceToday.toString(),
+               : (dashboardStats?.totalAttendanceToday || 0).toString(),
               change: "+1.2%",
               color: "from-orange-500 to-red-500",
               link: "/teacher/reports",

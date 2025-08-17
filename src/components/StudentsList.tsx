@@ -232,9 +232,9 @@ let subscription =   adminData?.subscription_status || 'inactive';
   }, [students, searchTerm, formFilter]);
 
   // Calculate statistics
-  const totalStudents = filteredStudents.length;
-  const maleCount = filteredStudents.filter(s => s.gender?.toLowerCase() === 'male').length;
-  const femaleCount = filteredStudents.filter(s => s.gender?.toLowerCase() === 'female').length;
+ const totalStudents = filteredStudents?.length || 0;
+ const maleCount = filteredStudents?.filter(s => s.gender?.toLowerCase() === 'male').length || 0;
+ const femaleCount = filteredStudents?.filter(s => s.gender?.toLowerCase() === 'female').length || 0;
   const malePercent = totalStudents > 0 ? ((maleCount / totalStudents) * 100).toFixed(1) : '0';
   const femalePercent = totalStudents > 0 ? ((femaleCount / totalStudents) * 100).toFixed(1) : '0';
 
@@ -497,7 +497,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
             { icon: Users, label: `Total ${terminology.studentPlural}`, value: totalStudents.toString(), color: "from-green-500 to-emerald-500" },
             { icon: UserCheck, label: `Male ${terminology.studentPlural}`, value: `${maleCount} (${malePercent}%)`, color: "from-blue-500 to-cyan-500" },
             { icon: Activity, label: `Female ${terminology.studentPlural}`, value: `${femaleCount} (${femalePercent}%)`, color: "from-purple-500 to-pink-500" },
-            { icon: BarChart3, label: formatMessage({ id: "students.stats.formsClasses" }), value: categories.length.toString(), color: "from-orange-500 to-red-500" }
+           { icon: BarChart3, label: formatMessage({ id: "students.stats.formsClasses" }), value: (categories?.length || 0).toString(), color: "from-orange-500 to-red-500" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
               <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>

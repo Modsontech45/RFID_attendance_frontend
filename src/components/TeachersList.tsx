@@ -247,9 +247,9 @@ const { locale } = useLocalIntl();
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Users, label: `Total ${terminology.teacherPlural}`, value: teachers.length.toString(), change: "+3%", color: "from-green-500 to-emerald-500" },
-            { icon: UserCheck, label: `Active ${terminology.teacherPlural}`, value: Math.floor(teachers.length * 0.85).toString(), change: "+5%", color: "from-blue-500 to-cyan-500" },
-            { icon: Award, label: formatMessage({ id: "teachersList.stats.TopPerforming" }), value: Math.floor(teachers.length * 0.2).toString(), change: "+12%", color: "from-purple-500 to-pink-500" },
+           { icon: Users, label: `Total ${terminology.teacherPlural}`, value: (teachers?.length || 0).toString(), change: "+3%", color: "from-green-500 to-emerald-500" },
+           { icon: UserCheck, label: `Active ${terminology.teacherPlural}`, value: Math.floor((teachers?.length || 0) * 0.85).toString(), change: "+5%", color: "from-blue-500 to-cyan-500" },
+           { icon: Award, label: formatMessage({ id: "teachersList.stats.TopPerforming" }), value: Math.floor((teachers?.length || 0) * 0.2).toString(), change: "+12%", color: "from-purple-500 to-pink-500" },
             { icon: Clock, label: formatMessage({ id: "teachersList.stats.avgExperience" }), value: "4.2y", change: "+0.3y", color: "from-orange-500 to-red-500" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">

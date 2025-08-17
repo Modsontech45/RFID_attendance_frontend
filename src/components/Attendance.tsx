@@ -184,10 +184,10 @@ const { formatMessage } = useIntl();
   };
 
   const calculateStats = (): AttendanceStats => {
-    const totalStudents = filteredRecords.length;
-    const totalPresent = filteredRecords.filter(r => r.status === 'present').length;
-    const totalPartial = filteredRecords.filter(r => r.status === 'partial').length;
-    const totalAbsent = filteredRecords.filter(r => r.status === 'absent').length;
+   const totalStudents = filteredRecords?.length || 0;
+   const totalPresent = filteredRecords?.filter(r => r.status === 'present').length || 0;
+   const totalPartial = filteredRecords?.filter(r => r.status === 'partial').length || 0;
+   const totalAbsent = filteredRecords?.filter(r => r.status === 'absent').length || 0;
 
     return { totalStudents, totalPresent, totalPartial, totalAbsent };
   };
