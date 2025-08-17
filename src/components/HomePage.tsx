@@ -291,8 +291,8 @@ const HomePage: React.FC = () => {
               <Users className="h-5 w-5" />
               <span>
                 <FormattedMessage
-                  id="home.buttons.teacher_portal"
-                  defaultMessage="Teacher Portal"
+                  id="home.buttons.staff_portal"
+                  defaultMessage="Staff Portal"
                 />
               </span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

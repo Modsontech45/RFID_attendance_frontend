@@ -109,7 +109,7 @@
     },
     "buttons": {
       "admin_portal": "Portail Admin",
-      "teacher_portal": "Portail Enseignant",
+      "staff_portal": "Portail Personnel",
       "documentation": "Documentation"
     },
     "stats": {

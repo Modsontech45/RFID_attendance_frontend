@@ -108,7 +108,7 @@
     },
     "buttons": {
       "admin_portal": "Admin Portal",
-      "teacher_portal": "Teacher Portal",
+      "staff_portal": "Staff Portal",
       "documentation": "Documentation"
     },
     "stats": {
