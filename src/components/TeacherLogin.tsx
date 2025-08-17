@@ -11,15 +11,22 @@ import {
 } from 'lucide-react';
 import {  useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
+import { useTerminology } from "../utils/terminology";
+
 const TeacherLogin: React.FC = () => {
   const navigate = useNavigate();
  const { formatMessage } = useIntl();
    const { locale } = useLocalIntl();
+  
   const [formData, setFormData] = useState({
     email: ''
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [adminData, setAdminData] = useState<any>(null);
+  
+  // Get terminology - will default to school if no admin data available
+  const terminology = useTerminology(adminData);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -77,6 +84,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         // ✅ Log and save admin data
         console.log('✅ Admin data:', result.admin);
         setAuthData('admin_data', JSON.stringify(result.admin));
+        setAdminData(result.admin);
       } else {
         console.warn('⚠️ No admin data returned');
       }
@@ -146,10 +154,10 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <Users className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-              { formatMessage({ id: "teacherlogin.title" })}
+              {terminology.teacher} Login
               </h1>
               <p className="text-white text-sm">
-                 { formatMessage({ id: "teacherlogin.subtitle" })}
+                Enter your email address to access your account
               </p>
             </div>
 
@@ -202,7 +210,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             {/* Info Text */}
             <div className="bg-green-900 border border-green-600 rounded-lg p-4 text-center">
               <p className="text-white text-sm">
-                { formatMessage({ id: "teacherlogin.info_text" })}
+                Only registered {terminology.teacher.toLowerCase()} members can access this portal. Contact your administrator if you need assistance.
               </p>
             </div>
 

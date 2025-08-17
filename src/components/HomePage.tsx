@@ -32,6 +32,7 @@ import {
   X,
 } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useTerminology } from "../utils/terminology";
 
 interface FloatingComment {
   id: number;
@@ -43,6 +44,7 @@ interface FloatingComment {
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
+  
   const [floatingComments, setFloatingComments] = useState<FloatingComment[]>([]);
   const [showAdPopup, setShowAdPopup] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);

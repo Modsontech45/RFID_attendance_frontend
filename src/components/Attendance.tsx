@@ -33,6 +33,7 @@ import {
 } from 'lucide-react';
 import {  useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
+import { useTerminology } from "../utils/terminology";
 interface AttendanceRecord {
   id: number;
   date: string;
@@ -96,6 +97,7 @@ const { formatMessage } = useIntl();
   const token = getAuthData('token');
   const apiKey = getApiKey();
   const adminData = getAdminData();
+  const terminology = useTerminology(adminData);
   
   // Extract admin info with fallbacks
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
@@ -511,7 +513,7 @@ const initializeData = async () => {
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                  {formatMessage({ id: "attendance.students" })}
+                  {terminology.studentPlural}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -586,7 +588,7 @@ const initializeData = async () => {
                 onClick={() => navigate('/admin/students')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                  {formatMessage({ id: "attendance.students" })}
+                  {terminology.studentPlural}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400">
                 {formatMessage({ id: "attendance.attendance" })}
@@ -625,11 +627,11 @@ const initializeData = async () => {
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-                {formatMessage({ id: "attendance.title" })}
+                Attendance Analysis
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              {formatMessage({ id: "attendance.subtitle" })}
+              Monitor and analyze {terminology.student.toLowerCase()} attendance with real-time insights and comprehensive reporting
             </p>
           </div>
         </section>
@@ -637,7 +639,7 @@ const initializeData = async () => {
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Users, label:  formatMessage({ id: "attendance.stats.totalStudents" }), value: stats.totalStudents.toString(), change: "+12%", color: "from-blue-500 to-cyan-500" },
+            { icon: Users, label: `Total ${terminology.studentPlural}`, value: stats.totalStudents.toString(), change: "+12%", color: "from-blue-500 to-cyan-500" },
             { icon: CheckCircle, label: formatMessage({ id: "attendance.stats.presentToday" }), value: stats.totalPresent.toString(), change: "+5%", color: "from-green-500 to-emerald-500" },
             { icon: Clock, label: formatMessage({ id: "attendance.stats.partial" }), value: stats.totalPartial.toString(), change: "+2%", color: "from-yellow-500 to-orange-500" },
             { icon: XCircle, label: formatMessage({ id: "attendance.stats.absentToday" }), value: stats.totalAbsent.toString(), change: "-3%", color: "from-red-500 to-pink-500" }

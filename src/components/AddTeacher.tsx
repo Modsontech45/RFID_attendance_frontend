@@ -24,11 +24,13 @@ import {
 } from "lucide-react";
 import { useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
+import { useTerminology } from "../utils/terminology";
 
 const AddTeacher: React.FC = () => {
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
   const { locale } = useLocalIntl();
+  
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -38,6 +40,7 @@ const AddTeacher: React.FC = () => {
   const token = getAuthData("token");
   const apiKey = getApiKey();
   const adminData = getAdminData();
+  const terminology = useTerminology(adminData);
 
   // Extract admin info with fallbacks
   const schoolName =
@@ -224,11 +227,10 @@ const AddTeacher: React.FC = () => {
                 <UserPlus className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                {formatMessage({ id: "addTeacher.title" })}
+                Add New {terminology.teacher}
               </h1>
               <p className="text-green-200 text-sm">
-                {formatMessage({ id: "addTeacher.subtitle" }) ||
-                  "Enter the email address of the staff member you want to add"}
+                Enter the email address of the {terminology.teacher.toLowerCase()} you want to add
               </p>
             </div>
 
@@ -255,8 +257,7 @@ const AddTeacher: React.FC = () => {
               {/* Email Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-green-300">
-                  {formatMessage({ id: "addTeacher.emailLabel" }) ||
-                    "Teacher Email Address"}
+                  {terminology.teacher} Email Address
                 </label>
                 <div className="relative">
                   <input
@@ -264,16 +265,14 @@ const AddTeacher: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={
-                      formatMessage({ id: "addTeacher.emailPlaceholder" }) ||
-                      "teacher@example.com"
+                      `${terminology.teacher.toLowerCase()}@example.com`
                     }
                     required
                     className="w-full pl-12 pr-4 py-4 border border-green-400/50 rounded-xl bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
                   />
                 </div>
                 <p className="text-xs text-green-300 mt-1">
-                  {formatMessage({ id: "addTeacher.infoText" }) ||
-                    "The teacher will receive an email invitation to join"}
+                  The {terminology.teacher.toLowerCase()} will receive an email invitation to join
                 </p>
               </div>
 
@@ -295,8 +294,7 @@ const AddTeacher: React.FC = () => {
                   <>
                     <Send className="w-5 h-5" />
                     <span>
-                      {formatMessage({ id: "addTeacher.submitButton" }) ||
-                        "Add Teacher"}
+                      Add {terminology.teacher}
                     </span>
                   </>
                 )}
@@ -308,8 +306,7 @@ const AddTeacher: React.FC = () => {
               <div className="flex items-center justify-center space-x-2 text-green-300 text-sm">
                 <Users className="w-4 h-4" />
                 <span>
-                  {formatMessage({ id: "addTeacher.infoText" }) ||
-                    "The staff member will receive an email invitation to join"}
+                  The {terminology.teacher.toLowerCase()} will receive an email invitation to join
                 </span>
               </div>
             </div>

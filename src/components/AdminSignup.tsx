@@ -12,6 +12,7 @@ import {
   EyeOff,
   Loader2,
   ArrowLeft,
+  Phone,
 } from "lucide-react";
 import { API_BASE, postData } from "../utils/auth";
 
@@ -24,6 +25,8 @@ const AdminSignup: React.FC = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    type: "",
+    telephone: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -62,10 +65,22 @@ const AdminSignup: React.FC = () => {
       newErrors.email = formatMessage({ id: "validation.emailInvalid" });
     }
 
+    if (!formData.telephone.trim()) {
+      newErrors.telephone = formatMessage({ id: "validation.telephoneRequired" });
+    } else if (!/^\+?[\d\s\-\(\)]{10,15}$/.test(formData.telephone.trim())) {
+      newErrors.telephone = formatMessage({ id: "validation.telephoneInvalid" });
+    }
+
+    if (!formData.type) {
+      newErrors.type = formatMessage({ id: "validation.typeRequired" });
+    }
+
     if (!formData.password) {
       newErrors.password = formatMessage({ id: "validation.passwordRequired" });
-    } else if (formData.password.length < 6) {
-      newErrors.password = formatMessage({ id: "validation.passwordLength" });
+    } else if (formData.password.length < 8) {
+      newErrors.password = formatMessage({ id: "validation.passwordMinLength" });
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(formData.password)) {
+      newErrors.password = formatMessage({ id: "validation.passwordStrength" });
     }
 
     if (!formData.confirmPassword) {
@@ -95,6 +110,8 @@ const AdminSignup: React.FC = () => {
           username: formData.username,
           email: formData.email,
           password: formData.password,
+          telephone: formData.telephone,
+          type: formData.type,
         },
         {
           "Accept-Language": localStorage.getItem("lang") || "en",
@@ -182,8 +199,8 @@ const AdminSignup: React.FC = () => {
                   value={formData.schoolname}
                   onChange={handleInputChange}
                   placeholder={formatMessage({
-                    id: "signup.admin.schoolPlaceholder",
-                    defaultMessage: "School Name",
+                    id: "signup.admin.organizationPlaceholder",
+                    defaultMessage: "Organization Name",
                   })}
                   required
                   className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
@@ -194,6 +211,44 @@ const AdminSignup: React.FC = () => {
                 />
               </div>
               {errors.schoolname && <p className="text-sm text-red-400">{errors.schoolname}</p>}
+            </div>
+
+            {/* Organization Type Field */}
+            <div className="space-y-2">
+              <div className="relative">
+                <Building className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                <select
+                  name="type"
+                  value={formData.type}
+                  onChange={handleInputChange}
+                  required
+                  className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white transition-all focus:outline-none focus:ring-2 ${
+                    errors.type
+                      ? "border-red-600 focus:ring-red-600"
+                      : "border-green-600 focus:ring-green-600"
+                  }`}
+                >
+                  <option value="">
+                    {formatMessage({
+                      id: "signup.admin.typePlaceholder",
+                      defaultMessage: "Select Organization Type",
+                    })}
+                  </option>
+                  <option value="school">
+                    {formatMessage({
+                      id: "signup.admin.typeSchool",
+                      defaultMessage: "School",
+                    })}
+                  </option>
+                  <option value="company">
+                    {formatMessage({
+                      id: "signup.admin.typeCompany",
+                      defaultMessage: "Company",
+                    })}
+                  </option>
+                </select>
+              </div>
+              {errors.type && <p className="text-sm text-red-400">{errors.type}</p>}
             </div>
 
             {/* Username Field */}
@@ -244,6 +299,30 @@ const AdminSignup: React.FC = () => {
               {errors.email && <p className="text-sm text-red-400">{errors.email}</p>}
             </div>
 
+            {/* Telephone Field */}
+            <div className="space-y-2">
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                <input
+                  type="tel"
+                  name="telephone"
+                  value={formData.telephone}
+                  onChange={handleInputChange}
+                  placeholder={formatMessage({
+                    id: "signup.admin.telephonePlaceholder",
+                    defaultMessage: "Phone Number",
+                  })}
+                  required
+                  className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                    errors.telephone
+                      ? "border-red-600 focus:ring-red-600"
+                      : "border-green-600 focus:ring-green-600"
+                  }`}
+                />
+              </div>
+              {errors.telephone && <p className="text-sm text-red-400">{errors.telephone}</p>}
+            </div>
+
             {/* Password Field */}
             <div className="space-y-2">
               <div className="relative">
@@ -273,6 +352,16 @@ const AdminSignup: React.FC = () => {
                 </button>
               </div>
               {errors.password && <p className="text-sm text-red-400">{errors.password}</p>}
+              <div className="text-xs text-gray-400 space-y-1">
+                <p>{formatMessage({ id: "validation.passwordRequirements" })}</p>
+                <ul className="list-disc list-inside space-y-1 text-xs">
+                  <li>{formatMessage({ id: "validation.passwordMinChars" })}</li>
+                  <li>{formatMessage({ id: "validation.passwordUppercase" })}</li>
+                  <li>{formatMessage({ id: "validation.passwordLowercase" })}</li>
+                  <li>{formatMessage({ id: "validation.passwordNumber" })}</li>
+                  <li>{formatMessage({ id: "validation.passwordSpecial" })}</li>
+                </ul>
+              </div>
             </div>
 
             {/* Confirm Password Field */}

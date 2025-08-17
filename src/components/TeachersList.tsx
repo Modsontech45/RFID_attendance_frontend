@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import {  useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
+import { useTerminology } from "../utils/terminology";
 
 interface Teacher {
   id: number;
@@ -55,6 +56,7 @@ const { locale } = useLocalIntl();
   const token = getAuthData('token');
   const apiKey = getApiKey();
   const adminData = getAdminData();
+  const terminology = useTerminology(adminData);
 
   // Extract admin info with fallbacks
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
@@ -236,11 +238,11 @@ const { locale } = useLocalIntl();
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-              {formatMessage({ id: "teachersList.yourStaff" })}
+              Your {terminology.teacherPlural}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              {formatMessage({ id: "teachersList.subtitle" })}
+              Manage and monitor your {terminology.teacher.toLowerCase()} staff with comprehensive tools
             </p>
           </div>
         </section>
@@ -248,8 +250,8 @@ const { locale } = useLocalIntl();
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Users, label:  formatMessage({ id: "teachersList.stats.totalTeachers" }), value: teachers.length.toString(), change: "+3%", color: "from-green-500 to-emerald-500" },
-            { icon: UserCheck, label: formatMessage({ id: "teachersList.stats.activeTeachers" }), value: Math.floor(teachers.length * 0.85).toString(), change: "+5%", color: "from-blue-500 to-cyan-500" },
+            { icon: Users, label: `Total ${terminology.teacherPlural}`, value: teachers.length.toString(), change: "+3%", color: "from-green-500 to-emerald-500" },
+            { icon: UserCheck, label: `Active ${terminology.teacherPlural}`, value: Math.floor(teachers.length * 0.85).toString(), change: "+5%", color: "from-blue-500 to-cyan-500" },
             { icon: Award, label: formatMessage({ id: "teachersList.stats.TopPerforming" }), value: Math.floor(teachers.length * 0.2).toString(), change: "+12%", color: "from-purple-500 to-pink-500" },
             { icon: Clock, label: formatMessage({ id: "teachersList.stats.avgExperience" }), value: "4.2y", change: "+0.3y", color: "from-orange-500 to-red-500" }
           ].map((stat, index) => (
@@ -326,7 +328,7 @@ const { locale } = useLocalIntl();
                   className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>{formatMessage({ id: "teachersList.addTeacher" })}</span>
+                  <span>Add {terminology.teacher}</span>
                 </button>
               </div>
             </div>
@@ -376,13 +378,13 @@ const { locale } = useLocalIntl();
                     <Users className="w-12 h-12 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "teachersList.noTeachers" })}</h3>
-                  <p className="text-gray-400 mb-8">{formatMessage({ id: "teachersList.addTeacher" })}</p>
+                  <p className="text-gray-400 mb-8">Add {terminology.teacherPlural.toLowerCase()} to see them here</p>
                   <button
                     onClick={handleAddTeacher}
                     className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-3 mx-auto"
                   >
                     <Plus className="w-5 h-5" />
-                    <span>{formatMessage({ id: "teachersList.addYourFirstTeacher" })}</span>
+                    <span>Add your first {terminology.teacher.toLowerCase()}</span>
                   </button>
                 </div>
               ) : (
@@ -417,7 +419,7 @@ const { locale } = useLocalIntl();
                       {/* Teacher Info */}
                       <div className={`flex-1 ${viewMode === 'list' ? 'text-left' : ''}`}>
                         <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors duration-300 mb-2">
-                          {teacher.full_name || `${formatMessage({ id: "teachersList.unnamedTeacher" })}`}
+                          {teacher.full_name || `Unnamed ${terminology.teacher}`}
                         </h3>
 
                         <div className="space-y-2 mb-4">

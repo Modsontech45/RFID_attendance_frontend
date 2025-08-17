@@ -37,6 +37,7 @@ import {
 import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useTerminology } from "../utils/terminology";
 
 interface DashboardStats {
   totalStudents: number;
@@ -98,6 +99,8 @@ const AdminDashboard: React.FC = () => {
     getApiKey() || formatMessage({ id: "dashboard.apiKeyPlaceholder" });
   const token = getAuthData("token");
   const adminData = getAdminData();
+
+  const terminology = useTerminology(adminData);
 
   const schoolName =
     adminData?.schoolname ||
@@ -381,10 +384,7 @@ const AdminDashboard: React.FC = () => {
                   className="relative rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/10"
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
-                    <FormattedMessage
-                      id="dashboard.nav.staff"
-                      defaultMessage="Staff"
-                    />
+                    {terminology.teacherPlural}
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </button>
@@ -407,10 +407,7 @@ const AdminDashboard: React.FC = () => {
                   className="relative rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/10"
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
-                    <FormattedMessage
-                      id="dashboard.nav.addStaff"
-                      defaultMessage="Add Staff"
-                    />
+                    Add {terminology.teacher}
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </button>
@@ -481,19 +478,13 @@ const AdminDashboard: React.FC = () => {
                 onClick={() => navigate("/admin/teachers")}
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
               >
-                <FormattedMessage
-                  id="dashboard.nav.staff"
-                  defaultMessage="Staff"
-                />
+                {terminology.teacherPlural}
               </button>
               <button
                 onClick={() => navigate("/admin/teachers/add")}
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
               >
-                <FormattedMessage
-                  id="dashboard.nav.addStaff"
-                  defaultMessage="Add Staff"
-                />
+                Add {terminology.teacher}
               </button>
               <button
                 onClick={() => navigate("/admin/reports")}
@@ -563,7 +554,7 @@ const AdminDashboard: React.FC = () => {
           {[
             {
               icon: Users,
-              label: formatMessage({ id: "dashboard.stats.students" }),
+              label: `Total ${terminology.studentPlural}`,
               value: isLoadingStats
                 ? "..."
                 : dashboardStats.totalStudents.toString(),
@@ -573,7 +564,7 @@ const AdminDashboard: React.FC = () => {
             },
             {
               icon: GraduationCap,
-              label: formatMessage({ id: "dashboard.stats.teachers" }),
+              label: `Active ${terminology.teacherPlural}`,
               value: isLoadingStats
                 ? "..."
                 : dashboardStats.totalTeachers.toString(),
@@ -792,32 +783,22 @@ const AdminDashboard: React.FC = () => {
             {[
               {
                 icon: ClipboardList,
-                title: formatMessage({
-                  id: "dashboard.features.attendance.title",
-                }),
-                description: formatMessage({
-                  id: "dashboard.features.attendance.description",
-                }),
+                title: "Attendance Tracking",
+                description: `Monitor and manage ${terminology.student.toLowerCase()} attendance records`,
                 color: "from-blue-500 to-cyan-500",
                 delay: "0ms",
               },
               {
                 icon: Users,
-                title: formatMessage({
-                  id: "dashboard.features.teacher.title",
-                }),
-                description: formatMessage({
-                  id: "dashboard.features.teacher.description",
-                }),
+                title: `${terminology.teacher} Management`,
+                description: `Add and manage ${terminology.teacher.toLowerCase()} staff`,
                 color: "from-green-500 to-emerald-500",
                 delay: "200ms",
               },
               {
                 icon: BarChart3,
-                title: formatMessage({ id: "dashboard.features.report.title" }),
-                description: formatMessage({
-                  id: "dashboard.features.report.description",
-                }),
+                title: "Reports & Analytics",
+                description: "Generate detailed reports and insights",
                 color: "from-purple-500 to-pink-500",
                 delay: "400ms",
               },
