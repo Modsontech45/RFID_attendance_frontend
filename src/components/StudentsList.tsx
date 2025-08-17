@@ -78,9 +78,6 @@ const StudentsList: React.FC = () => {
   // Extract admin info with fallbacks
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
-
-  // const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   changeLanguage(e.target.value);
   // };
 let subscription =   adminData?.subscription_status || 'inactive';
 

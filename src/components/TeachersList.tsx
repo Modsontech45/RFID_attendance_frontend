@@ -62,9 +62,6 @@ const { locale } = useLocalIntl();
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
 
-  // const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   changeLanguage(e.target.value);
-  // };
 
   const handleGoHome = () => {
     navigate('/admin/dashboard');
@@ -342,7 +339,7 @@ const { locale } = useLocalIntl();
             <div className="flex items-center justify-center py-20">
               <div className="text-center space-y-4">
                 <Loader2 className="w-12 h-12 animate-spin text-green-600 mx-auto" />
-                <span className="text-gray-300 text-lg">{t('teachersList.loading')}</span>
+                <span className="text-gray-300 text-lg">{formatMessage({ id: 'teachersList.loading' })}</span>
               </div>
             </div>
           )}
@@ -364,7 +361,7 @@ const { locale } = useLocalIntl();
                 className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 mx-auto"
               >
                 <RefreshCw className="w-4 h-4" />
-                <span>{t('teachersList.tryAgain')}</span>
+                <span>{formatMessage({ id: 'teachersList.tryAgain' })}</span>
               </button>
             </div>
           )}

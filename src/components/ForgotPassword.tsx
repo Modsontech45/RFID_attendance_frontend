@@ -25,9 +25,6 @@ const ForgotPassword: React.FC = () => {
     "success" | "error" | "warning" | ""
   >("");
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeLanguage(e.target.value);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
