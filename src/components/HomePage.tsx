@@ -244,21 +244,21 @@ const HomePage: React.FC = () => {
               <Sparkles className="h-4 w-4" />
               <span className="text-sm font-medium">
                 <FormattedMessage
-                  id="home.hero.subtitle"
-                  defaultMessage="Next-Generation School Attendance System"
+                  id="home.hero.badge"
+                  defaultMessage="Next-Generation Attendance System"
                 />
               </span>
             </div>
 
             <h1 className="text-5xl font-bold leading-tight md:text-7xl">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                <FormattedMessage id="home.hero.title_part1" defaultMessage="Smart School" />
+                <FormattedMessage id="home.hero.title_part1" defaultMessage="Smart Attendance" />
               </span>
               <br />
               <span className="text-white">
                 <FormattedMessage
                   id="home.hero.title_part2"
-                  defaultMessage="Attendance Made Simple"
+                  defaultMessage="Made Simple"
                 />
               </span>
             </h1>
@@ -266,7 +266,7 @@ const HomePage: React.FC = () => {
             <p className="mx-auto max-w-3xl text-xl leading-relaxed text-gray-300">
               <FormattedMessage
                 id="home.hero.description"
-                defaultMessage="Revolutionary RFID-powered attendance tracking for schools. Experience seamless, real-time monitoring with enterprise-grade security."
+                defaultMessage="Revolutionary RFID-powered attendance tracking for schools and companies. Experience seamless, real-time monitoring with enterprise-grade security."
               />
             </p>
           </div>
@@ -315,8 +315,8 @@ const HomePage: React.FC = () => {
             {[
               {
                 icon: Building,
-                label: formatMessage({ id: "home.stats.schools", defaultMessage: "Schools" }),
-                value: formatMessage({ id: "home.stats.schools_value", defaultMessage: "500+" }),
+                label: formatMessage({ id: "home.stats.organizations", defaultMessage: "Organizations" }),
+                value: formatMessage({ id: "home.stats.organizations_value", defaultMessage: "500+" }),
               },
               {
                 icon: UserCheck,
@@ -358,13 +358,13 @@ const HomePage: React.FC = () => {
             <h2 className="text-4xl font-bold text-white">
               <FormattedMessage
                 id="home.features.title"
-                defaultMessage="Why Choose Synctuario for Your School?"
+                defaultMessage="Why Choose Synctuario?"
               />
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-300">
               <FormattedMessage
                 id="home.features.description"
-                defaultMessage="Cutting-edge technology meets intuitive design for the ultimate school attendance management experience."
+                defaultMessage="Cutting-edge technology meets intuitive design for the ultimate attendance management experience."
               />
             </p>
           </div>
@@ -391,7 +391,7 @@ const HomePage: React.FC = () => {
                 }),
                 description: formatMessage({
                   id: "home.features.items.1.description",
-                  defaultMessage: "Bank-level encryption with unique API keys for each school",
+                  defaultMessage: "Bank-level encryption with unique API keys for each organization",
                 }),
                 color: "from-green-500 to-emerald-500",
               },
@@ -481,11 +481,11 @@ const HomePage: React.FC = () => {
                 icon: UserCheck,
                 title: formatMessage({
                   id: "home.how_it_works.steps.0.title",
-                  defaultMessage: "Register Students",
+                  defaultMessage: "Register Users",
                 }),
                 description: formatMessage({
                   id: "home.how_it_works.steps.0.description",
-                  defaultMessage: "Add students with unique RFID cards",
+                  defaultMessage: "Add students or employees with unique RFID cards",
                 }),
               },
               {
@@ -531,7 +531,7 @@ const HomePage: React.FC = () => {
         <section className="space-y-12">
           <div className="space-y-4 text-center">
             <h2 className="text-4xl font-bold text-white">
-              <FormattedMessage id="home.use_cases.title" defaultMessage="Perfect for Schools" />
+              <FormattedMessage id="home.use_cases.title" defaultMessage="Perfect For" />
             </h2>
           </div>
 
@@ -540,27 +540,23 @@ const HomePage: React.FC = () => {
               <GraduationCap className="mb-6 h-12 w-12 text-blue-400" />
               <h3 className="mb-4 text-2xl font-bold text-white">
                 <FormattedMessage
-                  id="home.use_cases.elementary.title"
-                  defaultMessage="Elementary & High Schools"
+                  id="home.use_cases.education.title"
+                  defaultMessage="Educational Institutions"
                 />
               </h3>
               <ul className="space-y-3 text-gray-300">
                 {[
                   formatMessage({
-                    id: "home.use_cases.elementary.items.0",
+                    id: "home.use_cases.education.items.0",
                     defaultMessage: "Student attendance tracking",
                   }),
                   formatMessage({
-                    id: "home.use_cases.elementary.items.1",
+                    id: "home.use_cases.education.items.1",
                     defaultMessage: "Teacher access management",
                   }),
                   formatMessage({
-                    id: "home.use_cases.elementary.items.2",
+                    id: "home.use_cases.education.items.2",
                     defaultMessage: "Parent notification system",
-                  }),
-                  formatMessage({
-                    id: "home.use_cases.elementary.items.3",
-                    defaultMessage: "Class-wise reporting",
                   }),
                 ].map((feature: string, index: number) => (
                   <li key={index} className="flex items-center space-x-3">
@@ -575,27 +571,23 @@ const HomePage: React.FC = () => {
               <Building className="mb-6 h-12 w-12 text-green-400" />
               <h3 className="mb-4 text-2xl font-bold text-white">
                 <FormattedMessage
-                  id="home.use_cases.university.title"
-                  defaultMessage="Universities & Colleges"
+                  id="home.use_cases.corporate.title"
+                  defaultMessage="Corporate Offices"
                 />
               </h3>
               <ul className="space-y-3 text-gray-300">
                 {[
                   formatMessage({
-                    id: "home.use_cases.university.items.0",
-                    defaultMessage: "Large-scale student tracking",
+                    id: "home.use_cases.corporate.items.0",
+                    defaultMessage: "Employee time tracking",
                   }),
                   formatMessage({
-                    id: "home.use_cases.university.items.1",
-                    defaultMessage: "Multi-campus support",
+                    id: "home.use_cases.corporate.items.1",
+                    defaultMessage: "Payroll integration",
                   }),
                   formatMessage({
-                    id: "home.use_cases.university.items.2",
-                    defaultMessage: "Advanced analytics",
-                  }),
-                  formatMessage({
-                    id: "home.use_cases.university.items.3",
-                    defaultMessage: "Integration with LMS",
+                    id: "home.use_cases.corporate.items.2",
+                    defaultMessage: "Security access control",
                   }),
                 ].map((feature: string, index: number) => (
                   <li key={index} className="flex items-center space-x-3">
@@ -614,13 +606,13 @@ const HomePage: React.FC = () => {
             <h2 className="text-4xl font-bold text-white">
               <FormattedMessage
                 id="home.cta.title"
-                defaultMessage="Ready to Transform Your School?"
+                defaultMessage="Ready to Get Started?"
               />
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-gray-300">
               <FormattedMessage
                 id="home.cta.description"
-                defaultMessage="Join hundreds of schools already using Synctuario for seamless attendance management."
+                defaultMessage="Join hundreds of organizations already using Synctuario for seamless attendance management."
               />
             </p>
           </div>

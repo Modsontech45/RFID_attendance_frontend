@@ -102,10 +102,10 @@
       "title": "Synctuario"
     },
     "hero": {
-      "subtitle": "Système de présence scolaire de nouvelle génération",
-      "title_part1": "École Intelligente",
-      "title_part2": "Présence Simplifiée",
-      "description": "Suivi de présence révolutionnaire alimenté par RFID pour les écoles. Expérience fluide et surveillance en temps réel avec une sécurité de niveau entreprise."
+      "badge": "Système de présence de nouvelle génération",
+      "title_part1": "Présence intelligente",
+      "title_part2": "simplifiée",
+      "description": "Suivi de présence révolutionnaire alimenté par RFID pour les écoles et les entreprises. Découvrez une surveillance transparente et en temps réel avec une sécurité de niveau entreprise."
     },
     "buttons": {
       "admin_portal": "Portail Admin",
@@ -113,18 +113,18 @@
       "documentation": "Documentation"
     },
     "stats": {
-      "schools": "Écoles",
+      "organizations": "Organisations",
       "daily_scans": "Passages Quotidiens",
       "accuracy": "Précision",
       "uptime": "Disponibilité",
-      "schools_value": "500+",
+      "organizations_value": "500+",
       "daily_scans_value": "50K+",
       "accuracy_value": "99,9%",
       "uptime_value": "99,99%"
     },
     "features": {
-      "title": "Pourquoi choisir Synctuario pour votre école ?",
-      "description": "La technologie de pointe rencontre un design intuitif pour l'expérience ultime de gestion de présence scolaire.",
+      "title": "Pourquoi choisir Synctuario ?",
+      "description": "La technologie de pointe rencontre un design intuitif pour l'expérience ultime de gestion de présence.",
       "items": [
         {
           "title": "Ultra-rapide",
@@ -132,7 +132,7 @@
         },
         {
           "title": "Sécurité d'entreprise",
-          "description": "Chiffrement de niveau bancaire avec clés API uniques pour chaque école"
+          "description": "Chiffrement de niveau bancaire avec clés API uniques pour chaque organisation"
         },
         {
           "title": "Analytique en temps réel",
@@ -158,8 +158,8 @@
       "steps": [
         {
           "step": "01",
-          "title": "Inscrire les élèves",
-          "description": "Ajouter des élèves avec des cartes RFID uniques"
+          "title": "Enregistrer les utilisateurs",
+          "description": "Ajouter des étudiants ou employés avec cartes RFID uniques"
         },
         {
           "step": "02",
@@ -174,29 +174,27 @@
       ]
     },
     "use_cases": {
-      "title": "Parfait pour les écoles",
-      "elementary": {
-        "title": "Écoles primaires & secondaires",
+      "title": "Parfait pour",
+      "education": {
+        "title": "Institutions éducatives",
         "items": [
           "Suivi de présence des élèves",
           "Gestion des accès enseignants",
-          "Système de notification aux parents",
-          "Rapports par classe"
+          "Système de notification des parents"
         ]
       },
-      "university": {
-        "title": "Universités & collèges",
+      "corporate": {
+        "title": "Bureaux d'entreprise",
         "items": [
-          "Suivi à grande échelle des étudiants",
-          "Support multi-campus",
-          "Analytique avancée",
-          "Intégration avec les LMS"
+          "Suivi du temps des employés",
+          "Intégration de la paie",
+          "Contrôle d'accès sécurisé"
         ]
       }
     },
     "cta": {
-      "title": "Prêt à transformer votre école ?",
-      "description": "Rejoignez des centaines d'écoles qui utilisent déjà Synctuario pour une gestion de présence sans faille.",
+      "title": "Prêt à commencer ?",
+      "description": "Rejoignez des centaines d'organisations utilisant déjà Synctuario pour une gestion de présence transparente.",
       "pricing_button": "Voir les tarifs",
       "contact_button": "Contactez-nous",
       "benefits": [

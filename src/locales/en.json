@@ -101,10 +101,10 @@
       "title": "Synctuario"
     },
     "hero": {
-      "subtitle": "Next-Generation School Attendance System",
-      "title_part1": "Smart School",
-      "title_part2": "Attendance Made Simple",
-      "description": "Revolutionary RFID-powered attendance tracking for schools. Experience seamless, real-time monitoring with enterprise-grade security."
+      "badge": "Next-Generation Attendance System",
+      "title_part1": "Smart Attendance",
+      "title_part2": "Made Simple",
+      "description": "Revolutionary RFID-powered attendance tracking for schools and companies. Experience seamless, real-time monitoring with enterprise-grade security."
     },
     "buttons": {
       "admin_portal": "Admin Portal",
@@ -112,18 +112,18 @@
       "documentation": "Documentation"
     },
     "stats": {
-      "schools": "Schools",
+      "organizations": "Organizations",
       "daily_scans": "Daily Scans",
       "accuracy": "Accuracy",
       "uptime": "Uptime",
-      "schools_value": "500+",
+      "organizations_value": "500+",
       "daily_scans_value": "50K+",
       "accuracy_value": "99.9%",
       "uptime_value": "99.99%"
     },
     "features": {
-      "title": "Why Choose Synctuario for Your School?",
-      "description": "Cutting-edge technology meets intuitive design for the ultimate school attendance management experience.",
+      "title": "Why Choose Synctuario?",
+      "description": "Cutting-edge technology meets intuitive design for the ultimate attendance management experience.",
       "items": [
         {
           "title": "Lightning Fast",
@@ -131,7 +131,7 @@
         },
         {
           "title": "Enterprise Security",
-          "description": "Bank-level encryption with unique API keys for each school"
+          "description": "Bank-level encryption with unique API keys for each organization"
         },
         {
           "title": "Real-time Analytics",
@@ -157,8 +157,8 @@
       "steps": [
         {
           "step": "01",
-          "title": "Register Students",
-          "description": "Add students with unique RFID cards"
+          "title": "Register Users",
+          "description": "Add students or employees with unique RFID cards"
         },
         {
           "step": "02",
@@ -173,29 +173,27 @@
       ]
     },
     "use_cases": {
-      "title": "Perfect for Schools",
-      "elementary": {
-        "title": "Elementary & High Schools",
+      "title": "Perfect For",
+      "education": {
+        "title": "Educational Institutions",
         "items": [
           "Student attendance tracking",
           "Teacher access management",
-          "Parent notification system",
-          "Class-wise reporting"
+          "Parent notification system"
         ]
       },
-      "university": {
-        "title": "Universities & Colleges",
+      "corporate": {
+        "title": "Corporate Offices",
         "items": [
-          "Large-scale student tracking",
-          "Multi-campus support",
-          "Advanced analytics",
-          "Integration with LMS"
+          "Employee time tracking",
+          "Payroll integration",
+          "Security access control"
         ]
       }
     },
     "cta": {
-      "title": "Ready to Transform Your School?",
-      "description": "Join hundreds of schools already using Synctuario for seamless attendance management.",
+      "title": "Ready to Get Started?",
+      "description": "Join hundreds of organizations already using Synctuario for seamless attendance management.",
       "pricing_button": "View Pricing",
       "contact_button": "Contact Us",
       "benefits": [
