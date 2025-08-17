@@ -58,8 +58,6 @@ const COUNTRY_CODES = [
   { code: "+381", country: "RS", name: "Serbia" },
   { code: "+382", country: "ME", name: "Montenegro" },
   { code: "+383", country: "XK", name: "Kosovo" },
-  { code: "+385", country: "HR", name: "Croatia" },
-  { code: "+386", country: "SI", name: "Slovenia" },
   { code: "+387", country: "BA", name: "Bosnia and Herzegovina" },
   { code: "+389", country: "MK", name: "North Macedonia" },
   { code: "+90", country: "TR", name: "Turkey" },
@@ -216,7 +214,7 @@ const AdminSignup: React.FC = () => {
     return { score, label, color, requirements };
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -358,14 +356,11 @@ const AdminSignup: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Con */}
+      {/* Main Content */}
       <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 py-8">
         <div className="w-full max-w-md">
           {/* Signup Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-6 rounded-2xl border-2 border-green-600 bg-black p-8 shadow-2xl"
-          >
+          <div className="space-y-6 rounded-2xl border-2 border-green-600 bg-black p-8 shadow-2xl">
             {/* Header */}
             <div className="space-y-2 text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-green-600">
@@ -383,334 +378,335 @@ const AdminSignup: React.FC = () => {
               </div>
             )}
 
-            {/* School Name Field */}
-            <div className="space-y-2">
-              <div className="relative">
-                <Building className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
-                <input
-                  type="text"
-                  name="schoolname"
-                  value={formData.schoolname}
-                  onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "signup.admin.organizationPlaceholder",
-                    defaultMessage: "Organization Name",
-                  })}
-                  required
-                  className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
-                    errors.schoolname
-                      ? "border-red-600 focus:ring-red-600"
-                      : "border-green-600 focus:ring-green-600"
-                  }`}
-                />
-              </div>
-              {errors.schoolname && <p className="text-sm text-red-400">{errors.schoolname}</p>}
-            </div>
-
-            {/* Organization Type Field */}
-            <div className="space-y-2">
-              <div className="relative">
-                <Building className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
-                <select
-                  name="type"
-                  value={formData.type}
-                  onChange={handleInputChange}
-                  required
-                  className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white transition-all focus:outline-none focus:ring-2 ${
-                    errors.type
-                      ? "border-red-600 focus:ring-red-600"
-                      : "border-green-600 focus:ring-green-600"
-                  }`}
-                >
-                  <option value="">
-                    {formatMessage({
-                      id: "signup.admin.typePlaceholder",
-                      defaultMessage: "Select Organization Type",
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* School Name Field */}
+              <div className="space-y-2">
+                <div className="relative">
+                  <Building className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <input
+                    type="text"
+                    name="schoolname"
+                    value={formData.schoolname}
+                    onChange={handleInputChange}
+                    placeholder={formatMessage({
+                      id: "signup.admin.organizationPlaceholder",
+                      defaultMessage: "Organization Name",
                     })}
-                  </option>
-                  <option value="school">
-                    {formatMessage({
-                      id: "signup.admin.typeSchool",
-                      defaultMessage: "School",
-                    })}
-                  </option>
-                  <option value="company">
-                    {formatMessage({
-                      id: "signup.admin.typeCompany",
-                      defaultMessage: "Company",
-                    })}
-                  </option>
-                </select>
-              </div>
-              {errors.type && <p className="text-sm text-red-400">{errors.type}</p>}
-            </div>
-
-            {/* Username Field */}
-            <div className="space-y-2">
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
-                <input
-                  type="text"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "signup.admin.usernamePlaceholder",
-                    defaultMessage: "Username",
-                  })}
-                  required
-                  className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
-                    errors.username
-                      ? "border-red-600 focus:ring-red-600"
-                      : "border-green-600 focus:ring-green-600"
-                  }`}
-                />
-              </div>
-              {errors.username && <p className="text-sm text-red-400">{errors.username}</p>}
-            </div>
-
-            {/* Email Field */}
-            <div className="space-y-2">
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "signup.admin.emailPlaceholder",
-                    defaultMessage: "Email",
-                  })}
-                  required
-                  className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
-                    errors.email
-                      ? "border-red-600 focus:ring-red-600"
-                      : "border-green-600 focus:ring-green-600"
-                  }`}
-                />
-              </div>
-              {errors.email && <p className="text-sm text-red-400">{errors.email}</p>}
-            </div>
-
-            {/* Telephone Field */}
-            <div className="space-y-2">
-              <div className="relative">
-                <Phone className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
-                {detectedCountry && (
-                  <div className="absolute left-12 top-1/2 -translate-y-1/2 transform flex items-center">
-                    <Flag
-                      code={detectedCountry}
-                      className="w-5 h-4 rounded-sm border border-white/20"
-                      fallback={<span className="text-xs">🌍</span>}
-                    />
-                  </div>
-                )}
-                <input
-                  type="tel"
-                  name="telephone"
-                  value={formData.telephone}
-                  onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "signup.admin.telephonePlaceholder",
-                    defaultMessage: "Phone Number",
-                  })}
-                  required
-                  className={`w-full rounded-lg border bg-black/50 py-3 ${detectedCountry ? 'pl-20' : 'pl-12'} pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
-                    errors.telephone
-                      ? "border-red-600 focus:ring-red-600"
-                      : "border-green-600 focus:ring-green-600"
-                  }`}
-                />
-              </div>
-              {errors.telephone && <p className="text-sm text-red-400">{errors.telephone}</p>}
-              {detectedCountry && (
-                <div className="flex items-center space-x-2 text-xs text-green-300">
-                  <Flag code={detectedCountry} className="w-4 h-3 rounded-sm" />
-                  <span>
-                    {COUNTRY_CODES.find(c => c.country === detectedCountry)?.name || "Unknown Country"}
-                  </span>
+                    required
+                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                      errors.schoolname
+                        ? "border-red-600 focus:ring-red-600"
+                        : "border-green-600 focus:ring-green-600"
+                    }`}
+                  />
                 </div>
-              )}
-            </div>
-
-            {/* Password Field */}
-            <div className="space-y-2">
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "signup.admin.passwordPlaceholder",
-                    defaultMessage: "Password",
-                  })}
-                  required
-                  className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
-                    errors.password
-                      ? "border-red-600 focus:ring-red-600"
-                      : "border-green-600 focus:ring-green-600"
-                  }`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 transform text-green-400 transition-colors hover:text-green-300"
-                >
-                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                </button>
+                {errors.schoolname && <p className="text-sm text-red-400">{errors.schoolname}</p>}
               </div>
-              {errors.password && <p className="text-sm text-red-400">{errors.password}</p>}
-              
-              {/* Password Strength Indicator */}
-              {formData.password && (
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-400">Password Strength:</span>
-                    <span className={`text-xs font-semibold ${passwordStrength.color}`}>
-                      {passwordStrength.label}
+
+              {/* Organization Type Field */}
+              <div className="space-y-2">
+                <div className="relative">
+                  <Building className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <select
+                    name="type"
+                    value={formData.type}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white transition-all focus:outline-none focus:ring-2 ${
+                      errors.type
+                        ? "border-red-600 focus:ring-red-600"
+                        : "border-green-600 focus:ring-green-600"
+                    }`}
+                  >
+                    <option value="">
+                      {formatMessage({
+                        id: "signup.admin.typePlaceholder",
+                        defaultMessage: "Select Organization Type",
+                      })}
+                    </option>
+                    <option value="school">
+                      {formatMessage({
+                        id: "signup.admin.typeSchool",
+                        defaultMessage: "School",
+                      })}
+                    </option>
+                    <option value="company">
+                      {formatMessage({
+                        id: "signup.admin.typeCompany",
+                        defaultMessage: "Company",
+                      })}
+                    </option>
+                  </select>
+                </div>
+                {errors.type && <p className="text-sm text-red-400">{errors.type}</p>}
+              </div>
+
+              {/* Username Field */}
+              <div className="space-y-2">
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <input
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleInputChange}
+                    placeholder={formatMessage({
+                      id: "signup.admin.usernamePlaceholder",
+                      defaultMessage: "Username",
+                    })}
+                    required
+                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                      errors.username
+                        ? "border-red-600 focus:ring-red-600"
+                        : "border-green-600 focus:ring-green-600"
+                    }`}
+                  />
+                </div>
+                {errors.username && <p className="text-sm text-red-400">{errors.username}</p>}
+              </div>
+
+              {/* Email Field */}
+              <div className="space-y-2">
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder={formatMessage({
+                      id: "signup.admin.emailPlaceholder",
+                      defaultMessage: "Email",
+                    })}
+                    required
+                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                      errors.email
+                        ? "border-red-600 focus:ring-red-600"
+                        : "border-green-600 focus:ring-green-600"
+                    }`}
+                  />
+                </div>
+                {errors.email && <p className="text-sm text-red-400">{errors.email}</p>}
+              </div>
+
+              {/* Telephone Field */}
+              <div className="space-y-2">
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  {detectedCountry && (
+                    <div className="absolute left-12 top-1/2 -translate-y-1/2 transform flex items-center">
+                      <Flag
+                        code={detectedCountry}
+                        className="w-5 h-4 rounded-sm border border-white/20"
+                        fallback={<span className="text-xs">🌍</span>}
+                      />
+                    </div>
+                  )}
+                  <input
+                    type="tel"
+                    name="telephone"
+                    value={formData.telephone}
+                    onChange={handleInputChange}
+                    placeholder={formatMessage({
+                      id: "signup.admin.telephonePlaceholder",
+                      defaultMessage: "Phone Number",
+                    })}
+                    required
+                    className={`w-full rounded-lg border bg-black/50 py-3 ${detectedCountry ? 'pl-20' : 'pl-12'} pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                      errors.telephone
+                        ? "border-red-600 focus:ring-red-600"
+                        : "border-green-600 focus:ring-green-600"
+                    }`}
+                  />
+                </div>
+                {errors.telephone && <p className="text-sm text-red-400">{errors.telephone}</p>}
+                {detectedCountry && (
+                  <div className="flex items-center space-x-2 text-xs text-green-300">
+                    <Flag code={detectedCountry} className="w-4 h-3 rounded-sm" />
+                    <span>
+                      {COUNTRY_CODES.find(c => c.country === detectedCountry)?.name || "Unknown Country"}
                     </span>
                   </div>
-                  
-                  {/* Strength Bar */}
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        passwordStrength.score >= 5
-                          ? "bg-green-500"
-                          : passwordStrength.score >= 4
-                          ? "bg-green-400"
-                          : passwordStrength.score >= 3
-                          ? "bg-yellow-400"
-                          : passwordStrength.score >= 2
-                          ? "bg-orange-400"
-                          : "bg-red-400"
-                      }`}
-                      style={{ width: `${(passwordStrength.score / 5) * 100}%` }}
-                    ></div>
-                  </div>
-                  
-                  {/* Requirements Checklist */}
-                  <div className="grid grid-cols-1 gap-1 text-xs">
-                    {[
-                      { key: "length", label: formatMessage({ id: "validation.passwordMinChars" }) },
-                      { key: "uppercase", label: formatMessage({ id: "validation.passwordUppercase" }) },
-                      { key: "lowercase", label: formatMessage({ id: "validation.passwordLowercase" }) },
-                      { key: "number", label: formatMessage({ id: "validation.passwordNumber" }) },
-                      { key: "special", label: formatMessage({ id: "validation.passwordSpecial" }) },
-                    ].map(({ key, label }) => (
-                      <div
-                        key={key}
-                        className={`flex items-center space-x-2 transition-colors duration-200 ${
-                          passwordStrength.requirements[key as keyof typeof passwordStrength.requirements]
-                            ? "text-green-400"
-                            : "text-gray-400"
-                        }`}
-                      >
-                        {passwordStrength.requirements[key as keyof typeof passwordStrength.requirements] ? (
-                          <Check className="h-3 w-3" />
-                        ) : (
-                          <X className="h-3 w-3" />
-                        )}
-                        <span>{label}</span>
-                      </div>
-                    ))}
-                  </div>
+                )}
+              </div>
+
+              {/* Password Field */}
+              <div className="space-y-2">
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    placeholder={formatMessage({
+                      id: "signup.admin.passwordPlaceholder",
+                      defaultMessage: "Password",
+                    })}
+                    required
+                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                      errors.password
+                        ? "border-red-600 focus:ring-red-600"
+                        : "border-green-600 focus:ring-green-600"
+                    }`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 transform text-green-400 transition-colors hover:text-green-300"
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
                 </div>
-              )}
+                {errors.password && <p className="text-sm text-red-400">{errors.password}</p>}
+                
+                {/* Password Strength Indicator */}
+                {formData.password && (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-400">Password Strength:</span>
+                      <span className={`text-xs font-semibold ${passwordStrength.color}`}>
+                        {passwordStrength.label}
+                      </span>
+                    </div>
+                    
+                    {/* Strength Bar */}
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div
+                        className={`h-2 rounded-full transition-all duration-300 ${
+                          passwordStrength.score >= 5
+                            ? "bg-green-500"
+                            : passwordStrength.score >= 4
+                            ? "bg-green-400"
+                            : passwordStrength.score >= 3
+                            ? "bg-yellow-400"
+                            : passwordStrength.score >= 2
+                            ? "bg-orange-400"
+                            : "bg-red-400"
+                        }`}
+                        style={{ width: `${(passwordStrength.score / 5) * 100}%` }}
+                      ></div>
+                    </div>
+                    
+                    {/* Requirements Checklist */}
+                    <div className="grid grid-cols-1 gap-1 text-xs">
+                      {[
+                        { key: "length", label: formatMessage({ id: "validation.passwordMinChars" }) },
+                        { key: "uppercase", label: formatMessage({ id: "validation.passwordUppercase" }) },
+                        { key: "lowercase", label: formatMessage({ id: "validation.passwordLowercase" }) },
+                        { key: "number", label: formatMessage({ id: "validation.passwordNumber" }) },
+                        { key: "special", label: formatMessage({ id: "validation.passwordSpecial" }) },
+                      ].map(({ key, label }) => (
+                        <div
+                          key={key}
+                          className={`flex items-center space-x-2 transition-colors duration-200 ${
+                            passwordStrength.requirements[key as keyof typeof passwordStrength.requirements]
+                              ? "text-green-400"
+                              : "text-gray-400"
+                          }`}
+                        >
+                          {passwordStrength.requirements[key as keyof typeof passwordStrength.requirements] ? (
+                            <Check className="h-3 w-3" />
+                          ) : (
+                            <X className="h-3 w-3" />
+                          )}
+                          <span>{label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
 
-            {/* Confirm Password Field */}
-            <div className="space-y-2">
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "signup.admin.confirmPasswordPlaceholder",
-                    defaultMessage: "Confirm Password",
-                  })}
-                  required
-                  className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
-                    errors.confirmPassword
-                      ? "border-red-600 focus:ring-red-600"
-                      : "border-green-600 focus:ring-green-600"
-                  }`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 transform text-green-400 transition-colors hover:text-green-300"
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
-                </button>
+              {/* Confirm Password Field */}
+              <div className="space-y-2">
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    placeholder={formatMessage({
+                      id: "signup.admin.confirmPasswordPlaceholder",
+                      defaultMessage: "Confirm Password",
+                    })}
+                    required
+                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                      errors.confirmPassword
+                        ? "border-red-600 focus:ring-red-600"
+                        : "border-green-600 focus:ring-green-600"
+                    }`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 transform text-green-400 transition-colors hover:text-green-300"
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
+                </div>
+                {errors.confirmPassword && (
+                  <p className="text-sm text-red-400">{errors.confirmPassword}</p>
+                )}
               </div>
-              {errors.confirmPassword && (
-                <p className="text-sm text-red-400">{errors.confirmPassword}</p>
-              )}
-            </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-green-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                  <span>
-                    <FormattedMessage
-                      id="signup.admin.creatingAccount"
-                      defaultMessage="Creating Account..."
-                    />
-                  </span>
-                </>
-              ) : (
-                <span>
-                  <FormattedMessage id="signup.admin.submitButton" defaultMessage="Sign Up" />
-                </span>
-              )}
-            </button>
-          </form>
-
-          {/* Links */}
-          <div className="space-y-3 text-center text-sm mt-6">
-            <p className="text-white">
-              <FormattedMessage
-                id="signup.admin.alreadyHaveAccount"
-                defaultMessage="Already have an account?"
-              />{" "}
-              <Link
-                to="/admin/login"
-                className="font-medium text-green-400 transition-colors hover:text-green-300 hover:underline"
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-green-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
               >
-                <FormattedMessage id="signup.admin.loginLink" defaultMessage="Login" />
-              </Link>
-            </p>
-          </div>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <span>
+                      <FormattedMessage
+                        id="signup.admin.creatingAccount"
+                        defaultMessage="Creating Account..."
+                      />
+                    </span>
+                  </>
+                ) : (
+                  <span>
+                    <FormattedMessage id="signup.admin.submitButton" defaultMessage="Sign Up" />
+                  </span>
+                )}
+              </button>
+            </form>
 
-          {/* Go Back Button */}
-          <button
-            type="button"
-            onClick={handleGoBack}
-            className="flex w-full items-center justify-center space-x-2 py-2 text-gray-400 transition-colors hover:text-white"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span>
-              <FormattedMessage id="signup.admin.back" defaultMessage="Back to Login" />
-            </span>
-          </button>
+            {/* Links */}
+            <div className="space-y-3 text-center text-sm">
+              <p className="text-white">
+                <FormattedMessage
+                  id="signup.admin.alreadyHaveAccount"
+                  defaultMessage="Already have an account?"
+                />{" "}
+                <Link
+                  to="/admin/login"
+                  className="font-medium text-green-400 transition-colors hover:text-green-300 hover:underline"
+                >
+                  <FormattedMessage id="signup.admin.loginLink" defaultMessage="Login" />
+                </Link>
+              </p>
+            </div>
+
+            {/* Go Back Button */}
+            <button
+              type="button"
+              onClick={handleGoBack}
+              className="flex w-full items-center justify-center space-x-2 py-2 text-gray-400 transition-colors hover:text-white"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              <span>
+                <FormattedMessage id="signup.admin.back" defaultMessage="Back to Login" />
+              </span>
+            </button>
+          </div>
         </div>
       </main>
     </div>
