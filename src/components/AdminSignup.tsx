@@ -682,35 +682,35 @@ const AdminSignup: React.FC = () => {
                 </span>
               )}
             </button>
-
-            {/* Links */}
-            <div className="space-y-3 text-center text-sm">
-              <p className="text-white">
-                <FormattedMessage
-                  id="signup.admin.alreadyHaveAccount"
-                  defaultMessage="Already have an account?"
-                />{" "}
-                <Link
-                  to="/admin/login"
-                  className="font-medium text-green-400 transition-colors hover:text-green-300 hover:underline"
-                >
-                  <FormattedMessage id="signup.admin.loginLink" defaultMessage="Login" />
-                </Link>
-              </p>
-            </div>
-
-            {/* Go Back Button */}
-            <button
-              type="button"
-              onClick={handleGoBack}
-              className="flex w-full items-center justify-center space-x-2 py-2 text-gray-400 transition-colors hover:text-white"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span>
-                <FormattedMessage id="signup.admin.back" defaultMessage="Back to Login" />
-              </span>
-            </button>
           </form>
+
+          {/* Links */}
+          <div className="space-y-3 text-center text-sm mt-6">
+            <p className="text-white">
+              <FormattedMessage
+                id="signup.admin.alreadyHaveAccount"
+                defaultMessage="Already have an account?"
+              />{" "}
+              <Link
+                to="/admin/login"
+                className="font-medium text-green-400 transition-colors hover:text-green-300 hover:underline"
+              >
+                <FormattedMessage id="signup.admin.loginLink" defaultMessage="Login" />
+              </Link>
+            </p>
+          </div>
+
+          {/* Go Back Button */}
+          <button
+            type="button"
+            onClick={handleGoBack}
+            className="flex w-full items-center justify-center space-x-2 py-2 text-gray-400 transition-colors hover:text-white"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>
+              <FormattedMessage id="signup.admin.back" defaultMessage="Back to Login" />
+            </span>
+          </button>
         </div>
       </main>
     </div>
