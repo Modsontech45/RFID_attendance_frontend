@@ -471,7 +471,6 @@ const AdminSignup: React.FC = () => {
 
             {/* Email Field */}
             <div className="space-y-2">
-        </form>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
                 <input
