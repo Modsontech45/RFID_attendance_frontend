@@ -117,107 +117,125 @@
       "docs": "Docs"
     },
     "hero": {
-      "badge": "Next-Generation Attendance System",
-      "titlePart1": "Smart Attendance",
-      "titlePart2": "Made Simple",
+      "subtitle": "Next-Generation Attendance System",
+      "title_part1": "Smart Attendance",
+      "title_part2": "Made Simple",
       "description": "Revolutionary RFID-powered attendance tracking for schools and companies. Experience seamless, real-time monitoring with enterprise-grade security."
     },
     "buttons": {
-      "adminPortal": "Admin Portal",
-      "staffPortal": "Staff Portal",
+      "admin_portal": "Admin Portal",
+      "teacher_portal": "Staff Portal",
       "documentation": "Documentation"
     },
     "stats": {
-      "organizations": "Organizations",
-      "dailyScans": "Daily Scans",
+      "schools": "Schools",
+      "daily_scans": "Daily Scans",
       "accuracy": "Accuracy",
       "uptime": "Uptime",
-      "organizationsValue": "500+",
-      "dailyScansValue": "50K+",
-      "accuracyValue": "99.9%",
-      "uptimeValue": "99.99%"
+      "schools_value": "500+",
+      "daily_scans_value": "50K+",
+      "accuracy_value": "99.9%",
+      "uptime_value": "99.99%"
     },
     "features": {
-      "title": "Why Choose Synctuario?",
-      "description": "Cutting-edge technology meets intuitive design for the ultimate attendance management experience.",
-      "lightningFast": {
-        "title": "Lightning Fast",
-        "description": "RFID scanning in milliseconds with ESP32 integration"
-      },
-      "enterpriseSecurity": {
-        "title": "Enterprise Security",
-        "description": "Bank-level encryption with unique API keys for each organization"
-      },
-      "realTimeAnalytics": {
-        "title": "Real-time Analytics",
-        "description": "Live dashboards with detailed reports and insights"
-      },
-      "multiLanguage": {
-        "title": "Multi-language",
-        "description": "Full support for English and French interfaces"
-      },
-      "mobileReady": {
-        "title": "Mobile Ready",
-        "description": "Access from any device with responsive design"
-      },
-      "exportData": {
-        "title": "Export Data",
-        "description": "Download attendance records in Excel format"
-      }
+      "title": "Why Choose Synctuario for Your School?",
+      "description": "Cutting-edge technology meets intuitive design for the ultimate school attendance management experience.",
+      "items": [
+        {
+          "title": "Lightning Fast",
+          "description": "RFID scanning in milliseconds with ESP32 integration"
+        },
+        {
+          "title": "Enterprise Security",
+          "description": "Bank-level encryption with unique API keys for each school"
+        },
+        {
+          "title": "Real-time Analytics",
+          "description": "Live dashboards with detailed reports and insights"
+        },
+        {
+          "title": "Multi-language",
+          "description": "Full support for English and French interfaces"
+        },
+        {
+          "title": "Mobile Ready",
+          "description": "Access from any device with responsive design"
+        },
+        {
+          "title": "Export Data",
+          "description": "Download attendance records in Excel format"
+        }
+      ]
     },
-    "howItWorks": {
+    "how_it_works": {
       "title": "How It Works",
       "description": "Simple setup, powerful results in just three steps.",
-      "step1": {
-        "step": "01",
-        "title": "Register Users",
-        "description": "Add students or employees with unique RFID cards"
-      },
-      "step2": {
-        "step": "02",
-        "title": "Scan & Track",
-        "description": "ESP32 readers capture attendance with timestamps"
-      },
-      "step3": {
-        "step": "03",
-        "title": "Monitor & Report",
-        "description": "View live data and generate detailed analytics"
-      }
+      "steps": [
+        {
+          "step": "01",
+          "title": "Register Students",
+          "description": "Add students with unique RFID cards"
+        },
+        {
+          "step": "02",
+          "title": "Scan & Track",
+          "description": "ESP32 readers capture attendance with timestamps"
+        },
+        {
+          "step": "03",
+          "title": "Monitor & Report",
+          "description": "View live data and generate detailed analytics"
+        }
+      ]
     },
-    "useCases": {
-      "title": "Perfect For",
-      "education": {
-        "title": "Educational Institutions",
-        "features": "Student attendance tracking|||Teacher access management|||Parent notification system"
+    "use_cases": {
+      "title": "Perfect for Schools",
+      "elementary": {
+        "title": "Elementary & High Schools",
+        "items": [
+          "Student attendance tracking",
+          "Teacher access management",
+          "Parent notification system",
+          "Class-wise reporting"
+        ]
       },
-      "corporate": {
-        "title": "Corporate Offices",
-        "features": "Employee time tracking|||Payroll integration|||Security access control"
+      "university": {
+        "title": "Universities & Colleges",
+        "items": [
+          "Large-scale student tracking",
+          "Multi-campus support",
+          "Advanced analytics",
+          "Integration with LMS"
+        ]
       }
     },
     "cta": {
-      "title": "Ready to Get Started?",
-      "description": "Join hundreds of organizations already using Synctuario for seamless attendance management.",
-      "pricingButton": "View Pricing",
-      "contactButton": "Contact Us",
-      "benefits": "15-day free trial|||No setup fees|||Cancel anytime"
+      "title": "Ready to Transform Your School?",
+      "description": "Join hundreds of schools already using Synctuario for seamless attendance management.",
+      "pricing_button": "View Pricing",
+      "contact_button": "Contact Us",
+      "benefits": [
+        "15-day free trial",
+        "No setup fees",
+        "Cancel anytime"
+      ]
     },
     "contact": {
       "title": "Contact Us",
       "subtitle": "Send us a message and we'll get back to you",
-      "namePlaceholder": "Your Name",
-      "emailPlaceholder": "Your Email",
-      "messagePlaceholder": "Your Message",
-      "sendButton": "Send Message",
+      "name_placeholder": "Your Name",
+      "email_placeholder": "Your Email",
+      "message_placeholder": "Your Message",
+      "send_button": "Send Message",
       "sending": "Sending...",
-      "successMessage": "Message sent successfully!",
-      "errorMessage": "Failed to send message. Please try again later."
+      "success_message": "Message sent successfully!",
+      "error_message": "Failed to send message. Please try again later."
     },
     "popup": {
-      "connectWithUs": "Connect With me",
+      "connect_with_us": "Connect With me",
       "close": "Close"
     },
-    "welcomeComments": [
+    "welcome_comments": [
       "✨ Welcome to Synctuario!",
       "🔐 Secure RFID Technology",
       "📊 Real-time Analytics",
@@ -227,6 +245,58 @@
       "⚡ Lightning Fast Scanning",
       "🌟 Trusted by 500+ Organizations"
     ]
+  },
+  "adminhomepage": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "header": "School Admin",
+      "section_title": "Dashboard Articles",
+      "api": "Your API Key for the Device",
+      "show": "Show",
+      "hide": "Hide",
+      "copy": "Copy",
+      "copied": "API Key copied!",
+      "rule": "Use the button below to create a new category for your forms or departments. Categories help group users for better organization and reporting.",
+      "create": "+ Create department",
+      "view": "view department",
+      "quick_actions": "Quick Actions",
+      "learn_more": "Learn more",
+      "modal": {
+        "title": "New Category",
+        "subtitle": "Create a new department category",
+        "category_name": "Category Name",
+        "category_placeholder": "Enter category name...",
+        "creating": "Creating..."
+      },
+      "stats": {
+        "students": "Total Students",
+        "teachers": "Active Teachers", 
+        "attendance": "Today's Attendance",
+        "records": "Attendance Records"
+      },
+      "menu": {
+        "school": "School",
+        "teachers": "Teachers",
+        "add_teacher": "Add Teacher",
+        "report": "Report",
+        "logout": "Logout",
+        "managers": "Managers"
+      },
+      "cards": {
+        "attendance": {
+          "title": "Attendance Tracking",
+          "description": "View and manage student attendance with real-time syncing from IoT devices."
+        },
+        "teacher": {
+          "title": "Teacher Management",
+          "description": "Add, update, and monitor all registered teachers with access control and activity logs."
+        },
+        "report": {
+          "title": "Student Reports",
+          "description": "Generate reports for attendance, academic performance, and behavioral tracking."
+        }
+      }
+    }
   },
   "dashboard": {
     "loading": "Loading Dashboard",
@@ -289,7 +359,20 @@
       "success": "Category created successfully!",
       "error": "Failed to create category.",
       "serverError": "Server error. Please try again."
+    },
+    "subscription": {
+      "subscribed": "Subscribed",
+      "free_plan": "Free Plan",
+      "subscribe_now": "Subscribe Now"
     }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name_placeholder": "Your Name",
+    "email_placeholder": "Your Email", 
+    "message_placeholder": "Your Message",
+    "send_button": "Send Message",
+    "sending": "Sending..."
   },
   "schoolManagement": {
     "title": "School Device Management",
@@ -397,6 +480,13 @@
     }
   },
   "attendance": {
+    "office": "Office",
+    "home": "Home", 
+    "students": "Students",
+    "attendance": "Attendance",
+    "reports": "Reports",
+    "logout": "Logout",
+    "settings": "Settings",
     "loading": {
       "attendance": "Loading Attendance...",
       "loadingAttendance": "Loading records...",
@@ -414,7 +504,7 @@
       "attendanceRate": "Attendance Rate",
       "partial": "Partial Attendance"
     },
-    "allForms": "All Forms",
+    "allforms": "All Forms",
     "download": "Download",
     "downloadAsPdf": "Download as PDF",
     "downloadAsExcel": "Download as Excel",
@@ -427,7 +517,7 @@
     "cancel": "Cancel",
     "applyFilters": "Apply Filters",
     "summary": "Attendance Summary",
-    "statistics": "Statistics by Form/Class",
+    "stattistics": "Statistics by Form/Class",
     "statsPresent": "Present",
     "statsAbsent": "Absent",
     "statsPartial": "Partial",
@@ -451,20 +541,20 @@
     "addYourFirstTeacher": "Add your first teacher to get started",
     "tryAgain": "Try Again",
     "goHome": "Go Home",
-    "stats": {
-      "totalTeachers": "Total Teachers",
+    "noBio": "No bio available",
+    "stats":{
+      "totalTeachers": "Total Teacher",
       "activeTeachers": "Active Teachers",
-      "topPerforming": "Top Performing",
+      "TopPerforming": "Top Performing",
       "avgExperience": "Average Experience"
     },
-    "searchTeachers": "Search teachers...",
+    "searchTeachers": "search teachers...",
     "filter": "Filter",
     "export": "Export",
     "addTeacher": "Add Teacher",
-    "unnamedTeacher": "Unnamed Teacher",
+    "unnamedTeacher":"Unnamed Teacher",
     "joined": "Joined on",
-    "view": "View Teacher",
-    "noBio": "No bio available"
+    "view":"View Teacher"
   },
   "addTeacher": {
     "title": "Add New Staff",

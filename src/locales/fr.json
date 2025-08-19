@@ -2,93 +2,140 @@
   "app": {
     "name": "Synctuario"
   },
+  "app": {
+    "name": "Synctuario"
+  },
   "loading": "Chargement...",
   "home": {
+    "header": {
+      "title": "Synctuario",
+      "docs": "Documentation"
+    },
+    "hero": {
+      "subtitle": "Système de présence de nouvelle génération",
+      "title_part1": "Présence intelligente",
+      "title_part2": "Simplifiée",
+      "description": "Suivi de présence révolutionnaire alimenté par RFID pour les écoles et les entreprises. Découvrez une surveillance transparente et en temps réel avec une sécurité de niveau entreprise."
+    },
+    "buttons": {
+      "admin_portal": "Portail Administrateur",
+      "teacher_portal": "Portail Personnel",
+      "documentation": "Documentation"
+    },
+    "stats": {
+      "schools": "Écoles",
+      "daily_scans": "Scans quotidiens",
+      "accuracy": "Précision",
+      "uptime": "Disponibilité",
+      "schools_value": "500+",
+      "daily_scans_value": "50K+",
+      "accuracy_value": "99,9%",
+      "uptime_value": "99,99%"
+    },
+    "features": {
+      "title": "Pourquoi choisir Synctuario pour votre école ?",
+      "description": "La technologie de pointe rencontre un design intuitif pour l'expérience ultime de gestion de présence scolaire.",
+      "items": [
+        {
+          "title": "Ultra-rapide",
+          "description": "Scan RFID en millisecondes avec intégration ESP32"
+        },
+        {
+          "title": "Sécurité d'entreprise",
+          "description": "Chiffrement de niveau bancaire avec clés API uniques pour chaque école"
+        },
+        {
+          "title": "Analytique en temps réel",
+          "description": "Tableaux de bord en direct avec rapports détaillés"
+        },
+        {
+          "title": "Multi-langue",
+          "description": "Support complet pour les interfaces en anglais et français"
+        },
+        {
+          "title": "Mobile prêt",
+          "description": "Accès depuis n'importe quel appareil avec design responsive"
+        },
+        {
+          "title": "Exporter les données",
+          "description": "Téléchargez les relevés de présence au format Excel"
+        }
+      ]
+    },
+    "how_it_works": {
+      "title": "Comment ça marche",
+      "description": "Installation simple, résultats puissants en seulement trois étapes.",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Inscrire les élèves",
+          "description": "Ajouter des élèves avec des cartes RFID uniques"
+        },
+        {
+          "step": "02",
+          "title": "Scanner & Suivre",
+          "description": "Les lecteurs ESP32 capturent la présence avec horodatage"
+        },
+        {
+          "step": "03",
+          "title": "Surveiller & Rapporter",
+          "description": "Voir les données en direct et générer des analyses détaillées"
+        }
+      ]
+    },
+    "use_cases": {
+      "title": "Parfait pour les écoles",
+      "elementary": {
+        "title": "Écoles primaires & secondaires",
+        "items": [
+          "Suivi de présence des élèves",
+          "Gestion des accès enseignants",
+          "Système de notification aux parents",
+          "Rapports par classe"
+        ]
+      },
+      "university": {
+        "title": "Universités & collèges",
+        "items": [
+          "Suivi à grande échelle des étudiants",
+          "Support multi-campus",
+          "Analytique avancée",
+          "Intégration avec les LMS"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Prêt à transformer votre école ?",
+      "description": "Rejoignez des centaines d'écoles qui utilisent déjà Synctuario pour une gestion de présence sans faille.",
+      "pricing_button": "Voir les tarifs",
+      "contact_button": "Contactez-nous",
+      "benefits": [
+        "Essai gratuit de 15 jours",
+        "Pas de frais d'installation",
+        "Annulez à tout moment"
+      ]
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "subtitle": "Envoyez-nous un message et nous vous répondrons",
+      "name_placeholder": "Votre nom",
+      "email_placeholder": "Votre e-mail",
+      "message_placeholder": "Votre message",
+      "send_button": "Envoyer le message",
+      "sending": "Envoi...",
+      "success_message": "Message envoyé avec succès !",
+      "error_message": "Échec de l'envoi du message. Veuillez réessayer plus tard."
+    },
+    "popup": {
+      "connect_with_us": "Connectez-vous avec moi",
+      "close": "Fermer"
+    },
     "title": "Êtes-vous un administrateur ou un membre du personnel ?",
     "admin": "Administrateur",
     "teacher": "Personnel",
     "english": "Anglais",
     "french": "Français",
-    "hero": {
-      "badge": "Système de présence de nouvelle génération",
-      "titlePart1": "Présence intelligente",
-      "titlePart2": "Simplifiée",
-      "description": "Suivi de présence révolutionnaire alimenté par RFID pour les écoles et les entreprises. Découvrez une surveillance transparente et en temps réel avec une sécurité de niveau entreprise."
-    },
-    "header": {
-      "title": "Synctuario",
-      "docs": "Documentation"
-    },
-    "buttons": {
-      "adminPortal": "Portail Administrateur",
-      "staffPortal": "Portail Personnel",
-      "documentation": "Documentation"
-    },
-    "stats": {
-      "organizations": "Organisations",
-      "dailyScans": "Scans quotidiens",
-      "accuracy": "Précision",
-      "uptime": "Disponibilité",
-      "organizationsValue": "500+",
-      "dailyScansValue": "50K+",
-      "accuracyValue": "99,9%",
-      "uptimeValue": "99,99%"
-    },
-    "features": {
-      "title": "Pourquoi choisir Synctuario ?",
-      "description": "La technologie de pointe rencontre un design intuitif pour l'expérience ultime de gestion de présence.",
-      "lightningFast": {
-        "title": "Ultra rapide",
-        "description": "Scan RFID en millisecondes avec intégration ESP32"
-      },
-      "enterpriseSecurity": {
-        "title": "Sécurité d'entreprise",
-        "description": "Chiffrement de niveau bancaire avec clés API uniques pour chaque organisation"
-      },
-      "realTimeAnalytics": {
-        "title": "Analyses en temps réel",
-        "description": "Tableaux de bord en direct avec rapports détaillés et insights"
-      },
-      "multiLanguage": {
-        "title": "Multi-langues",
-        "description": "Support complet pour les interfaces anglaises et françaises"
-      },
-      "mobileReady": {
-        "title": "Compatible mobile",
-        "description": "Accès depuis n'importe quel appareil avec design responsive"
-      },
-      "exportData": {
-        "title": "Exporter les données",
-        "description": "Télécharger les registres de présence au format Excel"
-      }
-    },
-    "howItWorks": {
-      "title": "Comment ça marche",
-      "description": "Configuration simple, résultats puissants en seulement trois étapes.",
-      "step1": {
-        "step": "01",
-        "title": "Enregistrer les utilisateurs",
-        "description": "Ajouter des étudiants ou employés avec cartes RFID uniques"
-      },
-      "step2": {
-        "step": "02",
-        "title": "Scanner et suivre",
-        "description": "Les lecteurs ESP32 capturent la présence avec horodatage"
-      },
-      "step3": {
-        "step": "03",
-        "title": "Surveiller et rapporter",
-        "description": "Voir les données en direct et générer des analyses détaillées"
-      }
-    },
-    "useCases": {
-      "title": "Parfait pour",
-      "education": {
-        "title": "Institutions éducatives",
-        "features": "Suivi de présence des étudiants|||Gestion d'accès des enseignants|||Système de notification des parents"
-      },
-      "corporate": {
-        "title": "Bureaux d'entreprise",
+    "welcome_comments": [
         "features": "Suivi du temps des employés|||Intégration de la paie|||Contrôle d'accès sécurisé"
       }
     },
@@ -128,40 +175,6 @@
       "⚡ Scan ultra rapide",
       "🌟 Approuvé par 500+ organisations"
     ]
-  },
-  "validation": {
-    "schoolNameRequired": "Le nom de l'école est requis",
-    "usernameRequired": "Le nom d'utilisateur est requis",
-    "emailRequired": "L'email est requis",
-    "emailInvalid": "L'email est invalide",
-    "telephoneRequired": "Le numéro de téléphone est requis",
-    "telephoneInvalid": "Veuillez entrer un numéro de téléphone valide (10-15 chiffres avec code pays optionnel)",
-    "typeRequired": "Le type d'organisation est requis",
-    "passwordRequired": "Le mot de passe est requis",
-    "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
-    "passwordStrength": "Le mot de passe doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial",
-    "passwordRequirements": "Le mot de passe doit contenir :",
-    "passwordMinChars": "Au moins 8 caractères",
-    "passwordUppercase": "Une lettre majuscule (A-Z)",
-    "passwordLowercase": "Une lettre minuscule (a-z)",
-    "passwordNumber": "Un chiffre (0-9)",
-    "passwordSpecial": "Un caractère spécial (@$!%*?&)",
-    "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
-    "passwordsDontMatch": "Les mots de passe ne correspondent pas"
-  },
-  "login": {
-    "admin": {
-      "title": "Connexion Administrateur",
-      "emailPlaceholder": "Email",
-      "passwordPlaceholder": "Mot de passe",
-      "loginButton": "Se connecter",
-      "loggingIn": "Connexion...",
-      "noAccount": "Vous n'avez pas de compte ?",
-      "signupLink": "S'inscrire",
-      "forgotPassword": "Mot de passe oublié ?",
-      "back": "Retour"
-    },
-    "teacher": {
       "title": "Connexion Personnel",
       "subtitle": "Entrez votre adresse e-mail pour accéder à votre compte",
       "emailPlaceholder": "Email / e-mail",
@@ -251,6 +264,21 @@
     },
     "quickActions": {
       "title": "Actions rapides",
+      "quick_actions": "Actions rapides",
+      "learn_more": "En savoir plus",
+      "modal": {
+        "title": "Nouvelle catégorie",
+        "subtitle": "Créer une nouvelle catégorie de département",
+        "category_name": "Nom de la catégorie",
+        "category_placeholder": "Saisissez le nom de la catégorie...",
+        "creating": "Création..."
+      },
+      "stats": {
+        "students": "Total Étudiants",
+        "teachers": "Enseignants Actifs",
+        "attendance": "Présences aujourd'hui",
+        "records": "Historique des présences"
+      },
       "subtitle": "Effectuez rapidement des tâches courantes",
       "create": "Créer une catégorie",
       "view": "Voir les catégories",
@@ -401,12 +429,13 @@
     }
   },
   "attendance": {
-    "loading": {
-      "attendance": "Chargement de la présence...",
-      "loadingAttendance": "Chargement des enregistrements...",
-      "error": "Une erreur s'est produite lors du chargement des données de présence",
-      "noRecords": "Aucun enregistrement de présence trouvé pour aujourd'hui",
-      "tryAdjusting": "Essayez d'ajuster vos critères de recherche ou de filtre pour afficher les enregistrements",
+    "office": "Bureau",
+    "home": "Accueil",
+    "students": "Étudiants",
+    "attendance": "Présence",
+    "reports": "Rapports",
+    "logout": "Déconnexion",
+    "settings": "Paramètres",
       "tryAgain": "Veuillez réessayer plus tard"
     },
     "title": "Analyse de la présence",
@@ -431,7 +460,7 @@
     "cancel": "Annuler",
     "applyFilters": "Appliquer les filtres",
     "summary": "Résumé de la présence",
-    "statistics": "Statistiques par formulaire/classe",
+    "stattistics": "Statistiques par Formulaire/Classe",
     "statsPresent": "Présents",
     "statsAbsent": "Absents",
     "statsPartial": "Partiels",
@@ -447,7 +476,7 @@
   },
   "teachersList": {
     "yourStaff": "Votre personnel",
-    "subtitle": "Gérez et surveillez votre personnel enseignant avec des outils complets",
+    "errorLoading": "Une erreur s'est produite lors du chargement des enseignants",
     "loading": "Chargement des enseignants...",
     "errorLoading": "Une erreur s'est produite lors du chargement des enseignants",
     "noTeachers": "Aucun enseignant trouvé",
@@ -455,6 +484,7 @@
     "addYourFirstTeacher": "Ajoutez votre premier enseignant pour commencer",
     "tryAgain": "Réessayer",
     "goHome": "Retour à l'accueil",
+    "noBio": "Pas de bio disponible",
     "stats": {
       "totalTeachers": "Total Enseignants",
       "activeTeachers": "Enseignants Actifs",
@@ -467,10 +497,7 @@
     "addTeacher": "Ajouter un enseignant",
     "unnamedTeacher": "Enseignant sans nom",
     "joined": "Rejoint le",
-    "view": "Voir l'enseignant",
-    "noBio": "Aucune bio disponible"
-  },
-  "addTeacher": {
+    "view":"Voir"
     "title": "Ajouter un nouveau membre du personnel",
     "subtitle": "Entrez l'adresse e-mail du membre du personnel que vous souhaitez ajouter",
     "emailLabel": "Adresse e-mail du personnel",
@@ -559,7 +586,8 @@
       "subtitle": "Contactez-nous pour en savoir plus, planifier une démo ou demander un devis personnalisé.",
       "email": "Nous envoyer un e-mail",
       "phone": "Nous appeler",
-      "office": "Notre bureau",
+        "logout": "Déconnexion",
+        "managers": "Gestionnaires"
       "whyChoose": "Pourquoi choisir Synctuario ?",
       "reasons": [
         "Support primé",
@@ -577,15 +605,32 @@
       }
     }
   },
+  "dashboard": {
+    "subscription": {
+      "subscribed": "Abonné",
+      "free_plan": "Plan gratuit",
+      "subscribe_now": "S'abonner maintenant"
+    }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "name_placeholder": "Votre nom",
+    "email_placeholder": "Votre e-mail",
+    "message_placeholder": "Votre message",
+    "send_button": "Envoyer le message",
+    "sending": "Envoi..."
+  },
   "reports": {
     "title": "Analyses et rapports",
     "subtitle": "Informations complètes et rapports détaillés pour votre système de gestion de présence",
     "filters": {
       "startDate": "Date de début :",
       "endDate": "Date de fin :",
-      "form": "Formulaire/Classe :",
+      "form": "Forme/Classe:",
+      "formClass": "Forme/Classe:",
       "allForms": "Tous les formulaires",
       "apply": "Appliquer les filtres",
+      "applyFilters": "Appliquer les filtres",
       "refresh": "Actualiser"
     },
     "stats": {
@@ -604,10 +649,49 @@
       "subtitle": "Générez et téléchargez des rapports complets dans votre format préféré",
       "pdf": "Télécharger le rapport PDF",
       "excel": "Télécharger le rapport Excel",
+      "pdf": "Télécharger le rapport PDF",
+      "excel": "Télécharger le rapport Excel",
       "generating": "Génération de votre rapport... Cela peut prendre quelques instants."
     }
   },
   "profile": {
+    "loading": "Chargement du profil...",
+    "edit": "Modifier le profil",
+    "picture": "URL de la photo de profil",
+    "fullName": "Nom complet",
+    "bio": "Biographie",
+    "joined": "Rejoint le",
+    "editForm": {
+      "placeholder": {
+        "picture": "Entrez l'URL de l'image",
+        "name": "Entrez votre nom complet",
+        "bio": "Parlez-nous de vous..."
+      }
+    },
+    "noPicture": "Aucune URL d'image définie",
+    "unnamed": "Sans nom",
+    "noBio": "Aucune bio disponible",
+    "save": "Sauvegarder le profil",
+    "saving": "Sauvegarde...",
+    "cancel": "Annuler",
+    "logout": "Déconnexion",
+    "success": "Profil mis à jour avec succès",
+    "error": "Une erreur s'est produite",
+    "section": {
+      "title": "Informations du profil"
+    }
+  },
+  "timeSettings": {
+    "header": "Paramètres d'heure d'arrivée / départ",
+    "signInStart": "Début d'arrivée :",
+    "signInEnd": "Fin d'arrivée :",
+    "signOutStart": "Début de départ :",
+    "signOutEnd": "Fin de départ :",
+    "edit": "Modifier les paramètres horaires",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "home": "Retour à l'accueil"
+  }
     "loading": "Chargement du profil...",
     "edit": "Modifier le profil",
     "picture": "URL de la photo de profil",
