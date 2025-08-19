@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 // import { useTranslation } from '../hooks/useTranslation';
 import { postData, API_BASE, setAuthData } from '../utils/auth';
+import { getAdminData } from '../utils/auth';
 import { 
   Shield, 
   ArrowLeft, 
@@ -23,7 +24,7 @@ const TeacherLogin: React.FC = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
-  const [adminData, setAdminData] = useState<any>(null);
+  const [adminData, setAdminDataState] = useState<any>(null);
   
   // Get terminology - will default to school if no admin data available
   const terminology = useTerminology(adminData);
@@ -84,7 +85,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         // ✅ Log and save admin data
         console.log('✅ Admin data:', result.admin);
         setAuthData('admin_data', JSON.stringify(result.admin));
-        setAdminData(result.admin);
+        setAdminDataState(result.admin);
       } else {
         console.warn('⚠️ No admin data returned');
       }
@@ -105,6 +106,13 @@ const handleSubmit = async (e: React.FormEvent) => {
   }
 };
 
+  // Get admin data on component mount
+  useEffect(() => {
+    const storedAdminData = getAdminData();
+    if (storedAdminData) {
+      setAdminDataState(storedAdminData);
+    }
+  }, []);
 
   const handleGoBack = () => {
     navigate('/');

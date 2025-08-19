@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getApiKey } from "../utils/auth";
 import { API_BASE } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
+import { getAdminData } from "../utils/auth";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 
@@ -15,6 +16,7 @@ interface TimeSettingsData {
 const TimeSettings: React.FC = () => {
   const { formatMessage } = useIntl();
   const apiKey = getApiKey();
+  const adminData = getAdminData();
   const navigate = useNavigate();
   const [settings, setSettings] = useState<TimeSettingsData | null>(null);
   const [form, setForm] = useState<TimeSettingsData>({
