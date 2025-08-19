@@ -818,10 +818,18 @@ const AdminDashboard: React.FC = () => {
                   <card.icon className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="mb-4 text-xl font-bold text-white transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-cyan-400 group-hover:bg-clip-text group-hover:text-transparent">
-                  {card.title}
+                  {adminData?.type === 'company' && card.title.includes('Teacher') 
+                    ? formatMessage({ id: "dashboard.features.teacher.titleCompany" })
+                    : adminData?.type === 'company' && card.title.includes('Attendance')
+                    ? formatMessage({ id: "dashboard.features.attendance.titleCompany", defaultMessage: "Time Tracking" })
+                    : card.title}
                 </h3>
                 <p className="leading-relaxed text-gray-400 transition-colors duration-300 group-hover:text-gray-300">
-                  {card.description}
+                  {adminData?.type === 'company' && card.description.includes('student') 
+                    ? formatMessage({ id: "dashboard.features.attendance.descriptionCompany" })
+                    : adminData?.type === 'company' && card.description.includes('teaching')
+                    ? formatMessage({ id: "dashboard.features.teacher.descriptionCompany" })
+                    : card.description}
                 </p>
                 <div className="mt-6 flex items-center text-blue-400 transition-colors duration-300 group-hover:text-blue-300">
                   <span className="text-sm font-medium">

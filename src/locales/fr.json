@@ -1,5 +1,6 @@
 {
   "app": {
+    "name": "Synctuario",
     "title": "Bienvenue",
     "description": "Ceci est une application de démonstration."
   },
@@ -7,7 +8,7 @@
     "login": "Se connecter"
   },
   "validation": {
-    "schoolNameRequired": "Le nom de l'école est requis",
+    "schoolNameRequired": "Le nom de l'organisation est requis",
     "usernameRequired": "Le nom d'utilisateur est requis",
     "emailRequired": "L'email est requis",
     "emailInvalid": "L'email est invalide",
@@ -29,6 +30,7 @@
   "signup": {
     "admin": {
       "title": "Inscription Admin",
+      "titleCompany": "Inscription PDG",
       "organizationPlaceholder": "Nom de l'organisation",
       "typePlaceholder": "Sélectionner le type d'organisation",
       "typeSchool": "École",
@@ -51,11 +53,16 @@
     }
   },
   "login": {
+    "error": {
+      "general": "Échec de la connexion. Veuillez réessayer."
+    },
     "admin": {
       "title": "Connexion Administrateur",
+      "titleCompany": "Connexion PDG",
       "emailPlaceholder": "Email",
       "passwordPlaceholder": "Mot de passe",
       "loginButton": "Se connecter",
+      "loggingIn": "Connexion en cours...",
       "noAccount": "Vous n'avez pas de compte ?",
       "signupLink": "S'inscrire",
       "forgotPassword": "Mot de passe oublié ?",
@@ -75,11 +82,14 @@
     },
     "teacherlogin": {
       "title": "Connexion Personnel",
+      "titleCompany": "Connexion Gestionnaire",
       "subtitle": "Entrez votre adresse e-mail pour accéder à votre compte",
       "email_placeholder": "Email / e-mail",
       "login_button": "Se connecter",
       "info_text": "Seuls les membres du personnel enregistrés peuvent accéder à ce portail. Contactez votre administrateur si vous avez besoin d'aide.",
-      "back": "Retour à l'accueil"
+      "info_textCompany": "Seuls les gestionnaires enregistrés peuvent accéder à ce portail. Contactez votre PDG si vous avez besoin d'aide.",
+      "back": "Retour à l'accueil",
+      "loading": "Chargement..."
     }
   },
   "home": {
@@ -103,134 +113,543 @@
     },
     "hero": {
       "badge": "Système de présence de nouvelle génération",
-      "title_part1": "Présence intelligente",
-      "title_part2": "simplifiée",
-      "description": "Suivi de présence révolutionnaire alimenté par RFID pour les écoles et les entreprises. Découvrez une surveillance transparente et en temps réel avec une sécurité de niveau entreprise."
-    },
-    "buttons": {
-      "admin_portal": "Portail Admin",
-      "staff_portal": "Portail Personnel",
-      "documentation": "Documentation"
+      "badgeCompany": "Système de suivi du temps de nouvelle génération",
+      "title": "Présence intelligente simplifiée",
+      "titleCompany": "Suivi du temps intelligent simplifié",
+      "subtitle": "Suivi de présence révolutionnaire alimenté par RFID pour les écoles et les entreprises. Découvrez une surveillance transparente et en temps réel avec une sécurité de niveau entreprise.",
+      "adminPortal": "Portail Administrateur",
+      "adminPortalCompany": "Portail PDG",
+      "staffPortal": "Portail Personnel",
+      "staffPortalCompany": "Portail Gestionnaire"
     },
     "stats": {
       "organizations": "Organisations",
-      "daily_scans": "Passages Quotidiens",
+      "dailyScans": "Scans quotidiens",
       "accuracy": "Précision",
-      "uptime": "Disponibilité",
-      "organizations_value": "500+",
-      "daily_scans_value": "50K+",
-      "accuracy_value": "99,9%",
-      "uptime_value": "99,99%"
+      "uptime": "Disponibilité"
     },
     "features": {
       "title": "Pourquoi choisir Synctuario ?",
-      "description": "La technologie de pointe rencontre un design intuitif pour l'expérience ultime de gestion de présence.",
-      "items": [
-        {
-          "title": "Ultra-rapide",
-          "description": "Scan RFID en millisecondes avec intégration ESP32"
-        },
-        {
-          "title": "Sécurité d'entreprise",
-          "description": "Chiffrement de niveau bancaire avec clés API uniques pour chaque organisation"
-        },
-        {
-          "title": "Analytique en temps réel",
-          "description": "Tableaux de bord en direct avec rapports détaillés"
-        },
-        {
-          "title": "Multi-langue",
-          "description": "Support complet pour les interfaces en anglais et français"
-        },
-        {
-          "title": "Mobile prêt",
-          "description": "Accès depuis n'importe quel appareil avec design responsive"
-        },
-        {
-          "title": "Exporter les données",
-          "description": "Téléchargez les relevés de présence au format Excel"
-        }
-      ]
+      "subtitle": "La technologie de pointe rencontre un design intuitif pour l'expérience ultime de gestion de présence.",
+      "subtitleCompany": "La technologie de pointe rencontre un design intuitif pour l'expérience ultime de suivi du temps.",
+      "lightningFast": {
+        "title": "Ultra rapide",
+        "description": "Scan RFID en millisecondes avec intégration ESP32"
+      },
+      "enterpriseSecurity": {
+        "title": "Sécurité d'entreprise",
+        "description": "Chiffrement de niveau bancaire avec clés API uniques pour chaque organisation"
+      },
+      "realTimeAnalytics": {
+        "title": "Analyses en temps réel",
+        "description": "Tableaux de bord en direct avec rapports détaillés et insights"
+      },
+      "multiLanguage": {
+        "title": "Multi-langues",
+        "description": "Support complet pour les interfaces anglaises et françaises"
+      },
+      "mobileReady": {
+        "title": "Compatible mobile",
+        "description": "Accès depuis n'importe quel appareil avec design responsive"
+      },
+      "exportData": {
+        "title": "Exporter les données",
+        "description": "Télécharger les registres de présence au format Excel",
+        "descriptionCompany": "Télécharger les registres de suivi du temps au format Excel"
+      }
     },
-    "how_it_works": {
+    "howItWorks": {
       "title": "Comment ça marche",
-      "description": "Installation simple, résultats puissants en seulement trois étapes.",
-      "steps": [
-        {
-          "step": "01",
-          "title": "Enregistrer les utilisateurs",
-          "description": "Ajouter des étudiants ou employés avec cartes RFID uniques"
-        },
-        {
-          "step": "02",
-          "title": "Scanner & Suivre",
-          "description": "Les lecteurs ESP32 capturent la présence avec horodatage"
-        },
-        {
-          "step": "03",
-          "title": "Surveiller & Rapporter",
-          "description": "Voir les données en direct et générer des analyses détaillées"
-        }
-      ]
+      "subtitle": "Configuration simple, résultats puissants en seulement trois étapes.",
+      "step1": {
+        "title": "Enregistrer les utilisateurs",
+        "description": "Ajouter des étudiants ou employés avec cartes RFID uniques"
+      },
+      "step2": {
+        "title": "Scanner et suivre",
+        "description": "Les lecteurs ESP32 capturent la présence avec horodatage",
+        "descriptionCompany": "Les lecteurs ESP32 capturent le suivi du temps avec horodatage"
+      },
+      "step3": {
+        "title": "Surveiller et rapporter",
+        "description": "Voir les données en direct et générer des analyses détaillées"
+      }
     },
-    "use_cases": {
+    "useCases": {
       "title": "Parfait pour",
       "education": {
         "title": "Institutions éducatives",
-        "items": [
-          "Suivi de présence des élèves",
-          "Gestion des accès enseignants",
+        "features": [
+          "Suivi de présence des étudiants",
+          "Gestion d'accès des enseignants",
           "Système de notification des parents"
         ]
       },
       "corporate": {
         "title": "Bureaux d'entreprise",
-        "items": [
+        "features": [
           "Suivi du temps des employés",
-          "Intégration de la paie",
+          "Contrôle d'accès des gestionnaires",
           "Contrôle d'accès sécurisé"
         ]
       }
     },
     "cta": {
       "title": "Prêt à commencer ?",
-      "description": "Rejoignez des centaines d'organisations utilisant déjà Synctuario pour une gestion de présence transparente.",
-      "pricing_button": "Voir les tarifs",
-      "contact_button": "Contactez-nous",
+      "subtitle": "Rejoignez des centaines d'organisations utilisant déjà Synctuario pour une gestion de présence transparente.",
+      "subtitleCompany": "Rejoignez des centaines d'organisations utilisant déjà Synctuario pour une gestion de suivi du temps transparente.",
+      "startTrial": "Commencer l'essai gratuit",
+      "viewDocs": "Voir la documentation",
       "benefits": [
         "Essai gratuit de 15 jours",
-        "Pas de frais d'installation",
-        "Annulez à tout moment"
+        "Aucune carte de crédit requise",
+        "Annuler à tout moment"
       ]
+    },
+    "floating_comments": [
+      "✨ Bienvenue sur Synctuario !",
+      "🔐 Technologie RFID sécurisée",
+      "📊 Analyses en temps réel",
+      "🚀 Configuration et utilisation faciles",
+      "💼 Parfait pour les écoles et entreprises",
+      "🎯 Taux de précision de 99,9%",
+      "⚡ Scan ultra rapide",
+      "🌟 Approuvé par 500+ organisations"
+    ],
+    "about": {
+      "title": "À propos du système de présence Synctuario",
+      "titleCompany": "À propos du système de suivi du temps Synctuario",
+      "description": "Le système de présence Synctuario est une plateforme robuste et facile à utiliser conçue pour les écoles et les entreprises afin d'automatiser le suivi de présence en utilisant la technologie RFID.",
+      "descriptionCompany": "Le système de suivi du temps Synctuario est une plateforme robuste et facile à utiliser conçue pour les entreprises afin d'automatiser le suivi du temps des employés en utilisant la technologie RFID.",
+      "featuresTitle": "Caractéristiques principales :",
+      "featuresList": [
+        "Enregistrez et suivez facilement la présence avec des cartes ou étiquettes RFID scannées via des appareils ESP32.",
+        "Visualisez les données de présence en direct avec des rapports détaillés et des analyses accessibles aux administrateurs et enseignants.",
+        "Différents niveaux d'accès pour les administrateurs et enseignants garantissent la sécurité et les permissions appropriées.",
+        "Prend en charge l'anglais et le français pour répondre aux bases d'utilisateurs diverses.",
+        "Plans d'abonnement mensuels et annuels flexibles pour les écoles et entreprises de toutes tailles.",
+        "Obtenez un essai gratuit de 15 jours lors de votre inscription.",
+        "Fonctionne pour les écoles et les entreprises — entièrement adaptable.",
+        "Vos données sont sauvegardées en sécurité et disponibles pour une utilisation future.",
+        "Lorsqu'un administrateur s'inscrit, une clé API unique est générée pour la communication sécurisée des appareils.",
+        "Les changements d'UID d'étudiant ou d'employé ne peuvent être effectués que par un administrateur ou PDG, et le propriétaire de l'ID sera notifié.",
+        "Les registres de présence peuvent être exportés au format Excel."
+      ],
+      "featuresListCompany": [
+        "Enregistrez et suivez facilement le temps des employés avec des cartes ou étiquettes RFID scannées via des appareils ESP32.",
+        "Visualisez les données de suivi du temps en direct avec des rapports détaillés et des analyses accessibles aux PDG et gestionnaires.",
+        "Différents niveaux d'accès pour les PDG et gestionnaires garantissent la sécurité et les permissions appropriées.",
+        "Prend en charge l'anglais et le français pour répondre aux bases d'utilisateurs diverses.",
+        "Plans d'abonnement mensuels et annuels flexibles pour les entreprises de toutes tailles.",
+        "Obtenez un essai gratuit de 15 jours lors de votre inscription.",
+        "Entièrement adaptable pour toute taille et structure d'entreprise.",
+        "Vos données sont sauvegardées en sécurité et disponibles pour une utilisation future.",
+        "Lorsqu'un PDG s'inscrit, une clé API unique est générée pour la communication sécurisée des appareils.",
+        "Les changements d'UID d'employé ne peuvent être effectués que par un PDG, et l'employé sera notifié.",
+        "Les registres de suivi du temps peuvent être exportés au format Excel."
+      ],
+      "howItWorksTitle": "Comment ça marche :",
+      "howItWorksDescription": "Les étudiants ou employés sont enregistrés avec des cartes RFID uniques. Lorsqu'une carte est scannée sur le lecteur ESP32, le système enregistre la présence avec horodatage.",
+      "howItWorksDescriptionCompany": "Les employés sont enregistrés avec des cartes RFID uniques. Lorsqu'une carte est scannée sur le lecteur ESP32, le système enregistre le suivi du temps avec horodatage.",
+      "whyChooseTitle": "Pourquoi choisir notre système ?",
+      "whyChooseList": [
+        "Réduit les erreurs de présence manuelles et le temps passé.",
+        "Améliore la précision et la responsabilité.",
+        "Fournit des analyses perspicaces pour améliorer les performances de l'école/entreprise.",
+        "S'adapte facilement à la croissance de votre organisation.",
+        "Soutenu par un support continu et des mises à jour de fonctionnalités.",
+        "Inclut un système API sécurisé pour synchroniser les appareils de présence."
+      ],
+      "whyChooseListCompany": [
+        "Réduit les erreurs de suivi du temps manuelles et le temps passé.",
+        "Améliore la précision et la responsabilité.",
+        "Fournit des analyses perspicaces pour améliorer les performances de l'entreprise.",
+        "S'adapte facilement à la croissance de votre organisation.",
+        "Soutenu par un support continu et des mises à jour de fonctionnalités.",
+        "Inclut un système API sécurisé pour synchroniser les appareils de suivi du temps."
+      ],
+      "subscriptionTitle": "Plans d'abonnement :",
+      "subscriptionDescription": "Choisissez entre des abonnements mensuels et annuels adaptés à la taille et aux besoins de votre institution.",
+      "subscriptionDescriptionCompany": "Choisissez entre des abonnements mensuels et annuels adaptés à la taille et aux besoins de votre entreprise.",
+      "getStartedTitle": "Commencez aujourd'hui !",
+      "getStartedDescription": "Contactez-nous en utilisant le formulaire ci-dessus ou cliquez sur les boutons pour vous abonner et prendre le contrôle de votre gestion de présence.",
+      "getStartedDescriptionCompany": "Contactez-nous en utilisant le formulaire ci-dessus ou cliquez sur les boutons pour vous abonner et prendre le contrôle de votre gestion de suivi du temps.",
+      "contactButton": "Nous contacter"
+    }
+  },
+  "forgotPassword": {
+    "title": "Réinitialiser votre mot de passe",
+    "subtitle": "Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe",
+    "email_placeholder": "Votre e-mail",
+    "send_button": "Envoyer le lien de réinitialisation",
+    "remember_password": "Vous vous souvenez de votre mot de passe ?",
+    "back_to_login": "Retour à la connexion"
+  },
+  "resetPassword": {
+    "title": "Définir un nouveau mot de passe",
+    "subtitle": "Entrez votre nouveau mot de passe ci-dessous",
+    "new_password_placeholder": "Nouveau mot de passe",
+    "confirm_password_placeholder": "Confirmer le mot de passe",
+    "reset_button": "Réinitialiser le mot de passe",
+    "resetting": "Réinitialisation...",
+    "back": "Retour à la demande de réinitialisation"
+  },
+  "resetSuccess": {
+    "title": "Réinitialisation du mot de passe réussie !",
+    "message": "Votre mot de passe a été mis à jour. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+    "loginButton": "Se connecter",
+    "additionalInfo": "Gardez votre nouveau mot de passe en sécurité et ne le partagez avec personne."
+  },
+  "emailVerification": {
+    "title": "Vérification d'email",
+    "verifying": "Vérification de votre email...",
+    "goToLogin": "Aller à la connexion",
+    "backToLogin": "Retour à la connexion",
+    "successInfo": "Votre compte est maintenant actif et prêt à être utilisé.",
+    "errorInfo": "Veuillez vérifier votre email pour un nouveau lien de vérification ou contactez le support."
+  },
+  "emailSent": {
+    "title": "Vérifiez votre boîte de réception",
+    "message1": "Nous avons envoyé un lien de vérification à votre email.",
+    "message2": "Veuillez confirmer pour continuer.",
+    "backToSignup": "Retour à l'inscription",
+    "additionalInfo": "Vous n'avez pas reçu l'email ? Vérifiez votre dossier spam ou essayez de vous inscrire à nouveau."
+  },
+  "adminhomepage": {
+    "dashboard": {
+      "title": "Tableau de bord Admin",
+      "titleCompany": "Tableau de bord PDG",
+      "header": "Admin École",
+      "headerCompany": "PDG Entreprise",
+      "section_title": "Articles du tableau de bord",
+      "api": "Votre clé API pour l'appareil",
+      "show": "Afficher",
+      "hide": "Masquer",
+      "copy": "Copier",
+      "copied": "Clé API copiée !",
+      "rule": "Utilisez le bouton ci-dessous pour créer une nouvelle catégorie pour vos formulaires ou départements. Les catégories aident à regrouper les utilisateurs pour une meilleure organisation et reporting.",
+      "ruleCompany": "Utilisez le bouton ci-dessous pour créer une nouvelle catégorie pour vos départements. Les catégories aident à regrouper les employés pour une meilleure organisation et reporting.",
+      "create": "+ Créer département",
+      "view": "voir département",
+      "menu": {
+        "school": "École",
+        "company": "Entreprise",
+        "teachers": "Enseignants",
+        "managers": "Gestionnaires",
+        "add_teacher": "Ajouter Enseignant",
+        "add_manager": "Ajouter Gestionnaire",
+        "report": "Rapport",
+        "logout": "Déconnexion"
+      },
+      "cards": {
+        "attendance": {
+          "title": "Suivi de présence",
+          "titleCompany": "Suivi du temps",
+          "description": "Voir et gérer la présence des étudiants avec synchronisation en temps réel depuis les appareils IoT.",
+          "descriptionCompany": "Voir et gérer le suivi du temps des employés avec synchronisation en temps réel depuis les appareils IoT."
+        },
+        "teacher": {
+          "title": "Gestion des enseignants",
+          "titleCompany": "Gestion des gestionnaires",
+          "description": "Ajouter, mettre à jour et surveiller tous les enseignants enregistrés avec contrôle d'accès et journaux d'activité.",
+          "descriptionCompany": "Ajouter, mettre à jour et surveiller tous les gestionnaires enregistrés avec contrôle d'accès et journaux d'activité."
+        },
+        "report": {
+          "title": "Rapports étudiants",
+          "titleCompany": "Rapports employés",
+          "description": "Générer des rapports pour la présence, les performances académiques et le suivi comportemental.",
+          "descriptionCompany": "Générer des rapports pour le suivi du temps, les performances et le suivi de productivité."
+        }
+      }
+    }
+  },
+  "teachersList": {
+    "title": "Liste des enseignants",
+    "titleCompany": "Liste des gestionnaires",
+    "yourStaff": "Votre personnel",
+    "yourManagers": "Vos gestionnaires",
+    "subtitle": "Gérez et surveillez votre personnel enseignant avec des outils complets",
+    "subtitleCompany": "Gérez et surveillez vos gestionnaires avec des outils complets",
+    "loading": "Chargement des enseignants...",
+    "loadingManagers": "Chargement des gestionnaires...",
+    "errorLoading": "Une erreur s'est produite lors du chargement des enseignants 🙏😢",
+    "errorLoadingManagers": "Une erreur s'est produite lors du chargement des gestionnaires 🙏😢",
+    "noTeachers": "Aucun enseignant trouvé",
+    "noManagers": "Aucun gestionnaire trouvé",
+    "addTeachers": "Ajoutez des enseignants pour les voir ici",
+    "addManagers": "Ajoutez des gestionnaires pour les voir ici",
+    "addYourFirstTeacher": "Ajoutez votre premier enseignant pour commencer",
+    "addYourFirstManager": "Ajoutez votre premier gestionnaire pour commencer",
+    "tryAgain": "Réessayer",
+    "goHome": "Retour à l'accueil",
+    "stats": {
+      "totalTeachers": "Total Enseignants",
+      "totalManagers": "Total Gestionnaires",
+      "activeTeachers": "Enseignants Actifs",
+      "activeManagers": "Gestionnaires Actifs",
+      "topPerforming": "Meilleurs Performants",
+      "avgExperience": "Expérience Moyenne"
+    },
+    "searchTeachers": "Rechercher des enseignants...",
+    "searchManagers": "Rechercher des gestionnaires...",
+    "filter": "Filtrer",
+    "export": "Exporter",
+    "addTeacher": "Ajouter un Enseignant",
+    "addManager": "Ajouter un Gestionnaire",
+    "unnamedTeacher": "Personnel Non Nommé",
+    "unnamedManager": "Gestionnaire Non Nommé",
+    "joined": "Rejoint le ",
+    "view": "Voir",
+    "viewManager": "Voir Gestionnaire",
+    "nobio": "Pas de bio disponible"
+  },
+  "addTeacher": {
+    "title": "Ajouter un nouveau membre du personnel",
+    "titleCompany": "Ajouter un nouveau gestionnaire",
+    "subtitle": "Entrez l'adresse e-mail du membre du personnel que vous souhaitez ajouter",
+    "subtitleCompany": "Entrez l'adresse e-mail du gestionnaire que vous souhaitez ajouter",
+    "emailLabel": "Adresse e-mail du personnel",
+    "emailLabelCompany": "Adresse e-mail du gestionnaire",
+    "emailPlaceholder": "personnel@exemple.com",
+    "emailPlaceholderCompany": "gestionnaire@exemple.com",
+    "submitButton": "Ajouter un membre du personnel",
+    "submitButtonCompany": "Ajouter un gestionnaire",
+    "adding": "Ajout du personnel...",
+    "addingCompany": "Ajout du gestionnaire...",
+    "infoText": "Le membre du personnel recevra une invitation par e-mail pour rejoindre",
+    "infoTextCompany": "Le gestionnaire recevra une invitation par e-mail pour rejoindre",
+    "goBack": "Retour au tableau de bord",
+    "dashboard": "Retour"
+  },
+  "schoolManagement": {
+    "title": "Gestion des appareils scolaires",
+    "titleCompany": "Gestion des appareils d'entreprise",
+    "subtitle": "Surveillez et gérez les appareils RFID de votre école avec des capacités de numérisation en temps réel",
+    "subtitleCompany": "Surveillez et gérez les appareils RFID de votre entreprise avec des capacités de suivi du temps en temps réel",
+    "registeredDevices": "Appareils enregistrés",
+    "monitorDevices": "Surveillez les appareils de numérisation RFID de votre école",
+    "monitorDevicesCompany": "Surveillez les appareils de numérisation RFID de votre entreprise",
+    "addDevice": "Ajouter un appareil",
+    "cancel": "Annuler",
+    "deviceUid": "UID de l'appareil",
+    "deviceName": "Nom de l'appareil",
+    "enterDeviceUid": "Entrez l'UID de l'appareil",
+    "enterDeviceName": "Entrez le nom de l'appareil",
+    "registerDevice": "Enregistrer l'appareil",
+    "noDevicesRegistered": "Aucun appareil enregistré",
+    "addFirstDevice": "Ajoutez votre premier appareil pour commencer",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "waitingForScan": "En attente de numérisation...",
+    "scanDetected": "Numérisation détectée",
+    "newStudentDetected": "Nouvel étudiant détecté - UID:",
+    "newEmployeeDetected": "Nouvel employé détecté - UID:",
+    "registerNewStudent": "Enregistrer un nouvel étudiant",
+    "registerNewEmployee": "Enregistrer un nouvel employé",
+    "studentName": "Nom de l'étudiant",
+    "employeeName": "Nom de l'employé",
+    "emailAddress": "Adresse e-mail",
+    "phoneNumber": "Numéro de téléphone",
+    "selectClass": "Sélectionner la classe/forme",
+    "selectDepartment": "Sélectionner le département",
+    "selectGender": "Sélectionner le sexe",
+    "male": "Masculin",
+    "female": "Féminin",
+    "other": "Autre",
+    "registerStudent": "Enregistrer l'étudiant",
+    "registerEmployee": "Enregistrer l'employé",
+    "registering": "Enregistrement...",
+    "deleteDevice": "Supprimer l'appareil",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet appareil?",
+    "loadingDevices": "Chargement des appareils...",
+    "justNow": "À l'instant",
+    "minuteAgo": "minute",
+    "minutesAgo": "minutes",
+    "hourAgo": "heure",
+    "hoursAgo": "heures",
+    "yesterday": "Hier à",
+    "never": "Jamais",
+    "lastSeen": "Vu pour la dernière fois:",
+    "dashboard": "Tableau de bord",
+    "dashboardCompany": "Tableau de bord PDG",
+    "students": "Étudiants",
+    "employees": "Employés",
+    "attendance": "Présence",
+    "timeTracking": "Suivi du temps",
+    "reports": "Rapports",
+    "schoolManagement": "Gestion de l'école",
+    "companyManagement": "Gestion de l'entreprise",
+    "logout": "Déconnexion"
+  },
+  "pricing": {
+    "back": "Retour",
+    "school": "École",
+    "company": "Entreprise",
+    "title": "Tarification scolaire",
+    "titleCompany": "Tarification d'entreprise",
+    "subtitle": "Choisissez le plan parfait pour votre école. Tous les plans incluent notre système de présence RFID complet avec surveillance en temps réel et rapports complets.",
+    "subtitleCompany": "Choisissez le plan parfait pour votre entreprise. Tous les plans incluent notre système de suivi du temps RFID complet avec surveillance en temps réel et rapports complets.",
+    "starter": {
+      "title": "Débutant",
+      "subtitle": "Parfait pour les petites écoles",
+      "subtitleCompany": "Parfait pour les petites entreprises",
+      "price": "29$",
+      "period": "par mois",
+      "subscribed": "✅ Abonné",
+      "freetrialExpired": "L'essai gratuit a expiré",
+      "startfreetrial": "Commencer l'essai gratuit",
+      "downgrade": "Rétrograder",
+      "freeplan": "Plan gratuit activé",
+      "getStarted": "Commencer",
+      "upgrade": "Améliorer",
+      "subscribeNow": "S'abonner maintenant",
+      "features": [
+        "Jusqu'à 100 étudiants",
+        "5 enseignants",
+        "2 appareils RFID",
+        "Rapports de base",
+        "Support par e-mail",
+        "Accès à l'application mobile"
+      ],
+      "featuresCompany": [
+        "Jusqu'à 100 employés",
+        "5 gestionnaires",
+        "2 appareils RFID",
+        "Rapports de base",
+        "Support par e-mail",
+        "Accès à l'application mobile"
+      ]
+    },
+    "professional": {
+      "title": "Professionnel",
+      "subtitle": "Idéal pour les écoles moyennes",
+      "subtitleCompany": "Idéal pour les entreprises moyennes",
+      "price": "79$",
+      "period": "par mois",
+      "mostPopular": "Le plus populaire",
+      "features": [
+        "Jusqu'à 500 étudiants",
+        "20 enseignants",
+        "10 appareils RFID",
+        "Rapports avancés",
+        "Support prioritaire",
+        "Notifications aux parents",
+        "Export de données",
+        "Image de marque personnalisée"
+      ],
+      "featuresCompany": [
+        "Jusqu'à 500 employés",
+        "20 gestionnaires",
+        "10 appareils RFID",
+        "Rapports avancés",
+        "Support prioritaire",
+        "Notifications RH",
+        "Export de données",
+        "Image de marque personnalisée"
+      ]
+    },
+    "enterprise": {
+      "title": "Entreprise",
+      "subtitle": "Pour les grandes écoles",
+      "subtitleCompany": "Pour les grandes entreprises",
+      "price": "199$",
+      "period": "par mois",
+      "features": [
+        "Étudiants illimités",
+        "Enseignants illimités",
+        "Appareils illimités",
+        "Rapports personnalisés",
+        "Support téléphonique 24/7",
+        "Accès API",
+        "Solution en marque blanche",
+        "Gestionnaire dédié"
+      ],
+      "featuresCompany": [
+        "Employés illimités",
+        "Gestionnaires illimités",
+        "Appareils illimités",
+        "Rapports personnalisés",
+        "Support téléphonique 24/7",
+        "Accès API",
+        "Solution en marque blanche",
+        "Gestionnaire de compte dédié"
+      ]
+    },
+    "getStarted": "Commencer",
+    "contactSales": "Contacter les ventes",
+    "allPlansInclude": "Tous les plans incluent",
+    "allPlansSubtitle": "Chaque plan Synctuario comprend ces fonctionnalités essentielles pour la gestion scolaire moderne",
+    "allPlansSubtitleCompany": "Chaque plan Synctuario comprend ces fonctionnalités essentielles pour la gestion d'entreprise moderne",
+    "features": {
+      "studentManagement": {
+        "title": "Gestion des étudiants",
+        "titleCompany": "Gestion des employés",
+        "description": "Base de données complète des étudiants avec attribution de cartes RFID",
+        "descriptionCompany": "Base de données complète des employés avec attribution de cartes RFID"
+      },
+      "realTimeTracking": {
+        "title": "Suivi en temps réel",
+        "description": "Surveillance de présence en direct avec notifications instantanées",
+        "descriptionCompany": "Surveillance de suivi du temps en direct avec notifications instantanées"
+      },
+      "advancedReports": {
+        "title": "Rapports avancés",
+        "description": "Analyses détaillées et rapports de présence exportables",
+        "descriptionCompany": "Analyses détaillées et rapports de suivi du temps exportables"
+      },
+      "fastSetup": {
+        "title": "Configuration rapide",
+        "description": "Installation rapide et configuration facile des appareils"
+      }
     },
     "contact": {
       "title": "Contactez-nous",
-      "subtitle": "Envoyez-nous un message et nous vous répondrons",
-      "name_placeholder": "Votre nom",
-      "email_placeholder": "Votre e-mail",
-      "message_placeholder": "Votre message",
-      "send_button": "Envoyer le message",
-      "sending": "Envoi...",
-      "success_message": "Message envoyé avec succès !",
-      "error_message": "Échec de l'envoi du message. Veuillez réessayer plus tard."
-    },
-    "popup": {
-      "connect_with_us": "Connectez-vous avec moi",
-      "close": "Fermer"
+      "subtitle": "Prêt à transformer le système de présence de votre école? Contactez notre équipe.",
+      "subtitleCompany": "Prêt à transformer le système de suivi du temps de votre entreprise? Contactez notre équipe.",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "office": "Bureau",
+      "whyChoose": "Pourquoi choisir Synctuario?",
+      "reasons": [
+        "Approuvé par 500+ écoles dans le monde",
+        "Garantie de disponibilité de 99,9%",
+        "Sécurité de niveau entreprise"
+      ],
+      "reasonsCompany": [
+        "Approuvé par 500+ entreprises dans le monde",
+        "Garantie de disponibilité de 99,9%",
+        "Sécurité de niveau entreprise"
+      ],
+      "getStartedToday": "Commencez aujourd'hui",
+      "form": {
+        "yourName": "Votre nom",
+        "schoolEmail": "E-mail de l'école",
+        "companyEmail": "E-mail de l'entreprise",
+        "schoolName": "Nom de l'école",
+        "companyName": "Nom de l'entreprise",
+        "selectPlan": "Sélectionner un plan",
+        "message": "Parlez-nous des besoins de votre école...",
+        "messageCompany": "Parlez-nous des besoins de votre entreprise...",
+        "sendMessage": "Envoyer le message",
+        "sending": "Envoi...",
+        "contactSales": "Contacter les ventes",
+        "selectedPlan": "Plan sélectionné:"
+      }
     }
   },
   "documentation": {
     "title": "Documentation",
-    "home": "Accueil",
-    "pricing": "Tarification",
-    "badge": "Documentation Complète",
     "subtitle": "Tout ce que vous devez savoir sur la configuration et l'utilisation du système de présence RFID Synctuario.",
+    "subtitleCompany": "Tout ce que vous devez savoir sur la configuration et l'utilisation du système de suivi du temps RFID Synctuario.",
     "gettingStarted": {
       "title": "Commencer",
       "welcome": "Bienvenue sur Synctuario",
-      "description": "Synctuario est un système complet de gestion de présence basé sur RFID conçu pour les écoles et les organisations. Cette documentation vous guidera à travers la configuration et l'utilisation.",
+      "description": "Synctuario est un système complet de gestion de présence basé sur RFID conçu pour les écoles et les organisations.",
+      "descriptionCompany": "Synctuario est un système complet de suivi du temps basé sur RFID conçu pour les entreprises et les organisations.",
       "forSchools": "Pour les écoles",
+      "forCompanies": "Pour les entreprises",
       "schoolsDesc": "Suivez la présence des étudiants avec des cartes RFID et une surveillance en temps réel.",
+      "companiesDesc": "Suivez le temps des employés avec des cartes RFID et une surveillance en temps réel.",
       "forOrganizations": "Pour les organisations",
       "organizationsDesc": "Surveillez la présence des employés et les systèmes de contrôle d'accès."
     },
@@ -254,8 +673,11 @@
       "title": "Gestion des utilisateurs",
       "managingUsers": "Gestion des utilisateurs",
       "adminUsers": "Utilisateurs administrateurs",
+      "ceoUsers": "Utilisateurs PDG",
       "teacherUsers": "Utilisateurs enseignants",
-      "registrationProcess": "Processus d'inscription des étudiants:"
+      "managerUsers": "Utilisateurs gestionnaires",
+      "registrationProcess": "Processus d'inscription des étudiants:",
+      "registrationProcessCompany": "Processus d'inscription des employés:"
     },
     "security": {
       "title": "Sécurité et clés API",
@@ -266,173 +688,66 @@
     },
     "troubleshooting": {
       "title": "Dépannage",
-      "commonIssues": "Problèmes courants et solutions",
-      "deviceOffline": {
-        "problem": "L'appareil apparaît hors ligne",
-        "cause": "Problèmes de connexion WiFi ou appareil n'envoie pas de signal",
-        "solution": "Vérifiez les identifiants WiFi, assurez-vous que l'appareil est alimenté, vérifiez la clé API"
-      },
-      "rfidNotDetected": {
-        "problem": "Cartes RFID non détectées",
-        "cause": "Problèmes de câblage ou dysfonctionnement du module RFID",
-        "solution": "Vérifiez les connexions, contrôlez l'alimentation, testez avec une carte RFID fonctionnelle"
-      }
-    },
-    "apiEndpoints": {
-      "registerDevice": {
-        "description": "Enregistrer un nouvel appareil RFID",
-        "example": {
-          "device_uid": "ESP32_001",
-          "device_name": "Entrée principale",
-          "api_key": "votre_clé_api"
-        }
-      },
-      "getDevices": {
-        "description": "Obtenir tous les appareils enregistrés",
-        "example": "GET /api/devices?api_key=votre_clé_api"
-      },
-      "submitScan": {
-        "description": "Soumettre les données de scan RFID",
-        "example": {
-          "uid": "A1B2C3D4",
-          "device_uid": "ESP32_001",
-          "api_key": "votre_clé_api"
-        }
-      }
-    },
-    "quickLinks": {
-  "title": "Liens Rapides",
-  "adminPortal": "Portail Administrateur",
-  "adminDescription": "Accéder au tableau de bord administrateur",
-  "teacherPortal": "Portail Enseignant",
-  "teacherDescription": "Accéder au tableau de bord enseignant",
-  "getStarted": "Commencer",
-  "freeplan": "Plan Gratuit",
-  "subscribeNow": "S'abonner Maintenant",
-  "pricingDescription": "Voir les tarifs et les plans"
-}
+      "commonIssues": "Problèmes courants et solutions"
+    }
   },
-  "pricing": {
-      "back": "Retour",
-        "school": "École",
-    "title": "Tarification scolaire",
-    "subtitle": "Choisissez le plan parfait pour votre école. Tous les plans incluent notre système de présence RFID complet avec surveillance en temps réel et rapports complets.",
-    "starter": {
-      "title": "Débutant",
-      "subtitle": "Parfait pour les petites écoles",
-      "price": "$35",
-      "period": "par mois",
-      "subscribed": "✅ Abonné",
-      "freetrialExpired": "L'essai gratuit a expiré",
-      "freetrialAvailable": "Essai gratuit disponible",
-      "startfreetrial": "Commencer l'essai gratuit",
-      "downgrade": "Reculer",
-      "freeplan": "Plan gratuit activé",
-      "getStarted": "Commencer",
-      "upgrade": "Améliorer",
-      "subscribeNow": "S'abonner Maintenant",
-      "features": [
-        "Jusqu'à 100 étudiants",
-        "5 enseignants",
-        "2 appareils RFID",
-        "Rapports de base",
-        "Support par e-mail",
-        "Accès à l'application mobile"
-      ]
+  "reports": {
+    "title": "Analyses et rapports",
+    "subtitle": "Insights complets et rapports détaillés pour votre système de gestion de présence",
+    "subtitleCompany": "Insights complets et rapports détaillés pour votre système de gestion de suivi du temps",
+    "filters": {
+      "startDate": "Date de début:",
+      "endDate": "Date de fin:",
+      "formClass": "Forme/Classe:",
+      "department": "Département:",
+      "allForms": "Toutes les formes",
+      "allDepartments": "Tous les départements",
+      "applyFilters": "Appliquer les filtres",
+      "refresh": "Actualiser"
     },
-    "professional": {
-      "title": "Professionnel",
-      "subtitle": "Idéal pour les écoles moyennes",
-      "price": "$65",
-      "period": "par mois",
-      "mostPopular": "Le plus populaire",
-      "features": [
-        "Jusqu'à 500 étudiants",
-        "20 enseignants",
-        "10 appareils RFID",
-        "Rapports avancés",
-        "Support prioritaire",
-        "Notifications aux parents",
-        "Export de données",
-        "Image de marque personnalisée"
-      ]
+    "stats": {
+      "totalStudents": "Total des étudiants",
+      "totalEmployees": "Total des employés",
+      "totalTeachers": "Total des enseignants",
+      "totalManagers": "Total des gestionnaires",
+      "attendanceRate": "Taux de présence",
+      "timeTrackingRate": "Taux de suivi du temps",
+      "totalRecords": "Total des enregistrements"
     },
-    "enterprise": {
-      "title": "Entreprise",
-      "subtitle": "Pour les grandes écoles",
-      "price": "$170",
-      "period": "par mois",
-      "features": [
-        "Étudiants illimités",
-        "Enseignants illimités",
-        "Appareils illimités",
-        "Rapports personnalisés",
-        "Support téléphonique 24/7",
-        "Accès API",
-        "Solution en marque blanche",
-        "Gestionnaire dédié"
-      ]
+    "charts": {
+      "attendanceRate": "Taux de présence",
+      "timeTrackingRate": "Taux de suivi du temps",
+      "formStatistics": "Statistiques par forme",
+      "departmentStatistics": "Statistiques par département",
+      "monthlyTrends": "Tendances mensuelles"
     },
-    "getStarted": "Commencer",
-    "contactSales": "Contacter les ventes",
-    "allPlansInclude": "Tous les plans incluent",
-    "allPlansSubtitle": "Chaque plan Synctuario comprend ces fonctionnalités essentielles pour la gestion scolaire moderne",
-    "features": {
-      "studentManagement": {
-        "title": "Gestion des étudiants",
-        "description": "Base de données complète des étudiants avec attribution de cartes RFID"
-      },
-      "realTimeTracking": {
-        "title": "Suivi en temps réel",
-        "description": "Surveillance de présence en direct avec notifications instantanées"
-      },
-      "advancedReports": {
-        "title": "Rapports avancés",
-        "description": "Analyses détaillées et rapports de présence exportables"
-      },
-      "fastSetup": {
-        "title": "Configuration rapide",
-        "description": "Installation rapide et configuration facile des appareils"
-      }
-    },
-    "contact": {
-      "title": "Contactez-nous",
-      "subtitle": "Prêt à transformer le système de présence de votre école? Contactez notre équipe.",
-      "email": "E-mail",
-      "phone": "Téléphone",
-      "office": "Bureau",
-      "whyChoose": "Pourquoi choisir Synctuario?",
-      "reasons": [
-        "Approuvé par 500+ écoles dans le monde",
-        "Garantie de disponibilité de 99,9%",
-        "Sécurité de niveau entreprise"
-      ],
-      "getStartedToday": "Commencez aujourd'hui",
-      "form": {
-        "yourName": "Votre nom",
-        "schoolEmail": "E-mail de l'école",
-        "schoolName": "Nom de l'école",
-        "selectPlan": "Sélectionner un plan",
-        "message": "Parlez-nous des besoins de votre école...",
-        "sendMessage": "Envoyer le message",
-        "sending": "Envoi...",
-        "contactSales": "Contacter les ventes",
-        "selectedPlan": "Plan sélectionné:"
-      }
+    "download": {
+      "title": "Télécharger les rapports",
+      "subtitle": "Générez et téléchargez des rapports complets dans votre format préféré",
+      "downloadPdf": "Télécharger le rapport PDF",
+      "downloadExcel": "Télécharger le rapport Excel",
+      "generating": "Génération de votre rapport... Cela peut prendre quelques instants."
     }
   },
   "dashboard": {
     "apiKeyPlaceholder": "VotreCléAPIici",
     "defaultSchoolName": "Synctuario Académie",
+    "defaultCompanyName": "Synctuario Corp",
     "defaultUsername": "utilisateur_admin",
+    "defaultCeoUsername": "utilisateur_pdg",
     "loading": "Chargement du tableau de bord",
     "welcomeTitle": "Bon retour",
     "welcomeSubtitle": "Gérez votre établissement avec des outils puissants et des informations en temps réel",
+    "welcomeSubtitleCompany": "Gérez votre organisation avec des outils puissants et des informations en temps réel",
     "stats": {
       "students": "Nombre total d'élèves",
+      "employees": "Nombre total d'employés",
       "teachers": "Enseignants actifs",
+      "managers": "Gestionnaires actifs",
       "attendance": "Présences aujourd'hui",
-      "records": "Historique des présences"
+      "timeTracking": "Suivi du temps aujourd'hui",
+      "records": "Historique des présences",
+      "timeRecords": "Historique du temps"
     },
     "apiSection": {
       "title": "Clé API",
@@ -452,11 +767,15 @@
       "title": "Fonctionnalités du tableau de bord",
       "attendance": {
         "title": "Suivi de la présence",
-        "description": "Surveillez et gérez les présences des élèves"
+        "titleCompany": "Suivi du temps",
+        "description": "Surveillez et gérez les présences des élèves",
+        "descriptionCompany": "Surveillez et gérez le suivi du temps des employés"
       },
       "teacher": {
         "title": "Gestion des enseignants",
-        "description": "Ajoutez et gérez le personnel enseignant"
+        "titleCompany": "Gestion des gestionnaires",
+        "description": "Ajoutez et gérez le personnel enseignant",
+        "descriptionCompany": "Ajoutez et gérez les gestionnaires de l'entreprise"
       },
       "report": {
         "title": "Rapports et analyses",
@@ -466,9 +785,12 @@
     },
     "nav": {
       "school": "École",
+      "company": "Entreprise",
       "staff": "Personnel",
+      "managers": "Gestionnaires",
       "reports": "Rapports",
       "addStaff": "Ajouter un membre",
+      "addManager": "Ajouter un gestionnaire",
       "docs": "Documentation"
     },
     "logout": "Déconnexion",
@@ -486,85 +808,49 @@
       "serverError": "Erreur serveur. Veuillez réessayer."
     }
   },
-  "schoolManagement": {
-    "title": "Gestion des appareils scolaires",
-    "subtitle": "Surveillez et gérez les appareils RFID de votre école avec des capacités de numérisation en temps réel",
-    "registeredDevices": "Appareils enregistrés",
-    "monitorDevices": "Surveillez les appareils de numérisation RFID de votre école",
-    "addDevice": "Ajouter un appareil",
-    "cancel": "Annuler",
-    "deviceUid": "UID de l'appareil",
-    "deviceName": "Nom de l'appareil",
-    "enterDeviceUid": "Entrez l'UID de l'appareil",
-    "enterDeviceName": "Entrez le nom de l'appareil",
-    "registerDevice": "Enregistrer l'appareil",
-    "noDevicesRegistered": "Aucun appareil enregistré",
-    "addFirstDevice": "Ajoutez votre premier appareil pour commencer",
-    "online": "En ligne",
-    "offline": "Hors ligne",
-    "waitingForScan": "En attente de numérisation...",
-    "scanDetected": "Numérisation détectée",
-    "newStudentDetected": "Nouvel étudiant détecté - UID:",
-    "registerNewStudent": "Enregistrer un nouvel étudiant",
-    "studentName": "Nom de l'étudiant",
-    "emailAddress": "Adresse e-mail",
-    "phoneNumber": "Numéro de téléphone",
-    "selectClass": "Sélectionner la classe/forme",
-    "selectGender": "Sélectionner le sexe",
-    "male": "Masculin",
-    "female": "Féminin",
-    "other": "Autre",
-    "registerStudent": "Enregistrer l'étudiant",
-    "registering": "Enregistrement...",
-    "deleteDevice": "Supprimer l'appareil",
-    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet appareil?",
-    "loadingDevices": "Chargement des appareils...",
-    "justNow": "À l'instant",
-    "minuteAgo": "minute",
-    "minutesAgo": "minutes",
-    "hourAgo": "heure",
-    "hoursAgo": "heure",
-    "yesterday": "Hier à",
-    "ago": "auparavant",
-    "never": "Jamais",
-    "lastSeen": "Vu pour la dernière fois:",
-    "dashboard": "Tableau de bord",
-    "students": "Étudiants",
-    "reports": "Rapports",
-
-    "schoolManagement": "Gestion de l'école",
-    "attendance": "Présence",
-    "logout": "Déconnexion"
-  },
   "students": {
     "loading": {
       "students": "Chargement des Étudiants",
-      "loadingStudents": "Chargement des étudiants..."
+      "employees": "Chargement des Employés",
+      "loadingStudents": "Chargement des étudiants...",
+      "loadingEmployees": "Chargement des employés..."
     },
     "navigation": {
       "office": "Bureau",
       "home": "Accueil",
       "students": "Étudiants",
+      "employees": "Employés",
       "attendance": "Présence",
+      "timeTracking": "Suivi du temps",
       "dashboard": "Tableau de Bord",
+      "ceoDashboard": "Tableau de Bord PDG",
       "profile": "Profil",
       "logout": "Déconnexion"
     },
     "header": {
       "title": "Tous les Membres Inscrits",
-      "subtitle": "Gérez et surveillez votre base de données de membres avec des outils complets"
+      "titleCompany": "Tous les Employés Inscrits",
+      "subtitle": "Gérez et surveillez votre base de données de membres avec des outils complets",
+      "subtitleCompany": "Gérez et surveillez votre base de données d'employés avec des outils complets"
     },
     "stats": {
       "totalStudents": "Total Étudiants",
+      "totalEmployees": "Total Employés",
       "maleStudents": "Étudiants Masculins",
+      "maleEmployees": "Employés Masculins",
       "femaleStudents": "Étudiants Féminins",
-      "formsClasses": "Formulaires/Classes"
+      "femaleEmployees": "Employés Féminins",
+      "formsClasses": "Formulaires/Classes",
+      "departments": "Départements"
     },
     "filters": {
       "filterByForm": "Filtrer par Formulaire/Classe :",
+      "filterByDepartment": "Filtrer par Département :",
       "allForms": "Tous les Formulaires",
+      "allDepartments": "Tous les Départements",
       "searchByName": "Rechercher par Nom :",
       "searchPlaceholder": "Rechercher des étudiants...",
+      "searchPlaceholderCompany": "Rechercher des employés...",
       "export": "Exporter",
       "refresh": "Actualiser"
     },
@@ -575,6 +861,7 @@
         "email": "Email",
         "telephone": "Téléphone",
         "form": "Formulaire/Classe",
+        "department": "Département",
         "gender": "Genre"
       }
     },
@@ -584,11 +871,14 @@
     },
     "errors": {
       "noStudentsFound": "Aucun Membre Trouvé",
+      "noEmployeesFound": "Aucun Employé Trouvé",
+      "noMembersFound": "Aucun Membre Trouvé",
       "adjustFilters": "Essayez d'ajuster vos critères de recherche ou de filtre",
       "tryAgain": "Réessayer"
     },
     "modal": {
       "updateUID": "Mettre à jour l'UID de l'Étudiant",
+      "updateUIDCompany": "Mettre à jour l'UID de l'Employé",
       "updateDescription": "Changer l'UID de la carte RFID pour",
       "currentUID": "UID Actuel :",
       "newUID": "Nouvel UID :",
@@ -625,148 +915,101 @@
     "office": "Bureau",
     "home": "Accueil",
     "students": "Étudiants",
+    "employees": "Employés",
     "attendance": "Présence",
+    "timeTracking": "Suivi du temps",
     "logout": "Déconnexion",
     "settings": "Paramètres",
     "loading": {
       "attendance": "Chargement de la Présence",
+      "timeTracking": "Chargement du Suivi du Temps",
       "loadingAttendance": "Chargement des enregistrements...",
       "error": "Une erreur s'est produite lors du chargement des données de présence. Veuillez réessayer. 🙏😢",
+      "errorCompany": "Une erreur s'est produite lors du chargement des données de suivi du temps. Veuillez réessayer. 🙏😢",
       "noRecords": "Aucun enregistrement de présence trouvé pour aujourd'hui. 🙏😢",
+      "noRecordsCompany": "Aucun enregistrement de suivi du temps trouvé pour aujourd'hui. 🙏😢",
       "tryAgain": "Essayez de rafraîchir la page ou de vérifier votre connexion Internet.🙏😢",
       "tryAdjusting": "Essayez d'ajuster vos critères de recherche ou de filtre pour afficher les enregistrements.🙏😢"
     },
     "title": "Analyse de la Présence",
+    "titleCompany": "Analyse du Suivi du Temps",
     "subtitle": "Surveillez et analysez la présence des membres avec des informations en temps réel et des rapports complets",
+    "subtitleCompany": "Surveillez et analysez le suivi du temps des employés avec des informations en temps réel et des rapports complets",
     "stats": {
       "totalStudents": "Total Étudiants",
+      "totalEmployees": "Total Employés",
       "presentToday": "Présents Aujourd'hui",
+      "checkedInToday": "Pointés Aujourd'hui",
       "absentToday": "Absents Aujourd'hui",
+      "notCheckedInToday": "Non Pointés Aujourd'hui",
       "attendanceRate": "Taux de Présence",
+      "timeTrackingRate": "Taux de Pointage",
       "partial": "Partiel"
     },
     "allforms": "Tous les Formulaires",
+    "allDepartments": "Tous les Départements",
     "download": "Télécharger",
     "downloadAspdf": "Télécharger en PDF",
     "downloadAsExcel": "Télécharger en Excel",
     "advancedFilters": "Filtres Avancés",
     "description": "Affinez votre recherche de présence avec des filtres avancés",
+    "descriptionCompany": "Affinez votre recherche de suivi du temps avec des filtres avancés",
     "searchByName": "Rechercher par Nom :",
     "searchPlaceholder": "Rechercher des membres...",
+    "searchPlaceholderCompany": "Rechercher des employés...",
     "startDate": "Date de Début",
     "endDate": "Date de Fin",
     "cancel": "Annuler",
     "applyFilters": "Appliquer les Filtres",
     "summary": "Résumé de la Présence",
+    "summaryCompany": "Résumé du Suivi du Temps",
     "statistics": "Statistiques par Formulaire/Classe",
+    "statisticsCompany": "Statistiques par Département",
     "statsPresent": "Présents",
+    "statsCheckedIn": "Pointés",
     "statsAbsent": "Absents",
+    "statsNotCheckedIn": "Non Pointés",
     "statsPartial": "Partiels",
     "table": {
       "date": "Date",
       "name": "Nom",
       "uid": "UID",
       "signInTime": "Heure de Connexion",
+      "checkInTime": "Heure de Pointage",
       "signOutTime": "Heure de Déconnexion",
+      "checkOutTime": "Heure de Sortie",
       "status": "Statut",
-      "form": "Formulaire/Classe"
+      "form": "Formulaire/Classe",
+      "department": "Département"
     }
   },
-  "teachersList": {
-    "yourStaff": "Votre Personnel Enseignant",
-    "errorLoading": "Une erreur s'est produite lors du chargement des enseignants 🙏😢",
-    "subtitle": "Gérez et surveillez votre personnel enseignant avec des outils complets",
-    "loading": "Chargement des enseignants...",
-    "noTeachers": "Aucun enseignant trouvé",
-    "addYourFirstTeacher": "Ajoutez votre premier enseignant pour commencer",
-    "addTeachers": "Ajoutez des enseignants pour les voir ici",
-    "tryAgain": "Réessayer",
-    "goHome": "Retour à l'accueil",
-    "stats": {
-      "totalTeachers": "Total Enseignants",
-      "activeTeachers": "Enseignants Actifs",
-      "TopPerforming": "Meilleurs Performants",
-      "avgExperience": "Expérience Moyenne"
-    },
-    "searchTeachers": "Rechercher des enseignants...",
-    "filter": "Filtrer",
-    "export": "Exporter",
-    "addTeacher": "Ajouter un Enseignant",
-    "unnamedTeacher":"Personnel Non Nommé",
-    "joined": "Rejoint le ",
-    "view":"Voir",
-    "nobio":"Pas de bio disponible"
-
-    
+  "AdminProfile": {
+    "loading": "Chargement du profil...",
+    "error": "Une erreur s'est produite lors du chargement de votre profil 🙏😢",
+    "title": "Profil Administrateur",
+    "titleCompany": "Profil PDG",
+    "back": "Retour au tableau de bord",
+    "logout": "Déconnexion",
+    "subscriptionInfo": "Informations sur l'abonnement",
+    "subscriptionPlan": "Formule d'abonnement",
+    "subscriptionType": "Type d'abonnement",
+    "schoolName": "Nom de l'établissement",
+    "companyName": "Nom de l'entreprise",
+    "daysLeft": "Jours restants",
+    "joinedOn": "Inscrit le",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "subscriptionProgress": "Progression de l'abonnement",
+    "daysremaining": "Jours restants",
+    "status": "Statut",
+    "schoolInformation": "Informations sur l'établissement",
+    "companyInformation": "Informations sur l'entreprise",
+    "username": "Nom d'utilisateur administrateur",
+    "ceoUsername": "Nom d'utilisateur PDG",
+    "cardbalance": "Solde de la carte: ",
+    "days": "jours"
   },
-  "addTeacher": {
-  "title": "Ajouter un nouvel enseignant",
-  "subtitle": "Entrez l'adresse e-mail de l'enseignant que vous souhaitez ajouter",
-  "emailLabel": "Adresse e-mail de l'enseignant",
-  "emailPlaceholder": "enseignant@exemple.com",
-  "submitButton": "Ajouter un enseignant",
-  "adding": "Ajout de l'enseignant...",
-  "infoText": "L'enseignant recevra une invitation par e-mail pour rejoindre",
-  "goBack": "Retour au tableau de bord",
-  "dashboard": "Retour"
-},
- "teacherlogin": {
-      "title": "Connexion Des enseignants",
-      "subtitle": "Entrez votre adresse e-mail pour accéder à votre compte",
-      "email_placeholder": "Email / e-mail",
-      "login_button": "Se connecter",
-      "info_text": "Seuls les membres du personnel enregistrés peuvent accéder à ce portail. Contactez votre administrateur si vous avez besoin d'aide.",
-      "back": "Retour à l'accueil",
-      "loading": "En cours..."
-
-    },
-    "AdminProfile": {
-  "loading": "Chargement du profil...",
-  "error": "Une erreur s'est produite lors du chargement de votre profil 🙏😢",
-  "title": "Profil Administrateur",
-  "back": "Retour au tableau de bord",
-  "logout": "Déconnexion",
-  "subInfo": "Informations sur l'abonnement",
-  "subscriptionPlan": "Formule d'abonnement",
-  "subscriptionType": "Type d'abonnement",
-  "schoolName": "Nom de l'établissement",
-  "createdAt": "Compte créé le",
-  "daysLeft": "Jours restants dans l'abonnement",
-  "joinedOn": "Inscrit le",
-  "startDate": "Date de début",
-  "endDate": "Date de fin",
-  "Subscriptionprogress": "Progression de l'abonnement",
-  "daysremaining": "Jours restants",
-  "status": "Statut",
-  "schoolInformation": "Informations sur l'établissement",
-  "username": "Nom d'utilisateur administrateur",
-  "cardbalance": "Solde de la carte: ",
-  "days": "Jours"
-  
-},
-"reports":{
-  "reports.title": "Analytique et Rapports",
-  "reports.subtitle": "Informations complètes et rapports détaillés pour votre système de gestion de présence",
-  "filters.startDate": "Date de début: ",
-  "filters.endDate": "Date de fin: ",
-  "filters.form": "Classe/Formulaire",
-  "filters.allForms": "Toutes les classes",
-  "filters.apply": "Appliquer les filtres",
-  "filters.refresh": "Rafraîchir",
-  "stats.totalStudents": "Nombre total d'élèves",
-  "stats.totalTeachers": "Nombre total d'enseignants",
-  "stats.attendanceRate": "Taux de présence",
-  "stats.totalRecords": "Nombre total d'enregistrements",
-  "charts.attendanceRate": "Taux de présence",
-  "charts.formStatistics": "Statistiques par classe",
-  "charts.monthlyTrends": "Tendances mensuelles",
-  "download.title": "Télécharger les rapports",
-  "download.subtitle": "Générez et téléchargez des rapports complets dans le format de votre choix",
-  "download.pdf": "Télécharger le rapport PDF",
-  "download.excel": "Télécharger le rapport Excel",
-  "download.generating": "Génération de votre rapport... Cela peut prendre quelques instants."
-},
- "profile": {
+  "profile": {
     "backtoschool": "Retour",
     "loading": "Chargement du profil...",
     "edit": "Modifier le profil",
@@ -795,56 +1038,19 @@
     }
   },
   "settime": {
-  "header": "Paramètres d'heure d'entrée / de sortie",
-  "start": "Début de l'entrée :",
-  "startEnd": "Fin de l'entrée :",
-  "endstart": "Début de la sortie :",
-  "end:": "Fin de la sortie :",
-  "modifier": "Modifier",
-  "save": "Ok",
-  "cancel": "Annuler",
-  "home":"Accueil"
-},
-  "forgotPassword": {
-    "title": "Réinitialiser votre mot de passe",
-    "subtitle": "Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe",
-    "email_placeholder": "Votre e-mail",
-    "send_button": "Envoyer le lien de réinitialisation",
-    "remember_password": "Vous vous souvenez de votre mot de passe ?",
-    "back_to_login": "Retour à la connexion"
-  },
-    "resetPassword": {
-    "title": "Définir un nouveau mot de passe",
-    "subtitle": "Entrez votre nouveau mot de passe ci-dessous",
-    "new_password_placeholder": "Nouveau mot de passe",
-    "confirm_password_placeholder": "Confirmer le mot de passe",
-    "reset_button": "Réinitialiser le mot de passe",
-    "resetting": "réinitialisation en cours...",
-  "back": "Retour à la demande de réinitialisation du mot de passe"
-  },
-   "resetSuccess": {
-    "title": "Réinitialisation du mot de passe réussie !",
-    "message": "Votre mot de passe a été mis à jour. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
-    "loginButton": "Se connecter",
-    "additionalInfo": "Gardez votre nouveau mot de passe en sécurité et ne le partagez avec personne."
-  },
-   "emailSent": {
-    "title": "Vérifiez votre boîte de réception",
-    "message1": "Nous avons envoyé un lien de vérification à votre email.",
-    "message2": "Veuillez confirmer pour continuer.",
-    "backToSignup": "Retour à l'inscription",
-    "additionalInfo": "Vous n'avez pas reçu l'email ? Vérifiez votre dossier spam ou essayez de vous inscrire à nouveau."
-  },
-   "emailVerification": {
-    "title": "Vérification d'email",
-    "verifying": "Vérification de votre email...",
-    "goToLogin": "Aller à la connexion",
-    "backToLogin": "Retour à la connexion",
-    "invalidLink": "Lien invalide ou jeton expiré",
-    "successInfo": "Votre compte est maintenant actif et prêt à être utilisé.",
-    "errorInfo": "Veuillez vérifier votre email pour un nouveau lien de vérification ou contactez le support."
+    "header": "Paramètres d'heure d'entrée / de sortie",
+    "headerCompany": "Paramètres d'heure de pointage / de sortie",
+    "start": "Début de l'entrée :",
+    "startCompany": "Début du pointage :",
+    "startEnd": "Fin de l'entrée :",
+    "startEndCompany": "Fin du pointage :",
+    "endstart": "Début de la sortie :",
+    "endstartCompany": "Début de la sortie :",
+    "end": "Fin de la sortie :",
+    "endCompany": "Fin de la sortie :",
+    "modifier": "Modifier les paramètres horaires",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "home": "Retour à l'accueil"
   }
-
-
-
 }

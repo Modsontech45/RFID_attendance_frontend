@@ -1,14 +1,19 @@
 {
   "app": {
+    "name": "Synctuario",
     "title": "Welcome",
     "description": "This is a demo application."
   },
   "login": {
+    "error": {
+      "general": "Login failed. Please try again."
+    },
     "admin": {
       "title": "Admin Login",
       "emailPlaceholder": "Email",
       "passwordPlaceholder": "Password",
       "loginButton": "Login",
+      "loggingIn": "Logging in...",
       "noAccount": "Don't have an account?",
       "signupLink": "Sign up",
       "forgotPassword": "Forgot password?",
@@ -27,16 +32,20 @@
     },
     "teacherlogin": {
       "title": "Staff Login",
+      "titleCompany": "Manager Login",
       "subtitle": "Enter your email address to access your account",
       "email_placeholder": "Email / e-mail",
       "login_button": "Login",
       "info_text": "Only registered staff members can access this portal. Contact your administrator if you need assistance.",
-      "back": "Back to Home"
+      "info_textCompany": "Only registered managers can access this portal. Contact your CEO if you need assistance.",
+      "back": "Back to Home",
+      "loading": "Loading..."
     }
   },
   "signup": {
     "admin": {
       "title": "Admin Sign Up",
+      "titleCompany": "CEO Sign Up",
       "organizationPlaceholder": "Organization Name",
       "typePlaceholder": "Select Organization Type",
       "typeSchool": "School",
@@ -59,7 +68,7 @@
     }
   },
   "validation": {
-    "schoolNameRequired": "School name is required",
+    "schoolNameRequired": "Organization name is required",
     "usernameRequired": "Username is required",
     "emailRequired": "Email is required",
     "emailInvalid": "Email is invalid",
@@ -102,81 +111,73 @@
     },
     "hero": {
       "badge": "Next-Generation Attendance System",
-      "title_part1": "Smart Attendance",
-      "title_part2": "Made Simple",
-      "description": "Revolutionary RFID-powered attendance tracking for schools and companies. Experience seamless, real-time monitoring with enterprise-grade security."
-    },
-    "buttons": {
-      "admin_portal": "Admin Portal",
-      "staff_portal": "Staff Portal",
-      "documentation": "Documentation"
+      "badgeCompany": "Next-Generation Time Tracking System",
+      "title": "Smart Attendance Made Simple",
+      "titleCompany": "Smart Time Tracking Made Simple",
+      "subtitle": "Revolutionary RFID-powered attendance tracking for schools and companies. Experience seamless, real-time monitoring with enterprise-grade security.",
+      "adminPortal": "Admin Portal",
+      "adminPortalCompany": "CEO Portal",
+      "staffPortal": "Staff Portal",
+      "staffPortalCompany": "Manager Portal"
     },
     "stats": {
       "organizations": "Organizations",
-      "daily_scans": "Daily Scans",
+      "dailyScans": "Daily Scans",
       "accuracy": "Accuracy",
-      "uptime": "Uptime",
-      "organizations_value": "500+",
-      "daily_scans_value": "50K+",
-      "accuracy_value": "99.9%",
-      "uptime_value": "99.99%"
+      "uptime": "Uptime"
     },
     "features": {
       "title": "Why Choose Synctuario?",
-      "description": "Cutting-edge technology meets intuitive design for the ultimate attendance management experience.",
-      "items": [
-        {
-          "title": "Lightning Fast",
-          "description": "RFID scanning in milliseconds with ESP32 integration"
-        },
-        {
-          "title": "Enterprise Security",
-          "description": "Bank-level encryption with unique API keys for each organization"
-        },
-        {
-          "title": "Real-time Analytics",
-          "description": "Live dashboards with detailed reports and insights"
-        },
-        {
-          "title": "Multi-language",
-          "description": "Full support for English and French interfaces"
-        },
-        {
-          "title": "Mobile Ready",
-          "description": "Access from any device with responsive design"
-        },
-        {
-          "title": "Export Data",
-          "description": "Download attendance records in Excel format"
-        }
-      ]
+      "subtitle": "Cutting-edge technology meets intuitive design for the ultimate attendance management experience.",
+      "subtitleCompany": "Cutting-edge technology meets intuitive design for the ultimate time tracking experience.",
+      "lightningFast": {
+        "title": "Lightning Fast",
+        "description": "RFID scanning in milliseconds with ESP32 integration"
+      },
+      "enterpriseSecurity": {
+        "title": "Enterprise Security",
+        "description": "Bank-level encryption with unique API keys for each organization"
+      },
+      "realTimeAnalytics": {
+        "title": "Real-time Analytics",
+        "description": "Live dashboards with detailed reports and insights"
+      },
+      "multiLanguage": {
+        "title": "Multi-language",
+        "description": "Full support for English and French interfaces"
+      },
+      "mobileReady": {
+        "title": "Mobile Ready",
+        "description": "Access from any device with responsive design"
+      },
+      "exportData": {
+        "title": "Export Data",
+        "description": "Download attendance records in Excel format",
+        "descriptionCompany": "Download time tracking records in Excel format"
+      }
     },
-    "how_it_works": {
+    "howItWorks": {
       "title": "How It Works",
-      "description": "Simple setup, powerful results in just three steps.",
-      "steps": [
-        {
-          "step": "01",
-          "title": "Register Users",
-          "description": "Add students or employees with unique RFID cards"
-        },
-        {
-          "step": "02",
-          "title": "Scan & Track",
-          "description": "ESP32 readers capture attendance with timestamps"
-        },
-        {
-          "step": "03",
-          "title": "Monitor & Report",
-          "description": "View live data and generate detailed analytics"
-        }
-      ]
+      "subtitle": "Simple setup, powerful results in just three steps.",
+      "step1": {
+        "title": "Register Users",
+        "description": "Add students or employees with unique RFID cards"
+      },
+      "step2": {
+        "title": "Scan & Track",
+        "description": "ESP32 readers capture attendance with timestamps",
+        "descriptionCompany": "ESP32 readers capture time tracking with timestamps"
+      },
+      "step3": {
+        "title": "Monitor & Report",
+        "description": "View live data and generate detailed analytics"
+      }
     },
-    "use_cases": {
+    "useCases": {
       "title": "Perfect For",
       "education": {
         "title": "Educational Institutions",
-        "items": [
+        "features": [
           "Student attendance tracking",
           "Teacher access management",
           "Parent notification system"
@@ -184,52 +185,469 @@
       },
       "corporate": {
         "title": "Corporate Offices",
-        "items": [
+        "features": [
           "Employee time tracking",
-          "Payroll integration",
+          "Manager access control",
           "Security access control"
         ]
       }
     },
     "cta": {
       "title": "Ready to Get Started?",
-      "description": "Join hundreds of organizations already using Synctuario for seamless attendance management.",
-      "pricing_button": "View Pricing",
-      "contact_button": "Contact Us",
+      "subtitle": "Join hundreds of organizations already using Synctuario for seamless attendance management.",
+      "subtitleCompany": "Join hundreds of organizations already using Synctuario for seamless time tracking management.",
+      "startTrial": "Start Free Trial",
+      "viewDocs": "View Documentation",
       "benefits": [
         "15-day free trial",
-        "No setup fees",
+        "No credit card required",
         "Cancel anytime"
       ]
     },
+    "floating_comments": [
+      "✨ Welcome to Synctuario!",
+      "🔐 Secure RFID Technology",
+      "📊 Real-time Analytics",
+      "🚀 Easy Setup & Use",
+      "💼 Perfect for Schools & Companies",
+      "🎯 99.9% Accuracy Rate",
+      "⚡ Lightning Fast Scanning",
+      "🌟 Trusted by 500+ Organizations"
+    ],
+    "about": {
+      "title": "About the Synctuario Attendance System",
+      "titleCompany": "About the Synctuario Time Tracking System",
+      "description": "The Synctuario Attendance System is a robust, easy-to-use platform designed for schools and companies to automate attendance tracking using RFID technology.",
+      "descriptionCompany": "The Synctuario Time Tracking System is a robust, easy-to-use platform designed for companies to automate employee time tracking using RFID technology.",
+      "featuresTitle": "Key Features:",
+      "featuresList": [
+        "Effortlessly register and track attendance with RFID cards or tags scanned via ESP32 devices.",
+        "View live attendance data with detailed reports and analytics accessible to admins and teachers.",
+        "Different access levels for admins and teachers ensure security and proper permissions.",
+        "Supports English and French to cater to diverse user bases.",
+        "Flexible monthly and yearly subscription plans for schools and companies of all sizes.",
+        "Get a 15-day free trial when you sign up.",
+        "Works for both schools and companies — fully adaptable.",
+        "Your data is securely saved and available for future use.",
+        "When an admin registers, a unique API key is generated for secure device communication.",
+        "Student or employee UID changes can only be made by an admin or CEO, and the ID owner will be notified.",
+        "Attendance records can be exported in Excel format."
+      ],
+      "featuresListCompany": [
+        "Effortlessly register and track employee time with RFID cards or tags scanned via ESP32 devices.",
+        "View live time tracking data with detailed reports and analytics accessible to CEOs and managers.",
+        "Different access levels for CEOs and managers ensure security and proper permissions.",
+        "Supports English and French to cater to diverse user bases.",
+        "Flexible monthly and yearly subscription plans for companies of all sizes.",
+        "Get a 15-day free trial when you sign up.",
+        "Fully adaptable for any company size and structure.",
+        "Your data is securely saved and available for future use.",
+        "When a CEO registers, a unique API key is generated for secure device communication.",
+        "Employee UID changes can only be made by a CEO, and the employee will be notified.",
+        "Time tracking records can be exported in Excel format."
+      ],
+      "howItWorksTitle": "How It Works:",
+      "howItWorksDescription": "Students or employees are registered with unique RFID cards. When a card is scanned on the ESP32 reader, the system logs the attendance with timestamps.",
+      "howItWorksDescriptionCompany": "Employees are registered with unique RFID cards. When a card is scanned on the ESP32 reader, the system logs the time tracking with timestamps.",
+      "whyChooseTitle": "Why Choose Our System?",
+      "whyChooseList": [
+        "Reduces manual attendance errors and time spent.",
+        "Improves accuracy and accountability.",
+        "Provides insightful analytics to improve school/company performance.",
+        "Scales easily with your organization's growth.",
+        "Backed by ongoing support and feature updates.",
+        "Includes a secure API system for syncing attendance devices."
+      ],
+      "whyChooseListCompany": [
+        "Reduces manual time tracking errors and time spent.",
+        "Improves accuracy and accountability.",
+        "Provides insightful analytics to improve company performance.",
+        "Scales easily with your organization's growth.",
+        "Backed by ongoing support and feature updates.",
+        "Includes a secure API system for syncing time tracking devices."
+      ],
+      "subscriptionTitle": "Subscription Plans:",
+      "subscriptionDescription": "Choose between monthly and yearly subscriptions tailored to your institution's size and needs.",
+      "subscriptionDescriptionCompany": "Choose between monthly and yearly subscriptions tailored to your company's size and needs.",
+      "getStartedTitle": "Get Started Today!",
+      "getStartedDescription": "Contact us using the form above or click the buttons to subscribe and take control of your attendance management.",
+      "getStartedDescriptionCompany": "Contact us using the form above or click the buttons to subscribe and take control of your time tracking management.",
+      "contactButton": "Contact Us"
+    }
+  },
+  "forgotPassword": {
+    "title": "Reset Your Password",
+    "subtitle": "Enter your email address and we'll send you a link to reset your password",
+    "email_placeholder": "Your Email",
+    "send_button": "Send Reset Link",
+    "remember_password": "Remember your password?",
+    "back_to_login": "Back to Login"
+  },
+  "resetPassword": {
+    "title": "Set New Password",
+    "subtitle": "Enter your new password below",
+    "new_password_placeholder": "New Password",
+    "confirm_password_placeholder": "Confirm Password",
+    "reset_button": "Reset Password",
+    "resetting": "Resetting...",
+    "back": "Back to Reset Request"
+  },
+  "resetSuccess": {
+    "title": "Password Reset Successful!",
+    "message": "Your password has been updated. You can now log in with your new password.",
+    "loginButton": "Login",
+    "additionalInfo": "Keep your new password secure and don't share it with anyone."
+  },
+  "emailVerification": {
+    "title": "Email Verification",
+    "verifying": "Verifying your email...",
+    "goToLogin": "Go to Login",
+    "backToLogin": "Back to Login",
+    "successInfo": "Your account is now active and ready to use.",
+    "errorInfo": "Please check your email for a new verification link or contact support."
+  },
+  "emailSent": {
+    "title": "Check your inbox",
+    "message1": "We've sent a verification link to your email.",
+    "message2": "Please confirm to continue.",
+    "backToSignup": "Back to Signup",
+    "additionalInfo": "Didn't receive the email? Check your spam folder or try signing up again."
+  },
+  "adminhomepage": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "titleCompany": "CEO Dashboard",
+      "header": "School Admin",
+      "headerCompany": "Company CEO",
+      "section_title": "Dashboard Articles",
+      "api": "Your API Key for the Device",
+      "show": "Show",
+      "hide": "Hide",
+      "copy": "Copy",
+      "copied": "API Key copied!",
+      "rule": "Use the button below to create a new category for your forms or departments. Categories help group users for better organization and reporting.",
+      "ruleCompany": "Use the button below to create a new category for your departments. Categories help group employees for better organization and reporting.",
+      "create": "+ Create department",
+      "view": "view department",
+      "menu": {
+        "school": "School",
+        "company": "Company",
+        "teachers": "Teachers",
+        "managers": "Managers",
+        "add_teacher": "Add Teacher",
+        "add_manager": "Add Manager",
+        "report": "Report",
+        "logout": "Logout"
+      },
+      "cards": {
+        "attendance": {
+          "title": "Attendance Tracking",
+          "titleCompany": "Time Tracking",
+          "description": "View and manage student attendance with real-time syncing from IoT devices.",
+          "descriptionCompany": "View and manage employee time tracking with real-time syncing from IoT devices."
+        },
+        "teacher": {
+          "title": "Teacher Management",
+          "titleCompany": "Manager Management",
+          "description": "Add, update, and monitor all registered teachers with access control and activity logs.",
+          "descriptionCompany": "Add, update, and monitor all registered managers with access control and activity logs."
+        },
+        "report": {
+          "title": "Student Reports",
+          "titleCompany": "Employee Reports",
+          "description": "Generate reports for attendance, academic performance, and behavioral tracking.",
+          "descriptionCompany": "Generate reports for time tracking, performance, and productivity tracking."
+        }
+      }
+    }
+  },
+  "teachersList": {
+    "title": "Teachers List",
+    "titleCompany": "Managers List",
+    "yourStaff": "Your Staff",
+    "yourManagers": "Your Managers",
+    "subtitle": "Manage and monitor your teaching staff with comprehensive tools",
+    "subtitleCompany": "Manage and monitor your management staff with comprehensive tools",
+    "loading": "Loading teachers...",
+    "loadingManagers": "Loading managers...",
+    "errorLoading": "An error occurred while loading teachers 🙏😢",
+    "errorLoadingManagers": "An error occurred while loading managers 🙏😢",
+    "noTeachers": "No teachers found",
+    "noManagers": "No managers found",
+    "addTeachers": "Add teachers to see them here",
+    "addManagers": "Add managers to see them here",
+    "addYourFirstTeacher": "Add your first teacher to get started",
+    "addYourFirstManager": "Add your first manager to get started",
+    "tryAgain": "Try Again",
+    "goHome": "Go Home",
+    "stats": {
+      "totalTeachers": "Total Teachers",
+      "totalManagers": "Total Managers",
+      "activeTeachers": "Active Teachers",
+      "activeManagers": "Active Managers",
+      "topPerforming": "Top Performing",
+      "avgExperience": "Average Experience"
+    },
+    "searchTeachers": "Search teachers...",
+    "searchManagers": "Search managers...",
+    "filter": "Filter",
+    "export": "Export",
+    "addTeacher": "Add Teacher",
+    "addManager": "Add Manager",
+    "unnamedTeacher": "Unnamed Teacher",
+    "unnamedManager": "Unnamed Manager",
+    "joined": "Joined on",
+    "view": "View Teacher",
+    "viewManager": "View Manager",
+    "nobio": "No bio available"
+  },
+  "addTeacher": {
+    "title": "Add New Staff",
+    "titleCompany": "Add New Manager",
+    "subtitle": "Enter the email address of the staff member you want to add",
+    "subtitleCompany": "Enter the email address of the manager you want to add",
+    "emailLabel": "Staff Email Address",
+    "emailLabelCompany": "Manager Email Address",
+    "emailPlaceholder": "staff@example.com",
+    "emailPlaceholderCompany": "manager@example.com",
+    "submitButton": "Add Staff Member",
+    "submitButtonCompany": "Add Manager",
+    "adding": "Adding Staff...",
+    "addingCompany": "Adding Manager...",
+    "infoText": "The staff member will receive an email invitation to join",
+    "infoTextCompany": "The manager will receive an email invitation to join",
+    "goBack": "Go Back to Dashboard",
+    "dashboard": "Dashboard"
+  },
+  "schoolManagement": {
+    "title": "School Device Management",
+    "titleCompany": "Company Device Management",
+    "subtitle": "Monitor and manage your school's RFID devices with real-time scanning capabilities",
+    "subtitleCompany": "Monitor and manage your company's RFID devices with real-time time tracking capabilities",
+    "registeredDevices": "Registered Devices",
+    "monitorDevices": "Monitor your school's RFID scanning devices",
+    "monitorDevicesCompany": "Monitor your company's RFID scanning devices",
+    "addDevice": "Add Device",
+    "cancel": "Cancel",
+    "deviceUid": "Device UID",
+    "deviceName": "Device Name",
+    "enterDeviceUid": "Enter device UID",
+    "enterDeviceName": "Enter device name",
+    "registerDevice": "Register Device",
+    "noDevicesRegistered": "No Devices Registered",
+    "addFirstDevice": "Add your first device to get started",
+    "online": "Online",
+    "offline": "Offline",
+    "waitingForScan": "Waiting for scan...",
+    "scanDetected": "Scan detected",
+    "newStudentDetected": "New student detected - UID:",
+    "newEmployeeDetected": "New employee detected - UID:",
+    "registerNewStudent": "Register New Student",
+    "registerNewEmployee": "Register New Employee",
+    "studentName": "Student Name",
+    "employeeName": "Employee Name",
+    "emailAddress": "Email Address",
+    "phoneNumber": "Phone Number",
+    "selectClass": "Select Class/Form",
+    "selectDepartment": "Select Department",
+    "selectGender": "Select Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "registerStudent": "Register Student",
+    "registerEmployee": "Register Employee",
+    "registering": "Registering...",
+    "deleteDevice": "Delete Device",
+    "confirmDelete": "Are you sure you want to delete this device?",
+    "loadingDevices": "Loading devices...",
+    "justNow": "Just now",
+    "minuteAgo": "minute ago",
+    "minutesAgo": "minutes ago",
+    "hourAgo": "hour ago",
+    "hoursAgo": "hours ago",
+    "yesterday": "Yesterday at",
+    "never": "Never",
+    "lastSeen": "Last seen:",
+    "dashboard": "Dashboard",
+    "dashboardCompany": "CEO Dashboard",
+    "students": "Students",
+    "employees": "Employees",
+    "attendance": "Attendance",
+    "timeTracking": "Time Tracking",
+    "reports": "Reports",
+    "schoolManagement": "School Management",
+    "companyManagement": "Company Management",
+    "logout": "Logout"
+  },
+  "pricing": {
+    "back": "Back",
+    "school": "School",
+    "company": "Company",
+    "title": "School Pricing",
+    "titleCompany": "Company Pricing",
+    "subtitle": "Choose the perfect plan for your school. All plans include our complete RFID attendance system with real-time monitoring and comprehensive reporting.",
+    "subtitleCompany": "Choose the perfect plan for your company. All plans include our complete RFID time tracking system with real-time monitoring and comprehensive reporting.",
+    "starter": {
+      "title": "Starter",
+      "subtitle": "Perfect for small schools",
+      "subtitleCompany": "Perfect for small companies",
+      "price": "$29",
+      "period": "per month",
+      "subscribed": "✅ Subscribed",
+      "freetrialExpired": "Free Trial Expired",
+      "startfreetrial": "Start Free Trial",
+      "downgrade": "Downgrade",
+      "freeplan": "Free Plan Activated",
+      "getStarted": "Get Started",
+      "upgrade": "Upgrade",
+      "subscribeNow": "Subscribe Now",
+      "features": [
+        "Up to 100 students",
+        "5 teachers",
+        "2 RFID devices",
+        "Basic reporting",
+        "Email support",
+        "Mobile app access"
+      ],
+      "featuresCompany": [
+        "Up to 100 employees",
+        "5 managers",
+        "2 RFID devices",
+        "Basic reporting",
+        "Email support",
+        "Mobile app access"
+      ]
+    },
+    "professional": {
+      "title": "Professional",
+      "subtitle": "Ideal for medium schools",
+      "subtitleCompany": "Ideal for medium companies",
+      "price": "$79",
+      "period": "per month",
+      "mostPopular": "Most Popular",
+      "features": [
+        "Up to 500 students",
+        "20 teachers",
+        "10 RFID devices",
+        "Advanced reporting",
+        "Priority support",
+        "Parent notifications",
+        "Data export",
+        "Custom branding"
+      ],
+      "featuresCompany": [
+        "Up to 500 employees",
+        "20 managers",
+        "10 RFID devices",
+        "Advanced reporting",
+        "Priority support",
+        "HR notifications",
+        "Data export",
+        "Custom branding"
+      ]
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "subtitle": "For large schools",
+      "subtitleCompany": "For large companies",
+      "price": "$199",
+      "period": "per month",
+      "features": [
+        "Unlimited students",
+        "Unlimited teachers",
+        "Unlimited devices",
+        "Custom reporting",
+        "24/7 phone support",
+        "API access",
+        "White-label solution",
+        "Dedicated manager"
+      ],
+      "featuresCompany": [
+        "Unlimited employees",
+        "Unlimited managers",
+        "Unlimited devices",
+        "Custom reporting",
+        "24/7 phone support",
+        "API access",
+        "White-label solution",
+        "Dedicated account manager"
+      ]
+    },
+    "getStarted": "Get Started",
+    "contactSales": "Contact Sales",
+    "allPlansInclude": "All Plans Include",
+    "allPlansSubtitle": "Every Synctuario plan comes with these essential features for modern school management",
+    "allPlansSubtitleCompany": "Every Synctuario plan comes with these essential features for modern company management",
+    "features": {
+      "studentManagement": {
+        "title": "Student Management",
+        "titleCompany": "Employee Management",
+        "description": "Complete student database with RFID card assignment",
+        "descriptionCompany": "Complete employee database with RFID card assignment"
+      },
+      "realTimeTracking": {
+        "title": "Real-time Tracking",
+        "description": "Live attendance monitoring with instant notifications",
+        "descriptionCompany": "Live time tracking monitoring with instant notifications"
+      },
+      "advancedReports": {
+        "title": "Advanced Reports",
+        "description": "Detailed analytics and exportable attendance reports",
+        "descriptionCompany": "Detailed analytics and exportable time tracking reports"
+      },
+      "fastSetup": {
+        "title": "Fast Setup",
+        "description": "Quick installation and easy device configuration"
+      }
+    },
     "contact": {
       "title": "Contact Us",
-      "subtitle": "Send us a message and we'll get back to you",
-      "name_placeholder": "Your Name",
-      "email_placeholder": "Your Email",
-      "message_placeholder": "Your Message",
-      "send_button": "Send Message",
-      "sending": "Sending...",
-      "success_message": "Message sent successfully!",
-      "error_message": "Failed to send message. Please try again later."
-    },
-    "popup": {
-      "connect_with_us": "Connect With me",
-      "close": "Close"
+      "subtitle": "Ready to transform your school's attendance system? Get in touch with our team.",
+      "subtitleCompany": "Ready to transform your company's time tracking system? Get in touch with our team.",
+      "email": "Email",
+      "phone": "Phone",
+      "office": "Office",
+      "whyChoose": "Why Choose Synctuario?",
+      "reasons": [
+        "Trusted by 500+ schools worldwide",
+        "99.9% uptime guarantee",
+        "Enterprise-grade security"
+      ],
+      "reasonsCompany": [
+        "Trusted by 500+ companies worldwide",
+        "99.9% uptime guarantee",
+        "Enterprise-grade security"
+      ],
+      "getStartedToday": "Get Started Today",
+      "form": {
+        "yourName": "Your Name",
+        "schoolEmail": "School Email",
+        "companyEmail": "Company Email",
+        "schoolName": "School Name",
+        "companyName": "Company Name",
+        "selectPlan": "Select a Plan",
+        "message": "Tell us about your school's needs...",
+        "messageCompany": "Tell us about your company's needs...",
+        "sendMessage": "Send Message",
+        "sending": "Sending...",
+        "contactSales": "Contact Sales",
+        "selectedPlan": "Selected Plan:"
+      }
     }
   },
   "documentation": {
     "title": "Documentation",
-    "home": "Home",
-    "pricing": "Pricing",
-    "badge": "Complete Documentation",
     "subtitle": "Everything you need to know about setting up, configuring, and using the Synctuario RFID attendance system.",
+    "subtitleCompany": "Everything you need to know about setting up, configuring, and using the Synctuario RFID time tracking system.",
     "gettingStarted": {
       "title": "Getting Started",
       "welcome": "Welcome to Synctuario",
-      "description": "Synctuario is a comprehensive RFID-based attendance management system designed for schools and organizations. This documentation will guide you through setup, configuration, and usage.",
+      "description": "Synctuario is a comprehensive RFID-based attendance management system designed for schools and organizations.",
+      "descriptionCompany": "Synctuario is a comprehensive RFID-based time tracking system designed for companies and organizations.",
       "forSchools": "For Schools",
+      "forCompanies": "For Companies",
       "schoolsDesc": "Track student attendance with RFID cards and real-time monitoring.",
+      "companiesDesc": "Track employee time with RFID cards and real-time monitoring.",
       "forOrganizations": "For Organizations",
       "organizationsDesc": "Monitor employee attendance and access control systems."
     },
@@ -253,8 +671,11 @@
       "title": "User Management",
       "managingUsers": "Managing Users",
       "adminUsers": "Admin Users",
+      "ceoUsers": "CEO Users",
       "teacherUsers": "Teacher Users",
-      "registrationProcess": "Student Registration Process:"
+      "managerUsers": "Manager Users",
+      "registrationProcess": "Student Registration Process:",
+      "registrationProcessCompany": "Employee Registration Process:"
     },
     "security": {
       "title": "Security & API Keys",
@@ -265,160 +686,66 @@
     },
     "troubleshooting": {
       "title": "Troubleshooting",
-      "commonIssues": "Common Issues & Solutions",
-      "deviceOffline": {
-        "problem": "Device shows as offline",
-        "cause": "WiFi connection issues or device not sending heartbeat",
-        "solution": "Check WiFi credentials, ensure device is powered, verify API key is correct"
-      },
-      "rfidNotDetected": {
-        "problem": "RFID cards not being detected",
-        "cause": "Wiring issues or RFID module malfunction",
-        "solution": "Verify wiring connections, check power supply, test with known working RFID card"
-      },
-      "apiEndpoints": {
-        "registerDevice": {
-          "description": "Register a new RFID device",
-          "example": {
-            "device_uid": "ESP32_001",
-            "device_name": "Main Entrance",
-            "api_key": "your_api_key"
-          }
-        },
-        "getDevices": {
-          "description": "Get all registered devices",
-          "example": "GET /api/devices?api_key=your_api_key"
-        },
-        "submitScan": {
-          "description": "Submit RFID scan data",
-          "example": {
-            "uid": "A1B2C3D4",
-            "device_uid": "ESP32_001",
-            "api_key": "your_api_key"
-          }
-        }
-      }
-    },
-    "quickLinks": {
-      "title": "Quick Links",
-      "adminPortal": "Admin Portal",
-      "adminDescription": "Access the admin dashboard",
-      "teacherPortal": "Teacher Portal",
-      "teacherDescription": "Access the teacher dashboard",
-      "getStarted": "Get Started",
-      "pricingDescription": "View pricing and plans"
+      "commonIssues": "Common Issues & Solutions"
     }
   },
-  "pricing": {
-    "back": "Back ",
-    "school": "School",
-    "title": "Choose the plan that fits your school",
-    "subtitle": "Affordable pricing plans designed to scale with your institution.",
-    "starter": {
-      "title": "Basic",
-      "subtitle": "Perfect for small schools or pilots",
-      "price": "$35",
-      "period": "month",
-      "subscribed": "Subscribed",
-      "freetrialExpired": "Free Trial Expired",
-      "upgrade": "Upgrade",
-       "getStarted": "Get Started",
-      "freetrialAvailable": "Free Trial Available",
-      "startfreetrial": "Start Free Trial",
-      "downgrade": "Downgrade",
-      "freeplan": "Free Plan Activated",
-      "subscribeNow": "Subscribe Now",
-      
-
-      "features": [
-        "Basic student management",
-        "Limited attendance tracking",
-        "Basic analytics dashboard",
-        "Email support"
-      ]
+  "reports": {
+    "title": "Analytics & Reports",
+    "subtitle": "Comprehensive insights and detailed reports for your attendance management system",
+    "subtitleCompany": "Comprehensive insights and detailed reports for your time tracking management system",
+    "filters": {
+      "startDate": "Start Date:",
+      "endDate": "End Date:",
+      "formClass": "Form/Class:",
+      "department": "Department:",
+      "allForms": "All Forms",
+      "allDepartments": "All Departments",
+      "applyFilters": "Apply Filters",
+      "refresh": "Refresh"
     },
-    "professional": {
-      "title": "Professional",
-      "subtitle": "Great for growing institutions",
-      "price": "$65",
-      "period": "month",
-      "mostPopular": "Most Popular",
-      "features": [
-        "Advanced student management",
-        "Real-time attendance tracking",
-        "Detailed analytics and reporting",
-        "Priority email support"
-      ]
+    "stats": {
+      "totalStudents": "Total Students",
+      "totalEmployees": "Total Employees",
+      "totalTeachers": "Total Teachers",
+      "totalManagers": "Total Managers",
+      "attendanceRate": "Attendance Rate",
+      "timeTrackingRate": "Time Tracking Rate",
+      "totalRecords": "Total Records"
     },
-    "enterprise": {
-      "title": "Enterprise",
-      "subtitle": "Best for large or multi-campus setups",
-      "price": "$170",
-      "period": "month",
-      "features": [
-        "All professional features",
-        "Dedicated account manager",
-        "Custom integrations",
-        "24/7 support"
-      ]
+    "charts": {
+      "attendanceRate": "Attendance Rate",
+      "timeTrackingRate": "Time Tracking Rate",
+      "formStatistics": "Form Statistics",
+      "departmentStatistics": "Department Statistics",
+      "monthlyTrends": "Monthly Trends"
     },
-    "getStarted": "Get Started",
-    "contactSales": "Contact Sales",
-    "allPlansInclude": "All Plans Include",
-    "allPlansSubtitle": "Every plan includes essential features to run your school efficiently.",
-    "features": {
-      "studentManagement": {
-        "title": "Student Management",
-        "description": "Manage student profiles, classes, and performance from one dashboard."
-      },
-      "realTimeTracking": {
-        "title": "Real-Time Tracking",
-        "description": "Instant updates on attendance and student activity."
-      },
-      "advancedReports": {
-        "title": "Advanced Reports",
-        "description": "Gain insights with automated reports and performance summaries."
-      },
-      "fastSetup": {
-        "title": "Fast Setup",
-        "description": "Get your school up and running in no time with our onboarding help."
-      }
-    },
-    "contact": {
-      "title": "Get In Touch",
-      "subtitle": "Reach out to learn more, schedule a demo, or request a custom quote.",
-      "email": "Email Us",
-      "phone": "Call Us",
-      "office": "Our Office",
-      "whyChoose": "Why Choose Synctuario?",
-      "reasons": [
-        "Award-Winning Support",
-        "Global Accessibility",
-        "Enterprise-Grade Security"
-      ],
-      "getStartedToday": "Get Started Today",
-      "form": {
-        "yourName": "Your Name",
-        "schoolEmail": "School Email",
-        "schoolName": "School Name",
-        "selectPlan": "Select a Plan (Optional)",
-        "message": "Your Message",
-        "sendMessage": "Send Message"
-      }
+    "download": {
+      "title": "Download Reports",
+      "subtitle": "Generate and download comprehensive reports in your preferred format",
+      "downloadPdf": "Download PDF Report",
+      "downloadExcel": "Download Excel Report",
+      "generating": "Generating your report... This may take a few moments."
     }
   },
   "dashboard": {
     "apiKeyPlaceholder": "YourAPIKeyHere",
     "defaultSchoolName": "Synctuario Academy",
+    "defaultCompanyName": "Synctuario Corp",
     "defaultUsername": "admin_user",
+    "defaultCeoUsername": "ceo_user",
     "loading": "Loading Dashboard",
     "welcomeTitle": "Welcome Back",
     "welcomeSubtitle": "Manage your institution with powerful tools and real-time insights",
+    "welcomeSubtitleCompany": "Manage your organization with powerful tools and real-time insights",
     "stats": {
       "students": "Total Students",
+      "employees": "Total Employees",
       "teachers": "Active Teachers",
+      "managers": "Active Managers",
       "attendance": "Today's Attendance",
-      "records": "Attendance Records"
+      "timeTracking": "Today's Time Tracking",
+      "records": "Attendance Records",
+      "timeRecords": "Time Records"
     },
     "apiSection": {
       "title": "API Key",
@@ -438,11 +765,15 @@
       "title": "Dashboard Features",
       "attendance": {
         "title": "Attendance Tracking",
-        "description": "Monitor and manage student attendance records"
+        "titleCompany": "Time Tracking",
+        "description": "Monitor and manage student attendance records",
+        "descriptionCompany": "Monitor and manage employee time tracking records"
       },
       "teacher": {
         "title": "Teacher Management",
-        "description": "Add and manage teaching staff"
+        "titleCompany": "Manager Management",
+        "description": "Add and manage teaching staff",
+        "descriptionCompany": "Add and manage company managers"
       },
       "report": {
         "title": "Reports & Analytics",
@@ -452,9 +783,12 @@
     },
     "nav": {
       "school": "School",
+      "company": "Company",
       "staff": "Staff",
+      "managers": "Managers",
       "reports": "Reports",
       "addStaff": "Add Staff",
+      "addManager": "Add Manager",
       "docs": "Documentation"
     },
     "logout": "Logout",
@@ -472,295 +806,208 @@
       "serverError": "Server error. Please try again."
     }
   },
-    "schoolManagement": {
-    "title": "School Device Management",
-    "subtitle": "Monitor and manage your school's RFID devices with real-time scanning capabilities",
-    "registeredDevices": "Registered Devices",
-    "monitorDevices": "Monitor your school's RFID scanning devices",
-    "addDevice": "Add Device",
-    "cancel": "Cancel",
-  
-    "deviceUid": "Device UID",
-    "deviceName": "Device Name",
-    "enterDeviceUid": "Enter device UID",
-    "enterDeviceName": "Enter device name",
-    "registerDevice": "Register Device",
-    "noDevicesRegistered": "No Devices Registered",
-    "addFirstDevice": "Add your first device to get started",
-    "online": "Online",
-    "offline": "Offline",
-    "waitingForScan": "Waiting for scan...",
-    "scanDetected": "Scan detected",
-    "newStudentDetected": "New student detected - UID:",
-    "registerNewStudent": "Register New Student",
-    "studentName": "Student Name",
-    "emailAddress": "Email Address",
-    "phoneNumber": "Phone Number",
-    "selectClass": "Select Class/Form",
-    "selectGender": "Select Gender",
-    "male": "Male",
-    "female": "Female",
-    "other": "Other",
-    "registerStudent": "Register Student",
-    "registering": "Registering...",
-    "deleteDevice": "Delete Device",
-    "confirmDelete": "Are you sure you want to delete this device?",
-    "loadingDevices": "Loading devices...",
-    "justNow": "Just now",
-    "ago": "ago",
-    "minuteAgo": "minute ago",
-    "minutesAgo": "minutes ago",
-    "hourAgo": "hour ago",
-    "hoursAgo": "hours ago",
-    "yesterday": "Yesterday at",
-    "never": "Never",
-    "lastSeen": "Last seen:",
-    "dashboard": "Admin Dashboard",
-    "students": "Students",
-    "attendance": "Attendance",
-    "reports": "Reports",
-    "registerStudentButton": "Register Student",
-    "schoolManagement": "School Management",
-    "logout": "Logout"
+  "students": {
+    "loading": {
+      "students": "Loading Students",
+      "employees": "Loading Employees",
+      "loadingStudents": "Loading students...",
+      "loadingEmployees": "Loading employees..."
+    },
+    "navigation": {
+      "office": "Office",
+      "home": "Home",
+      "students": "Students",
+      "employees": "Employees",
+      "attendance": "Attendance",
+      "timeTracking": "Time Tracking",
+      "dashboard": "Dashboard",
+      "ceoDashboard": "CEO Dashboard",
+      "profile": "Profile",
+      "logout": "Logout"
+    },
+    "header": {
+      "title": "All Registered Members",
+      "titleCompany": "All Registered Employees",
+      "subtitle": "Manage and monitor your member database with comprehensive tools",
+      "subtitleCompany": "Manage and monitor your employee database with comprehensive tools"
+    },
+    "stats": {
+      "totalStudents": "Total Students",
+      "totalEmployees": "Total Employees",
+      "maleStudents": "Male Students",
+      "maleEmployees": "Male Employees",
+      "femaleStudents": "Female Students",
+      "femaleEmployees": "Female Employees",
+      "formsClasses": "Forms/Classes",
+      "departments": "Departments"
+    },
+    "filters": {
+      "filterByForm": "Filter by Form/Class:",
+      "filterByDepartment": "Filter by Department:",
+      "allForms": "All Forms",
+      "allDepartments": "All Departments",
+      "searchByName": "Search by Name:",
+      "searchPlaceholder": "Search students...",
+      "searchPlaceholderCompany": "Search employees...",
+      "export": "Export",
+      "refresh": "Refresh"
+    },
+    "table": {
+      "headers": {
+        "name": "Name",
+        "uid": "UID",
+        "email": "Email",
+        "telephone": "Telephone",
+        "form": "Form/Class",
+        "department": "Department",
+        "gender": "Gender"
+      }
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "errors": {
+      "noStudentsFound": "No Members Found",
+      "noEmployeesFound": "No Employees Found",
+      "noMembersFound": "No Members Found",
+      "adjustFilters": "Try adjusting your search or filter criteria",
+      "tryAgain": "Try Again"
+    },
+    "modal": {
+      "updateUID": "Update Student UID",
+      "updateUIDCompany": "Update Employee UID",
+      "updateDescription": "Change the RFID card UID for",
+      "currentUID": "Current UID:",
+      "newUID": "New UID:",
+      "newUIDPlaceholder": "Enter new UID...",
+      "updating": "Updating...",
+      "updateButton": "Update UID"
+    },
+    "buttons": {
+      "close": "Close",
+      "cancel": "Cancel",
+      "save": "Save",
+      "update": "Update",
+      "delete": "Delete",
+      "confirm": "Confirm"
+    },
+    "messages": {
+      "success": "Operation completed successfully",
+      "error": "An error occurred",
+      "updated": "Updated successfully",
+      "deleted": "Deleted successfully"
+    },
+    "common": {
+      "loading": "Loading...",
+      "noData": "No data available",
+      "search": "Search",
+      "filter": "Filter",
+      "all": "All",
+      "none": "None",
+      "yes": "Yes",
+      "no": "No"
+    }
   },
-  "students":{
-  "loading": {
-    "students": "Loading Students",
-    "loadingStudents": "Loading students..."
-  },
-  "navigation": {
+  "attendance": {
     "office": "Office",
     "home": "Home",
     "students": "Students",
+    "employees": "Employees",
     "attendance": "Attendance",
-    "profile": "Profile",
-    "dashboard": "Dashboard",
-    "logout": "Logout"
-  },
-  "header": {
-    "title": "All Registered Members",
-    "subtitle": "Manage and monitor your member database with comprehensive tools"
-  },
-  "stats": {
-    "totalStudents": "Total Students",
-    "maleStudents": "Male Students",
-    "femaleStudents": "Female Students",
-    "formsClasses": "Forms/Classes"
-  },
-  "filters": {
-    "filterByForm": "Filter by Form/Class:",
-    "allForms": "All Forms",
+    "timeTracking": "Time Tracking",
+    "logout": "Logout",
+    "settings": "Settings",
+    "loading": {
+      "attendance": "Loading Attendance...",
+      "timeTracking": "Loading Time Tracking...",
+      "loadingAttendance": "Loading records...",
+      "error": "An error occurred while loading attendance data 🙏😢",
+      "errorCompany": "An error occurred while loading time tracking data 🙏😢",
+      "noRecords": "No attendance records found for today 🙏😢",
+      "noRecordsCompany": "No time tracking records found for today 🙏😢",
+      "tryAdjusting": "Try adjusting your search or filter criteria to display records 🙏😢",
+      "tryAgain": "Please try again later 🙏😢"
+    },
+    "title": "Attendance Analysis",
+    "titleCompany": "Time Tracking Analysis",
+    "subtitle": "Monitor and analyze member attendance with real-time insights and comprehensive reporting",
+    "subtitleCompany": "Monitor and analyze employee time tracking with real-time insights and comprehensive reporting",
+    "stats": {
+      "totalStudents": "Total Attendance",
+      "totalEmployees": "Total Time Records",
+      "presentToday": "Present Today",
+      "checkedInToday": "Checked In Today",
+      "absentToday": "Absent Today",
+      "notCheckedInToday": "Not Checked In Today",
+      "attendanceRate": "Attendance Rate",
+      "timeTrackingRate": "Check-in Rate",
+      "partial": "Partial Attendance"
+    },
+    "allforms": "All Forms",
+    "allDepartments": "All Departments",
+    "download": "Download",
+    "downloadAsPdf": "Download as PDF",
+    "downloadAsExcel": "Download as Excel",
+    "advancedFilters": "Advanced Filters",
+    "description": "Refine your attendance search with advanced filters",
+    "descriptionCompany": "Refine your time tracking search with advanced filters",
     "searchByName": "Search by Name:",
-    "searchPlaceholder": "Search students...",
-    "export": "Export",
-    "refresh": "Refresh"
-  },
-  "table": {
-    "headers": {
+    "searchPlaceholder": "Search members...",
+    "searchPlaceholderCompany": "Search employees...",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "cancel": "Cancel",
+    "applyFilters": "Apply Filters",
+    "summary": "Attendance Summary",
+    "summaryCompany": "Time Tracking Summary",
+    "statistics": "Statistics by Form/Class",
+    "statisticsCompany": "Statistics by Department",
+    "statsPresent": "Present",
+    "statsCheckedIn": "Checked In",
+    "statsAbsent": "Absent",
+    "statsNotCheckedIn": "Not Checked In",
+    "statsPartial": "Partial",
+    "table": {
+      "date": "Date",
       "name": "Name",
       "uid": "UID",
-      "email": "Email",
-      "telephone": "Telephone",
+      "signInTime": "Sign In",
+      "checkInTime": "Check In",
+      "signOutTime": "Sign Out",
+      "checkOutTime": "Check Out",
+      "status": "Status",
       "form": "Form/Class",
-      "gender": "Gender"
+      "department": "Department"
     }
   },
-  "gender": {
-    "male": "Male",
-    "female": "Female"
-  },
-  "errors": {
-    "noStudentsFound": "No Members Found",
-    "adjustFilters": "Try adjusting your search or filter criteria",
-    "tryAgain": "Try Again"
-  },
-  "modal": {
-    "updateUID": "Update Student UID",
-    "updateDescription": "Change the RFID card UID for",
-    "currentUID": "Current UID:",
-    "newUID": "New UID:",
-    "newUIDPlaceholder": "Enter new UID...",
-    "updating": "Updating...",
-    "updateButton": "Update UID"
-  },
-  "buttons": {
-    "close": "Close",
-    "cancel": "Cancel",
-    "save": "Save",
-    "update": "Update",
-    "delete": "Delete",
-    "confirm": "Confirm"
-  },
-  "messages": {
-    "success": "Operation completed successfully",
-    "error": "An error occurred",
-    "updated": "Updated successfully",
-    "deleted": "Deleted successfully"
-  },
-  "common": {
-    "loading": "Loading...",
-    "noData": "No data available",
-    "search": "Search",
-    "filter": "Filter",
-    "all": "All",
-    "none": "None",
-    "yes": "Yes",
-    "no": "No"
-  }
-} ,
-"attendance":{
-  "office":"Office",
-  "home":"Home",
-  "students":"Students",
-  "attendance":"Attendance",
-  "logout":"Logout",
-  "settings":"Settings",
-  "loading": {
-    "attendance": "Loading Attendance...",
-    "loadingAttendance": "Loading records...",
-    "error": "An error occurred while loading attendance data 🙏😢",
-    "noRecords": "No attendance records found for today 🙏😢",
-    "tryAdjusting": "Try adjusting your search or filter criteria to display records 🙏😢",
-    "tryAgain": "Please try again later 🙏😢"
-  },
-  "title": "Attendance analysis",
-  "subtitle": "Monitor and analyze member attendance with real-time insights and comprehensive reporting",
-  "stats": {
-    "totalStudents": "Total Attendance",
-    "presentToday": "Present Today",
-    "absentToday": "Absent Today",
-    "attendanceRate": "Attendance Rate",
-    "partial": "Partial Attendance"
-   
-  },
-   "allforms": "All Forms",
-   "download": "Download",
-   "downloadAsPdf": "Download as PDF",
-  "downloadAsExcel": "Download as Excel",
-  "advancedFilters": "Advanced Filters",
-  "description": "Refine your attendance search with advanced filters",
-  "searchByName": "Search by Name:",
-  "searchPlaceholder": "Search members...",
-  "startDate": "Start Date",
-  "endDate": "End Date",
-  "cancel": "Cancel",
-  "applyFilters": "Apply Filters",
-  "summary": "Attendance Summary",
-  "stattistics": "Statistics by Form/Class",
-  "statsPresent": "Present",
-  "statsAbsent": "Absent",
-  "statsPartial": "Partial",
-  "table":{
-    "date": "Date",
-    "name": "Name",
-    "uid": "UID",
-    "signInTime": "Sign In",
-    "signOutTime": "Sign Out",
+  "AdminProfile": {
+    "loading": "Loading Profile...",
+    "error": "An error occurred while loading your profile 🙏😢",
+    "title": "Admin Profile",
+    "titleCompany": "CEO Profile",
+    "back": "Back to Dashboard",
+    "logout": "Logout",
+    "subscriptionInfo": "Subscription Information",
+    "subscriptionPlan": "Subscription Plan",
+    "subscriptionType": "Subscription Type",
+    "schoolName": "School Name",
+    "companyName": "Company Name",
+    "daysLeft": "Days Left",
+    "joinedOn": "Joined On",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "subscriptionProgress": "Subscription Progress",
+    "daysremaining": "Days remaining",
     "status": "Status",
-    "form": "Form/Class"
-  }
-
-
-
-},
-  "teachersList": {
-  
-    "yourStaff": "Your Teachers",
-    "subtitle": "Manage and monitor your teaching staff with comprehensive tools",
-    "loading": "Loading teachers...",
-    "errorLoading": "An error occurred while loading teachers 🙏😢",
-    "noTeachers": "No teachers found",
-    "addTeachers": "Add teachers to see them here",
-    "addYourFirstTeacher": "Add your first teacher to get started",
-    "tryAgain": "Try Again",
-    "goHome": "Go Home",
-    "stats":{
-      "totalTeachers": "Total Teacher",
-      "activeTeachers": "Active Teachers",
-      "TopPerforming": "Top Performing",
-      "avgExperience": "Average Experience"
-
-    },
-    "searchTeachers": "search teachers...",
-    "filter": "Filter",
-    "export": "Export",
-    "addTeacher": "Add Teacher",
-    "unnamedTeacher":"Unnamed Teacher",
-    "joined": "Joined on",
-    "view":"View Teacher",
-    "nobio":"No bio "
+    "schoolInformation": "School Information",
+    "companyInformation": "Company Information",
+    "username": "Admin Username",
+    "ceoUsername": "CEO Username",
+    "cardbalance": "Card Balance: ",
+    "days": "days"
   },
-    "addTeacher": {
-    "title": "Add New Staff",
-    "subtitle": "Enter the email address of the staff member you want to add",
-    "emailLabel": "Staff Email Address",
-    "emailPlaceholder": "staff@example.com",
-    "submitButton": "Add Staff Member",
-    "adding": "Adding Staff...",
-    "infoText": "The staff member will receive an email invitation to join",
-    "goBack": "Go Back to Dashboard",
-    "dashboard": "Dashboard"
-  },
-    "teacherlogin": {
-      "title": "Teacher Login",
-      "subtitle": "Enter your email address to access your account",
-      "email_placeholder": "Email / e-mail",
-      "login_button": "Login",
-      "info_text": "Only registered staff members can access this portal. Contact your administrator if you need assistance.",
-      "back": "Back to Home",
-       "loading": "Loading..."
-    },
-    "AdminProfile":{
-      "loading": "Loading Profile...",
-      "error": "An error occurred while loading your profile 🙏😢",
-      "title": "Admin Profile",
-      "back": " Back to Dashboards",
-      "logout": "Logout",
-      "subInfo": "Subscription Information",
-      "subscriptionPlan": "Subscription Plan",
-      "subscriptionType": "Subscription Type",
-      "schoolName": "School Name",
-      "createdAt": "Account Created At",
-      "daysLeft": "Days Left in Subscription",
-      "joinedOn": "Joined on",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "Subscriptionprogress": "Subscription Progress",
-      "daysremaining": "Days remaining",
-      "status": "Status",
-      "schoolInformation": "School Information",
-      "username": "Admin Username",
-      "cardbalance": "Card Balance",
-      "days": "Days"
-
-
-
-
-    },
-
-    "reports":{
-  "reports.title": "Analytics & Reports",
-  "reports.subtitle": "Comprehensive insights and detailed reports for your attendance management system",
-  "filters.startDate": "Start Date: ",
-  "filters.endDate": "End Date: ",
-  "filters.form": "Form/Class: ",
-  "filters.allForms": "All Forms",
-  "filters.apply": "Apply Filters",
-  "filters.refresh": "Refresh",
-  "stats.totalStudents": "Total Students",
-  "stats.totalTeachers": "Total Teachers",
-  "stats.attendanceRate": "Attendance Rate",
-  "stats.totalRecords": "Total Records",
-  "charts.attendanceRate": "Attendance Rate",
-  "charts.formStatistics": "Form Statistics",
-  "charts.monthlyTrends": "Monthly Trends",
-  "download.title": "Download Reports",
-  "download.subtitle": "Generate and download comprehensive reports in your preferred format",
-  "download.pdf": "Download PDF Report",
-  "download.excel": "Download Excel Report",
-  "download.generating": "Generating your report... This may take a few moments."
-},
- "profile": {
+  "profile": {
     "backtoschool": "Back",
     "loading": "Loading profile...",
     "edit": "Edit Profile",
@@ -788,57 +1035,20 @@
       "title": "Profile Information"
     }
   },
-"settime": {
-  "header": "Sign In / Sign Out Time Settings",
-  "start": "Sign In Start Time:",
-  "startEnd": "Sign In End Time:",
-  "endstart": "Sign Out Start Time:",
-  "end:": "Sign Out End Time:",
-  "modifier": "Edit",
-  "save": "OK",
-  "cancel": "Cancel",
-  "home": "Home"
-},
- "forgotPassword": {
-    "title": "Reset Your Password",
-    "subtitle": "Enter your email address and we'll send you a link to reset your password",
-    "email_placeholder": "Your Email",
-    "send_button": "Send Reset Link",
-    "remember_password": "Remember your password?",
-    "back_to_login": "Back to Login"
-  },
-    "resetPassword": {
-    "title": "Set New Password",
-    "subtitle": "Enter your new password below",
-    "new_password_placeholder": "New Password",
-    "confirm_password_placeholder": "Confirm Password",
-    "reset_button": "Reset Password",
-    "resetting": "resetting .....",
-    "back": "Back to request password reset"
-  },
-    "resetSuccess": {
-    "title": "Password Reset Successful!",
-    "message": "Your password has been updated. You can now log in with your new password.",
-    "loginButton": "Login",
-    "additionalInfo": "Keep your new password secure and don't share it with anyone."
-  },
-    "emailSent": {
-    "title": "Check your inbox",
-    "message1": "We've sent a verification link to your email.",
-    "message2": "Please confirm to continue.",
-    "backToSignup": "Back to Signup",
-    "additionalInfo": "Didn't receive the email? Check your spam folder or try signing up again."
-  },
-    "emailVerification": {
-    "title": "Email Verification",
-    "verifying": "Verifying your email...",
-    "goToLogin": "Go to Login",
-    "invalidLink": "Invalid link or token expired",
-    "backToLogin": "Back to Login",
-    "successInfo": "Your account is now active and ready to use.",
-    "errorInfo": "Please check your email for a new verification link or contact support."
+  "settime": {
+    "header": "Sign In / Sign Out Time Settings",
+    "headerCompany": "Check In / Check Out Time Settings",
+    "start": "Sign In Start:",
+    "startCompany": "Check In Start:",
+    "startEnd": "Sign In End:",
+    "startEndCompany": "Check In End:",
+    "endstart": "Sign Out Start:",
+    "endstartCompany": "Check Out Start:",
+    "end": "Sign Out End:",
+    "endCompany": "Check Out End:",
+    "modifier": "Edit Time Settings",
+    "save": "Save",
+    "cancel": "Cancel",
+    "home": "Go Home"
   }
-
-
-
 }

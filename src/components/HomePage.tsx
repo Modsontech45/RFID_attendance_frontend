@@ -571,22 +571,22 @@ const HomePage: React.FC = () => {
               <Building className="mb-6 h-12 w-12 text-green-400" />
               <h3 className="mb-4 text-2xl font-bold text-white">
                 <FormattedMessage
-                  id="home.use_cases.corporate.title"
-                  defaultMessage="Corporate Offices"
+                  id="home.use_cases.company.title"
+                  defaultMessage="Companies & Organizations"
                 />
               </h3>
               <ul className="space-y-3 text-gray-300">
                 {[
                   formatMessage({
-                    id: "home.use_cases.corporate.items.0",
+                    id: "home.use_cases.company.items.0",
                     defaultMessage: "Employee time tracking",
                   }),
                   formatMessage({
-                    id: "home.use_cases.corporate.items.1",
-                    defaultMessage: "Payroll integration",
+                    id: "home.use_cases.company.items.1",
+                    defaultMessage: "Manager access control",
                   }),
                   formatMessage({
-                    id: "home.use_cases.corporate.items.2",
+                    id: "home.use_cases.company.items.2",
                     defaultMessage: "Security access control",
                   }),
                 ].map((feature: string, index: number) => (
