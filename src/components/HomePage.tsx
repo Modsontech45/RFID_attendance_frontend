@@ -61,14 +61,14 @@ const HomePage: React.FC = () => {
   // Floating comments data
   const getCommentsData = () => {
     return [
-      formatMessage({ id: "home.welcome_comments.0", defaultMessage: "✨ Welcome to Synctuario!" }),
-      formatMessage({ id: "home.welcome_comments.1", defaultMessage: "🔐 Secure RFID Technology" }),
-      formatMessage({ id: "home.welcome_comments.2", defaultMessage: "📊 Real-time Analytics" }),
-      formatMessage({ id: "home.welcome_comments.3", defaultMessage: "🚀 Easy Setup & Use" }),
-      formatMessage({ id: "home.welcome_comments.4", defaultMessage: "💼 Perfect for Schools & Companies" }),
-      formatMessage({ id: "home.welcome_comments.5", defaultMessage: "🎯 99.9% Accuracy Rate" }),
-      formatMessage({ id: "home.welcome_comments.6", defaultMessage: "⚡ Lightning Fast Scanning" }),
-      formatMessage({ id: "home.welcome_comments.7", defaultMessage: "🌟 Trusted by 500+ Organizations" }),
+      formatMessage({ id: "home.floating_comments.0", defaultMessage: "✨ Welcome to Synctuario!" }),
+      formatMessage({ id: "home.floating_comments.1", defaultMessage: "🔐 Secure RFID Technology" }),
+      formatMessage({ id: "home.floating_comments.2", defaultMessage: "📊 Real-time Analytics" }),
+      formatMessage({ id: "home.floating_comments.3", defaultMessage: "🚀 Easy Setup & Use" }),
+      formatMessage({ id: "home.floating_comments.4", defaultMessage: "💼 Perfect for Schools & Companies" }),
+      formatMessage({ id: "home.floating_comments.5", defaultMessage: "🎯 99.9% Accuracy Rate" }),
+      formatMessage({ id: "home.floating_comments.6", defaultMessage: "⚡ Lightning Fast Scanning" }),
+      formatMessage({ id: "home.floating_comments.7", defaultMessage: "🌟 Trusted by 500+ Organizations" }),
     ];
   };
 
@@ -511,7 +511,11 @@ const HomePage: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-center space-x-8 text-sm text-gray-400">
-            {(formatMessage({ id: "home.cta.benefits", defaultMessage: "" }) as string).split('|||').filter(Boolean).map((benefit: string, index: number) => (
+            {[
+              formatMessage({ id: "home.cta.benefits.0", defaultMessage: "Free Setup" }),
+              formatMessage({ id: "home.cta.benefits.1", defaultMessage: "24/7 Support" }),
+              formatMessage({ id: "home.cta.benefits.2", defaultMessage: "30-Day Trial" })
+            ].map((benefit: string, index: number) => (
               <div key={index} className="flex items-center space-x-2">
                 <CheckCircle className="h-4 w-4 text-green-400" />
                 <span>{benefit}</span>
