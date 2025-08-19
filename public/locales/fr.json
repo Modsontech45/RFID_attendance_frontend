@@ -251,7 +251,8 @@
     "noTeachers": "Aucun enseignant trouvé",
     "addTeachers": "Ajoutez des enseignants pour les voir ici",
     "tryAgain": "Réessayer",
-    "goHome": "Retour à l'accueil"
+    "goHome": "Retour à l'accueil",
+    "noBio": "Pas de bio disponible"
   },
   "addTeacher": {
     "title": "Ajouter un nouveau membre du personnel",
