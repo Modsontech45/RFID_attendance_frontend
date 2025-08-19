@@ -389,7 +389,6 @@ const AdminSignup: React.FC = () => {
                     value={formData.schoolname}
                     onChange={handleInputChange}
                     placeholder={formatMessage({ id: "signup.admin.organizationPlaceholder", defaultMessage: "Organization Name" })}
-                    required
                     className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
                       errors.schoolname
                         ? "border-red-600 focus:ring-red-600"

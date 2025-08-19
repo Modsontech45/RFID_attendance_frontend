@@ -462,6 +462,10 @@ const HomePage: React.FC = () => {
 
             <div className="rounded-2xl border border-green-500/30 bg-gradient-to-br from-green-600/20 to-emerald-600/20 p-8 backdrop-blur-sm">
               <Building className="mb-6 h-12 w-12 text-green-400" />
+              <h3 className="mb-4 text-2xl font-bold text-white">
+                <FormattedMessage id="home.useCases.corporate.title" defaultMessage="Corporate Offices" />
+              </h3>
+              <ul className="space-y-3 text-gray-300">
                 {formatMessage({ id: "home.useCases.corporate.features", defaultMessage: [] }).map((feature: string, index: number) => (
                   <li key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-400" />
