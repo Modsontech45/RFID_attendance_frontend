@@ -227,10 +227,10 @@ const AddTeacher: React.FC = () => {
                 <UserPlus className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                <FormattedMessage id="addTeacher.title" defaultMessage="Add New Staff" />
+                {formatMessage({ id: "addTeacher.title" })}
               </h1>
               <p className="text-green-200 text-sm">
-                <FormattedMessage id="addTeacher.subtitle" defaultMessage="Enter the email address of the staff member you want to add" />
+                {formatMessage({ id: "addTeacher.subtitle" })}
               </p>
             </div>
 
@@ -257,7 +257,7 @@ const AddTeacher: React.FC = () => {
               {/* Email Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-green-300">
-                  {formatMessage({ id: "addTeacher.emailLabel" })}
+                  <FormattedMessage id="addTeacher.emailLabel" defaultMessage="Staff Email Address" />
                 </label>
                 <div className="relative">
                   <input
@@ -270,6 +270,7 @@ const AddTeacher: React.FC = () => {
                     required
                     className="w-full pl-12 pr-4 py-4 border border-green-400/50 rounded-xl bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
                   />
+                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
                 </div>
                 <p className="text-xs text-green-300 mt-1">
                   {formatMessage({ id: "addTeacher.infoText" })}
