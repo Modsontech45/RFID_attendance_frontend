@@ -434,11 +434,11 @@ const HomePage: React.FC = () => {
               {
                 icon: Download,
                 title: formatMessage({
-                  id: "home.features.exportData.title",
+                  id: "home.features.items.5.title",
                   defaultMessage: "Export Data",
                 }),
                 description: formatMessage({
-                  id: "home.features.exportData.description",
+                  id: "home.features.items.5.description",
                   defaultMessage: "Download attendance records in Excel format",
                 }),
                 color: "from-teal-500 to-green-500",
@@ -547,15 +547,15 @@ const HomePage: React.FC = () => {
               <ul className="space-y-3 text-gray-300">
                 {[
                   formatMessage({
-                    id: "home.use_cases.education.features.0",
+                    id: "home.use_cases.education.items.0",
                     defaultMessage: "Student attendance tracking",
                   }),
                   formatMessage({
-                    id: "home.use_cases.education.features.1",
+                    id: "home.use_cases.education.items.1",
                     defaultMessage: "Teacher access management",
                   }),
                   formatMessage({
-                    id: "home.use_cases.education.features.2",
+                    id: "home.use_cases.education.items.2",
                     defaultMessage: "Parent notification system",
                   }),
                 ].map((feature: string, index: number) => (
