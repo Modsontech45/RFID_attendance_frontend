@@ -18,7 +18,10 @@ const flattenMessages = (
       if (typeof value === "string") {
         acc[prefixedKey] = value;
       } else if (Array.isArray(value)) {
-        acc[prefixedKey] = value.join("|||");
+        // Create individual indexed keys for array elements
+        value.forEach((item, index) => {
+          acc[`${prefixedKey}.${index}`] = item;
+        });
       } else if (typeof value === "object" && value !== null) {
         Object.assign(
           acc,
