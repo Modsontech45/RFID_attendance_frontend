@@ -1,0 +1,485 @@
+{
+  "loading": "Loading...",
+  "home": {
+    "title": "Are you an Admin or a Staff member?",
+    "admin": "Admin",
+    "teacher": "Staff",
+    "english": "English",
+    "french": "Français",
+    "hero": {
+      "badge": "Next-Generation Attendance System",
+      "title": "Smart Attendance Made Simple",
+      "subtitle": "Revolutionary RFID-powered attendance tracking for schools and companies. Experience seamless, real-time monitoring with enterprise-grade security.",
+      "adminPortal": "Admin Portal",
+      "staffPortal": "Staff Portal"
+    },
+    "stats": {
+      "organizations": "Organizations",
+      "dailyScans": "Daily Scans",
+      "accuracy": "Accuracy",
+      "uptime": "Uptime"
+    },
+    "features": {
+      "title": "Why Choose Synctuario?",
+      "subtitle": "Cutting-edge technology meets intuitive design for the ultimate attendance management experience.",
+      "lightningFast": {
+        "title": "Lightning Fast",
+        "description": "RFID scanning in milliseconds with ESP32 integration"
+      },
+      "enterpriseSecurity": {
+        "title": "Enterprise Security",
+        "description": "Bank-level encryption with unique API keys for each organization"
+      },
+      "realTimeAnalytics": {
+        "title": "Real-time Analytics",
+        "description": "Live dashboards with detailed reports and insights"
+      },
+      "multiLanguage": {
+        "title": "Multi-language",
+        "description": "Full support for English and French interfaces"
+      },
+      "mobileReady": {
+        "title": "Mobile Ready",
+        "description": "Access from any device with responsive design"
+      },
+      "exportData": {
+        "title": "Export Data",
+        "description": "Download attendance records in Excel format"
+      }
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "subtitle": "Simple setup, powerful results in just three steps.",
+      "step1": {
+        "title": "Register Users",
+        "description": "Add students or employees with unique RFID cards"
+      },
+      "step2": {
+        "title": "Scan & Track",
+        "description": "ESP32 readers capture attendance with timestamps"
+      },
+      "step3": {
+        "title": "Monitor & Report",
+        "description": "View live data and generate detailed analytics"
+      }
+    },
+    "useCases": {
+      "title": "Perfect For",
+      "education": {
+        "title": "Educational Institutions",
+        "features": [
+          "Student attendance tracking",
+          "Teacher access management",
+          "Parent notification system"
+        ]
+      },
+      "corporate": {
+        "title": "Corporate Offices",
+        "features": [
+          "Employee time tracking",
+          "Payroll integration",
+          "Security access control"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "subtitle": "Join hundreds of organizations already using Synctuario for seamless attendance management.",
+      "startTrial": "Start Free Trial",
+      "viewDocs": "View Documentation",
+      "benefits": [
+        "15-day free trial",
+        "No credit card required",
+        "Cancel anytime"
+      ]
+    },
+    "floating_comments": [
+      "✨ Welcome to Synctuario!",
+      "🔐 Secure RFID Technology",
+      "📊 Real-time Analytics",
+      "🚀 Easy Setup & Use",
+      "💼 Perfect for Schools & Companies",
+      "🎯 99.9% Accuracy Rate",
+      "⚡ Lightning Fast Scanning",
+      "🌟 Trusted by 500+ Organizations"
+    ],
+    "about": {
+      "title": "About the Synctuario Attendance System",
+      "description": "The Synctuario Attendance System is a robust, easy-to-use platform designed for schools and companies to automate attendance tracking using RFID technology. It combines hardware and software to provide a seamless, real-time attendance monitoring experience.",
+      "featuresTitle": "Key Features:",
+      "featuresList": [
+        "Effortlessly register and track attendance with RFID cards or tags scanned via ESP32 devices.",
+        "View live attendance data with detailed reports and analytics accessible to admins and teachers.",
+        "Different access levels for admins and teachers ensure security and proper permissions.",
+        "Supports English and French to cater to diverse user bases.",
+        "Flexible monthly and yearly subscription plans for schools and companies of all sizes.",
+        "Get a 15-day free trial when you sign up.",
+        "Works for both schools and companies — fully adaptable.",
+        "Your data is securely saved and available for future use.",
+        "When an admin registers, a unique API key is generated for secure device communication.",
+        "Student or employee UID changes can only be made by an admin or CEO, and the ID owner will be notified.",
+        "Attendance records can be exported in Excel format."
+      ],
+      "howItWorksTitle": "How It Works:",
+      "howItWorksDescription": "Students or employees are registered with unique RFID cards. When a card is scanned on the ESP32 reader, the system logs the attendance with timestamps. Admins and teachers can monitor attendance live, generate reports, and manage users via a secure web interface.",
+      "whyChooseTitle": "Why Choose Our System?",
+      "whyChooseList": [
+        "Reduces manual attendance errors and time spent.",
+        "Improves accuracy and accountability.",
+        "Provides insightful analytics to improve school/company performance.",
+        "Scales easily with your organization's growth.",
+        "Backed by ongoing support and feature updates.",
+        "Includes a secure API system for syncing attendance devices."
+      ],
+      "subscriptionTitle": "Subscription Plans:",
+      "subscriptionDescription": "Choose between monthly and yearly subscriptions tailored to your institution's size and needs. Enjoy priority support, free updates, and dedicated account management with yearly plans.",
+      "getStartedTitle": "Get Started Today!",
+      "getStartedDescription": "Contact us using the form above or click the buttons to subscribe and take control of your attendance management.",
+      "contactButton": "Contact Us"
+    }
+  },
+  "login": {
+    "adminlogin": {
+      "title": "Admin Login",
+      "email_placeholder": "Email",
+      "password_placeholder": "Password",
+      "login_button": "Login",
+      "no_account": "Don't have an account?",
+      "signup_link": "Sign up",
+      "forgot_password": "Forgot password?",
+      "back": "Go back"
+    },
+    "adminsignup": {
+      "title": "Admin Signup",
+      "firstname_placeholder": "First Name",
+      "lastname_placeholder": "Last Name",
+      "email_placeholder": "Email",
+      "password_placeholder": "Password",
+      "confirm_password_placeholder": "Confirm Password",
+      "submit_button": "Sign Up",
+      "already_have_account": "Already have an account?",
+      "login_link": "Login"
+    },
+    "teacherlogin": {
+      "title": "Staff Login",
+      "subtitle": "Enter your email address to access your account",
+      "email_placeholder": "Email / e-mail",
+      "login_button": "Login",
+      "info_text": "Only registered staff members can access this portal. Contact your administrator if you need assistance.",
+      "back": "Back to Home"
+    }
+  },
+  "forgotPassword": {
+    "title": "Reset Your Password",
+    "subtitle": "Enter your email address and we'll send you a link to reset your password",
+    "email_placeholder": "Your Email",
+    "send_button": "Send Reset Link",
+    "remember_password": "Remember your password?",
+    "back_to_login": "Back to Login"
+  },
+  "resetPassword": {
+    "title": "Set New Password",
+    "subtitle": "Enter your new password below",
+    "new_password_placeholder": "New Password",
+    "confirm_password_placeholder": "Confirm Password",
+    "reset_button": "Reset Password"
+  },
+  "resetSuccess": {
+    "title": "Password Reset Successful!",
+    "message": "Your password has been updated. You can now log in with your new password.",
+    "loginButton": "Login",
+    "additionalInfo": "Keep your new password secure and don't share it with anyone."
+  },
+  "emailVerification": {
+    "title": "Email Verification",
+    "verifying": "Verifying your email...",
+    "goToLogin": "Go to Login",
+    "backToLogin": "Back to Login",
+    "successInfo": "Your account is now active and ready to use.",
+    "errorInfo": "Please check your email for a new verification link or contact support."
+  },
+  "emailSent": {
+    "title": "Check your inbox",
+    "message1": "We've sent a verification link to your email.",
+    "message2": "Please confirm to continue.",
+    "backToSignup": "Back to Signup",
+    "additionalInfo": "Didn't receive the email? Check your spam folder or try signing up again."
+  },
+  "adminhomepage": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "header": "School Admin",
+      "section_title": "Dashboard Articles",
+      "api": "Your API Key for the Device",
+      "show": "Show",
+      "hide": "Hide",
+      "copy": "Copy",
+      "copied": "API Key copied!",
+      "rule": "Use the button below to create a new category for your forms or departments. Categories help group users for better organization and reporting.",
+      "create": "+ Create department",
+      "view": "view department",
+      "menu": {
+        "school": "School",
+        "teachers": "Teachers",
+        "add_teacher": "Add Teacher",
+        "report": "Report",
+        "logout": "Logout"
+      },
+      "cards": {
+        "attendance": {
+          "title": "Attendance Tracking",
+          "description": "View and manage student attendance with real-time syncing from IoT devices."
+        },
+        "teacher": {
+          "title": "Teacher Management",
+          "description": "Add, update, and monitor all registered teachers with access control and activity logs."
+        },
+        "report": {
+          "title": "Student Reports",
+          "description": "Generate reports for attendance, academic performance, and behavioral tracking."
+        }
+      }
+    }
+  },
+  "teachersList": {
+    "title": "Teachers List",
+    "yourStaff": "Your Staff",
+    "loading": "Loading teachers...",
+    "noTeachers": "No teachers found",
+    "addTeachers": "Add teachers to see them here",
+    "tryAgain": "Try Again",
+    "goHome": "Go Home"
+  },
+  "addTeacher": {
+    "title": "Add New Staff",
+    "subtitle": "Enter the email address of the staff member you want to add",
+    "emailLabel": "Staff Email Address",
+    "emailPlaceholder": "staff@example.com",
+    "submitButton": "Add Staff Member",
+    "infoText": "The staff member will receive an email invitation to join",
+    "goBack": "Go Back to Dashboard"
+  },
+  "schoolManagement": {
+    "title": "School Device Management",
+    "subtitle": "Monitor and manage your school's RFID devices with real-time scanning capabilities",
+    "registeredDevices": "Registered Devices",
+    "monitorDevices": "Monitor your school's RFID scanning devices",
+    "addDevice": "Add Device",
+    "cancel": "Cancel",
+    "deviceUid": "Device UID",
+    "deviceName": "Device Name",
+    "enterDeviceUid": "Enter device UID",
+    "enterDeviceName": "Enter device name",
+    "registerDevice": "Register Device",
+    "noDevicesRegistered": "No Devices Registered",
+    "addFirstDevice": "Add your first device to get started",
+    "online": "Online",
+    "offline": "Offline",
+    "waitingForScan": "Waiting for scan...",
+    "scanDetected": "Scan detected",
+    "newStudentDetected": "New student detected - UID:",
+    "registerNewStudent": "Register New Student",
+    "studentName": "Student Name",
+    "emailAddress": "Email Address",
+    "phoneNumber": "Phone Number",
+    "selectClass": "Select Class/Form",
+    "selectGender": "Select Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "registerStudent": "Register Student",
+    "registering": "Registering...",
+    "deleteDevice": "Delete Device",
+    "confirmDelete": "Are you sure you want to delete this device?",
+    "loadingDevices": "Loading devices...",
+    "justNow": "Just now",
+    "minuteAgo": "minute ago",
+    "minutesAgo": "minutes ago",
+    "hourAgo": "hour ago",
+    "hoursAgo": "hours ago",
+    "yesterday": "Yesterday at",
+    "never": "Never",
+    "lastSeen": "Last seen:",
+    "dashboard": "Dashboard",
+    "students": "Students",
+    "attendance": "Attendance",
+    "logout": "Logout"
+  },
+  "pricing": {
+    "title": "School Pricing",
+    "subtitle": "Choose the perfect plan for your school. All plans include our complete RFID attendance system with real-time monitoring and comprehensive reporting.",
+    "starter": {
+      "title": "Starter",
+      "subtitle": "Perfect for small schools",
+      "price": "$29",
+      "period": "per month",
+      "features": [
+        "Up to 100 students",
+        "5 teachers",
+        "2 RFID devices",
+        "Basic reporting",
+        "Email support",
+        "Mobile app access"
+      ]
+    },
+    "professional": {
+      "title": "Professional",
+      "subtitle": "Ideal for medium schools",
+      "price": "$79",
+      "period": "per month",
+      "mostPopular": "Most Popular",
+      "features": [
+        "Up to 500 students",
+        "20 teachers",
+        "10 RFID devices",
+        "Advanced reporting",
+        "Priority support",
+        "Parent notifications",
+        "Data export",
+        "Custom branding"
+      ]
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "subtitle": "For large schools",
+      "price": "$199",
+      "period": "per month",
+      "features": [
+        "Unlimited students",
+        "Unlimited teachers",
+        "Unlimited devices",
+        "Custom reporting",
+        "24/7 phone support",
+        "API access",
+        "White-label solution",
+        "Dedicated manager"
+      ]
+    },
+    "getStarted": "Get Started",
+    "contactSales": "Contact Sales",
+    "allPlansInclude": "All Plans Include",
+    "allPlansSubtitle": "Every Synctuario plan comes with these essential features for modern school management",
+    "features": {
+      "studentManagement": {
+        "title": "Student Management",
+        "description": "Complete student database with RFID card assignment"
+      },
+      "realTimeTracking": {
+        "title": "Real-time Tracking",
+        "description": "Live attendance monitoring with instant notifications"
+      },
+      "advancedReports": {
+        "title": "Advanced Reports",
+        "description": "Detailed analytics and exportable attendance reports"
+      },
+      "fastSetup": {
+        "title": "Fast Setup",
+        "description": "Quick installation and easy device configuration"
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "subtitle": "Ready to transform your school's attendance system? Get in touch with our team.",
+      "email": "Email",
+      "phone": "Phone",
+      "office": "Office",
+      "whyChoose": "Why Choose Synctuario?",
+      "reasons": [
+        "Trusted by 500+ schools worldwide",
+        "99.9% uptime guarantee",
+        "Enterprise-grade security"
+      ],
+      "getStartedToday": "Get Started Today",
+      "form": {
+        "yourName": "Your Name",
+        "schoolEmail": "School Email",
+        "schoolName": "School Name",
+        "selectPlan": "Select a Plan",
+        "message": "Tell us about your school's needs...",
+        "sendMessage": "Send Message",
+        "sending": "Sending...",
+        "contactSales": "Contact Sales",
+        "selectedPlan": "Selected Plan:"
+      }
+    }
+  },
+  "documentation": {
+    "title": "Documentation",
+    "subtitle": "Everything you need to know about setting up, configuring, and using the Synctuario RFID attendance system.",
+    "gettingStarted": {
+      "title": "Getting Started",
+      "welcome": "Welcome to Synctuario",
+      "description": "Synctuario is a comprehensive RFID-based attendance management system designed for schools and organizations. This documentation will guide you through setup, configuration, and usage.",
+      "forSchools": "For Schools",
+      "schoolsDesc": "Track student attendance with RFID cards and real-time monitoring.",
+      "forOrganizations": "For Organizations",
+      "organizationsDesc": "Monitor employee attendance and access control systems."
+    },
+    "hardwareSetup": {
+      "title": "Hardware Setup",
+      "esp32Setup": "ESP32 RFID Reader Setup",
+      "requiredComponents": "Required Components:",
+      "wiringDiagram": "Wiring Diagram:",
+      "importantNotes": "Important Notes:"
+    },
+    "arduinoCode": {
+      "title": "Arduino Code",
+      "completeCode": "Complete Arduino Code:",
+      "configurationSteps": "Configuration Steps:"
+    },
+    "apiReference": {
+      "title": "API Reference",
+      "endpoints": "API Endpoints"
+    },
+    "userManagement": {
+      "title": "User Management",
+      "managingUsers": "Managing Users",
+      "adminUsers": "Admin Users",
+      "teacherUsers": "Teacher Users",
+      "registrationProcess": "Student Registration Process:"
+    },
+    "security": {
+      "title": "Security & API Keys",
+      "bestPractices": "Security Best Practices",
+      "apiKeyManagement": "API Key Management",
+      "securityGuidelines": "Security Guidelines:",
+      "dataProtection": "Data Protection"
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "commonIssues": "Common Issues & Solutions"
+    }
+  },
+  "reports": {
+    "title": "Analytics & Reports",
+    "subtitle": "Comprehensive insights and detailed reports for your attendance management system",
+    "filters": {
+      "startDate": "Start Date:",
+      "endDate": "End Date:",
+      "formClass": "Form/Class:",
+      "allForms": "All Forms",
+      "applyFilters": "Apply Filters",
+      "refresh": "Refresh"
+    },
+    "stats": {
+      "totalStudents": "Total Students",
+      "totalTeachers": "Total Teachers",
+      "attendanceRate": "Attendance Rate",
+      "totalRecords": "Total Records"
+    },
+    "charts": {
+      "attendanceRate": "Attendance Rate",
+      "formStatistics": "Form Statistics",
+      "monthlyTrends": "Monthly Trends"
+    },
+    "download": {
+      "title": "Download Reports",
+      "subtitle": "Generate and download comprehensive reports in your preferred format",
+      "downloadPdf": "Download PDF Report",
+      "downloadExcel": "Download Excel Report",
+      "generating": "Generating your report... This may take a few moments."
+    }
+  }
+
+  
+}
