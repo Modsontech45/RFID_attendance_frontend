@@ -524,7 +524,7 @@ const HomePage: React.FC = () => {
             {[
               formatMessage({ id: "home.cta.benefits.0", defaultMessage: "15-day free trial" }),
               formatMessage({ id: "home.cta.benefits.1", defaultMessage: "No setup fees" }),
-              formatMessage({ id: "home.cta.benefits.2", defaultMessage: "Cancel anytime" })
+              formatMessage({ id: "home.cta.benefits.2", defaultMessage: "Cancel anytime" }),
             ].map((benefit: string, index: number) => (
               <div key={index} className="flex items-center space-x-2">
                 <CheckCircle className="h-4 w-4 text-green-400" />
