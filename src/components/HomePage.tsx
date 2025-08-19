@@ -434,11 +434,11 @@ const HomePage: React.FC = () => {
               {
                 icon: Download,
                 title: formatMessage({
-                  id: "home.features.items.5.title",
+                  id: "home.features.exportData.title",
                   defaultMessage: "Export Data",
                 }),
                 description: formatMessage({
-                  id: "home.features.items.5.description",
+                  id: "home.features.exportData.description",
                   defaultMessage: "Download attendance records in Excel format",
                 }),
                 color: "from-teal-500 to-green-500",
