@@ -547,15 +547,15 @@ const HomePage: React.FC = () => {
               <ul className="space-y-3 text-gray-300">
                 {[
                   formatMessage({
-                    id: "home.use_cases.education.items.0",
+                    id: "home.use_cases.education.features.0",
                     defaultMessage: "Student attendance tracking",
                   }),
                   formatMessage({
-                    id: "home.use_cases.education.items.1",
+                    id: "home.use_cases.education.features.1",
                     defaultMessage: "Teacher access management",
                   }),
                   formatMessage({
-                    id: "home.use_cases.education.items.2",
+                    id: "home.use_cases.education.features.2",
                     defaultMessage: "Parent notification system",
                   }),
                 ].map((feature: string, index: number) => (
