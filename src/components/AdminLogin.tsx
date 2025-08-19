@@ -115,7 +115,7 @@ const AdminLogin: React.FC = () => {
                 <Shield className="h-6 w-6 text-white" />
               </div>
               <span className="text-2xl font-bold text-green-400">
-                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
+                <FormattedMessage id="home.header.title" defaultMessage="Synctuario" />
               </span>
             </div>
             <LanguageSwitcher />
@@ -137,7 +137,7 @@ const AdminLogin: React.FC = () => {
                 <Shield className="h-8 w-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-                <FormattedMessage id="login.admin.title" defaultMessage="Admin Login" />
+                <FormattedMessage id="login.adminlogin.title" defaultMessage="Admin Login" />
               </h1>
             </div>
 
@@ -158,6 +158,7 @@ const AdminLogin: React.FC = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder={formatMessage({ id: "login.admin.emailPlaceholder", defaultMessage: "Email" })}
+                  placeholder={formatMessage({ id: "login.adminlogin.email_placeholder", defaultMessage: "Email" })}
                   required
                   className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
                     errors.email
@@ -179,6 +180,7 @@ const AdminLogin: React.FC = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                   placeholder={formatMessage({ id: "login.admin.passwordPlaceholder", defaultMessage: "Password" })}
+                  placeholder={formatMessage({ id: "login.adminlogin.password_placeholder", defaultMessage: "Password" })}
                   required
                   className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
                     errors.password
@@ -202,12 +204,12 @@ const AdminLogin: React.FC = () => {
               type="submit"
               disabled={isLoading}
               className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-green-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
-            >
+                      <FormattedMessage id="login.adminlogin.logging_in" defaultMessage="Logging in..." />
               {isLoading ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
                   <span>
-                    <FormattedMessage id="login.admin.loggingIn" defaultMessage="Logging in..." />
+                    <FormattedMessage id="login.adminlogin.login_button" defaultMessage="Login" />
                   </span>
                 </>
               ) : (
@@ -220,12 +222,12 @@ const AdminLogin: React.FC = () => {
             {/* Links */}
             <div className="space-y-3 text-center text-sm">
               <p className="text-white">
-                <FormattedMessage id="login.admin.noAccount" defaultMessage="Don't have an account?" />{" "}
+                <FormattedMessage id="login.adminlogin.no_account" defaultMessage="Don't have an account?" />{" "}
                 <Link
                   to="/admin/signup"
                   className="font-medium text-green-400 transition-colors hover:text-green-300 hover:underline"
                 >
-                  <FormattedMessage id="login.admin.signupLink" defaultMessage="Sign up" />
+                  <FormattedMessage id="login.adminlogin.signup_link" defaultMessage="Sign up" />
                 </Link>
               </p>
 
@@ -234,7 +236,7 @@ const AdminLogin: React.FC = () => {
                   to="/admin/forgot-password"
                   className="text-green-400 transition-colors hover:text-green-300 hover:underline"
                 >
-                  <FormattedMessage id="login.admin.forgotPassword" defaultMessage="Forgot password?" />
+                  <FormattedMessage id="login.adminlogin.forgot_password" defaultMessage="Forgot password?" />
                 </Link>
               </p>
             </div>
@@ -247,7 +249,7 @@ const AdminLogin: React.FC = () => {
             >
               <ArrowLeft className="h-4 w-4" />
               <span>
-                <FormattedMessage id="login.admin.back" defaultMessage="Go back" />
+                <FormattedMessage id="login.adminlogin.back" defaultMessage="Go back" />
               </span>
             </button>
           </form>

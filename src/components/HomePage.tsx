@@ -186,7 +186,7 @@ const HomePage: React.FC = () => {
                 <Shield className="h-6 w-6 text-white" />
               </div>
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent">
-                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
+                <FormattedMessage id="home.header.title" defaultMessage="Synctuario" />
               </span>
             </div>
 
@@ -233,17 +233,17 @@ const HomePage: React.FC = () => {
             <div className="inline-flex items-center space-x-2 rounded-full border border-blue-500/30 bg-blue-500/20 px-4 py-2 text-blue-300 backdrop-blur-sm">
               <Sparkles className="h-4 w-4" />
               <span className="text-sm font-medium">
-                <FormattedMessage id="home.hero.badge" defaultMessage="Next-Generation Attendance System" />
+                <FormattedMessage id="home.hero.subtitle" defaultMessage="Next-Generation Attendance System" />
               </span>
             </div>
 
             <h1 className="text-5xl font-bold leading-tight md:text-7xl">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                <FormattedMessage id="home.hero.titlePart1" defaultMessage="Smart Attendance" />
+                <FormattedMessage id="home.hero.title_part1" defaultMessage="Smart Attendance" />
               </span>
               <br />
               <span className="text-white">
-                <FormattedMessage id="home.hero.titlePart2" defaultMessage="Made Simple" />
+                <FormattedMessage id="home.hero.title_part2" defaultMessage="Made Simple" />
               </span>
             </h1>
 
@@ -260,7 +260,7 @@ const HomePage: React.FC = () => {
             >
               <Shield className="h-5 w-5" />
               <span>
-                <FormattedMessage id="home.buttons.adminPortal" defaultMessage="Admin Portal" />
+                <FormattedMessage id="home.buttons.admin_portal" defaultMessage="Admin Portal" />
               </span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
@@ -271,7 +271,7 @@ const HomePage: React.FC = () => {
             >
               <Users className="h-5 w-5" />
               <span>
-                <FormattedMessage id="home.buttons.staffPortal" defaultMessage="Staff Portal" />
+                <FormattedMessage id="home.buttons.teacher_portal" defaultMessage="Teacher Portal" />
               </span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
@@ -293,23 +293,23 @@ const HomePage: React.FC = () => {
             {[
               {
                 icon: Building,
-                label: formatMessage({ id: "home.stats.organizations", defaultMessage: "Organizations" }),
-                value: formatMessage({ id: "home.stats.organizationsValue", defaultMessage: "500+" }),
+                label: formatMessage({ id: "home.stats.schools", defaultMessage: "Schools" }),
+                value: formatMessage({ id: "home.stats.schools_value", defaultMessage: "500+" }),
               },
               {
                 icon: UserCheck,
-                label: formatMessage({ id: "home.stats.dailyScans", defaultMessage: "Daily Scans" }),
-                value: formatMessage({ id: "home.stats.dailyScansValue", defaultMessage: "50K+" }),
+                label: formatMessage({ id: "home.stats.daily_scans", defaultMessage: "Daily Scans" }),
+                value: formatMessage({ id: "home.stats.daily_scans_value", defaultMessage: "50K+" }),
               },
               {
                 icon: TrendingUp,
                 label: formatMessage({ id: "home.stats.accuracy", defaultMessage: "Accuracy" }),
-                value: formatMessage({ id: "home.stats.accuracyValue", defaultMessage: "99.9%" }),
+                value: formatMessage({ id: "home.stats.accuracy_value", defaultMessage: "99.9%" }),
               },
               {
                 icon: Award,
                 label: formatMessage({ id: "home.stats.uptime", defaultMessage: "Uptime" }),
-                value: formatMessage({ id: "home.stats.uptimeValue", defaultMessage: "99.99%" }),
+                value: formatMessage({ id: "home.stats.uptime_value", defaultMessage: "99.99%" }),
               },
             ].map((stat, index) => (
               <div
@@ -328,7 +328,7 @@ const HomePage: React.FC = () => {
         <section className="space-y-12">
           <div className="space-y-4 text-center">
             <h2 className="text-4xl font-bold text-white">
-              <FormattedMessage id="home.features.title" defaultMessage="Why Choose Synctuario?" />
+              <FormattedMessage id="home.features.title" defaultMessage="Why Choose Synctuario for Your School?" />
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-300">
               <FormattedMessage id="home.features.description" defaultMessage="Cutting-edge technology meets intuitive design for the ultimate attendance management experience." />
@@ -339,38 +339,38 @@ const HomePage: React.FC = () => {
             {[
               {
                 icon: Zap,
-                title: formatMessage({ id: "home.features.lightningFast.title", defaultMessage: "Lightning Fast" }),
-                description: formatMessage({ id: "home.features.lightningFast.description", defaultMessage: "RFID scanning in milliseconds with ESP32 integration" }),
+                title: formatMessage({ id: "home.features.items.0.title", defaultMessage: "Lightning Fast" }),
+                description: formatMessage({ id: "home.features.items.0.description", defaultMessage: "RFID scanning in milliseconds with ESP32 integration" }),
                 color: "from-yellow-500 to-orange-500",
               },
               {
                 icon: Lock,
-                title: formatMessage({ id: "home.features.enterpriseSecurity.title", defaultMessage: "Enterprise Security" }),
-                description: formatMessage({ id: "home.features.enterpriseSecurity.description", defaultMessage: "Bank-level encryption with unique API keys for each organization" }),
+                title: formatMessage({ id: "home.features.items.1.title", defaultMessage: "Enterprise Security" }),
+                description: formatMessage({ id: "home.features.items.1.description", defaultMessage: "Bank-level encryption with unique API keys for each school" }),
                 color: "from-green-500 to-emerald-500",
               },
               {
                 icon: BarChart3,
-                title: formatMessage({ id: "home.features.realTimeAnalytics.title", defaultMessage: "Real-time Analytics" }),
-                description: formatMessage({ id: "home.features.realTimeAnalytics.description", defaultMessage: "Live dashboards with detailed reports and insights" }),
+                title: formatMessage({ id: "home.features.items.2.title", defaultMessage: "Real-time Analytics" }),
+                description: formatMessage({ id: "home.features.items.2.description", defaultMessage: "Live dashboards with detailed reports and insights" }),
                 color: "from-purple-500 to-pink-500",
               },
               {
                 icon: Globe,
-                title: formatMessage({ id: "home.features.multiLanguage.title", defaultMessage: "Multi-language" }),
-                description: formatMessage({ id: "home.features.multiLanguage.description", defaultMessage: "Full support for English and French interfaces" }),
+                title: formatMessage({ id: "home.features.items.3.title", defaultMessage: "Multi-language" }),
+                description: formatMessage({ id: "home.features.items.3.description", defaultMessage: "Full support for English and French interfaces" }),
                 color: "from-blue-500 to-cyan-500",
               },
               {
                 icon: Smartphone,
-                title: formatMessage({ id: "home.features.mobileReady.title", defaultMessage: "Mobile Ready" }),
-                description: formatMessage({ id: "home.features.mobileReady.description", defaultMessage: "Access from any device with responsive design" }),
+                title: formatMessage({ id: "home.features.items.4.title", defaultMessage: "Mobile Ready" }),
+                description: formatMessage({ id: "home.features.items.4.description", defaultMessage: "Access from any device with responsive design" }),
                 color: "from-indigo-500 to-purple-500",
               },
               {
                 icon: Download,
-                title: formatMessage({ id: "home.features.exportData.title", defaultMessage: "Export Data" }),
-                description: formatMessage({ id: "home.features.exportData.description", defaultMessage: "Download attendance records in Excel format" }),
+                title: formatMessage({ id: "home.features.items.5.title", defaultMessage: "Export Data" }),
+                description: formatMessage({ id: "home.features.items.5.description", defaultMessage: "Download attendance records in Excel format" }),
                 color: "from-teal-500 to-green-500",
               },
             ].map((feature, index) => (
@@ -394,32 +394,32 @@ const HomePage: React.FC = () => {
         <section className="space-y-12">
           <div className="space-y-4 text-center">
             <h2 className="text-4xl font-bold text-white">
-              <FormattedMessage id="home.howItWorks.title" defaultMessage="How It Works" />
+              <FormattedMessage id="home.how_it_works.title" defaultMessage="How It Works" />
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-300">
-              <FormattedMessage id="home.howItWorks.description" defaultMessage="Simple setup, powerful results in just three steps." />
+              <FormattedMessage id="home.how_it_works.description" defaultMessage="Simple setup, powerful results in just three steps." />
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
             {[
               {
-                step: formatMessage({ id: "home.howItWorks.step1.step", defaultMessage: "01" }),
+                step: formatMessage({ id: "home.how_it_works.steps.0.step", defaultMessage: "01" }),
                 icon: UserCheck,
-                title: formatMessage({ id: "home.howItWorks.step1.title", defaultMessage: "Register Users" }),
-                description: formatMessage({ id: "home.howItWorks.step1.description", defaultMessage: "Add students or employees with unique RFID cards" }),
+                title: formatMessage({ id: "home.how_it_works.steps.0.title", defaultMessage: "Register Students" }),
+                description: formatMessage({ id: "home.how_it_works.steps.0.description", defaultMessage: "Add students with unique RFID cards" }),
               },
               {
-                step: formatMessage({ id: "home.howItWorks.step2.step", defaultMessage: "02" }),
+                step: formatMessage({ id: "home.how_it_works.steps.1.step", defaultMessage: "02" }),
                 icon: Smartphone,
-                title: formatMessage({ id: "home.howItWorks.step2.title", defaultMessage: "Scan & Track" }),
-                description: formatMessage({ id: "home.howItWorks.step2.description", defaultMessage: "ESP32 readers capture attendance with timestamps" }),
+                title: formatMessage({ id: "home.how_it_works.steps.1.title", defaultMessage: "Scan & Track" }),
+                description: formatMessage({ id: "home.how_it_works.steps.1.description", defaultMessage: "ESP32 readers capture attendance with timestamps" }),
               },
               {
-                step: formatMessage({ id: "home.howItWorks.step3.step", defaultMessage: "03" }),
+                step: formatMessage({ id: "home.how_it_works.steps.2.step", defaultMessage: "03" }),
                 icon: BarChart3,
-                title: formatMessage({ id: "home.howItWorks.step3.title", defaultMessage: "Monitor & Report" }),
-                description: formatMessage({ id: "home.howItWorks.step3.description", defaultMessage: "View live data and generate detailed analytics" }),
+                title: formatMessage({ id: "home.how_it_works.steps.2.title", defaultMessage: "Monitor & Report" }),
+                description: formatMessage({ id: "home.how_it_works.steps.2.description", defaultMessage: "View live data and generate detailed analytics" }),
               },
             ].map((step, index) => (
               <div key={index} className="relative text-center">
@@ -440,7 +440,7 @@ const HomePage: React.FC = () => {
         <section className="space-y-12">
           <div className="space-y-4 text-center">
             <h2 className="text-4xl font-bold text-white">
-              <FormattedMessage id="home.useCases.title" defaultMessage="Perfect For" />
+              <FormattedMessage id="home.use_cases.title" defaultMessage="Perfect for Schools" />
             </h2>
           </div>
 
@@ -448,10 +448,15 @@ const HomePage: React.FC = () => {
             <div className="rounded-2xl border border-blue-500/30 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-8 backdrop-blur-sm">
               <GraduationCap className="mb-6 h-12 w-12 text-blue-400" />
               <h3 className="mb-4 text-2xl font-bold text-white">
-                <FormattedMessage id="home.useCases.education.title" defaultMessage="Educational Institutions" />
+                <FormattedMessage id="home.use_cases.elementary.title" defaultMessage="Elementary & High Schools" />
               </h3>
               <ul className="space-y-3 text-gray-300">
-                {(formatMessage({ id: "home.useCases.education.features", defaultMessage: "" }) as string).split('|||').filter(Boolean).map((feature: string, index: number) => (
+                {[
+                  formatMessage({ id: "home.use_cases.elementary.items.0", defaultMessage: "Student attendance tracking" }),
+                  formatMessage({ id: "home.use_cases.elementary.items.1", defaultMessage: "Teacher access management" }),
+                  formatMessage({ id: "home.use_cases.elementary.items.2", defaultMessage: "Parent notification system" }),
+                  formatMessage({ id: "home.use_cases.elementary.items.3", defaultMessage: "Class-wise reporting" }),
+                ].map((feature: string, index: number) => (
                   <li key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-400" />
                     <span>{feature}</span>
@@ -463,10 +468,15 @@ const HomePage: React.FC = () => {
             <div className="rounded-2xl border border-green-500/30 bg-gradient-to-br from-green-600/20 to-emerald-600/20 p-8 backdrop-blur-sm">
               <Building className="mb-6 h-12 w-12 text-green-400" />
               <h3 className="mb-4 text-2xl font-bold text-white">
-                <FormattedMessage id="home.useCases.corporate.title" defaultMessage="Corporate Offices" />
+                <FormattedMessage id="home.use_cases.university.title" defaultMessage="Universities & Colleges" />
               </h3>
               <ul className="space-y-3 text-gray-300">
-                {(formatMessage({ id: "home.useCases.corporate.features", defaultMessage: "" }) as string).split('|||').filter(Boolean).map((feature: string, index: number) => (
+                {[
+                  formatMessage({ id: "home.use_cases.university.items.0", defaultMessage: "Large-scale student tracking" }),
+                  formatMessage({ id: "home.use_cases.university.items.1", defaultMessage: "Multi-campus support" }),
+                  formatMessage({ id: "home.use_cases.university.items.2", defaultMessage: "Advanced analytics" }),
+                  formatMessage({ id: "home.use_cases.university.items.3", defaultMessage: "Integration with LMS" }),
+                ].map((feature: string, index: number) => (
                   <li key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-400" />
                     <span>{feature}</span>
@@ -481,7 +491,7 @@ const HomePage: React.FC = () => {
         <section className="space-y-8 rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-12 text-center backdrop-blur-sm">
           <div className="space-y-4">
             <h2 className="text-4xl font-bold text-white">
-              <FormattedMessage id="home.cta.title" defaultMessage="Ready to Get Started?" />
+              <FormattedMessage id="home.cta.title" defaultMessage="Ready to Transform Your School?" />
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-gray-300">
               <FormattedMessage id="home.cta.description" defaultMessage="Join hundreds of organizations already using Synctuario for seamless attendance management." />
@@ -495,7 +505,7 @@ const HomePage: React.FC = () => {
             >
               <Calendar className="h-5 w-5" />
               <span>
-                <FormattedMessage id="home.cta.pricingButton" defaultMessage="View Pricing" />
+                <FormattedMessage id="home.cta.pricing_button" defaultMessage="View Pricing" />
               </span>
             </button>
 
@@ -505,16 +515,16 @@ const HomePage: React.FC = () => {
             >
               <FileText className="h-5 w-5" />
               <span>
-                <FormattedMessage id="home.cta.contactButton" defaultMessage="Contact Us" />
+                <FormattedMessage id="home.cta.contact_button" defaultMessage="Contact Us" />
               </span>
             </button>
           </div>
 
           <div className="flex items-center justify-center space-x-8 text-sm text-gray-400">
             {[
-              formatMessage({ id: "home.cta.benefits.0", defaultMessage: "Free Setup" }),
-              formatMessage({ id: "home.cta.benefits.1", defaultMessage: "24/7 Support" }),
-              formatMessage({ id: "home.cta.benefits.2", defaultMessage: "30-Day Trial" })
+              formatMessage({ id: "home.cta.benefits.0", defaultMessage: "15-day free trial" }),
+              formatMessage({ id: "home.cta.benefits.1", defaultMessage: "No setup fees" }),
+              formatMessage({ id: "home.cta.benefits.2", defaultMessage: "Cancel anytime" })
             ].map((benefit: string, index: number) => (
               <div key={index} className="flex items-center space-x-2">
                 <CheckCircle className="h-4 w-4 text-green-400" />
@@ -545,7 +555,7 @@ const HomePage: React.FC = () => {
     
     {/* Connect with Us Section */}
     <h3 className="font-semibold text-white">
-      <FormattedMessage id="home.popup.connectWithUs" defaultMessage="Connect With me" />
+      <FormattedMessage id="home.popup.connect_with_us" defaultMessage="Connect With me" />
     </h3>
     
     <div className="flex justify-center space-x-4">
@@ -600,16 +610,22 @@ const HomePage: React.FC = () => {
             </button>
 
             <h2 className="mb-4 text-2xl font-bold text-white">
-              <FormattedMessage id="home.contact.title" defaultMessage="Contact Us" />
+              <FormattedMessage id="contact.title" defaultMessage="Contact Us" />
             </h2>
             <p className="mb-6 text-gray-400">
-              <FormattedMessage id="home.contact.subtitle" defaultMessage="Send us a message and we'll get back to you" />
+              <FormattedMessage
+                id="home.contact.subtitle"
+                defaultMessage="Send us a message and we'll get back to you"
+              />
             </p>
 
             <form onSubmit={handleContactSubmit} className="space-y-4">
               <input
                 type="text"
-                placeholder={formatMessage({ id: "home.contact.namePlaceholder", defaultMessage: "Your Name" })}
+                placeholder={formatMessage({
+                  id: "contact.name_placeholder",
+                  defaultMessage: "Your Name",
+                })}
                 value={contactForm.name}
                 onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                 required
@@ -617,14 +633,20 @@ const HomePage: React.FC = () => {
               />
               <input
                 type="email"
-                placeholder={formatMessage({ id: "home.contact.emailPlaceholder", defaultMessage: "Your Email" })}
+                placeholder={formatMessage({
+                  id: "contact.email_placeholder",
+                  defaultMessage: "Your Email",
+                })}
                 value={contactForm.email}
                 onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                 required
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <textarea
-                placeholder={formatMessage({ id: "home.contact.messagePlaceholder", defaultMessage: "Your Message" })}
+                placeholder={formatMessage({
+                  id: "contact.message_placeholder",
+                  defaultMessage: "Your Message",
+                })}
                 value={contactForm.message}
                 onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                 required
@@ -640,12 +662,12 @@ const HomePage: React.FC = () => {
                 {isSubmittingContact ? (
                   <>
                     <Loader2 className="h-5 w-5 animate-spin" />
-                    <FormattedMessage id="home.contact.sending" defaultMessage="Sending..." />
+                    <FormattedMessage id="contact.sending" defaultMessage="Sending..." />
                   </>
                 ) : (
                   <>
                     <Send className="h-5 w-5" />
-                    <FormattedMessage id="home.contact.sendButton" defaultMessage="Send Message" />
+                    <FormattedMessage id="contact.send_button" defaultMessage="Send Message" />
                   </>
                 )}
               </button>

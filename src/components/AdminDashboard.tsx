@@ -339,11 +339,11 @@ const AdminDashboard: React.FC = () => {
                   }`}
                 >
                   {subscription === "active" ? (
-                    <FormattedMessage id="pricing.starter.subscribed" defaultMessage="Subscribed" />
+                    <FormattedMessage id="dashboard.subscription.subscribed" defaultMessage="Subscribed" />
                   ) : subscription === "trial" ? (
-                    <FormattedMessage id="pricing.starter.freePlan" defaultMessage="Free Plan" />
+                    <FormattedMessage id="dashboard.subscription.free_plan" defaultMessage="Free Plan" />
                   ) : (
-                    <FormattedMessage id="pricing.starter.subscribeNow" defaultMessage="Subscribe Now" />
+                    <FormattedMessage id="dashboard.subscription.subscribe_now" defaultMessage="Subscribe Now" />
                   )}
                 </span>
       
@@ -356,7 +356,7 @@ const AdminDashboard: React.FC = () => {
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
                     {adminData?.type === 'company' ? 'Company' : (
-                      <FormattedMessage id="dashboard.nav.school" defaultMessage="School" />
+                      <FormattedMessage id="adminhomepage.dashboard.menu.school" defaultMessage="School" />
                     )}
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
@@ -368,9 +368,9 @@ const AdminDashboard: React.FC = () => {
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
                     {adminData?.type === 'company' ? (
-                      <FormattedMessage id="dashboard.nav.managers" defaultMessage="Managers" />
+                      <FormattedMessage id="adminhomepage.dashboard.menu.managers" defaultMessage="Managers" />
                     ) : (
-                      <FormattedMessage id="dashboard.nav.staff" defaultMessage="Staff" />
+                      <FormattedMessage id="adminhomepage.dashboard.menu.teachers" defaultMessage="Teachers" />
                     )}
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
@@ -381,7 +381,7 @@ const AdminDashboard: React.FC = () => {
                   className="relative rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/10"
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
-                    <FormattedMessage id="dashboard.nav.reports" defaultMessage="Reports" />
+                    <FormattedMessage id="adminhomepage.dashboard.menu.report" defaultMessage="Report" />
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </button>
@@ -391,7 +391,7 @@ const AdminDashboard: React.FC = () => {
                   className="relative rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/10"
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
-                    <FormattedMessage id="dashboard.nav.addStaff" defaultMessage="Add Staff" />
+                    <FormattedMessage id="adminhomepage.dashboard.menu.add_teacher" defaultMessage="Add Teacher" />
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </button>
@@ -401,7 +401,7 @@ const AdminDashboard: React.FC = () => {
                   className="relative rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/10"
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
-                    <FormattedMessage id="dashboard.nav.docs" defaultMessage="Documentation" />
+                    <FormattedMessage id="documentation.title" defaultMessage="Documentation" />
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </button>
@@ -446,7 +446,7 @@ const AdminDashboard: React.FC = () => {
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
               >
                 {adminData?.type === 'company' ? 'Company' : (
-                  <FormattedMessage id="dashboard.nav.school" defaultMessage="School" />
+                  <FormattedMessage id="adminhomepage.dashboard.menu.school" defaultMessage="School" />
                 )}
               </button>
               <button
@@ -454,28 +454,28 @@ const AdminDashboard: React.FC = () => {
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
               >
                 {adminData?.type === 'company' ? (
-                  <FormattedMessage id="dashboard.nav.managers" defaultMessage="Managers" />
+                  <FormattedMessage id="adminhomepage.dashboard.menu.managers" defaultMessage="Managers" />
                 ) : (
-                  <FormattedMessage id="dashboard.nav.staff" defaultMessage="Staff" />
+                  <FormattedMessage id="adminhomepage.dashboard.menu.teachers" defaultMessage="Teachers" />
                 )}
               </button>
               <button
                 onClick={() => navigate("/admin/teachers/add")}
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
               >
-                <FormattedMessage id="dashboard.nav.addStaff" defaultMessage="Add Staff" />
+                <FormattedMessage id="adminhomepage.dashboard.menu.add_teacher" defaultMessage="Add Teacher" />
               </button>
               <button
                 onClick={() => navigate("/admin/reports")}
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
               >
-                <FormattedMessage id="dashboard.nav.reports" defaultMessage="Reports" />
+                <FormattedMessage id="adminhomepage.dashboard.menu.report" defaultMessage="Report" />
               </button>
               <button
                 onClick={() => navigate("/docs")}
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
               >
-                <FormattedMessage id="dashboard.nav.docs" defaultMessage="Documentation" />
+                <FormattedMessage id="documentation.title" defaultMessage="Documentation" />
               </button>
 
               <div className=" border-t border-white/10 pt-4">
@@ -498,11 +498,11 @@ const AdminDashboard: React.FC = () => {
           <div className="space-y-4">
             <h1 className="text-5xl font-bold md:text-6xl">
               <span className="animate-gradient bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                <FormattedMessage id="dashboard.welcomeTitle" defaultMessage="Welcome Back" />
+                <FormattedMessage id="adminhomepage.dashboard.title" defaultMessage="Admin Dashboard" />
               </span>
             </h1>
             <p className="mx-auto max-w-2xl text-xl text-gray-300">
-              <FormattedMessage id="dashboard.welcomeSubtitle" defaultMessage="Manage your institution with powerful tools and real-time insights" />
+              <FormattedMessage id="adminhomepage.dashboard.section_title" defaultMessage="Dashboard Articles" />
             </p>
           </div>
         </section>
@@ -517,7 +517,7 @@ const AdminDashboard: React.FC = () => {
               icon: Users,
               label: adminData?.type === 'company' ? 
                 formatMessage({ id: "dashboard.stats.employees", defaultMessage: "Total Employees" }) :
-                formatMessage({ id: "dashboard.stats.students", defaultMessage: "Total Students" }),
+                formatMessage({ id: "adminhomepage.dashboard.stats.students", defaultMessage: "Total Students" }),
               value: isLoadingStats
                 ? "..."
                : (dashboardStats?.totalStudents || 0).toString(),
@@ -529,7 +529,7 @@ const AdminDashboard: React.FC = () => {
               icon: GraduationCap,
               label: adminData?.type === 'company' ? 
                 formatMessage({ id: "dashboard.stats.managers", defaultMessage: "Active Managers" }) :
-                formatMessage({ id: "dashboard.stats.teachers", defaultMessage: "Active Teachers" }),
+                formatMessage({ id: "adminhomepage.dashboard.stats.teachers", defaultMessage: "Active Teachers" }),
               value: isLoadingStats
                 ? "..."
                : (dashboardStats?.totalTeachers || 0).toString(),
@@ -539,7 +539,7 @@ const AdminDashboard: React.FC = () => {
             },
             {
               icon: ClipboardList,
-              label: formatMessage({ id: "dashboard.stats.attendance" }),
+              label: formatMessage({ id: "adminhomepage.dashboard.stats.attendance", defaultMessage: "Today's Attendance" }),
               value: isLoadingStats
                 ? "..."
                : `${dashboardStats?.attendanceRate || 0}%`,
@@ -549,7 +549,7 @@ const AdminDashboard: React.FC = () => {
             },
             {
               icon: TrendingUp,
-              label: formatMessage({ id: "dashboard.stats.records" }),
+              label: formatMessage({ id: "adminhomepage.dashboard.stats.records", defaultMessage: "Attendance Records" }),
               value: isLoadingStats
                 ? "..."
                : (dashboardStats?.totalAttendanceToday || 0).toString(),
@@ -598,7 +598,7 @@ const AdminDashboard: React.FC = () => {
                   <Zap className="h-5 w-5 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-white">
-                  <FormattedMessage id="dashboard.apiSection.title" defaultMessage="API Key" />
+                  <FormattedMessage id="adminhomepage.dashboard.api" defaultMessage="Your API Key for the Device" />
                 </h3>
               </div>
 
@@ -621,9 +621,9 @@ const AdminDashboard: React.FC = () => {
                     )}
                     <span className="hidden sm:inline">
                       {showApiKey ? (
-                        <FormattedMessage id="dashboard.apiSection.hide" defaultMessage="Hide" />
+                        <FormattedMessage id="adminhomepage.dashboard.hide" defaultMessage="Hide" />
                       ) : (
-                        <FormattedMessage id="dashboard.apiSection.show" defaultMessage="Show" />
+                        <FormattedMessage id="adminhomepage.dashboard.show" defaultMessage="Show" />
                       )}
                     </span>
                   </button>
@@ -633,7 +633,7 @@ const AdminDashboard: React.FC = () => {
                   >
                     <Copy className="h-4 w-4" />
                     <span className="hidden sm:inline">
-                      <FormattedMessage id="dashboard.apiSection.copy" defaultMessage="Copy" />
+                      <FormattedMessage id="adminhomepage.dashboard.copy" defaultMessage="Copy" />
                     </span>
                   </button>
                 </div>
@@ -642,7 +642,10 @@ const AdminDashboard: React.FC = () => {
                   <div className="animate-fade-in flex items-center space-x-2 text-green-400">
                     <CheckCircle className="h-4 w-4" />
                     <span className="text-sm">
-                      <FormattedMessage id="dashboard.apiSection.copied" defaultMessage="Copied to clipboard!" />
+                      <FormattedMessage
+                        id="adminhomepage.dashboard.copied"
+                        defaultMessage="API Key copied!"
+                      />
                     </span>
                   </div>
                 )}
@@ -660,10 +663,10 @@ const AdminDashboard: React.FC = () => {
         >
           <div className="mb-8 text-center">
             <h2 className="mb-4 text-3xl font-bold text-white">
-              <FormattedMessage id="dashboard.quickActions.title" defaultMessage="Quick Actions" />
+              <FormattedMessage id="adminhomepage.dashboard.quick_actions" defaultMessage="Quick Actions" />
             </h2>
             <p className="mx-auto max-w-2xl text-gray-300">
-              <FormattedMessage id="dashboard.quickActions.subtitle" defaultMessage="Perform common tasks quickly" />
+              <FormattedMessage id="adminhomepage.dashboard.rule" defaultMessage="Use the button below to create a new category for your forms or departments. Categories help group users for better organization and reporting." />
             </p>
           </div>
 
@@ -674,7 +677,10 @@ const AdminDashboard: React.FC = () => {
             >
               <Plus className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
               <span>
-                <FormattedMessage id="dashboard.quickActions.create" defaultMessage="Create Category" />
+                <FormattedMessage
+                  id="adminhomepage.dashboard.create"
+                  defaultMessage="+ Create department"
+                />
               </span>
             </button>
 
@@ -684,7 +690,10 @@ const AdminDashboard: React.FC = () => {
             >
               <Building className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
               <span>
-                <FormattedMessage id="dashboard.quickActions.view" defaultMessage="View Categories" />
+                <FormattedMessage
+                  id="adminhomepage.dashboard.view"
+                  defaultMessage="view department"
+                />
               </span>
             </button>
 
@@ -694,7 +703,10 @@ const AdminDashboard: React.FC = () => {
             >
               <Clock className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
               <span>
-                <FormattedMessage id="dashboard.quickActions.timeSettings" defaultMessage="Time Settings" />
+                <FormattedMessage
+                  id="timeSettings.header"
+                  defaultMessage="Time Settings"
+                />
               </span>
             </button>
           </div>
@@ -707,7 +719,7 @@ const AdminDashboard: React.FC = () => {
         >
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-4xl font-bold text-white">
-              <FormattedMessage id="dashboard.features.title" defaultMessage="Dashboard Features" />
+              <FormattedMessage id="adminhomepage.dashboard.section_title" defaultMessage="Dashboard Articles" />
             </h2>
           </div>
 
@@ -715,22 +727,22 @@ const AdminDashboard: React.FC = () => {
             {[
               {
                 icon: ClipboardList,
-                title: formatMessage({ id: "dashboard.features.attendance.title", defaultMessage: "Attendance Tracking" }),
-                description: formatMessage({ id: "dashboard.features.attendance.description", defaultMessage: "Monitor and manage student attendance records" }),
+                title: formatMessage({ id: "adminhomepage.dashboard.cards.attendance.title", defaultMessage: "Attendance Tracking" }),
+                description: formatMessage({ id: "adminhomepage.dashboard.cards.attendance.description", defaultMessage: "Monitor and manage student attendance records" }),
                 color: "from-blue-500 to-cyan-500",
                 delay: "0ms",
               },
               {
                 icon: Users,
-                title: formatMessage({ id: "dashboard.features.teacher.title", defaultMessage: "Teacher Management" }),
-                description: formatMessage({ id: "dashboard.features.teacher.description", defaultMessage: "Add and manage teaching staff" }),
+                title: formatMessage({ id: "adminhomepage.dashboard.cards.teacher.title", defaultMessage: "Teacher Management" }),
+                description: formatMessage({ id: "adminhomepage.dashboard.cards.teacher.description", defaultMessage: "Add and manage teaching staff" }),
                 color: "from-green-500 to-emerald-500",
                 delay: "200ms",
               },
               {
                 icon: BarChart3,
-                title: formatMessage({ id: "dashboard.features.report.title", defaultMessage: "Reports & Analytics" }),
-                description: formatMessage({ id: "dashboard.features.report.description", defaultMessage: "Generate detailed reports and insights" }),
+                title: formatMessage({ id: "adminhomepage.dashboard.cards.report.title", defaultMessage: "Reports & Analytics" }),
+                description: formatMessage({ id: "adminhomepage.dashboard.cards.report.description", defaultMessage: "Generate detailed reports and insights" }),
                 color: "from-purple-500 to-pink-500",
                 delay: "400ms",
               },
@@ -753,7 +765,10 @@ const AdminDashboard: React.FC = () => {
                 </p>
                 <div className="mt-6 flex items-center text-blue-400 transition-colors duration-300 group-hover:text-blue-300">
                   <span className="text-sm font-medium">
-                    <FormattedMessage id="dashboard.features.learnMore" defaultMessage="Learn more" />
+                    <FormattedMessage
+                      id="adminhomepage.dashboard.learn_more"
+                      defaultMessage="Learn more"
+                    />
                   </span>
                   <Activity className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
@@ -779,23 +794,32 @@ const AdminDashboard: React.FC = () => {
                 <Plus className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-white">
-                <FormattedMessage id="dashboard.modal.title" defaultMessage="New Category" />
+                <FormattedMessage id="adminhomepage.dashboard.modal.title" defaultMessage="New Category" />
               </h3>
               <p className="mt-2 text-gray-400">
-                <FormattedMessage id="dashboard.modal.subtitle" defaultMessage="Create a new department category" />
+                <FormattedMessage
+                  id="adminhomepage.dashboard.modal.subtitle"
+                  defaultMessage="Create a new department category"
+                />
               </p>
             </div>
 
             <form onSubmit={handleCreateCategory} className="space-y-6">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-300">
-                  <FormattedMessage id="dashboard.modal.categoryName" defaultMessage="Category Name" />
+                  <FormattedMessage
+                    id="adminhomepage.dashboard.modal.category_name"
+                    defaultMessage="Category Name"
+                  />
                 </label>
                 <input
                   type="text"
                   value={categoryName}
                   onChange={(e) => setCategoryName(e.target.value)}
-                  placeholder={formatMessage({ id: "dashboard.modal.categoryPlaceholder", defaultMessage: "Enter category name..." })}
+                  placeholder={formatMessage({
+                    id: "adminhomepage.dashboard.modal.category_placeholder",
+                    defaultMessage: "Enter category name...",
+                  })}
                   required
                   className="w-full rounded-xl border border-white/20 bg-black/50 px-4 py-3 text-white placeholder-gray-400 transition-all duration-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
@@ -810,14 +834,20 @@ const AdminDashboard: React.FC = () => {
                   <>
                     <Loader2 className="h-5 w-5 animate-spin" />
                     <span>
-                      <FormattedMessage id="dashboard.modal.creating" defaultMessage="Creating..." />
+                      <FormattedMessage
+                        id="adminhomepage.dashboard.modal.creating"
+                        defaultMessage="Creating..."
+                      />
                     </span>
                   </>
                 ) : (
                   <>
                     <Plus className="h-5 w-5" />
                     <span>
-                      <FormattedMessage id="dashboard.modal.createButton" defaultMessage="Create Category" />
+                      <FormattedMessage
+                        id="adminhomepage.dashboard.create"
+                        defaultMessage="+ Create department"
+                      />
                     </span>
                   </>
                 )}

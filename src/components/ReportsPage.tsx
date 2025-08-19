@@ -509,7 +509,7 @@ const subscription = adminData?.subscription_status;
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                      {formatMessage({ id: "schoolManagement.dashboard" })}
+                      {formatMessage({ id: "attendance.office" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -519,7 +519,7 @@ const subscription = adminData?.subscription_status;
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
+                    {formatMessage({ id: "attendance.home" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -548,7 +548,7 @@ const subscription = adminData?.subscription_status;
                 
                 <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
                   <span className="text-blue-400 transition-colors">
-                      {formatMessage({ id: "schoolManagement.reports" })}
+                      {formatMessage({ id: "attendance.reports" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
                 </button>
@@ -560,7 +560,7 @@ const subscription = adminData?.subscription_status;
                 {/* Settings */}
                 <button onClick={() => navigate('/admin/settings')}
                 className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <User className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
+                  <User className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
                 </button>
 
           
@@ -570,7 +570,8 @@ const subscription = adminData?.subscription_status;
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>  {formatMessage({ id: "AdminProfile.logout" })}
+                  <span>{formatMessage({ id: "attendance.logout" })}
+
                   </span>
                 </button>
               </div>
@@ -646,11 +647,11 @@ const subscription = adminData?.subscription_status;
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-              {formatMessage({ id: "reports.reports.title" })}
+              {formatMessage({ id: "reports.title" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              {formatMessage({ id: "reports.reports.subtitle" })}
+              {formatMessage({ id: "reports.subtitle" })}
             </p>
           </div>
         </section>
@@ -682,6 +683,7 @@ const subscription = adminData?.subscription_status;
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-blue-300"> {formatMessage({ id: "reports.filters.form" })}</label>
+                  <label className="text-sm font-medium text-blue-300">{formatMessage({ id: "reports.filters.formClass" })}</label>
                   <select
                     value={selectedForm}
                     onChange={(e) => setSelectedForm(e.target.value)}
@@ -702,6 +704,7 @@ const subscription = adminData?.subscription_status;
                 >
                   <Filter className="w-4 h-4" />
                   <span> {formatMessage({ id: "reports.filters.apply" })}</span>
+                  <span>{formatMessage({ id: "reports.filters.applyFilters" })}</span>
                 </button>
 
                 <button
@@ -722,28 +725,28 @@ const subscription = adminData?.subscription_status;
             {[
               { 
                 icon: Users, 
-                label: ` ${formatMessage({ id: "reports.stats.totalStudents" })}`, 
+                label: formatMessage({ id: "reports.stats.totalStudents" }), 
                 value: reportData.totalStudents.toString(), 
                 change: "+12%", 
                 color: "from-blue-500 to-cyan-500" 
               },
               { 
                 icon: Users, 
-                label: ` ${formatMessage({ id: "reports.stats.totalTeachers" })}`, 
+                label: formatMessage({ id: "reports.stats.totalTeachers" }), 
                 value: reportData.totalTeachers.toString(), 
                 change: "+5%", 
                 color: "from-green-500 to-emerald-500" 
               },
               { 
                 icon: Activity, 
-                label: ` ${formatMessage({ id: "reports.stats.attendanceRate" })}`, 
+                label: formatMessage({ id: "reports.stats.attendanceRate" }), 
                 value: `${reportData.attendanceRate.toFixed(1)}%`, 
                 change: "+2.1%", 
                 color: "from-purple-500 to-pink-500" 
               },
               { 
                 icon: BarChart3, 
-                label: ` ${formatMessage({ id: "reports.stats.totalRecords" })}`, 
+                label: formatMessage({ id: "reports.stats.totalRecords" }), 
                 value: reportData.totalAttendanceRecords.toString(), 
                 change: "+15%", 
                 color: "from-orange-500 to-red-500" 
@@ -825,6 +828,7 @@ const subscription = adminData?.subscription_status;
                     <FileText className="w-5 h-5" />
                   )}
                   <span>{formatMessage({ id: "reports.download.pdf" })}</span>
+                  <span>{formatMessage({ id: "reports.download.downloadPdf" })}</span>
                 </button>
                 
                 <button
@@ -838,12 +842,13 @@ const subscription = adminData?.subscription_status;
                     <Download className="w-5 h-5" />
                   )}
                   <span>{formatMessage({ id: "reports.download.excel" })}</span>
+                  <span>{formatMessage({ id: "reports.download.downloadExcel" })}</span>
                 </button>
               </div>
 
               {isGeneratingReport && (
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
-                  <p className="text-blue-300">Generating your report... This may take a few moments.</p>
+                  <p className="text-blue-300">{formatMessage({ id: "reports.download.generating" })}</p>
                 </div>
               )}
             </div>

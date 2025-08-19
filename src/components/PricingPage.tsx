@@ -253,12 +253,12 @@ const PricingPage: React.FC = () => {
               <span className="mt-4 inline-block cursor-pointer rounded-full bg-gradient-to-r from-blue-900 via-green-2 to-blue-600 px-6 py-3 text-white font-extrabold shadow-xl ring-4 ring-green-700 transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-1 hover:shadow-2xl animate-pulse">
                 <FormattedMessage
                   id={`${ ( plans === "starter"|| plans === "professional" || plans === "enterprise")  && planstatus === "active" || planstatus === "expired"
-                      ? "pricing.starter.freetrialExpired"
+                      ? "pricing.starter.freeTrialExpired"
                       : planstatus === "trial"
-                      ? "pricing.starter.freeplan"
-                      : "pricing.starter.startfreetrial"
+                      ? "pricing.starter.freePlan"
+                      : "pricing.starter.startFreeTrial"
                   }`}
-                  defaultMessage="pricing.starter.startfreetrial"
+                  defaultMessage="Start Free Trial"
                 />
               </span>
             </div>
@@ -303,12 +303,12 @@ const PricingPage: React.FC = () => {
               <FormattedMessage
                 id={`${
                   plans === "enterprise" || plans === "professional"
-                    ? "pricing.starter.downgrade"
+                    ? "pricing.professional.downgrade"
                     : plans === "starter" && planstatus === "active"
                       ? "pricing.starter.subscribed"
                       : "pricing.starter.getStarted"
                 }`}
-                defaultMessage="pricing.starter.downgrade"
+                defaultMessage="Get Started"
               />
             </button>
           </div>
@@ -326,7 +326,7 @@ const PricingPage: React.FC = () => {
                     id={
                       plans === "professional"
                         ? "pricing.starter.subscribed"
-                        : "pricing.professional.popular"
+                        : "pricing.professional.mostPopular"
                     }
                     defaultMessage="Most Popular"
                   />
@@ -405,7 +405,7 @@ const PricingPage: React.FC = () => {
                     : plans === "starter"
                       ? "pricing.starter.upgrade"
                       : plans === "enterprise"
-                        ? "pricing.starter.downgrade"
+                        ? "pricing.professional.downgrade"
                         : "pricing.starter.getStarted"
                 }
                 defaultMessage="Get Started"
@@ -495,7 +495,7 @@ const PricingPage: React.FC = () => {
             >
               <FormattedMessage
                 id={`${plans === "enterprise" ? "pricing.starter.subscribed" : plans === "professional" ? "pricing.starter.upgrade" : plans === "starter" ? "pricing.starter.upgrade" : "pricing.starter.getStarted"}`}
-                defaultMessage="Contact Sales"
+                defaultMessage="Get Started"
               />
             </button>
           </div>

@@ -319,7 +319,7 @@ const TeacherProfile: React.FC = () => {
                   <User className="w-5 h-5 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-white">
-                  <FormattedMessage id="profile.section.title" />
+                  {formatMessage({ id: "profile.section.title" })}
                 </h2>
               </div>
 
@@ -330,7 +330,7 @@ const TeacherProfile: React.FC = () => {
                 >
                   <Edit className="w-4 h-4" />
                   <span>
-                    <FormattedMessage id="profile.edit" />
+                    {formatMessage({ id: "profile.edit" })}
                   </span>
                 </button>
               )}
@@ -340,7 +340,7 @@ const TeacherProfile: React.FC = () => {
               {/* Profile Picture URL */}
               <div className="space-y-2">
                 <label className="block font-semibold text-sm text-green-300">
-                  <FormattedMessage id="profile.picture" />
+                  {formatMessage({ id: "profile.picture" })}
                 </label>
                 {isEditing ? (
                   <div className="relative">
@@ -349,7 +349,7 @@ const TeacherProfile: React.FC = () => {
                       type="text"
                       value={editForm.picture}
                       onChange={(e) => handleInputChange('picture', e.target.value)}
-                      placeholder={formatMessage({ id: "profile.editform.placeholder.picture" })}
+                      placeholder={formatMessage({ id: "profile.editForm.placeholder.picture" })}
                       className="w-full pl-12 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
                     />
                   </div>
@@ -363,7 +363,7 @@ const TeacherProfile: React.FC = () => {
               {/* Full Name */}
               <div className="space-y-2">
                 <label className="block font-semibold text-sm text-green-300">
-                  <FormattedMessage id="profile.fullname" />
+                  {formatMessage({ id: "profile.fullName" })}
                 </label>
                 {isEditing ? (
                   <div className="relative">
@@ -372,7 +372,7 @@ const TeacherProfile: React.FC = () => {
                       type="text"
                       value={editForm.full_name}
                       onChange={(e) => handleInputChange('full_name', e.target.value)}
-                      placeholder={formatMessage({ id: "profile.editform.placeholder.name" })}
+                      placeholder={formatMessage({ id: "profile.editForm.placeholder.name" })}
                       className="w-full pl-12 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
                     />
                   </div>
@@ -386,7 +386,7 @@ const TeacherProfile: React.FC = () => {
               {/* Bio */}
               <div className="space-y-2">
                 <label className="block font-semibold text-sm text-green-300">
-                  <FormattedMessage id="profile.bio" />
+                  {formatMessage({ id: "profile.bio" })}
                 </label>
                 {isEditing ? (
                   <div className="relative">
@@ -394,7 +394,7 @@ const TeacherProfile: React.FC = () => {
                     <textarea
                       value={editForm.bio}
                       onChange={(e) => handleInputChange('bio', e.target.value)}
-                      placeholder={formatMessage({ id: "profile.editform.placeholder.bio" })}
+                      placeholder={formatMessage({ id: "profile.editForm.placeholder.bio" })}
                       rows={4}
                       className="w-full pl-12 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 resize-none"
                     />
@@ -413,7 +413,7 @@ const TeacherProfile: React.FC = () => {
                     onClick={() => toggleEdit(false)}
                     className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300"
                   >
-                    <FormattedMessage id="profile.cancel" />
+                    {formatMessage({ id: "profile.cancel" })}
                   </button>
 
                   <button
@@ -425,14 +425,14 @@ const TeacherProfile: React.FC = () => {
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
                         <span>
-                          <FormattedMessage id="profile.saving" />
+                          {formatMessage({ id: "profile.saving" })}
                         </span>
                       </>
                     ) : (
                       <>
                         <Save className="w-4 h-4" />
                         <span>
-                          <FormattedMessage id="profile.save" />
+                          {formatMessage({ id: "profile.save" })}
                         </span>
                       </>
                     )}

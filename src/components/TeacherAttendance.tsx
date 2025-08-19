@@ -448,7 +448,7 @@ const initializeData = async () => {
               >
                 <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
                   <Users className="w-4 h-4" />
-                  <span> {formatMessage({ id: "students.navigation.students" })}</span>
+                  <span>{formatMessage({ id: "students.navigation.students" })}</span>
                 </span>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
               </button>
@@ -456,7 +456,7 @@ const initializeData = async () => {
                 <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400">
                 <span className="text-blue-400 transition-colors flex items-center space-x-2">
                   <BarChart3 className="w-4 h-4" />
-                  <span> {formatMessage({ id: "students.navigation.attendance" })}</span>
+                  <span>{formatMessage({ id: "students.navigation.attendance" })}</span>
                 </span>
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
               </button>
@@ -469,7 +469,7 @@ const initializeData = async () => {
               >
                 <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
                   <User className="w-4 h-4" />
-                  <span>   {formatMessage({ id: "students.navigation.profile" })}</span>
+                  <span>{formatMessage({ id: "students.navigation.profile" })}</span>
                 </span>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
               </button>
@@ -481,7 +481,7 @@ const initializeData = async () => {
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>  {formatMessage({ id: "students.navigation.logout" })}</span>
+                  <span>{formatMessage({ id: "students.navigation.logout" })}</span>
                 </button>
 
             </nav>
@@ -510,10 +510,10 @@ const initializeData = async () => {
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Users, label:  formatMessage({ id: "attendance.stats.totalStudents" }), value: stats.totalStudents.toString(), change: "+12%", color: "from-blue-500 to-cyan-500" },
+            { icon: Users, label: formatMessage({ id: "attendance.stats.totalStudents" }), value: stats.totalStudents.toString(), change: "+12%", color: "from-blue-500 to-cyan-500" },
             { icon: CheckCircle, label:formatMessage({ id: "attendance.stats.presentToday" }), value: stats.totalPresent.toString(), change: "+5%", color: "from-green-500 to-emerald-500" },
             { icon: Clock, label: formatMessage({ id: "attendance.stats.partial" }), value: stats.totalPartial.toString(), change: "+2%", color: "from-yellow-500 to-orange-500" },
-            { icon: XCircle, label:  formatMessage({ id: "attendance.stats.absentToday" }), value: stats.totalAbsent.toString(), change: "-3%", color: "from-red-500 to-pink-500" }
+            { icon: XCircle, label: formatMessage({ id: "attendance.stats.absentToday" }), value: stats.totalAbsent.toString(), change: "-3%", color: "from-red-500 to-pink-500" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
               <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -544,6 +544,7 @@ const initializeData = async () => {
                     onChange={(e) => handleFilterChange('form', e.target.value)}
                     className="bg-black/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 w-48"
                   >
+                    <option value="">{formatMessage({ id: "attendance.allforms" })}</option>
                     <option value="">{formatMessage({ id: "attendance.allforms" })}</option>
                     {categories.map(category => (
                       <option key={category.id} value={category.name}>{category.name}</option>

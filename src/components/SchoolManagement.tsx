@@ -486,10 +486,10 @@ const { formatMessage } = useIntl();
                   }`}
                 >
                   {subscription === "active"
-                    ? formatMessage({ id: "pricing.starter.subscribed" })
+                    ? formatMessage({ id: "dashboard.subscription.subscribed" })
                     : subscription === "trial"
-                    ? formatMessage({ id: "pricing.starter.freeplan" })
-                    : formatMessage({ id: "pricing.starter.subscribeNow" })}
+                    ? formatMessage({ id: "dashboard.subscription.free_plan" })
+                    : formatMessage({ id: "dashboard.subscription.subscribe_now" })}
                 </span>
 
             {/* Desktop Navigation */}
@@ -645,14 +645,11 @@ const { formatMessage } = useIntl();
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-                {adminData?.type === 'company' ? 'Company Device Management' : formatMessage({ id: "schoolManagement.title" })}
+                {formatMessage({ id: "schoolManagement.title" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              {adminData?.type === 'company' 
-                ? 'Monitor and manage your company\'s RFID devices with real-time scanning capabilities'
-                : formatMessage({ id: "schoolManagement.subtitle" })
-              }
+              {formatMessage({ id: "schoolManagement.subtitle" })}
             </p>
           </div>
         </section>
@@ -663,13 +660,10 @@ const { formatMessage } = useIntl();
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
               <div className="space-y-2">
                 <h2 className="text-2xl font-bold text-white">
-                  {adminData?.type === 'company' ? 'Registered Devices' : formatMessage({ id: "schoolManagement.registeredDevices" })}
+                  {formatMessage({ id: "schoolManagement.registeredDevices" })}
                 </h2>
                 <p className="text-gray-300">
-                  {adminData?.type === 'company' 
-                    ? 'Monitor your company\'s RFID scanning devices'
-                    : formatMessage({ id: "schoolManagement.monitorDevices" })
-                  }
+                  {formatMessage({ id: "schoolManagement.monitorDevices" })}
                 </p>
               </div>
 
@@ -808,7 +802,7 @@ const { formatMessage } = useIntl();
 
                         {showForm && (
                           <div className="mt-4 p-4 bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-lg border border-blue-500/30">
-                            <h4 className="text-lg font-semibold text-blue-300 mb-4">Register New {terminology.student}</h4>
+                            <h4 className="text-lg font-semibold text-blue-300 mb-4">{formatMessage({ id: "schoolManagement.registerNewStudent" })}</h4>
                             <StudentRegistrationForm
                               device_uid={device.device_uid}
                               categories={categories}
@@ -883,7 +877,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
         name="name"
         value={formData.name}
         onChange={handleChange}
-      placeholder={`${terminology.student} Name`}
+        placeholder={formatMessage({ id: "schoolManagement.studentName" })}
         required
         className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
       />
@@ -941,7 +935,7 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
         disabled={submitting}
         className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 py-2 rounded-lg font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
       >
-      {submitting ? "Registering..." : `Register ${terminology.student}`}
+      {submitting ? formatMessage({ id: "schoolManagement.registering" }) : formatMessage({ id: "schoolManagement.registerStudent" })}
       </button>
 
       {message && (

@@ -110,7 +110,7 @@ const TeacherLogin: React.FC = () => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold text-green-400">
-                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
+                <FormattedMessage id="home.header.title" defaultMessage="Synctuario" />
               </span>
             </div>
             <LanguageSwitcher />
@@ -129,10 +129,10 @@ const TeacherLogin: React.FC = () => {
                 <Users className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-                <FormattedMessage id="login.teacher.title" defaultMessage="Staff Login" />
+                <FormattedMessage id="login.teacherlogin.title" defaultMessage="Staff Login" />
               </h1>
               <p className="text-white text-sm">
-                <FormattedMessage id="login.teacher.subtitle" defaultMessage="Enter your email address to access your account" />
+                <FormattedMessage id="login.teacherlogin.subtitle" defaultMessage="Enter your email address to access your account" />
               </p>
             </div>
 
@@ -152,7 +152,7 @@ const TeacherLogin: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder={formatMessage({ id: "login.teacher.emailPlaceholder", defaultMessage: "Email / e-mail" })}
+                  placeholder={formatMessage({ id: "login.teacherlogin.email_placeholder", defaultMessage: "Email / e-mail" })}
                   required
                   className={`w-full pl-12 pr-4 py-3 border rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 transition-all ${
                     errors.email 
@@ -175,17 +175,17 @@ const TeacherLogin: React.FC = () => {
               {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  <span><FormattedMessage id="login.teacher.loading" defaultMessage="Loading..." /></span>
+                  <span><FormattedMessage id="login.teacherlogin.loading" defaultMessage="Loading..." /></span>
                 </>
               ) : (
-                <span><FormattedMessage id="login.teacher.loginButton" defaultMessage="Login" /></span>
+                <span><FormattedMessage id="login.teacherlogin.login_button" defaultMessage="Login" /></span>
               )}
             </button>
 
             {/* Info Text */}
             <div className="bg-green-900 border border-green-600 rounded-lg p-4 text-center">
               <p className="text-white text-sm">
-                <FormattedMessage id="login.teacher.infoText" defaultMessage="Only registered staff members can access this portal. Contact your administrator if you need assistance." />
+                <FormattedMessage id="login.teacherlogin.info_text" defaultMessage="Only registered staff members can access this portal. Contact your administrator if you need assistance." />
               </p>
             </div>
 
@@ -196,7 +196,7 @@ const TeacherLogin: React.FC = () => {
               className="w-full flex items-center justify-center space-x-2 text-gray-400 hover:text-white transition-colors py-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span><FormattedMessage id="login.teacher.back" defaultMessage="Back to Home" /></span>
+              <span><FormattedMessage id="login.teacherlogin.back" defaultMessage="Back to Home" /></span>
             </button>
           </form>
         </div>

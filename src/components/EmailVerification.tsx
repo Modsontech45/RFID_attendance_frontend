@@ -72,7 +72,7 @@ const EmailVerification: React.FC = () => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
+                <FormattedMessage id="home.header.title" defaultMessage="Synctuario" />
               </span>
             </div>
 

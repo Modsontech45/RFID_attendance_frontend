@@ -349,7 +349,7 @@ const AdminSignup: React.FC = () => {
                 <Shield className="h-6 w-6 text-white" />
               </div>
               <span className="text-2xl font-bold text-green-400">
-                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
+                <FormattedMessage id="home.header.title" defaultMessage="Synctuario" />
               </span>
             </div>
           </div>
@@ -367,7 +367,7 @@ const AdminSignup: React.FC = () => {
                 <UserPlus className="h-8 w-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-                <FormattedMessage id="signup.admin.title" defaultMessage="Admin Sign Up" />
+                <FormattedMessage id="login.adminsignup.title" defaultMessage="Admin Sign Up" />
               </h1>
             </div>
 
@@ -389,6 +389,7 @@ const AdminSignup: React.FC = () => {
                     value={formData.schoolname}
                     onChange={handleInputChange}
                     placeholder={formatMessage({ id: "signup.admin.organizationPlaceholder", defaultMessage: "Organization Name" })}
+                    placeholder={formatMessage({ id: "login.adminsignup.organization_placeholder", defaultMessage: "Organization Name" })}
                     className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
                       errors.schoolname
                         ? "border-red-600 focus:ring-red-600"
@@ -416,19 +417,19 @@ const AdminSignup: React.FC = () => {
                   >
                     <option value="">
                       {formatMessage({
-                        id: "signup.admin.typePlaceholder",
+                        id: "login.adminsignup.type_placeholder",
                         defaultMessage: "Select Organization Type",
                       })}
                     </option>
                     <option value="school">
                       {formatMessage({
-                        id: "signup.admin.typeSchool",
+                        id: "login.adminsignup.type_school",
                         defaultMessage: "School",
                       })}
                     </option>
                     <option value="company">
                       {formatMessage({
-                        id: "signup.admin.typeCompany",
+                        id: "login.adminsignup.type_company",
                         defaultMessage: "Company",
                       })}
                     </option>
@@ -447,7 +448,7 @@ const AdminSignup: React.FC = () => {
                     value={formData.username}
                     onChange={handleInputChange}
                     placeholder={formatMessage({
-                      id: "signup.admin.usernamePlaceholder",
+                      id: "login.adminsignup.username_placeholder",
                       defaultMessage: "Username",
                     })}
                     required
@@ -471,7 +472,7 @@ const AdminSignup: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder={formatMessage({
-                      id: "signup.admin.emailPlaceholder",
+                      id: "login.adminsignup.email_placeholder",
                       defaultMessage: "Email",
                     })}
                     required
@@ -503,7 +504,7 @@ const AdminSignup: React.FC = () => {
                     value={formData.telephone}
                     onChange={handleInputChange}
                     placeholder={formatMessage({
-                      id: "signup.admin.telephonePlaceholder",
+                      id: "login.adminsignup.telephone_placeholder",
                       defaultMessage: "Phone Number",
                     })}
                     required
@@ -535,7 +536,7 @@ const AdminSignup: React.FC = () => {
                     value={formData.password}
                     onChange={handleInputChange}
                     placeholder={formatMessage({
-                      id: "signup.admin.passwordPlaceholder",
+                      id: "login.adminsignup.password_placeholder",
                       defaultMessage: "Password",
                     })}
                     required
@@ -627,7 +628,7 @@ const AdminSignup: React.FC = () => {
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
                     placeholder={formatMessage({
-                      id: "signup.admin.confirmPasswordPlaceholder",
+                      id: "login.adminsignup.confirm_password_placeholder",
                       defaultMessage: "Confirm Password",
                     })}
                     required
@@ -665,14 +666,14 @@ const AdminSignup: React.FC = () => {
                     <Loader2 className="h-5 w-5 animate-spin" />
                     <span>
                       <FormattedMessage
-                        id="signup.admin.creatingAccount"
+                        id="login.adminsignup.creating_account"
                         defaultMessage="Creating Account..."
                       />
                     </span>
                   </>
                 ) : (
                   <span>
-                    <FormattedMessage id="signup.admin.createAccount" defaultMessage="Create Account" />
+                    <FormattedMessage id="login.adminsignup.submit_button" defaultMessage="Sign Up" />
                   </span>
                 )}
               </button>
@@ -682,14 +683,14 @@ const AdminSignup: React.FC = () => {
             <div className="text-center">
               <p className="text-gray-400">
                 <FormattedMessage
-                  id="signup.admin.alreadyHaveAccount"
+                  id="login.adminsignup.already_have_account"
                   defaultMessage="Already have an account?"
                 />{" "}
                 <Link
                   to="/admin/login"
                   className="font-semibold text-green-400 transition-colors hover:text-green-300"
                 >
-                  <FormattedMessage id="signup.admin.loginLink" defaultMessage="Login" />
+                  <FormattedMessage id="login.adminsignup.login_link" defaultMessage="Login" />
                 </Link>
               </p>
             </div>
@@ -702,7 +703,7 @@ const AdminSignup: React.FC = () => {
             >
               <ArrowLeft className="h-4 w-4" />
               <span>
-                <FormattedMessage id="signup.admin.back" defaultMessage="Back to Login" />
+                <FormattedMessage id="login.adminsignup.back" defaultMessage="Back to Login" />
               </span>
             </button>
           </div>

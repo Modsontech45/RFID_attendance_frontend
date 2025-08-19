@@ -88,7 +88,7 @@ const TimeSettings: React.FC = () => {
     return (
       <div className="flex justify-center items-center h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
         <span className="text-green-400 text-lg font-semibold tracking-wide">
-          <FormattedMessage id="timeSettings.loading" defaultMessage="Loading time settings..." />
+          Loading time settings...
         </span>
       </div>
     );
@@ -98,7 +98,7 @@ const TimeSettings: React.FC = () => {
     <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 py-12">
       <div className="max-w-2xl w-full px-10 py-12 bg-gradient-to-r from-black via-gray-900 to-green-900 rounded-xl shadow-2xl text-white font-sans">
         <h2 className="text-3xl font-extrabold mb-8 text-center tracking-wider drop-shadow-md">
-          <FormattedMessage id="timeSettings.header" defaultMessage="Sign In / Sign Out Time Settings" />
+          {formatMessage({ id: "timeSettings.header" })}
         </h2>
 
         {message && (
@@ -118,25 +118,25 @@ const TimeSettings: React.FC = () => {
           <div className="space-y-6 text-lg leading-relaxed text-green-300">
             <p>
               <strong className="text-green-400">
-                <FormattedMessage id="timeSettings.signInStart" defaultMessage="Sign In Start:" />
+                {formatMessage({ id: "timeSettings.signInStart" })}
                 </strong>{" "}
               {settings?.sign_in_start}
             </p>
             <p>
               <strong className="text-green-400">
-                <FormattedMessage id="timeSettings.signInEnd" defaultMessage="Sign In End:" />
+                {formatMessage({ id: "timeSettings.signInEnd" })}
                 </strong>{" "}
               {settings?.sign_in_end}
             </p>
             <p>
               <strong className="text-green-400">
-                <FormattedMessage id="timeSettings.signOutStart" defaultMessage="Sign Out Start:" />
+                {formatMessage({ id: "timeSettings.signOutStart" })}
                </strong>{" "}
               {settings?.sign_out_start}
             </p>
             <p>
               <strong className="text-green-400">
-                <FormattedMessage id="timeSettings.signOutEnd" defaultMessage="Sign Out End:" />
+                {formatMessage({ id: "timeSettings.signOutEnd" })}
                 </strong>{" "}
               {settings?.sign_out_end}
             </p>
@@ -146,7 +146,7 @@ const TimeSettings: React.FC = () => {
                 onClick={() => setEditing(true)}
                 className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-black font-bold px-10 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
               >
-                <FormattedMessage id="timeSettings.edit" defaultMessage="Edit Time Settings" />
+                {formatMessage({ id: "timeSettings.edit" })}
               </button>
             </div>
           </div>
@@ -181,7 +181,7 @@ const TimeSettings: React.FC = () => {
                 type="submit"
                 className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-black font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
               >
-                <FormattedMessage id="timeSettings.save" defaultMessage="Save" />
+                {formatMessage({ id: "timeSettings.save" })}
               </button>
               <button
                 type="button"
@@ -191,7 +191,7 @@ const TimeSettings: React.FC = () => {
                 }}
                 className="bg-gray-800 hover:bg-gray-700 text-green-400 font-semibold px-8 py-3 rounded-xl shadow-inner transition"
               >
-                <FormattedMessage id="timeSettings.cancel" defaultMessage="Cancel" />
+                {formatMessage({ id: "timeSettings.cancel" })}
               </button>
             </div>
           </form>
@@ -203,7 +203,7 @@ const TimeSettings: React.FC = () => {
         className="mt-10 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-black font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
         type="button"
       >
-        <FormattedMessage id="timeSettings.home" defaultMessage="Go Home" />
+        {formatMessage({ id: "timeSettings.home" })}
       </button>
     </div>
   );

@@ -174,7 +174,7 @@ const ResetPassword: React.FC = () => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
+                <FormattedMessage id="home.header.title" defaultMessage="Synctuario" />
               </span>
             </div>
             
@@ -224,6 +224,7 @@ const ResetPassword: React.FC = () => {
                     value={formData.newPassword}
                     onChange={handleInputChange}
                     placeholder={formatMessage({ id: "resetPassword.newPasswordPlaceholder", defaultMessage: "New Password" })}
+                    placeholder={formatMessage({ id: "resetPassword.new_password_placeholder", defaultMessage: "New Password" })}
                     required
                     className="w-full pl-12 pr-12 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
@@ -247,6 +248,7 @@ const ResetPassword: React.FC = () => {
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
                     placeholder={formatMessage({ id: "resetPassword.confirmPasswordPlaceholder", defaultMessage: "Confirm Password" })}
+                    placeholder={formatMessage({ id: "resetPassword.confirm_password_placeholder", defaultMessage: "Confirm Password" })}
                     required
                     className="w-full pl-12 pr-12 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
@@ -273,7 +275,7 @@ const ResetPassword: React.FC = () => {
                   </>
                 ) : (
                   <span>
-                    <FormattedMessage id="resetPassword.resetButton" defaultMessage="Reset Password" />
+                    <FormattedMessage id="resetPassword.reset_button" defaultMessage="Reset Password" />
                   </span>
                 )}
               </button>
@@ -286,7 +288,7 @@ const ResetPassword: React.FC = () => {
               className="w-full flex items-center justify-center space-x-2 text-white/70 hover:text-white transition-colors py-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span><FormattedMessage id="resetPassword.back" defaultMessage="Back to request password reset" /></span>
+              <span><FormattedMessage id="resetPassword.back_to_request" defaultMessage="Back to request password reset" /></span>
             </button>
           </div>
         </div>

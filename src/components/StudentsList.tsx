@@ -316,7 +316,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                   {formatMessage({ id: "schoolManagement.dashboard" })}
+                   {formatMessage({ id: "students.navigation.office" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -326,14 +326,14 @@ let subscription =   adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
+                    {formatMessage({ id: "students.navigation.home" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
 
                 <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
                   <span className="text-green-400 transition-colors">
-                  {terminology.studentPlural}
+                  {formatMessage({ id: "students.navigation.students" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-emerald-400"></div>
                 </button>
@@ -356,7 +356,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {formatMessage({ id: "schoolManagement.reports" })}
+                    {formatMessage({ id: "students.navigation.reports" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -413,13 +413,13 @@ let subscription =   adminData?.subscription_status || 'inactive';
                 onClick={() => navigate('/admin/dashboard')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-               {formatMessage({ id: "schoolManagement.dashboard" })}
+               {formatMessage({ id: "students.navigation.office" })}
               </button>
               <button
                 onClick={() => navigate('/admin/school')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-               {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
+               {formatMessage({ id: "students.navigation.home" })}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-green-400">
                 {formatMessage({ id: "students.navigation.students" })}
@@ -445,7 +445,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {formatMessage({ id: "schoolManagement.reports" })}
+                    {formatMessage({ id: "students.navigation.reports" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -482,11 +482,11 @@ let subscription =   adminData?.subscription_status || 'inactive';
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-                 All Registered {terminology.studentPlural}
+                 {formatMessage({ id: "students.header.title" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Manage and monitor your {terminology.student.toLowerCase()} database with comprehensive tools
+              {formatMessage({ id: "students.header.subtitle" })}
             </p>
           </div>
         </section>
@@ -494,9 +494,9 @@ let subscription =   adminData?.subscription_status || 'inactive';
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Users, label: `Total ${terminology.studentPlural}`, value: totalStudents.toString(), color: "from-green-500 to-emerald-500" },
-            { icon: UserCheck, label: `Male ${terminology.studentPlural}`, value: `${maleCount} (${malePercent}%)`, color: "from-blue-500 to-cyan-500" },
-            { icon: Activity, label: `Female ${terminology.studentPlural}`, value: `${femaleCount} (${femalePercent}%)`, color: "from-purple-500 to-pink-500" },
+            { icon: Users, label: formatMessage({ id: "students.stats.totalStudents" }), value: totalStudents.toString(), color: "from-green-500 to-emerald-500" },
+            { icon: UserCheck, label: formatMessage({ id: "students.stats.maleStudents" }), value: `${maleCount} (${malePercent}%)`, color: "from-blue-500 to-cyan-500" },
+            { icon: Activity, label: formatMessage({ id: "students.stats.femaleStudents" }), value: `${femaleCount} (${femalePercent}%)`, color: "from-purple-500 to-pink-500" },
            { icon: BarChart3, label: formatMessage({ id: "students.stats.formsClasses" }), value: (categories?.length || 0).toString(), color: "from-orange-500 to-red-500" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
@@ -537,7 +537,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
-                      placeholder={formatMessage({ id: "students.filters.searchByName" })}
+                      placeholder={formatMessage({ id: "students.filters.searchPlaceholder" })}
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 w-64"
@@ -648,132 +648,4 @@ let subscription =   adminData?.subscription_status || 'inactive';
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/10">
-                    {filteredStudents.map((student, index) => (
-                      <tr
-                        key={student.id}
-                        onClick={() => openUpdateModal(student)}
-                        className="hover:bg-white/5 transition-colors duration-200 cursor-pointer animate-slide-up"
-                        style={{ animationDelay: `${index * 50}ms` }}
-                      >
-                        <td className="px-6 py-4 text-white font-medium">{student.name}</td>
-                        <td className="px-6 py-4">
-                          <code className="bg-black/50 text-green-400 px-2 py-1 rounded text-sm">
-                            {student.uid}
-                          </code>
-                        </td>
-                        <td className="px-6 py-4 text-gray-300">{student.email}</td>
-                        <td className="px-6 py-4 text-gray-300">{student.telephone}</td>
-                        <td className="px-6 py-4">
-                          <span className="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm">
-                            {student.form}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className={`px-3 py-1 rounded-full text-sm ${
-                            student.gender === 'Male'
-                              ? 'bg-blue-500/20 text-blue-400'
-                              : student.gender === 'Female'
-                              ? 'bg-pink-500/20 text-pink-400'
-                              : 'bg-gray-500/20 text-gray-400'
-                          }`}>
-                            {student.gender || '-'}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-
-                {filteredStudents.length === 0 && !isLoading && !error && (
-                  <div className="text-center py-20">
-                    <div className="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
-                      <Users className="w-12 h-12 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "students.errors.noStudentsFound" })}</h3>
-                    <p className="text-gray-400">Try adjusting your search or filter criteria</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </section>
-      </main>
-
-      {/* Update UID Modal */}
-      {showUpdateModal && selectedStudent && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 border border-white/20 text-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative transform animate-scale-in">
-            <button
-              onClick={closeUpdateModal}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white hover:rotate-90 transition-all duration-300"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Edit className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-white">{formatMessage({ id: "students.modal.updateUID" })}</h3>
-              <p className="text-gray-400 mt-2">Change the RFID card UID for {selectedStudent.name}</p>
-            </div>
-
-            <form onSubmit={handleUpdateUid} className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">{formatMessage({ id: "students.modal.currentUID" })}</label>
-                <input
-                  type="text"
-                  value={selectedStudent.uid}
-                  readOnly
-                  className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/20 text-gray-400 font-mono"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">{formatMessage({ id: "students.modal.newUID" })}</label>
-                <input
-                  type="text"
-                  value={newUid}
-                  onChange={(e) => setNewUid(e.target.value)}
-                  placeholder={formatMessage({ id: "students.modal.newUIDPlaceholder" })}
-                  required
-                  className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-300"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isUpdating}
-                className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-600 disabled:to-gray-700 py-4 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex justify-center items-center space-x-3 shadow-lg"
-              >
-                {isUpdating ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>{formatMessage({ id: "students.modal.updating" })}</span>
-                  </>
-                ) : (
-                  <>
-                    <Edit className="w-5 h-5" />
-                    <span>{formatMessage({ id: "students.modal.updateUID" })}</span>
-                  </>
-                )}
-              </button>
-
-              {updateMessage && (
-                <div className={`text-center p-4 rounded-xl border ${
-                  updateMessageType === 'success'
-                    ? 'bg-green-500/20 border-green-500/50 text-green-300'
-                    : 'bg-red-500/20 border-red-500/50 text-red-300'
-                } animate-fade-in`}>
-                  <span>{updateMessage}</span>
-                </div>
-              )}
-            </form>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default StudentsList;
+                    {filteredStu

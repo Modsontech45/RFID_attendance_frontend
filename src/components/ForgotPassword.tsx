@@ -124,7 +124,7 @@ const ForgotPassword: React.FC = () => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
+                <FormattedMessage id="home.header.title" defaultMessage="Synctuario" />
               </span>
             </div>
 
@@ -149,7 +149,7 @@ const ForgotPassword: React.FC = () => {
                 <FormattedMessage id="forgotPassword.title" defaultMessage="Reset Your Password" />
               </h1>
               <p className="text-green-200 text-sm">
-                <FormattedMessage id="forgotPassword.subtitle" />
+                <FormattedMessage id="forgotPassword.subtitle" defaultMessage="Enter your email address and we'll send you a link to reset your password" />
               </p>
             </div>
 
@@ -174,6 +174,7 @@ const ForgotPassword: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={formatMessage({ id: "forgotPassword.emailPlaceholder", defaultMessage: "Your Email" })}
+                    placeholder={formatMessage({ id: "forgotPassword.email_placeholder", defaultMessage: "Your Email" })}
                     required
                     className="w-full pl-12 pr-4 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
@@ -193,7 +194,7 @@ const ForgotPassword: React.FC = () => {
                   </>
                 ) : (
                   <span>
-                    <FormattedMessage id="forgotPassword.sendButton" defaultMessage="Send Reset Link" />
+                    <FormattedMessage id="forgotPassword.send_button" defaultMessage="Send Reset Link" />
                   </span>
                 )}
               </button>
@@ -202,12 +203,12 @@ const ForgotPassword: React.FC = () => {
             {/* Links */}
             <div className="space-y-3 text-center text-sm">
               <p className="text-green-300">
-                <FormattedMessage id="forgotPassword.rememberPassword" defaultMessage="Remember your password?" />{" "}
+                <FormattedMessage id="forgotPassword.remember_password" defaultMessage="Remember your password?" />{" "}
                 <Link
                   to="/admin/login"
                   className="text-green-400 hover:text-green-300 hover:underline transition-colors font-medium"
                 >
-                  <FormattedMessage id="forgotPassword.backToLogin" defaultMessage="Back to Login" />
+                  <FormattedMessage id="forgotPassword.back_to_login" defaultMessage="Back to Login" />
                 </Link>
               </p>
             </div>
@@ -220,7 +221,7 @@ const ForgotPassword: React.FC = () => {
             >
               <ArrowLeft className="w-4 h-4" />
               <span>
-                <FormattedMessage id="forgotPassword.backToLogin" defaultMessage="Back to Login" />
+                <FormattedMessage id="forgotPassword.back_to_login" defaultMessage="Back to Login" />
               </span>
             </button>
           </div>

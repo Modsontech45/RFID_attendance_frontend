@@ -227,10 +227,10 @@ const AddTeacher: React.FC = () => {
                 <UserPlus className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Add New {terminology.teacher}
+                {formatMessage({ id: "addTeacher.title" })}
               </h1>
               <p className="text-green-200 text-sm">
-                Enter the email address of the {terminology.teacher.toLowerCase()} you want to add
+                {formatMessage({ id: "addTeacher.subtitle" })}
               </p>
             </div>
 
@@ -257,7 +257,7 @@ const AddTeacher: React.FC = () => {
               {/* Email Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-green-300">
-                  {terminology.teacher} Email Address
+                  {formatMessage({ id: "addTeacher.emailLabel" })}
                 </label>
                 <div className="relative">
                   <input
@@ -265,14 +265,14 @@ const AddTeacher: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={
-                      `${terminology.teacher.toLowerCase()}@example.com`
+                      formatMessage({ id: "addTeacher.emailPlaceholder" })
                     }
                     required
                     className="w-full pl-12 pr-4 py-4 border border-green-400/50 rounded-xl bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
                   />
                 </div>
                 <p className="text-xs text-green-300 mt-1">
-                  The {terminology.teacher.toLowerCase()} will receive an email invitation to join
+                  {formatMessage({ id: "addTeacher.infoText" })}
                 </p>
               </div>
 
@@ -294,7 +294,7 @@ const AddTeacher: React.FC = () => {
                   <>
                     <Send className="w-5 h-5" />
                     <span>
-                      Add {terminology.teacher}
+                      {formatMessage({ id: "addTeacher.submitButton" })}
                     </span>
                   </>
                 )}
@@ -306,7 +306,7 @@ const AddTeacher: React.FC = () => {
               <div className="flex items-center justify-center space-x-2 text-green-300 text-sm">
                 <Users className="w-4 h-4" />
                 <span>
-                  The {terminology.teacher.toLowerCase()} will receive an email invitation to join
+                  {formatMessage({ id: "addTeacher.infoText" })}
                 </span>
               </div>
             </div>
@@ -318,7 +318,7 @@ const AddTeacher: React.FC = () => {
                 className="text-green-400 hover:text-green-300 transition-colors duration-300 flex items-center space-x-2 mx-auto group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
-                <span> {formatMessage({ id: "addTeacher.goBack" })}</span>
+                <span>{formatMessage({ id: "addTeacher.goBack" })}</span>
               </button>
             </div>
           </div>
