@@ -273,7 +273,8 @@
       "staff": "Staff",
       "reports": "Reports",
       "addStaff": "Add Staff",
-      "docs": "Documentation"
+      "docs": "Documentation",
+      "managers": "Managers"
     },
     "logout": "Logout",
     "modal": {

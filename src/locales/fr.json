@@ -231,16 +231,6 @@
       "⚡ Scannage ultra-rapide",
       "🌟 Confié par plus de 500 organisations"
     ],
-    "welcome_comments": [
-      "✨ Bienvenue à Synctuario!",
-      "🔐 Technologie RFID Sécurisée",
-      "📊 Analytique en Temps Réel",
-      "🚀 Installation Facile & Utilisation",
-      "💼 Parfait pour les écoles & entreprises",
-      "🎯 Taux de précision de 99,9%",
-      "⚡ Scannage ultra-rapide",
-      "🌟 Confié par plus de 500 organisations"
-    ]
   },
   "adminProfile": {
     "companyInformation": "Informations sur l'entreprise"
@@ -290,7 +280,8 @@
       "staff": "Personnel",
       "reports": "Rapports",
       "addStaff": "Ajouter un membre",
-      "docs": "Documentation"
+      "docs": "Documentation",
+      "managers": "Gestionnaires"
     },
     "logout": "Déconnexion",
     "modal": {
