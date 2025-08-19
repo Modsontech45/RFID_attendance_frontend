@@ -157,7 +157,6 @@ const AdminLogin: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder={formatMessage({ id: "login.admin.emailPlaceholder", defaultMessage: "Email" })}
                   placeholder={formatMessage({ id: "login.adminlogin.email_placeholder", defaultMessage: "Email" })}
                   required
                   className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
@@ -179,7 +178,6 @@ const AdminLogin: React.FC = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  placeholder={formatMessage({ id: "login.admin.passwordPlaceholder", defaultMessage: "Password" })}
                   placeholder={formatMessage({ id: "login.adminlogin.password_placeholder", defaultMessage: "Password" })}
                   required
                   className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
@@ -204,17 +202,17 @@ const AdminLogin: React.FC = () => {
               type="submit"
               disabled={isLoading}
               className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-green-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
-                      <FormattedMessage id="login.adminlogin.logging_in" defaultMessage="Logging in..." />
+            >
               {isLoading ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
                   <span>
-                    <FormattedMessage id="login.adminlogin.login_button" defaultMessage="Login" />
+                    <FormattedMessage id="login.adminlogin.logging_in" defaultMessage="Logging in..." />
                   </span>
                 </>
               ) : (
                 <span>
-                  <FormattedMessage id="login.admin.loginButton" defaultMessage="Login" />
+                  <FormattedMessage id="login.adminlogin.login_button" defaultMessage="Login" />
                 </span>
               )}
             </button>
