@@ -67,19 +67,11 @@
       "title": "Perfect For",
       "education": {
         "title": "Educational Institutions",
-        "features": [
-          "Student attendance tracking",
-          "Teacher access management",
-          "Parent notification system"
-        ]
+        "features": "Student attendance tracking|||Teacher access management|||Parent notification system"
       },
       "corporate": {
         "title": "Corporate Offices",
-        "features": [
-          "Employee time tracking",
-          "Payroll integration",
-          "Security access control"
-        ]
+        "features": "Employee time tracking|||Payroll integration|||Security access control"
       }
     },
     "cta": {

@@ -70,19 +70,11 @@
       "title": "Parfait pour",
       "education": {
         "title": "Institutions éducatives",
-        "features": [
-          "Suivi de présence des étudiants",
-          "Gestion d'accès des enseignants",
-          "Système de notification des parents"
-        ]
+        "features": "Suivi de présence des étudiants|||Gestion d'accès des enseignants|||Système de notification des parents"
       },
       "corporate": {
         "title": "Bureaux d'entreprise",
-        "features": [
-          "Suivi du temps des employés",
-          "Intégration de la paie",
-          "Contrôle d'accès sécurisé"
-        ]
+        "features": "Suivi du temps des employés|||Intégration de la paie|||Contrôle d'accès sécurisé"
       }
     },
     "cta": {
