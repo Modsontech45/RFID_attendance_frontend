@@ -326,7 +326,7 @@ let subscription = adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {formatMessage({ id: "students.navigation.home" })}
+                    <FormattedMessage id="students.navigation.home" defaultMessage="Home" />
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -486,7 +486,7 @@ let subscription = adminData?.subscription_status || 'inactive';
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              <FormattedMessage id="students.header.subtitle" defaultMessage="Manage and monitor your member database with comprehensive tools" />
+              {formatMessage({ id: "students.header.subtitle" })}
             </p>
           </div>
         </section>
