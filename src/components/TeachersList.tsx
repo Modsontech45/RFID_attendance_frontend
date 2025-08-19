@@ -235,17 +235,11 @@ const { locale } = useLocalIntl();
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-                <FormattedMessage 
-                  id={adminData?.type === 'company' ? "teachersList.yourManagers" : "teachersList.yourStaff"}
-                  defaultMessage={`Your ${terminology.teacherPlural}`}
-                />
+              Your {terminology.teacherPlural}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              <FormattedMessage 
-                id={adminData?.type === 'company' ? "teachersList.subtitleCompany" : "teachersList.subtitle"}
-                defaultMessage={`Manage and monitor your ${terminology.teacher.toLowerCase()} staff with comprehensive tools`}
-              />
+              Manage and monitor your {terminology.teacher.toLowerCase()} staff with comprehensive tools
             </p>
           </div>
         </section>
