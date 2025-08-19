@@ -667,7 +667,7 @@ const HomePage: React.FC = () => {
                 ) : (
                   <>
                     <Send className="h-5 w-5" />
-                    <FormattedMessage id="contact.send_button" defaultMessage="Send Message" />
+                    <FormattedMessage id="contact.sendButton" defaultMessage="Send Message" />
                   </>
                 )}
               </button>

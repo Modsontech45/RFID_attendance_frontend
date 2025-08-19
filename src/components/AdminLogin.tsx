@@ -247,7 +247,7 @@ const AdminLogin: React.FC = () => {
             >
               <ArrowLeft className="h-4 w-4" />
               <span>
-                <FormattedMessage id="login.adminlogin.back" defaultMessage="Go back" />
+                <FormattedMessage id="login.admin.back" defaultMessage="Go back" />
               </span>
             </button>
           </form>
