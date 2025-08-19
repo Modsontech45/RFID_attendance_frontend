@@ -1,1 +1,731 @@
-{}
+{
+  "app": {
+    "name": "Synctuario"
+  },
+  "loading": "Chargement...",
+  "home": {
+    "title": "Êtes-vous un administrateur ou un membre du personnel ?",
+    "admin": "Administrateur",
+    "teacher": "Personnel",
+    "english": "Anglais",
+    "french": "Français",
+    "hero": {
+      "badge": "Système de présence de nouvelle génération",
+      "titlePart1": "Présence intelligente",
+      "titlePart2": "Simplifiée",
+      "description": "Suivi de présence révolutionnaire alimenté par RFID pour les écoles et les entreprises. Découvrez une surveillance transparente et en temps réel avec une sécurité de niveau entreprise."
+    },
+    "header": {
+      "title": "Synctuario",
+      "docs": "Documentation"
+    },
+    "buttons": {
+      "adminPortal": "Portail Administrateur",
+      "staffPortal": "Portail Personnel",
+      "documentation": "Documentation"
+    },
+    "stats": {
+      "organizations": "Organisations",
+      "dailyScans": "Scans quotidiens",
+      "accuracy": "Précision",
+      "uptime": "Disponibilité",
+      "organizationsValue": "500+",
+      "dailyScansValue": "50K+",
+      "accuracyValue": "99,9%",
+      "uptimeValue": "99,99%"
+    },
+    "features": {
+      "title": "Pourquoi choisir Synctuario ?",
+      "description": "La technologie de pointe rencontre un design intuitif pour l'expérience ultime de gestion de présence.",
+      "lightningFast": {
+        "title": "Ultra rapide",
+        "description": "Scan RFID en millisecondes avec intégration ESP32"
+      },
+      "enterpriseSecurity": {
+        "title": "Sécurité d'entreprise",
+        "description": "Chiffrement de niveau bancaire avec clés API uniques pour chaque organisation"
+      },
+      "realTimeAnalytics": {
+        "title": "Analyses en temps réel",
+        "description": "Tableaux de bord en direct avec rapports détaillés et insights"
+      },
+      "multiLanguage": {
+        "title": "Multi-langues",
+        "description": "Support complet pour les interfaces anglaises et françaises"
+      },
+      "mobileReady": {
+        "title": "Compatible mobile",
+        "description": "Accès depuis n'importe quel appareil avec design responsive"
+      },
+      "exportData": {
+        "title": "Exporter les données",
+        "description": "Télécharger les registres de présence au format Excel"
+      }
+    },
+    "howItWorks": {
+      "title": "Comment ça marche",
+      "description": "Configuration simple, résultats puissants en seulement trois étapes.",
+      "step1": {
+        "step": "01",
+        "title": "Enregistrer les utilisateurs",
+        "description": "Ajouter des étudiants ou employés avec cartes RFID uniques"
+      },
+      "step2": {
+        "step": "02",
+        "title": "Scanner et suivre",
+        "description": "Les lecteurs ESP32 capturent la présence avec horodatage"
+      },
+      "step3": {
+        "step": "03",
+        "title": "Surveiller et rapporter",
+        "description": "Voir les données en direct et générer des analyses détaillées"
+      }
+    },
+    "useCases": {
+      "title": "Parfait pour",
+      "education": {
+        "title": "Institutions éducatives",
+        "features": "Suivi de présence des étudiants|||Gestion d'accès des enseignants|||Système de notification des parents"
+      },
+      "corporate": {
+        "title": "Bureaux d'entreprise",
+        "features": "Suivi du temps des employés|||Intégration de la paie|||Contrôle d'accès sécurisé"
+      }
+    },
+    "cta": {
+      "title": "Prêt à commencer ?",
+      "description": "Rejoignez des centaines d'organisations utilisant déjà Synctuario pour une gestion de présence transparente.",
+      "pricingButton": "Voir les tarifs",
+      "contactButton": "Nous contacter",
+      "benefits": [
+        "Essai gratuit de 15 jours",
+        "Aucune carte de crédit requise",
+        "Annuler à tout moment"
+      ]
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "subtitle": "Envoyez-nous un message et nous vous répondrons",
+      "namePlaceholder": "Votre nom",
+      "emailPlaceholder": "Votre e-mail",
+      "messagePlaceholder": "Votre message",
+      "sendButton": "Envoyer le message",
+      "sending": "Envoi...",
+      "successMessage": "Message envoyé avec succès !",
+      "errorMessage": "Échec de l'envoi du message. Veuillez réessayer plus tard."
+    },
+    "popup": {
+      "connectWithUs": "Connectez-vous avec moi",
+      "close": "Fermer"
+    },
+    "welcomeComments": [
+      "✨ Bienvenue sur Synctuario !",
+      "🔐 Technologie RFID sécurisée",
+      "📊 Analyses en temps réel",
+      "🚀 Configuration et utilisation faciles",
+      "💼 Parfait pour les écoles et entreprises",
+      "🎯 Taux de précision de 99,9%",
+      "⚡ Scan ultra rapide",
+      "🌟 Approuvé par 500+ organisations"
+    ]
+  },
+  "validation": {
+    "schoolNameRequired": "Le nom de l'école est requis",
+    "usernameRequired": "Le nom d'utilisateur est requis",
+    "emailRequired": "L'email est requis",
+    "emailInvalid": "L'email est invalide",
+    "telephoneRequired": "Le numéro de téléphone est requis",
+    "telephoneInvalid": "Veuillez entrer un numéro de téléphone valide (10-15 chiffres avec code pays optionnel)",
+    "typeRequired": "Le type d'organisation est requis",
+    "passwordRequired": "Le mot de passe est requis",
+    "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+    "passwordStrength": "Le mot de passe doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial",
+    "passwordRequirements": "Le mot de passe doit contenir :",
+    "passwordMinChars": "Au moins 8 caractères",
+    "passwordUppercase": "Une lettre majuscule (A-Z)",
+    "passwordLowercase": "Une lettre minuscule (a-z)",
+    "passwordNumber": "Un chiffre (0-9)",
+    "passwordSpecial": "Un caractère spécial (@$!%*?&)",
+    "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+    "passwordsDontMatch": "Les mots de passe ne correspondent pas"
+  },
+  "login": {
+    "admin": {
+      "title": "Connexion Administrateur",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Mot de passe",
+      "loginButton": "Se connecter",
+      "loggingIn": "Connexion...",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signupLink": "S'inscrire",
+      "forgotPassword": "Mot de passe oublié ?",
+      "back": "Retour"
+    },
+    "teacher": {
+      "title": "Connexion Personnel",
+      "subtitle": "Entrez votre adresse e-mail pour accéder à votre compte",
+      "emailPlaceholder": "Email / e-mail",
+      "loginButton": "Se connecter",
+      "loading": "Chargement...",
+      "infoText": "Seuls les membres du personnel enregistrés peuvent accéder à ce portail. Contactez votre administrateur si vous avez besoin d'aide.",
+      "back": "Retour à l'accueil"
+    }
+  },
+  "signup": {
+    "admin": {
+      "title": "Inscription Administrateur",
+      "organizationPlaceholder": "Nom de l'organisation",
+      "typePlaceholder": "Sélectionner le type d'organisation",
+      "typeSchool": "École",
+      "typeCompany": "Entreprise",
+      "usernamePlaceholder": "Nom d'utilisateur",
+      "emailPlaceholder": "Email",
+      "telephonePlaceholder": "Numéro de téléphone",
+      "passwordPlaceholder": "Mot de passe",
+      "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+      "submitButton": "S'inscrire",
+      "creatingAccount": "Création du compte...",
+      "alreadyHaveAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Se connecter",
+      "back": "Retour à la connexion"
+    },
+    "error": {
+      "general": "Échec de l'inscription. Veuillez réessayer.",
+      "accountExists": "Un compte avec cet email existe déjà.",
+      "network": "Erreur réseau. Veuillez vérifier votre connexion et réessayer."
+    }
+  },
+  "forgotPassword": {
+    "title": "Réinitialiser votre mot de passe",
+    "subtitle": "Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe",
+    "emailPlaceholder": "Votre e-mail",
+    "sendButton": "Envoyer le lien de réinitialisation",
+    "rememberPassword": "Vous vous souvenez de votre mot de passe ?",
+    "backToLogin": "Retour à la connexion"
+  },
+  "resetPassword": {
+    "title": "Définir un nouveau mot de passe",
+    "subtitle": "Entrez votre nouveau mot de passe ci-dessous",
+    "newPasswordPlaceholder": "Nouveau mot de passe",
+    "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+    "resetButton": "Réinitialiser le mot de passe",
+    "resetting": "Réinitialisation..."
+  },
+  "resetSuccess": {
+    "title": "Réinitialisation du mot de passe réussie !",
+    "message": "Votre mot de passe a été mis à jour. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+    "loginButton": "Se connecter",
+    "additionalInfo": "Gardez votre nouveau mot de passe en sécurité et ne le partagez avec personne."
+  },
+  "emailVerification": {
+    "title": "Vérification d'email",
+    "verifying": "Vérification de votre email...",
+    "goToLogin": "Aller à la connexion",
+    "backToLogin": "Retour à la connexion",
+    "successInfo": "Votre compte est maintenant actif et prêt à être utilisé.",
+    "errorInfo": "Veuillez vérifier votre email pour un nouveau lien de vérification ou contactez le support."
+  },
+  "emailSent": {
+    "title": "Vérifiez votre boîte de réception",
+    "message1": "Nous avons envoyé un lien de vérification à votre email.",
+    "message2": "Veuillez confirmer pour continuer.",
+    "backToSignup": "Retour à l'inscription",
+    "additionalInfo": "Vous n'avez pas reçu l'email ? Vérifiez votre dossier spam ou essayez de vous inscrire à nouveau."
+  },
+  "dashboard": {
+    "loading": "Chargement du tableau de bord",
+    "welcomeTitle": "Bon retour",
+    "welcomeSubtitle": "Gérez votre établissement avec des outils puissants et des informations en temps réel",
+    "stats": {
+      "students": "Total Étudiants",
+      "teachers": "Enseignants Actifs",
+      "attendance": "Présence d'aujourd'hui",
+      "records": "Enregistrements de présence"
+    },
+    "apiSection": {
+      "title": "Clé API",
+      "show": "Afficher",
+      "hide": "Masquer",
+      "copy": "Copier",
+      "copied": "Copié dans le presse-papiers !"
+    },
+    "quickActions": {
+      "title": "Actions rapides",
+      "subtitle": "Effectuez rapidement des tâches courantes",
+      "create": "Créer une catégorie",
+      "view": "Voir les catégories",
+      "timeSettings": "Paramètres horaires"
+    },
+    "features": {
+      "title": "Fonctionnalités du tableau de bord",
+      "attendance": {
+        "title": "Suivi de la présence",
+        "description": "Surveillez et gérez les enregistrements de présence des étudiants"
+      },
+      "teacher": {
+        "title": "Gestion des enseignants",
+        "description": "Ajoutez et gérez le personnel enseignant"
+      },
+      "report": {
+        "title": "Rapports et analyses",
+        "description": "Générez des rapports détaillés et des informations"
+      },
+      "learnMore": "En savoir plus"
+    },
+    "nav": {
+      "school": "École",
+      "staff": "Personnel",
+      "reports": "Rapports",
+      "addStaff": "Ajouter du personnel",
+      "docs": "Documentation",
+      "managers": "Gestionnaires"
+    },
+    "logout": "Déconnexion",
+    "modal": {
+      "title": "Nouvelle catégorie",
+      "subtitle": "Créer une nouvelle catégorie de département",
+      "categoryName": "Nom de la catégorie",
+      "categoryPlaceholder": "Saisissez le nom de la catégorie...",
+      "creating": "Création...",
+      "createButton": "Créer la catégorie"
+    },
+    "category": {
+      "success": "Catégorie créée avec succès !",
+      "error": "Échec de la création de la catégorie.",
+      "serverError": "Erreur serveur. Veuillez réessayer."
+    }
+  },
+  "schoolManagement": {
+    "title": "Gestion des appareils scolaires",
+    "subtitle": "Surveillez et gérez les appareils RFID de votre école avec des capacités de numérisation en temps réel",
+    "registeredDevices": "Appareils enregistrés",
+    "monitorDevices": "Surveillez les appareils de numérisation RFID de votre école",
+    "addDevice": "Ajouter un appareil",
+    "cancel": "Annuler",
+    "deviceUid": "UID de l'appareil",
+    "deviceName": "Nom de l'appareil",
+    "enterDeviceUid": "Entrez l'UID de l'appareil",
+    "enterDeviceName": "Entrez le nom de l'appareil",
+    "registerDevice": "Enregistrer l'appareil",
+    "noDevicesRegistered": "Aucun appareil enregistré",
+    "addFirstDevice": "Ajoutez votre premier appareil pour commencer",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "waitingForScan": "En attente de numérisation...",
+    "scanDetected": "Numérisation détectée",
+    "newStudentDetected": "Nouvel étudiant détecté - UID :",
+    "registerNewStudent": "Enregistrer un nouvel étudiant",
+    "studentName": "Nom de l'étudiant",
+    "emailAddress": "Adresse e-mail",
+    "phoneNumber": "Numéro de téléphone",
+    "selectClass": "Sélectionner la classe/forme",
+    "selectGender": "Sélectionner le sexe",
+    "male": "Masculin",
+    "female": "Féminin",
+    "other": "Autre",
+    "registerStudent": "Enregistrer l'étudiant",
+    "registering": "Enregistrement...",
+    "deleteDevice": "Supprimer l'appareil",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet appareil ?",
+    "loadingDevices": "Chargement des appareils...",
+    "justNow": "À l'instant",
+    "ago": "il y a",
+    "minuteAgo": "minute",
+    "minutesAgo": "minutes",
+    "hourAgo": "heure",
+    "hoursAgo": "heures",
+    "yesterday": "Hier à",
+    "never": "Jamais",
+    "lastSeen": "Vu pour la dernière fois :",
+    "dashboard": "Tableau de bord",
+    "students": "Étudiants",
+    "attendance": "Présence",
+    "reports": "Rapports",
+    "schoolManagement": "Gestion de l'école",
+    "logout": "Déconnexion"
+  },
+  "students": {
+    "loading": {
+      "students": "Chargement des Étudiants",
+      "loadingStudents": "Chargement des étudiants..."
+    },
+    "navigation": {
+      "office": "Bureau",
+      "home": "Accueil",
+      "students": "Étudiants",
+      "attendance": "Présence",
+      "profile": "Profil",
+      "dashboard": "Tableau de bord",
+      "logout": "Déconnexion"
+    },
+    "header": {
+      "title": "Tous les membres inscrits",
+      "subtitle": "Gérez et surveillez votre base de données de membres avec des outils complets"
+    },
+    "stats": {
+      "totalStudents": "Total Étudiants",
+      "maleStudents": "Étudiants Masculins",
+      "femaleStudents": "Étudiants Féminins",
+      "formsClasses": "Formulaires/Classes"
+    },
+    "filters": {
+      "allForms": "Tous les formulaires",
+      "searchByName": "Rechercher par nom :",
+      "searchPlaceholder": "Rechercher des étudiants...",
+      "export": "Exporter",
+      "refresh": "Actualiser"
+    },
+    "table": {
+      "headers": {
+        "name": "Nom",
+        "uid": "UID",
+        "email": "Email",
+        "telephone": "Téléphone",
+        "form": "Formulaire/Classe",
+        "gender": "Genre"
+      }
+    },
+    "errors": {
+      "noStudentsFound": "Aucun membre trouvé",
+      "noMembersFound": "Aucun membre trouvé",
+      "adjustFilters": "Essayez d'ajuster vos critères de recherche ou de filtre",
+      "tryAgain": "Réessayer"
+    },
+    "modal": {
+      "updateUID": "Mettre à jour l'UID de l'étudiant",
+      "currentUID": "UID actuel :",
+      "newUID": "Nouvel UID :",
+      "newUIDPlaceholder": "Entrez le nouvel UID...",
+      "updating": "Mise à jour...",
+      "updateButton": "Mettre à jour l'UID"
+    }
+  },
+  "attendance": {
+    "loading": {
+      "attendance": "Chargement de la présence...",
+      "loadingAttendance": "Chargement des enregistrements...",
+      "error": "Une erreur s'est produite lors du chargement des données de présence",
+      "noRecords": "Aucun enregistrement de présence trouvé pour aujourd'hui",
+      "tryAdjusting": "Essayez d'ajuster vos critères de recherche ou de filtre pour afficher les enregistrements",
+      "tryAgain": "Veuillez réessayer plus tard"
+    },
+    "title": "Analyse de la présence",
+    "subtitle": "Surveillez et analysez la présence des membres avec des informations en temps réel et des rapports complets",
+    "stats": {
+      "totalStudents": "Total présences",
+      "presentToday": "Présents aujourd'hui",
+      "absentToday": "Absents aujourd'hui",
+      "attendanceRate": "Taux de présence",
+      "partial": "Présence partielle"
+    },
+    "allForms": "Tous les formulaires",
+    "download": "Télécharger",
+    "downloadAsPdf": "Télécharger en PDF",
+    "downloadAsExcel": "Télécharger en Excel",
+    "advancedFilters": "Filtres avancés",
+    "description": "Affinez votre recherche de présence avec des filtres avancés",
+    "searchByName": "Rechercher par nom :",
+    "searchPlaceholder": "Rechercher des membres...",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "cancel": "Annuler",
+    "applyFilters": "Appliquer les filtres",
+    "summary": "Résumé de la présence",
+    "statistics": "Statistiques par formulaire/classe",
+    "statsPresent": "Présents",
+    "statsAbsent": "Absents",
+    "statsPartial": "Partiels",
+    "table": {
+      "date": "Date",
+      "name": "Nom",
+      "uid": "UID",
+      "signInTime": "Heure d'arrivée",
+      "signOutTime": "Heure de départ",
+      "status": "Statut",
+      "form": "Formulaire/Classe"
+    }
+  },
+  "teachersList": {
+    "yourStaff": "Votre personnel",
+    "subtitle": "Gérez et surveillez votre personnel enseignant avec des outils complets",
+    "loading": "Chargement des enseignants...",
+    "errorLoading": "Une erreur s'est produite lors du chargement des enseignants",
+    "noTeachers": "Aucun enseignant trouvé",
+    "addTeachers": "Ajoutez des enseignants pour les voir ici",
+    "addYourFirstTeacher": "Ajoutez votre premier enseignant pour commencer",
+    "tryAgain": "Réessayer",
+    "goHome": "Retour à l'accueil",
+    "stats": {
+      "totalTeachers": "Total Enseignants",
+      "activeTeachers": "Enseignants Actifs",
+      "topPerforming": "Meilleurs Performants",
+      "avgExperience": "Expérience Moyenne"
+    },
+    "searchTeachers": "Rechercher des enseignants...",
+    "filter": "Filtrer",
+    "export": "Exporter",
+    "addTeacher": "Ajouter un enseignant",
+    "unnamedTeacher": "Enseignant sans nom",
+    "joined": "Rejoint le",
+    "view": "Voir l'enseignant",
+    "noBio": "Aucune bio disponible"
+  },
+  "addTeacher": {
+    "title": "Ajouter un nouveau membre du personnel",
+    "subtitle": "Entrez l'adresse e-mail du membre du personnel que vous souhaitez ajouter",
+    "emailLabel": "Adresse e-mail du personnel",
+    "emailPlaceholder": "personnel@exemple.com",
+    "submitButton": "Ajouter un membre du personnel",
+    "adding": "Ajout du personnel...",
+    "infoText": "Le membre du personnel recevra une invitation par e-mail pour rejoindre",
+    "goBack": "Retour au tableau de bord",
+    "dashboard": "Tableau de bord"
+  },
+  "pricing": {
+    "back": "Retour",
+    "school": "École",
+    "title": "Choisissez le plan qui convient à votre école",
+    "subtitle": "Plans tarifaires abordables conçus pour évoluer avec votre institution.",
+    "starter": {
+      "title": "Basique",
+      "subtitle": "Parfait pour les petites écoles ou les projets pilotes",
+      "price": "35$",
+      "period": "mois",
+      "subscribed": "Abonné",
+      "freeTrialExpired": "Essai gratuit expiré",
+      "upgrade": "Mettre à niveau",
+      "getStarted": "Commencer",
+      "freeTrialAvailable": "Essai gratuit disponible",
+      "startFreeTrial": "Commencer l'essai gratuit",
+      "downgrade": "Rétrograder",
+      "freePlan": "Plan gratuit activé",
+      "subscribeNow": "S'abonner maintenant",
+      "features": [
+        "Gestion basique des étudiants",
+        "Suivi de présence limité",
+        "Tableau de bord analytique basique",
+        "Support par e-mail"
+      ]
+    },
+    "professional": {
+      "title": "Professionnel",
+      "subtitle": "Idéal pour les institutions en croissance",
+      "price": "65$",
+      "period": "mois",
+      "mostPopular": "Le plus populaire",
+      "features": [
+        "Gestion avancée des étudiants",
+        "Suivi de présence en temps réel",
+        "Analyses et rapports détaillés",
+        "Support e-mail prioritaire"
+      ]
+    },
+    "enterprise": {
+      "title": "Entreprise",
+      "subtitle": "Idéal pour les grandes configurations ou multi-campus",
+      "price": "170$",
+      "period": "mois",
+      "features": [
+        "Toutes les fonctionnalités professionnelles",
+        "Gestionnaire de compte dédié",
+        "Intégrations personnalisées",
+        "Support 24/7"
+      ]
+    },
+    "getStarted": "Commencer",
+    "contactSales": "Contacter les ventes",
+    "allPlansInclude": "Tous les plans incluent",
+    "allPlansSubtitle": "Chaque plan inclut des fonctionnalités essentielles pour gérer votre école efficacement.",
+    "features": {
+      "studentManagement": {
+        "title": "Gestion des étudiants",
+        "description": "Gérez les profils des étudiants, les classes et les performances depuis un tableau de bord."
+      },
+      "realTimeTracking": {
+        "title": "Suivi en temps réel",
+        "description": "Mises à jour instantanées sur la présence et l'activité des étudiants."
+      },
+      "advancedReports": {
+        "title": "Rapports avancés",
+        "description": "Obtenez des informations avec des rapports automatisés et des résumés de performance."
+      },
+      "fastSetup": {
+        "title": "Configuration rapide",
+        "description": "Mettez votre école en marche rapidement avec notre aide à l'intégration."
+      }
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "subtitle": "Contactez-nous pour en savoir plus, planifier une démo ou demander un devis personnalisé.",
+      "email": "Nous envoyer un e-mail",
+      "phone": "Nous appeler",
+      "office": "Notre bureau",
+      "whyChoose": "Pourquoi choisir Synctuario ?",
+      "reasons": [
+        "Support primé",
+        "Accessibilité mondiale",
+        "Sécurité de niveau entreprise"
+      ],
+      "getStartedToday": "Commencez aujourd'hui",
+      "form": {
+        "yourName": "Votre nom",
+        "schoolEmail": "E-mail de l'école",
+        "schoolName": "Nom de l'école",
+        "selectPlan": "Sélectionner un plan (optionnel)",
+        "message": "Votre message",
+        "sendMessage": "Envoyer le message"
+      }
+    }
+  },
+  "reports": {
+    "title": "Analyses et rapports",
+    "subtitle": "Informations complètes et rapports détaillés pour votre système de gestion de présence",
+    "filters": {
+      "startDate": "Date de début :",
+      "endDate": "Date de fin :",
+      "form": "Formulaire/Classe :",
+      "allForms": "Tous les formulaires",
+      "apply": "Appliquer les filtres",
+      "refresh": "Actualiser"
+    },
+    "stats": {
+      "totalStudents": "Total Étudiants",
+      "totalTeachers": "Total Enseignants",
+      "attendanceRate": "Taux de présence",
+      "totalRecords": "Total Enregistrements"
+    },
+    "charts": {
+      "attendanceRate": "Taux de présence",
+      "formStatistics": "Statistiques par formulaire",
+      "monthlyTrends": "Tendances mensuelles"
+    },
+    "download": {
+      "title": "Télécharger les rapports",
+      "subtitle": "Générez et téléchargez des rapports complets dans votre format préféré",
+      "pdf": "Télécharger le rapport PDF",
+      "excel": "Télécharger le rapport Excel",
+      "generating": "Génération de votre rapport... Cela peut prendre quelques instants."
+    }
+  },
+  "profile": {
+    "loading": "Chargement du profil...",
+    "edit": "Modifier le profil",
+    "picture": "URL de la photo de profil",
+    "fullName": "Nom complet",
+    "bio": "Biographie",
+    "joined": "Rejoint le",
+    "editForm": {
+      "placeholder": {
+        "picture": "Entrez l'URL de l'image",
+        "name": "Entrez votre nom complet",
+        "bio": "Parlez-nous de vous..."
+      }
+    },
+    "noPicture": "Aucune URL d'image définie",
+    "unnamed": "Sans nom",
+    "noBio": "Aucune bio disponible",
+    "save": "Sauvegarder le profil",
+    "saving": "Sauvegarde...",
+    "cancel": "Annuler",
+    "logout": "Déconnexion",
+    "success": "Profil mis à jour avec succès",
+    "error": "Une erreur s'est produite",
+    "section": {
+      "title": "Informations du profil"
+    }
+  },
+  "adminProfile": {
+    "loading": "Chargement du profil...",
+    "error": "Une erreur s'est produite lors du chargement de votre profil",
+    "title": "Profil Administrateur",
+    "back": "Retour au tableau de bord",
+    "logout": "Déconnexion",
+    "subscriptionInfo": "Informations d'abonnement",
+    "subscriptionPlan": "Plan d'abonnement",
+    "subscriptionType": "Type d'abonnement",
+    "schoolName": "Nom de l'école",
+    "companyName": "Nom de l'entreprise",
+    "createdAt": "Compte créé le",
+    "daysLeft": "Jours restants",
+    "joinedOn": "Rejoint le",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "subscriptionProgress": "Progression de l'abonnement",
+    "daysRemaining": "Jours restants",
+    "status": "Statut",
+    "schoolInformation": "Informations de l'école",
+    "username": "Nom d'utilisateur administrateur",
+    "cardBalance": "Solde de la carte",
+    "days": "Jours"
+  },
+  "timeSettings": {
+    "header": "Paramètres d'heure d'arrivée / départ",
+    "signInStart": "Début d'arrivée :",
+    "signInEnd": "Fin d'arrivée :",
+    "signOutStart": "Début de départ :",
+    "signOutEnd": "Fin de départ :",
+    "edit": "Modifier les paramètres horaires",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "home": "Retour à l'accueil"
+  },
+  "documentation": {
+    "title": "Documentation",
+    "home": "Accueil",
+    "pricing": "Tarification",
+    "badge": "Documentation complète",
+    "subtitle": "Tout ce que vous devez savoir sur la configuration, la configuration et l'utilisation du système de présence RFID Synctuario.",
+    "gettingStarted": {
+      "title": "Commencer",
+      "welcome": "Bienvenue sur Synctuario",
+      "description": "Synctuario est un système complet de gestion de présence basé sur RFID conçu pour les écoles et les organisations.",
+      "forSchools": "Pour les écoles",
+      "schoolsDesc": "Suivez la présence des étudiants avec des cartes RFID et une surveillance en temps réel.",
+      "forOrganizations": "Pour les organisations",
+      "organizationsDesc": "Surveillez la présence des employés et les systèmes de contrôle d'accès."
+    },
+    "hardwareSetup": {
+      "title": "Configuration matérielle",
+      "esp32Setup": "Configuration du lecteur RFID ESP32",
+      "requiredComponents": "Composants requis :",
+      "wiringDiagram": "Schéma de câblage :",
+      "importantNotes": "Notes importantes :"
+    },
+    "arduinoCode": {
+      "title": "Code Arduino",
+      "completeCode": "Code Arduino complet :",
+      "configurationSteps": "Étapes de configuration :"
+    },
+    "apiReference": {
+      "title": "Référence API",
+      "endpoints": "Points de terminaison API"
+    },
+    "userManagement": {
+      "title": "Gestion des utilisateurs",
+      "managingUsers": "Gestion des utilisateurs",
+      "adminUsers": "Utilisateurs administrateurs",
+      "teacherUsers": "Utilisateurs enseignants",
+      "registrationProcess": "Processus d'inscription des étudiants :"
+    },
+    "security": {
+      "title": "Sécurité et clés API",
+      "bestPractices": "Meilleures pratiques de sécurité",
+      "apiKeyManagement": "Gestion des clés API",
+      "securityGuidelines": "Directives de sécurité :",
+      "dataProtection": "Protection des données"
+    },
+    "troubleshooting": {
+      "title": "Dépannage",
+      "commonIssues": "Problèmes courants et solutions"
+    },
+    "quickLinks": {
+      "title": "Liens rapides",
+      "adminPortal": "Portail Administrateur",
+      "adminDescription": "Accéder au tableau de bord administrateur",
+      "teacherPortal": "Portail Enseignant",
+      "teacherDescription": "Accéder au tableau de bord enseignant",
+      "getStarted": "Commencer",
+      "pricingDescription": "Voir les tarifs et les plans"
+    }
+  }
+}
