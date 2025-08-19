@@ -126,7 +126,8 @@
       "organizations": "Organisations",
       "dailyScans": "Scans quotidiens",
       "accuracy": "Précision",
-      "uptime": "Disponibilité"
+      "uptime": "Disponibilité",
+      "uptime_value": "99,99%"
     },
     "features": {
       "title": "Pourquoi choisir Synctuario ?",
