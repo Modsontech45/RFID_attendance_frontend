@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "Bienvenue",
-    "description": "Ceci est une application de démonstration."
+    "description": "Ceci est une application de démonstration.",
+    "name": "Synctuario"
   },
   "button": {
     "login": "Se connecter"
