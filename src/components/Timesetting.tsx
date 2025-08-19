@@ -234,6 +234,10 @@ const TimeSettings: React.FC = () => {
                <FormattedMessage
             id="settime.home"
             defaultMessage="Go Home"
+          />
+      </button>
+    </div>
+  );
 };
 
 export default TimeSettings;
