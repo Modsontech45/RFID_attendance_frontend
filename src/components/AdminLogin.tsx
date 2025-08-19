@@ -5,12 +5,10 @@ import { postData, API_BASE, setAuthData } from "../utils/auth";
 
 import { Shield, Eye, EyeOff, ArrowLeft, Loader2, Mail, Lock } from "lucide-react";
 
-import { FormattedMessage, useIntl } from "react-intl";
-import LanguageSwitcher from "./LanguageSwitcher";
 
 const AdminLogin: React.FC = () => {
   const navigate = useNavigate();
-  const { formatMessage } = useIntl();
+  const { t, currentLanguage, changeLanguage, loading } = useTranslation();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -38,15 +36,15 @@ const AdminLogin: React.FC = () => {
     const newErrors: { [key: string]: string } = {};
 
     if (!formData.email) {
-      newErrors.email = formatMessage({ id: "validation.emailRequired" });
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = formatMessage({ id: "validation.emailInvalid" });
+      newErrors.email = "Email is invalid";
     }
 
     if (!formData.password) {
-      newErrors.password = formatMessage({ id: "validation.passwordRequired" });
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
-      newErrors.password = formatMessage({ id: "validation.passwordLength" });
+      newErrors.password = "Password must be at least 6 characters";
     }
 
     setErrors(newErrors);
@@ -64,7 +62,7 @@ const AdminLogin: React.FC = () => {
 
     try {
       const result = await postData(`${API_BASE}/admin/login`, formData, {
-        "Accept-Language": localStorage.getItem("lang") || "en",
+        "Accept-Language": currentLanguage,
       });
 
       console.log("Login response:", result);
@@ -89,12 +87,12 @@ const AdminLogin: React.FC = () => {
 
       console.log("Login failed, no token found in response");
       setErrors({
-        general: result.message || formatMessage({ id: "login.error.general" }),
+        general: result.message || "Login failed. Please try again.",
       });
     } catch (error: any) {
       console.error("Login error:", error);
       const message =
-        error?.message || error?.data?.message || formatMessage({ id: "login.error.general" });
+        error?.message || error?.data?.message || "Login failed. Please try again.";
       setErrors({ general: message });
     } finally {
       setIsLoading(false);
@@ -104,6 +102,24 @@ const AdminLogin: React.FC = () => {
   const handleGoBack = () => {
     navigate("/");
   };
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    changeLanguage(e.target.value);
+  };
+
+  // Show loading state while translations are loading
+  if (loading) {
+    return (
+      <div className="bg-black text-white min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <Shield className="w-6 h-6 text-white animate-pulse" />
+          </div>
+          <div className="text-xl text-white">Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -116,10 +132,17 @@ const AdminLogin: React.FC = () => {
                 <Shield className="h-6 w-6 text-white" />
               </div>
               <span className="text-2xl font-bold text-green-400">
-                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
+                Synctuario
               </span>
             </div>
-            <LanguageSwitcher />
+            <select 
+              value={currentLanguage}
+              onChange={handleLanguageChange}
+              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+              <option value="en" className="text-gray-900">🇺🇸 {t('home.english') || 'English'}</option>
+              <option value="fr" className="text-gray-900">🇫🇷 {t('home.french') || 'French'}</option>
+            </select>
           </div>
         </div>
       </header>
@@ -138,7 +161,7 @@ const AdminLogin: React.FC = () => {
                 <Shield className="h-8 w-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-                <FormattedMessage id="login.admin.title" defaultMessage="Admin Login" />
+                {t('login.adminlogin.title') || 'Admin Login'}
               </h1>
             </div>
 
@@ -158,10 +181,7 @@ const AdminLogin: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "login.admin.emailPlaceholder",
-                    defaultMessage: "Email",
-                  })}
+                  placeholder={t('login.adminlogin.email_placeholder') || 'Email'}
                   required
                   className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
                     errors.email
@@ -182,10 +202,7 @@ const AdminLogin: React.FC = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "login.admin.passwordPlaceholder",
-                    defaultMessage: "Password",
-                  })}
+                  placeholder={t('login.adminlogin.password_placeholder') || 'Password'}
                   required
                   className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
                     errors.password
@@ -209,12 +226,12 @@ const AdminLogin: React.FC = () => {
               type="submit"
               disabled={isLoading}
               className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-green-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
-            >
+                      Logging in...
               {isLoading ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
                   <span>
-                    <FormattedMessage id="login.admin.loggingIn" defaultMessage="Logging in..." />
+                    {t('login.adminlogin.login_button') || 'Login'}
                   </span>
                 </>
               ) : (
@@ -227,15 +244,12 @@ const AdminLogin: React.FC = () => {
             {/* Links */}
             <div className="space-y-3 text-center text-sm">
               <p className="text-white">
-                <FormattedMessage
-                  id="login.admin.noAccount"
-                  defaultMessage="Don't have an account?"
-                />{" "}
+                {t('login.adminlogin.no_account') || "Don't have an account?"}{" "}
                 <Link
                   to="/admin/signup"
                   className="font-medium text-green-400 transition-colors hover:text-green-300 hover:underline"
                 >
-                  <FormattedMessage id="login.admin.signupLink" defaultMessage="Sign up" />
+                  {t('login.adminlogin.signup_link') || 'Sign up'}
                 </Link>
               </p>
 
@@ -244,10 +258,7 @@ const AdminLogin: React.FC = () => {
                   to="/admin/forgot-password"
                   className="text-green-400 transition-colors hover:text-green-300 hover:underline"
                 >
-                  <FormattedMessage
-                    id="login.admin.forgotPassword"
-                    defaultMessage="Forgot password?"
-                  />
+                  {t('login.adminlogin.forgot_password') || 'Forgot password?'}
                 </Link>
               </p>
             </div>
@@ -260,7 +271,7 @@ const AdminLogin: React.FC = () => {
             >
               <ArrowLeft className="h-4 w-4" />
               <span>
-                <FormattedMessage id="login.admin.back" defaultMessage="Go back" />
+                {t('login.adminlogin.back') || 'Go back'}
               </span>
             </button>
           </form>
