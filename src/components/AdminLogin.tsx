@@ -226,17 +226,17 @@ const AdminLogin: React.FC = () => {
               type="submit"
               disabled={isLoading}
               className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-green-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
-                      Logging in...
+            >
               {isLoading ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
                   <span>
-                    {t('login.adminlogin.login_button') || 'Login'}
+                    {t('login.adminlogin.logging_in') || 'Logging in...'}
                   </span>
                 </>
               ) : (
                 <span>
-                  <FormattedMessage id="login.admin.loginButton" defaultMessage="Login" />
+                  {t('login.adminlogin.login_button') || 'Login'}
                 </span>
               )}
             </button>
