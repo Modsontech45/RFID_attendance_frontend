@@ -25,7 +25,6 @@ import {
 import { useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { useTerminology } from "../utils/terminology";
-import { FormattedMessage } from "react-intl";
 
 const AddTeacher: React.FC = () => {
   const navigate = useNavigate();
@@ -266,11 +265,12 @@ const AddTeacher: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={
-                      formatMessage({ id: "addTeacher.emailPlaceholder" })
+                      formatMessage({ id: "addTeacher.emailPlaceholder", defaultMessage: "staff@example.com" })
                     }
                     required
                     className="w-full pl-12 pr-4 py-4 border border-green-400/50 rounded-xl bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
                   />
+                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
                 </div>
                 <p className="text-xs text-green-300 mt-1">
                   {formatMessage({ id: "addTeacher.infoText" })}
@@ -307,7 +307,7 @@ const AddTeacher: React.FC = () => {
               <div className="flex items-center justify-center space-x-2 text-green-300 text-sm">
                 <Users className="w-4 h-4" />
                 <span>
-                  <FormattedMessage id="addTeacher.infoText" defaultMessage="The staff member will receive an email invitation to join" />
+                  {formatMessage({ id: "addTeacher.infoText" })}
                 </span>
               </div>
             </div>
