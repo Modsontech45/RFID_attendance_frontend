@@ -1,4 +1,7 @@
 {
+  "app": {
+    "name": "Synctuario"
+  },
   "loading": "Chargement...",
   "home": {
     "title": "Êtes-vous un administrateur ou un membre du personnel ?",
