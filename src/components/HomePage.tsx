@@ -594,7 +594,6 @@ const HomePage: React.FC = () => {
     </button>
   </div>
 </div>
-
       )}
 
       {/* Contact Modal */}
@@ -614,7 +613,7 @@ const HomePage: React.FC = () => {
             </h2>
             <p className="mb-6 text-gray-400">
               <FormattedMessage
-                id="home.contact.subtitle"
+                id="contact.description"
                 defaultMessage="Send us a message and we'll get back to you"
               />
             </p>
@@ -667,7 +666,7 @@ const HomePage: React.FC = () => {
                 ) : (
                   <>
                     <Send className="h-5 w-5" />
-                    <FormattedMessage id="contact.sendButton" defaultMessage="Send Message" />
+                    <FormattedMessage id="contact.send_button" defaultMessage="Send Message" />
                   </>
                 )}
               </button>
