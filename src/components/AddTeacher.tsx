@@ -22,7 +22,7 @@ import {
   Plus,
   Send,
 } from "lucide-react";
-import { useIntl } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { useTerminology } from "../utils/terminology";
 
@@ -227,10 +227,10 @@ const AddTeacher: React.FC = () => {
                 <UserPlus className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                {formatMessage({ id: "addTeacher.title" })}
+                <FormattedMessage id="addTeacher.title" defaultMessage="Add New Staff" />
               </h1>
               <p className="text-green-200 text-sm">
-                {formatMessage({ id: "addTeacher.subtitle" })}
+                <FormattedMessage id="addTeacher.subtitle" defaultMessage="Enter the email address of the staff member you want to add" />
               </p>
             </div>
 
@@ -265,12 +265,11 @@ const AddTeacher: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={
-                      formatMessage({ id: "addTeacher.emailPlaceholder", defaultMessage: "staff@example.com" })
+                      formatMessage({ id: "addTeacher.emailPlaceholder" })
                     }
                     required
                     className="w-full pl-12 pr-4 py-4 border border-green-400/50 rounded-xl bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
                   />
-                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
                 </div>
                 <p className="text-xs text-green-300 mt-1">
                   {formatMessage({ id: "addTeacher.infoText" })}
