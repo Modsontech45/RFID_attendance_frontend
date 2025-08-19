@@ -22,9 +22,10 @@ import {
   Plus,
   Send,
 } from "lucide-react";
-import { useIntl, FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { useTerminology } from "../utils/terminology";
+import { FormattedMessage } from "react-intl";
 
 const AddTeacher: React.FC = () => {
   const navigate = useNavigate();
@@ -306,7 +307,7 @@ const AddTeacher: React.FC = () => {
               <div className="flex items-center justify-center space-x-2 text-green-300 text-sm">
                 <Users className="w-4 h-4" />
                 <span>
-                  {formatMessage({ id: "addTeacher.infoText" })}
+                  <FormattedMessage id="addTeacher.infoText" defaultMessage="The staff member will receive an email invitation to join" />
                 </span>
               </div>
             </div>
@@ -318,7 +319,7 @@ const AddTeacher: React.FC = () => {
                 className="text-green-400 hover:text-green-300 transition-colors duration-300 flex items-center space-x-2 mx-auto group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
-                <span><FormattedMessage id="addTeacher.goBack" defaultMessage="Go Back to Dashboard" /></span>
+                <span>{formatMessage({ id: "addTeacher.goBack" })}</span>
               </button>
             </div>
           </div>
