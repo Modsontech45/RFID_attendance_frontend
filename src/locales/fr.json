@@ -200,7 +200,11 @@
       "description": "Rejoignez des centaines d'organisations utilisant déjà Synctuario pour une gestion de présence transparente.",
       "pricingButton": "Voir les tarifs",
       "contactButton": "Contactez-nous",
-      "benefits": "Essai gratuit de 15 jours|||Pas de frais d'installation|||Annulez à tout moment"
+      "benefits": {
+        "0": "Installation gratuite",
+        "1": "Support 24/7",
+        "2": "Essai de 30 jours"
+      }
     },
     "contact": {
       "title": "Contactez-nous",
