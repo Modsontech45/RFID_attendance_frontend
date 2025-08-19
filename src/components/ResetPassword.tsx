@@ -127,8 +127,8 @@ const ResetPassword: React.FC = () => {
   };
 
   const handleGoBack = () => {
-    );
-  }
+    navigate('/admin/forgot-password');
+  };
 
   const getMessageIcon = () => {
     switch (messageType) {
