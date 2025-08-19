@@ -266,7 +266,7 @@ let subscription = adminData?.subscription_status || 'inactive';
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                         {formatMessage({ id: "students.loading.students" })}
+                         <FormattedMessage id="students.loading.students" defaultMessage="Loading Students" />
             </div>
             <div className="flex justify-center space-x-1">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
@@ -482,7 +482,7 @@ let subscription = adminData?.subscription_status || 'inactive';
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-                 <FormattedMessage id="students.header.title" defaultMessage="All Registered Members" />
+                 {formatMessage({ id: "students.header.title" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
