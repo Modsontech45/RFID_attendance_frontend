@@ -196,7 +196,7 @@ const TeacherLogin: React.FC = () => {
               className="w-full flex items-center justify-center space-x-2 text-gray-400 hover:text-white transition-colors py-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span><FormattedMessage id="login.teacherlogin.back" defaultMessage="Back to Home" /></span>
+              <span><FormattedMessage id="login.teacher.back" defaultMessage="Back to Home" /></span>
             </button>
           </form>
         </div>

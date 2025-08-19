@@ -649,7 +649,7 @@ const { formatMessage } = useIntl();
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              {formatMessage({ id: "schoolManagement.subtitle" })}
+              <FormattedMessage id="schoolManagement.subtitle" defaultMessage="Monitor and manage your school's RFID devices with real-time scanning capabilities" />
             </p>
           </div>
         </section>

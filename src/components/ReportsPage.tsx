@@ -848,7 +848,7 @@ const subscription = adminData?.subscription_status;
 
               {isGeneratingReport && (
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
-                  <p className="text-blue-300">{formatMessage({ id: "reports.download.generating" })}</p>
+                  <p className="text-blue-300"><FormattedMessage id="reports.download.generating" defaultMessage="Generating your report... This may take a few moments." /></p>
                 </div>
               )}
             </div>

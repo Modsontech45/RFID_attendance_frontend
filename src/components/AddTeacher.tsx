@@ -22,7 +22,7 @@ import {
   Plus,
   Send,
 } from "lucide-react";
-import { useIntl } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { useTerminology } from "../utils/terminology";
 
@@ -318,7 +318,7 @@ const AddTeacher: React.FC = () => {
                 className="text-green-400 hover:text-green-300 transition-colors duration-300 flex items-center space-x-2 mx-auto group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
-                <span>{formatMessage({ id: "addTeacher.goBack" })}</span>
+                <span><FormattedMessage id="addTeacher.goBack" defaultMessage="Go Back to Dashboard" /></span>
               </button>
             </div>
           </div>

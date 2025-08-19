@@ -28,6 +28,44 @@
     "passwordsDontMatch": "Passwords do not match"
   },
   "login": {
+    "adminlogin": {
+      "title": "Admin Login",
+      "email_placeholder": "Email",
+      "password_placeholder": "Password",
+      "login_button": "Login",
+      "logging_in": "Logging in...",
+      "no_account": "Don't have an account?",
+      "signup_link": "Sign up",
+      "forgot_password": "Forgot password?",
+      "back": "Go back"
+    },
+    "adminsignup": {
+      "title": "Admin Signup",
+      "schoolname_placeholder": "Organization Name",
+      "organization_type_placeholder": "Select Organization Type",
+      "organization_school": "School",
+      "organization_company": "Company",
+      "username_placeholder": "Username",
+      "email_placeholder": "Email",
+      "phone_placeholder": "Phone Number",
+      "password_placeholder": "Password",
+      "confirm_password_placeholder": "Confirm Password",
+      "submit_button": "Sign Up",
+      "creating_account": "Creating Account...",
+      "already_have_account": "Already have an account?",
+      "login_link": "Login",
+      "back": "Back to Login"
+    },
+    "teacher": {
+      "title": "Staff Login",
+      "subtitle": "Enter your email address to access your account",
+      "email_placeholder": "Email / e-mail",
+      "login_button": "Login",
+      "loading": "Loading...",
+      "info_text": "Only registered staff members can access this portal. Contact your administrator if you need assistance.",
+      "back": "Back to Home"
+    }
+  },
     "admin": {
       "title": "Admin Login",
       "emailPlaceholder": "Email",

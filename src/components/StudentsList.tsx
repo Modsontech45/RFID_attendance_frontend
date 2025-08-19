@@ -486,7 +486,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              {formatMessage({ id: "students.header.subtitle" })}
+              <FormattedMessage id="students.header.subtitle" defaultMessage="Manage and monitor your member database with comprehensive tools" />
             </p>
           </div>
         </section>
