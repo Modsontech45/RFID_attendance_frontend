@@ -188,19 +188,11 @@
       "title": "Parfait pour",
       "education": {
         "title": "Institutions éducatives",
-        "features": [
-          "Suivi de présence des élèves",
-          "Gestion des accès enseignants",
-          "Système de notification des parents"
-        ]
+        "features": "Suivi de présence des élèves|||Gestion des accès enseignants|||Système de notification des parents"
       },
       "corporate": {
         "title": "Bureaux d'entreprise",
-        "features": [
-          "Suivi du temps des employés",
-          "Intégration de la paie",
-          "Contrôle d'accès sécurisé"
-        ]
+        "features": "Suivi du temps des employés|||Intégration de la paie|||Contrôle d'accès sécurisé"
       }
     },
     "cta": {
@@ -208,11 +200,7 @@
       "description": "Rejoignez des centaines d'organisations utilisant déjà Synctuario pour une gestion de présence transparente.",
       "pricingButton": "Voir les tarifs",
       "contactButton": "Contactez-nous",
-      "benefits": [
-        "Essai gratuit de 15 jours",
-        "Pas de frais d'installation",
-        "Annulez à tout moment"
-      ]
+      "benefits": "Essai gratuit de 15 jours|||Pas de frais d'installation|||Annulez à tout moment"
     },
     "contact": {
       "title": "Contactez-nous",

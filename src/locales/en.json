@@ -188,19 +188,11 @@
       "title": "Perfect For",
       "education": {
         "title": "Educational Institutions",
-        "features": [
-          "Student attendance tracking",
-          "Teacher access management",
-          "Parent notification system"
-        ]
+        "features": "Student attendance tracking|||Teacher access management|||Parent notification system"
       },
       "corporate": {
         "title": "Corporate Offices",
-        "features": [
-          "Employee time tracking",
-          "Payroll integration",
-          "Security access control"
-        ]
+        "features": "Employee time tracking|||Payroll integration|||Security access control"
       }
     },
     "cta": {
@@ -208,11 +200,7 @@
       "description": "Join hundreds of organizations already using Synctuario for seamless attendance management.",
       "pricingButton": "View Pricing",
       "contactButton": "Contact Us",
-      "benefits": [
-        "15-day free trial",
-        "No setup fees",
-        "Cancel anytime"
-      ]
+      "benefits": "15-day free trial|||No setup fees|||Cancel anytime"
     },
     "contact": {
       "title": "Contact Us",
