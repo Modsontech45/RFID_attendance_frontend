@@ -812,7 +812,8 @@
       "employees": "Loading Employees",
       "loadingStudents": "Loading students...",
       "loadingEmployees": "Loading employees...",
-    },
+    }
+  },
     "navigation": {
       "office": "Office",
       "home": "Home",
