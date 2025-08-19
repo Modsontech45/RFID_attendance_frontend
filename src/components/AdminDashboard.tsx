@@ -371,10 +371,12 @@ const AdminDashboard: React.FC = () => {
                   className="relative rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/10"
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
-                    <FormattedMessage
-                      id="dashboard.nav.school"
-                      defaultMessage="School"
-                    />
+                    {adminData?.type === 'company' ? 'Company' : (
+                      <FormattedMessage
+                        id="dashboard.nav.school"
+                        defaultMessage="School"
+                      />
+                    )}
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </button>
@@ -469,10 +471,12 @@ const AdminDashboard: React.FC = () => {
                 onClick={() => navigate("/admin/school")}
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
               >
-                <FormattedMessage
-                  id="dashboard.nav.school"
-                  defaultMessage="School"
-                />
+                {adminData?.type === 'company' ? 'Company' : (
+                  <FormattedMessage
+                    id="dashboard.nav.school"
+                    defaultMessage="School"
+                  />
+                )}
               </button>
               <button
                 onClick={() => navigate("/admin/teachers")}

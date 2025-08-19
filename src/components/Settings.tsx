@@ -228,10 +228,14 @@ const SettingsComponent: React.FC = () => {
             <div className="bg-[#1e2a38] rounded-lg p-6 border border-[#263445] shadow">
               <div className="flex items-center space-x-3 mb-4">
                 <Building className="h-6 w-6 text-blue-400" />
-                <h3 className="text-lg font-semibold"><FormattedMessage
-                          id="AdminProfile.schoolInformation"
-                          defaultMessage="School Information"
-                        /></h3>
+                <h3 className="text-lg font-semibold">
+                  {adminData?.type === 'company' ? 'Company Information' : (
+                    <FormattedMessage
+                      id="AdminProfile.schoolInformation"
+                      defaultMessage="School Information"
+                    />
+                  )}
+                </h3>
               </div>
               <Info label={<FormattedMessage
                           id="AdminProfile.schoolName"
@@ -267,8 +271,8 @@ const SettingsComponent: React.FC = () => {
                           defaultMessage="Days Left"
                         />} value={`${daysLeft}`} />
               <SummaryRow label={<FormattedMessage
-                          id="AdminProfile.schoolName"
-                          defaultMessage="School"
+                          id={adminData?.type === 'company' ? "AdminProfile.companyName" : "AdminProfile.schoolName"}
+                          defaultMessage={adminData?.type === 'company' ? "Company" : "School"}
                         />} value={SchoolName} />
             </div>
           </div>

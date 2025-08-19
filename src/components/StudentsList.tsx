@@ -326,7 +326,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {formatMessage({ id: "schoolManagement.schoolManagement" })}
+                    {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -419,7 +419,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                 onClick={() => navigate('/admin/school')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-               {formatMessage({ id: "schoolManagement.schoolManagement" })}
+               {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-green-400">
                 {formatMessage({ id: "students.navigation.students" })}

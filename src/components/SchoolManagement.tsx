@@ -507,7 +507,7 @@ const { formatMessage } = useIntl();
 
                 <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
                   <span className="text-blue-400 transition-colors">
-                    {formatMessage({ id: "schoolManagement.schoolManagement" })}
+                    {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
                 </button>
@@ -594,7 +594,7 @@ const { formatMessage } = useIntl();
                 {formatMessage({ id: "schoolManagement.dashboard" })}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400">
-                {formatMessage({ id: "schoolManagement.title" })}
+                {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.title" })}
               </button>
               <button
                 onClick={() => navigate('/admin/students')}
@@ -645,11 +645,14 @@ const { formatMessage } = useIntl();
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-              {formatMessage({ id: "schoolManagement.title" })}
+                {adminData?.type === 'company' ? 'Company Device Management' : formatMessage({ id: "schoolManagement.title" })}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              {formatMessage({ id: "schoolManagement.subtitle" })}
+              {adminData?.type === 'company' 
+                ? 'Monitor and manage your company\'s RFID devices with real-time scanning capabilities'
+                : formatMessage({ id: "schoolManagement.subtitle" })
+              }
             </p>
           </div>
         </section>
@@ -659,8 +662,15 @@ const { formatMessage } = useIntl();
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
               <div className="space-y-2">
-                <h2 className="text-2xl font-bold text-white"> {formatMessage({ id: "schoolManagement.registeredDevices" })}</h2>
-                <p className="text-gray-300"> {formatMessage({ id: "schoolManagement.monitorDevices" })}</p>
+                <h2 className="text-2xl font-bold text-white">
+                  {adminData?.type === 'company' ? 'Registered Devices' : formatMessage({ id: "schoolManagement.registeredDevices" })}
+                </h2>
+                <p className="text-gray-300">
+                  {adminData?.type === 'company' 
+                    ? 'Monitor your company\'s RFID scanning devices'
+                    : formatMessage({ id: "schoolManagement.monitorDevices" })
+                  }
+                </p>
               </div>
 
               <button
