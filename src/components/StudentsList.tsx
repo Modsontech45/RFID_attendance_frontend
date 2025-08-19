@@ -316,7 +316,7 @@ let subscription = adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                   <FormattedMessage id="students.navigation.office" defaultMessage="Office" />
+                   {formatMessage({ id: "students.navigation.office" })}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -482,7 +482,7 @@ let subscription = adminData?.subscription_status || 'inactive';
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-                 {formatMessage({ id: "students.header.title" })}
+                 <FormattedMessage id="students.header.title" defaultMessage="All Registered Members" />
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
