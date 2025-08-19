@@ -53,7 +53,7 @@ const StudentsList: React.FC = () => {
   const navigate = useNavigate();
   // const { t, locale,, changeLanguage, loading } = useTranslation();
   const { formatMessage } = useIntl();
-  const { locale, } = useLocalIntl();
+  const { locale } = useLocalIntl();
   const [students, setStudents] = useState<Student[]>([]);
   const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -79,7 +79,7 @@ const StudentsList: React.FC = () => {
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
   // };
-let subscription =   adminData?.subscription_status || 'inactive';
+let subscription = adminData?.subscription_status || 'inactive';
 
 
   const handleLogout = () => {
@@ -333,7 +333,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
 
                 <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
                   <span className="text-green-400 transition-colors">
-                  {formatMessage({ id: "students.navigation.students" })}
+                  <FormattedMessage id="students.navigation.students" defaultMessage="Students" />
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-emerald-400"></div>
                 </button>
@@ -486,7 +486,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              <FormattedMessage id="students.header.subtitle" defaultMessage="Manage and monitor your member database with comprehensive tools" />
+              {formatMessage({ id: "students.header.subtitle" })}
             </p>
           </div>
         </section>
@@ -648,4 +648,25 @@ let subscription =   adminData?.subscription_status || 'inactive';
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/10">
-                    {filteredStu
+                    {filteredStudents.map((student) => (
+                      <tr key={student.id} className="hover:bg-white/5 transition-colors duration-200">
+                        <td className="px-6 py-4 text-white font-medium">{student.name}</td>
+                        <td className="px-6 py-4 text-gray-300">{student.uid}</td>
+                        <td className="px-6 py-4 text-gray-300">{student.email}</td>
+                        <td className="px-6 py-4 text-gray-300">{student.telephone}</td>
+                        <td className="px-6 py-4 text-gray-300">{student.form}</td>
+                        <td className="px-6 py-4 text-gray-300">{student.gender}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default StudentsList;
