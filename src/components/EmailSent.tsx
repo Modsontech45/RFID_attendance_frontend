@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { 
   Shield, 
@@ -8,10 +8,11 @@ import {
   ArrowLeft,
   CheckCircle
 } from 'lucide-react';
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const EmailSent: React.FC = () => {
   const navigate = useNavigate();
-  const { formatMessage: t } = useIntl();
+  const { formatMessage } = useIntl();
   const { locale } = useLocalIntl();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,7 +27,9 @@ const EmailSent: React.FC = () => {
           <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
             <Shield className="w-6 h-6 text-white animate-pulse" />
           </div>
-          <div className="text-xl text-gray-300">Loading...</div>
+          <div className="text-xl text-gray-300">
+            <FormattedMessage id="common.loading" defaultMessage="Loading..." />
+          </div>
         </div>
       </div>
     );
@@ -50,8 +53,12 @@ const EmailSent: React.FC = () => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Synctuario
+                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
               </span>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
@@ -68,17 +75,17 @@ const EmailSent: React.FC = () => {
                 <Mail className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                📧 {t({ id: 'emailSent.title' })}
+                📧 <FormattedMessage id="emailSent.title" defaultMessage="Check your inbox" />
               </h1>
             </div>
 
             {/* Message */}
             <div className="space-y-4">
               <p className="text-green-300 text-lg">
-                {t({ id: 'emailSent.message1' })}
+                <FormattedMessage id="emailSent.message1" defaultMessage="We've sent a verification link to your email." />
               </p>
               <p className="text-green-300 text-lg">
-                {t({ id: 'emailSent.message2' })}
+                <FormattedMessage id="emailSent.message2" defaultMessage="Please confirm to continue." />
               </p>
             </div>
 
@@ -93,13 +100,13 @@ const EmailSent: React.FC = () => {
               className="w-full flex items-center justify-center space-x-2 text-green-400 hover:text-green-300 transition-colors py-3 border border-green-500/50 rounded-lg hover:bg-green-500/10"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>{t({ id: 'emailSent.backToSignup' })}</span>
+              <span><FormattedMessage id="emailSent.backToSignup" defaultMessage="Back to Signup" /></span>
             </button>
 
             {/* Additional Info */}
             <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-center">
               <p className="text-green-300 text-sm">
-                {t({ id: 'emailSent.additionalInfo' })}
+                <FormattedMessage id="emailSent.additionalInfo" defaultMessage="Didn't receive the email? Check your spam folder or try signing up again." />
               </p>
             </div>
           </div>

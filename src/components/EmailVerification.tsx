@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { API_BASE } from '../utils/auth';
 import {
@@ -11,6 +11,7 @@ import {
   Mail,
   ArrowRight
 } from 'lucide-react';
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const EmailVerification: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +20,6 @@ const EmailVerification: React.FC = () => {
   const { locale } = useLocalIntl();
   const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [message, setMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleLoginClick = () => {
     navigate('/admin/login');
@@ -31,7 +31,7 @@ const EmailVerification: React.FC = () => {
 
       if (!token) {
         setVerificationStatus('error');
-        setMessage(formatMessage({ id: 'emailVerification.invalidLink' }));
+        setMessage(formatMessage({ id: 'emailVerification.invalidLink', defaultMessage: 'Invalid verification link.' }));
         return;
       }
 
@@ -41,33 +41,20 @@ const EmailVerification: React.FC = () => {
 
         if (response.ok) {
           setVerificationStatus('success');
-          setMessage(data.message || formatMessage({ id: 'emailVerification.successDefault' }));
+          setMessage(data.message || formatMessage({ id: 'emailVerification.successDefault', defaultMessage: 'Email verified successfully!' }));
         } else {
           setVerificationStatus('error');
-          setMessage(data.message || formatMessage({ id: 'emailVerification.tokenExpired' }));
+          setMessage(data.message || formatMessage({ id: 'emailVerification.tokenExpired', defaultMessage: 'Invalid or expired token.' }));
         }
       } catch (error) {
         console.error('Verification error:', error);
         setVerificationStatus('error');
-        setMessage(formatMessage({ id: 'emailVerification.serverError' }));
+        setMessage(formatMessage({ id: 'emailVerification.serverError', defaultMessage: 'Server error. Please try again later.' }));
       }
     };
 
     verifyEmail();
   }, [searchParams, formatMessage]);
-
-  if (isLoading) {
-    return (
-      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-6 h-6 text-white animate-pulse" />
-          </div>
-          <div className="text-xl text-gray-300">Loading...</div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen relative overflow-hidden">
@@ -85,8 +72,12 @@ const EmailVerification: React.FC = () => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Synctuario
+                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
               </span>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
@@ -100,7 +91,7 @@ const EmailVerification: React.FC = () => {
                 <Mail className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                {formatMessage({ id: 'emailVerification.title' })}
+                <FormattedMessage id="emailVerification.title" defaultMessage="Email Verification" />
               </h1>
             </div>
 
@@ -111,7 +102,7 @@ const EmailVerification: React.FC = () => {
                     <Loader2 className="w-12 h-12 text-green-400 animate-spin" />
                   </div>
                   <p className="text-green-300 text-lg">
-                    {formatMessage({ id: 'emailVerification.verifying' })}
+                    <FormattedMessage id="emailVerification.verifying" defaultMessage="Verifying your email..." />
                   </p>
                 </>
               )}
@@ -128,7 +119,7 @@ const EmailVerification: React.FC = () => {
                     onClick={handleLoginClick}
                     className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-3"
                   >
-                    <span>{formatMessage({ id: 'emailVerification.goToLogin' })}</span>
+                    <span><FormattedMessage id="emailVerification.goToLogin" defaultMessage="Go to Login" /></span>
                     <ArrowRight className="w-5 h-5" />
                   </button>
                 </>
@@ -146,7 +137,7 @@ const EmailVerification: React.FC = () => {
                     onClick={handleLoginClick}
                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-3"
                   >
-                    <span>{formatMessage({ id: 'emailVerification.backToLogin' })}</span>
+                    <span><FormattedMessage id="emailVerification.backToLogin" defaultMessage="Back to Login" /></span>
                     <ArrowRight className="w-5 h-5" />
                   </button>
                 </>
@@ -156,7 +147,7 @@ const EmailVerification: React.FC = () => {
             {verificationStatus === 'success' && (
               <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-center">
                 <p className="text-green-300 text-sm">
-                  {formatMessage({ id: 'emailVerification.successInfo' })}
+                  <FormattedMessage id="emailVerification.successInfo" defaultMessage="Your account is now active and ready to use." />
                 </p>
               </div>
             )}
@@ -164,7 +155,7 @@ const EmailVerification: React.FC = () => {
             {verificationStatus === 'error' && (
               <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-center">
                 <p className="text-red-300 text-sm">
-                  {formatMessage({ id: 'emailVerification.errorInfo' })}
+                  <FormattedMessage id="emailVerification.errorInfo" defaultMessage="Please check your email for a new verification link or contact support." />
                 </p>
               </div>
             )}

@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const ResetPassword: React.FC = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const ResetPassword: React.FC = () => {
     setToken(tokenFromUrl);
     
     if (!tokenFromUrl) {
-      setMessage('Invalid reset link. Please check your email or request a new one.');
+      setMessage(formatMessage({ id: "resetPassword.invalidLink", defaultMessage: "Invalid reset link. Please check your email or request a new one." }));
       setMessageType('error');
     }
   }, [searchParams]);
@@ -61,25 +62,25 @@ const ResetPassword: React.FC = () => {
     e.preventDefault();
     
     if (!token) {
-      setMessage('Invalid reset link. Please check your email or request a new one.');
+      setMessage(formatMessage({ id: "resetPassword.invalidLink", defaultMessage: "Invalid reset link. Please check your email or request a new one." }));
       setMessageType('error');
       return;
     }
 
     if (!formData.newPassword) {
-      setMessage('New password is required');
+      setMessage(formatMessage({ id: "validation.passwordRequired", defaultMessage: "New password is required" }));
       setMessageType('error');
       return;
     }
 
     if (formData.newPassword.length < 6) {
-      setMessage('Password must be at least 6 characters');
+      setMessage(formatMessage({ id: "validation.passwordMinLength", defaultMessage: "Password must be at least 6 characters" }));
       setMessageType('error');
       return;
     }
 
     if (formData.newPassword !== formData.confirmPassword) {
-      setMessage('Passwords do not match');
+      setMessage(formatMessage({ id: "validation.passwordsDontMatch", defaultMessage: "Passwords do not match" }));
       setMessageType('error');
       return;
     }
@@ -93,7 +94,7 @@ const ResetPassword: React.FC = () => {
       });
 
       if (result.message?.toLowerCase().includes("expired")) {
-        setMessage('❌ This reset link has expired. Please request a new one.');
+        setMessage(formatMessage({ id: "resetPassword.linkExpired", defaultMessage: "This reset link has expired. Please request a new one." }));
         setMessageType('error');
         setTimeout(() => {
           navigate('/admin/forgot-password');
@@ -102,7 +103,7 @@ const ResetPassword: React.FC = () => {
       }
 
       if (result.message?.toLowerCase().includes("malformed")) {
-        setMessage('❌ Invalid reset link. Please check your email or request a new one.');
+        setMessage(formatMessage({ id: "resetPassword.invalidLink", defaultMessage: "Invalid reset link. Please check your email or request a new one." }));
         setMessageType('error');
         return;
       }
@@ -118,7 +119,7 @@ const ResetPassword: React.FC = () => {
 
     } catch (error) {
       console.error('Reset password error:', error);
-      setMessage('❌ Server error. Please try again.');
+      setMessage(formatMessage({ id: "resetPassword.serverError", defaultMessage: "Server error. Please try again." }));
       setMessageType('error');
     } finally {
       setIsLoading(false);
@@ -126,20 +127,6 @@ const ResetPassword: React.FC = () => {
   };
 
   const handleGoBack = () => {
-    navigate('/admin/forgot-password');
-  };
-
-  // Show loading state while translations are loading
-  if (isLoading) {
-    return (
-      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-6 h-6 text-white animate-pulse" />
-          </div>
-          <div className="text-xl text-gray-300">Loading...</div>
-        </div>
-      </div>
     );
   }
 
@@ -187,11 +174,12 @@ const ResetPassword: React.FC = () => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Synctuario
+                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
               </span>
             </div>
             
             <div className="flex items-center space-x-4">
+              <LanguageSwitcher />
        
             </div>
           </div>
@@ -209,18 +197,10 @@ const ResetPassword: React.FC = () => {
                 <Lock className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-                  <FormattedMessage
-                                      id="resetPassword.title"
-                                      defaultMessage="Set New Password"
-                                    />
-          
+                <FormattedMessage id="resetPassword.title" defaultMessage="Set New Password" />
               </h1>
               <p className="text-green-200 text-sm">
-                   <FormattedMessage
-                                      id="resetPassword.subtitle"
-                                      defaultMessage="Enter your new password below"
-                                    />
-    
+                <FormattedMessage id="resetPassword.subtitle" defaultMessage="Enter your new password below" />
               </p>
             </div>
 
@@ -243,11 +223,7 @@ const ResetPassword: React.FC = () => {
                     name="newPassword"
                     value={formData.newPassword}
                     onChange={handleInputChange}
-                     placeholder={formatMessage({
-                      id: "resetPassword.new_password_placeholder",
-                     
-                    })}
-                    // placeholder={t('resetPassword.new_password_placeholder') || 'New Password'}
+                    placeholder={formatMessage({ id: "resetPassword.newPasswordPlaceholder", defaultMessage: "New Password" })}
                     required
                     className="w-full pl-12 pr-12 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
@@ -270,11 +246,7 @@ const ResetPassword: React.FC = () => {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                      placeholder={formatMessage({
-                      id: "resetPassword.confirm_password_placeholder",
-                     
-                    })}
-                    // placeholder={t('resetPassword.confirm_password_placeholder') || 'Confirm Password'}
+                    placeholder={formatMessage({ id: "resetPassword.confirmPasswordPlaceholder", defaultMessage: "Confirm Password" })}
                     required
                     className="w-full pl-12 pr-12 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
@@ -297,19 +269,11 @@ const ResetPassword: React.FC = () => {
                 {isLoading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>  <FormattedMessage
-                                      id="resetPassword.resetting"
-                                     
-                                    /></span>
+                    <span><FormattedMessage id="resetPassword.resetting" defaultMessage="Resetting..." /></span>
                   </>
                 ) : (
                   <span>
-                     <FormattedMessage
-                                      id="resetPassword.reset_button"
-                                     
-                                    />
-    
-                    {/* {t('resetPassword.reset_button')} */}
+                    <FormattedMessage id="resetPassword.resetButton" defaultMessage="Reset Password" />
                   </span>
                 )}
               </button>
@@ -322,10 +286,7 @@ const ResetPassword: React.FC = () => {
               className="w-full flex items-center justify-center space-x-2 text-white/70 hover:text-white transition-colors py-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>     <FormattedMessage
-                                      id="resetPassword.back"
-                                     
-                                    /></span>
+              <span><FormattedMessage id="resetPassword.back" defaultMessage="Back to request password reset" /></span>
             </button>
           </div>
         </div>

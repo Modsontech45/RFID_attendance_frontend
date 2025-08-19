@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const ForgotPassword: React.FC = () => {
   const navigate = useNavigate();
@@ -30,13 +31,13 @@ const ForgotPassword: React.FC = () => {
     e.preventDefault();
 
     if (!email) {
-      setMessage("Email is required");
+      setMessage(formatMessage({ id: "validation.emailRequired", defaultMessage: "Email is required" }));
       setMessageType("error");
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      setMessage("Please enter a valid email address");
+      setMessage(formatMessage({ id: "validation.emailInvalid", defaultMessage: "Please enter a valid email address" }));
       setMessageType("error");
       return;
     }
@@ -57,14 +58,14 @@ const ForgotPassword: React.FC = () => {
         setTimeout(() => {
           // For now, just show success - you can add a success page later
           setMessage(
-            "Reset link sent! Check your email and follow the instructions."
+            formatMessage({ id: "forgotPassword.resetLinkSent", defaultMessage: "Reset link sent! Check your email and follow the instructions." })
           );
         }, 3000);
       }
     } catch (error) {
       console.error("Reset request error:", error);
       setMessage(
-        "❌ Could not contact server. Check your internet or try again later."
+        formatMessage({ id: "forgotPassword.serverError", defaultMessage: "Could not contact server. Check your internet or try again later." })
       );
       setMessageType("error");
     } finally {
@@ -75,20 +76,6 @@ const ForgotPassword: React.FC = () => {
   const handleGoBack = () => {
     navigate("/admin/login");
   };
-
-  // Show loading state while translations are loading
-  if (isLoading) {
-    return (
-      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-6 h-6 text-white animate-pulse" />
-          </div>
-          <div className="text-xl text-gray-300">Loading...</div>
-        </div>
-      </div>
-    );
-  }
 
   const getMessageIcon = () => {
     switch (messageType) {
@@ -137,11 +124,13 @@ const ForgotPassword: React.FC = () => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Synctuario
+                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
               </span>
             </div>
 
-            <div className="flex items-center space-x-4"></div>
+            <div className="flex items-center space-x-4">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       </header>
@@ -157,7 +146,7 @@ const ForgotPassword: React.FC = () => {
                 <Mail className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-                {/* {t('forgotPassword.title')} */}
+                <FormattedMessage id="forgotPassword.title" defaultMessage="Reset Your Password" />
               </h1>
               <p className="text-green-200 text-sm">
                 <FormattedMessage id="forgotPassword.subtitle" />
@@ -184,10 +173,7 @@ const ForgotPassword: React.FC = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder={formatMessage({
-                      id: "forgotPassword.email_placeholder",
-                      defaultMessage: "Your Email",
-                    })}
+                    placeholder={formatMessage({ id: "forgotPassword.emailPlaceholder", defaultMessage: "Your Email" })}
                     required
                     className="w-full pl-12 pr-4 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
@@ -203,12 +189,11 @@ const ForgotPassword: React.FC = () => {
                 {isLoading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Sending...</span>
+                    <span><FormattedMessage id="forgotPassword.sending" defaultMessage="Sending..." /></span>
                   </>
                 ) : (
                   <span>
-                    <FormattedMessage id="forgotPassword.send_button" />
-                    {/* {t('forgotPassword.send_button')} */}
+                    <FormattedMessage id="forgotPassword.sendButton" defaultMessage="Send Reset Link" />
                   </span>
                 )}
               </button>
@@ -217,12 +202,12 @@ const ForgotPassword: React.FC = () => {
             {/* Links */}
             <div className="space-y-3 text-center text-sm">
               <p className="text-green-300">
-                <FormattedMessage id="forgotPassword.remember_password" />{" "}
+                <FormattedMessage id="forgotPassword.rememberPassword" defaultMessage="Remember your password?" />{" "}
                 <Link
                   to="/admin/login"
                   className="text-green-400 hover:text-green-300 hover:underline transition-colors font-medium"
                 >
-                  <FormattedMessage id="forgotPassword.back_to_login" />
+                  <FormattedMessage id="forgotPassword.backToLogin" defaultMessage="Back to Login" />
                 </Link>
               </p>
             </div>
@@ -235,8 +220,7 @@ const ForgotPassword: React.FC = () => {
             >
               <ArrowLeft className="w-4 h-4" />
               <span>
-                {" "}
-                <FormattedMessage id="forgotPassword.back_to_login" />
+                <FormattedMessage id="forgotPassword.backToLogin" defaultMessage="Back to Login" />
               </span>
             </button>
           </div>

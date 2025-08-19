@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-// import { useTranslation } from '../hooks/useTranslation';
 import { postData, API_BASE, setAuthData } from '../utils/auth';
 import { 
   Shield, 
@@ -9,13 +8,13 @@ import {
   Mail,
   Users
 } from 'lucide-react';
-import {  useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
-import { useTerminology } from "../utils/terminology";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const TeacherLogin: React.FC = () => {
   const navigate = useNavigate();
- const { formatMessage } = useIntl();
+  const { formatMessage } = useIntl();
    const { locale } = useLocalIntl();
   
   const [formData, setFormData] = useState({
@@ -23,10 +22,6 @@ const TeacherLogin: React.FC = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
-  const [adminData, setAdminData] = useState<any>(null);
-  
-  // Get terminology - will default to school if no admin data available
-  const terminology = useTerminology(adminData);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -48,81 +43,60 @@ const TeacherLogin: React.FC = () => {
     const newErrors: {[key: string]: string} = {};
 
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = formatMessage({ id: "validation.emailRequired", defaultMessage: "Email is required" });
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+      newErrors.email = formatMessage({ id: "validation.emailInvalid", defaultMessage: "Email is invalid" });
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if (!validateForm()) {
-    return;
-  }
-
-  setIsLoading(true);
-
-  try {
-    const result = await postData(`${API_BASE}/teachers/login`, formData, {
-      'Accept-Language': locale || 'en'
-    });
-
-    if (result.token) {
-      // ✅ Save authentication data
-      setAuthData('token', result.token);
-      setAuthData('role', 'teacher');
-
-      if (result.teacher?.api_key) {
-        setAuthData('api_key', result.teacher.api_key);
-      }
-
-      if (result.admin) {
-        // ✅ Log and save admin data
-        console.log('✅ Admin data:', result.admin);
-        setAuthData('admin_data', JSON.stringify(result.admin));
-        setAdminData(result.admin);
-      } else {
-        console.warn('⚠️ No admin data returned');
-      }
-
-      // ✅ Redirect
-      console.log('Teacher login successful, redirecting to dashboard...');
-      navigate('/teacher/students');
-
-    } else {
-      setErrors({ general: result.message || 'Login failed. Please try again.' });
+    if (!validateForm()) {
+      return;
     }
 
-  } catch (error: any) {
-    console.error('Login error:', error);
-    setErrors({ general: `${error.message || 'An unexpected error occurred.'}` });
-  } finally {
-    setIsLoading(false);
-  }
-};
+    setIsLoading(true);
+
+    try {
+      const result = await postData(`${API_BASE}/teachers/login`, formData, {
+        'Accept-Language': locale || 'en'
+      });
+
+      if (result.token) {
+        setAuthData('token', result.token);
+        setAuthData('role', 'teacher');
+
+        if (result.teacher?.api_key) {
+          setAuthData('api_key', result.teacher.api_key);
+        }
+
+        if (result.admin) {
+          setAuthData('admin_data', JSON.stringify(result.admin));
+        }
+
+        console.log('Teacher login successful, redirecting to dashboard...');
+        navigate('/teacher/students');
+
+      } else {
+        setErrors({ general: result.message || formatMessage({ id: "login.teacher.loginFailed", defaultMessage: "Login failed. Please try again." }) });
+      }
+
+    } catch (error: any) {
+      console.error('Login error:', error);
+      setErrors({ general: error.message || formatMessage({ id: "login.teacher.unexpectedError", defaultMessage: "An unexpected error occurred." }) });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
 
   const handleGoBack = () => {
     navigate('/');
   };
-
-  // Show loading state while translations are loading
-  if (isLoading) {
-    return (
-      <div className="bg-black text-white min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <Users className="w-6 h-6 text-white animate-pulse" />
-          </div>
-          <div className="text-xl text-white">{  formatMessage({ id: "teacherlogin.loading" }) || 'Loading...'}</div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -136,9 +110,10 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold text-green-400">
-                Synctuario
+                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
               </span>
             </div>
+            <LanguageSwitcher />
           </div>
         </div>
       </header>
@@ -154,10 +129,10 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <Users className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-              {terminology.teacher} Login
+                <FormattedMessage id="login.teacher.title" defaultMessage="Staff Login" />
               </h1>
               <p className="text-white text-sm">
-                Enter your email address to access your account
+                <FormattedMessage id="login.teacher.subtitle" defaultMessage="Enter your email address to access your account" />
               </p>
             </div>
 
@@ -177,7 +152,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder=  { formatMessage({ id: "teacherlogin.email_placeholder" })}
+                  placeholder={formatMessage({ id: "login.teacher.emailPlaceholder", defaultMessage: "Email / e-mail" })}
                   required
                   className={`w-full pl-12 pr-4 py-3 border rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 transition-all ${
                     errors.email 
@@ -200,17 +175,17 @@ const handleSubmit = async (e: React.FormEvent) => {
               {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>{ formatMessage({ id: "teacherlogin.loading" })}</span>
+                  <span><FormattedMessage id="login.teacher.loading" defaultMessage="Loading..." /></span>
                 </>
               ) : (
-                <span>{ formatMessage({ id: "teacherlogin.login_button" })}</span>
+                <span><FormattedMessage id="login.teacher.loginButton" defaultMessage="Login" /></span>
               )}
             </button>
 
             {/* Info Text */}
             <div className="bg-green-900 border border-green-600 rounded-lg p-4 text-center">
               <p className="text-white text-sm">
-                Only registered {terminology.teacher.toLowerCase()} members can access this portal. Contact your administrator if you need assistance.
+                <FormattedMessage id="login.teacher.infoText" defaultMessage="Only registered staff members can access this portal. Contact your administrator if you need assistance." />
               </p>
             </div>
 
@@ -221,7 +196,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               className="w-full flex items-center justify-center space-x-2 text-gray-400 hover:text-white transition-colors py-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>{ formatMessage({ id: "teacherlogin.back" })}</span>
+              <span><FormattedMessage id="login.teacher.back" defaultMessage="Back to Home" /></span>
             </button>
           </form>
         </div>

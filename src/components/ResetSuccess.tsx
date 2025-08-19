@@ -1,27 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { Shield, CheckCircle, ArrowRight } from 'lucide-react';
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const ResetSuccess: React.FC = () => {
   const navigate = useNavigate();
-  const { formatMessage: t } = useIntl();
+  const { formatMessage } = useIntl();
   const { locale, setLocale } = useLocalIntl();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [loading, setLoading] = useState(false); // for language selector
-  const currentLanguage = locale || "en";
 
   const handleLoginClick = () => {
     navigate('/admin/login');
-  };
-
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLang = e.target.value;
-    setLoading(true);
-    setLocale(newLang);
-    setTimeout(() => setLoading(false), 300);
   };
 
   if (isLoading) {
@@ -31,7 +23,9 @@ const ResetSuccess: React.FC = () => {
           <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
             <Shield className="w-6 h-6 text-white animate-pulse" />
           </div>
-          <div className="text-xl text-gray-300">Loading...</div>
+          <div className="text-xl text-gray-300">
+            <FormattedMessage id="common.loading" defaultMessage="Loading..." />
+          </div>
         </div>
       </div>
     );
@@ -58,20 +52,12 @@ const ResetSuccess: React.FC = () => {
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Synctuario
+                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
               </span>
             </div>
 
             <div className="flex items-center space-x-4">
-              <select
-                value={currentLanguage}
-                onChange={handleLanguageChange}
-                disabled={loading}
-                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-              >
-                <option value="en" className="text-gray-900">🇺🇸 {t({ id: 'home.english' })}</option>
-                <option value="fr" className="text-gray-900">🇫🇷 {t({ id: 'home.french' })}</option>
-              </select>
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
@@ -87,10 +73,10 @@ const ResetSuccess: React.FC = () => {
 
             <div className="space-y-4">
               <h1 className="text-3xl font-bold text-green-400">
-                {t({ id: 'resetSuccess.title' })}
+                <FormattedMessage id="resetSuccess.title" defaultMessage="Password Reset Successful!" />
               </h1>
               <p className="text-green-200 text-lg">
-                {t({ id: 'resetSuccess.message' })}
+                <FormattedMessage id="resetSuccess.message" defaultMessage="Your password has been updated. You can now log in with your new password." />
               </p>
             </div>
 
@@ -98,13 +84,13 @@ const ResetSuccess: React.FC = () => {
               onClick={handleLoginClick}
               className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-3"
             >
-              <span>{t({ id: 'resetSuccess.loginButton' })}</span>
+              <span><FormattedMessage id="resetSuccess.loginButton" defaultMessage="Login" /></span>
               <ArrowRight className="w-5 h-5" />
             </button>
 
             <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-center">
               <p className="text-green-300 text-sm">
-                {t({ id: 'resetSuccess.additionalInfo' })}
+                <FormattedMessage id="resetSuccess.additionalInfo" defaultMessage="Keep your new password secure and don't share it with anyone." />
               </p>
             </div>
           </div>

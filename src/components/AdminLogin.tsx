@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useTranslation } from "../hooks/useTranslation";
 import { postData, API_BASE, setAuthData } from "../utils/auth";
 
 import { Shield, Eye, EyeOff, ArrowLeft, Loader2, Mail, Lock } from "lucide-react";
@@ -46,7 +45,7 @@ const AdminLogin: React.FC = () => {
     if (!formData.password) {
       newErrors.password = formatMessage({ id: "validation.passwordRequired" });
     } else if (formData.password.length < 6) {
-      newErrors.password = formatMessage({ id: "validation.passwordLength" });
+      newErrors.password = formatMessage({ id: "validation.passwordMinLength" });
     }
 
     setErrors(newErrors);
@@ -89,12 +88,12 @@ const AdminLogin: React.FC = () => {
 
       console.log("Login failed, no token found in response");
       setErrors({
-        general: result.message || formatMessage({ id: "login.error.general" }),
+        general: result.message || "Login failed. Please try again.",
       });
     } catch (error: any) {
       console.error("Login error:", error);
       const message =
-        error?.message || error?.data?.message || formatMessage({ id: "login.error.general" });
+        error?.message || error?.data?.message || "An error occurred. Please try again.";
       setErrors({ general: message });
     } finally {
       setIsLoading(false);
@@ -158,10 +157,7 @@ const AdminLogin: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "login.admin.emailPlaceholder",
-                    defaultMessage: "Email",
-                  })}
+                  placeholder={formatMessage({ id: "login.admin.emailPlaceholder", defaultMessage: "Email" })}
                   required
                   className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
                     errors.email
@@ -182,10 +178,7 @@ const AdminLogin: React.FC = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  placeholder={formatMessage({
-                    id: "login.admin.passwordPlaceholder",
-                    defaultMessage: "Password",
-                  })}
+                  placeholder={formatMessage({ id: "login.admin.passwordPlaceholder", defaultMessage: "Password" })}
                   required
                   className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
                     errors.password
@@ -227,10 +220,7 @@ const AdminLogin: React.FC = () => {
             {/* Links */}
             <div className="space-y-3 text-center text-sm">
               <p className="text-white">
-                <FormattedMessage
-                  id="login.admin.noAccount"
-                  defaultMessage="Don't have an account?"
-                />{" "}
+                <FormattedMessage id="login.admin.noAccount" defaultMessage="Don't have an account?" />{" "}
                 <Link
                   to="/admin/signup"
                   className="font-medium text-green-400 transition-colors hover:text-green-300 hover:underline"
@@ -244,10 +234,7 @@ const AdminLogin: React.FC = () => {
                   to="/admin/forgot-password"
                   className="text-green-400 transition-colors hover:text-green-300 hover:underline"
                 >
-                  <FormattedMessage
-                    id="login.admin.forgotPassword"
-                    defaultMessage="Forgot password?"
-                  />
+                  <FormattedMessage id="login.admin.forgotPassword" defaultMessage="Forgot password?" />
                 </Link>
               </p>
             </div>

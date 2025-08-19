@@ -387,10 +387,7 @@ const AdminSignup: React.FC = () => {
                     type="text"
                     name="schoolname"
                     value={formData.schoolname}
-                    onChange={handleInputChange}
-                    placeholder={formatMessage({
-                      id: "signup.admin.organizationPlaceholder",
-                      defaultMessage: "Organization Name",
+                  placeholder={formatMessage({ id: "signup.admin.organizationPlaceholder", defaultMessage: "Organization Name" })}
                     })}
                     required
                     className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
@@ -441,10 +438,7 @@ const AdminSignup: React.FC = () => {
                 {errors.type && <p className="text-sm text-red-400">{errors.type}</p>}
               </div>
 
-              {/* Username Field */}
-              <div className="space-y-2">
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  placeholder={formatMessage({ id: "signup.admin.usernamePlaceholder", defaultMessage: "Username" })}
                   <input
                     type="text"
                     name="username"
@@ -465,10 +459,7 @@ const AdminSignup: React.FC = () => {
                 {errors.username && <p className="text-sm text-red-400">{errors.username}</p>}
               </div>
 
-              {/* Email Field */}
-              <div className="space-y-2">
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  placeholder={formatMessage({ id: "signup.admin.emailPlaceholder", defaultMessage: "Email" })}
                   <input
                     type="email"
                     name="email"
@@ -498,10 +489,7 @@ const AdminSignup: React.FC = () => {
                       <Flag
                         code={detectedCountry}
                         className="w-5 h-4 rounded-sm border border-white/20"
-                        fallback={<span className="text-xs">🌍</span>}
-                      />
-                    </div>
-                  )}
+                  placeholder={formatMessage({ id: "signup.admin.telephonePlaceholder", defaultMessage: "Phone Number" })}
                   <input
                     type="tel"
                     name="telephone"
@@ -530,10 +518,7 @@ const AdminSignup: React.FC = () => {
                 )}
               </div>
 
-              {/* Password Field */}
-              <div className="space-y-2">
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  placeholder={formatMessage({ id: "signup.admin.passwordPlaceholder", defaultMessage: "Password" })}
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
@@ -555,7 +540,9 @@ const AdminSignup: React.FC = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 transform text-green-400 transition-colors hover:text-green-300"
                   >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                      <span className="text-xs text-gray-400">
+                        <FormattedMessage id="validation.passwordRequirements" defaultMessage="Password Strength:" />
+                      </span>
                   </button>
                 </div>
                 {errors.password && <p className="text-sm text-red-400">{errors.password}</p>}
@@ -582,11 +569,11 @@ const AdminSignup: React.FC = () => {
                             ? "bg-yellow-400"
                             : passwordStrength.score >= 2
                             ? "bg-orange-400"
-                            : "bg-red-400"
-                        }`}
-                        style={{ width: `${(passwordStrength.score / 5) * 100}%` }}
-                      ></div>
-                    </div>
+                        { key: "length", label: formatMessage({ id: "validation.passwordMinChars", defaultMessage: "At least 8 characters" }) },
+                        { key: "uppercase", label: formatMessage({ id: "validation.passwordUppercase", defaultMessage: "One uppercase letter (A-Z)" }) },
+                        { key: "lowercase", label: formatMessage({ id: "validation.passwordLowercase", defaultMessage: "One lowercase letter (a-z)" }) },
+                        { key: "number", label: formatMessage({ id: "validation.passwordNumber", defaultMessage: "One number (0-9)" }) },
+                        { key: "special", label: formatMessage({ id: "validation.passwordSpecial", defaultMessage: "One special character (@$!%*?&)" }) },
                     
                     {/* Requirements Checklist */}
                     <div className="grid grid-cols-1 gap-1 text-xs">
@@ -618,10 +605,7 @@ const AdminSignup: React.FC = () => {
                 )}
               </div>
 
-              {/* Confirm Password Field */}
-              <div className="space-y-2">
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                    placeholder={formatMessage({ id: "signup.admin.confirmPasswordPlaceholder", defaultMessage: "Confirm Password" })}
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
@@ -656,10 +640,7 @@ const AdminSignup: React.FC = () => {
               </div>
 
               {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-green-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
+                      <FormattedMessage id="signup.admin.creatingAccount" defaultMessage="Creating Account..." />
               >
                 {isLoading ? (
                   <>
@@ -673,22 +654,10 @@ const AdminSignup: React.FC = () => {
                   </>
                 ) : (
                   <span>
-                    <FormattedMessage id="signup.admin.submitButton" defaultMessage="Sign Up" />
-                  </span>
-                )}
-              </button>
-            </form>
-
-            {/* Links */}
-            <div className="space-y-3 text-center text-sm">
-              <p className="text-white">
-                <FormattedMessage
+                <FormattedMessage id="signup.admin.alreadyHaveAccount" defaultMessage="Already have an account?" />{" "}
                   id="signup.admin.alreadyHaveAccount"
                   defaultMessage="Already have an account?"
-                />{" "}
-                <Link
-                  to="/admin/login"
-                  className="font-medium text-green-400 transition-colors hover:text-green-300 hover:underline"
+                    <FormattedMessage id="signup.admin.typeCompany" defaultMessage="Company" />
                 >
                   <FormattedMessage id="signup.admin.loginLink" defaultMessage="Login" />
                 </Link>
