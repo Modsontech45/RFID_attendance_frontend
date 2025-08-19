@@ -156,7 +156,7 @@ const HomePage: React.FC = () => {
       clearInterval(interval);
       clearTimeout(adTimer);
     };
-  }, [formatMessage]);
+  }, [t]);
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     changeLanguage(e.target.value);
@@ -175,7 +175,6 @@ const HomePage: React.FC = () => {
       </div>
     );
   }
-  }, [t]);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
@@ -613,7 +612,6 @@ const HomePage: React.FC = () => {
     </button>
   </div>
 </div>
-
       )}
 
       {/* Contact Modal */}
