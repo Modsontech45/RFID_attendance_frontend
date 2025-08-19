@@ -61,14 +61,14 @@ const HomePage: React.FC = () => {
   // Floating comments data
   const getCommentsData = () => {
     return [
-      formatMessage({ id: "home.floating_comments.0", defaultMessage: "✨ Welcome to Synctuario!" }),
-      formatMessage({ id: "home.floating_comments.1", defaultMessage: "🔐 Secure RFID Technology" }),
-      formatMessage({ id: "home.floating_comments.2", defaultMessage: "📊 Real-time Analytics" }),
-      formatMessage({ id: "home.floating_comments.3", defaultMessage: "🚀 Easy Setup & Use" }),
-      formatMessage({ id: "home.floating_comments.4", defaultMessage: "💼 Perfect for Schools & Companies" }),
-      formatMessage({ id: "home.floating_comments.5", defaultMessage: "🎯 99.9% Accuracy Rate" }),
-      formatMessage({ id: "home.floating_comments.6", defaultMessage: "⚡ Lightning Fast Scanning" }),
-      formatMessage({ id: "home.floating_comments.7", defaultMessage: "🌟 Trusted by 500+ Organizations" }),
+      formatMessage({ id: "home.welcome_comments.0", defaultMessage: "✨ Welcome to Synctuario!" }),
+      formatMessage({ id: "home.welcome_comments.1", defaultMessage: "🔐 Secure RFID Technology" }),
+      formatMessage({ id: "home.welcome_comments.2", defaultMessage: "📊 Real-time Analytics" }),
+      formatMessage({ id: "home.welcome_comments.3", defaultMessage: "🚀 Easy Setup & Use" }),
+      formatMessage({ id: "home.welcome_comments.4", defaultMessage: "💼 Perfect for Schools & Companies" }),
+      formatMessage({ id: "home.welcome_comments.5", defaultMessage: "🎯 99.9% Accuracy Rate" }),
+      formatMessage({ id: "home.welcome_comments.6", defaultMessage: "⚡ Lightning Fast Scanning" }),
+      formatMessage({ id: "home.welcome_comments.7", defaultMessage: "🌟 Trusted by 500+ Organizations" }),
     ];
   };
 
