@@ -179,7 +179,7 @@
       "title": "Parfait pour",
       "education": {
         "title": "Institutions éducatives",
-        "features": [
+        "items": [
           "Suivi de présence des étudiants",
           "Gestion d'accès des enseignants",
           "Système de notification des parents"

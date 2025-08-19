@@ -177,7 +177,7 @@
       "title": "Perfect For",
       "education": {
         "title": "Educational Institutions",
-        "features": [
+        "items": [
           "Student attendance tracking",
           "Teacher access management",
           "Parent notification system"
