@@ -17,6 +17,8 @@ const flattenMessages = (
 
       if (typeof value === "string") {
         acc[prefixedKey] = value;
+      } else if (Array.isArray(value)) {
+        acc[prefixedKey] = value.join("|||");
       } else if (typeof value === "object" && value !== null) {
         Object.assign(
           acc,

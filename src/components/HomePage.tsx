@@ -451,7 +451,7 @@ const HomePage: React.FC = () => {
                 <FormattedMessage id="home.useCases.education.title" defaultMessage="Educational Institutions" />
               </h3>
               <ul className="space-y-3 text-gray-300">
-                {formatMessage({ id: "home.useCases.education.features", defaultMessage: [] }).map((feature: string, index: number) => (
+                {(formatMessage({ id: "home.useCases.education.features", defaultMessage: "" }) as string).split('|||').filter(Boolean).map((feature: string, index: number) => (
                   <li key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-400" />
                     <span>{feature}</span>
@@ -466,7 +466,7 @@ const HomePage: React.FC = () => {
                 <FormattedMessage id="home.useCases.corporate.title" defaultMessage="Corporate Offices" />
               </h3>
               <ul className="space-y-3 text-gray-300">
-                {formatMessage({ id: "home.useCases.corporate.features", defaultMessage: [] }).map((feature: string, index: number) => (
+                {(formatMessage({ id: "home.useCases.corporate.features", defaultMessage: "" }) as string).split('|||').filter(Boolean).map((feature: string, index: number) => (
                   <li key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-400" />
                     <span>{feature}</span>
@@ -511,7 +511,7 @@ const HomePage: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-center space-x-8 text-sm text-gray-400">
-            {formatMessage({ id: "home.cta.benefits", defaultMessage: [] }).map((benefit: string, index: number) => (
+            {(formatMessage({ id: "home.cta.benefits", defaultMessage: "" }) as string).split('|||').filter(Boolean).map((benefit: string, index: number) => (
               <div key={index} className="flex items-center space-x-2">
                 <CheckCircle className="h-4 w-4 text-green-400" />
                 <span>{benefit}</span>
