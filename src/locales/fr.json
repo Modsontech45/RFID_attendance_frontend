@@ -230,7 +230,7 @@
       "🎯 Taux de précision de 99,9%",
       "⚡ Scannage ultra-rapide",
       "🌟 Confié par plus de 500 organisations"
-    ]
+    ],
     "welcome_comments": [
       "✨ Bienvenue à Synctuario!",
       "🔐 Technologie RFID Sécurisée",
@@ -240,7 +240,10 @@
       "🎯 Taux de précision de 99,9%",
       "⚡ Scannage ultra-rapide",
       "🌟 Confié par plus de 500 organisations"
-    ],
+    ]
+  },
+  "adminProfile": {
+    "companyInformation": "Informations sur l'entreprise"
   },
   "dashboard": {
     "loading": "Chargement du tableau de bord",
