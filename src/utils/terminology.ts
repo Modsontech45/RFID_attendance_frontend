@@ -148,7 +148,7 @@ export const getTerminology = (organizationType: string): TerminologyMap => {
       monitordevice: 'Monitor your school\'s RFID scanning devices',
       deviceMonetization: 'Monitor and manage your school\'s RFID devices with real-time scanning capabilities',
       devicemanagement: 'School Device Management',
-      companymanagement: 'Company Management',
+      companymanagement: 'School Management',
       studentloading: 'Loading Students...',
       management: 'Management',
       company: 'School',
