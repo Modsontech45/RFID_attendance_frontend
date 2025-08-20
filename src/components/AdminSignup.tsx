@@ -421,7 +421,7 @@ const AdminSignup: React.FC = () => {
                     <option value="">
                       {formatMessage({
                         id: "signup.admin.typePlaceholder",
-                        defaultMessage: "Select Organization Type",
+                        defaultMessage: " Organization Type",
                       })}
                     </option>
                     <option value="school">

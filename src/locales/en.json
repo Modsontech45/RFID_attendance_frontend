@@ -38,7 +38,7 @@
     "admin": {
       "title": "Admin Sign Up",
       "organizationPlaceholder": "Organization Name",
-      "typePlaceholder": "Select Organization Type",
+      "typePlaceholder": "Organization Type",
       "typeSchool": "School",
       "typeCompany": "Company",
       "usernamePlaceholder": "Username",
@@ -311,12 +311,12 @@
   },
   "pricing": {
     "back": "Back ",
-    "school": "School",
-    "title": "Choose the plan that fits your school",
-    "subtitle": "Affordable pricing plans designed to scale with your institution.",
+    "school": "Home",
+    "title": "Choose the plan that fits your school or organization",
+    "subtitle": "Affordable pricing plans designed to scale with your institution or organization.",
     "starter": {
       "title": "Basic",
-      "subtitle": "Perfect for small schools or pilots",
+      "subtitle": "Perfect for small schools or organizations",
       "price": "$35",
       "period": "month",
       "subscribed": "Subscribed",
@@ -331,7 +331,7 @@
       
 
       "features": [
-        "Basic student management",
+        "Basic student or employee management",
         "Limited attendance tracking",
         "Basic analytics dashboard",
         "Email support"
@@ -339,12 +339,12 @@
     },
     "professional": {
       "title": "Professional",
-      "subtitle": "Great for growing institutions",
+      "subtitle": "Great for growing institutions or organizations",
       "price": "$65",
       "period": "month",
       "mostPopular": "Most Popular",
       "features": [
-        "Advanced student management",
+        "Advanced student or employee management",
         "Real-time attendance tracking",
         "Detailed analytics and reporting",
         "Priority email support"
@@ -352,7 +352,7 @@
     },
     "enterprise": {
       "title": "Enterprise",
-      "subtitle": "Best for large or multi-campus setups",
+      "subtitle": "Best for large or multi-campus organizations",
       "price": "$170",
       "period": "month",
       "features": [
@@ -731,11 +731,8 @@
       "schoolInformation": "School Information",
       "username": "Admin Username",
       "cardbalance": "Card Balance",
-      "days": "Days"
-
-
-
-
+      "days": "Days",
+      "subscriptionInfo": "Subscription Information"
     },
 
     "reports":{

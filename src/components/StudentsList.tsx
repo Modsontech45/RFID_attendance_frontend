@@ -266,7 +266,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                         {formatMessage({ id: "students.loading.students" })}
+                         {terminology.studentloading}
             </div>
             <div className="flex justify-center space-x-1">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
@@ -326,7 +326,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
+                    {terminology.companymanagement}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -419,7 +419,7 @@ let subscription =   adminData?.subscription_status || 'inactive';
                 onClick={() => navigate('/admin/school')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-               {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
+               {terminology.companymanagement}
               </button>
               <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-green-400">
                 {formatMessage({ id: "students.navigation.students" })}
@@ -482,11 +482,11 @@ let subscription =   adminData?.subscription_status || 'inactive';
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-                 All Registered {terminology.studentPlural}
+                 {terminology.allRegisteredWorkers}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Manage and monitor your {terminology.student.toLowerCase()} database with comprehensive tools
+              {terminology.manageWorkers}
             </p>
           </div>
         </section>
@@ -495,8 +495,8 @@ let subscription =   adminData?.subscription_status || 'inactive';
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
             { icon: Users, label: `Total ${terminology.studentPlural}`, value: totalStudents.toString(), color: "from-green-500 to-emerald-500" },
-            { icon: UserCheck, label: `Male ${terminology.studentPlural}`, value: `${maleCount} (${malePercent}%)`, color: "from-blue-500 to-cyan-500" },
-            { icon: Activity, label: `Female ${terminology.studentPlural}`, value: `${femaleCount} (${femalePercent}%)`, color: "from-purple-500 to-pink-500" },
+            { icon: UserCheck, label: `${terminology.male}`, value: `${maleCount} (${malePercent}%)`, color: "from-blue-500 to-cyan-500" },
+            { icon: Activity, label: `${terminology.female}`, value: `${femaleCount} (${femalePercent}%)`, color: "from-purple-500 to-pink-500" },
            { icon: BarChart3, label: formatMessage({ id: "students.stats.formsClasses" }), value: (categories?.length || 0).toString(), color: "from-orange-500 to-red-500" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">

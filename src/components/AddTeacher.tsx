@@ -134,7 +134,7 @@ const AddTeacher: React.FC = () => {
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-              Loading Add Teacher
+              {terminology.loading}
             </div>
             <div className="flex justify-center space-x-1">
               <div
@@ -227,10 +227,10 @@ const AddTeacher: React.FC = () => {
                 <UserPlus className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Add New {terminology.teacher}
+                {terminology.AddCoManager}
               </h1>
               <p className="text-green-200 text-sm">
-                Enter the email address of the {terminology.teacher.toLowerCase()} you want to add
+                {terminology.coManagerEmail}
               </p>
             </div>
 
@@ -257,7 +257,7 @@ const AddTeacher: React.FC = () => {
               {/* Email Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-green-300">
-                  {terminology.teacher} Email Address
+                  {terminology.coManager} 
                 </label>
                 <div className="relative">
                   <input
@@ -272,7 +272,7 @@ const AddTeacher: React.FC = () => {
                   />
                 </div>
                 <p className="text-xs text-green-300 mt-1">
-                  The {terminology.teacher.toLowerCase()} will receive an email invitation to join
+                  {terminology.receiveEmail} 
                 </p>
               </div>
 
@@ -294,7 +294,7 @@ const AddTeacher: React.FC = () => {
                   <>
                     <Send className="w-5 h-5" />
                     <span>
-                      Add {terminology.teacher}
+                        {terminology.add}{terminology.teacher}
                     </span>
                   </>
                 )}
@@ -306,7 +306,7 @@ const AddTeacher: React.FC = () => {
               <div className="flex items-center justify-center space-x-2 text-green-300 text-sm">
                 <Users className="w-4 h-4" />
                 <span>
-                  The {terminology.teacher.toLowerCase()} will receive an email invitation to join
+                  {terminology.receiveEmail} 
                 </span>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getAdminData, logout } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
+import { useTerminology } from "../utils/terminology";
 import {
   CreditCard,
   User,
@@ -30,7 +31,7 @@ const SettingsComponent: React.FC = () => {
   const plan = adminData?.subscription_plan || "unknown";
   const PlanType = adminData?.subscription_type || "Monthly";
   const subscriptionStatus = adminData?.subscription_status || "trial";
-
+  const terminology = useTerminology(adminData);
 
 
   let PlanStartDate = "" //adminData?.subscription_start_date // ||  subscriptionStatus === "trial" ? adminData?.trial_start_date :adminData?.subscription_start_date;
@@ -229,18 +230,10 @@ const SettingsComponent: React.FC = () => {
               <div className="flex items-center space-x-3 mb-4">
                 <Building className="h-6 w-6 text-blue-400" />
                 <h3 className="text-lg font-semibold">
-                  {adminData?.type === 'company' ? 'Company Information' : (
-                    <FormattedMessage
-                      id="AdminProfile.schoolInformation"
-                      defaultMessage="School Information"
-                    />
-                  )}
+                  {terminology.companyInfo}
                 </h3>
               </div>
-              <Info label={<FormattedMessage
-                          id="AdminProfile.schoolName"
-                          defaultMessage="School Name"
-                        />} icon={<GraduationCap className="h-4 w-4 text-gray-400" />} value={SchoolName} />
+              <Info label={terminology.companyName} icon={<GraduationCap className="h-4 w-4 text-gray-400" />} value={SchoolName} />
               <Info label={<FormattedMessage
                           id="AdminProfile.username"
                           defaultMessage="Admin Username"
@@ -270,10 +263,7 @@ const SettingsComponent: React.FC = () => {
                           id="AdminProfile.daysLeft"
                           defaultMessage="Days Left"
                         />} value={`${daysLeft}`} />
-              <SummaryRow label={<FormattedMessage
-                          id={adminData?.type === 'company' ? "AdminProfile.companyName" : "AdminProfile.schoolName"}
-                          defaultMessage={adminData?.type === 'company' ? "Company" : "School"}
-                        />} value={SchoolName} />
+              <SummaryRow label={terminology.companyName} value={SchoolName} />
             </div>
           </div>
         </div>

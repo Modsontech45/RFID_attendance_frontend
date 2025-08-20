@@ -27,13 +27,12 @@ import {
   TrendingUp,
   Activity,
   Menu,
-  X,
-  Eye,
-  PieChart
+  X
+ 
 } from 'lucide-react';
-import { FormattedMessage, useIntl } from "react-intl";
+import {  useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
-
+import { useTerminology } from "../utils/terminology";
 interface AttendanceRecord {
   id: number;
   date: string;
@@ -86,7 +85,7 @@ const TeacherAttendance: React.FC = () => {
   const token = getAuthData('token');
   const apiKey = getApiKey();
   const adminData = getAdminData();
-  
+   const terminology = useTerminology(adminData);
   // Extract admin info with fallbacks
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
   const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
@@ -391,7 +390,7 @@ const initializeData = async () => {
               >
                 <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
                   <Users className="w-4 h-4" />
-                  <span>    {formatMessage({ id: "attendance.students" })}</span>
+                  <span>    {terminology.studentPlural}</span>
                 </span>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
               </button>
@@ -448,7 +447,7 @@ const initializeData = async () => {
               >
                 <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
                   <Users className="w-4 h-4" />
-                  <span> {formatMessage({ id: "students.navigation.students" })}</span>
+                  <span> {terminology.studentPlural}</span>
                 </span>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
               </button>
@@ -724,8 +723,8 @@ const initializeData = async () => {
                     <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
                       <BarChart3 className="w-12 h-12 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">No Attendance Records Found</h3>
-                    <p className="text-gray-400">Try adjusting your search or filter criteria</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">{terminology.noAttendanceRecords}</h3>
+                    <p className="text-gray-400">{terminology.criteria}</p>
                   </div>
                 )}
               </div>

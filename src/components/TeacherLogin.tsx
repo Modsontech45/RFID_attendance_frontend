@@ -154,10 +154,10 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <Users className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
-              {terminology.teacher} Login
+              {terminology.coWorkerLogin} 
               </h1>
               <p className="text-white text-sm">
-                Enter your email address to access your account
+                {terminology.accessAccount}
               </p>
             </div>
 
@@ -210,7 +210,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             {/* Info Text */}
             <div className="bg-green-900 border border-green-600 rounded-lg p-4 text-center">
               <p className="text-white text-sm">
-                Only registered {terminology.teacher.toLowerCase()} members can access this portal. Contact your administrator if you need assistance.
+                {terminology.note}
               </p>
             </div>
 

@@ -503,7 +503,7 @@ const initializeData = async () => {
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                  {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
+                  {terminology.companymanagement}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -582,7 +582,7 @@ const initializeData = async () => {
                 onClick={() => navigate('/admin/school')}
                 className="w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
               >
-                  {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
+                  {terminology.companymanagement}
               </button>
               <button 
                 onClick={() => navigate('/admin/students')}
@@ -627,11 +627,11 @@ const initializeData = async () => {
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-                Attendance Analysis
+                [{terminology.workersAnalytics}]
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Monitor and analyze {terminology.student.toLowerCase()} attendance with real-time insights and comprehensive reporting
+              {terminology.monitorAttendance}
             </p>
           </div>
         </section>

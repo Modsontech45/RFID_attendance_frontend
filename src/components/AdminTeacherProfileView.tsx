@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getAuthData, API_BASE } from '../utils/auth';
+import { getAuthData, API_BASE, getAdminData } from '../utils/auth';
 import { Mail, Calendar, CheckCircle, ArrowLeft, Trash2, AlertTriangle } from 'lucide-react';
-
+import { useTerminology } from "../utils/terminology";
 interface TeacherData {
   full_name: string;
   email: string;
@@ -20,7 +20,8 @@ const AdminTeacherProfileView: React.FC = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const token = getAuthData('token');
   const role = getAuthData('role');
-
+   const adminData = getAdminData();
+ const terminology = useTerminology(adminData);
   useEffect(() => {
     if (!token || role !== 'admin') {
       navigate('/admin/login');
@@ -83,7 +84,7 @@ const AdminTeacherProfileView: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
         <div className="text-center space-y-4">
           <div className="w-12 h-12 border-4 border-green-500 border-dashed rounded-full animate-spin mx-auto"></div>
-          <p className="text-lg font-semibold">Loading teacher profile...</p>
+          <p className="text-lg font-semibold">{terminology.loading}</p>
         </div>
       </div>
     );
@@ -93,7 +94,7 @@ const AdminTeacherProfileView: React.FC = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
         <div className="text-center space-y-4">
-          <p className="text-xl font-bold">Teacher not found</p>
+          <p className="text-xl font-bold">{terminology.teacherNotFound}</p>
           <button
             onClick={() => navigate('/admin/dashboard')}
             className="mt-4 inline-flex items-center px-5 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition"
@@ -115,7 +116,7 @@ const AdminTeacherProfileView: React.FC = () => {
           className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-lg backdrop-blur-lg transition-all text-white shadow-lg"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Go Home</span>
+          <span>{terminology.goHome}</span>
         </button>
       </div>
 
@@ -127,10 +128,9 @@ const AdminTeacherProfileView: React.FC = () => {
               <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto">
                 <AlertTriangle className="w-8 h-8 text-red-400" />
               </div>
-              <h3 className="text-xl font-bold text-white">Delete Teacher</h3>
+              <h3 className="text-xl font-bold text-white">{terminology.deleteTeacher}</h3>
               <p className="text-gray-300">
-                Are you sure you want to delete <span className="font-semibold text-white">{teacherData.full_name}</span>? 
-                This action cannot be undone.
+                {terminology.warning}
               </p>
               <div className="flex space-x-3 pt-4">
                 <button
@@ -138,7 +138,7 @@ const AdminTeacherProfileView: React.FC = () => {
                   disabled={isDeleting}
                   className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition disabled:opacity-50"
                 >
-                  Cancel
+                  {terminology.cancel}
                 </button>
                 <button
                   onClick={handleDeleteTeacher}
@@ -148,7 +148,7 @@ const AdminTeacherProfileView: React.FC = () => {
                   {isDeleting ? (
                     <div className="w-4 h-4 border-2 border-white border-dashed rounded-full animate-spin"></div>
                   ) : (
-                    'Delete'
+                    terminology.delete
                   )}
                 </button>
               </div>
@@ -166,7 +166,7 @@ const AdminTeacherProfileView: React.FC = () => {
           />
           <div className="inline-flex items-center space-x-2 justify-center">
             <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-              {teacherData.full_name || 'Unnamed Teacher'}
+              {teacherData.full_name || terminology.workerUsername}
             </h1>
             <CheckCircle className="w-6 h-6 text-green-400" />
           </div>
@@ -178,11 +178,11 @@ const AdminTeacherProfileView: React.FC = () => {
 
           <div className="flex justify-center items-center space-x-2 text-gray-400">
             <Calendar className="w-4 h-4" />
-            <span>Joined {formatDate(teacherData.created_at)}</span>
+            <span>{terminology.joined} {formatDate(teacherData.created_at)}</span>
           </div>
 
           <div className="mt-6 bg-black/30 p-4 rounded-lg whitespace-pre-line border border-white/20 text-gray-300 leading-relaxed text-sm sm:text-base">
-            {teacherData.bio || 'No bio available.'}
+            {teacherData.bio || terminology.noBio}
           </div>
 
           {/* Delete Button */}
@@ -192,7 +192,7 @@ const AdminTeacherProfileView: React.FC = () => {
               className="inline-flex items-center space-x-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all shadow-lg hover:shadow-red-500/25"
             >
               <Trash2 className="w-4 h-4" />
-              <span>Delete Teacher</span>
+              <span>{terminology.deleteTeacher}</span>
             </button>
           </div>
         </div>

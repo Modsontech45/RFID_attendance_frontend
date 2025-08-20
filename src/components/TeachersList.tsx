@@ -148,7 +148,7 @@ const { locale } = useLocalIntl();
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-              Loading Teachers
+              {terminology.loading}
             </div>
             <div className="flex justify-center space-x-1">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
@@ -235,11 +235,11 @@ const { locale } = useLocalIntl();
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
-              Your {terminology.teacherPlural}
+              {terminology.teacherPlural}
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Manage and monitor your {terminology.teacher.toLowerCase()} staff with comprehensive tools
+              {terminology.manageWorkers} 
             </p>
           </div>
         </section>
@@ -278,7 +278,7 @@ const { locale } = useLocalIntl();
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
-                    placeholder={formatMessage({ id: "teachersList.searchTeachers" })}
+                    placeholder={terminology.searchWorkers}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10 pr-4 py-3 bg-black/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 w-64"
@@ -325,7 +325,7 @@ const { locale } = useLocalIntl();
                   className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>Add {terminology.teacher}</span>
+                  <span>{terminology.add} {terminology.teacher}</span>
                 </button>
               </div>
             </div>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import { useTranslation } from '../hooks/useTranslation';
 import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
 import SubscriptionCard from './SubscriptionModal';
+import { useTerminology } from "../utils/terminology";
 import { 
   Shield, 
   BarChart3,
@@ -103,6 +104,7 @@ const ReportsPage: React.FC = () => {
   const token = getAuthData('token');
   const apiKey = getApiKey();
   const adminData = getAdminData();
+   const terminology = useTerminology(adminData);
   
   // Extract admin info with fallbacks
   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'Synctuario Academy';
@@ -459,7 +461,7 @@ const subscription = adminData?.subscription_status;
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Loading Reports
+              {terminology.loadingReports}
             </div>
             <div className="flex justify-center space-x-1">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
@@ -519,7 +521,7 @@ const subscription = adminData?.subscription_status;
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                    {adminData?.type === 'company' ? 'Company Management' : formatMessage({ id: "schoolManagement.schoolManagement" })}
+                    {terminology.companymanagement}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>
@@ -528,7 +530,7 @@ const subscription = adminData?.subscription_status;
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
                 >
                   <span className="text-gray-300 group-hover:text-white transition-colors">
-                  {formatMessage({ id: "attendance.students" })}
+                  {terminology.studentPlural}
                   </span>
                   <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
                 </button>

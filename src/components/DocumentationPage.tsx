@@ -26,8 +26,10 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import { FormattedMessage, useIntl } from "react-intl";
-import LanguageSwitcher from "./LanguageSwitcher";
+import { FormattedMessage } from "react-intl";
+import { useTerminology } from "../utils/terminology";
+import { getAdminData } from "../utils/auth";
+
 
 const arduinoCode = `#include <WiFi.h>
 #include <SPI.h>
@@ -371,6 +373,8 @@ const DocumentationPage: React.FC = () => {
   );
   const [copiedCode, setCopiedCode] = useState<string>("");
   const [showApiKey, setShowApiKey] = useState(false);
+  const adminData = getAdminData();
+  const terminology = useTerminology(adminData);
 
   useEffect(() => {
     // Simulate loading translations or other data
@@ -943,16 +947,10 @@ const DocumentationPage: React.FC = () => {
             >
               <Users className="mx-auto mb-3 h-8 w-8 text-green-400" />
               <h3 className="mb-2 font-semibold text-white">
-                <FormattedMessage
-                  id="documentation.quickLinks.teacherPortal"
-                  defaultMessage="Teacher Portal"
-                />
+               {terminology.workerBoard}
               </h3>
               <p className="text-sm text-gray-300">
-                <FormattedMessage
-                  id="documentation.quickLinks.teacherDescription"
-                  defaultMessage="Access the teacher dashboard"
-                />
+               {terminology.workerPortal}
               </p>
             </button>
 
