@@ -12,9 +12,6 @@ import {
   Clock,
   CheckCircle,
   AlertCircle,
-  Settings,
-  Bell,
-  LogOut,
   Menu,
   X,
   Loader2,
@@ -840,7 +837,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ devic
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState('');
   const { formatMessage } = useIntl();
-
+ const adminData = getAdminData();
+  const terminology = useTerminology(adminData);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
