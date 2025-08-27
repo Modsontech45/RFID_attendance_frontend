@@ -315,6 +315,7 @@
     "title": "Choose the plan that fits your school or organization",
     "subtitle": "Affordable pricing plans designed to scale with your institution or organization.",
     "starter": {
+      "renew": "Renew",
       "title": "Basic",
       "subtitle": "Perfect for small schools or organizations",
       "price": "$35",
@@ -609,6 +610,8 @@
   }
 } ,
 "attendance":{
+  "punctuality": "Punctuality",
+  "statistics": "Statistics",
   "office":"Office",
   "home":"Home",
   "students":"Students",

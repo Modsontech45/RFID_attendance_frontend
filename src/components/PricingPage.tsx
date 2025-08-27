@@ -306,6 +306,8 @@ const PricingPage: React.FC = () => {
                     ? "pricing.starter.downgrade"
                     : plans === "starter" && planstatus === "active"
                       ? "pricing.starter.subscribed"
+                      : plans === "starter" && planstatus === "expired"
+                        ? "pricing.starter.renew"
                       : "pricing.starter.getStarted"
                 }`}
                 defaultMessage="pricing.starter.downgrade"
@@ -400,15 +402,17 @@ const PricingPage: React.FC = () => {
             >
               <FormattedMessage
                 id={
-                  plans === "professional"
+                  plans === "professional" && planstatus === "active"
                     ? "pricing.starter.subscribed"
                     : plans === "starter"
                       ? "pricing.starter.upgrade"
                       : plans === "enterprise"
                         ? "pricing.starter.downgrade"
+                        : plans === "professional" && planstatus === "expired"
+                        ? "pricing.starter.renew"
                         : "pricing.starter.getStarted"
                 }
-                defaultMessage="Get Started"
+               
               />
             </button>
           </div>
@@ -494,7 +498,7 @@ const PricingPage: React.FC = () => {
   `}
             >
               <FormattedMessage
-                id={`${plans === "enterprise" ? "pricing.starter.subscribed" : plans === "professional" ? "pricing.starter.upgrade" : plans === "starter" ? "pricing.starter.upgrade" : "pricing.starter.getStarted"}`}
+                id={`${plans === "enterprise" && planstatus === "active" ? "pricing.starter.subscribed" : plans === "professional" && planstatus === "active" ? "pricing.starter.upgrade" : plans === "enterprise" && planstatus === "expired" ? "pricing.starter.renew" : plans === "starter" && planstatus === "active" ? "pricing.starter.upgrade" : "pricing.starter.getStarted"}`}
                 defaultMessage="Contact Sales"
               />
             </button>

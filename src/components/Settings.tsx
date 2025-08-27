@@ -46,14 +46,22 @@ const SettingsComponent: React.FC = () => {
     PlanEndDate = adminData?.subscription_end_date
     PlanStartDate = adminData?.subscription_start_date
   }
+  else if (subscriptionStatus === "expired") {
+    PlanStartDate = adminData?.subscription_start_date
+    PlanEndDate = adminData?.subscription_end_date
+  }
 
 
-
+// if daysLeft is negative, set it to 0
   const daysLeft =  Math.ceil((new Date(PlanEndDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+  let resdays = daysLeft;
+  if (daysLeft < 0) {
+    resdays = 0;
+  } 
   const Email = adminData?.email || "admin@centralhigh.edu";
   const datejoin = adminData?.created_at || "2024-01-15";
   let MoneyPaid = 0
-  const daypercentage = Math.max((daysLeft / 31) * 100, 5)
+  const daypercentage = Math.max((resdays * 100) / 31)
   if (plan === "starter" && subscriptionStatus !== "trial") {
     MoneyPaid = 35;
   } else if (plan === "professional") {
@@ -184,7 +192,7 @@ const SettingsComponent: React.FC = () => {
                 <Info label={<FormattedMessage
                           id="AdminProfile.daysLeft"
                           defaultMessage="Days Left"
-                        />} icon={<Clock className="h-5 w-5 text-gray-400" />} value={`${daysLeft} ${formatMessage({ id: "AdminProfile.days" })}`} className={getDaysLeftColor(daysLeft)} />
+                        />} icon={<Clock className="h-5 w-5 text-gray-400" />} value={`${resdays} ${formatMessage({ id: "AdminProfile.days" })}`} className={getDaysLeftColor(resdays)} />
                 <Info label={<FormattedMessage
                           id="AdminProfile.joinedOn"
                           defaultMessage="Joined On"
@@ -206,7 +214,7 @@ const SettingsComponent: React.FC = () => {
                           id="AdminProfile.Subscriptionprogress"
                           defaultMessage="  Subscription Progress"
                         /></span>
-                  <span>{daysLeft} <FormattedMessage
+                  <span>{resdays} <FormattedMessage
                           id="AdminProfile.daysremaining"
                           defaultMessage="Days remaining"
                         /></span>
@@ -214,9 +222,9 @@ const SettingsComponent: React.FC = () => {
                 <div className="w-full bg-gray-700 rounded-full h-2">
                   <div
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      daysLeft > 20 ? "bg-green-500" : daysLeft > 10 ? "bg-yellow-500" : "bg-red-500"
+                      resdays > 20 ? "bg-green-500" : resdays > 10 ? "bg-yellow-500" : "bg-red-500"
                     }`}
-                    style={{ width: `${Math.max((daysLeft / 31) * 100, 5)}%` }}
+                    style={{ width: `${Math.max((resdays / 31) * 100)}%` }}
                   ></div>
                 </div>
               </div>
@@ -262,7 +270,7 @@ const SettingsComponent: React.FC = () => {
               <SummaryRow label={<FormattedMessage
                           id="AdminProfile.daysLeft"
                           defaultMessage="Days Left"
-                        />} value={`${daysLeft}`} />
+                        />} value={`${resdays}`} />
               <SummaryRow label={terminology.companyName} value={SchoolName} />
             </div>
           </div>
