@@ -301,20 +301,20 @@
       }
     },
     "quickLinks": {
-  "title": "Liens Rapides",
-  "adminPortal": "Portail Administrateur",
-  "adminDescription": "Accéder au tableau de bord administrateur",
-  "teacherPortal": "Portail Enseignant",
-  "teacherDescription": "Accéder au tableau de bord enseignant",
-  "getStarted": "Commencer",
-  "freeplan": "Plan Gratuit",
-  "subscribeNow": "S'abonner Maintenant",
-  "pricingDescription": "Voir les tarifs et les plans"
-}
+      "title": "Liens Rapides",
+      "adminPortal": "Portail Administrateur",
+      "adminDescription": "Accéder au tableau de bord administrateur",
+      "teacherPortal": "Portail Enseignant",
+      "teacherDescription": "Accéder au tableau de bord enseignant",
+      "getStarted": "Commencer",
+      "freeplan": "Plan Gratuit",
+      "subscribeNow": "S'abonner Maintenant",
+      "pricingDescription": "Voir les tarifs et les plans"
+    }
   },
   "pricing": {
-      "back": "Retour",
-        "school": "Maison",
+    "back": "Retour",
+    "school": "Maison",
     "title": "Tarification scolaire ou entreprise",
     "subtitle": "Choisissez le plan parfait pour votre école ou entreprise. Tous les plans incluent notre système de présence RFID complet avec surveillance en temps réel et rapports complets.",
     "starter": {
@@ -642,9 +642,9 @@
     "title": "Analyse de la Présence",
     "subtitle": "Surveillez et analysez la présence des membres avec des informations en temps réel et des rapports complets",
     "stats": {
-      "totalStudents": "Total Étudiants",
-      "presentToday": "Présents Aujourd'hui",
-      "absentToday": "Absents Aujourd'hui",
+      "totalStudents": "Total d'enregistrements",
+      "presentToday": "Présents ",
+      "absentToday": "Absents ",
       "attendanceRate": "Taux de Présence",
       "partial": "Partiel"
     },
@@ -695,81 +695,78 @@
     "filter": "Filtrer",
     "export": "Exporter",
     "addTeacher": "Ajouter un Enseignant",
-    "unnamedTeacher":"Personnel Non Nommé",
+    "unnamedTeacher": "Personnel Non Nommé",
     "joined": "Rejoint le ",
-    "view":"Voir",
-    "nobio":"Pas de bio disponible"
-
-    
+    "view": "Voir",
+    "nobio": "Pas de bio disponible"
   },
   "addTeacher": {
-  "title": "Ajouter un nouvel enseignant",
-  "subtitle": "Entrez l'adresse e-mail de l'enseignant que vous souhaitez ajouter",
-  "emailLabel": "Adresse e-mail de l'enseignant",
-  "emailPlaceholder": "enseignant@exemple.com",
-  "submitButton": "Ajouter un enseignant",
-  "adding": "Ajout de l'enseignant...",
-  "infoText": "L'enseignant recevra une invitation par e-mail pour rejoindre",
-  "goBack": "Retour au tableau de bord",
-  "dashboard": "Retour"
-},
- "teacherlogin": {
-      "title": "Connexion Des enseignants",
-      "subtitle": "Entrez votre adresse e-mail pour accéder à votre compte",
-      "email_placeholder": "Email / e-mail",
-      "login_button": "Se connecter",
-      "info_text": "Seuls les membres du personnel enregistrés peuvent accéder à ce portail. Contactez votre administrateur si vous avez besoin d'aide.",
-      "back": "Retour à l'accueil",
-      "loading": "En cours..."
-
-    },
-    "AdminProfile": {
-  "loading": "Chargement du profil...",
-  "error": "Une erreur s'est produite lors du chargement de votre profil 🙏😢",
-  "title": "Profil Administrateur",
-  "back": "Retour au tableau de bord",
-  "logout": "Déconnexion",
-  "subInfo": "Informations sur l'abonnement",
-  "subscriptionPlan": "Formule d'abonnement",
-  "subscriptionType": "Type d'abonnement",
-  "schoolName": "Nom de l'établissement",
-  "createdAt": "Compte créé le",
-  "daysLeft": "Jours restants dans l'abonnement",
-  "joinedOn": "Inscrit le",
-  "startDate": "Date de début",
-  "endDate": "Date de fin",
-  "Subscriptionprogress": "Progression de l'abonnement",
-  "daysremaining": "Jours restants",
-  "status": "Statut",
-  "schoolInformation": "Informations sur l'établissement",
-  "username": "Nom d'utilisateur administrateur",
-  "cardbalance": "Solde de la carte: ",
-  "days": "Jours",
-  "subscriptionInfo": "Informations sur l'abonnement"
-},
-"reports":{
-  "reports.title": "Analytique et Rapports",
-  "reports.subtitle": "Informations complètes et rapports détaillés pour votre système de gestion de présence",
-  "filters.startDate": "Date de début: ",
-  "filters.endDate": "Date de fin: ",
-  "filters.form": "Classe/Formulaire",
-  "filters.allForms": "Toutes les classes",
-  "filters.apply": "Appliquer les filtres",
-  "filters.refresh": "Rafraîchir",
-  "stats.totalStudents": "Nombre total d'élèves",
-  "stats.totalTeachers": "Nombre total d'enseignants",
-  "stats.attendanceRate": "Taux de présence",
-  "stats.totalRecords": "Nombre total d'enregistrements",
-  "charts.attendanceRate": "Taux de présence",
-  "charts.formStatistics": "Statistiques par classe",
-  "charts.monthlyTrends": "Tendances mensuelles",
-  "download.title": "Télécharger les rapports",
-  "download.subtitle": "Générez et téléchargez des rapports complets dans le format de votre choix",
-  "download.pdf": "Télécharger le rapport PDF",
-  "download.excel": "Télécharger le rapport Excel",
-  "download.generating": "Génération de votre rapport... Cela peut prendre quelques instants."
-},
- "profile": {
+    "title": "Ajouter un nouvel enseignant",
+    "subtitle": "Entrez l'adresse e-mail de l'enseignant que vous souhaitez ajouter",
+    "emailLabel": "Adresse e-mail de l'enseignant",
+    "emailPlaceholder": "enseignant@exemple.com",
+    "submitButton": "Ajouter un enseignant",
+    "adding": "Ajout de l'enseignant...",
+    "infoText": "L'enseignant recevra une invitation par e-mail pour rejoindre",
+    "goBack": "Retour au tableau de bord",
+    "dashboard": "Retour"
+  },
+  "teacherlogin": {
+    "title": "Connexion Des enseignants",
+    "subtitle": "Entrez votre adresse e-mail pour accéder à votre compte",
+    "email_placeholder": "Email / e-mail",
+    "login_button": "Se connecter",
+    "info_text": "Seuls les membres du personnel enregistrés peuvent accéder à ce portail. Contactez votre administrateur si vous avez besoin d'aide.",
+    "back": "Retour à l'accueil",
+    "loading": "En cours..."
+  },
+  "AdminProfile": {
+    "loading": "Chargement du profil...",
+    "error": "Une erreur s'est produite lors du chargement de votre profil 🙏😢",
+    "title": "Profil Administrateur",
+    "back": "Retour au tableau de bord",
+    "logout": "Déconnexion",
+    "subInfo": "Informations sur l'abonnement",
+    "subscriptionPlan": "Formule d'abonnement",
+    "subscriptionType": "Type d'abonnement",
+    "schoolName": "Nom de l'établissement",
+    "createdAt": "Compte créé le",
+    "daysLeft": "Jours restants dans l'abonnement",
+    "joinedOn": "Inscrit le",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "Subscriptionprogress": "Progression de l'abonnement",
+    "daysremaining": "Jours restants",
+    "status": "Statut",
+    "schoolInformation": "Informations sur l'établissement",
+    "username": "Nom d'utilisateur administrateur",
+    "cardbalance": "Solde de la carte: ",
+    "days": "Jours",
+    "subscriptionInfo": "Informations sur l'abonnement"
+  },
+  "reports": {
+    "reports.title": "Analytique et Rapports",
+    "reports.subtitle": "Informations complètes et rapports détaillés pour votre système de gestion de présence",
+    "filters.startDate": "Date de début: ",
+    "filters.endDate": "Date de fin: ",
+    "filters.form": "Classe/Formulaire",
+    "filters.allForms": "Toutes les classes",
+    "filters.apply": "Appliquer les filtres",
+    "filters.refresh": "Rafraîchir",
+    "stats.totalStudents": "Nombre total d'élèves",
+    "stats.totalTeachers": "Nombre total d'enseignants",
+    "stats.attendanceRate": "Taux de présence",
+    "stats.totalRecords": "Nombre total d'enregistrements",
+    "charts.attendanceRate": "Taux de présence",
+    "charts.formStatistics": "Statistiques par classe",
+    "charts.monthlyTrends": "Tendances mensuelles",
+    "download.title": "Télécharger les rapports",
+    "download.subtitle": "Générez et téléchargez des rapports complets dans le format de votre choix",
+    "download.pdf": "Télécharger le rapport PDF",
+    "download.excel": "Télécharger le rapport Excel",
+    "download.generating": "Génération de votre rapport... Cela peut prendre quelques instants."
+  },
+  "profile": {
     "backtoschool": "Retour",
     "loading": "Chargement du profil...",
     "edit": "Modifier le profil",
@@ -798,16 +795,16 @@
     }
   },
   "settime": {
-  "header": "Paramètres d'heure d'entrée / de sortie",
-  "start": "Début de l'entrée :",
-  "startEnd": "Fin de l'entrée :",
-  "endstart": "Début de la sortie :",
-  "end:": "Fin de la sortie :",
-  "modifier": "Modifier",
-  "save": "Ok",
-  "cancel": "Annuler",
-  "home":"Accueil"
-},
+    "header": "Paramètres d'heure d'entrée / de sortie",
+    "start": "Début de l'entrée :",
+    "startEnd": "Fin de l'entrée :",
+    "endstart": "Début de la sortie :",
+    "end:": "Fin de la sortie :",
+    "modifier": "Modifier",
+    "save": "Ok",
+    "cancel": "Annuler",
+    "home": "Accueil"
+  },
   "forgotPassword": {
     "title": "Réinitialiser votre mot de passe",
     "subtitle": "Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe",
@@ -816,29 +813,29 @@
     "remember_password": "Vous vous souvenez de votre mot de passe ?",
     "back_to_login": "Retour à la connexion"
   },
-    "resetPassword": {
+  "resetPassword": {
     "title": "Définir un nouveau mot de passe",
     "subtitle": "Entrez votre nouveau mot de passe ci-dessous",
     "new_password_placeholder": "Nouveau mot de passe",
     "confirm_password_placeholder": "Confirmer le mot de passe",
     "reset_button": "Réinitialiser le mot de passe",
     "resetting": "réinitialisation en cours...",
-  "back": "Retour à la demande de réinitialisation du mot de passe"
+    "back": "Retour à la demande de réinitialisation du mot de passe"
   },
-   "resetSuccess": {
+  "resetSuccess": {
     "title": "Réinitialisation du mot de passe réussie !",
     "message": "Votre mot de passe a été mis à jour. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
     "loginButton": "Se connecter",
     "additionalInfo": "Gardez votre nouveau mot de passe en sécurité et ne le partagez avec personne."
   },
-   "emailSent": {
+  "emailSent": {
     "title": "Vérifiez votre boîte de réception",
     "message1": "Nous avons envoyé un lien de vérification à votre email.",
     "message2": "Veuillez confirmer pour continuer.",
     "backToSignup": "Retour à l'inscription",
     "additionalInfo": "Vous n'avez pas reçu l'email ? Vérifiez votre dossier spam ou essayez de vous inscrire à nouveau."
   },
-   "emailVerification": {
+  "emailVerification": {
     "title": "Vérification d'email",
     "verifying": "Vérification de votre email...",
     "goToLogin": "Aller à la connexion",
@@ -847,7 +844,4 @@
     "successInfo": "Votre compte est maintenant actif et prêt à être utilisé.",
     "errorInfo": "Veuillez vérifier votre email pour un nouveau lien de vérification ou contactez le support."
   }
-
-
-
 }

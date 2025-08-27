@@ -335,7 +335,13 @@ const Attendance: React.FC = () => {
   };
 
   const handleFilterChange = (key: string, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
+    setFilters((prev) => {
+      // if user is applying ANY filter manually, clear out today's date
+      if (key !== "date") {
+        return { ...prev, [key]: value, date: "" };
+      }
+      return { ...prev, [key]: value };
+    });
   };
 
   const downloadAsPDF = async () => {
@@ -691,7 +697,7 @@ const Attendance: React.FC = () => {
           {[
             {
               icon: Users,
-              label: `Total ${terminology.studentPlural}`,
+              label: `Total `,
               value: stats.totalStudents.toString(),
               change: "+12%",
               color: "from-blue-500 to-cyan-500",
@@ -1087,7 +1093,11 @@ const Attendance: React.FC = () => {
               : "bg-transparent text-gray-500" // fallback
       }`}
                           >
-                            {record.punctuality === 'late' ? "LATE" : record.punctuality === 'on_time' ? "ON TIME" : "NOT CHECKED"}
+                            {record.punctuality === "late"
+                              ? "LATE"
+                              : record.punctuality === "on_time"
+                                ? "ON TIME"
+                                : "NOT CHECKED"}
                           </span>
                         </td>
                       </tr>

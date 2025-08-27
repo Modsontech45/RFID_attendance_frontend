@@ -416,7 +416,7 @@
     "welcomeTitle": "Welcome Back",
     "welcomeSubtitle": "Manage your institution with powerful tools and real-time insights",
     "stats": {
-      "students": "Total Students",
+      "students": "Total ",
       "teachers": "Active Teachers",
       "attendance": "Today's Attendance",
       "records": "Attendance Records"
@@ -630,8 +630,8 @@
   "subtitle": "Monitor and analyze member attendance with real-time insights and comprehensive reporting",
   "stats": {
     "totalStudents": "Total Attendance",
-    "presentToday": "Present Today",
-    "absentToday": "Absent Today",
+    "presentToday": "Present ",
+    "absentToday": "Absent ",
     "attendanceRate": "Attendance Rate",
     "partial": "Partial Attendance"
    
