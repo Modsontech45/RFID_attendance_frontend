@@ -49,7 +49,7 @@ interface AttendanceRecord {
   sign_out_time?: string;
   status: "present" | "partial" | "absent";
   form: string;
-  punctuality: "on_time" | "late" | "not_checked";
+  punctuality: "on_time" | "late" | "not_checked"  | "manual";
 }
 
 interface Category {
@@ -1090,14 +1090,18 @@ const Attendance: React.FC = () => {
             ? "bg-transparent text-yellow-600 animate-pulse border-spacing-1 border-2 border-yellow-600" // blinking yellow
             : record.punctuality === "not_checked"
               ? "bg-transparent text-red-600 animate-bounce" // red with light bounce
+                : record.punctuality === "manual"
+              ? "bg-transparent text-white animate-bounce"
               : "bg-transparent text-gray-500" // fallback
       }`}
                           >
                             {record.punctuality === "late"
-                              ? "LATE"
+                              ? formatMessage({ id: "punctuality.late" })
                               : record.punctuality === "on_time"
-                                ? "ON TIME"
-                                : "NOT CHECKED"}
+                                ? formatMessage({ id: "punctuality.on_time" })
+                                  : record.punctuality === "manual"
+                                ? formatMessage({ id: "punctuality.manual" })
+                                : formatMessage({ id: "punctuality.not_checked" })}
                           </span>
                         </td>
                       </tr>

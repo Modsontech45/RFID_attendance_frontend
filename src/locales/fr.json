@@ -50,6 +50,12 @@
       "network": "Erreur réseau. Veuillez vérifier votre connexion et réessayer."
     }
   },
+   "punctuality": {
+    "late": "EN RETARD",
+    "on_time": "À L'HEURE",
+    "manual": "Marqué manuellement",
+    "not_checked": "NON VÉRIFIÉ"
+  },
   "login": {
     "admin": {
       "title": "Connexion Administrateur",
@@ -623,6 +629,8 @@
     }
   },
   "attendance": {
+       "marking": "En cours...",
+    "mark": "Marquer la présence",
     "puntuality": "Ponctualité",
     "statistics": "Statistiques",
     "office": "Bureau",

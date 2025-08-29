@@ -81,6 +81,12 @@
   "button": {
     "login": "Log In"
   },
+    "punctuality": {
+    "late": "LATE",
+    "on_time": "ON TIME",
+    "manual": "Manually marked",
+    "not_checked": "NOT CHECKED"
+  },
   "home": {
     "welcome_comments": [
       "✨ Welcome to Synctuario!",
@@ -610,6 +616,8 @@
   }
 } ,
 "attendance":{
+  "marking": "Marking...",
+  "mark": "Mark Attendance",
   "punctuality": "Punctuality",
   "statistics": "Statistics",
   "office":"Office",
