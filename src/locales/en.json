@@ -616,6 +616,7 @@
   }
 } ,
 "attendance":{
+  "pdf" : " Download Pdf",
   "marking": "Marking...",
   "mark": "Mark Attendance",
   "punctuality": "Punctuality",

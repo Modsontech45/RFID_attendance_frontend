@@ -629,6 +629,7 @@
     }
   },
   "attendance": {
+     "pdf" : "Telecharger Pdf",
        "marking": "En cours...",
     "mark": "Marquer la présence",
     "puntuality": "Ponctualité",

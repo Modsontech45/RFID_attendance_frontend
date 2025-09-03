@@ -8,6 +8,9 @@ import {
   getAdminData,
 } from "../utils/auth";
 import SubscriptionCard from "./SubscriptionModal";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import * as XLSX from "xlsx"; // Add this import for Excel functionality
 import {
   Shield,
   Users,
@@ -40,6 +43,7 @@ import {
 import { useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { useTerminology } from "../utils/terminology";
+
 interface AttendanceRecord {
   id: number;
   date: string;
@@ -49,7 +53,7 @@ interface AttendanceRecord {
   sign_out_time?: string;
   status: "present" | "partial" | "absent";
   form: string;
-  punctuality: "on_time" | "late" | "not_checked"  | "manual";
+  punctuality: "on_time" | "late" | "not_checked" | "manual";
 }
 
 interface Category {
@@ -103,9 +107,10 @@ const Attendance: React.FC = () => {
     endDate: "",
   });
 
-  // Chart reference
+  // Chart and table references
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstanceRef = useRef<any>(null);
+  const tableRef = useRef<HTMLTableElement>(null); // Fixed: Should be HTMLTableElement
 
   const token = getAuthData("token");
   const apiKey = getApiKey();
@@ -120,9 +125,6 @@ const Attendance: React.FC = () => {
   const username =
     adminData?.username || adminData?.email?.split("@")[0] || "admin_user";
   const subscription = adminData?.subscription_status || "inactive";
-  // const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   changeLanguage(e.target.value);
-  // };
 
   const handleLogout = () => {
     if (refreshInterval) {
@@ -344,21 +346,210 @@ const Attendance: React.FC = () => {
     });
   };
 
+  // Enhanced PDF download function
   const downloadAsPDF = async () => {
     try {
-      console.log("Downloading as PDF...");
-      alert("PDF download functionality would be implemented here");
+      if (!tableRef.current) {
+        console.error("Table reference not found");
+        return;
+      }
+
+      console.log("Generating PDF...");
+
+      // Create a clean container
+      const tempDiv = document.createElement("div");
+      tempDiv.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: -9999px;
+      background: white;
+      padding: 20px;
+      width: max-content;
+      height: max-content;
+      overflow: visible;
+      z-index: -1;
+    `;
+
+      const tableClone = tableRef.current.cloneNode(true) as HTMLTableElement;
+
+      // Reset table styles - keep it as a table!
+      tableClone.style.cssText = `
+      background: white;
+      color: black;
+      border-collapse: collapse;
+      width: auto;
+      max-width: none;
+      max-height: none;
+      overflow: visible;
+      display: table;
+      table-layout: auto;
+    `;
+
+      // Clean cell styles
+      tableClone.querySelectorAll("th, td").forEach((cell) => {
+        const el = cell as HTMLElement;
+        el.style.cssText = `
+        background: white;
+        color: black;
+        border: 1px solid #ccc;
+        padding: 8px;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+      `;
+      });
+
+      // Header styles
+      tableClone.querySelectorAll("th").forEach((cell) => {
+        const el = cell as HTMLElement;
+        el.style.background = "#f0f0f0";
+        el.style.fontWeight = "bold";
+      });
+
+      tempDiv.appendChild(tableClone);
+      document.body.appendChild(tempDiv);
+
+      // Wait for layout to settle
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      // Get actual dimensions
+      const tableRect = tableClone.getBoundingClientRect();
+      const fullWidth = Math.max(tableClone.scrollWidth, tableRect.width);
+      const fullHeight = Math.max(tableClone.scrollHeight, tableRect.height);
+
+      console.log(`Table dimensions: ${fullWidth}x${fullHeight}`);
+
+      // Capture with proper dimensions
+      const canvas = await html2canvas(tempDiv, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "white",
+        width: fullWidth + 40, // include padding
+        height: fullHeight + 40,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: fullWidth + 40,
+        windowHeight: fullHeight + 40,
+        allowTaint: true,
+      });
+
+      document.body.removeChild(tempDiv);
+
+      // Generate PDF
+      const imgData = canvas.toDataURL("image/png", 1.0);
+      const pdf = new jsPDF("l", "mm", "a4");
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const imgWidth = pageWidth - 20;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      // Add pages as needed
+      let heightLeft = imgHeight;
+      let position = 10;
+
+      pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight - 20;
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight + 10;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight - 20;
+      }
+
+      // Add footer
+      pdf.setFontSize(14);
+      pdf.text(`${schoolName} - Attendance Report`, 10, pageHeight - 5);
+
+      const fileName = `attendance-${new Date().toISOString().split("T")[0]}.pdf`;
+      pdf.save(fileName);
+
+      console.log("PDF generated successfully ✅");
     } catch (error) {
-      console.error("Error downloading PDF:", error);
+      console.error("Error generating PDF:", error);
+      alert("Error generating PDF. Please try again.");
     }
   };
 
+  // Enhanced Excel download function
   const downloadAsExcel = async () => {
     try {
-      console.log("Downloading as Excel...");
-      alert("Excel download functionality would be implemented here");
+      console.log("Generating Excel file...");
+
+      if (filteredRecords.length === 0) {
+        alert("No data to export");
+        return;
+      }
+
+      // Prepare data for Excel
+      const excelData = filteredRecords.map((record) => ({
+        Date: formatDate(record.date),
+        Name: record.name || "N/A",
+        UID: record.uid || "N/A",
+        "Sign In Time": record.sign_in_time
+          ? formatTime(record.sign_in_time)
+          : "Not signed in",
+        "Sign Out Time": record.sign_out_time
+          ? formatTime(record.sign_out_time)
+          : "Not signed out",
+        Status: record.status,
+        Form: record.form || "Unknown",
+        Punctuality:
+          record.punctuality === "late"
+            ? formatMessage({ id: "punctuality.late" })
+            : record.punctuality === "on_time"
+              ? formatMessage({ id: "punctuality.on_time" })
+              : record.punctuality === "manual"
+                ? formatMessage({ id: "punctuality.manual" })
+                : formatMessage({ id: "punctuality.not_checked" }),
+      }));
+
+      // Add summary data
+      const stats = calculateStats();
+      const summaryData = [
+        {},
+        { Date: "SUMMARY" },
+        { Date: "Total Students", Name: stats.totalStudents },
+        { Date: "Present", Name: stats.totalPresent },
+        { Date: "Partial", Name: stats.totalPartial },
+        { Date: "Absent", Name: stats.totalAbsent },
+      ];
+
+      // Combine data
+      const combinedData = [...excelData, ...summaryData];
+
+      // Create workbook
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(combinedData);
+
+      // Add some styling (column widths)
+      const colWidths = [
+        { wch: 12 }, // Date
+        { wch: 20 }, // Name
+        { wch: 15 }, // UID
+        { wch: 15 }, // Sign In Time
+        { wch: 15 }, // Sign Out Time
+        { wch: 10 }, // Status
+        { wch: 12 }, // Form
+        { wch: 15 }, // Punctuality
+      ];
+      ws["!cols"] = colWidths;
+
+      // Add worksheet to workbook
+      XLSX.utils.book_append_sheet(wb, ws, "Attendance Report");
+
+      // Generate filename with current date
+      const fileName = `attendance-${new Date().toISOString().split("T")[0]}.xlsx`;
+
+      // Save file
+      XLSX.writeFile(wb, fileName);
+
+      console.log("Excel file generated successfully");
     } catch (error) {
-      console.error("Error downloading Excel:", error);
+      console.error("Error generating Excel file:", error);
+      alert("Error generating Excel file. Please try again.");
     }
   };
 
@@ -436,7 +627,7 @@ const Attendance: React.FC = () => {
     const initializeData = async () => {
       await Promise.all([fetchAttendanceRecords(), fetchCategories()]);
       const today = new Date().toISOString().split("T")[0];
-      setFilters((prev) => ({ ...prev, date: today })); // 🟢 set today's date filter
+      setFilters((prev) => ({ ...prev, date: today }));
       setIsLoading(false);
       setTimeout(() => setIsLoaded(true), 300);
       startAutoRefresh();
@@ -572,6 +763,7 @@ const Attendance: React.FC = () => {
                   </span>
                   <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
                 </button>
+
                 <button
                   onClick={() => navigate("/admin/reports")}
                   className="relative group px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
@@ -584,25 +776,13 @@ const Attendance: React.FC = () => {
               </div>
 
               <div className="flex items-center space-x-4">
-                {/* Notifications */}
-                {/* <button title='Notifications' className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <Bell className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-                  <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                </button>
-
-                <button  title={formatMessage({ id: "attendance.settings" })} className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
-                </button>
-
-
-
                 <button
                   onClick={handleLogout}
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>  {formatMessage({ id: "attendance.logout" })}</span>
-                </button> */}
+                  <span>{formatMessage({ id: "attendance.logout" })}</span>
+                </button>
               </div>
             </nav>
 
@@ -811,9 +991,7 @@ const Attendance: React.FC = () => {
                         onClick={downloadAsPDF}
                         className="flex justify-between w-full px-4 py-3 hover:bg-white/10 text-white transition-colors"
                       >
-                        <span>
-                          {formatMessage({ id: "attendance.downloadAspdf" })}
-                        </span>
+                        <span>{formatMessage({ id: "attendance.pdf" })}</span>
                         <FileText className="w-4 h-4" />
                       </button>
                       <button
@@ -966,79 +1144,32 @@ const Attendance: React.FC = () => {
           {!isLoading && !error && (
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-lg">
               <div className="overflow-x-auto">
-                <table className="min-w-full">
+                <table ref={tableRef} className="min-w-full">
                   <thead className="bg-blue-800/50 backdrop-blur-sm">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="w-4 h-4" />
-                          <span>
-                            {formatMessage({ id: "attendance.table.date" })}
-                          </span>
-                        </div>
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                        <div className="flex items-center space-x-2">
-                          <User className="w-4 h-4" />
-                          <span>
-                            {formatMessage({ id: "attendance.table.name" })}
-                          </span>
-                        </div>
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                        <div className="flex items-center space-x-2">
-                          <Hash className="w-4 h-4" />
-                          <span>
-                            {formatMessage({ id: "attendance.table.uid" })}
-                          </span>
-                        </div>
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                        <div className="flex items-center space-x-2">
-                          <Clock className="w-4 h-4" />
-                          <span>
-                            {formatMessage({
-                              id: "attendance.table.signInTime",
-                            })}
-                          </span>
-                        </div>
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                        <div className="flex items-center space-x-2">
-                          <Clock className="w-4 h-4" />
-                          <span>
-                            {formatMessage({
-                              id: "attendance.table.signOutTime",
-                            })}
-                          </span>
-                        </div>
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                        <div className="flex items-center space-x-2">
-                          <Activity className="w-4 h-4" />
-                          <span>
-                            {formatMessage({ id: "attendance.table.status" })}
-                          </span>
-                        </div>
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                        <div className="flex items-center space-x-2">
-                          <GraduationCap className="w-4 h-4" />
-                          <span>
-                            {formatMessage({ id: "attendance.table.form" })}
-                          </span>
-                        </div>
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                        <div className="flex items-center space-x-2">
-                          <GraduationCap className="w-4 h-4" />
-                          <span>
-                            {formatMessage({ id: "attendance.punctuality" })}
-                          </span>
-                        </div>
-                      </th>
+                      {[
+                        { id: "attendance.table.date", icon: Calendar },
+                        { id: "attendance.table.name", icon: User },
+                        { id: "attendance.table.uid", icon: Hash },
+                        { id: "attendance.table.signInTime", icon: Clock },
+                        { id: "attendance.table.signOutTime", icon: Clock },
+                        { id: "attendance.table.status", icon: Activity },
+                        { id: "attendance.table.form", icon: GraduationCap },
+                        { id: "attendance.punctuality", icon: GraduationCap },
+                      ].map(({ id, icon: Icon }) => (
+                        <th
+                          key={id}
+                          className="px-6 py-4 text-left text-sm font-semibold text-white"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <Icon className="w-4 h-4" />
+                            <span>{formatMessage({ id })}</span>
+                          </div>
+                        </th>
+                      ))}
                     </tr>
                   </thead>
+
                   <tbody className="divide-y divide-white/10">
                     {filteredRecords.map((record, index) => (
                       <tr
@@ -1046,62 +1177,87 @@ const Attendance: React.FC = () => {
                         className="hover:bg-white/5 transition-colors duration-200 animate-slide-up"
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
+                        {/* Date */}
                         <td className="px-6 py-4 text-white">
                           {formatDate(record.date)}
                         </td>
+
+                        {/* Name */}
                         <td className="px-6 py-4 text-white font-medium">
                           {record.name || "N/A"}
                         </td>
+
+                        {/* UID */}
                         <td className="px-6 py-4">
                           <code className="bg-black/50 text-blue-400 px-2 py-1 rounded text-sm">
                             {record.uid || "N/A"}
                           </code>
                         </td>
+
+                        {/* Sign-in Time */}
                         <td
-                          className={`px-6 py-4 ${record.sign_in_time ? "text-green-400" : "text-red-400 font-semibold"}`}
+                          className={`px-6 py-4 ${
+                            record.sign_in_time
+                              ? "text-green-400"
+                              : "text-red-400 font-semibold"
+                          }`}
                         >
                           {formatTime(record.sign_in_time)}
                         </td>
+
+                        {/* Sign-out Time */}
                         <td
-                          className={`px-6 py-4 ${record.sign_out_time ? "text-green-400" : "text-red-400 font-semibold"}`}
+                          className={`px-6 py-4 ${
+                            record.sign_out_time
+                              ? "text-green-400"
+                              : "text-red-400 font-semibold"
+                          }`}
                         >
                           {record.sign_out_time
                             ? formatTime(record.sign_out_time)
                             : "Not signed out"}
                         </td>
+
+                        {/* Status */}
                         <td className="px-6 py-4">
                           <span className={getStatusBadge(record.status)}>
                             {getStatusIcon(record.status)}
                             <span className="capitalize">{record.status}</span>
                           </span>
                         </td>
+
+                        {/* Form */}
                         <td className="px-6 py-4">
                           <span className="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm">
                             {record.form || "Unknown"}
                           </span>
                         </td>
+
+                        {/* Punctuality */}
                         <td className="px-6 py-4">
                           <span
                             className={`px-3 py-1 rounded-full text-sm
-      ${
-        record.punctuality === "on_time"
-          ? "bg-emerald-600 text-white" // static green
-          : record.punctuality === "late"
-            ? "bg-transparent text-yellow-600 animate-pulse border-spacing-1 border-2 border-yellow-600" // blinking yellow
-            : record.punctuality === "not_checked"
-              ? "bg-transparent text-red-600 animate-bounce" // red with light bounce
-                : record.punctuality === "manual"
-              ? "bg-transparent text-white animate-bounce"
-              : "bg-transparent text-gray-500" // fallback
-      }`}
+              ${
+                record.punctuality === "on_time"
+                  ? "bg-emerald-600 text-white"
+                  : record.punctuality === "late"
+                    ? "bg-transparent text-yellow-600 animate-pulse border-2 border-yellow-600"
+                    : record.punctuality === "not_checked"
+                      ? "bg-transparent text-red-600 animate-bounce"
+                      : record.punctuality === "manual"
+                        ? "bg-transparent text-white animate-bounce"
+                        : "bg-transparent text-gray-500"
+              }`}
                           >
                             {record.punctuality === "late"
                               ? formatMessage({ id: "punctuality.late" })
                               : record.punctuality === "on_time"
                                 ? formatMessage({ id: "punctuality.on_time" })
-                                  : record.punctuality === "manual"
-                                ? formatMessage({ id: "punctuality.manual" })
-                                : formatMessage({ id: "punctuality.not_checked" })}
+                                : record.punctuality === "manual"
+                                  ? formatMessage({ id: "punctuality.manual" })
+                                  : formatMessage({
+                                      id: "punctuality.not_checked",
+                                    })}
                           </span>
                         </td>
                       </tr>
