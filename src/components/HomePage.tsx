@@ -142,7 +142,7 @@ const HomePage: React.FC = () => {
   };
 const handleAppDownload = () => {
   // Replace with your hosted APK URL
-  const apkUrl = "https://rfid-attendance-synctuario-theta.vercel.app/app/app-release.apk";
+  const apkUrl = "https://rfid-attendance-synctuario-theta.vercel.app/app/app-debug.apk";
   const link = document.createElement("a");
   link.href = apkUrl;
   link.download = "Synctuario.apk";
