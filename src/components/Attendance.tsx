@@ -97,7 +97,7 @@ const Attendance: React.FC = () => {
   const [refreshInterval, setRefreshInterval] = useState<NodeJS.Timeout | null>(
     null
   );
-
+  const dropdownRef = useRef<HTMLDivElement>(null);
   // Filter states
   const [filters, setFilters] = useState({
     form: "",
@@ -478,53 +478,17 @@ const Attendance: React.FC = () => {
     try {
       console.log("Generating Excel file...");
 
-      if (filteredRecords.length === 0) {
-        alert("No data to export");
+      if (!tableRef.current) {
+        alert("Table reference not found");
         return;
       }
 
-      // Prepare data for Excel
-      const excelData = filteredRecords.map((record) => ({
-        Date: formatDate(record.date),
-        Name: record.name || "N/A",
-        UID: record.uid || "N/A",
-        "Sign In Time": record.sign_in_time
-          ? formatTime(record.sign_in_time)
-          : "Not signed in",
-        "Sign Out Time": record.sign_out_time
-          ? formatTime(record.sign_out_time)
-          : "Not signed out",
-        Status: record.status,
-        Form: record.form || "Unknown",
-        Punctuality:
-          record.punctuality === "late"
-            ? formatMessage({ id: "punctuality.late" })
-            : record.punctuality === "on_time"
-              ? formatMessage({ id: "punctuality.on_time" })
-              : record.punctuality === "manual"
-                ? formatMessage({ id: "punctuality.manual" })
-                : formatMessage({ id: "punctuality.not_checked" }),
-      }));
+      // ✅ Directly convert the DOM table into a worksheet
+      const ws = XLSX.utils.table_to_sheet(tableRef.current, {
+        raw: true, // keeps raw values
+      });
 
-      // Add summary data
-      const stats = calculateStats();
-      const summaryData = [
-        {},
-        { Date: "SUMMARY" },
-        { Date: "Total Students", Name: stats.totalStudents },
-        { Date: "Present", Name: stats.totalPresent },
-        { Date: "Partial", Name: stats.totalPartial },
-        { Date: "Absent", Name: stats.totalAbsent },
-      ];
-
-      // Combine data
-      const combinedData = [...excelData, ...summaryData];
-
-      // Create workbook
-      const wb = XLSX.utils.book_new();
-      const ws = XLSX.utils.json_to_sheet(combinedData);
-
-      // Add some styling (column widths)
+      // Add column widths (optional)
       const colWidths = [
         { wch: 12 }, // Date
         { wch: 20 }, // Name
@@ -537,16 +501,19 @@ const Attendance: React.FC = () => {
       ];
       ws["!cols"] = colWidths;
 
-      // Add worksheet to workbook
+      // Create a new workbook and append worksheet
+      const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "Attendance Report");
 
       // Generate filename with current date
-      const fileName = `attendance-${new Date().toISOString().split("T")[0]}.xlsx`;
+      const fileName = `attendance-${
+        new Date().toISOString().split("T")[0]
+      }.xlsx`;
 
-      // Save file
+      // Save Excel file
       XLSX.writeFile(wb, fileName);
 
-      console.log("Excel file generated successfully");
+      console.log("Excel file generated successfully ✅");
     } catch (error) {
       console.error("Error generating Excel file:", error);
       alert("Error generating Excel file. Please try again.");
@@ -614,6 +581,19 @@ const Attendance: React.FC = () => {
       createChart();
     }
   }, [filteredRecords]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowDownloadOptions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Check authentication and fetch data on component mount
   useEffect(() => {
@@ -977,24 +957,19 @@ const Attendance: React.FC = () => {
                   <RefreshCw className="w-4 h-4" />
                   {/* <span>Refresh</span> */}
                 </button>
-                <div className="relative">
+                <div className="relative" ref={dropdownRef} style={{ zIndex: 9999 }}  >
                   <button
-                    onClick={() => setShowDownloadOptions(!showDownloadOptions)}
+                    onClick={() => setShowDownloadOptions((prev) => !prev)}
                     className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2"
                   >
                     <Download className="w-4 h-4" />
+                    {/* Uncomment if you want a label */}
                     {/* <span>{formatMessage({ id: "attendance.download" })}</span> */}
                   </button>
+
                   {showDownloadOptions && (
                     <div className="absolute right-0 mt-2 w-48 bg-black/80 backdrop-blur-md border border-white/20 rounded-xl shadow-2xl z-50 overflow-hidden">
-                      <button
-                        onClick={downloadAsPDF}
-                        className="flex justify-between w-full px-4 py-3 hover:bg-white/10 text-white transition-colors"
-                      >
-                        <span>{formatMessage({ id: "attendance.pdf" })}</span>
-                        <FileText className="w-4 h-4" />
-                      </button>
-                      <button
+                         <button
                         onClick={downloadAsExcel}
                         className="flex justify-between w-full px-4 py-3 hover:bg-white/10 text-white transition-colors"
                       >
@@ -1003,6 +978,14 @@ const Attendance: React.FC = () => {
                         </span>
                         <BarChart3 className="w-4 h-4" />
                       </button>
+                      <button
+                        onClick={downloadAsPDF}
+                        className="flex justify-between w-full px-4 py-3 hover:bg-white/10 text-white transition-colors"
+                      >
+                        <span>{formatMessage({ id: "attendance.pdf" })}</span>
+                        <FileText className="w-4 h-4" />
+                      </button>
+                   
                     </div>
                   )}
                 </div>
