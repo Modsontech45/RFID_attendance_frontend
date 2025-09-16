@@ -141,7 +141,7 @@ const HomePage: React.FC = () => {
     }
   };
   const handleAppDownload = () => {
-    const apkUrl = "https://rfid-attendance-synctuario-theta.vercel.app/app/afrAttendance.apk";
+    const apkUrl = "https://rfid-attendancesystem-backend-project.onrender.com/app/afrAttendance.apk";
     const link = document.createElement("a");
     link.href = apkUrl;
     link.download = "Synctuario.apk"; // optional: forces download
