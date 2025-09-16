@@ -140,6 +140,16 @@ const HomePage: React.FC = () => {
       setIsSubmittingContact(false);
     }
   };
+const handleAppDownload = () => {
+  // Replace with your hosted APK URL
+  const apkUrl = "https://rfid-attendance-synctuario-theta.vercel.app/app/app-release.apk";
+  const link = document.createElement("a");
+  link.href = apkUrl;
+  link.download = "Synctuario.apk";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 
   // Effects
   useEffect(() => {
@@ -239,6 +249,22 @@ const HomePage: React.FC = () => {
       <main className="relative z-10 mx-auto max-w-7xl space-y-20 px-6 py-12">
         {/* Hero Section */}
         <section className="space-y-8 text-center">
+         
+          <button
+  onClick={handleAppDownload}
+  className="group relative flex transform items-center space-x-3 rounded-xl bg-gradient-to-r from-teal-500 to-green-500 px-8 py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-teal-600 hover:to-green-600 hover:shadow-xl"
+>
+  <Download className="h-5 w-5" />
+  <span>
+    <FormattedMessage
+      id="home.buttons.download_app"
+      defaultMessage="Android APK"
+      
+    />
+  </span>
+</button>
+
+
           <div className="space-y-6">
             <div className="inline-flex items-center space-x-2 rounded-full border border-blue-500/30 bg-blue-500/20 px-4 py-2 text-blue-300 backdrop-blur-sm">
               <Sparkles className="h-4 w-4" />

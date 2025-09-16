@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AFR attendance </string>
+    <string name="title_activity_main">AFR attendance </string>
+    <string name="package_name">com.afripul.attendance</string>
+    <string name="custom_url_scheme">com.afripul.attendance</string>
+</resources>

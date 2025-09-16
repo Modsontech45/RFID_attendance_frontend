@@ -11,6 +11,8 @@
     "update:browserslist": "npx update-browserslist-db@latest"
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/ios": "^7.4.3",
     "axios": "^1.10.0",
     "chart.js": "^4.5.0",
     "emailjs-com": "^3.2.0",
