@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Icon from "./icon.png"; // ✅ adjust the path to your icon file
 
 const VerifyPayment: React.FC = () => {
   const [status, setStatus] = useState<string>("Verifying...");
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // Simulate getting reference from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const reference = urlParams.get("reference");
 
@@ -17,14 +17,10 @@ const VerifyPayment: React.FC = () => {
 
     const verifyUrl = `https://rfid-attendancesystem-backend-project.onrender.com/api/paystack/verify/${reference}`;
 
-    fetch(verifyUrl, {
-      method: "GET",
-      redirect: "manual", // Do not follow redirects automatically
-    })
+    fetch(verifyUrl, { method: "GET", redirect: "manual" })
       .then(async (res) => {
         console.log("Response status:", res.status);
         if (res.status >= 300 && res.status < 400) {
-          // Redirect response detected
           const location = res.headers.get("Location");
           console.log("Redirect Location:", location);
 
@@ -37,7 +33,6 @@ const VerifyPayment: React.FC = () => {
           }
           setLoading(false);
         } else {
-          // Not a redirect, parse JSON response
           try {
             const data = await res.json();
             console.log("JSON response data:", data);
@@ -65,6 +60,9 @@ const VerifyPayment: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-700 via-blue-800 to-black text-center p-4">
+      <div className="flex items-center justify-center mb-0">
+        <img src={Icon} alt="App Logo" className="h-24 w-24" />
+      </div>
       <div className="bg-black bg-opacity-40 backdrop-blur-sm border border-blue-600 border-opacity-30 shadow-2xl rounded-xl p-8 max-w-md w-full">
         <h1 className="text-xl font-bold mb-4 text-white">Payment Verification</h1>
         {loading ? (
@@ -72,8 +70,8 @@ const VerifyPayment: React.FC = () => {
         ) : (
           <div>
             <p className="text-white text-lg mb-6">{status}</p>
-            <button 
-              onClick={() => window.location.href = '/admin/dashboard'}
+            <button
+              onClick={() => (window.location.href = "/admin/dashboard")}
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
             >
               Go Home

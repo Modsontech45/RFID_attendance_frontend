@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  
   getAuthData,
   logout,
   getApiKey,
   API_BASE,
   getAdminData,
 } from "../utils/auth";
+import Icon from "./icon.png";
 import SubscriptionCard from "./SubscriptionModal";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -631,8 +633,9 @@ const Attendance: React.FC = () => {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6 animate-pulse shadow-2xl">
-            <BarChart3 className="w-8 h-8 text-white animate-bounce" />
+           <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -691,9 +694,10 @@ const Attendance: React.FC = () => {
             {/* Logo and Title */}
             <div className="flex items-center space-x-4 group">
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center border-2 border-white/20 shadow-lg group-hover:scale-110 transition-all duration-300">
-                  <Shield className="w-7 h-7 text-white group-hover:rotate-12 transition-transform duration-300" />
-                </div>
+                      <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
               </div>
               <div className="space-y-1">

@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
-
+import Icon from "./icon.png";
 const SettingsComponent: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -114,7 +114,10 @@ const SettingsComponent: React.FC = () => {
     return (
       <div className="min-h-screen bg-[#0e141b] flex items-center justify-center text-white">
         <div className="flex items-center space-x-2">
-          <Loader2 className="h-6 w-6 animate-spin text-blue-400" />
+            <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
+          </div>
           <span className="text-gray-300"> <FormattedMessage
                           id="AdminProfile.loading"
                           defaultMessage="Loading Profile"

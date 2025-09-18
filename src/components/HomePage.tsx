@@ -228,12 +228,7 @@ const HomePage: React.FC = () => {
         {/* Logo without background */}
         <img src={Icon} alt="App Logo" className="h-18 w-20" />
 
-        <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent">
-          <FormattedMessage
-            id="home.header.titl"
-            defaultMessage="AFR Attendance"
-          />
-        </span>
+     
       </div>
 
       <div className="flex items-center space-x-4">

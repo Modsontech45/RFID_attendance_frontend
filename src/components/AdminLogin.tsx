@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "../hooks/useTranslation";
 import { postData, API_BASE, setAuthData } from "../utils/auth";
-
+import Icon from "./icon.png";
 import { Shield, Eye, EyeOff, ArrowLeft, Loader2, Mail, Lock } from "lucide-react";
 
 import { FormattedMessage, useIntl } from "react-intl";
@@ -112,9 +112,10 @@ const AdminLogin: React.FC = () => {
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-600">
-                <Shield className="h-6 w-6 text-white" />
-              </div>
+              <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
+          </div>
               <span className="text-2xl font-bold text-green-400">
                 <FormattedMessage id="app.name" defaultMessage="Synctuario" />
               </span>
@@ -134,9 +135,10 @@ const AdminLogin: React.FC = () => {
           >
             {/* Header */}
             <div className="space-y-2 text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-green-600">
-                <Shield className="h-8 w-8 text-white" />
-              </div>
+                  <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
               <h1 className="text-3xl font-bold text-green-400">
                 <FormattedMessage id="login.admin.title" defaultMessage="Admin Login" />
               </h1>

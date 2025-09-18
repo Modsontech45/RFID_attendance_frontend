@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Icon from "./icon.png";
 import {
   getAuthData,
   getApiKey,
@@ -30,7 +30,7 @@ const AddTeacher: React.FC = () => {
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
   const { locale } = useLocalIntl();
-  
+
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -129,24 +129,26 @@ const AddTeacher: React.FC = () => {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6 animate-pulse shadow-2xl">
-            <UserPlus className="w-8 h-8 text-white animate-bounce" />
+          <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
-          <div className="space-y-2">
-            <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+
+          <div className="space-y-4">
+            <div className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
               {terminology.loading}
             </div>
-            <div className="flex justify-center space-x-1">
+            <div className="flex justify-center space-x-2">
               <div
-                className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
+                className="w-3 h-3 bg-green-400 rounded-full animate-bounce"
                 style={{ animationDelay: "0ms" }}
               ></div>
               <div
-                className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
+                className="w-3 h-3 bg-green-400 rounded-full animate-bounce"
                 style={{ animationDelay: "150ms" }}
               ></div>
               <div
-                className="w-2 h-2 bg-green-400 rounded-full animate-bounce"
+                className="w-3 h-3 bg-green-400 rounded-full animate-bounce"
                 style={{ animationDelay: "300ms" }}
               ></div>
             </div>
@@ -178,8 +180,9 @@ const AddTeacher: React.FC = () => {
             {/* Logo and Title */}
             <div className="flex items-center space-x-4 group">
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center border-2 border-white/20 shadow-lg group-hover:scale-110 transition-all duration-300">
-                  <Shield className="w-7 h-7 text-white group-hover:rotate-12 transition-transform duration-300" />
+                <div className="flex items-center space-x-3">
+                  {/* Logo without background */}
+                  <img src={Icon} alt="App Logo" className="h-18 w-20" />
                 </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
               </div>
@@ -257,22 +260,20 @@ const AddTeacher: React.FC = () => {
               {/* Email Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-green-300">
-                  {terminology.coManager} 
+                  {terminology.coManager}
                 </label>
                 <div className="relative">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder={
-                      `${terminology.teacher.toLowerCase()}@example.com`
-                    }
+                    placeholder={`${terminology.teacher.toLowerCase()}@example.com`}
                     required
                     className="w-full pl-12 pr-4 py-4 border border-green-400/50 rounded-xl bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
                   />
                 </div>
                 <p className="text-xs text-green-300 mt-1">
-                  {terminology.receiveEmail} 
+                  {terminology.receiveEmail}
                 </p>
               </div>
 
@@ -294,7 +295,8 @@ const AddTeacher: React.FC = () => {
                   <>
                     <Send className="w-5 h-5" />
                     <span>
-                        {terminology.add}{terminology.teacher}
+                      {terminology.add}
+                      {terminology.teacher}
                     </span>
                   </>
                 )}
@@ -305,9 +307,7 @@ const AddTeacher: React.FC = () => {
             <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 text-center">
               <div className="flex items-center justify-center space-x-2 text-green-300 text-sm">
                 <Users className="w-4 h-4" />
-                <span>
-                  {terminology.receiveEmail} 
-                </span>
+                <span>{terminology.receiveEmail}</span>
               </div>
             </div>
 

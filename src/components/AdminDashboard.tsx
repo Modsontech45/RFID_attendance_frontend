@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useTranslation } from "../hooks/useTranslation";
+import Icon from "./icon.png";
 import { getAuthData, logout, getApiKey, getAdminData } from "../utils/auth";
 import { postData, API_BASE } from "../utils/auth";
 import SubscriptionCard from "./SubscriptionModal";
@@ -69,8 +70,6 @@ interface AttendanceRecord {
   status: "present" | "partial" | "absent";
 }
 
-
-
 const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
@@ -119,11 +118,10 @@ const AdminDashboard: React.FC = () => {
   //   adminData?.subscription_plan ||
   //   formatMessage({ id: "dashboard.defaultPlan" });
 
-    function handleSubscriptionClick() {
-  console.log("Subscription is not active — show modal or redirect");
-  navigate("/pricing");
-}
-
+  function handleSubscriptionClick() {
+    console.log("Subscription is not active — show modal or redirect");
+    navigate("/pricing");
+  }
 
   const handleLogout = () => {
     logout();
@@ -294,8 +292,9 @@ const AdminDashboard: React.FC = () => {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
         <div className="text-center">
-          <div className="mx-auto mb-6 flex h-16 w-16 animate-pulse items-center justify-center rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-500 shadow-2xl">
-            <Shield className="h-8 w-8 animate-bounce text-white" />
+          <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
           <div className="space-y-2">
             <div className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent">
@@ -333,9 +332,10 @@ const AdminDashboard: React.FC = () => {
             {/* Logo and Title */}
             <div className="group flex items-center space-x-4">
               <div className="relative">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-white/20 bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg transition-all duration-300 group-hover:scale-110">
-                  <Shield className="h-7 w-7 text-white transition-transform duration-300 group-hover:rotate-12" />
-                </div>
+                       <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
                 <div className="absolute -right-1 -top-1 h-4 w-4 animate-pulse rounded-full border-2 border-white bg-green-400" />
               </div>
               <div className="space-y-1">
@@ -346,23 +346,19 @@ const AdminDashboard: React.FC = () => {
               </div>
             </div>
 
-              <span
-                  onClick={
-                   
-                      () => handleSubscriptionClick()
-                     
-                  }
-                  className={`px-3 py-1 rounded-full text-white font-medium text-sm cursor-pointer ${
-                    subscription === "active"
-                      ? "bg-green-800 cursor-default"
-                      : "bg-red-800 hover:opacity-80"
-                  }`}
-                >
-                  <FormattedMessage
-                    id={`${subscription === "active" ? "pricing.starter.subscribed" : subscription === "trial" ? "pricing.starter.freeplan" : "pricing.starter.subscribeNow"}`}
-                  />
-                </span>
-      
+            <span
+              onClick={() => handleSubscriptionClick()}
+              className={`px-3 py-1 rounded-full text-white font-medium text-sm cursor-pointer ${
+                subscription === "active"
+                  ? "bg-green-800 cursor-default"
+                  : "bg-red-800 hover:opacity-80"
+              }`}
+            >
+              <FormattedMessage
+                id={`${subscription === "active" ? "pricing.starter.subscribed" : subscription === "trial" ? "pricing.starter.freeplan" : "pricing.starter.subscribeNow"}`}
+              />
+            </span>
+
             {/* Desktop Navigation */}
             <nav className="hidden items-center space-x-8 lg:flex">
               <div className="flex items-center space-x-6">
@@ -371,7 +367,7 @@ const AdminDashboard: React.FC = () => {
                   className="relative rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/10"
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
-                       {terminology.company}
+                    {terminology.company}
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </button>
@@ -404,7 +400,7 @@ const AdminDashboard: React.FC = () => {
                   className="relative rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/10"
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
-                     {terminology.add} {terminology.teacher}
+                    {terminology.add} {terminology.teacher}
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </button>
@@ -414,26 +410,26 @@ const AdminDashboard: React.FC = () => {
                   className="relative rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/10"
                 >
                   <span className="text-gray-300 transition-colors hover:text-white">
-                 Docs
+                    Docs
                   </span>
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </button>
               </div>
 
               <div className="flex items-center space-x-4">
-             
-
                 {/* <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
                   <Bell className="h-5 w-5 text-gray-400 transition-colors hover:text-white" />
                   <div className="absolute right-1 top-1 h-2 w-2 animate-pulse rounded-full bg-red-500" />
                 </button> */}
 
-                <button  onClick={() => navigate("/admin/settings")}
-                 className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
+                <button
+                  onClick={() => navigate("/admin/settings")}
+                  className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10"
+                >
                   <User className="h-5 w-5 text-gray-400 transition-all duration-300 hover:rotate-90 hover:text-white" />
                 </button>
 
-            <LanguageSwitcher />
+                <LanguageSwitcher />
               </div>
             </nav>
 
@@ -490,19 +486,19 @@ const AdminDashboard: React.FC = () => {
                 onClick={() => navigate("/docs")}
                 className="w-full rounded-lg px-4 py-3 text-left text-gray-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
               >
-             Docs
+                Docs
               </button>
 
               <div className=" border-t border-white/10 pt-4">
-
-                 {/* <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
+                {/* <button className="relative rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
                   <Bell className="h-5 w-5 text-gray-400 transition-colors hover:text-white" />
                   <div className="absolute right-1 top-1 h-2 w-2 animate-pulse rounded-full bg-red-500" />
                 </button> */}
-        
 
-                 <button  onClick={() => navigate("/admin/settings")}
-                 className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10">
+                <button
+                  onClick={() => navigate("/admin/settings")}
+                  className="rounded-lg p-2 transition-all duration-300 hover:bg-white/10"
+                >
                   <User className="h-5 w-5 text-gray-400 transition-all duration-300 hover:rotate-90 hover:text-white" />
                 </button>
                 <LanguageSwitcher />
@@ -545,7 +541,7 @@ const AdminDashboard: React.FC = () => {
               label: `Total ${terminology.studentPlural}`,
               value: isLoadingStats
                 ? "..."
-               : (dashboardStats?.totalStudents || 0).toString(),
+                : (dashboardStats?.totalStudents || 0).toString(),
               change: "+12%",
               color: "from-blue-500 to-cyan-500",
               link: "/admin/students",
@@ -555,7 +551,7 @@ const AdminDashboard: React.FC = () => {
               label: `Active ${terminology.teacherPlural}`,
               value: isLoadingStats
                 ? "..."
-               : (dashboardStats?.totalTeachers || 0).toString(),
+                : (dashboardStats?.totalTeachers || 0).toString(),
               change: "+5%",
               color: "from-green-500 to-emerald-500",
               link: "/admin/teachers",
@@ -565,7 +561,7 @@ const AdminDashboard: React.FC = () => {
               label: formatMessage({ id: "dashboard.stats.attendance" }),
               value: isLoadingStats
                 ? "..."
-               : `${dashboardStats?.attendanceRate || 0}%`,
+                : `${dashboardStats?.attendanceRate || 0}%`,
               change: "+2.1%",
               color: "from-purple-500 to-pink-500",
               link: "/admin/attendance",
@@ -575,7 +571,7 @@ const AdminDashboard: React.FC = () => {
               label: formatMessage({ id: "dashboard.stats.records" }),
               value: isLoadingStats
                 ? "..."
-               : (dashboardStats?.totalAttendanceToday || 0).toString(),
+                : (dashboardStats?.totalAttendanceToday || 0).toString(),
               change: "+1.2%",
               color: "from-orange-500 to-red-500",
               link: "/teacher/reports",
@@ -689,7 +685,9 @@ const AdminDashboard: React.FC = () => {
           </div>
         </section>
 
-       {subscription !== "active" && subscription !== "trial" && <SubscriptionCard />}
+        {subscription !== "active" && subscription !== "trial" && (
+          <SubscriptionCard />
+        )}
 
         {/* Quick Actions Section */}
         <section

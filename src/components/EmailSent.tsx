@@ -8,7 +8,7 @@ import {
   ArrowLeft,
   CheckCircle
 } from 'lucide-react';
-
+import Icon from "./icon.png";
 const EmailSent: React.FC = () => {
   const navigate = useNavigate();
   const { formatMessage: t } = useIntl();
@@ -23,8 +23,9 @@ const EmailSent: React.FC = () => {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-6 h-6 text-white animate-pulse" />
+          <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
           <div className="text-xl text-gray-300">Loading...</div>
         </div>
@@ -46,12 +47,13 @@ const EmailSent: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                   <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
+              {/* <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
                 Synctuario
-              </span>
+              </span> */}
             </div>
           </div>
         </div>

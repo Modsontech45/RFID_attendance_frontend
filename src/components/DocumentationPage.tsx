@@ -26,6 +26,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
+import Icon from "./icon.png";
 import { FormattedMessage } from "react-intl";
 import { useTerminology } from "../utils/terminology";
 import { getAdminData } from "../utils/auth";
@@ -403,8 +404,9 @@ const DocumentationPage: React.FC = () => {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
         <div className="text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500">
-            <Book className="h-6 w-6 animate-pulse text-white" />
+          <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
           <div className="text-xl text-gray-300">
             <FormattedMessage
@@ -841,12 +843,11 @@ const DocumentationPage: React.FC = () => {
       <header className="relative z-20 border-b border-white/20 bg-white/10 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500">
-              <Shield className="h-6 w-6 text-white" />
-            </div>
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent">
-              Synctuario
-            </span>
+                 <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
+         
           </div>
           <div className="flex items-center space-x-4">
             <button onClick={() => navigate(-1)} className="text-gray-300 hover:text-white">

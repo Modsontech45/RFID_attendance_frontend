@@ -12,7 +12,7 @@ import {
 import {  useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
 import { useTerminology } from "../utils/terminology";
-
+import Icon from "./icon.png";
 const TeacherLogin: React.FC = () => {
   const navigate = useNavigate();
  const { formatMessage } = useIntl();
@@ -115,8 +115,9 @@ const handleSubmit = async (e: React.FormEvent) => {
     return (
       <div className="bg-black text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-            <Users className="w-6 h-6 text-white animate-pulse" />
+          <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
           <div className="text-xl text-white">{  formatMessage({ id: "teacherlogin.loading" }) || 'Loading...'}</div>
         </div>
@@ -132,12 +133,11 @@ const handleSubmit = async (e: React.FormEvent) => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold text-green-400">
-                Synctuario
-              </span>
+                     <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
+           
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useIntl, FormattedMessage } from "react-intl";
 import Flag from "react-world-flags";
+import Icon from "./icon.png";
 import {
   Shield,
   UserPlus,
@@ -345,9 +346,10 @@ const AdminSignup: React.FC = () => {
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-600">
-                <Shield className="h-6 w-6 text-white" />
-              </div>
+              <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
+          </div>
               <span className="text-2xl font-bold text-green-400">
                 <FormattedMessage id="app.name" defaultMessage="Synctuario" />
               </span>
@@ -363,9 +365,10 @@ const AdminSignup: React.FC = () => {
           <div className="space-y-6 rounded-2xl border-2 border-green-600 bg-black p-8 shadow-2xl">
             {/* Header */}
             <div className="space-y-2 text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-green-600">
-                <UserPlus className="h-8 w-8 text-white" />
-              </div>
+                     <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
               <h1 className="text-3xl font-bold text-green-400">
                 <FormattedMessage id="signup.admin.title" defaultMessage="Admin Sign Up" />
               </h1>

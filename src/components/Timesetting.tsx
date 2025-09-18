@@ -4,7 +4,7 @@ import { API_BASE } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
-
+import Icon from "./icon.png";
 interface TimeSettingsData {
   sign_in_start: string;
   sign_in_end: string;

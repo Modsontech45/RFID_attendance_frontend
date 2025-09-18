@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
-import { getAdminData } from "../utils/auth";
+import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
 import axios from "axios";
 import {
   Shield,
@@ -22,7 +22,7 @@ import {
   AlertCircle,
   Loader2,
 } from "lucide-react";
-
+import Icon from "./icon.png";
 type PaymentFormProps = {
   email: string;
   plan: string;
@@ -110,7 +110,8 @@ const PricingPage: React.FC = () => {
   const planstatus =  adminData?.subscription_status;
   const endfree = adminData?.trial_end_date;
   const Email = adminData?.email;
-
+   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'AFR';
+     const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
   const handlePlanSelect = (planName: string) => {
     setSelectedPlan(planName);
     setEmail(Email); // Set immediately from admin data
@@ -132,12 +133,16 @@ const PricingPage: React.FC = () => {
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500">
-                <Shield className="h-6 w-6 text-white" />
+                       <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
+ <div className="space-y-1">
+                <span className="text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  {schoolName}
+                </span>
+                <div className="text-xs text-gray-400">@{username}</div>
               </div>
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent">
-                Synctuario
-              </span>
             </div>
 
             <div className="flex items-center space-x-4">

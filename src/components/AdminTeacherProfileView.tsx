@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getAuthData, API_BASE, getAdminData } from '../utils/auth';
 import { Mail, Calendar, CheckCircle, ArrowLeft, Trash2, AlertTriangle } from 'lucide-react';
 import { useTerminology } from "../utils/terminology";
+import Icon from "./icon.png";
 interface TeacherData {
   full_name: string;
   email: string;
@@ -83,7 +84,10 @@ const AdminTeacherProfileView: React.FC = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
         <div className="text-center space-y-4">
-          <div className="w-12 h-12 border-4 border-green-500 border-dashed rounded-full animate-spin mx-auto"></div>
+             <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
+          </div>
           <p className="text-lg font-semibold">{terminology.loading}</p>
         </div>
       </div>

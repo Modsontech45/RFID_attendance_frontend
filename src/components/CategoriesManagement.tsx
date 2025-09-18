@@ -17,7 +17,7 @@ import {
   BarChart3,
   RefreshCw
 } from 'lucide-react';
-
+import Icon from "./icon.png";
 interface Category {
   id: number;
   name: string;
@@ -126,8 +126,9 @@ const CategoriesManagement: React.FC = () => {
     return (
       <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 animate-pulse shadow-2xl">
-            <Building className="w-8 h-8 text-white animate-bounce" />
+          <div className="flex items-center justify-center mb-6">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
           <div className="space-y-2">
             <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -160,9 +161,10 @@ const CategoriesManagement: React.FC = () => {
             {/* Logo and Title */}
             <div className="flex items-center space-x-4 group">
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center border-2 border-white/20 shadow-lg group-hover:scale-110 transition-all duration-300">
-                  <Shield className="w-7 h-7 text-white group-hover:rotate-12 transition-transform duration-300" />
-                </div>
+                      <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-purple-400 rounded-full border-2 border-white animate-pulse"></div>
               </div>
               <div className="space-y-1">
@@ -176,25 +178,25 @@ const CategoriesManagement: React.FC = () => {
             {/* Header Actions */}
             <div className="flex items-center space-x-4">
               {/* Notifications */}
-              <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+              {/* <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                 <Bell className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
                 <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-              </button>
+              </button> */}
 
               {/* Settings */}
-              <button className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+              {/* <button className="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                 <Settings className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:rotate-90 transition-all duration-300" />
-              </button>
+              </button> */}
 
               {/* Language Selector */}
-              <select 
+              {/* <select 
                 value={currentLanguage}
                 onChange={handleLanguageChange}
                 className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 hover:bg-white/20 transition-all duration-300"
               >
                 <option value="en" className="text-gray-900">🇺🇸 {t('home.english')}</option>
                 <option value="fr" className="text-gray-900">🇫🇷 {t('home.french')}</option>
-              </select>
+              </select> */}
               
               <button
                 onClick={handleGoHome}

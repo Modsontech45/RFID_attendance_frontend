@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useIntl as useLocalIntl } from "../context/IntlContext";
-
+import Icon from "./icon.png";
 const ForgotPassword: React.FC = () => {
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
@@ -133,12 +133,11 @@ const ForgotPassword: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-                Synctuario
-              </span>
+                      <div className="flex items-center justify-center mb-0">
+            {/* Bigger Logo */}
+            <img src={Icon} alt="App Logo" className="h-24 w-24" />
+          </div>
+             
             </div>
 
             <div className="flex items-center space-x-4"></div>
