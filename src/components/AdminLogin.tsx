@@ -116,9 +116,9 @@ const AdminLogin: React.FC = () => {
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
-              <span className="text-2xl font-bold text-green-400">
+              {/* <span className="text-2xl font-bold text-green-400">
                 <FormattedMessage id="app.name" defaultMessage="Synctuario" />
-              </span>
+              </span> */}
             </div>
             <LanguageSwitcher />
           </div>
