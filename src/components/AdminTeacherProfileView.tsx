@@ -112,7 +112,7 @@ const AdminTeacherProfileView: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 text-white px-6 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white px-6 py-12">
       {/* Floating Go Home Button */}
       <div className="fixed top-6 left-6 z-50">
         <button

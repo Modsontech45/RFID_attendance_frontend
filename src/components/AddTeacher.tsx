@@ -127,7 +127,7 @@ const AddTeacher: React.FC = () => {
   // Show loading state while translations are loading
   if (isLoading || !isLoaded) {
     return (
-      <div className="bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 text-white min-h-screen flex items-center justify-center">
+      <div className="bg-primary text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="flex items-center justify-center mb-6">
             {/* Bigger Logo */}
@@ -135,20 +135,20 @@ const AddTeacher: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            <div className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+            <div className="text-3xl font-bold bg-button-green bg-clip-text text-transparent">
               {terminology.loading}
             </div>
             <div className="flex justify-center space-x-2">
               <div
-                className="w-3 h-3 bg-green-400 rounded-full animate-bounce"
+                className="w-3 h-3 bg-button-green rounded-full animate-bounce"
                 style={{ animationDelay: "0ms" }}
               ></div>
               <div
-                className="w-3 h-3 bg-green-400 rounded-full animate-bounce"
+                className="w-3 h-3 bg-button-green rounded-full animate-bounce"
                 style={{ animationDelay: "150ms" }}
               ></div>
               <div
-                className="w-3 h-3 bg-green-400 rounded-full animate-bounce"
+                className="w-3 h-3 bg-button-green rounded-full animate-bounce"
                 style={{ animationDelay: "300ms" }}
               ></div>
             </div>
@@ -159,7 +159,7 @@ const AddTeacher: React.FC = () => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 text-white min-h-screen">
+    <div className="bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white min-h-screen">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -174,7 +174,7 @@ const AddTeacher: React.FC = () => {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300">
+      <header className="sticky top-0 z-50 bg-black/40 backdrop-blur-xl border-b border-white/30 shadow-2xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Title */}
@@ -184,10 +184,10 @@ const AddTeacher: React.FC = () => {
                   {/* Logo without background */}
                   <img src={Icon} alt="App Logo" className="h-18 w-20" />
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-button-green rounded-full border-2 border-white animate-pulse"></div>
               </div>
               <div className="space-y-1">
-                <span className="text-lg font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                <span className="text-lg font-bold bg-white bg-clip-text text-transparent">
                   {schoolName}
                 </span>
                 <div className="text-xs text-gray-400">@{username}</div>
@@ -209,7 +209,7 @@ const AddTeacher: React.FC = () => {
 
               <button
                 onClick={handleGoBack}
-                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                className="bg-transparent border border-button-green hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>{formatMessage({ id: "addTeacher.dashboard" })}</span>
@@ -223,16 +223,16 @@ const AddTeacher: React.FC = () => {
       <main className="relative z-10 flex items-center justify-center min-h-[calc(100vh-80px)] px-4 py-12">
         <div className="w-full max-w-md">
           {/* Add Teacher Form */}
-          <div className="bg-black/40 backdrop-blur-md border-2 border-green-500/50 p-8 rounded-2xl shadow-2xl space-y-6 animate-fade-in">
+          <div className="bg-black/40 backdrop-blur-md border-2 border-white/20 p-8 rounded-2xl shadow-2xl space-y-6 animate-fade-in">
             {/* Header */}
             <div className="text-center space-y-4">
-              <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-2xl">
+              <div className="w-20 h-20 bg-gradient-to-r from-button-green to-blue rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-2xl">
                 <UserPlus className="w-10 h-10 text-white" />
               </div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold bg-button-green bg-clip-text text-transparent">
                 {terminology.AddCoManager}
               </h1>
-              <p className="text-green-200 text-sm">
+              <p className="text-white/40 text-sm">
                 {terminology.coManagerEmail}
               </p>
             </div>
@@ -259,7 +259,7 @@ const AddTeacher: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Email Field */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-green-300">
+                <label className="text-sm font-medium text-white">
                   {terminology.coManager}
                 </label>
                 <div className="relative">
@@ -269,10 +269,10 @@ const AddTeacher: React.FC = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={`${terminology.teacher.toLowerCase()}@example.com`}
                     required
-                    className="w-full pl-12 pr-4 py-4 border border-green-400/50 rounded-xl bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
+                    className="w-full pl-12 pr-4 py-4 border border-green-400/30 rounded-xl bg-black/50 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
                   />
                 </div>
-                <p className="text-xs text-green-300 mt-1">
+                <p className="text-xs text-white/40 mt-1">
                   {terminology.receiveEmail}
                 </p>
               </div>
@@ -281,7 +281,7 @@ const AddTeacher: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-700 text-white py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center justify-center space-x-3 shadow-lg hover:shadow-2xl"
+                className="w-full bg-primary border border-green-400/30 hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-700 text-white py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center justify-center space-x-3 shadow-lg hover:shadow-2xl"
               >
                 {isLoading ? (
                   <>
@@ -305,7 +305,7 @@ const AddTeacher: React.FC = () => {
 
             {/* Additional Info */}
             <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 text-center">
-              <div className="flex items-center justify-center space-x-2 text-green-300 text-sm">
+              <div className="flex items-center justify-center space-x-2 text-white/40 text-sm">
                 <Users className="w-4 h-4" />
                 <span>{terminology.receiveEmail}</span>
               </div>
@@ -315,7 +315,7 @@ const AddTeacher: React.FC = () => {
             <div className="text-center">
               <button
                 onClick={handleGoBack}
-                className="text-green-400 hover:text-green-300 transition-colors duration-300 flex items-center space-x-2 mx-auto group"
+                className="text-white/40 hover:text-green-300 transition-colors duration-300 flex items-center space-x-2 mx-auto group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
                 <span> {formatMessage({ id: "addTeacher.goBack" })}</span>

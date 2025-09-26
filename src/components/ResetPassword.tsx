@@ -171,7 +171,7 @@ const ResetPassword: React.FC = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen relative overflow-hidden">
+    <div className="bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white min-h-screen relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{
@@ -202,13 +202,13 @@ const ResetPassword: React.FC = () => {
       <main className="relative z-10 flex items-center justify-center min-h-[calc(100vh-80px)] px-4">
         <div className="w-full max-w-md">
           {/* Reset Form */}
-          <div className="bg-green-900/20 backdrop-blur-md border border-green-500/50 p-8 rounded-2xl shadow-2xl space-y-6">
+          <div className="bg-green-900/20 backdrop-blur-md border border-white/30 p-8 rounded-2xl shadow-2xl space-y-6">
             {/* Header */}
             <div className="text-center space-y-2">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-button-green rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Lock className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-green-400">
+              <h1 className="text-3xl font-bold text-white">
                   <FormattedMessage
                                       id="resetPassword.title"
                                       defaultMessage="Set New Password"
@@ -237,7 +237,7 @@ const ResetPassword: React.FC = () => {
               {/* New Password Field */}
               <div className="space-y-2">
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white" />
                   <input
                     type={showNewPassword ? 'text' : 'password'}
                     name="newPassword"
@@ -249,12 +249,12 @@ const ResetPassword: React.FC = () => {
                     })}
                     // placeholder={t('resetPassword.new_password_placeholder') || 'New Password'}
                     required
-                    className="w-full pl-12 pr-12 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    className="w-full pl-12 pr-12 py-3 border border-white/30 rounded-lg bg-black/50 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-button-green transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => setShowNewPassword(!showNewPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300 transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white hover:text-green-300 transition-colors"
                   >
                     {showNewPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
@@ -264,7 +264,7 @@ const ResetPassword: React.FC = () => {
               {/* Confirm Password Field */}
               <div className="space-y-2">
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white" />
                   <input
                     type={showConfirmPassword ? 'text' : 'password'}
                     name="confirmPassword"
@@ -276,12 +276,12 @@ const ResetPassword: React.FC = () => {
                     })}
                     // placeholder={t('resetPassword.confirm_password_placeholder') || 'Confirm Password'}
                     required
-                    className="w-full pl-12 pr-12 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    className="w-full pl-12 pr-12 py-3 border border-white/30 rounded-lg bg-black/50 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-button-green transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300 transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white hover:text-green-300 transition-colors"
                   >
                     {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
@@ -292,7 +292,7 @@ const ResetPassword: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading || !token}
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center justify-center space-x-2"
+                className="w-full bg-button-green hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center justify-center space-x-2"
               >
                 {isLoading ? (
                   <>

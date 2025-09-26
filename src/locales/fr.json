@@ -327,7 +327,7 @@
       "renew": "Renouveler",
       "title": "Débutant",
       "subtitle": "Parfait pour les petites écoles ou les entreprises en démarrage",
-      "price": "$35",
+      "price": "$7",
       "period": "par mois",
       "subscribed": "✅ Abonné",
       "freetrialExpired": "L'essai gratuit a expiré",
@@ -350,7 +350,7 @@
     "professional": {
       "title": "Professionnel",
       "subtitle": "Idéal pour les écoles ou entreprises moyennes",
-      "price": "$65",
+      "price": "$15",
       "period": "par mois",
       "mostPopular": "Le plus populaire",
       "features": [
@@ -367,7 +367,7 @@
     "enterprise": {
       "title": "Entreprise",
       "subtitle": "Pour les grandes écoles ou entreprises avec des besoins avancés",
-      "price": "$170",
+      "price": "$35",
       "period": "par mois",
       "features": [
         "Étudiants ou employés illimités",

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
-import { getAuthData, logout, getApiKey, API_BASE, getAdminData } from '../utils/auth';
+import {
+  getAuthData,
+  logout,
+  getApiKey,
+  API_BASE,
+  getAdminData,
+} from "../utils/auth";
 import axios from "axios";
 import {
   Shield,
@@ -107,11 +113,15 @@ const PricingPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const adminData = getAdminData();
   const plans = adminData?.subscription_plan;
-  const planstatus =  adminData?.subscription_status;
+  const planstatus = adminData?.subscription_status;
   const endfree = adminData?.trial_end_date;
   const Email = adminData?.email;
-   const schoolName = adminData?.schoolname || adminData?.email?.split('@')[1]?.split('.')[0] || 'AFR';
-     const username = adminData?.username || adminData?.email?.split('@')[0] || 'admin_user';
+  const schoolName =
+    adminData?.schoolname ||
+    adminData?.email?.split("@")[1]?.split(".")[0] ||
+    "AFR";
+  const username =
+    adminData?.username || adminData?.email?.split("@")[0] || "admin_user";
   const handlePlanSelect = (planName: string) => {
     setSelectedPlan(planName);
     setEmail(Email); // Set immediately from admin data
@@ -119,7 +129,7 @@ const PricingPage: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div
@@ -129,18 +139,16 @@ const PricingPage: React.FC = () => {
           }}
         ></div>
       </div>
-      <header className="relative z-20 border-b border-white/20 bg-white/10 backdrop-blur-md">
+      <header className="relative z-20 border-b border-white/30 bg-black/20 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-                       <div className="flex items-center justify-center mb-0">
-            {/* Bigger Logo */}
-            <img src={Icon} alt="App Logo" className="h-24 w-24" />
-          </div>
- <div className="space-y-1">
-                <span className="text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  {schoolName}
-                </span>
+              <div className="flex items-center justify-center mb-0">
+                {/* Bigger Logo */}
+                <img src={Icon} alt="App Logo" className="h-24 w-24" />
+              </div>
+              <div className="space-y-1">
+                <span className=" text-secondary">{schoolName}</span>
                 <div className="text-xs text-gray-400">@{username}</div>
               </div>
             </div>
@@ -150,19 +158,13 @@ const PricingPage: React.FC = () => {
                 onClick={() => navigate("/admin/school")}
                 className="text-gray-300 transition-colors cursor-pointer hover:text-white"
               >
-                <FormattedMessage
-                  id="pricing.school"
-                  defaultMessage="school"
-                />
+                <FormattedMessage id="pricing.school" defaultMessage="school" />
               </a>
               <a
                 onClick={() => navigate(-1)}
                 className="text-gray-300 transition-colors cursor-pointer hover:text-white"
               >
-                <FormattedMessage
-                  id="pricing.back"
-                  defaultMessage="Back"
-                />
+                <FormattedMessage id="pricing.back" defaultMessage="Back" />
               </a>
               <a
                 // onClick={() => href("#contact")}
@@ -180,7 +182,7 @@ const PricingPage: React.FC = () => {
         <section className="space-y-8 text-center">
           <div className="space-y-6">
             <h1 className="text-5xl font-bold leading-tight md:text-7xl">
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-button-green via-white to-button-green bg-clip-text text-transparent">
                 <FormattedMessage
                   id="pricing.title"
                   defaultMessage="Choose the plan that fits your school"
@@ -199,7 +201,7 @@ const PricingPage: React.FC = () => {
         {/* Payment Form Modal/Section */}
         {showPaymentForm && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50  ">
-            <div className="relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30">
+            <div className="relative transform rounded-2xl border-2 border-white/50 bg-gradient-to-br from-button-green/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30">
               <button
                 onClick={() => setShowPaymentForm(false)}
                 className="absolute top-2 right-2 text-white hover:text-gray-700"
@@ -215,11 +217,11 @@ const PricingPage: React.FC = () => {
         <section className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
           {/* Starter Plan */}
           <div
-            className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
-            ${plans === "starter" ? "ring-2 ring-blue-500" : ""}`}
+            className={`relative transform rounded-2xl border-2 border-white/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+            ${plans === "starter" ? "ring-2 ring-button-green" : ""}`}
           >
             {plans === "starter" && planstatus === "active" && (
-              <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
+              <span className="flex items-center space-x-1 rounded-full bg-button-green  px-4 py-2 text-sm font-semibold text-white">
                 <CheckCircle className="h-4 w-4" />
                 <span>
                   <FormattedMessage
@@ -243,10 +245,10 @@ const PricingPage: React.FC = () => {
                   defaultMessage="Perfect for small schools or pilots"
                 />
               </p>
-              <div className="mb-2 text-4xl font-bold text-blue-400">
+              <div className="mb-2 text-4xl font-bold text-white">
                 <FormattedMessage
                   id="pricing.starter.price"
-                  defaultMessage="$30"
+                  defaultMessage="$7"
                 />
               </div>
               <div className="text-gray-400">
@@ -254,14 +256,19 @@ const PricingPage: React.FC = () => {
                   id="pricing.starter.period"
                   defaultMessage="month"
                 />
-              </div> 
-              <span className="mt-4 inline-block cursor-pointer rounded-full bg-gradient-to-r from-blue-900 via-green-2 to-blue-600 px-6 py-3 text-white font-extrabold shadow-xl ring-4 ring-green-700 transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-1 hover:shadow-2xl animate-pulse">
+              </div>
+              <span className="mt-4 inline-block cursor-pointer rounded-full bg-transparent px-6 py-3 text-white font-extrabold shadow-xl ring-4 ring-green-700 transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-1 hover:shadow-2xl animate-pulse">
                 <FormattedMessage
-                  id={`${ ( plans === "starter"|| plans === "professional" || plans === "enterprise")  && planstatus === "active" || planstatus === "expired"
+                  id={`${
+                    ((plans === "starter" ||
+                      plans === "professional" ||
+                      plans === "enterprise") &&
+                      planstatus === "active") ||
+                    planstatus === "expired"
                       ? "pricing.starter.freetrialExpired"
                       : planstatus === "trial"
-                      ? "pricing.starter.freeplan"
-                      : "pricing.starter.startfreetrial"
+                        ? "pricing.starter.freeplan"
+                        : "pricing.starter.startfreetrial"
                   }`}
                   defaultMessage="pricing.starter.startfreetrial"
                 />
@@ -288,7 +295,7 @@ const PricingPage: React.FC = () => {
                 }),
               ].map((feature: string, index: number) => (
                 <li key={index} className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 flex-shrink-0 text-green-400" />
+                  <Check className="h-5 w-5 flex-shrink-0 text-button-green" />
                   <span className="text-gray-300">{feature}</span>
                 </li>
               ))}
@@ -301,7 +308,7 @@ const PricingPage: React.FC = () => {
     ${
       plans === "starter" && planstatus === "active"
         ? "bg-gray-400 text-white cursor-not-allowed"
-        : "bg-blue-600 text-white hover:scale-105 hover:bg-blue-700"
+        : "bg-button-green text-white hover:scale-105 hover:bg-button-green/10"
     }
   `}
             >
@@ -313,7 +320,7 @@ const PricingPage: React.FC = () => {
                       ? "pricing.starter.subscribed"
                       : plans === "starter" && planstatus === "expired"
                         ? "pricing.starter.renew"
-                      : "pricing.starter.getStarted"
+                        : "pricing.starter.getStarted"
                 }`}
                 defaultMessage="pricing.starter.downgrade"
               />
@@ -322,11 +329,11 @@ const PricingPage: React.FC = () => {
 
           {/* Professional Plan */}
           <div
-            className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
-            ${plans === "professional" ? "ring-2 ring-blue-500" : ""}`}
+            className={`relative transform rounded-2xl border-2 border-white/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+            ${plans === "professional" ? "ring-2 ring-button-green" : ""}`}
           >
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 transform">
-              <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
+              <span className="flex items-center space-x-1 rounded-full bg-button-green px-4 py-2 text-sm font-semibold text-white">
                 <Star className="h-4 w-4" />
                 <span>
                   <FormattedMessage
@@ -354,10 +361,10 @@ const PricingPage: React.FC = () => {
                   defaultMessage="Great for growing institutions"
                 />
               </p>
-              <div className="mb-2 text-4xl font-bold text-blue-400">
+              <div className="mb-2 text-4xl font-bold text-white">
                 <FormattedMessage
                   id="pricing.professional.price"
-                  defaultMessage="$60"
+                  defaultMessage="$15"
                 />
               </div>
               <div className="text-gray-400">
@@ -388,7 +395,7 @@ const PricingPage: React.FC = () => {
                 }),
               ].map((feature: string, index: number) => (
                 <li key={index} className="flex items-center space-x-3">
-                  <Check className="h-5 w-5 flex-shrink-0 text-green-400" />
+                  <Check className="h-5 w-5 flex-shrink-0 text-button-green" />
                   <span className="text-gray-300">{feature}</span>
                 </li>
               ))}
@@ -401,7 +408,7 @@ const PricingPage: React.FC = () => {
     ${
       plans === "professional" && planstatus === "active"
         ? "bg-gray-400 text-white cursor-not-allowed"
-        : "bg-blue-600 text-white hover:scale-105 hover:bg-blue-700"
+        : "bg-button-green text-white hover:scale-105 hover:bg-button-green/10"
     }
   `}
             >
@@ -414,18 +421,17 @@ const PricingPage: React.FC = () => {
                       : plans === "enterprise"
                         ? "pricing.starter.downgrade"
                         : plans === "professional" && planstatus === "expired"
-                        ? "pricing.starter.renew"
-                        : "pricing.starter.getStarted"
+                          ? "pricing.starter.renew"
+                          : "pricing.starter.getStarted"
                 }
-               
               />
             </button>
           </div>
 
           {/* Enterprise Plan */}
           <div
-            className={`relative transform rounded-2xl border-2 border-blue-700/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
-            ${plans === "enterprise" ? "ring-2 ring-blue-500" : ""}`}
+            className={`relative transform rounded-2xl border-2 border-white/50 bg-gradient-to-br from-blue-00/20 to-cyan-600/20 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-600/30
+            ${plans === "enterprise" ? "ring-2 ring-button-green" : ""}`}
           >
             {plans === "enterprise" && (
               <span className="flex items-center space-x-1 rounded-full bg-gradient-to-r from-black to-cyan-500 px-4 py-2 text-sm font-semibold text-white">
@@ -451,10 +457,10 @@ const PricingPage: React.FC = () => {
                   defaultMessage="Best for large or multi-campus setups"
                 />
               </p>
-              <div className="mb-2 text-4xl font-bold text-blue-400">
+              <div className="mb-2 text-4xl font-bold text-white">
                 <FormattedMessage
                   id="pricing.enterprise.price"
-                  defaultMessage="Custom"
+                  defaultMessage="35"
                 />
               </div>
               <div className="text-gray-400">
@@ -498,7 +504,7 @@ const PricingPage: React.FC = () => {
     ${
       plans === "enterprise" && planstatus === "active"
         ? "bg-gray-400 text-white cursor-not-allowed"
-        : "bg-blue-600 text-white hover:scale-105 hover:bg-blue-700"
+        : "bg-button-green text-white hover:scale-105 hover:bg-button-green/10"
     }
   `}
             >
@@ -590,7 +596,7 @@ const PricingPage: React.FC = () => {
               },
             ].map((feature, index) => (
               <div key={index} className="space-y-4 text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-cyan-600">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-button-green to-blue">
                   <feature.icon className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-white">

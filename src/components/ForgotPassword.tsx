@@ -79,7 +79,7 @@ const ForgotPassword: React.FC = () => {
   // Show loading state while translations are loading
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen flex items-center justify-center">
+      <div className="bg-primary text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
             <Shield className="w-6 h-6 text-white animate-pulse" />
@@ -117,7 +117,7 @@ const ForgotPassword: React.FC = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen relative overflow-hidden">
+    <div className="bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white min-h-screen relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div
@@ -129,7 +129,7 @@ const ForgotPassword: React.FC = () => {
       </div>
 
       {/* Header */}
-      <header className="relative z-20 bg-white/10 backdrop-blur-md border-b border-white/20">
+      <header className="relative z-20 bg-black/40 backdrop-blur-md border-b border-white/30">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -149,16 +149,16 @@ const ForgotPassword: React.FC = () => {
       <main className="relative z-10 flex items-center justify-center min-h-[calc(100vh-80px)] px-4">
         <div className="w-full max-w-md">
           {/* Reset Form */}
-          <div className="bg-green-900/20 backdrop-blur-md border border-green-500/50 p-8 rounded-2xl shadow-2xl space-y-6">
+          <div className="bg-black/20 backdrop-blur-md border border-white/30 p-8 rounded-2xl shadow-2xl space-y-6">
             {/* Header */}
             <div className="text-center space-y-2">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-button-green to-blue rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Mail className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-green-400">
                 {/* {t('forgotPassword.title')} */}
               </h1>
-              <p className="text-green-200 text-sm">
+              <p className="text-white text-sm">
                 <FormattedMessage id="forgotPassword.subtitle" />
               </p>
             </div>
@@ -178,7 +178,7 @@ const ForgotPassword: React.FC = () => {
               {/* Email Field */}
               <div className="space-y-2">
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-button-green" />
                   <input
                     type="email"
                     value={email}
@@ -188,7 +188,7 @@ const ForgotPassword: React.FC = () => {
                       defaultMessage: "Your Email",
                     })}
                     required
-                    className="w-full pl-12 pr-4 py-3 border border-green-400/50 rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    className="w-full pl-12 pr-4 py-3 border border-white/30 rounded-lg bg-black/50 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
                 </div>
               </div>
@@ -197,7 +197,7 @@ const ForgotPassword: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center justify-center space-x-2"
+                className="w-full bg-button-green hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center justify-center space-x-2"
               >
                 {isLoading ? (
                   <>
@@ -215,7 +215,7 @@ const ForgotPassword: React.FC = () => {
 
             {/* Links */}
             <div className="space-y-3 text-center text-sm">
-              <p className="text-green-300">
+              <p className="text-gray-300">
                 <FormattedMessage id="forgotPassword.remember_password" />{" "}
                 <Link
                   to="/admin/login"

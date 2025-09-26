@@ -252,7 +252,7 @@ const SettingsComponent: React.FC = () => {
             </div>
 
             {/* Card Summary */}
-            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#6d28d9] rounded-lg p-6 shadow text-white">
+            <div className="bg-gradient-to-r from-button-green to-button-green/10 rounded-lg p-6 shadow text-white">
               <div className="flex items-center space-x-3 mb-3">
                 <Activity className="h-6 w-6" />
                 <h3 className="text-lg font-semibold">

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { getAuthData, getApiKey, getAdminData, API_BASE } from '../utils/auth';
 import {
-  Shield,
+ 
   ArrowLeft,
   Users,
   Loader2,
@@ -13,14 +13,12 @@ import {
   Mail,
   Calendar,
   Eye,
-  Edit,
-  MoreVertical,
+ 
   UserCheck,
   Award,
   Clock,
   TrendingUp,
-  Bell,
-  Settings,
+
   Grid,
   List,
   Download,
@@ -141,20 +139,20 @@ const { locale } = useLocalIntl();
 
   if (isLoading|| !isLoaded) {
     return (
-      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen flex items-center justify-center">
+      <div className="bg-primary text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
            <div className="flex items-center justify-center mb-6">
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
           <div className="space-y-2">
-            <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+            <div className="text-2xl font-bold bg-button-green bg-clip-text text-transparent">
               {terminology.loading}
             </div>
             <div className="flex justify-center space-x-1">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              <div className="w-2 h-2 bg-button-green rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+              <div className="w-2 h-2 bg-button-green rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+              <div className="w-2 h-2 bg-button-green rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
             </div>
           </div>
         </div>
@@ -163,16 +161,16 @@ const { locale } = useLocalIntl();
   }
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 text-white min-h-screen">
+    <div className="bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white min-h-screen">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-button-green/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-button-green/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-button-green/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300">
+      <header className="sticky top-0 z-50 bg-black/40 backdrop-blur-xl border-b border-white/30 shadow-2xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Title */}
@@ -182,10 +180,10 @@ const { locale } = useLocalIntl();
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-24 w-24" />
           </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-button-green rounded-full border-2 border-white animate-pulse"></div>
               </div>
               <div className="space-y-1">
-                <span className="text-lg font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                <span className="text-lg font-bold bg-white bg-clip-text text-transparent">
                   {schoolName}
                 </span>
                 <div className="text-xs text-gray-400">@{username}</div>
@@ -219,7 +217,7 @@ const { locale } = useLocalIntl();
 
               <button
                 onClick={handleGoHome}
-                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                className="bg-transparent border border-white/20 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>{formatMessage({ id: "teachersList.goHome" })}</span>
@@ -236,7 +234,7 @@ const { locale } = useLocalIntl();
         <section className="text-center space-y-6 animate-fade-in">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
-              <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient">
+              <span className="bg-button-green bg-clip-text text-transparent animate-gradient">
               {terminology.teacherPlural}
               </span>
             </h1>
@@ -249,10 +247,10 @@ const { locale } = useLocalIntl();
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-           { icon: Users, label: `Total ${terminology.teacherPlural}`, value: (teachers?.length || 0).toString(), change: "+3%", color: "from-green-500 to-emerald-500" },
-           { icon: UserCheck, label: `Active ${terminology.teacherPlural}`, value: Math.floor((teachers?.length || 0) * 0.85).toString(), change: "+5%", color: "from-blue-500 to-cyan-500" },
-           { icon: Award, label: formatMessage({ id: "teachersList.stats.TopPerforming" }), value: Math.floor((teachers?.length || 0) * 0.2).toString(), change: "+12%", color: "from-purple-500 to-pink-500" },
-            { icon: Clock, label: formatMessage({ id: "teachersList.stats.avgExperience" }), value: "4.2y", change: "+0.3y", color: "from-orange-500 to-red-500" }
+           { icon: Users, label: `Total ${terminology.teacherPlural}`, value: (teachers?.length || 0).toString(), change: "+3%", color: "from-button-green to-blue" },
+           { icon: UserCheck, label: `Active ${terminology.teacherPlural}`, value: Math.floor((teachers?.length || 0) * 0.85).toString(), change: "+5%", color: "from-button-green to-blue" },
+           { icon: Award, label: formatMessage({ id: "teachersList.stats.TopPerforming" }), value: Math.floor((teachers?.length || 0) * 0.2).toString(), change: "+12%", color: "from-button-green to-blue" },
+            { icon: Clock, label: formatMessage({ id: "teachersList.stats.avgExperience" }), value: "4.2y", change: "+0.3y", color: "from-button-green to-blue" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
               <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -299,7 +297,7 @@ const { locale } = useLocalIntl();
                     onClick={() => setViewMode('grid')}
                     className={`p-2 rounded-lg transition-all duration-300 ${
                       viewMode === 'grid'
-                        ? 'bg-green-600 text-white'
+                        ? 'bg-button-green text-white'
                         : 'text-gray-400 hover:text-white'
                     }`}
                   >
@@ -309,7 +307,7 @@ const { locale } = useLocalIntl();
                     onClick={() => setViewMode('list')}
                     className={`p-2 rounded-lg transition-all duration-300 ${
                       viewMode === 'list'
-                        ? 'bg-green-600 text-white'
+                        ? 'bg-button-green text-white'
                         : 'text-gray-400 hover:text-white'
                     }`}
                   >
@@ -317,14 +315,14 @@ const { locale } = useLocalIntl();
                   </button>
                 </div>
 
-                <button className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2">
+                {/* <button className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl text-white transition-all duration-300 flex items-center space-x-2">
                   <Download className="w-4 h-4" />
                 
-                </button>
+                </button> */}
 
                 <button
                   onClick={handleAddTeacher}
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                  className="bg-button-green hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <Plus className="w-4 h-4" />
                   <span>{terminology.add} {terminology.teacher}</span>
@@ -373,14 +371,14 @@ const { locale } = useLocalIntl();
             <div className="space-y-6">
               {filteredTeachers.length === 0 ? (
                 <div className="text-center py-20">
-                  <div className="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
+                  <div className="w-24 h-24 bg-button-green rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
                     <Users className="w-12 h-12 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{formatMessage({ id: "teachersList.noTeachers" })}</h3>
                   <p className="text-gray-400 mb-8">Add {terminology.teacherPlural.toLowerCase()} to see them here</p>
                   <button
                     onClick={handleAddTeacher}
-                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-3 mx-auto"
+                    className="bg-button-green hover:bg-button-green/80 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-3 mx-auto"
                   >
                     <Plus className="w-5 h-5" />
                     <span>Add your first {terminology.teacher.toLowerCase()}</span>

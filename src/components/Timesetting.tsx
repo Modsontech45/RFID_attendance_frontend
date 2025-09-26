@@ -86,8 +86,8 @@ const TimeSettings: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
-        <span className="text-green-400 text-lg font-semibold tracking-wide">
+      <div className="flex justify-center items-center h-screen bg-primary">
+        <span className="text-white text-lg font-semibold tracking-wide">
           Loading time settings...
         </span>
       </div>
@@ -95,8 +95,8 @@ const TimeSettings: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 py-12">
-      <div className="max-w-2xl w-full px-10 py-12 bg-gradient-to-r from-black via-gray-900 to-green-900 rounded-xl shadow-2xl text-white font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark flex flex-col items-center justify-center px-4 py-12">
+      <div className="max-w-2xl w-full px-10 py-12 border border-white/40 bg-gradient-to-r from-transparent via-gray-900 to-transparent rounded-xl shadow-2xl text-white font-sans">
         <h2 className="text-3xl font-extrabold mb-8 text-center tracking-wider drop-shadow-md">
           <FormattedMessage
             id="settime.header"
@@ -121,7 +121,7 @@ const TimeSettings: React.FC = () => {
         {!editing ? (
           <div className="space-y-6 text-lg leading-relaxed text-green-300">
             <p>
-              <strong className="text-green-400">
+              <strong className="text-button-green">
                     <FormattedMessage
             id="settime.start"
             defaultMessage="Sign In Start:"
@@ -130,7 +130,7 @@ const TimeSettings: React.FC = () => {
               {settings?.sign_in_start}
             </p>
             <p>
-              <strong className="text-green-400">
+              <strong className="text-button-green">
                              <FormattedMessage
             id="settime.startEnd"
             defaultMessage="Sign In End:"
@@ -139,7 +139,7 @@ const TimeSettings: React.FC = () => {
               {settings?.sign_in_end}
             </p>
             <p>
-              <strong className="text-green-400">
+              <strong className="text-button-green">
                                        <FormattedMessage
             id="settime.endstart"
             defaultMessage="Sign Out Start:"
@@ -148,7 +148,7 @@ const TimeSettings: React.FC = () => {
               {settings?.sign_out_start}
             </p>
             <p>
-              <strong className="text-green-400">
+              <strong className="text-button-green">
                                                <FormattedMessage
             id="settime.end"
             defaultMessage="Sign Out End:"
@@ -160,7 +160,7 @@ const TimeSettings: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setEditing(true)}
-                className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-black font-bold px-10 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
+                className="bg-button-green hover:from-green-700 hover:to-green-600 text-black font-bold px-10 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
               >
                                                         <FormattedMessage
             id="settime.modifier"
@@ -192,14 +192,14 @@ const TimeSettings: React.FC = () => {
                   value={form[field as keyof TimeSettingsData]}
                   onChange={handleChange}
                   required
-                  className="w-full px-5 py-3 rounded-lg bg-black bg-opacity-60 border border-green-500 text-green-200 placeholder-green-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition"
+                  className="w-full px-5 py-3 rounded-lg bg-black bg-opacity-60 border border-green-500 text-green-200 placeholder-button-green focus:outline-none focus:ring-2 focus:ring-button-green focus:border-button-green transition"
                 />
               </div>
             ))}
             <div className="flex justify-end gap-6 pt-6">
               <button
                 type="submit"
-                className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-black font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
+                className="bg-button-green hover:from-green-700 hover:to-green-600 text-black font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
               >
                      <FormattedMessage
             id="settime.save"
@@ -212,7 +212,7 @@ const TimeSettings: React.FC = () => {
                   setEditing(false);
                   if (settings) setForm(settings);
                 }}
-                className="bg-gray-800 hover:bg-gray-700 text-green-400 font-semibold px-8 py-3 rounded-xl shadow-inner transition"
+                className="bg-gray-800 hover:bg-gray-700 text-button-green font-semibold px-8 py-3 rounded-xl shadow-inner transition"
               >
                        <FormattedMessage
             id="settime.cancel"
@@ -226,7 +226,7 @@ const TimeSettings: React.FC = () => {
 
       <button
         onClick={() => navigate("/admin/dashboard")}
-        className="mt-10 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-black font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
+        className="mt-10 bg-transparent border border-button-green hover:from-green-700 hover:to-green-600 text-black font-bold px-8 py-3 rounded-xl shadow-lg transition transform hover:scale-105"
         type="button"
       >
                <FormattedMessage

@@ -126,10 +126,10 @@ const handleSubmit = async (e: React.FormEvent) => {
   }
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white min-h-screen">
 
       {/* Header */}
-      <header className="bg-black border-b border-green-600">
+      <header className="bg-black border-b border-white/30">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -147,13 +147,13 @@ const handleSubmit = async (e: React.FormEvent) => {
       <main className="flex items-center justify-center min-h-[calc(100vh-80px)] px-4">
         <div className="w-full max-w-md">
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="bg-black border-2 border-green-600 p-8 rounded-2xl shadow-2xl space-y-6">
+          <form onSubmit={handleSubmit} className="bg-black border-2 border-white/30 p-8 rounded-2xl shadow-2xl space-y-6">
             {/* Header */}
             <div className="text-center space-y-2">
-              <div className="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-button-green to-blue rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-green-400">
+              <h1 className="text-3xl font-bold text-white">
               {terminology.coWorkerLogin} 
               </h1>
               <p className="text-white text-sm">
@@ -171,7 +171,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             {/* Email Field */}
             <div className="space-y-2">
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-button-green" />
                 <input
                   type="email"
                   name="email"
@@ -179,10 +179,10 @@ const handleSubmit = async (e: React.FormEvent) => {
                   onChange={handleInputChange}
                   placeholder=  { formatMessage({ id: "teacherlogin.email_placeholder" })}
                   required
-                  className={`w-full pl-12 pr-4 py-3 border rounded-lg bg-black/50 text-white placeholder-green-300/70 focus:outline-none focus:ring-2 transition-all ${
-                    errors.email 
-                      ? 'border-red-600 focus:ring-red-600' 
-                      : 'border-green-600 focus:ring-green-600'
+                  className={`w-full pl-12 pr-4 py-3 border rounded-lg bg-black/50 text-white placeholder-white/30 focus:outline-none focus:ring-2 transition-all ${
+                    errors.email
+                      ? 'border-red-600 focus:ring-red-600'
+                      : 'border-white/30 focus:ring-green-600'
                   }`}
                 />
               </div>
@@ -195,7 +195,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center justify-center space-x-2"
+              className="w-full bg-button-green hover:bg-button-green/30 disabled:bg-gray-600 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 flex items-center justify-center space-x-2"
             >
               {isLoading ? (
                 <>
@@ -208,7 +208,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             </button>
 
             {/* Info Text */}
-            <div className="bg-green-900 border border-green-600 rounded-lg p-4 text-center">
+            <div className="bg-transparent border border-white/30 rounded-lg p-4 text-center">
               <p className="text-white text-sm">
                 {terminology.note}
               </p>

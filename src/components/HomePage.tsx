@@ -33,7 +33,7 @@ import {
   X,
 } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { useTerminology } from "../utils/terminology";
+
 
 interface FloatingComment {
   id: number;
@@ -209,7 +209,7 @@ const HomePage: React.FC = () => {
   }, [formatMessage]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div
@@ -221,29 +221,26 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* Header */}
-      <header className="relative z-20 border-b border-white/20 bg-blue-900 backdrop-blur-md">
-  <div className="mx-auto max-w-7xl px-6 py-4">
-    <div className="flex items-center justify-between">
-      <div className="flex items-center space-x-3">
-        {/* Logo without background */}
-        <img src={Icon} alt="App Logo" className="h-18 w-20" />
+      <header className="relative z-20 border-b border-white/20 bg-header-green backdrop-blur-md">
+        <div className="mx-auto max-w-7xl px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              {/* Logo without background */}
+              <img src={Icon} alt="App Logo" className="h-18 w-20" />
+            </div>
 
-     
-      </div>
-
-      <div className="flex items-center space-x-4">
-        <button
-          onClick={() => navigate("/docs")}
-          className="text-gray-300 transition-colors hover:text-white"
-        >
-          <FormattedMessage id="home.header.docs" defaultMessage="Docs" />
-        </button>
-        <LanguageSwitcher />
-      </div>
-    </div>
-  </div>
-</header>
-
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => navigate("/docs")}
+                className="text-gray-300 transition-colors hover:text-white"
+              >
+                <FormattedMessage id="home.header.docs" defaultMessage="Docs" />
+              </button>
+              <LanguageSwitcher />
+            </div>
+          </div>
+        </div>
+      </header>
 
       {/* Floating Comments Container */}
       <div
@@ -253,7 +250,7 @@ const HomePage: React.FC = () => {
         {floatingComments.map((comment) => (
           <div
             key={comment.id}
-            className="pointer-events-none absolute bottom-1/2 animate-[floatUpFade_var(--duration)_ease-out_forwards] select-none whitespace-nowrap rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-4 py-2 font-medium text-white shadow-lg"
+            className="pointer-events-none absolute bottom-1/2 animate-[floatUpFade_var(--duration)_ease-out_forwards] select-none whitespace-nowrap rounded-full bg-gradient-to-r from-primary to-primary-dark px-4 py-2 font-medium text-white shadow-lg"
             style={
               {
                 left: `${comment.left}px`,
@@ -273,7 +270,7 @@ const HomePage: React.FC = () => {
         <section className="space-y-8 text-center">
           <button
             onClick={handleAppDownload}
-            className="group relative flex transform items-center space-x-3 rounded-xl bg-gradient-to-r from-teal-500 to-green-500 px-8 py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-teal-600 hover:to-green-600 hover:shadow-xl"
+            className="group relative flex transform items-center space-x-3 rounded-xl border hover:border-teal-600 hover:bg-teal-600 px-8 py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-teal-600 hover:to-green-600 hover:shadow-xl"
           >
             <Download className="h-5 w-5" />
             <span>
@@ -285,7 +282,7 @@ const HomePage: React.FC = () => {
           </button>
 
           <div className="space-y-6">
-            <div className="inline-flex items-center space-x-2 rounded-full border border-blue-500/30 bg-blue-500/20 px-4 py-2 text-blue-300 backdrop-blur-sm">
+            <div className="inline-flex items-center space-x-2 rounded-full border border-blue-500/30 bg-button-green/2 px-4 py-2 text-white backdrop-blur-sm">
               <Sparkles className="h-4 w-4" />
               <span className="text-sm font-medium">
                 <FormattedMessage
@@ -296,7 +293,7 @@ const HomePage: React.FC = () => {
             </div>
 
             <h1 className="text-5xl font-bold leading-tight md:text-7xl">
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-button-green/10 via-button-green to-button-green/30 bg-clip-text text-transparent">
                 <FormattedMessage
                   id="home.hero.title_part1"
                   defaultMessage="Smart Attendance"
@@ -323,7 +320,7 @@ const HomePage: React.FC = () => {
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             <button
               onClick={handleAdminClick}
-              className="group relative flex transform items-center space-x-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-8 py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-cyan-700 hover:shadow-xl"
+              className="group relative flex transform items-center space-x-3 rounded-xl border border-secondary  px-8 py-4 font-semibold backdrop-blur-md bg-button-green transition-all duration-300 hover:scale-105 hover:bg-secondary/10"
             >
               <Shield className="h-5 w-5" />
               <span>
@@ -337,7 +334,7 @@ const HomePage: React.FC = () => {
 
             <button
               onClick={handleTeacherClick}
-              className="group relative flex transform items-center space-x-3 rounded-xl border border-white/20 bg-white/10 px-8 py-4 font-semibold backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
+              className="group relative flex transform items-center space-x-3 rounded-xl border border-secondary  px-8 py-4 font-semibold backdrop-blur-md bg-button-green transition-all duration-300 hover:scale-105 hover:bg-secondary/10"
             >
               <Users className="h-5 w-5" />
               <span>
@@ -351,7 +348,7 @@ const HomePage: React.FC = () => {
 
             <button
               onClick={() => navigate("/docs")}
-              className="group relative flex transform items-center space-x-3 rounded-xl border border-purple-500/30 bg-purple-600/20 px-8 py-4 font-semibold backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-purple-600/30"
+              className="group relative flex transform items-center space-x-3 rounded-xl border border-secondary  px-8 py-4 font-semibold backdrop-blur-md bg-blue transition-all duration-300 hover:scale-105 hover:bg-button-green/30"
             >
               <FileText className="h-5 w-5" />
               <span>
@@ -369,6 +366,7 @@ const HomePage: React.FC = () => {
             {[
               {
                 icon: Building,
+  
                 label: formatMessage({
                   id: "home.stats.organizations",
                   defaultMessage: "Organizations",
@@ -456,7 +454,7 @@ const HomePage: React.FC = () => {
                   defaultMessage:
                     "RFID scanning in milliseconds with ESP32 integration",
                 }),
-                color: "from-yellow-500 to-orange-500",
+                color: "header-green",
               },
               {
                 icon: Lock,
@@ -469,7 +467,7 @@ const HomePage: React.FC = () => {
                   defaultMessage:
                     "Bank-level encryption with unique API keys for each organization",
                 }),
-                color: "from-green-500 to-emerald-500",
+                color: "",
               },
               {
                 icon: BarChart3,
@@ -482,7 +480,7 @@ const HomePage: React.FC = () => {
                   defaultMessage:
                     "Live dashboards with detailed reports and insights",
                 }),
-                color: "from-purple-500 to-pink-500",
+                color: "",
               },
               {
                 icon: Globe,
@@ -495,7 +493,7 @@ const HomePage: React.FC = () => {
                   defaultMessage:
                     "Full support for English and French interfaces",
                 }),
-                color: "from-blue-500 to-cyan-500",
+                color: "",
               },
               {
                 icon: Smartphone,
@@ -508,7 +506,7 @@ const HomePage: React.FC = () => {
                   defaultMessage:
                     "Access from any device with responsive design",
                 }),
-                color: "from-indigo-500 to-purple-500",
+                color: "",
               },
               {
                 icon: Download,
@@ -520,7 +518,7 @@ const HomePage: React.FC = () => {
                   id: "home.features.items.5.description",
                   defaultMessage: "Download attendance records in Excel format",
                 }),
-                color: "from-teal-500 to-green-500",
+                color: "",
               },
             ].map((feature, index) => (
               <div
@@ -661,7 +659,7 @@ const HomePage: React.FC = () => {
                   }),
                 ].map((feature: string, index: number) => (
                   <li key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-400" />
+                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-button-green" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -669,7 +667,7 @@ const HomePage: React.FC = () => {
             </div>
 
             <div className="rounded-2xl border border-green-500/30 bg-gradient-to-br from-green-600/20 to-emerald-600/20 p-8 backdrop-blur-sm">
-              <Building className="mb-6 h-12 w-12 text-green-400" />
+              <Building className="mb-6 h-12 w-12 text-button-green" />
               <h3 className="mb-4 text-2xl font-bold text-white">
                 <FormattedMessage
                   id="home.use_cases.corporate.title"
@@ -692,7 +690,7 @@ const HomePage: React.FC = () => {
                   }),
                 ].map((feature: string, index: number) => (
                   <li key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-400" />
+                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-button-green" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -702,7 +700,7 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="space-y-8 rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-12 text-center backdrop-blur-sm">
+        <section className="space-y-8 rounded-2xl border border-blue-500/30 bg-slate-900 p-12 text-center backdrop-blur-sm">
           <div className="space-y-4">
             <h2 className="text-4xl font-bold text-white">
               <FormattedMessage
@@ -721,7 +719,7 @@ const HomePage: React.FC = () => {
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <button
               onClick={() => navigate("/pricing")}
-              className="flex transform items-center space-x-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-8 py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-cyan-700 hover:shadow-xl"
+              className="flex transform items-center space-x-3 rounded-xl bg-button-green px-8 py-4 font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-cyan-700 hover:shadow-xl"
             >
               <Calendar className="h-5 w-5" />
               <span>
@@ -762,7 +760,7 @@ const HomePage: React.FC = () => {
               }),
             ].map((benefit: string, index: number) => (
               <div key={index} className="flex items-center space-x-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
+                <CheckCircle className="h-4 w-4 text-button-green" />
                 <span>{benefit}</span>
               </div>
             ))}
@@ -902,7 +900,7 @@ const HomePage: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmittingContact}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-button-green py-3 font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
               >
                 {isSubmittingContact ? (
                   <>
@@ -928,7 +926,7 @@ const HomePage: React.FC = () => {
               <div
                 className={`mt-4 rounded p-3 ${
                   contactMessageType === "success"
-                    ? "bg-green-600 text-white"
+                    ? "bg-button-green text-white"
                     : "bg-red-600 text-white"
                 }`}
                 role="alert"

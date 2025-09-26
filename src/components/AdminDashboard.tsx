@@ -290,14 +290,14 @@ const AdminDashboard: React.FC = () => {
 
   if (!isLoaded) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
+      <div className="flex min-h-screen items-center justify-center bg-primary text-white">
         <div className="text-center">
           <div className="flex items-center justify-center mb-6">
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
           <div className="space-y-2">
-            <div className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent">
+            <div className="bg-primary bg-clip-text text-2xl font-bold text-transparent">
               <FormattedMessage
                 id="dashboard.loading"
                 defaultMessage="Loading Dashboard"
@@ -305,15 +305,15 @@ const AdminDashboard: React.FC = () => {
             </div>
             <div className="flex justify-center space-x-1">
               <div
-                className="h-2 w-2 animate-bounce rounded-full bg-blue-400"
+                className="h-2 w-2 animate-bounce rounded-full primary"
                 style={{ animationDelay: "0ms" }}
               />
               <div
-                className="h-2 w-2 animate-bounce rounded-full bg-blue-400"
+                className="h-2 w-2 animate-bounce rounded-full primary"
                 style={{ animationDelay: "150ms" }}
               />
               <div
-                className="h-2 w-2 animate-bounce rounded-full bg-blue-400"
+                className="h-2 w-2 animate-bounce rounded-full primary"
                 style={{ animationDelay: "300ms" }}
               />
             </div>
@@ -324,9 +324,9 @@ const AdminDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-black/20 shadow-2xl backdrop-blur-xl transition-all duration-300">
+      <header className="sticky top-0 z-50 border-b border-white/40 bg-black/40 shadow-2xl backdrop-blur-xl transition-all duration-300">
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Title */}
@@ -336,10 +336,10 @@ const AdminDashboard: React.FC = () => {
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-24 w-24" />
           </div>
-                <div className="absolute -right-1 -top-1 h-4 w-4 animate-pulse rounded-full border-2 border-white bg-green-400" />
+                <div className="absolute -right-1 -top-1 h-4 w-4 animate-pulse rounded-full border-2 border-white bg-button-green" />
               </div>
               <div className="space-y-1">
-                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-lg font-bold text-transparent">
+                <span className=" text-secondary">
                   {schoolName}
                 </span>
                 <div className="text-xs text-gray-400">@{username}</div>
@@ -543,7 +543,7 @@ const AdminDashboard: React.FC = () => {
                 ? "..."
                 : (dashboardStats?.totalStudents || 0).toString(),
               change: "+12%",
-              color: "from-blue-500 to-cyan-500",
+              color: "from-button-green to-blue",
               link: "/admin/students",
             },
             {
@@ -553,7 +553,7 @@ const AdminDashboard: React.FC = () => {
                 ? "..."
                 : (dashboardStats?.totalTeachers || 0).toString(),
               change: "+5%",
-              color: "from-green-500 to-emerald-500",
+              color: "from-button-green to-blue",
               link: "/admin/teachers",
             },
             {
@@ -563,7 +563,7 @@ const AdminDashboard: React.FC = () => {
                 ? "..."
                 : `${dashboardStats?.attendanceRate || 0}%`,
               change: "+2.1%",
-              color: "from-purple-500 to-pink-500",
+              color: "from-button-green to-blue",
               link: "/admin/attendance",
             },
             {
@@ -573,7 +573,7 @@ const AdminDashboard: React.FC = () => {
                 ? "..."
                 : (dashboardStats?.totalAttendanceToday || 0).toString(),
               change: "+1.2%",
-              color: "from-orange-500 to-red-500",
+              color: "from-button-green to-blue",
               link: "/teacher/reports",
             },
           ].map((stat, index) => (
@@ -613,7 +613,7 @@ const AdminDashboard: React.FC = () => {
           <div className="mx-auto max-w-2xl">
             <div className="rounded-2xl border border-white/20 bg-gradient-to-r from-gray-900/80 to-gray-800/80 p-8 shadow-2xl backdrop-blur-md">
               <div className="mb-6 flex items-center space-x-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-button-green to-blue">
                   <Zap className="h-5 w-5 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-white">
@@ -634,7 +634,7 @@ const AdminDashboard: React.FC = () => {
                   />
                   <button
                     onClick={toggleApiKeyVisibility}
-                    className="flex transform items-center space-x-2 rounded-xl bg-blue-600 px-4 py-3 text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700"
+                    className="flex transform items-center space-x-2 rounded-xl bg-transparent border border-white/20 px-4 py-3 text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700"
                   >
                     {showApiKey ? (
                       <EyeOff className="h-4 w-4" />
@@ -657,7 +657,7 @@ const AdminDashboard: React.FC = () => {
                   </button>
                   <button
                     onClick={copyApiKey}
-                    className="flex transform items-center space-x-2 rounded-xl bg-green-600 px-4 py-3 text-white transition-all duration-300 hover:scale-105 hover:bg-green-700"
+                    className="flex transform items-center space-x-2 rounded-xl bg-button-green px-4 py-3 text-white transition-all duration-300 hover:scale-105 hover:bg-transparent hover:border hover:border-white/20"
                   >
                     <Copy className="h-4 w-4" />
                     <span className="hidden sm:inline">
@@ -670,7 +670,7 @@ const AdminDashboard: React.FC = () => {
                 </div>
 
                 {copyMessage && (
-                  <div className="animate-fade-in flex items-center space-x-2 text-green-400">
+                  <div className="animate-fade-in flex items-center space-x-2 text-success">
                     <CheckCircle className="h-4 w-4" />
                     <span className="text-sm">
                       <FormattedMessage
@@ -712,7 +712,7 @@ const AdminDashboard: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <button
               onClick={() => setShowCategoryModal(true)}
-              className="group flex transform items-center space-x-3 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-700 hover:to-emerald-700 hover:shadow-2xl"
+              className="group flex transform items-center space-x-3 rounded-2xl bg-transparent border border-white/40 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-button-green hover:shadow-2xl"
             >
               <Plus className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
               <span>
@@ -725,7 +725,7 @@ const AdminDashboard: React.FC = () => {
 
             <button
               onClick={() => navigate("/admin/categories")}
-              className="group flex transform items-center space-x-3 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-600 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-cyan-700 hover:shadow-2xl"
+              className="group flex transform items-center space-x-3 rounded-2xl bg-primary-dark border px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-transparent hover:from-blue-700 hover:to-cyan-700 hover:shadow-2xl"
             >
               <Building className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
               <span>
@@ -738,7 +738,7 @@ const AdminDashboard: React.FC = () => {
 
             <button
               onClick={() => navigate("/admin/time-settings")}
-              className="group flex transform items-center space-x-3 rounded-2xl bg-gradient-to-r from-green-600 to-lime-600 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-700 hover:to-lime-700 hover:shadow-2xl"
+              className="group flex transform items-center space-x-3 rounded-2xl bg-button-green px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-700 hover:to-lime-700 hover:shadow-2xl"
             >
               <Clock className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
               <span>
@@ -771,21 +771,21 @@ const AdminDashboard: React.FC = () => {
                 icon: ClipboardList,
                 title: "Attendance Tracking",
                 description: `Monitor and manage ${terminology.student.toLowerCase()} attendance records`,
-                color: "from-blue-500 to-cyan-500",
+                color: "from-button-green to-blue",
                 delay: "0ms",
               },
               {
                 icon: Users,
                 title: `${terminology.teacher} `,
                 description: `Add and manage ${terminology.teacher.toLowerCase()} staff`,
-                color: "from-green-500 to-emerald-500",
+                color: "from-button-green to-blue",
                 delay: "200ms",
               },
               {
                 icon: BarChart3,
                 title: "Reports & Analytics",
                 description: "Generate detailed reports and insights",
-                color: "from-purple-500 to-pink-500",
+                color: "from-button-green to-blue",
                 delay: "400ms",
               },
             ].map((card, index) => (
@@ -832,7 +832,7 @@ const AdminDashboard: React.FC = () => {
             </button>
 
             <div className="mb-8 text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-button-green">
                 <Plus className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-white">
@@ -866,14 +866,14 @@ const AdminDashboard: React.FC = () => {
                     defaultMessage: "Enter category name...",
                   })}
                   required
-                  className="w-full rounded-xl border border-white/20 bg-black/50 px-4 py-3 text-white placeholder-gray-400 transition-all duration-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full rounded-xl border border-white/20 bg-black/50 px-4 py-3 text-white placeholder-gray-400 transition-all duration-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-button-green"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={categoryLoading}
-                className="flex w-full transform items-center justify-center space-x-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-700 hover:to-emerald-700 disabled:scale-100 disabled:from-gray-600 disabled:to-gray-700"
+                className="flex w-full transform items-center justify-center space-x-3 rounded-xl bg-button-green py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 disabled:scale-100"
               >
                 {categoryLoading ? (
                   <>

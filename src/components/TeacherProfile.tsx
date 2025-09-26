@@ -177,7 +177,7 @@ const TeacherProfile: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center text-white">
+      <div className="min-h-screen bg-primary flex items-center justify-center text-white">
         <div className="text-center">
           <div className="flex items-center justify-center mb-6">
             {/* Bigger Logo */}
@@ -190,12 +190,12 @@ const TeacherProfile: React.FC = () => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 text-white min-h-screen">
+    <div className="bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white min-h-screen">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-button-green rounded-full blur-3xl animate-pulse"></div>
         <div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"
+          className="absolute -bottom-40 -left-40 w-80 h-80 bg-button-green rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         ></div>
         <div
@@ -205,7 +205,7 @@ const TeacherProfile: React.FC = () => {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300">
+      <header className="sticky top-0 z-50 bg-black/40 backdrop-blur-xl border-b border-white/30 shadow-2xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Title */}
@@ -218,7 +218,7 @@ const TeacherProfile: React.FC = () => {
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
               </div>
               <div className="space-y-1">
-                <span className="text-lg font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                <span className="text-lg font-bold bg-white bg-clip-text text-transparent">
                   {schoolName}
                 </span>
                 <div className="text-xs text-gray-400">@{username}</div>
@@ -239,10 +239,10 @@ const TeacherProfile: React.FC = () => {
 
               <div className="flex items-center space-x-4">
                 {/* Notifications */}
-                <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
+                {/* <button className="relative p-2 rounded-lg hover:bg-white/10 transition-all duration-300 group">
                   <Bell className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
                   <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                </button>
+                </button> */}
               </div>
             </nav>
           </div>
@@ -255,7 +255,7 @@ const TeacherProfile: React.FC = () => {
         {isLoading && (
           <div className="flex items-center justify-center py-20">
             <div className="text-center space-y-4">
-              <Loader2 className="w-12 h-12 animate-spin text-green-600 mx-auto" />
+              <Loader2 className="w-12 h-12 animate-spin text-button-green mx-auto" />
               <span className="text-gray-300 text-lg">
                 {terminology.loading}
               </span>
@@ -276,21 +276,21 @@ const TeacherProfile: React.FC = () => {
                       teacherData.picture || "https://via.placeholder.com/150"
                     }
                     alt="Profile Picture"
-                    className="w-32 h-32 rounded-full object-cover border-4 border-green-500/50 shadow-2xl mx-auto"
+                    className="w-32 h-32 rounded-full object-cover border-4 border-white/20 shadow-2xl mx-auto"
                   />
-                  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-3 border-white flex items-center justify-center shadow-lg">
+                  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-button-green rounded-full border-3 border-white flex items-center justify-center shadow-lg">
                     <CheckCircle className="w-4 h-4 text-white" />
                   </div>
                 </div>
 
                 {/* Basic Info */}
                 <div className="space-y-3">
-                  <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                  <h1 className="text-4xl font-bold bg-white bg-clip-text text-transparent">
                     {teacherData.full_name || terminology.workerUsername}
                   </h1>
 
                   <div className="flex items-center justify-center space-x-2 text-gray-300">
-                    <Mail className="w-5 h-5 text-green-400" />
+                    <Mail className="w-5 h-5 text-button-green" />
                     <span className="text-lg">{teacherData.email}</span>
                   </div>
 
@@ -310,7 +310,7 @@ const TeacherProfile: React.FC = () => {
               <div
                 className={`border rounded-xl p-4 text-center flex items-center justify-center space-x-3 animate-fade-in ${
                   messageType === "success"
-                    ? "bg-green-500/20 border-green-500/50 text-green-300"
+                    ? "bg-green-500/20 border-button-green/50 text-button-green"
                     : "bg-red-500/20 border-red-500/50 text-red-300"
                 }`}
               >
@@ -334,7 +334,7 @@ const TeacherProfile: React.FC = () => {
             <section className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-lg">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-button-green rounded-xl flex items-center justify-center">
                     <User className="w-5 h-5 text-white" />
                   </div>
                   <h2 className="text-2xl font-bold text-white">
@@ -345,7 +345,7 @@ const TeacherProfile: React.FC = () => {
                 {!isEditing && (
                   <button
                     onClick={() => toggleEdit(true)}
-                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                    className="bg-button-green hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                   >
                     <Edit className="w-4 h-4" />
                     <span>

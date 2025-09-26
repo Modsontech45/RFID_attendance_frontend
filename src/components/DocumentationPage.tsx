@@ -29,7 +29,14 @@ import {
 import Icon from "./icon.png";
 import { FormattedMessage } from "react-intl";
 import { useTerminology } from "../utils/terminology";
-import { getAdminData } from "../utils/auth";
+import {
+  getAuthData,
+  logout,
+  getApiKey,
+  API_BASE,
+  getAdminData,
+} from "../utils/auth";
+
 
 
 const arduinoCode = `#include <WiFi.h>
@@ -376,6 +383,15 @@ const DocumentationPage: React.FC = () => {
   const [showApiKey, setShowApiKey] = useState(false);
   const adminData = getAdminData();
   const terminology = useTerminology(adminData);
+  
+  const schoolName =
+    adminData?.schoolname ||
+    adminData?.email?.split("@")[1]?.split(".")[0] ||
+    "Synctuario Academy";
+  const username =
+    adminData?.username || adminData?.email?.split("@")[0] || "admin_user";
+  
+
 
   useEffect(() => {
     // Simulate loading translations or other data
@@ -402,12 +418,13 @@ const DocumentationPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
+      <div className="flex min-h-screen items-center justify-center bg-primary text-white">
         <div className="text-center">
           <div className="flex items-center justify-center mb-6">
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
+          
           <div className="text-xl text-gray-300">
             <FormattedMessage
               id="documentation.loading"
@@ -425,7 +442,7 @@ const DocumentationPage: React.FC = () => {
       icon: Play,
       content: (
         <div className="space-y-6">
-          <div className="rounded-xl border border-blue-500/30 bg-blue-500/10 p-6">
+          <div className="rounded-xl border border-blue-500/30  p-6">
             <h4 className="mb-4 text-xl font-semibold text-blue-300">
               <FormattedMessage id="documentation.gettingStarted.welcome" />
             </h4>
@@ -838,15 +855,21 @@ const DocumentationPage: React.FC = () => {
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white">
       {/* Header */}
-      <header className="relative z-20 border-b border-white/20 bg-white/10 backdrop-blur-md">
+      <header className="relative z-20 border-b border-white/40 bg-black/40 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-3">
                  <div className="flex items-center justify-center mb-0">
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-24 w-24" />
           </div>
+            <div className="space-y-1">
+                <span className="text-lg font-bold bg-white bg-clip-text text-transparent">
+                  {schoolName}
+                </span>
+                <div className="text-xs text-gray-400">@{username}</div>
+              </div>
          
           </div>
           <div className="flex items-center space-x-4">
@@ -897,7 +920,7 @@ const DocumentationPage: React.FC = () => {
                 className="flex w-full items-center justify-between p-6 hover:bg-white/5"
               >
                 <div className="flex items-center space-x-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-button-green via-button-green/50 to-primary-dark">
                     <section.icon className="h-6 w-6 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold text-white">
@@ -918,7 +941,7 @@ const DocumentationPage: React.FC = () => {
         </section>
 
         {/* Quick Links */}
-        <section className="mt-16 rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-8 backdrop-blur-sm">
+        <section className="mt-16 rounded-2xl border border-blue-500/30 bg-gradient-to-br from-slate-600 via-primary-dark to-primary-dark p-8 backdrop-blur-sm">
           <h2 className="mb-6 text-center text-2xl font-bold text-white">
             <FormattedMessage id="documentation.quickLinks.title" defaultMessage="Quick Links" />
           </h2>

@@ -342,7 +342,7 @@ const AdminSignup: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className="border-b border-green-600 bg-black">
+      <header className="border-b border-white/30 bg-black">
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -350,9 +350,7 @@ const AdminSignup: React.FC = () => {
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
-              <span className="text-2xl font-bold text-green-400">
-                <FormattedMessage id="app.name" defaultMessage="Synctuario" />
-              </span>
+              
             </div>
           </div>
         </div>
@@ -362,14 +360,14 @@ const AdminSignup: React.FC = () => {
       <main className="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 py-8">
         <div className="w-full max-w-md">
           {/* Signup Form */}
-          <div className="space-y-6 rounded-2xl border-2 border-green-600 bg-black p-8 shadow-2xl">
+          <div className="space-y-6 rounded-2xl border-2 border-white/30 bg-black p-8 shadow-2xl">
             {/* Header */}
             <div className="space-y-2 text-center">
                      <div className="flex items-center justify-center mb-0">
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-24 w-24" />
           </div>
-              <h1 className="text-3xl font-bold text-green-400">
+              <h1 className="text-3xl font-bold text-white">
                 <FormattedMessage id="signup.admin.title" defaultMessage="Admin Sign Up" />
               </h1>
             </div>
@@ -385,7 +383,7 @@ const AdminSignup: React.FC = () => {
               {/* School Name Field */}
               <div className="space-y-2">
                 <div className="relative">
-                  <Building className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <Building className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-white" />
                   <input
                     type="text"
                     name="schoolname"
@@ -396,7 +394,7 @@ const AdminSignup: React.FC = () => {
                       defaultMessage: "Organization Name",
                     })}
                     required
-                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full rounded-lg  bg-gray-800/60 py-3 pl-12 pr-4 text-white placeholder-white/30 transition-all focus:outline-none focus:ring-2 ${
                       errors.schoolname
                         ? "border-red-600 focus:ring-red-600"
                         : "border-green-600 focus:ring-green-600"
@@ -415,7 +413,7 @@ const AdminSignup: React.FC = () => {
                     value={formData.type}
                     onChange={handleInputChange}
                     required
-                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full rounded-lg bg-gray-800/60 py-3 pl-12 pr-4 text-white transition-all focus:outline-none focus:ring-2 ${
                       errors.type
                         ? "border-red-600 focus:ring-red-600"
                         : "border-green-600 focus:ring-green-600"
@@ -447,7 +445,7 @@ const AdminSignup: React.FC = () => {
               {/* Username Field */}
               <div className="space-y-2">
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <User className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-white" />
                   <input
                     type="text"
                     name="username"
@@ -458,7 +456,7 @@ const AdminSignup: React.FC = () => {
                       defaultMessage: "Username",
                     })}
                     required
-                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full rounded-lg bg-gray-800/60 py-3 pl-12 pr-4 text-white placeholder-white/30 transition-all focus:outline-none focus:ring-2 ${
                       errors.username
                         ? "border-red-600 focus:ring-red-600"
                         : "border-green-600 focus:ring-green-600"
@@ -471,7 +469,7 @@ const AdminSignup: React.FC = () => {
               {/* Email Field */}
               <div className="space-y-2">
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <Mail className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-white" />
                   <input
                     type="email"
                     name="email"
@@ -482,7 +480,7 @@ const AdminSignup: React.FC = () => {
                       defaultMessage: "Email",
                     })}
                     required
-                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full rounded-lg bg-gray-800/60 py-3 pl-12 pr-4 text-white placeholder-white/30 transition-all focus:outline-none focus:ring-2 ${
                       errors.email
                         ? "border-red-600 focus:ring-red-600"
                         : "border-green-600 focus:ring-green-600"
@@ -495,7 +493,7 @@ const AdminSignup: React.FC = () => {
               {/* Telephone Field */}
               <div className="space-y-2">
                 <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <Phone className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-white" />
                   {detectedCountry && (
                     <div className="absolute left-12 top-1/2 -translate-y-1/2 transform flex items-center">
                       <Flag
@@ -515,7 +513,7 @@ const AdminSignup: React.FC = () => {
                       defaultMessage: "Phone Number",
                     })}
                     required
-                    className={`w-full rounded-lg border bg-black/50 py-3 ${detectedCountry ? 'pl-20' : 'pl-12'} pr-4 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full rounded-lg  bg-gray-800/60 py-3 ${detectedCountry ? 'pl-20' : 'pl-12'} pr-4 text-white placeholder-white/30 transition-all focus:outline-none focus:ring-2 ${
                       errors.telephone
                         ? "border-red-600 focus:ring-red-600"
                         : "border-green-600 focus:ring-green-600"
@@ -536,7 +534,7 @@ const AdminSignup: React.FC = () => {
               {/* Password Field */}
               <div className="space-y-2">
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-white" />
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
@@ -547,7 +545,7 @@ const AdminSignup: React.FC = () => {
                       defaultMessage: "Password",
                     })}
                     required
-                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full rounded-lg  bg-gray-800/60 py-3 pl-12 pr-12 text-white placeholder-white/30 transition-all focus:outline-none focus:ring-2 ${
                       errors.password
                         ? "border-red-600 focus:ring-red-600"
                         : "border-green-600 focus:ring-green-600"
@@ -556,7 +554,7 @@ const AdminSignup: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 transform text-green-400 transition-colors hover:text-green-300"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-400 transition-colors hover:text-green-300"
                   >
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
@@ -624,7 +622,7 @@ const AdminSignup: React.FC = () => {
               {/* Confirm Password Field */}
               <div className="space-y-2">
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-green-400" />
+                  <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-white" />
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
@@ -635,7 +633,7 @@ const AdminSignup: React.FC = () => {
                       defaultMessage: "Confirm Password",
                     })}
                     required
-                    className={`w-full rounded-lg border bg-black/50 py-3 pl-12 pr-12 text-white placeholder-green-300/70 transition-all focus:outline-none focus:ring-2 ${
+                    className={`w-full rounded-lgbg-gray-800/60 bg-gray-800/60 py-3 pl-12 pr-12 text-white placeholder-white/30 transition-all focus:outline-none focus:ring-2 ${
                       errors.confirmPassword
                         ? "border-red-600 focus:ring-red-600"
                         : "border-green-600 focus:ring-green-600"
@@ -644,7 +642,7 @@ const AdminSignup: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 transform text-green-400 transition-colors hover:text-green-300"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 transform  transition-colors hover:text-green-300"
                   >
                     {showConfirmPassword ? (
                       <EyeOff className="h-5 w-5" />
@@ -662,7 +660,7 @@ const AdminSignup: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-green-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
+                className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-button-green py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
               >
                 {isLoading ? (
                   <>

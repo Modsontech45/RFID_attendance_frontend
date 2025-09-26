@@ -361,7 +361,7 @@ const TeacherAttendance: React.FC = () => {
   // Show loading state while translations are loading
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen flex items-center justify-center">
+      <div className="bg-primary text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="flex items-center justify-center mb-6">
             {/* Bigger Logo */}
@@ -376,22 +376,22 @@ const TeacherAttendance: React.FC = () => {
   const stats = calculateStats();
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen">
+    <div className="bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white min-h-screen">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-button-green rounded-full blur-3xl animate-pulse"></div>
         <div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"
+          className="absolute -bottom-40 -left-40 w-80 h-80 bg-button-green rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         ></div>
         <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl animate-pulse"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-button-green/20 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "4s" }}
         ></div>
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300">
+      <header className="sticky top-0 z-50 bg-black/40 backdrop-blur-xl border-b border-white/50 shadow-2xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Title */}
@@ -401,12 +401,10 @@ const TeacherAttendance: React.FC = () => {
                   {/* Bigger Logo */}
                   <img src={Icon} alt="App Logo" className="h-24 w-24" />
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-button-green rounded-full border-2 border-white animate-pulse"></div>
               </div>
               <div className="space-y-1">
-                <span className="text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  {schoolName}
-                </span>
+                <span className=" text-secondary">{schoolName}</span>
                 <div className="text-xs text-gray-400">@{username}</div>
               </div>
             </div>
@@ -421,7 +419,7 @@ const TeacherAttendance: React.FC = () => {
                   <Users className="w-4 h-4" />
                   <span> {terminology.studentPlural}</span>
                 </span>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-button-green group-hover:w-full transition-all duration-300"></div>
               </button>
 
               <button className="relative group px-4 py-2 rounded-lg bg-white/10 transition-all duration-300">
@@ -429,7 +427,7 @@ const TeacherAttendance: React.FC = () => {
                   <BarChart3 className="w-4 h-4" />
                   <span> {formatMessage({ id: "attendance.attendance" })}</span>
                 </span>
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-button-green group-hover:w-full transition-all duration-300"></div>
               </button>
 
               <button
@@ -442,7 +440,7 @@ const TeacherAttendance: React.FC = () => {
                     {formatMessage({ id: "students.navigation.profile" })}
                   </span>
                 </span>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-button-green group-hover:w-full transition-all duration-300"></div>
               </button>
 
               <div className="flex items-center space-x-4">
@@ -480,29 +478,29 @@ const TeacherAttendance: React.FC = () => {
             <nav className="pb-4 border-t border-white/10 pt-4 space-y-2">
               <button
                 onClick={() => navigate("/teacher/students")}
-                className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400"
+                className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-white"
               >
                 <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
                   <Users className="w-4 h-4" />
                   <span> {terminology.studentPlural}</span>
                 </span>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-button-green group-hover:w-full transition-all duration-300"></div>
               </button>
 
-              <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400">
-                <span className="text-blue-400 transition-colors flex items-center space-x-2">
+              <button className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-white">
+                <span className="text-button-green transition-colors flex items-center space-x-2">
                   <BarChart3 className="w-4 h-4" />
                   <span>
                     {" "}
                     {formatMessage({ id: "students.navigation.attendance" })}
                   </span>
                 </span>
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-button-green"></div>
               </button>
 
               <button
                 onClick={() => navigate("/teacher/profile")}
-                className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-blue-400"
+                className="w-full text-left px-4 py-3 rounded-lg bg-white/10 text-white"
               >
                 <span className="text-gray-300 group-hover:text-white transition-colors flex items-center space-x-2">
                   <User className="w-4 h-4" />
@@ -535,7 +533,7 @@ const TeacherAttendance: React.FC = () => {
         <section className="text-center space-y-6 animate-fade-in">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
+              <span className="bg-gradient-to-r from-button-green via-white to-button-green bg-clip-text text-transparent animate-gradient">
                 {formatMessage({ id: "attendance.title" })}
               </span>
             </h1>
@@ -556,28 +554,28 @@ const TeacherAttendance: React.FC = () => {
               label: formatMessage({ id: "attendance.stats.totalStudents" }),
               value: stats.totalStudents.toString(),
               change: "+12%",
-              color: "from-blue-500 to-cyan-500",
+              color: "from-button-green to-blue",
             },
             {
               icon: CheckCircle,
               label: formatMessage({ id: "attendance.stats.presentToday" }),
               value: stats.totalPresent.toString(),
               change: "+5%",
-              color: "from-green-500 to-emerald-500",
+              color: "from-button-green to-blue",
             },
             {
               icon: Clock,
               label: formatMessage({ id: "attendance.stats.partial" }),
               value: stats.totalPartial.toString(),
               change: "+2%",
-              color: "from-yellow-500 to-orange-500",
+              color: "from-button-green to-blue",
             },
             {
               icon: XCircle,
               label: formatMessage({ id: "attendance.stats.absentToday" }),
               value: stats.totalAbsent.toString(),
               change: "-3%",
-              color: "from-red-500 to-pink-500",
+              color: "from-button-green to-blue",
             },
           ].map((stat, index) => (
             <div
@@ -647,7 +645,7 @@ const TeacherAttendance: React.FC = () => {
                     setIsLoading(true);
                     fetchAttendanceRecords().finally(() => setIsLoading(false));
                   }}
-                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                  className="bg-button-green hover:from-blue-700 hover:to-cyan-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
                 >
                   <RefreshCw className="w-4 h-4" />
                   <span>
@@ -666,7 +664,7 @@ const TeacherAttendance: React.FC = () => {
         >
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-lg">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-button-green to-blue rounded-xl flex items-center justify-center">
                 <BarChart3 className="w-5 h-5 text-white" />
               </div>
               <h2 className="text-2xl font-bold text-white">
@@ -694,7 +692,7 @@ const TeacherAttendance: React.FC = () => {
           {isLoading && (
             <div className="flex items-center justify-center py-20">
               <div className="text-center space-y-4">
-                <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto" />
+                <Loader2 className="w-12 h-12 animate-spin text-button-green mx-auto" />
                 <span className="text-gray-300 text-lg">
                   Loading attendance records...
                 </span>
@@ -731,7 +729,7 @@ const TeacherAttendance: React.FC = () => {
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-lg">
               <div className="overflow-x-auto">
                 <table className="min-w-full">
-                  <thead className="bg-blue-800/50 backdrop-blur-sm">
+                  <thead className="bg-button-green backdrop-blur-sm">
                     <tr>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                         <div className="flex items-center space-x-2">

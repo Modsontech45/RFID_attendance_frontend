@@ -12,6 +12,7 @@ import {
   Settings,
   Bell,
   Users,
+  User,
   TrendingUp,
   Activity,
   BarChart3,
@@ -124,20 +125,20 @@ const CategoriesManagement: React.FC = () => {
   // Show loading state while translations are loading
   if (loading || !isLoaded) {
     return (
-      <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 text-white min-h-screen flex items-center justify-center">
+      <div className="bg-primary text-white min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="flex items-center justify-center mb-6">
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
           <div className="space-y-2">
-            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <div className="text-2xl font-bold bg-white bg-clip-text text-transparent">
               Loading Categories
             </div>
             <div className="flex justify-center space-x-1">
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              <div className="w-2 h-2 bg-button-green rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+              <div className="w-2 h-2 bg-button-green rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+              <div className="w-2 h-2 bg-button-green rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
             </div>
           </div>
         </div>
@@ -146,7 +147,7 @@ const CategoriesManagement: React.FC = () => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 text-white min-h-screen">
+    <div className="bg-gradient-to-br from-slate-900 via-primary-dark to-primary-dark text-white min-h-screen">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -155,7 +156,7 @@ const CategoriesManagement: React.FC = () => {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300">
+      <header className="sticky top-0 z-50 bg-black/40 backdrop-blur-xl border-b border-white/30 shadow-2xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Title */}
@@ -165,10 +166,10 @@ const CategoriesManagement: React.FC = () => {
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-24 w-24" />
           </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-purple-400 rounded-full border-2 border-white animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-button-green rounded-full border-2 border-white animate-pulse"></div>
               </div>
               <div className="space-y-1">
-                <span className="text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <span className="text-lg font-bold bg-white bg-clip-text text-transparent">
                   {schoolName}
                 </span>
                 <div className="text-xs text-gray-400">@{username}</div>
@@ -200,7 +201,7 @@ const CategoriesManagement: React.FC = () => {
               
               <button
                 onClick={handleGoHome}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                className="bg-transparent border border-white/20 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Go Home</span>
@@ -217,7 +218,7 @@ const CategoriesManagement: React.FC = () => {
         <section className="text-center space-y-6 animate-fade-in">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient">
+              <span className="bg-button-green bg-clip-text text-transparent animate-gradient">
                 Manage Categories
               </span>
             </h1>
@@ -230,10 +231,10 @@ const CategoriesManagement: React.FC = () => {
         {/* Stats Overview */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
           {[
-            { icon: Building, label: "Total Categories", value: categories.length.toString(), change: "+2", color: "from-purple-500 to-pink-500" },
-            { icon: Users, label: "Active Departments", value: categories.length.toString(), change: "+1", color: "from-blue-500 to-cyan-500" },
-            { icon: Activity, label: "In Use", value: Math.floor(categories.length * 0.8).toString(), change: "+3", color: "from-green-500 to-emerald-500" },
-            { icon: BarChart3, label: "Total Forms", value: categories.length.toString(), change: "+1", color: "from-orange-500 to-red-500" }
+            { icon: Building, label: "Total Categories", value: categories.length.toString(), change: "+2", color: "from-button-green to-blue" },
+            { icon: Users, label: "Active Departments", value: categories.length.toString(), change: "+1", color: "from-button-green to-blue" },
+            { icon: Activity, label: "In Use", value: Math.floor(categories.length * 0.8).toString(), change: "+3", color: "from-button-green to-blue" },
+            { icon: BarChart3, label: "Total Forms", value: categories.length.toString(), change: "+1", color: "from-button-green to-blue" }
           ].map((stat, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
               <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -266,7 +267,7 @@ const CategoriesManagement: React.FC = () => {
                   setIsLoading(true);
                   fetchCategories();
                 }}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                className="bg-button-green hover:bg-button-green/80 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
               >
                 <RefreshCw className="w-5 h-5" />
                 <span>Refresh</span>
@@ -314,7 +315,7 @@ const CategoriesManagement: React.FC = () => {
             <div className="space-y-6">
               {categories.length === 0 ? (
                 <div className="text-center py-20">
-                  <div className="w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
+                  <div className="w-24 h-24 bg-button-green rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
                     <Building className="w-12 h-12 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">No Categories Found</h3>
@@ -330,8 +331,8 @@ const CategoriesManagement: React.FC = () => {
                     >
                       <div className="flex flex-col justify-between h-full">
                         <div className="mb-4">
-                          <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <Building className="w-6 h-6 text-white" />
+                          <div className="w-12 h-12 bg-button-green rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <User className="w-6 h-6 text-white" />
                           </div>
                           <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300 mb-2">
                             {category.name}

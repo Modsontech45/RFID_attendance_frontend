@@ -2,75 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+/* -------------------- Animations -------------------- */
 @keyframes floatUpFade {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -150px);
-  }
+  0% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -150px); }
 }
 
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.5s ease-out;
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes gradient {
-  0%, 100% {
-    background-size: 200% 200%;
-    background-position: left center;
-  }
-  50% {
-    background-size: 200% 200%;
-    background-position: right center;
-  }
+  0%, 100% { background-size: 200% 200%; background-position: left center; }
+  50% { background-size: 200% 200%; background-position: right center; }
 }
 
-.animate-slide-up {
-  animation: slide-up 0.6s ease-out forwards;
-  opacity: 0;
-}
+/* -------------------- Utility Classes -------------------- */
+.animate-fade-in { animation: fade-in 0.5s ease-out; }
+.animate-slide-up { animation: slide-up 0.6s ease-out forwards; opacity: 0; }
+.animate-scale-in { animation: scale-in 0.3s ease-out; }
+.animate-gradient { background-size: 200% 200%; animation: gradient 3s ease infinite; }
 
-.animate-scale-in {
-  animation: scale-in 0.3s ease-out;
-}
+/* -------------------- Color Variables -------------------- */
+:root {
+  /* Core Brand Colors */
+  --color-primary: #605b5b;          /* Dark strong background / headers */
+  --color-button-green: #0a7e57; 
+  --color-blue-light: #317efb;              /* Light blue - header bg */
+  --color-primary-dark: #171414;     /* Darker black for contrast */
+  --color-secondary: #ffffff;        /* White - main text & highlights */
+  --color-secondary-dark: #261818;   /* Subtle off-white contrast */
 
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient 3s ease infinite;
+  /* Status / Trading Colors */
+  --color-success: #16c784;          /* Positive metrics / profit */
+  --color-error: #ea3943;            /* Negative metrics / loss */
+  --color-warning: #f59e0b;          /* Alerts / warnings */
+
+  /* Accent Colors */
+  --color-accent-blue: #3b82f6;      /* Links / CTAs */
+  --color-accent-purple: #8b5cf6;    /* Charts / highlights */
+  --color-accent-teal: #14B8A6;      /* Optional data accents */
+  --color-accent-orange: #F97316;    /* Alerts / optional highlights */
+
+  /* Neutral / Dashboard */
+  --color-bg-dark: #0b0f1a;          /* Dark dashboard background */
+  --color-bg-card: #1e293b;          /* Card / panel backgrounds */
+  --color-border: rgba(255,255,255,0.08); /* Subtle borders */
+  --color-text: #ffffff;              /* Primary text */
+  --color-text-light: #cbd5e1;        /* Secondary text */
+  --color-text-muted: #64748b;        /* Placeholder / muted text */
 }

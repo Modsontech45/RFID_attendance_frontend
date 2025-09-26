@@ -108,7 +108,7 @@ const AdminLogin: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className="border-b border-green-600 bg-black">
+      <header className="border-b border-white/30 bg-black">
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -131,7 +131,7 @@ const AdminLogin: React.FC = () => {
           {/* Login Form */}
           <form
             onSubmit={handleSubmit}
-            className="space-y-6 rounded-2xl border-2 border-green-600 bg-black p-8 shadow-2xl"
+            className="space-y-6 rounded-2xl border-2 border-white/30 bg-black p-8 shadow-2xl"
           >
             {/* Header */}
             <div className="space-y-2 text-center">
@@ -139,7 +139,7 @@ const AdminLogin: React.FC = () => {
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-24 w-24" />
           </div>
-              <h1 className="text-3xl font-bold text-green-400">
+              <h1 className="text-3xl font-bold text-white">
                 <FormattedMessage id="login.admin.title" defaultMessage="Admin Login" />
               </h1>
             </div>
@@ -210,7 +210,7 @@ const AdminLogin: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-green-600 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
+              className="flex w-full transform items-center justify-center space-x-2 rounded-lg bg-button-green py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-green-700 disabled:scale-100 disabled:bg-gray-600"
             >
               {isLoading ? (
                 <>

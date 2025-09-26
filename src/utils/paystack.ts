@@ -14,7 +14,7 @@ export interface PaystackConfig {
 
 // Paystack configuration - Replace with your actual public key
 const PAYSTACK_CONFIG: PaystackConfig = {
-  publicKey: 'pk_test_your_paystack_public_key_here', // Replace with your actual public key
+  publicKey: 'pk_live_4968898b558c40ea19b80d156fd06611a5ecaa0e', // Replace with your actual public key
   currency: 'USD'
 };
 

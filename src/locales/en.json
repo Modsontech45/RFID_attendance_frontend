@@ -324,7 +324,7 @@
       "renew": "Renew",
       "title": "Basic",
       "subtitle": "Perfect for small schools or organizations",
-      "price": "$35",
+      "price": "$7",
       "period": "month",
       "subscribed": "Subscribed",
       "freetrialExpired": "Free Trial Expired",
@@ -347,7 +347,7 @@
     "professional": {
       "title": "Professional",
       "subtitle": "Great for growing institutions or organizations",
-      "price": "$65",
+      "price": "$15",
       "period": "month",
       "mostPopular": "Most Popular",
       "features": [
@@ -360,7 +360,7 @@
     "enterprise": {
       "title": "Enterprise",
       "subtitle": "Best for large or multi-campus organizations",
-      "price": "$170",
+      "price": "$35",
       "period": "month",
       "features": [
         "All professional features",
