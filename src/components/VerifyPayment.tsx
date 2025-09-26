@@ -15,7 +15,7 @@ const VerifyPayment: React.FC = () => {
       return;
     }
 
-    const verifyUrl = `https://rfid-attendancesystem-backend-project.onrender.com/api/paystack/verify/${reference}`;
+    const verifyUrl = ` https://rfid-attendance-system-backend-proj.vercel.app/api/paystack/verify/${reference}`;
 
     fetch(verifyUrl, { method: "GET", redirect: "manual" })
       .then(async (res) => {
@@ -29,7 +29,9 @@ const VerifyPayment: React.FC = () => {
           } else if (location?.toLowerCase().includes("paymentfailed")) {
             setStatus("❌ Payment verification failed.");
           } else {
-            setStatus(`⚠️ Payment verification completed with unknown status. Redirected to: ${location}`);
+            setStatus(
+              `⚠️ Payment verification completed with unknown status. Redirected to: ${location}`
+            );
           }
           setLoading(false);
         } else {
@@ -40,9 +42,13 @@ const VerifyPayment: React.FC = () => {
             if (data.status === "success") {
               setStatus("✅ Payment verified successfully.");
             } else if (data.status === "failed" || data.status === "error") {
-              setStatus(`❌ Verification failed: ${data.message || "Unknown error"}`);
+              setStatus(
+                `❌ Verification failed: ${data.message || "Unknown error"}`
+              );
             } else {
-              setStatus("⚠️ Verification completed. Please check your payment status.");
+              setStatus(
+                "⚠️ Verification completed. Please check your payment status."
+              );
             }
           } catch (jsonError) {
             console.error("Error parsing JSON:", jsonError);
@@ -64,7 +70,9 @@ const VerifyPayment: React.FC = () => {
         <img src={Icon} alt="App Logo" className="h-24 w-24" />
       </div>
       <div className="bg-black bg-opacity-40 backdrop-blur-sm border border-blue-600 border-opacity-30 shadow-2xl rounded-xl p-8 max-w-md w-full">
-        <h1 className="text-xl font-bold mb-4 text-white">Payment Verification</h1>
+        <h1 className="text-xl font-bold mb-4 text-white">
+          Payment Verification
+        </h1>
         {loading ? (
           <p className="text-blue-300 animate-pulse text-lg">Please wait...</p>
         ) : (

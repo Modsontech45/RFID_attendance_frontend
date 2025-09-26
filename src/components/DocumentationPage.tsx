@@ -37,8 +37,6 @@ import {
   getAdminData,
 } from "../utils/auth";
 
-
-
 const arduinoCode = `#include <WiFi.h>
 #include <SPI.h>
 #include <MFRC522.h>
@@ -67,7 +65,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", 0, 60000);
-const char* serverURL = "https://rfid-attendancesystem-backend-project.onrender.com/api/scan";
+const char* serverURL = " https://rfid-attendance-system-backend-proj.vercel.app/api/scan";
 
 // Timer variables for notifyOnlineStatus
 unsigned long previousOnlineMillis = 0;
@@ -202,7 +200,7 @@ void notifyOnlineStatus() {
   if (WiFi.status() != WL_CONNECTED) return;
 
   HTTPClient http;
-  http.begin("https://rfid-attendancesystem-backend-project.onrender.com/api/devices/online");
+  http.begin(" https://rfid-attendance-system-backend-proj.vercel.app/api/devices/online");
   http.addHeader("Content-Type", "application/json");
 
   String payload = "{\"device_uid\":\"" + String(deviceUID) + "\",\"api_key\":\"" + String(apiKey) + "\"}";
@@ -351,7 +349,8 @@ const troubleshootingItems = [
     icon: Wifi,
     problem: "Device shows as offline",
     cause: "WiFi connection issues or device not sending heartbeat",
-    solution: "Check WiFi credentials, ensure device is powered, verify API key is correct",
+    solution:
+      "Check WiFi credentials, ensure device is powered, verify API key is correct",
   },
   {
     icon: Smartphone,
@@ -363,13 +362,15 @@ const troubleshootingItems = [
     icon: Database,
     problem: "Scans not appearing in system",
     cause: "API communication failure or incorrect device UID",
-    solution: "Check device UID matches registration, verify internet connection, check API key",
+    solution:
+      "Check device UID matches registration, verify internet connection, check API key",
   },
   {
     icon: Terminal,
     problem: "Arduino compilation errors",
     cause: "Missing libraries or incorrect board configuration",
-    solution: "Install required libraries (MFRC522, ArduinoJson), select correct ESP32 board",
+    solution:
+      "Install required libraries (MFRC522, ArduinoJson), select correct ESP32 board",
   },
 ];
 
@@ -377,21 +378,19 @@ const DocumentationPage: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
-    new Set(["getting-started"]),
+    new Set(["getting-started"])
   );
   const [copiedCode, setCopiedCode] = useState<string>("");
   const [showApiKey, setShowApiKey] = useState(false);
   const adminData = getAdminData();
   const terminology = useTerminology(adminData);
-  
+
   const schoolName =
     adminData?.schoolname ||
     adminData?.email?.split("@")[1]?.split(".")[0] ||
     "Synctuario Academy";
   const username =
     adminData?.username || adminData?.email?.split("@")[0] || "admin_user";
-  
-
 
   useEffect(() => {
     // Simulate loading translations or other data
@@ -424,7 +423,7 @@ const DocumentationPage: React.FC = () => {
             {/* Bigger Logo */}
             <img src={Icon} alt="App Logo" className="h-32 w-32" />
           </div>
-          
+
           <div className="text-xl text-gray-300">
             <FormattedMessage
               id="documentation.loading"
@@ -488,9 +487,17 @@ const DocumentationPage: React.FC = () => {
                   <FormattedMessage id="documentation.hardwareSetup.requiredComponents" />
                 </h5>
                 <ul className="list-inside list-disc space-y-1 text-gray-300">
-                  {["esp32", "mfrc522", "rfidTags", "jumperWires", "breadboard"].map((key) => (
+                  {[
+                    "esp32",
+                    "mfrc522",
+                    "rfidTags",
+                    "jumperWires",
+                    "breadboard",
+                  ].map((key) => (
                     <li key={key}>
-                      <FormattedMessage id={`documentation.hardwareSetup.components.${key}`} />
+                      <FormattedMessage
+                        id={`documentation.hardwareSetup.components.${key}`}
+                      />
                     </li>
                   ))}
                 </ul>
@@ -523,14 +530,20 @@ const DocumentationPage: React.FC = () => {
                     </div>
                     <div className="rounded bg-gray-800 p-3">
                       <div className="mb-2 text-xs text-yellow-400">
-                        ⚠️ <FormattedMessage id="documentation.hardwareSetup.importantNotes" />
+                        ⚠️{" "}
+                        <FormattedMessage id="documentation.hardwareSetup.importantNotes" />
                       </div>
                       <div className="space-y-1 text-xs text-gray-400">
-                        {["use3v3", "doubleCheck", "ensureStable"].map((key) => (
-                          <div key={key}>
-                            • <FormattedMessage id={`documentation.hardwareSetup.notes.${key}`} />
-                          </div>
-                        ))}
+                        {["use3v3", "doubleCheck", "ensureStable"].map(
+                          (key) => (
+                            <div key={key}>
+                              •{" "}
+                              <FormattedMessage
+                                id={`documentation.hardwareSetup.notes.${key}`}
+                              />
+                            </div>
+                          )
+                        )}
                       </div>
                     </div>
                   </div>
@@ -574,7 +587,10 @@ const DocumentationPage: React.FC = () => {
                           defaultMessage={"Copied"}
                         />
                       ) : (
-                        <FormattedMessage id="documentation.copy.copy" defaultMessage={"Copy"} />
+                        <FormattedMessage
+                          id="documentation.copy.copy"
+                          defaultMessage={"Copy"}
+                        />
                       )}
                     </span>
                   </button>
@@ -592,20 +608,32 @@ const DocumentationPage: React.FC = () => {
                 </h6>
                 <ol className="list-inside list-decimal space-y-1 text-gray-300">
                   <li>
-                    Replace <code className="rounded bg-gray-700 px-1">YOUR_WIFI_SSID</code> with
-                    your WiFi network name
+                    Replace{" "}
+                    <code className="rounded bg-gray-700 px-1">
+                      YOUR_WIFI_SSID
+                    </code>{" "}
+                    with your WiFi network name
                   </li>
                   <li>
-                    Replace <code className="rounded bg-gray-700 px-1">YOUR_WIFI_PASSWORD</code>{" "}
+                    Replace{" "}
+                    <code className="rounded bg-gray-700 px-1">
+                      YOUR_WIFI_PASSWORD
+                    </code>{" "}
                     with your WiFi password
                   </li>
                   <li>
-                    Replace <code className="rounded bg-gray-700 px-1">YOUR_API_KEY</code> with your
-                    Synctuario API key
+                    Replace{" "}
+                    <code className="rounded bg-gray-700 px-1">
+                      YOUR_API_KEY
+                    </code>{" "}
+                    with your Synctuario API key
                   </li>
                   <li>
-                    Replace <code className="rounded bg-gray-700 px-1">YOUR_DEVICE_UID</code> with a
-                    unique device identifier
+                    Replace{" "}
+                    <code className="rounded bg-gray-700 px-1">
+                      YOUR_DEVICE_UID
+                    </code>{" "}
+                    with a unique device identifier
                   </li>
                   <li>Upload the code to your ESP32</li>
                 </ol>
@@ -656,7 +684,9 @@ const DocumentationPage: React.FC = () => {
                           <FormattedMessage id="documentation.apiReference.exampleLabel" />
                         </span>
                         <button
-                          onClick={() => copyToClipboard(endpoint.example!, `api-${i}`)}
+                          onClick={() =>
+                            copyToClipboard(endpoint.example!, `api-${i}`)
+                          }
                           className="flex items-center space-x-1 hover:text-white"
                         >
                           {copiedCode === `api-${i}` ? (
@@ -765,18 +795,24 @@ const DocumentationPage: React.FC = () => {
                 </h5>
                 <div className="space-y-3">
                   <p className="text-sm text-gray-300">
-                    Each admin account receives a unique API key for device communication. Keep this
-                    key secure:
+                    Each admin account receives a unique API key for device
+                    communication. Keep this key secure:
                   </p>
 
                   <div className="rounded bg-gray-900 p-3">
                     <div className="mb-2 flex items-center justify-between">
-                      <span className="text-sm text-gray-400">Example API Key:</span>
+                      <span className="text-sm text-gray-400">
+                        Example API Key:
+                      </span>
                       <button
                         onClick={() => setShowApiKey(!showApiKey)}
                         className="flex items-center space-x-1 text-xs text-gray-400 transition-colors hover:text-white"
                       >
-                        {showApiKey ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
+                        {showApiKey ? (
+                          <EyeOff className="h-3 w-3" />
+                        ) : (
+                          <Eye className="h-3 w-3" />
+                        )}
                         <span>{showApiKey ? "Hide" : "Show"}</span>
                       </button>
                     </div>
@@ -789,7 +825,8 @@ const DocumentationPage: React.FC = () => {
 
                   <div className="rounded border border-yellow-500/30 bg-yellow-500/10 p-3">
                     <h6 className="mb-1 text-sm font-semibold text-yellow-300">
-                      ⚠️ <FormattedMessage id="documentation.security.securityGuidelines" />
+                      ⚠️{" "}
+                      <FormattedMessage id="documentation.security.securityGuidelines" />
                     </h6>
                     <ul className="space-y-1 text-xs text-gray-300">
                       <li>• Never share your API key publicly</li>
@@ -833,16 +870,25 @@ const DocumentationPage: React.FC = () => {
                 <div key={index} className="rounded-lg bg-black/30 p-4">
                   <h5 className="mb-2 flex items-center space-x-2 font-semibold text-white">
                     <item.icon className="h-4 w-4 text-red-400" />
-                    <FormattedMessage id={item.problem} defaultMessage={item.problem} />
+                    <FormattedMessage
+                      id={item.problem}
+                      defaultMessage={item.problem}
+                    />
                   </h5>
                   <div className="space-y-2 text-sm text-gray-300">
                     <p>
                       <strong>Cause:</strong>{" "}
-                      <FormattedMessage id={item.cause} defaultMessage={item.cause} />
+                      <FormattedMessage
+                        id={item.cause}
+                        defaultMessage={item.cause}
+                      />
                     </p>
                     <p>
                       <strong>Solution:</strong>{" "}
-                      <FormattedMessage id={item.solution} defaultMessage={item.solution} />
+                      <FormattedMessage
+                        id={item.solution}
+                        defaultMessage={item.solution}
+                      />
                     </p>
                   </div>
                 </div>
@@ -860,24 +906,32 @@ const DocumentationPage: React.FC = () => {
       <header className="relative z-20 border-b border-white/40 bg-black/40 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-3">
-                 <div className="flex items-center justify-center mb-0">
-            {/* Bigger Logo */}
-            <img src={Icon} alt="App Logo" className="h-24 w-24" />
-          </div>
+            <div className="flex items-center justify-center mb-0">
+              {/* Bigger Logo */}
+              <img src={Icon} alt="App Logo" className="h-24 w-24" />
+            </div>
             <div className="space-y-1">
-                <span className="text-lg font-bold bg-white bg-clip-text text-transparent">
-                  {schoolName}
-                </span>
-                <div className="text-xs text-gray-400">@{username}</div>
-              </div>
-         
+              <span className="text-lg font-bold bg-white bg-clip-text text-transparent">
+                {schoolName}
+              </span>
+              <div className="text-xs text-gray-400">@{username}</div>
+            </div>
           </div>
           <div className="flex items-center space-x-4">
-            <button onClick={() => navigate(-1)} className="text-gray-300 hover:text-white">
+            <button
+              onClick={() => navigate(-1)}
+              className="text-gray-300 hover:text-white"
+            >
               <FormattedMessage id="documentation.home" defaultMessage="Home" />
             </button>
-            <button onClick={() => navigate("/pricing")} className="text-gray-300 hover:text-white">
-              <FormattedMessage id="documentation.pricing" defaultMessage="Pricing" />
+            <button
+              onClick={() => navigate("/pricing")}
+              className="text-gray-300 hover:text-white"
+            >
+              <FormattedMessage
+                id="documentation.pricing"
+                defaultMessage="Pricing"
+              />
             </button>
             {/* <LanguageSwitcher /> */}
           </div>
@@ -898,7 +952,10 @@ const DocumentationPage: React.FC = () => {
             </span>
           </div>
           <h1 className="text-5xl font-bold">
-            <FormattedMessage id="documentation.title" defaultMessage="Documentation" />
+            <FormattedMessage
+              id="documentation.title"
+              defaultMessage="Documentation"
+            />
           </h1>
           <p className="mx-auto max-w-3xl text-xl text-gray-300">
             <FormattedMessage
@@ -924,7 +981,10 @@ const DocumentationPage: React.FC = () => {
                     <section.icon className="h-6 w-6 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold text-white">
-                    <FormattedMessage id={section.titleId} defaultMessage="Section" />
+                    <FormattedMessage
+                      id={section.titleId}
+                      defaultMessage="Section"
+                    />
                   </h3>
                 </div>
                 {expandedSections.has(section.id) ? (
@@ -934,7 +994,9 @@ const DocumentationPage: React.FC = () => {
                 )}
               </button>
               {expandedSections.has(section.id) && (
-                <div className="animate-slide-up px-6 pb-6">{section.content}</div>
+                <div className="animate-slide-up px-6 pb-6">
+                  {section.content}
+                </div>
               )}
             </div>
           ))}
@@ -943,7 +1005,10 @@ const DocumentationPage: React.FC = () => {
         {/* Quick Links */}
         <section className="mt-16 rounded-2xl border border-blue-500/30 bg-gradient-to-br from-slate-600 via-primary-dark to-primary-dark p-8 backdrop-blur-sm">
           <h2 className="mb-6 text-center text-2xl font-bold text-white">
-            <FormattedMessage id="documentation.quickLinks.title" defaultMessage="Quick Links" />
+            <FormattedMessage
+              id="documentation.quickLinks.title"
+              defaultMessage="Quick Links"
+            />
           </h2>
           <div className="grid gap-6 md:grid-cols-3">
             <button
@@ -971,10 +1036,10 @@ const DocumentationPage: React.FC = () => {
             >
               <Users className="mx-auto mb-3 h-8 w-8 text-green-400" />
               <h3 className="mb-2 font-semibold text-white">
-               {terminology.workerBoard}
+                {terminology.workerBoard}
               </h3>
               <p className="text-sm text-gray-300">
-               {terminology.workerPortal}
+                {terminology.workerPortal}
               </p>
             </button>
 

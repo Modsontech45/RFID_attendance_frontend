@@ -90,7 +90,7 @@ export const setAdminData = (adminData: any): void => {
 };
 
 // API utilities
-export const API_BASE = "https://rfid-attendancesystem-backend-project.onrender.com/api";
+export const API_BASE = " https://rfid-attendance-system-backend-proj.vercel.app/api";
 
 export const postData = async (url: string, data: any, headers: any = {}): Promise<any> => {
   try {

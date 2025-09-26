@@ -80,7 +80,7 @@ const StudentsList: React.FC = () => {
   >("success");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-   const [loadingMap, setLoadingMap] = useState<{ [uid: string]: boolean }>({});
+  const [loadingMap, setLoadingMap] = useState<{ [uid: string]: boolean }>({});
 
   const token = getAuthData("token");
   const apiKey = getApiKey();
@@ -109,7 +109,7 @@ const StudentsList: React.FC = () => {
 
   //   try {
   //     const response = await fetch(
-  //       "https://rfid-attendancesystem-backend-project.onrender.com/api/scan/admin",
+  //       " https://rfid-attendance-system-backend-proj.vercel.app/api/scan/admin",
   //       {
   //         method: "POST",
   //         headers: {
@@ -176,7 +176,7 @@ const StudentsList: React.FC = () => {
 
     try {
       const response = await fetch(
-        "https://rfid-attendancesystem-backend-project.onrender.com/api/scan/admin",
+        " https://rfid-attendance-system-backend-proj.vercel.app/api/scan/admin",
         {
           method: "POST",
           headers: {
@@ -449,10 +449,10 @@ const StudentsList: React.FC = () => {
             {/* Logo and Title */}
             <div className="flex items-center space-x-4 group">
               <div className="relative">
-                       <div className="flex items-center justify-center mb-0">
-            {/* Bigger Logo */}
-            <img src={Icon} alt="App Logo" className="h-24 w-24" />
-          </div>
+                <div className="flex items-center justify-center mb-0">
+                  {/* Bigger Logo */}
+                  <img src={Icon} alt="App Logo" className="h-24 w-24" />
+                </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
               </div>
               <div className="space-y-1">

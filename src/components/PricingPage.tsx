@@ -52,7 +52,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ email, plan }) => {
 
     try {
       const res = await axios.post(
-        "https://rfid-attendancesystem-backend-project.onrender.com/api/paystack/initialize",
+        " https://rfid-attendance-system-backend-proj.vercel.app/api/paystack/initialize",
         {
           email,
           plan: plan.toLowerCase(),

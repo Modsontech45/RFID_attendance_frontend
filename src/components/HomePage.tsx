@@ -34,7 +34,6 @@ import {
 } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-
 interface FloatingComment {
   id: number;
   text: string;
@@ -162,7 +161,7 @@ const HomePage: React.FC = () => {
   };
   const handleAppDownload = () => {
     const apkUrl =
-      "https://rfid-attendancesystem-backend-project.onrender.com/app/afrAttendance.apk";
+      " https://rfid-attendance-system-backend-proj.vercel.app/app/afrAttendance.apk";
     const link = document.createElement("a");
     link.href = apkUrl;
     link.download = "Synctuario.apk"; // optional: forces download
@@ -366,7 +365,7 @@ const HomePage: React.FC = () => {
             {[
               {
                 icon: Building,
-  
+
                 label: formatMessage({
                   id: "home.stats.organizations",
                   defaultMessage: "Organizations",
